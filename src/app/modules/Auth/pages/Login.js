@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -32,15 +32,11 @@ function Login(props) {
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
       .max(50, "Maximum 50 symbols")
-      .required(
-        "Please Give Username or Email Address"
-      ),
+      .required("Please Give Username or Email Address"),
     password: Yup.string()
       .min(3, "Minimum 3 symbols")
       .max(50, "Maximum 50 symbols")
-      .required(
-        "Please Give Password"
-      ),
+      .required("Please Give Password"),
   });
 
   const enableLoading = () => {
@@ -79,21 +75,16 @@ function Login(props) {
 
       // Submit
       const response = await login(values.email, values.password);
-      console.log('response', response)
+      console.log("response", response);
       disableLoading();
-      if(response.status){
-        setStatus(
-          "Successfully Logged in !"
-        );
+      if (response.status) {
+        setStatus("Successfully Logged in !");
         window.location.href = "/dashboard";
         setLoggedSuccess();
-      }else{
-        setStatus(
-          "Invalid Username and Password !"
-        );
+      } else {
+        setStatus("Invalid Username and Password !");
         setLoggedError();
       }
-      
 
       // setTimeout(() => {
       //   login(values.email, values.password)
@@ -116,12 +107,10 @@ function Login(props) {
     <div className="login-form login-signin" id="kt_login_signin_form">
       {/* begin::Head */}
       <div className="mb-10 mb-lg-20">
-        <h3 className="font-size-h1 mb-5">
-          Welcome to
-        </h3>
-        <h1 className="site_name_login">
+        <h3 className="font-size-h1 mb-5 text-bold">Welcome to iShip</h3>
+        {/* <h1 className="site_name_login">
           iMarine
-        </h1>
+        </h1> */}
       </div>
       {/* end::Head */}
 
@@ -134,13 +123,17 @@ function Login(props) {
           <div className="mb-10 alert alert-custom alert-light-danger alert-dismissible">
             <div className="alert-text font-weight-bold">{formik.status}</div>
           </div>
-        ):''}
+        ) : (
+          ""
+        )}
 
         {formik.status && isLogged ? (
           <div className="mb-10 alert alert-custom alert-light-success alert-dismissible">
             <div className="alert-text font-weight-bold">{formik.status}</div>
           </div>
-        ):''}
+        ) : (
+          ""
+        )}
 
         <div className="form-group fv-plugins-icon-container">
           <label className="login-label">Email or Username</label>
@@ -160,9 +153,9 @@ function Login(props) {
           ) : null}
         </div>
         <div className="form-group fv-plugins-icon-container">
-        <label className="login-label">Password</label>
+          <label className="login-label">Password</label>
           <input
-            placeholder="Password"
+            placeholder="Enter Password"
             type="password"
             className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
               "password"
