@@ -108,6 +108,39 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
             },
             ],
         },
+
+        {
+            moduleName: "Certificates",
+            moduleRouteUrl: "/certificates/list",
+            moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
+            subModules: [{
+                subModuleName: "Certificate Main",
+                subModuleRouteUrl: "/certificates-main/list",
+                subModuleIcon: "menu-bullet menu-bullet-dot",
+                features: [{
+                    featureName: "Certificate Main List",
+                    featureRouteUrl: "/certificates-main/list",
+                    featureIcon: "menu-bullet menu-bullet-dot",
+                },
+                {
+                    featureName: "Certificate Main Create",
+                    featureRouteUrl: "/certificates-main/create",
+                    featureIcon: "menu-bullet menu-bullet-dot",
+                }
+                ],
+            },
+            {
+                subModuleName: "Vessel Items",
+                subModuleRouteUrl: "/vessel-items/list",
+                subModuleIcon: "menu-bullet menu-bullet-dot",
+                features: [{
+                    featureName: "Item List",
+                    featureRouteUrl: "/vessel-items/list",
+                    featureIcon: "menu-bullet menu-bullet-dot",
+                },],
+            },
+            ],
+        },
         {
             moduleName: "Procurement",
             moduleRouteUrl: "/vessels/list",
