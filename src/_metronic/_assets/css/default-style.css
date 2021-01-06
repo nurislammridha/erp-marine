@@ -1,0 +1,82 @@
+ul.breadcrumb.breadcrumb-transparent.breadcrumb-dot.font-weight-bold.p-0.my-2 {
+    display: !important;
+}
+
+ul.sticky-toolbar.nav.flex-column.pl-2.pr-2.pt-3.pb-3.mt-4 {
+    display: ;
+}
+
+.borderGap {
+    border-bottom: 1px dashed #E5EAEE;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.site-name {
+    color: #fff;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+@media (min-width: 992px) {
+    .header-fixed.subheader-fixed.subheader-enabled .wrapper {
+        padding-top: 70px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .subheader-enabled .content {
+        padding-top: 15px;
+    }
+}
+
+.aside-minimize .brand .brand-logo span {
+    display: none;
+}
+
+.site_name_login {
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #2F3044;
+    margin-top: -5px!important;
+}
+
+.login-label {
+    font-weight: bold!important;
+    font-size: 14px!important;
+}
+
+
+/* Design Dash Board */
+
+.dashboard-card {}
+
+.shipping-card {
+    background-color: #4A7DFF;
+    padding-top: 30px;
+    padding-bottom: 5px !important;
+}
+
+.shipping-card h2 {
+    color: white;
+    font-weight: 800;
+    padding-top: 15px;
+}
+
+.second-color {
+    background-color: #3699FF;
+}
+
+.shipping-card p {
+    color: white;
+    font-size: 12px;
+}
+
+.spacer {
+    padding-left: 30px;
+}
+
+
+/* Design Dash Board */
