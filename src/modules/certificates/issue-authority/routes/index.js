@@ -1,12 +1,12 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import IssueAutorityContainer from "../views/IssueAuthorityContainer";
+import IssueAutorityListContainer from "../views/IssueAuthorityListContainer";
 
 const issueAuthorityRoutes = [
   {
     path: "/certificates/issue-authority/list",
     name: "Issue Autority List",
-    component: IssueAutorityContainer,
+    component: IssueAutorityListContainer,
     exact: true,
   },
 ];
