@@ -36,6 +36,7 @@ import VoyageActivityBunkerReducer from "../modules/voyage/_redux/reducers/Voyag
 import VoyageActivityOfficerReducer from "../modules/voyage/_redux/reducers/VoyageActivityOfficerReducer";
 import VoyageActivityAuxEngn2Reducer from "../modules/voyage/_redux/reducers/VoyageActivityAuxEngn2Reducer";
 import VoyageActivityAuxEngn3Reducer from "../modules/voyage/_redux/reducers/VoyageActivityAuxEngn3Reducer";
+import CertificateMainReducer from "../modules/certificates/certificate-main/_redux/reducers/CertificateMainReducer";
 
 
 /** 
@@ -87,6 +88,9 @@ export const rootReducer = combineReducers({
          promotion: EmployeePromotionReducer,
 
          VoyageActivityBunkerReducer: VoyageActivityBunkerReducer,
+
+         /**Certificates */
+         certificateMainInfo:CertificateMainReducer
        });
 
 export function* rootSaga() {
