@@ -16,7 +16,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
                 subModuleRouteUrl: "/employee/employee-list",
                 subModuleIcon: "menu-bullet menu-bullet-dot",
                 features: [{
-                    featureName: "Employee List",
+                    featureName: "All Employees",
                     featureRouteUrl: "/employee/employee-list",
                     featureIcon: "menu-bullet menu-bullet-dot",
                 },
@@ -46,7 +46,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
             moduleRouteUrl: "/addition-deduction",
             moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
             subModules: [{
-                subModuleName: "Addition/Deduction",
+                subModuleName: "New Expense",
                 subModuleRouteUrl: "/addition-deduction",
                 subModuleIcon: "menu-bullet menu-bullet-dot",
                 features: [{
@@ -309,11 +309,11 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
             moduleRouteUrl: "/employee",
             moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
             subModules: [{
-                subModuleName: "-Employee",
+                subModuleName: "Employee Management",
                 subModuleRouteUrl: "/employee/employee-list",
                 subModuleIcon: "menu-bullet menu-bullet-dot",
                 features: [{
-                    featureName: "Employee List",
+                    featureName: "All Employees",
                     featureRouteUrl: "/employee/employee-list",
                     featureIcon: "menu-bullet menu-bullet-dot",
                 },],
@@ -324,7 +324,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
             moduleRouteUrl: "/addition-deduction",
             moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
             subModules: [{
-                subModuleName: "Addition/Deduction",
+                subModuleName: "New Expense",
                 subModuleRouteUrl: "/addition-deduction",
                 subModuleIcon: "menu-bullet menu-bullet-dot",
                 features: [{
