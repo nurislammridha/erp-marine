@@ -1,18 +1,43 @@
-import React, {useMemo} from "react";
+import React, { useMemo } from "react";
 import objectPath from "object-path";
-import {useHtmlClassService} from "../../layout";
-import {DashboardMain} from "./DashboardMain";
+import { useHtmlClassService } from "../../layout";
+import { DashboardMain } from "./DashboardMain";
+import CustomeDesign from "./CustomeDesign";
+import { Bar, Doughnut } from "react-chartjs-2";
+import BarChart from "../../../modules/master/components/Chart/BarChart";
+import DougHuntChart from "../../../modules/master/components/Chart/DougHuntChart";
+import DashBoardCard from "../../../modules/dashboard/components/DashBoardCard";
 
 export function Dashboard() {
-    const uiService = useHtmlClassService();
-    const layoutProps = useMemo(() => {
-        return {
-            demo: objectPath.get(
-                uiService.config,
-                "demo"
-            )};
-    }, [uiService]);
-    return <>
-        <DashboardMain />
-    </>;
+  const uiService = useHtmlClassService();
+  const layoutProps = useMemo(() => {
+    return {
+      demo: objectPath.get(uiService.config, "demo"),
+    };
+  }, [uiService]);
+return (
+    <>
+      {/* <DashboardMain /> */}
+
+      {/* DashBoard design Starts 11:00   */}
+
+        <DashBoardCard/>
+      <div className="container  dashboard__pb ">
+        <div className="row">
+          <div className="col-lg-6  col-12">
+                    <DougHuntChart/>
+          </div>
+          <div className="col-lg-6 col-12">
+                   <BarChart/>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      {/* DashBoard design Ends 11:00   */}
+      {/* <CustomeDesign /> */}
+    </>
+  );
 }

@@ -28,7 +28,7 @@ export function Brand() {
         id="kt_brand"
       >
         {/* begin::Logo */}
-        <Link to="" className="brand-logo">
+        <Link to="/dashboard" className="brand-logo">
           <img alt="logo" src={layoutProps.headerLogo} style={{  width: 100 }} /> 
           <span className="site-name">{ '' }</span>
         </Link>
@@ -36,13 +36,11 @@ export function Brand() {
 
         {layoutProps.asideSelfMinimizeToggle && (
           <>
-            {/* begin::Toggle */}
             <button className="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
               <span className="svg-icon svg-icon-xl">
                 <SVG src={toAbsoluteUrl("/media/svg/icons/Navigation/Angle-double-left.svg")} />
               </span>
             </button>
-            {/* end::Toolbar */}
           </>
         )}
       </div>

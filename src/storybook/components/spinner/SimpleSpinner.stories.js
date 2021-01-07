@@ -1,6 +1,5 @@
 import React from "react";
 import { CircularProgress } from "@material-ui/core";
-
 import { withInfo } from "@storybook/addon-info";
 
 // export default { title: "More/Spinner" };
@@ -10,7 +9,9 @@ const CircularSpinner = () => (
 );
 
 const TableComponent = () => {
-  <>Welcome</>;
+  return (
+    <>Welcome</>
+  )
 };
 
 export default {

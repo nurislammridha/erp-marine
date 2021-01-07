@@ -23,22 +23,25 @@ export function AsideMenuList({ layoutProps }) {
 
   const menuList = useSelector((state) => state.menu.menuList);
 
-  console.log('====================================');
-  console.log('menuList', menuList);
-  console.log('====================================');
-
   return (
     <>
       {/* begin::Menu Nav */}
       <ul className={`menu-nav ${layoutProps.ulClasses}`}>
         {/*begin::1 Level*/}
+        {/* begin::section */}
+        <li className="menu-section ">
+          <h4 className="menu-text">Main Menu</h4>
+          <i className="menu-icon flaticon-more-v2"></i>
+        </li>
+        {/* end:: section */}
+        
         <li
           className={`menu-item ${getMenuItemActive("/dashboard")}`}
           aria-haspopup="true"
         >
           <NavLink className="menu-link" to="/dashboard">
             <span className="svg-icon menu-icon">
-              <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Layers.svg")} />
+              <SVG src={toAbsoluteUrl("/media/svg/icons/sidebar/icon-dashboard.svg")} />
             </span>
             <span className="menu-text">Dashboard</span>
           </NavLink>
@@ -46,13 +49,6 @@ export function AsideMenuList({ layoutProps }) {
         {/*end::1 Level*/}
 
         {/* Modules */}
-        {/* begin::section */}
-        <li className="menu-section ">
-          <h4 className="menu-text">Modules</h4>
-          <i className="menu-icon flaticon-more-v2"></i>
-        </li>
-        {/* end:: section */}
-
         {typeof menuList != 'undefined' &&
           menuList.map((menu, index) => (
             <li

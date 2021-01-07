@@ -27,6 +27,7 @@ import {
 import { MetronicI18nProvider } from "./_metronic/i18n";
 
 import "./_metronic/_assets/css/default-style.css"
+import "./styles/global-style.css";
 
 
 /**
