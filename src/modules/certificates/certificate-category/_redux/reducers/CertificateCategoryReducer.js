@@ -4,10 +4,8 @@ const initiliazeState = {
   certificateCategoryList: [],
   certificateCategoryInput: {
       strCertificateCategoriName: '',
-    //   intActionBy: '',
-    //   dteLastActionDateTime: '',
-    //   dteServerDateTime: '',
-    //   isActive: ''
+      intActionBy: '1',
+      isActive: '1'
   },
 };
 
@@ -20,9 +18,15 @@ function CertificateCategoryReducer(state = initiliazeState, action) {
           ...state,
           certificateCategoryInput
       };
-      break;
+      case Types.CERTIFICATE_CATEGORY_STORE:
+        console.log('action.payload,', action.payload);
+          return {
+              ...state,
+              status: action.payload.status
+          };
 
-    default:
+
+      default:
       break;
   }
   return state;
