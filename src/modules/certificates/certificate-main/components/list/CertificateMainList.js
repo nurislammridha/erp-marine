@@ -124,7 +124,7 @@ const CertificateMainList = withRouter(({ history, props }) => {
                           <a
                             className="btn btn-icon btn-light btn-hover-info btn-sm"
                             onClick={() => {
-                              history.push("/vessels/edit", { vessel: item });
+                              history.push("/certificates-main/edit", { vessel: item });
                             }}
                           >
                             <i className="fa fa-edit"></i>
