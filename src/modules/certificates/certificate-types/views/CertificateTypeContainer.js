@@ -85,7 +85,7 @@ const CertificateTypeContainer = () => {
           >
             Add New
           </Button>
-          <Modal size="lg" show={show} onHide={handleClose}>
+          <Modal show={show} onHide={handleClose}>
 
             <Modal.Header closeButton>
               <Modal.Title>Add Certificate Type</Modal.Title>
