@@ -5,7 +5,7 @@ import Select from "react-select";
 import { useHistory, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { handleChangeCertificateTypeInput } from "../../_redux/actions/CertificateTypeAction";
+import { certificatetypeSubmitAction, handleChangeCertificateTypeInput } from "../../_redux/actions/CertificateTypeAction";
 
 
 const CertificateTypeAdd = () => {
@@ -29,16 +29,17 @@ const CertificateTypeAdd = () => {
         dispatch(handleChangeCertificateTypeInput(name, value));
     };
 
-    // const onSubmit = (data) => {
-    //     dispatch(voyageSubmitAction(voyageInput));
-    // };
+    const onSubmit = (data) => {
+
+        dispatch(certificatetypeSubmitAction(certificateTypeInput));
+    };
 
 
     return (
         <>
             <form
                 className="form form-label-right"
-                // onSubmit={handleSubmit(onSubmit)}
+                onSubmit={handleSubmit(onSubmit)}
                 method="post"
             >
                 <div className="form-group row mt-5">

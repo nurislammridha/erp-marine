@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { handleCertificateCategoryInput } from "../../_redux/actions/CertificateCategoryAction";
+import { certificatecategorySubmitAction,handleCertificateCategoryInput } from "../../_redux/actions/CertificateCategoryAction";
 
 const CertificateCategoryAdd = () => {
   const history = useHistory();
@@ -15,7 +15,9 @@ const CertificateCategoryAdd = () => {
   const categoryInputChange = (name, value) => {
     dispatch(handleCertificateCategoryInput(name, value));
   };
-  const submiteCategory = (data) => {};
+  const submiteCategory = (data) => {
+    dispatch(certificatecategorySubmitAction(getCategoryInpuData));
+  };
 
   const statusOptions = [
     {
