@@ -25,7 +25,7 @@ export function AuthPage() {
       <div className="d-flex flex-column flex-root  ">
         {/*begin::Login*/}
         <div
-          className="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-row-fluid bg-white"
+          className="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-row-fluid bg-white order-xl-first order-lg-first order-sm-last "
           id="kt_login"
         >
           {/*begin::Content*/}
@@ -68,7 +68,7 @@ export function AuthPage() {
 
           {/*begin::Aside*/}
           <div
-            className=" login-aside d-flex flex-row-auto bgi-size-cover bgi-no-repeat p-10 p-lg-10"
+            className=" login-aside d-flex flex-row-auto bgi-size-cover bgi-no-repeat p-10 p-lg-10  order-xl-last order-lg-last order-sm-last "
             style={{
               backgroundImage: `url(${toAbsoluteUrl(
                 "/media/bg/login-bg.png"

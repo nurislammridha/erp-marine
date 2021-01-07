@@ -51,9 +51,6 @@ ul.sticky-toolbar.nav.flex-column.pl-2.pr-2.pt-3.pb-3.mt-4 {
 
 /* Design Dash Board */
 
-.dashboard-card {
-}
-
 .shipping-card {
   background-color: #4a7dff;
   padding-top: 30px;
@@ -80,64 +77,274 @@ ul.sticky-toolbar.nav.flex-column.pl-2.pr-2.pt-3.pb-3.mt-4 {
 }
 
 /* Design Dash Board */
-/* custome form design */
+
+/* custom form design */
+
 .formHeight {
   height: 30px;
 }
+
 label.formFont.form-label {
   font-size: 11px !important;
   margin-bottom: 0px !important;
 }
+
 button.saveButton {
   height: 29px;
   line-height: 10px;
 }
+
 .cancelButton {
   background-color: #aeaeae !important;
 }
+
+/* DashBoard Main Page Design Starts */
+
+.dashboard__pb {
+  padding-bottom: 30px;
+}
+
+.paid__widget {
+  height: 80px;
+  width: 215px;
+  box-shadow: 0px 3px 6px #2c28281c;
+  border-radius: 10px;
+  background: white;
+  overflow: hidden;
+}
+
+.widget__left {
+  float: left;
+  width: 30%;
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+.widget__left span {
+  display: block;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background: #40c297;
+}
+
+.widget__right {
+  float: right;
+  width: 70%;
+  text-align: left;
+  padding-top: 20px;
+}
+
+.widget__right p {
+  color: #8898aa;
+  text-transform: uppercase;
+  font-size: 11px !important;
+}
+
+.widget__right h4 {
+  color: #4d4f5c;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.chart__box {
+  box-shadow: 0px 2px 6px #2c28281c;
+  border-radius: 10px;
+  padding-bottom: 10%;
+  overflow: hidden;
+  height: 300px;
+}
+
+.chart__box p {
+  padding-top: 10px;
+  font-size: 11px !important;
+  padding-left: 10px;
+}
+
+.chart__box h4 {
+  font-size: 14px !important;
+  padding-left: 10px;
+  color: #172b4d;
+  /* color:#F1F3F9; */
+}
+
+.dough__main {
+  padding-top: 30px;
+}
+
+.doug__left {
+  float: left;
+  width: 52%;
+}
+
+.doug__right {
+  float: left;
+  width: 40%;
+}
+
+.color__circle {
+  display: inline-block;
+}
+
+.stat__1 {
+  position: relative;
+}
+
+.stat__1::before {
+  content: "";
+  height: 7px;
+  width: 7px;
+  border-radius: 50%;
+  background: black;
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  border: 3px solid #feb969;
+}
+
+.border__green {
+  border: 3px solid #2dce98;
+}
+
+.border__blue {
+  border: 3px solid #1f50b1;
+}
+
+.border__red {
+  border: 3px solid #f53c56;
+}
+
+.dough__list {
+  color: #4d4f5c;
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 3px;
+  font-family: "poppins";
+}
+
+.list__1 {
+  margin-right: 25px;
+}
+
+.list__2 {
+  margin-right: 15px;
+}
+
+.list__3 {
+  margin-right: 70px;
+}
+
+.list__4 {
+  margin-right: 67px;
+}
+
+.dough__num {
+  font-weight: 500;
+}
+
+/* DashBoard Main Page Design Ends */
+
 /* login page  */
 
 .form-control:focus {
   color: #000000 !important;
 }
+
 a#kt_login_forgot {
   color: #172b4d !important;
 }
+
 button#kt_login_signin_submit {
   background: #1d3d74;
   border: 1px solid #1d3d74;
   box-shadow: #00000029 !important;
   width: 201px;
 }
+
 .heading {
   color: #160637;
   font-size: 30px !important;
 }
+
 span.loginText {
   font-weight: 500;
 }
+
 a {
   color: #4174aa !important;
   font-size: 12px;
 }
+
 img.loginpageLogo {
   width: 180px;
   margin-bottom: 50px;
 }
+
 @media (min-width: 1200px) {
   .login.login-1 .login-aside {
     width: 100%;
     max-width: 900px !important;
   }
 }
-.loginForm input.form-control {
-  background: #fcfcfc !important;
-
-  height: 36px !important;
-  border: 1px solid #95989a4d;
-  box-shadow: -5px 3px 5px #00000029 !important;
+@media (max-width: 1199px) {
+  .login.login-1 .login-aside {
+    width: 100%;
+    max-width: 650px !important;
+  }
 }
-.loginForm input#formBasicChecbox {
+/* .loginForm input#formBasicChecbox {
   box-shadow: -5px 3px 5px #00000021 !important;
   border: none !important;
+} */
+.loginForm input.form-control {
+  background: #fcfcfc !important;
+  height: 36px !important;
+  border: 1px solid #95989a4d;
+  box-shadow: 0px 2px 5px #00000010 !important;
+}
+@media (max-width: 425px) {
+  .login-aside {
+    height: 400px !important;
+  }
+  img.loginpageLogo {
+    width: 99px;
+
+    margin-top: -130px;
+  }
+  .heading {
+    font-size: 22px !important;
+    margin-top: -55px;
+  }
+}
+.overlay__caption {
+  background-color: #007bff;
+
+  color: white;
+  border-radius: 9px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.2s;
+  position: relative;
+  border-radius: 5px;
+}
+.overlay__caption:hover {
+  color: #fff;
+  /* box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15); */
+}
+.overlay__caption:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #007bff;
+  opacity: 0;
+  transition: all 0.3s, opacity 0.2s;
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+.overlay__caption:hover:before {
+  transform: scaleY(1);
+  opacity: 0.25;
 }

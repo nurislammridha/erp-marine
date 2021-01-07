@@ -13,11 +13,11 @@ const CertificateTypeEdit = () => {
     const statusOptions = [
         {
             label: 'Active',
-            value: 0
+            value: "1"
         },
         {
             label: 'Inactive',
-            value: 1
+            value: "0"
         }
     ]
 
@@ -31,28 +31,17 @@ const CertificateTypeEdit = () => {
                 method="post"
             >
                 <div className="form-group row mt-5">
-                    <div className="col-sm-4">
-                        <label className="form-label">Certificate Name</label>
-                        <Form.Control type="text"
+                    <div className="col-sm-6">
+                        <label className="form-label">Certificate Type Name</label>
+                        <Form.Control
+                            type="text"
                             placeholder=""
                         />
                     </div>
 
 
-
-                    <div className="col-sm-4">
-                        <label className="form-label">Certificate Type</label>
-                        <RHFInput
-                            as={<Select options={statusOptions} />}
-                            rules={{ required: false }}
-                            name="intCargoTypeID"
-                            register={register}
-                            value={""}
-                            setValue={setValue}
-                        />
-                    </div>
-                    <div className="col-sm-4">
-                        <label className="form-label">Action</label>
+                    <div className="col-sm-6">
+                        <label className="form-label">Status</label>
                         <RHFInput
                             as={<Select options={statusOptions} />}
                             rules={{ required: false }}
