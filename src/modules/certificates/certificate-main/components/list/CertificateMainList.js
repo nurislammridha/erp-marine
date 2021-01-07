@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { withRouter } from "react-router-dom";
 import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
 import { getCertificateMainListAction } from "../../_redux/actions/CertificateMainAction";
 
-const CertificateMainList = () => {
+const CertificateMainList = withRouter(({history,props}) => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
@@ -36,6 +37,10 @@ const CertificateMainList = () => {
     }
   };
 
+  const certificateDelete=()=>{
+
+  }
+
   return (
     <>
       <div className="container">
@@ -44,19 +49,19 @@ const CertificateMainList = () => {
             <div className="card-title">
               <h3 class="card-label">Certificate List</h3>
             </div>
-            {/* <div className="card-toolbar">
+            <div className="card-toolbar">
               <a
                 onClick={() => {
-                  history.push("/vessels/add");
+                  history.push("/certificates-main/create");
                 }}
               >
                 <button type="button" class="btn btn-primary">
-                  New Vessel
+                  New Certificate
                 </button>
               </a>
-            </div> */}
+            </div>
           </div>
-          <div className="mb-2">
+          <div className="mb-2 ml-2">
             <div className="float-left">
               <input
                 type="search"
@@ -76,12 +81,12 @@ const CertificateMainList = () => {
             <div className="clearfix"></div>
           </div>
           {isLoading && <LoadingSpinner text="Loading Products..." />}
-          {!isLoading &&  certificates.length === 0 && (
+          {!isLoading && certificates.length === 0 && (
             <div className="alert alert-warning">Sorry ! No Product Found.</div>
           )}
           {!isLoading && certificates.length > 0 && (
             <>
-              <div className="table-responsive">
+              <div className="table-responsive ml-2">
                 <table className="table table-bordered">
                   <thead>
                     <tr>
@@ -90,18 +95,43 @@ const CertificateMainList = () => {
                       <th>Price</th>
                       <th className="td-description">Description</th>
                       <th className="td-upload-info">Upload Information</th>
+                      <th className="td-upload-info">Upload Information</th>
                       <th className="td-action">Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     {certificates.map((certificate, index) => (
                       <tr>
-                        <td>{index +1}</td>
+                        <td>{index + 1}</td>
                         <td>{certificate.strCustomeCode}</td>
                         <td>{certificate.intNotOnBoard}</td>
                         <td>{certificate.dteCertificateValidUntil}</td>
                         <td>{certificate.dteExtendedUntil}</td>
                         <td>{certificate.dteExtendedUntil}</td>
+                        <td>
+                          <a
+                            className="btn btn-icon btn-light btn-hover-info btn-sm"
+                            onClick={() => {
+                              history.push("/certificates-main/edit");
+                            }}
+                          >
+                            <i className="fa fa-edit"></i>
+                          </a>
+                          &nbsp;&nbsp;&nbsp;
+                          <a
+                            className="btn btn-icon btn-light btn-hover-danger btn-sm"
+                            onClick={() => {
+                              if (
+                                window.confirm(
+                                  "Are you sure you wish to delete this item?"
+                                )
+                              )
+                                certificateDelete(certificate.intID);
+                            }}
+                          >
+                            <i className="fa fa-trash"></i>
+                          </a>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -118,6 +148,6 @@ const CertificateMainList = () => {
       </div>
     </>
   );
-};
+});
 
 export default CertificateMainList;

@@ -28,7 +28,7 @@ export const handleChangeProductInputAction = (name, value, e, isEdit = false) =
 
 export const getCertificateMainListAction = (page, searchText = null, isPublic = false) => async(dispatch) => {
     let response = {
-        products: [],
+        certificates: [],
         status: false,
         message: "",
         isLoading: true,
@@ -38,10 +38,11 @@ export const getCertificateMainListAction = (page, searchText = null, isPublic =
     let url = '';
     url =`${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1&paginateNo=1`;
 
-    if (searchText === null) {
-        url = `${url}&paginateNo=${page}`;
+    if (searchText !== null) {
+        // url += `&paginateNo=${page}`;
+        url += `&search=${searchText}`
     } else {
-        url = `${process.env.REACT_APP_API_URL}certificate/details?search=${searchText}`
+        // url += `&certificate/details?search=${searchText}`
     }
 
     try {
