@@ -14,6 +14,7 @@ import getVoyageRoutes from "../modules/voyage/routes/";
 import getVesselItemRoutes from "../domains/VesselItem/routes";
 import getDemandSheetRoutes from "../modules/demand-sheet/routes";
 import getCertificateModuleRoutes from "../modules/certificates/routes";
+import getDocumentationRoutes from "../modules/documentation/routes";
 
 const BasePage = () => {
   return (
@@ -63,6 +64,9 @@ const BasePage = () => {
         {/* Certificate Issue Authority */}
         {getCertificateModuleRoutes()}
         {/* Certificate Types */}
+
+        
+        {getDocumentationRoutes()}
 
         <Redirect to="error/error-v1" />
       </Switch>
