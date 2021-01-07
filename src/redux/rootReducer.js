@@ -38,7 +38,7 @@ import VoyageActivityAuxEngn2Reducer from "../modules/voyage/_redux/reducers/Voy
 import VoyageActivityAuxEngn3Reducer from "../modules/voyage/_redux/reducers/VoyageActivityAuxEngn3Reducer";
 import CertificateMainReducer from "../modules/certificates/certificate-main/_redux/reducers/CertificateMainReducer";
 import CertificateTypeReducer from "../modules/certificates/certificate-types/_redux/reducers/CertificateTypeReducer";
-
+import CertificateIssueAuthorityReducer from "../modules/certificates/issue-authority/_redux/reducers/CertificateIssueAuthorityReducer";
 
 /** 
 | Domain : CCO
@@ -64,7 +64,10 @@ export const rootReducer = combineReducers({
   employeeRecordInfo: EmployeeRecordReducer,
   employeeDocumentInfo: EmployeeDocumentReducer,
   employeeCertificateInfo: EmployeeCertificateReducer,
+<<<<<<< HEAD
   certificateTypeInfo: CertificateTypeReducer,
+=======
+>>>>>>> origin/nur
   employeeBankDetailsInfo: EmployeeBankDetailsReducer,
   employeeReferenceInfo: EmployeeReferenceReducer,
   vesselInfo: VesselReducer,
@@ -92,7 +95,12 @@ export const rootReducer = combineReducers({
   VoyageActivityBunkerReducer: VoyageActivityBunkerReducer,
 
   /**Certificates */
+<<<<<<< HEAD
   certificateMainInfo: CertificateMainReducer
+=======
+  certificateMainInfo: CertificateMainReducer,
+  certificateIssueAuthorityInfo: CertificateIssueAuthorityReducer,
+>>>>>>> origin/nur
 });
 
 export function* rootSaga() {

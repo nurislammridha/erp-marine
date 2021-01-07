@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Form, Card, Button, Row, Col } from "react-bootstrap";
 
-const CustomeDesign = () => {
+const BasicTable = () => {
   return (
     <Card>
       <Card.Body>
@@ -76,13 +76,7 @@ const CustomeDesign = () => {
         </table>
       </Card.Body>
     </Card>
-
-    // <Card>
-    //   <Card.Body>
-
-    //   </Card.Body>
-    //   </Card>
   );
 };
 
-export default CustomeDesign;
+export default BasicTable;
