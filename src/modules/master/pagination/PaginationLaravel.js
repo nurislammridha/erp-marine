@@ -19,18 +19,19 @@ const PaginationLaravel = (props) => {
                 (typeof isDescription === 'undefined' || isDescription === true) && data !== null &&
                 <div className="d-flex">
                     <div className="mx-auto">
-                        <div className='row'>
-                            <div className="col-6">
-                                Products - {data.from} to {data.from + data.per_page}
+                        <div className='row col-12'>
+                            <div className="col-12">
+                                Data - {data.from} to {data.from + data.per_page}
                                 {' '} | Total {data.total < data.per_page ? data.total : data.per_page}
                                 {' '} | Out of {data.total}
                             </div>
-                            {
-                                data.total > limit &&
+                            
+                            {/* {
+                                data.total > limit && */}
                                 <div className="col-6">
                                     <Pagination changePage={changePage} data={data} />
                                 </div>
-                            }
+                            {/* } */}
 
                         </div>
                     </div>
