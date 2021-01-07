@@ -80,9 +80,9 @@ const CertificateMainList = withRouter(({history,props}) => {
             </div>
             <div className="clearfix"></div>
           </div>
-          {isLoading && <LoadingSpinner text="Loading Products..." />}
+          {isLoading && <LoadingSpinner text="Loading Certificates..." />}
           {!isLoading && certificates.length === 0 && (
-            <div className="alert alert-warning">Sorry ! No Product Found.</div>
+            <div className="alert alert-warning">Sorry ! No Certificates Found.</div>
           )}
           {!isLoading && certificates.length > 0 && (
             <>
