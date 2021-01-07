@@ -27,7 +27,7 @@ const BarChart = () => {
   };
   return (
     <>
-      <div className="chart__box  bg-white">
+      <div className="chart__box chart__box__custom bg-white">
         <div className="chart__head">
           <p>All</p>
           <h4 className="text-bold">Users Count</h4>

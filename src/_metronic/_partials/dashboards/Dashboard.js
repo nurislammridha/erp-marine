@@ -24,11 +24,11 @@ return (
 
         <DashBoardCard/>
       <div className="container  dashboard__pb ">
-        <div className="row">
-          <div className="col-lg-6  col-12">
+        <div className="row ">
+        <div className="col-lg-6  col-12 dash__board__chart">
                     <DougHuntChart/>
           </div>
-          <div className="col-lg-6 col-12">
+        <div className="col-lg-6 col-12 dash__board__chart">
                    <BarChart/>
           </div>
         </div>
