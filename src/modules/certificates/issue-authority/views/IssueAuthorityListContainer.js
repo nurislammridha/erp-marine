@@ -17,7 +17,7 @@ const IssueAutorityListContainer = (props) => {
     <div className="card card-custom gutter-b">
       <div className="row pt-5 pl-4 pb-3">
         <div className="col-xl-9 col-lg-9 col-md-9 col-6">
-          <h3>Issue Authority List</h3>
+          <h3>Issuing Authority List</h3>
         </div>
         <div className="col-xl-3 col-lg-3 col-md-3 col-6 VoyageListBtn">
           <Dropdown className="d-inline mr-2">

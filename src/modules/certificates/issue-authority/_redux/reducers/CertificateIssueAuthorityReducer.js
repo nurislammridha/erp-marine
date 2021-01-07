@@ -1,10 +1,23 @@
 import * as Types from "../types/Types";
 
 const initialState = {
+  issuingAuthorities: [],
+  issuingAuthoritiesData: null,
+  isLoading: false,
   CertificateIssueAuthirityInput: {
     authorityName: "dfgdgf",
     isActiveStatus: "",
   },
+  errors: [],
+  addStatus: false,
+  editStatus: false,
+  editing: false,
+  deleteStatus: false,
+  deleting: false,
+
+  addMessage: "",
+  editMessage: "",
+  deleteMessage: "",
 };
 
 const CertificateIssueAuthorityReducer = (state = initialState, action) => {
@@ -21,7 +34,49 @@ const CertificateIssueAuthorityReducer = (state = initialState, action) => {
         ...state,
         CertificateIssueAuthirityInput,
       };
-      break;
+
+    case Types.GET_ISSUING_AUTHORITY_LIST:
+      return {
+        ...state,
+        issuingAuthorities: action.payload.issuingAuthorities,
+        // productsPaginatedData: action.payload.productsPaginatedData,
+        // isLoading: action.payload.isLoading,
+      };
+
+    // case Types.LOADING:
+    //   return {
+    //     ...state,
+    //     isLoading: action.payload,
+    //   };
+
+    // case Types.EDITING:
+    //   return {
+    //     ...state,
+    //     editing: action.payload,
+    //   };
+
+    // case Types.DELETING:
+    //   return {
+    //     ...state,
+    //     deleting: action.payload,
+    //   };
+
+    // case Types.EMPTY_PRODUCT_MESSAGE:
+    //   return {
+    //     ...state,
+    //     addMessage: null,
+    //     editMessage: null,
+    //     deleteMessage: null,
+    //     productData: {
+    //       id: 0,
+    //       title: "",
+    //       description: "",
+    //       price: "",
+    //       image: null,
+    //       imagePreviewUrl: null,
+    //     },
+    //   };
+    // break;
 
     default:
       break;
