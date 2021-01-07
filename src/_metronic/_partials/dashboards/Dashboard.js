@@ -7,6 +7,7 @@ import { Bar, Doughnut } from "react-chartjs-2";
 import BarChart from "../../../modules/master/components/Chart/BarChart";
 import DougHuntChart from "../../../modules/master/components/Chart/DougHuntChart";
 import DashBoardCard from "../../../modules/dashboard/components/DashBoardCard";
+import CircularProgressBar from "../../../modules/master/components/CircularProgressBar/CircularProgressBar";
 
 export function Dashboard() {
   const uiService = useHtmlClassService();
@@ -32,7 +33,9 @@ return (
           </div>
         </div>
       </div>
+          
 
+            <CircularProgressBar/>
 
 
 

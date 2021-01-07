@@ -79,10 +79,7 @@ ul.sticky-toolbar.nav.flex-column.pl-2.pr-2.pt-3.pb-3.mt-4 {
     padding-left: 30px;
 }
 
-
 /* Design Dash Board */
-
-
 /* custom form design */
 
 .formHeight {
@@ -98,14 +95,10 @@ button.saveButton {
     height: 29px;
     line-height: 10px;
 }
-
 .cancelButton {
     background-color: #aeaeae !important;
 }
-
-
 /* DashBoard Main Page Design Starts */
-
 .dashboard__pb {
     padding-bottom: 30px;
 }
@@ -118,7 +111,6 @@ button.saveButton {
     background: white;
     overflow: hidden;
 }
-
 .widget__left {
     float: left;
     width: 30%;
@@ -192,7 +184,7 @@ button.saveButton {
     border-radius: 10px;
     padding-bottom: 10%;
     overflow: hidden;
-    height: 300px;
+    height: 380px;
 }
 
 .chart__box p {
@@ -215,12 +207,13 @@ button.saveButton {
 .doug__left {
     float: left;
     width: 52%;
-    padding-top: 25px;
+    
 }
 
 .doug__right {
     float: left;
     width: 40%;
+    padding-top: 25px;
 }
 
 .doughunt__stat {}
@@ -246,19 +239,15 @@ button.saveButton {
 }
 
 .border__orange {}
-
 .border__green {
     border: 3px solid #2DCE98;
 }
-
 .border__blue {
     border: 3px solid #1F50B1;
 }
-
 .border__red {
     border: 3px solid #F53C56;
 }
-
 .dough__list {
     color: #4D4F5C;
     font-size: 11px;
@@ -286,21 +275,14 @@ button.saveButton {
 .dough__num {
     font-weight: 500;
 }
-
-
 /* DashBoard Main Page Design Ends */
-
-
 /* login page  */
-
 .form-control:focus {
     color: #000000 !important;
 }
-
 .stat__2 {
     position: relative;
 }
-
 .stat__2::before {
     content: "";
     height: 11px;
@@ -312,11 +294,9 @@ button.saveButton {
     left: -4px;
     border: 3px solid #2DCE98;
 }
-
 .stat__3 {
     position: relative;
 }
-
 .stat__3::before {
     content: "";
     height: 11px;
@@ -328,11 +308,9 @@ button.saveButton {
     left: -4px;
     border: 3px solid #1F50B1;
 }
-
 .stat__4 {
     position: relative;
 }
-
 .stat__4::before {
     content: "";
     height: 11px;
@@ -344,23 +322,19 @@ button.saveButton {
     left: -4px;
     border: 3px solid #F53C56;
 }
-
 a#kt_login_forgot {
     color: #172b4d !important;
 }
-
 button#kt_login_signin_submit {
     background: #1d3d74;
     border: 1px solid #1d3d74;
     box-shadow: #00000029 !important;
     width: 201px;
 }
-
 .heading {
     color: #160637;
     font-size: 30px !important;
 }
-
 span.loginText {
     font-weight: 500;
 }
