@@ -57,7 +57,6 @@ const CertificateTypeList = () => {
             </table>
 
             <Modal size="lg" show={show} onHide={handleClose}>
-
                 <Modal.Header closeButton>
                     <Modal.Title>Certificate Type Edit</Modal.Title>
                 </Modal.Header>
@@ -65,7 +64,7 @@ const CertificateTypeList = () => {
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Cancel
-              </Button>
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </div>

@@ -10,7 +10,7 @@ import ReactToPrint from "react-to-print-advanced";
 import CertificateTypeAdd from "../components/create/CertificateTypeAdd";
 import { useDispatch, useSelector } from "react-redux";
 import { getCertificateTypeList } from "../_redux/actions/CertificateTypeAction";
-
+import SimpleModal from "../../../../modules/master/components/Modal/SimpleModal";
 
 const CertificateTypeContainer = () => {
 
@@ -28,6 +28,11 @@ const CertificateTypeContainer = () => {
       dispatch(getCertificateTypeList());
     }
   }, [modalStatus]);
+
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
+  const [showTypeModal, setShowTypeModal] = useState(false);
+  const [showCertificateModal, setShowCertificateModal] = useState(false);
+  const [showIssuedByModal, setShowIssuedByModal] = useState(false);
 
   return (
     <div className="card card-custom gutter-b">
@@ -94,8 +99,7 @@ const CertificateTypeContainer = () => {
           >
             Add New
           </Button>
-          <Modal show={show} onHide={handleClose}>
-
+          {/* <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Add Certificate Type</Modal.Title>
             </Modal.Header>
@@ -105,7 +109,15 @@ const CertificateTypeContainer = () => {
                 Cancel
               </Button>
             </Modal.Footer>
-          </Modal>
+          </Modal> */}
+
+          <SimpleModal
+            show={show}
+            handleClose={() => handleClose()}
+            modalTitle={"Certificate Type Add"}
+          >
+            <CertificateTypeAdd />
+          </SimpleModal>
 
         </div>
         <div className="clearfix"></div>

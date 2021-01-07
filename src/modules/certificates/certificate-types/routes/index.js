@@ -4,7 +4,7 @@ import CertificateTypeContainer from "../views/CertificateTypeContainer";
 
 const certificateTypeRoutes = [
   {
-    path: "/certificates/types/list",
+    path: "/certificate/configure/types",
     name: "Certificate List",
     component: CertificateTypeContainer,
     exact: true,

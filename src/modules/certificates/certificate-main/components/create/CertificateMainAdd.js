@@ -409,7 +409,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </div>
                 </div>
                 <div className="col-lg-3 mt-3">
-                  <label htmlFor="">{ '' }</label>
+                  <label htmlFor="">{''}</label>
                   <Form.Group controlId="formBasicChecbox">
                     <Form.Check
                       className="forgotPasswordText  "
