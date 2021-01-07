@@ -5,8 +5,9 @@ const initialState = {
   issuingAuthoritiesData: null,
   isLoading: false,
   CertificateIssueAuthirityInput: {
-    authorityName: "dfgdgf",
-    isActiveStatus: "",
+    strIssuingAuthorityName: "New issuing authority",
+    isActive: "1",
+    intActionBy: 1272,
   },
   errors: [],
   addStatus: false,
@@ -41,6 +42,12 @@ const CertificateIssueAuthorityReducer = (state = initialState, action) => {
         issuingAuthorities: action.payload.issuingAuthorities,
         // productsPaginatedData: action.payload.productsPaginatedData,
         // isLoading: action.payload.isLoading,
+      };
+
+    case Types.POST_ISSUING_AUTHORITY:
+      return {
+        ...state,
+        status: action.payload.status,
       };
 
     // case Types.LOADING:
