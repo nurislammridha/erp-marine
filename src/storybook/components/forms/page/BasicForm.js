@@ -1,5 +1,7 @@
 import React from 'react';
-
+import "bootstrap/dist/css/bootstrap.min.css"
+import "../../../../_metronic/_assets/css/default-style.css"
+import "../../../../styles/global-style.css";
 import { Form, Card, Button, Row, Col } from "react-bootstrap";
 
 const BasicForm = () => {
