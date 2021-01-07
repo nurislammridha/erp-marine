@@ -23,8 +23,10 @@ const DougHuntChart = () => {
   return (
     <>
       <div className="chart__box  bg-white ">
-        <p>OVERVIEW</p>
+        <div className="chart__head">
+                <p>OVERVIEW</p>
         <h4 className="text-bold">Purchased</h4>
+        </div>
 
         <div className="dough__main">
           <div className="doug__left">
