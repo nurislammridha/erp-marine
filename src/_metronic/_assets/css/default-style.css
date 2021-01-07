@@ -103,7 +103,7 @@ button.saveButton {
 
 .paid__widget{
 height:80px;
-width:215px;
+width:220px;
 box-shadow: 0px 3px 6px #2C28281C;
 border-radius: 10px;
 background:white;
@@ -173,11 +173,11 @@ padding-top: 30px;
 
 .doughunt__stat{
 
+   padding-top: 25px;
 
 }
 .color__circle {
     display: inline-block;
-  
 
 } 
 
@@ -186,30 +186,66 @@ padding-top: 30px;
 
  }
  .stat__1::before{
-   content: "";
-    height: 7px;
-    width: 7px;
+     content: "";
+    height: 11px;
+    width: 11px;
     border-radius: 50%;
-     background:black;
-     position: absolute;
-     top:10px;
-     left:0px;
+    background: white;
+    position: absolute;
+    top: 9px;
+    left: -4px;
     border: 3px solid #FEB969;
 
  }
 
-.border__orange{
+ .stat__2{
+  position: relative;
 
-}
-.border__green{
-   border: 3px solid #2DCE98;
-}
-.border__blue{
-   border: 3px solid #1F50B1;
-}
-.border__red{
-   border: 3px solid #F53C56;
-}
+ }
+ .stat__2::before{
+     content: "";
+    height: 11px;
+    width: 11px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    top: 9px;
+    left: -4px;
+    border: 3px solid #2DCE98;
+
+ }
+ .stat__3{
+  position: relative;
+
+ }
+ .stat__3::before{
+     content: "";
+    height: 11px;
+    width: 11px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    top: 9px;
+    left: -4px;
+    border: 3px solid #1F50B1;
+
+ }
+ .stat__4{
+  position: relative;
+
+ }
+ .stat__4::before{
+     content: "";
+    height: 11px;
+    width: 11px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    top: 9px;
+    left: -4px;
+    border: 3px solid #F53C56;
+
+ }
 
 .dough__list{
   color:#4D4F5C;
