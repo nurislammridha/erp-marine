@@ -36,28 +36,31 @@ export const getCertificateMainListAction = (page, searchText = null, isPublic =
     };
     dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
     let url = '';
-    url =`${process.env.REACT_APP_API_URL}/certificate/details`;
+    url =`${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1&paginateNo=1`;
 
-    // if (searchText === null) {
-    //     url = `${url}?page=${page}`;
-    // } else {
-    //     url = `${process.env.REACT_APP_API_URL}products/view/search?search=${searchText}`
-    // }
+    if (searchText === null) {
+        url = `${url}&paginateNo=${page}`;
+    } else {
+        url = `${process.env.REACT_APP_API_URL}certificate/details?search=${searchText}`
+    }
 
     try {
         await Axios.get(url)
             .then((res) => {
+                console.log('ReponseCertificate',res);
                 const { data, message, status } = res.data;
                 response.status = status;
-                response.products = data.data;
+                response.certificates = data.data;
                 response.message = message;
-                response.productsPaginatedData = data;
+                response.certificatesPaginatedData = data;
                 response.isLoading = false;
             })
             .catch((err) => {
+                console.log('ErrorCertificate1')
                 toast.error(err);
             });
     } catch (error) {
+        console.log('ErrorCertificate2')
         response.message = 'Something Went Wrong !';
         toast.error(error);
     }
