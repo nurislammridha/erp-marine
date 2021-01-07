@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { FormattedMessage, injectIntl } from "react-intl";
 import * as auth from "../_redux/authRedux";
 import { login } from "../_redux/authCrud";
+import { Form } from "react-bootstrap";
 
 /*
   INTL (i18n) docs:
@@ -106,8 +107,9 @@ function Login(props) {
   return (
     <div className="login-form login-signin" id="kt_login_signin_form">
       {/* begin::Head */}
-      <div className="mb-10 mb-lg-20">
-        <h3 className="font-size-h1 mb-5 text-bold">Welcome to iShip</h3>
+      <img className="loginpageLogo  " src="/media/logos/logo.png" alt="logo" />
+      <div className="mb-10 mb-lg-7">
+        <h1 className="font-size-h1 heading  text-bold">Welcome to iShip</h1>
         {/* <h1 className="site_name_login">
           iMarine
         </h1> */}
@@ -136,11 +138,11 @@ function Login(props) {
         )}
 
         <div className="form-group fv-plugins-icon-container">
-          <label className="login-label">Email or Username</label>
+          <label className="login-label">Email </label>
           <input
-            placeholder="Email Or Username"
+            placeholder="Enter Email"
             type="text"
-            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+            className={`form-control emailinput h-auto py-5 px-6 ${getInputClasses(
               "email"
             )}`}
             name="email"
@@ -157,7 +159,7 @@ function Login(props) {
           <input
             placeholder="Enter Password"
             type="password"
-            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+            className={`form-control emailinput h-auto py-5 px-6 ${getInputClasses(
               "password"
             )}`}
             name="password"
@@ -169,26 +171,43 @@ function Login(props) {
             </div>
           ) : null}
         </div>
-        <div className="form-group justify-content-between align-items-center">
+        <div className="form-group justify-content-between align-items-center float-left">
+          <Form.Group controlId="formBasicChecbox">
+            <Form.Check
+              className="forgotPasswordText  "
+              type="checkbox"
+              label="Remember Me"
+            />
+          </Form.Group>
+        </div>
+        <div className="form-group justify-content-between align-items-center mt-3">
           <p className="float-right text-right">
             <Link
               to=""
-              className=" my-3 mr-2 text-primary"
+              className=" my-3 mr-2 forgotPasswordText"
               id="kt_login_forgot"
             >
               Forgot Password?
             </Link>
           </p>
+        </div>
+        <div className="clearfix"></div>
+        <div className="mt-3">
           <button
             id="kt_login_signin_submit"
             type="submit"
             disabled={formik.isSubmitting}
-            className={`btn btn-primary font-weight-bold px-9 py-4 my-3`}
+            className={`btn btn-primary loginButton`}
           >
-            <span>Sign In</span>
+            <span className="loginText">Log in</span>
             {loading && <span className="ml-3 spinner spinner-white"></span>}
           </button>
         </div>
+        <p className="mt-5 ">
+          <Link className="signupText" to="">
+            Don't have account? <b>SIGNUP</b>
+          </Link>
+        </p>
       </form>
       {/*end::Form*/}
     </div>

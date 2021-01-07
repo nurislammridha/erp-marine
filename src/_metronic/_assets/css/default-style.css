@@ -44,8 +44,9 @@ ul.sticky-toolbar.nav.flex-column.pl-2.pr-2.pt-3.pb-3.mt-4 {
 }
 
 .login-label {
-  font-weight: bold !important;
+  font-weight: 400 !important;
   font-size: 14px !important;
+  color: #000000 !important;
 }
 
 /* Design Dash Board */
@@ -93,4 +94,43 @@ button.saveButton {
 }
 .cancelButton {
   background-color: #aeaeae !important;
+}
+/* login page  */
+input.form-control.emailinput {
+  background: #fcfcfc !important;
+  box-shadow: #00000029 !important;
+  border: 1px solid #95989a4d !important;
+  height: 36px !important;
+}
+.form-control:focus {
+  color: #000000 !important;
+}
+a#kt_login_forgot {
+  color: #172b4d !important;
+}
+button#kt_login_signin_submit {
+  background: #1d3d74;
+  border: 1px solid #1d3d74;
+  box-shadow: #00000029 !important;
+  width: 201px;
+}
+.heading {
+  color: #160637;
+  font-size: 30px !important;
+}
+span.loginText {
+  font-weight: 500;
+}
+a {
+  color: #4174aa !important;
+  font-size: 12px;
+}
+img.loginpageLogo {
+  width: 180px;
+  margin-bottom: 50px;
+}
+.login.login-1 .login-aside {
+  width: 100%;
+  /* max-width: 600px; */
+  flex-basis: 40% !important;
 }
