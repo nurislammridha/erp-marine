@@ -38,17 +38,17 @@ const DougHuntChart = () => {
                 <span className="dough__list list__1">Sales Module</span>{" "}
                 <span className="dough__num">$122,900</span>{" "}
               </p>
-              <p>
+              <p className="stat__2">
              
                 <span className="dough__list list__2">Finance Module</span>{" "}
                 <span className="dough__num">$96,785</span>{" "}
               </p>
-              <p>
+              <p className="stat__3">
               
                 <span className="dough__list list__3">Spain</span>{" "}
                 <span className="dough__num">$35,785</span>{" "}
               </p>
-              <p>
+              <p className="stat__4">
                
                 <span className="dough__list list__4">Russia</span>{" "}
                 <span className="dough__num">$22,123</span>{" "}
