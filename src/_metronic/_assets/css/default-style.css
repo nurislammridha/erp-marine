@@ -536,3 +536,11 @@ img.loginpageLogo {
     line-height: 10px;
     width: 90px;
 } */
+
+.input-area-add .btn-default {
+    border-radius: 0px!important;
+    background: white;
+    border-color: #cccccc;
+    border-left: 0px!important;
+    margin-left: -3px;
+}

@@ -16,6 +16,7 @@ import { deleteProductImagePreview, handleChangeProductInputAction } from "../..
 import CertificateCategoryAddModal from "../../../certificate-category/components/create/CertificateCategoryAddModal";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 import CertificateCategoryAdd from "../../../certificate-category/components/create/CertificateCategoryAdd";
+import CertificateTypeAdd from "../../../certificate-types/components/create/CertificateTypeAdd";
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -257,17 +258,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div>
 
                 <div className="col-lg-3">
-                  <SimpleModal
-                    show={showTypeModal}
-                    handleClose={() => setShowTypeModal(false)}
-                    handleShow={() => setShowTypeModal(true)}
-                    modalTitle={"Type Name"}
-                  >
-                    <div>
-                      Add Here Component
-                    </div>
-                  </SimpleModal>
-
                   <label className="form-label">Certificate Type</label>
                   <div className="input-area-add">
                     <div className="float-left">
@@ -577,6 +567,16 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div>
               </div>
             </form>
+
+            <SimpleModal
+              show={showTypeModal}
+              handleClose={() => setShowTypeModal(false)}
+              handleShow={() => setShowTypeModal(true)}
+              modalTitle={"Type Name"}
+            >
+              <CertificateTypeAdd />
+            </SimpleModal>
+            
           </div>
         </div>
       </div>
