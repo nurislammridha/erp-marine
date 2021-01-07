@@ -1,7 +1,7 @@
 import * as Types from "../types/Types";
 import axios from "axios";
 import { showToast } from "../../../../master/utils/ToastHelper";
-// import { showToast } from "../../../master/utils/ToastHelper";
+
 
 export const handleChangeCertificateTypeInput = (name, value) => (dispatch) => {
     const formData = {
@@ -15,27 +15,16 @@ export const handleChangeCertificateTypeInput = (name, value) => (dispatch) => {
 };
 
 export const getCertificateTypeList = (searchValue = "", status = "") => async (dispatch) => {
-    const headers = {
-        "Content-Type": "application/json",
-    };
-
-    // containerTypeId = (containerTypeId === "" || containerTypeId === null) ? "" : containerTypeId;
-    // vessel = (vessel === null || vessel === "") ? "" : vessel;
-
+    let isActive = status == "" ? 1 : parseInt(status);
     let url = `http://10.3.203.136:8081/iMarineAPI/public/api/v1/certificate/types`;
 
-    if (searchValue !== "" || status !== "") {
-        url += `?search=${searchValue}&status=${status}`;
+    if (searchValue !== "" || isActive !== "") {
+        url += `?search=${searchValue}&isActive=${isActive}`;
     }
-    axios
-        .get(url, {
-            headers: headers,
-        })
+
+    axios.get(url)
         .then((res) => {
-            console.log("Response", res);
-            let data = res.data;
-            console.log('data', data)
-            dispatch({ type: Types.GET_CERTIFICATE_TYPE_LIST, payload: data });
+            dispatch({ type: Types.GET_CERTIFICATE_TYPE_LIST, payload: res.data });
         });
 };
 

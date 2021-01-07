@@ -17,11 +17,11 @@ const CertificateTypeFilter = () => {
     const statusOptions = [
         {
             label: 'Active',
-            value: 0
+            value: '1'
         },
         {
             label: 'Inactive',
-            value: 1
+            value: '0'
         }
     ]
 
@@ -62,12 +62,10 @@ const CertificateTypeFilter = () => {
                                     register={register}
                                     value={certificateTypeInput.isActive}
                                     onChange={(option) => {
-                                        handleChangeTextInput("strCargoTypeName", option.label);
-                                        handleChangeTextInput("isActive", option.value);
+                                        setType(option.value);
                                         dispatch(getCertificateTypeList(search, option.value));
                                     }}
                                     setValue={setValue}
-
                                 />
                             </Col>
                         </Form.Group>

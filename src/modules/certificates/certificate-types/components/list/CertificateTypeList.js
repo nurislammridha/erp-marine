@@ -41,15 +41,13 @@ const CertificateTypeList = () => {
                                 <td>{item.strCertificateTypeName}</td>
                                 <td>{item.intActionBy}</td>
                                 <td>{item.dteLastActionDateTime}</td>
-                                <td>{item.isActive}</td>
+                                <td>{item.isActive ? "Active" : "Inactive"}</td>
                                 <td>
                                     {" "}
                                     <Link to={``}>
                                         <i className="far fa-eye mr-3"></i>
                                     </Link>
-                                    <Button className="btn btn-light" onClick={handleShow}>
-                                        <i className="far fa-edit"></i>
-                                    </Button>
+                                    <i className="far fa-edit ml-2" onClick={handleShow}></i>
 
                                 </td>
                             </tr>
