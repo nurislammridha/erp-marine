@@ -31,7 +31,7 @@ const IssueAuthorityFilter = () => {
             controlId="formPlaintextPassword"
           >
             <Form.Label className="mt-2">Status</Form.Label>
-            <Col sm="10">
+            <Col sm="9">
               <RHFInput
                 as={<Select options={action} />}
                 rules={{ required: false }}
