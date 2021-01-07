@@ -3,6 +3,8 @@ import { Form } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { RHFInput } from "react-hook-form-input";
+import Select from "react-select";
 import { handleCertificateCategoryInput } from "../../_redux/actions/CertificateCategoryAction";
 
 const CertificateCategoryAdd = () => {
@@ -15,7 +17,7 @@ const CertificateCategoryAdd = () => {
   const categoryInputChange = (name, value) => {
     dispatch(handleCertificateCategoryInput(name, value));
   };
-  const submiteCategory = (data) => {};
+  const submiteCategory = (data) => { };
 
   const statusOptions = [
     {
@@ -28,6 +30,8 @@ const CertificateCategoryAdd = () => {
     },
   ];
 
+  const loading = false;
+
   //add boiler info in multiple list
 
   return (
@@ -37,36 +41,46 @@ const CertificateCategoryAdd = () => {
         onSubmit={handleSubmit(submiteCategory)}
         method="post"
       >
-        <div className="form-group mt-5">
-          <label className="form-label">Certificate Name</label>
+        <div className="form-group mt-0">
+          <label className="form-label">Category Name</label>
           <Form.Control
             type="text"
             ref={register}
             value={getCategoryInpuData.strCertificateCategoriName}
-            placeholder="Certificate Category"
+            placeholder="Type Category Name"
             name="strCertificateCategoriName"
             onChange={(e) => categoryInputChange("strCertificateCategoriName", e.target.value)}
+          />
+        </div>
+
+        <div className="form-group mt-0">
+          <label className="form-label">Parent Category <span className="text-info"> (Optional)</span></label>
+          <RHFInput
+              as={<Select options={statusOptions} />}
+              rules={{ required: false }}
+              name="intCargoTypeID"
+              register={register}
+              value={''}
+              onChange={() => console.log('e')}
+              setValue={""}
           />
         </div>
         <div className="form-group row">
           <div className="col-sm-10"></div>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg">
-          <span>Submit</span>
-        </button>
 
-        {/* {loading && (
-                    <button type="submit" class="btn btn-primary btn-lg" disabled={true}>
-                        <span>Submitting...</span>
-                        <span className="ml-3 spinner spinner-white"></span>
-                    </button>
-                )}
+        {loading && (
+          <button type="submit" class="btn btn-primary btn-lg" disabled={true}>
+            <span><i className="fa fa-check"></i>  Submitting...</span>
+            <span className="ml-3 spinner spinner-white"></span>
+          </button>
+        )}
 
-                {!loading && (
-                    <button type="submit" class="btn btn-primary btn-lg">
-                        <span>Submit</span>
-                    </button>
-                )} */}
+        {!loading && (
+          <button type="submit" class="btn btn-primary saveButton">
+            <span>Submit</span>
+          </button>
+        )}
       </form>
     </>
   );

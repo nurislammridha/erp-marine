@@ -488,3 +488,51 @@ img.loginpageLogo {
     box-shadow: -5px 3px 5px #00000021 !important;
     border: none !important;
 }
+
+.input-area-add .float-left {
+    width: 80%;
+}
+
+.input-area-add .float-right {
+    width: 20%;
+}
+
+.input-area-add input,
+.input-area-add select {
+    border-radius: 0px!important;
+}
+
+.btn-modal-close {
+    position: absolute;
+    right: -16px;
+    padding-right: 20px;
+    cursor: pointer;
+    top: -10px;
+    background: #ffffffed;
+    border-radius: 20px;
+    width: 36px;
+    height: 36px;
+    padding: 12px;
+    box-shadow: 1px 2px 30px grey;
+}
+
+.btn-default i {
+    margin-left: -1px;
+    width: 16px;
+    height: 16px;
+    margin-top: -2px;
+    margin-bottom: -1px;
+}
+
+.btn-modal-close i {
+    margin: -1px;
+    margin-left: 1px;
+    margin-top: -2px;
+}
+
+
+/* button.saveButton {
+    height: 29px;
+    line-height: 10px;
+    width: 90px;
+} */

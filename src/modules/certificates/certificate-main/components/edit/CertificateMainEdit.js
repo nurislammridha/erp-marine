@@ -71,15 +71,6 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
   );
   const countryList = useSelector((state) => state.vesselInfo.countryList);
   let vesselType = [];
-  if (vesselTypeList.data) {
-    vesselTypeList.data.forEach((item) => {
-      let items = {
-        value: item.intID,
-        label: item.strName,
-      };
-      vesselType.push(items);
-    });
-  }
 
   let Country = [];
   if (countryList) {
@@ -142,7 +133,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
         <div className="card card-custom gutter-b">
           <div className="card-header">
             <div className="card-title">
-              <h3 class="card-label">Certificate Main Create</h3>
+              <h3 className="card-label">Certificate</h3>
             </div>
           </div>
           <div className="card-body">
@@ -153,7 +144,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
             >
               <div className="form-group row mt-5">
               <div className="col-lg-4">
-                  <label className="form-label">Vessel Name</label>
+                  <label className="form-label">Vessel</label>
                   <RHFInput
                     as={<Select options={vesselType} />}
                     rules={{ required: true }}
