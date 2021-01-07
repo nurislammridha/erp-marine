@@ -1,163 +1,82 @@
-import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import {
-  GetVesselList,
-  DeleteVessel,
-  VesselEmptyDeleteMessage,
-} from "../../../../../domains/Vessel/_redux/actions/VesselAction";
+import { getCertificateMainListAction } from '../../_redux/actions/CertificateMainAction';
+import LoadingSpinner from './LoadingSpinner';
+import PaginationLaravel from './PaginationLaravel';
 
-const CertificateMainList = withRouter(({ history, props }) => {
-  const dispatch = useDispatch();
-  const [employeeInfo, setEmployeeInfo] = React.useState({
-    vesselList: [],
-  });
+const CertificateMainList = () => {
+    const dispatch = useDispatch();
+    const [currentPage, setCurrentPage] = useState(1);
+    const [searchText, setSearchText] = useState('');
 
-  const vesselList = useSelector((state) => state.vesselInfo.vesselList);
-  const deleteMessage = useSelector((state) => state.vesselInfo.deleteMessage);
-  const deleteStatus = useSelector((state) => state.vesselInfo.deleteStatus);
+    const isLoading = useSelector((state) => state.certificateMainInfo.isLoading);
+    const certificates = useSelector((state) => state.certificateMainInfo.certificates);
+    const certificatesPaginatedData = useSelector((state) => state.product.certificatesPaginatedData);
 
-  useEffect(() => {
-    dispatch(GetVesselList());
-    if (typeof deleteMessage === null || typeof deleteMessage === "undefined") {
-      toast.error("Something Went Wrong", {
-        autoClose: 2000,
-        className: "dangerColor",
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    } else {
-      if (deleteStatus && deleteMessage.length > 0) {
-        toast.success(deleteMessage, {
-          autoClose: 2000,
-          className: "primaryColor",
-          position: toast.POSITION.BOTTOM_RIGHT,
-        });
-        dispatch(VesselEmptyDeleteMessage());
-        history.push("/vessels/list");
-      }
+    useEffect(() => {
+        dispatch(getCertificateMainListAction(currentPage));
+    }, [dispatch, currentPage]);
 
-      if (!deleteStatus && deleteMessage.length > 0) {
-        toast.error(deleteMessage, {
-          autoClose: 2000,
-          className: "dangerColor",
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        dispatch(VesselEmptyDeleteMessage());
-      }
+    const changePage = (data) => {
+        setCurrentPage(data.page);
+        dispatch(getCertificateMainListAction(data.page));
     }
-  }, [deleteMessage, deleteStatus, dispatch, props]);
 
-  const vesselDelete = async (intID) => {
-    // let deleteData = await DeleteVessel(intID);
-    dispatch(DeleteVessel(intID));
-    dispatch(GetVesselList());
-  };
+    const searchProduct = (e) => {
+        const searchText = e.target.value;
+        setSearchText(searchText)
+        if (searchText.length === 0) {
+            dispatch(getCertificateMainListAction(currentPage));
+        } else {
+            dispatch(getCertificateMainListAction(currentPage, searchText));
+        }
+    }
 
-  return (
-    <>
-      <div className="container">
-        <div className="card card-custom gutter-b">
-          <div className="card-header">
-            <div className="card-title">
-              <h3 class="card-label">Certificate Main List</h3>
+    return (
+        <>
+            <div className="mb-2">
+                <div className="float-left">
+                    <input type="search" value={searchText} className="form-control product-search-input" placeholder="Search By Title, Description, Price" onChange={searchProduct} />
+                </div>
+                <div className="float-right">
+                    <PaginationLaravel isDescription={false} changePage={changePage} data={certificatesPaginatedData} />
+                </div>
+                <div className="clearfix"></div>
             </div>
-            <div className="card-toolbar">
-              <a
-                onClick={() => {
-                  history.push("/certificates-main/create");
-                }}
-              >
-                <button type="button" class="btn btn-primary">
-                  Create Certificate
-                </button>
-              </a>
-            </div>
-          </div>
-          <div className="card-body">
-            <form className="form form-label-right">
-            </form>
-            <div className="react-bootstrap-table table-responsive">
-              <table className="table table table-head-custom table-vertical-center">
-                <thead>
-                  <tr>
-                    <td>SL</td>
-                    <td>NAME OF THE CERTIFICATES</td>
-                    <td>CERTIFICATE TYPE</td>
-                    <td>VESSEL NAME</td>
-                    <td>ISSUE DATE</td>
-                    <td>EXPIRY DATE</td>
-                    <td>ATTACHMENTS</td>
-                    <td>REMARKS</td>
-                    <td>ACTION</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  {vesselList &&
-                    vesselList.map((item, index) => (
-                      <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>{item.strVesselName}</td>
-                        <td>{item.strIMONumber}</td>
-                        <td>{item.strVesselTypeName}</td>
-                        <td>{item.strBuildYear}</td>
-                        <td>{item.numDeadWeight}</td>
-                        <td>{item.strYardCountryName}</td>
-                        <td>
-                          {item.ysnOwn == "1" ? (
-                            <button
-                              type="button"
-                              className="badge badge-primary border-0"
-                            >
-                              Own Vessel
-                            </button>
-                          ) : (
-                            <button
-                              type="button"
-                              className="badge badge-danger border-0"
-                            >
-                              Other's Vessel
-                            </button>
-                          )}
-                        </td>
-                        <td>
-                          <a
-                            className="btn btn-icon btn-light btn-hover-info btn-sm"
-                            onClick={() => {
-                              history.push("/certificates-main/edit", { vessel: item });
-                            }}
-                          >
-                            <i className="fa fa-edit"></i>
-                          </a>
-                          &nbsp;&nbsp;&nbsp;
-                          <a
-                            className="btn btn-icon btn-light btn-hover-danger btn-sm"
-                            onClick={() => {
-                              if (
-                                window.confirm(
-                                  "Are you sure you wish to delete this item?"
-                                )
-                              )
-                                vesselDelete(item.intID);
-                            }}
-                          >
-                            <i className="fa fa-trash"></i>
-                          </a>
-                        </td>
-                      </tr>
-                    ))}
-                  {vesselList == null && (
-                    <p className="text-danger text-center">No Data Found</p>
-                  )}
-                </tbody>
-                <tfoot></tfoot>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-});
+            {
+                isLoading &&
+                <LoadingSpinner text="Loading Products..." />
+            }
+            {
+                !isLoading && certificates.length === 0 &&
+                <div className="alert alert-warning">
+                    Sorry ! No Product Found.
+                </div>
+            }
+            {
+                !isLoading && certificates.length > 0 &&
+                <>
+                    <div className="table-responsive">
+                        <table className="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th className='td-sl'>Sl</th>
+                                    <th className='td-product-title'>Product</th>
+                                    <th>Price</th>
+                                    <th className='td-description'>Description</th>
+                                    <th className='td-upload-info'>Upload Information</th>
+                                    <th className='td-action'>Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                        <PaginationLaravel changePage={changePage} data={certificatesPaginatedData} />
+                    </div>
+                </>
+
+            }
+        </>
+    );
+}
 
 export default CertificateMainList;
