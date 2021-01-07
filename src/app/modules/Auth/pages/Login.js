@@ -105,7 +105,7 @@ function Login(props) {
   });
 
   return (
-    <div className="login-form login-signin" id="kt_login_signin_form">
+    <div className="login-form login-signin" id="kt_login_signin_form ">
       {/* begin::Head */}
       <img className="loginpageLogo  " src="/media/logos/logo.png" alt="logo" />
       <div className="mb-10 mb-lg-7">
@@ -119,7 +119,7 @@ function Login(props) {
       {/*begin::Form*/}
       <form
         onSubmit={formik.handleSubmit}
-        className="form fv-plugins-bootstrap fv-plugins-framework"
+        className="form fv-plugins-bootstrap fv-plugins-framework loginForm"
       >
         {formik.status && !isLogged ? (
           <div className="mb-10 alert alert-custom alert-light-danger alert-dismissible">
