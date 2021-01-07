@@ -8,6 +8,9 @@ const initialState = {
         intActionBy: "",
         isActive: "1"
     },
+    certificateTypeList: [],
+    status: false
+
 
 };
 
@@ -16,8 +19,6 @@ const CertificateTypeReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-
-
         case Types.CHANGE_CERTIFICATE_TYPE_INPUT:
             const certificateTypeInput = { ...state.certificateTypeInput };
             certificateTypeInput[action.payload.name] = action.payload.value;
@@ -25,7 +26,22 @@ const CertificateTypeReducer = (state = initialState, action) => {
                 ...state,
                 certificateTypeInput,
             };
-            break;
+
+        case Types.GET_CERTIFICATE_TYPE_LIST:
+
+            return {
+                ...state,
+                certificateTypeList: action.payload.data,
+            };
+
+        case Types.CREATE_CERTIFICATE_TYPE:
+            console.log('action.payload,', action.payload);
+            return {
+                ...state,
+                status: action.payload.status
+
+
+            };
 
         // case Types.VOYAGE_SUBMIT:
         //     if (action.payload.status) {
