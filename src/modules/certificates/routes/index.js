@@ -4,12 +4,14 @@ import issueAuthorityRoutes from "../issue-authority/routes";
 import certificateTypeRoutes from "../certificate-types/routes";
 import certificateMainRoutes from "../certificate-main/routes";
 import certificateCategoryRoutes from "../certificate-category/routes";
+import certificateMasterRoutes from "../certificate-master/routes";
 
 const certificateModuleRoutes = [
   ...issueAuthorityRoutes,
   ...certificateTypeRoutes,
   ...certificateMainRoutes,
-  ...certificateCategoryRoutes
+  ...certificateCategoryRoutes,
+  ...certificateMasterRoutes
 ];
 
 function getCertificateModuleRoutes() {
