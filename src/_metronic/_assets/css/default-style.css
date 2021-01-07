@@ -1,239 +1,307 @@
 ul.breadcrumb.breadcrumb-transparent.breadcrumb-dot.font-weight-bold.p-0.my-2 {
-  /* display: !important; */
+    /* display: !important; */
 }
 
 ul.sticky-toolbar.nav.flex-column.pl-2.pr-2.pt-3.pb-3.mt-4 {
-  /* display: ; */
+    /* display: ; */
 }
 
 .borderGap {
-  border-bottom: 1px dashed #e5eaee;
-  margin-bottom: 20px;
-  width: 100%;
+    border-bottom: 1px dashed #e5eaee;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
 .site-name {
-  color: #fff;
-  margin-top: 10px;
-  margin-left: 10px;
-  font-weight: 500;
-  font-size: 15px;
+    color: #fff;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-weight: 500;
+    font-size: 15px;
 }
 
 @media (min-width: 992px) {
-  .header-fixed.subheader-fixed.subheader-enabled .wrapper {
-    padding-top: 70px;
-  }
+    .header-fixed.subheader-fixed.subheader-enabled .wrapper {
+        padding-top: 70px;
+    }
 }
 
 @media (max-width: 991.98px) {
-  .subheader-enabled .content {
-    padding-top: 15px;
-  }
+    .subheader-enabled .content {
+        padding-top: 15px;
+    }
 }
 
 .aside-minimize .brand .brand-logo span {
-  display: none;
+    display: none;
 }
 
 .site_name_login {
-  text-transform: uppercase;
-  font-weight: 800;
-  color: #2f3044;
-  margin-top: -5px !important;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #2f3044;
+    margin-top: -5px !important;
 }
 
 .login-label {
-  font-weight: bold !important;
-  font-size: 14px !important;
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    color: #000000 !important;
 }
+
 
 /* Design Dash Board */
 
-.dashboard-card {
-}
+.dashboard-card {}
 
 .shipping-card {
-  background-color: #4a7dff;
-  padding-top: 30px;
-  padding-bottom: 5px !important;
+    background-color: #4a7dff;
+    padding-top: 30px;
+    padding-bottom: 5px !important;
 }
 
 .shipping-card h2 {
-  color: white;
-  font-weight: 800;
-  padding-top: 15px;
+    color: white;
+    font-weight: 800;
+    padding-top: 15px;
 }
 
 .second-color {
-  background-color: #3699ff;
+    background-color: #3699ff;
 }
 
 .shipping-card p {
-  color: white;
-  font-size: 12px;
+    color: white;
+    font-size: 12px;
 }
 
 .spacer {
-  padding-left: 30px;
+    padding-left: 30px;
 }
 
+
 /* Design Dash Board */
+
+
 /* custom form design */
+
 .formHeight {
-  height: 30px;
+    height: 30px;
 }
+
 label.formFont.form-label {
-  font-size: 11px !important;
-  margin-bottom: 0px !important;
+    font-size: 11px !important;
+    margin-bottom: 0px !important;
 }
+
 button.saveButton {
-  height: 29px;
-  line-height: 10px;
+    height: 29px;
+    line-height: 10px;
 }
+
 .cancelButton {
-  background-color: #aeaeae !important;
+    background-color: #aeaeae !important;
 }
+
 
 /* DashBoard Main Page Design Starts */
 
-  .dashboard__pb{
+.dashboard__pb {
     padding-bottom: 30px;
 }
 
-.paid__widget{
-height:80px;
-width:215px;
-box-shadow: 0px 3px 6px #2C28281C;
-border-radius: 10px;
-background:white;
-overflow: hidden;
+.paid__widget {
+    height: 80px;
+    width: 215px;
+    box-shadow: 0px 3px 6px #2C28281C;
+    border-radius: 10px;
+    background: white;
+    overflow: hidden;
+}
 
+.widget__left {
+    float: left;
+    width: 30%;
+    padding-top: 20px;
+    padding-left: 20px;
 }
-.widget__left{
-float: left;
-width:30%;
-padding-top: 20px;
-padding-left: 20px;
+
+.widget__left span {
+    display: block;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: #40C297;
 }
-.widget__left span{
-  display:block;
-   height :30px;
-   width: 30px;
-   border-radius: 50%;
-   background:#40C297;
+
+.widget__right {
+    float: right;
+    width: 70%;
+    text-align: left;
+    padding-top: 20px;
 }
-.widget__right{
-float: right;
-width:70%;
-text-align: left;
-padding-top: 20px;
-}
-.widget__right p{
-    color:#8898AA;
+
+.widget__right p {
+    color: #8898AA;
     text-transform: uppercase;
-     font-size: 11px !important;
+    font-size: 11px !important;
 }
-.widget__right h4{
-    color:#4D4F5C;
+
+.widget__right h4 {
+    color: #4D4F5C;
     font-weight: bold;
     font-size: 16px;
 }
-.chart__box{
-box-shadow: 0px 2px 6px #2C28281C;
-border-radius: 10px;
-padding-bottom: 10%;
-overflow: hidden;
-height: 300px;
-}
-.chart__box p{
-padding-top: 10px;
-font-size: 11px !important;
-padding-left: 10px;
-}
-.chart__box h4{
-font-size: 14px !important;
-padding-left: 10px;
-color:#172B4D;
-/* color:#F1F3F9; */
+
+.chart__box {
+    box-shadow: 0px 2px 6px #2C28281C;
+    border-radius: 10px;
+    padding-bottom: 10%;
+    overflow: hidden;
+    height: 300px;
 }
 
-.dough__main{
-
-padding-top: 30px;
-
+.chart__box p {
+    padding-top: 10px;
+    font-size: 11px !important;
+    padding-left: 10px;
 }
 
-.doug__left{ float:left;
-   width:52%;
-}
-.doug__right{  float:left;
-     width:40%;
+.chart__box h4 {
+    font-size: 14px !important;
+    padding-left: 10px;
+    color: #172B4D;
+    /* color:#F1F3F9; */
 }
 
-.doughunt__stat{
-
-
+.dough__main {
+    padding-top: 30px;
 }
+
+.doug__left {
+    float: left;
+    width: 52%;
+}
+
+.doug__right {
+    float: left;
+    width: 40%;
+}
+
+.doughunt__stat {}
+
 .color__circle {
     display: inline-block;
-  
+}
 
-} 
+.stat__1 {
+    position: relative;
+}
 
- .stat__1{
-  position: relative;
-
- }
- .stat__1::before{
-   content: "";
+.stat__1::before {
+    content: "";
     height: 7px;
     width: 7px;
     border-radius: 50%;
-     background:black;
-     position: absolute;
-     top:10px;
-     left:0px;
+    background: black;
+    position: absolute;
+    top: 10px;
+    left: 0px;
     border: 3px solid #FEB969;
-
- }
-
-.border__orange{
-
-}
-.border__green{
-   border: 3px solid #2DCE98;
-}
-.border__blue{
-   border: 3px solid #1F50B1;
-}
-.border__red{
-   border: 3px solid #F53C56;
 }
 
-.dough__list{
-  color:#4D4F5C;
-  font-size: 11px;
-  font-weight:600;
-  margin-left: 3px;
-  font-family: "poppins";
+.border__orange {}
+
+.border__green {
+    border: 3px solid #2DCE98;
 }
 
-.list__1{
-   margin-right: 25px;
+.border__blue {
+    border: 3px solid #1F50B1;
 }
-.list__2{
-   margin-right: 15px;
+
+.border__red {
+    border: 3px solid #F53C56;
 }
-.list__3{
-  margin-right: 70px;
+
+.dough__list {
+    color: #4D4F5C;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 3px;
+    font-family: "poppins";
 }
-.list__4{
-  margin-right: 67px;
+
+.list__1 {
+    margin-right: 25px;
+}
+
+.list__2 {
+    margin-right: 15px;
+}
+
+.list__3 {
+    margin-right: 70px;
+}
+
+.list__4 {
+    margin-right: 67px;
+}
+
+.dough__num {
+    font-weight: 500;
 }
 
 
-.dough__num{
-  font-weight: 500;
-}
 /* DashBoard Main Page Design Ends */
+
+
+/* login page  */
+
+.form-control:focus {
+    color: #000000 !important;
+}
+
+a#kt_login_forgot {
+    color: #172b4d !important;
+}
+
+button#kt_login_signin_submit {
+    background: #1d3d74;
+    border: 1px solid #1d3d74;
+    box-shadow: #00000029 !important;
+    width: 201px;
+}
+
+.heading {
+    color: #160637;
+    font-size: 30px !important;
+}
+
+span.loginText {
+    font-weight: 500;
+}
+
+a {
+    color: #4174aa !important;
+    font-size: 12px;
+}
+
+img.loginpageLogo {
+    width: 180px;
+    margin-bottom: 50px;
+}
+
+@media (min-width: 1200px) {
+    .login.login-1 .login-aside {
+        width: 100%;
+        max-width: 900px !important;
+    }
+}
+
+.loginForm input.form-control {
+    background: #fcfcfc !important;
+    height: 36px !important;
+    border: 1px solid #95989a4d;
+    box-shadow: -5px 3px 5px #00000029 !important;
+}
