@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Button, Dropdown } from "react-bootstrap";
 import Modal from 'react-bootstrap/Modal';
@@ -7,6 +7,7 @@ import CertificateTypeList from "../../certificate-types/components/list/Certifi
 import Pdf from "react-to-pdf";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import ReactToPrint from "react-to-print-advanced";
+import { useDispatch, useSelector } from "react-redux";
 import CertificateCategoryAdd from "../components/create/CertificateCategoryAdd";
 
 
@@ -14,11 +15,18 @@ const CertificateCategoryContainer = () => {
 
   const history = useHistory();
   const ref = React.createRef();
-
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  // const modalStatus = useSelector((state) => state.getCategoryInpuData.status);
+
+  // useEffect(() => {
+  //   if (modalStatus) {
+  //     setShow(false);
+  //   }
+  // }, [modalStatus]);
 
   return (
     <div className="card card-custom gutter-b">
