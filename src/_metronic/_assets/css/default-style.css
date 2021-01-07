@@ -109,18 +109,18 @@ button.saveButton {
 }
 
 .paid__widget {
-  height: 80px;
-  width: 215px;
-  box-shadow: 0px 3px 6px #2c28281c;
-  border-radius: 10px;
-  background: white;
-  overflow: hidden;
-  height: 80px;
-  width: 220px;
-  box-shadow: 0px 3px 6px #2c28281c;
-  border-radius: 10px;
-  background: white;
-  overflow: hidden;
+    height: 80px;
+    width: 215px;
+    box-shadow: 0px 3px 6px #2c28281c;
+    border-radius: 10px;
+    background: white;
+    overflow: hidden;
+    height: 80px;
+    width: 220px;
+    box-shadow: 0px 3px 6px #2c28281c;
+    border-radius: 10px;
+    background: white;
+    overflow: hidden;
 }
 
 .widget__left {
@@ -158,37 +158,37 @@ button.saveButton {
 }
 
 .widget__left {
-  float: left;
-  width: 30%;
-  padding-top: 20px;
-  padding-left: 20px;
+    float: left;
+    width: 30%;
+    padding-top: 20px;
+    padding-left: 20px;
 }
 
 .widget__left span {
-  display: block;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  background: #40c297;
+    display: block;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: #40c297;
 }
 
 .widget__right {
-  float: right;
-  width: 70%;
-  text-align: left;
-  padding-top: 20px;
+    float: right;
+    width: 70%;
+    text-align: left;
+    padding-top: 20px;
 }
 
 .widget__right p {
-  color: #8898aa;
-  text-transform: uppercase;
-  font-size: 11px !important;
+    color: #8898aa;
+    text-transform: uppercase;
+    font-size: 11px !important;
 }
 
 .widget__right h4 {
-  color: #4d4f5c;
-  font-weight: bold;
-  font-size: 16px;
+    color: #4d4f5c;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 .chart__box {
@@ -217,11 +217,11 @@ button.saveButton {
 }
 
 .doug__left {
-  float: left;
-  width: 52%;
-  float: left;
-  width: 52%;
-  padding-top: 25px;
+    float: left;
+    width: 52%;
+    float: left;
+    width: 52%;
+    padding-top: 25px;
 }
 
 .doug__right {
@@ -239,24 +239,24 @@ button.saveButton {
 }
 
 .stat__1::before {
-  content: "";
-  height: 7px;
-  width: 7px;
-  border-radius: 50%;
-  background: black;
-  position: absolute;
-  top: 10px;
-  left: 0px;
-  border: 3px solid #feb969;
-  content: "";
-  height: 11px;
-  width: 11px;
-  border-radius: 50%;
-  background: white;
-  position: absolute;
-  top: 9px;
-  left: -4px;
-  border: 3px solid #feb969;
+    content: "";
+    height: 7px;
+    width: 7px;
+    border-radius: 50%;
+    background: black;
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    border: 3px solid #feb969;
+    content: "";
+    height: 11px;
+    width: 11px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    top: 9px;
+    left: -4px;
+    border: 3px solid #feb969;
 }
 
 .border__orange {
@@ -317,51 +317,51 @@ button.saveButton {
 }
 
 .stat__2 {
-  position: relative;
+    position: relative;
 }
 
 .stat__2::before {
-  content: "";
-  height: 11px;
-  width: 11px;
-  border-radius: 50%;
-  background: white;
-  position: absolute;
-  top: 9px;
-  left: -4px;
-  border: 3px solid #2dce98;
+    content: "";
+    height: 11px;
+    width: 11px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    top: 9px;
+    left: -4px;
+    border: 3px solid #2dce98;
 }
 
 .stat__3 {
-  position: relative;
+    position: relative;
 }
 
 .stat__3::before {
-  content: "";
-  height: 11px;
-  width: 11px;
-  border-radius: 50%;
-  background: white;
-  position: absolute;
-  top: 9px;
-  left: -4px;
-  border: 3px solid #1f50b1;
+    content: "";
+    height: 11px;
+    width: 11px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    top: 9px;
+    left: -4px;
+    border: 3px solid #1f50b1;
 }
 
 .stat__4 {
-  position: relative;
+    position: relative;
 }
 
 .stat__4::before {
-  content: "";
-  height: 11px;
-  width: 11px;
-  border-radius: 50%;
-  background: white;
-  position: absolute;
-  top: 9px;
-  left: -4px;
-  border: 3px solid #f53c56;
+    content: "";
+    height: 11px;
+    width: 11px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    top: 9px;
+    left: -4px;
+    border: 3px solid #f53c56;
 }
 
 a#kt_login_forgot {
@@ -395,11 +395,12 @@ img.loginpageLogo {
 }
 
 @media (min-width: 1200px) {
-  .login.login-1 .login-aside {
-    width: 100%;
-    max-width: 900px !important;
-  }
+    .login.login-1 .login-aside {
+        width: 100%;
+        max-width: 900px !important;
+    }
 }
+
 @media (max-width: 1199px) {
     .login.login-1 .login-aside {
         width: 100%;
@@ -421,22 +422,20 @@ img.loginpageLogo {
 }
 
 @media (max-width: 425px) {
-  .login-aside {
-    height: 400px !important;
-  }
+    .login-aside {
+        height: 400px !important;
+    }
 }
+
 img.loginpageLogo {
-  width: 99px;
-
-  margin-top: -130px;
+    width: 99px;
+    margin-top: -130px;
 }
+
 .heading {
-  font-size: 22px !important;
-  margin-top: -55px;
+    font-size: 22px !important;
+    margin-top: -55px;
 }
-
-.overlay__caption {
-  background-color: #007bff;
 
 .overlay__caption {
     background-color: #007bff;
@@ -469,22 +468,23 @@ img.loginpageLogo {
 }
 
 .overlay__caption:hover:before {
-  transform: scaleY(1);
-  opacity: 0.25;
+    transform: scaleY(1);
+    opacity: 0.25;
 }
+
 .login.login-1 .login-aside {
-  width: 100%;
-  max-width: 900px !important;
+    width: 100%;
+    max-width: 900px !important;
 }
 
 .loginForm input.form-control {
-  background: #fcfcfc !important;
-  height: 36px !important;
-  border: 1px solid #95989a4d;
-  box-shadow: -5px 3px 5px #00000029 !important;
+    background: #fcfcfc !important;
+    height: 36px !important;
+    border: 1px solid #95989a4d;
+    box-shadow: -5px 3px 5px #00000029 !important;
 }
 
 .loginForm input#formBasicChecbox {
-  box-shadow: -5px 3px 5px #00000021 !important;
-  border: none !important;
+    box-shadow: -5px 3px 5px #00000021 !important;
+    border: none !important;
 }
