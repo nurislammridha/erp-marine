@@ -392,7 +392,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                 <div className="col-sm-10">
                   <a
                     onClick={() => {
-                      history.push("/vessels/list");
+                      history.push("/certificates-main/list");
                     }}
                   >
                     <button type="button" class="btn btn-secondary btn-lg mr-2">

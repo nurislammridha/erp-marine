@@ -26,6 +26,47 @@ export const handleChangeProductInputAction = (name, value, e, isEdit = false) =
 
 };
 
+export const getCertificateMainListAction = (page, searchText = null, isPublic = false) => async(dispatch) => {
+    let response = {
+        products: [],
+        status: false,
+        message: "",
+        isLoading: true,
+        errors: []
+    };
+    dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
+    let url = '';
+    url =`${process.env.REACT_APP_API_URL}/certificate/details`;
+
+    // if (searchText === null) {
+    //     url = `${url}?page=${page}`;
+    // } else {
+    //     url = `${process.env.REACT_APP_API_URL}products/view/search?search=${searchText}`
+    // }
+
+    try {
+        await Axios.get(url)
+            .then((res) => {
+                const { data, message, status } = res.data;
+                response.status = status;
+                response.products = data.data;
+                response.message = message;
+                response.productsPaginatedData = data;
+                response.isLoading = false;
+            })
+            .catch((err) => {
+                toast.error(err);
+            });
+    } catch (error) {
+        response.message = 'Something Went Wrong !';
+        toast.error(error);
+    }
+
+    response.isLoading = false;
+    dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
+};
+
+
 export const deleteProductImagePreview = () => (dispatch) => {
     let data = {
         name: 'imagePreviewUrl',

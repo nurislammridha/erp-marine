@@ -38,7 +38,8 @@ import VoyageActivityAuxEngn2Reducer from "../modules/voyage/_redux/reducers/Voy
 import VoyageActivityAuxEngn3Reducer from "../modules/voyage/_redux/reducers/VoyageActivityAuxEngn3Reducer";
 import CertificateMainReducer from "../modules/certificates/certificate-main/_redux/reducers/CertificateMainReducer";
 import CertificateTypeReducer from "../modules/certificates/certificate-types/_redux/reducers/CertificateTypeReducer";
-
+import CertificateIssueAuthorityReducer from "../modules/certificates/issue-authority/_redux/reducers/CertificateIssueAuthorityReducer";
+import CertificateCategoryReducer from "../modules/certificates/certificate-category/_redux/reducers/CertificateCategoryReducer";
 
 /** 
 | Domain : CCO
@@ -64,7 +65,6 @@ export const rootReducer = combineReducers({
   employeeRecordInfo: EmployeeRecordReducer,
   employeeDocumentInfo: EmployeeDocumentReducer,
   employeeCertificateInfo: EmployeeCertificateReducer,
-  certificateTypeInfo: CertificateTypeReducer,
   employeeBankDetailsInfo: EmployeeBankDetailsReducer,
   employeeReferenceInfo: EmployeeReferenceReducer,
   vesselInfo: VesselReducer,
@@ -81,6 +81,7 @@ export const rootReducer = combineReducers({
   voyageAux1: VoyageActivityAuxEngnReducer,
   voyageAux2: VoyageActivityAuxEngn2Reducer,
   voyageAux3: VoyageActivityAuxEngn3Reducer,
+  VoyageActivityBunkerReducer: VoyageActivityBunkerReducer,
 
   /** Procurement Module Reducers */
   purchaseRequisition: PurchaseRequisitionReducer,
@@ -89,10 +90,12 @@ export const rootReducer = combineReducers({
   /** Promotion */
   promotion: EmployeePromotionReducer,
 
-  VoyageActivityBunkerReducer: VoyageActivityBunkerReducer,
 
   /**Certificates */
-  certificateMainInfo: CertificateMainReducer
+  certificateMainInfo: CertificateMainReducer,
+  certificateIssueAuthorityInfo: CertificateIssueAuthorityReducer,
+  CertificateCategoryReducer: CertificateCategoryReducer,
+  certificateTypeInfo: CertificateTypeReducer,
 });
 
 export function* rootSaga() {

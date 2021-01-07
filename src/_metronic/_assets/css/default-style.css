@@ -111,6 +111,12 @@ button.saveButton {
   border-radius: 10px;
   background: white;
   overflow: hidden;
+    height: 80px;
+    width: 220px;
+    box-shadow: 0px 3px 6px #2C28281C;
+    border-radius: 10px;
+    background: white;
+    overflow: hidden;
 }
 
 .widget__left {
@@ -147,6 +153,40 @@ button.saveButton {
   font-size: 16px;
 }
 
+.widget__left {
+    float: left;
+    width: 30%;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.widget__left span {
+    display: block;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: #40C297;
+}
+
+.widget__right {
+    float: right;
+    width: 70%;
+    text-align: left;
+    padding-top: 20px;
+}
+
+.widget__right p {
+    color: #8898AA;
+    text-transform: uppercase;
+    font-size: 11px !important;
+}
+
+.widget__right h4 {
+    color: #4D4F5C;
+    font-weight: bold;
+    font-size: 16px;
+}
+
 .chart__box {
   box-shadow: 0px 2px 6px #2c28281c;
   border-radius: 10px;
@@ -175,6 +215,9 @@ button.saveButton {
 .doug__left {
   float: left;
   width: 52%;
+    float: left;
+    width: 52%;
+    padding-top: 25px;
 }
 
 .doug__right {
@@ -200,6 +243,15 @@ button.saveButton {
   top: 10px;
   left: 0px;
   border: 3px solid #feb969;
+    content: "";
+    height: 11px;
+    width: 11px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    top: 9px;
+    left: -4px;
+    border: 3px solid #FEB969;
 }
 
 .border__green {
@@ -248,6 +300,54 @@ button.saveButton {
 
 .form-control:focus {
   color: #000000 !important;
+}
+
+.stat__2 {
+    position: relative;
+}
+
+.stat__2::before {
+    content: "";
+    height: 11px;
+    width: 11px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    top: 9px;
+    left: -4px;
+    border: 3px solid #2DCE98;
+}
+
+.stat__3 {
+    position: relative;
+}
+
+.stat__3::before {
+    content: "";
+    height: 11px;
+    width: 11px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    top: 9px;
+    left: -4px;
+    border: 3px solid #1F50B1;
+}
+
+.stat__4 {
+    position: relative;
+}
+
+.stat__4::before {
+    content: "";
+    height: 11px;
+    width: 11px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    top: 9px;
+    left: -4px;
+    border: 3px solid #F53C56;
 }
 
 a#kt_login_forgot {
@@ -347,4 +447,21 @@ img.loginpageLogo {
 .overlay__caption:hover:before {
   transform: scaleY(1);
   opacity: 0.25;
+}
+    .login.login-1 .login-aside {
+        width: 100%;
+        max-width: 900px !important;
+    }
+}
+
+.loginForm input.form-control {
+    background: #fcfcfc !important;
+    height: 36px !important;
+    border: 1px solid #95989a4d;
+    box-shadow: -5px 3px 5px #00000029 !important;
+}
+
+.loginForm input#formBasicChecbox {
+    box-shadow: -5px 3px 5px #00000021 !important;
+    border: none !important;
 }
