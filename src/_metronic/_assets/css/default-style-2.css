@@ -16,19 +16,170 @@ canvas.chart-right.chartjs-render-monitor {
 .action__needed{
   background:white;
   padding: 15px;
-
   box-shadow: 0 0 30px 0 rgba(82,63,105,.05);
-    border: 10px;
+  border-radius: 10px;
+  height:380px;
+  width: 300px;
+
 }
 
-svg.CircularProgressbar.progress__bar {
- padding-top: 30px;
-width: 24% !important;
+.action__body{
+   text-align: left;
 }
-   .action__head h4{
-       font-size: 1.275rem;
-       font-weight: 600;
+svg.CircularProgressbar.progress__bar {
+  width: 35% !important;
+   padding-top: 35px;
+ 
+}
+.action__head h4{
+font-size: 1.275rem;
+font-weight: 600;
    }
+.three__dot{
+   cursor: pointer; 
+}
+
+
+.action__footer a{
+    color: #fff;
+    background-color: #1bc5bd;
+    border-color: #1bc5bd;
+    text-align: center;
+}
 
 
 /* Circular Progress Bar Ends */
+
+
+/* Medium devices (landscape phones, 576px and up) */
+
+@media (max-width: 992px) and (min-width: 768px) {
+
+
+  .chart__box {
+    box-shadow: 0px 2px 6px #2C28281C;
+    border-radius: 10px;
+    padding-bottom: 10%;
+    overflow: hidden;
+    height: 550px;
+    margin-bottom: 25px;
+}
+
+ .paid__widget {
+    height: 80px;
+    width: 90%;
+    box-shadow: 0px 3px 6px #2C28281C;
+    border-radius: 10px;
+    background: white;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+}
+@media (max-width: 767px)  {
+  .chart__box {
+    box-shadow: 0px 2px 6px #2C28281C;
+    border-radius: 10px;
+    padding-bottom: 10%;
+    overflow: hidden;
+    height: 420px;
+    margin-bottom: 25px;
+}
+.doughunt__stat {
+    padding-top: 23%;
+}
+}
+
+
+/*  small devices (portrait phones, less than 576px) */
+
+@media (max-width: 425px) {
+    .paid__widget {
+    height: 80px;
+    width: 90%;
+    box-shadow: 0px 3px 6px #2C28281C;
+    border-radius: 10px;
+    background: white;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+ .row.justify-content-md-center.justify-content-sm-center {
+    padding-left: 13%;
+}
+ .dash__board__chart{
+     margin-bottom: 35px;
+ }
+   .doug__left {
+    width: 100%;
+}
+   .doug__right {
+    width: 100%;
+}
+  svg.CircularProgressbar.progress__bar {
+    width: 55% !important;
+}
+.chart__box {
+    box-shadow: 0px 2px 6px #2C28281C;
+    border-radius: 10px;
+    padding-bottom: 10%;
+    overflow: hidden;
+    height: 550px;
+}
+.chart__box__custom{
+height:309px !important;
+}
+.doughunt__stat {
+    padding-left: 26%;
+}
+
+
+ .dashboard__pb {
+    padding-bottom: 30px;
+    padding-left: 9%;
+}
+
+}
+/* extra small */
+@media (max-width: 375px) {
+     .paid__widget {
+    height: 80px;
+    width: 90%;
+    box-shadow: 0px 3px 6px #2C28281C;
+    border-radius: 10px;
+    background: white;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+ .row.justify-content-md-center.justify-content-sm-center {
+    padding-left: 13%;
+}
+ .dash__board__chart{
+     margin-bottom: 35px;
+ }
+   .doug__left {
+    width: 100%;
+}
+   .doug__right {
+    width: 100%;
+}
+  svg.CircularProgressbar.progress__bar {
+    width: 55% !important;
+}
+.chart__box {
+    box-shadow: 0px 2px 6px #2C28281C;
+    border-radius: 10px;
+    padding-bottom: 10%;
+    overflow: hidden;
+    height: 520px;
+}
+.chart__box__custom{
+height: 245px !important;
+}
+.doughunt__stat {
+    padding-left: 26%;
+}
+}
+
+
