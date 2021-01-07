@@ -2,21 +2,40 @@ import React, { useState } from "react";
 import { Form, Button, Image, Col, Row, Table } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
+import { getCertificateTypeList } from "../../_redux/actions/CertificateTypeAction";
 
 const CertificateTypeFilter = () => {
 
+
+    const [search, setSearch] = useState("");
+    const [type, setType] = useState("");
+    const dispatch = useDispatch();
+    const certificateTypeInput = useSelector((state) => state.certificateTypeInfo.certificateTypeInput);
     const { register, setValue } = useForm();
     const statusOptions = [
         {
             label: 'Active',
-            value: 0
+            value: '1'
         },
         {
             label: 'Inactive',
-            value: 1
+            value: '0'
         }
     ]
+
+    const handleChangeTextInput = (name, value) => {
+        // dispatch(GetVoyageList(value, type));
+    };
+
+    const changeSearch = (value) => {
+        setSearch(value);
+        dispatch(getCertificateTypeList(value, type));
+
+    };
+
+
     return (
         <div className="container">
             <form className="form form-label-right" method="post">
@@ -24,8 +43,8 @@ const CertificateTypeFilter = () => {
                     <div className="col-lg-3 col-md-6 col-10">
                         <Form.Control type="text"
                             placeholder="Search"
-                        // value={search}
-                        // onChange={ }
+                            value={search}
+                            onChange={(e) => changeSearch(e.target.value)}
                         />
                     </div>
                     <div className="col-lg-3 col-md-6 col-10">
@@ -39,12 +58,14 @@ const CertificateTypeFilter = () => {
                                 <RHFInput
                                     as={<Select options={statusOptions} />}
                                     rules={{ required: false }}
-                                    name="intCargoTypeID"
+                                    name="isActive"
                                     register={register}
-                                    value={''}
-                                    onChange={() => console.log('e')}
-                                    setValue={""}
-
+                                    value={certificateTypeInput.isActive}
+                                    onChange={(option) => {
+                                        setType(option.value);
+                                        dispatch(getCertificateTypeList(search, option.value));
+                                    }}
+                                    setValue={setValue}
                                 />
                             </Col>
                         </Form.Group>
