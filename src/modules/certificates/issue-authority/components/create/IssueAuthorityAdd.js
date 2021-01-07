@@ -27,6 +27,8 @@ const IssueAuthorityAdd = () => {
     dispatch(handleChangeCertificateIssueAuthorityInput(name, value));
   };
 
+  const submit = () => {};
+
   return (
     <Form>
       <Form.Group as={Row} controlId="formAuthorityName">
@@ -49,7 +51,7 @@ const IssueAuthorityAdd = () => {
           />
         </Col>
       </Form.Group>
-      <Form.Group as={Row} controlId="formPlaintextPassword">
+      {/* <Form.Group as={Row} controlId="formPlaintextPassword">
         <Form.Label column sm="3">
           Status:
         </Form.Label>
@@ -63,7 +65,7 @@ const IssueAuthorityAdd = () => {
             setValue={""}
           />
         </Col>
-      </Form.Group>
+      </Form.Group> */}
       <Form.Group as={Row} controlId="formPlaintextPassword">
         <Form.Label column sm="3"></Form.Label>
         <Col sm="9">
