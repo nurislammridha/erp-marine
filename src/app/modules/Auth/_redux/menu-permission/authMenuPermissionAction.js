@@ -16,7 +16,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
                 subModuleRouteUrl: "/employee/employee-list",
                 subModuleIcon: "menu-bullet menu-bullet-dot",
                 features: [{
-                    featureName: "Employee List",
+                    featureName: "All Employees",
                     featureRouteUrl: "/employee/employee-list",
                     featureIcon: "menu-bullet menu-bullet-dot",
                 },
@@ -46,7 +46,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
             moduleRouteUrl: "/addition-deduction",
             moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
             subModules: [{
-                subModuleName: "Addition/Deduction",
+                subModuleName: "New Expense",
                 subModuleRouteUrl: "/addition-deduction",
                 subModuleIcon: "menu-bullet menu-bullet-dot",
                 features: [{
@@ -94,6 +94,39 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
                     featureRouteUrl: "/vessels/vessel-account",
                     featureIcon: "menu-bullet menu-bullet-dot",
                 },
+                ],
+            },
+            {
+                subModuleName: "Vessel Items",
+                subModuleRouteUrl: "/vessel-items/list",
+                subModuleIcon: "menu-bullet menu-bullet-dot",
+                features: [{
+                    featureName: "Item List",
+                    featureRouteUrl: "/vessel-items/list",
+                    featureIcon: "menu-bullet menu-bullet-dot",
+                },],
+            },
+            ],
+        },
+
+        {
+            moduleName: "Certificates",
+            moduleRouteUrl: "/certificates/list",
+            moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
+            subModules: [{
+                subModuleName: "Certificate Main",
+                subModuleRouteUrl: "/certificates-main/list",
+                subModuleIcon: "menu-bullet menu-bullet-dot",
+                features: [{
+                    featureName: "Certificate Main List",
+                    featureRouteUrl: "/certificates-main/list",
+                    featureIcon: "menu-bullet menu-bullet-dot",
+                },
+                {
+                    featureName: "Certificate Main Create",
+                    featureRouteUrl: "/certificates-main/create",
+                    featureIcon: "menu-bullet menu-bullet-dot",
+                }
                 ],
             },
             {
@@ -276,11 +309,11 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
             moduleRouteUrl: "/employee",
             moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
             subModules: [{
-                subModuleName: "-Employee",
+                subModuleName: "Employee Management",
                 subModuleRouteUrl: "/employee/employee-list",
                 subModuleIcon: "menu-bullet menu-bullet-dot",
                 features: [{
-                    featureName: "Employee List",
+                    featureName: "All Employees",
                     featureRouteUrl: "/employee/employee-list",
                     featureIcon: "menu-bullet menu-bullet-dot",
                 },],
@@ -291,7 +324,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
             moduleRouteUrl: "/addition-deduction",
             moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
             subModules: [{
-                subModuleName: "Addition/Deduction",
+                subModuleName: "New Expense",
                 subModuleRouteUrl: "/addition-deduction",
                 subModuleIcon: "menu-bullet menu-bullet-dot",
                 features: [{
