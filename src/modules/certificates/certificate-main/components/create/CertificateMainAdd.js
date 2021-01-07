@@ -186,7 +186,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     show={showCategoryModal}
                     handleClose={() => setShowCategoryModal(false)}
                     handleShow={() => setShowCategoryModal(true)}
-                    modalTitle={"Certificate"}
+                    modalTitle={"Certificate Category"}
                   >
                     <CertificateCategoryAdd />
                   </SimpleModal>
@@ -576,7 +576,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
             >
               <CertificateTypeAdd />
             </SimpleModal>
-            
+
           </div>
         </div>
       </div>

@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
-import { handleCertificateCategoryInput } from "../../_redux/actions/CertificateCategoryAction";
 import { certificatecategorySubmitAction,handleCertificateCategoryInput } from "../../_redux/actions/CertificateCategoryAction";
 
 const CertificateCategoryAdd = () => {
@@ -18,7 +17,7 @@ const CertificateCategoryAdd = () => {
   const categoryInputChange = (name, value) => {
     dispatch(handleCertificateCategoryInput(name, value));
   };
-  
+
   const submiteCategory = (data) => {
     dispatch(certificatecategorySubmitAction(getCategoryInpuData));
   };
