@@ -388,3 +388,8 @@ img.loginpageLogo {
     border: 1px solid #95989a4d;
     box-shadow: -5px 3px 5px #00000029 !important;
 }
+
+.loginForm input#formBasicChecbox {
+    box-shadow: -5px 3px 5px #00000021 !important;
+    border: none !important;
+}
