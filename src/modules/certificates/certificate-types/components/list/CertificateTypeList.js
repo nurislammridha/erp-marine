@@ -32,7 +32,7 @@ const CertificateTypeList = () => {
                             <Link to={``}>
                                 <i className="far fa-eye mr-3"></i>
                             </Link>
-                            <Button className="" onClick={handleShow}>
+                            <Button className="btn btn-light" onClick={handleShow}>
                                 <i className="far fa-edit"></i>
                             </Button>
 
