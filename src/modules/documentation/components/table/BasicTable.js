@@ -2,46 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import { Form, Card, Button, Row, Col } from "react-bootstrap";
 
-const CustomeDesign = () => {
+const BasicTable = () => {
   return (
     <Card>
       <Card.Body>
-        <div className="row mt-5">
-          <Form.Group className="mt-3" controlId="formBasicChecbox">
-            <Form.Check type="checkbox" />
-          </Form.Group>
-
-          <Form.Check className="mt-3" type="radio" aria-label="radio 1" />
-
-          <div className="col-lg-3 col-md-6 col-10">
-            <Form.Group as={Row} controlId="formPlaintextPassword">
-              <Form.Label className="formFont pl-1" column sm="3">
-                Password
-              </Form.Label>
-              <Col sm="9">
-                <Form.Control
-                  className="formHeight"
-                  type="password"
-                  placeholder="Password"
-                />
-              </Col>
-            </Form.Group>
-          </div>
-          <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Label className="formFont pl-1">Example textarea</Form.Label>
-            <Form.Control as="textarea" rows="3" />
-          </Form.Group>
-          <div className="col-lg-3">
-            <Form.Group>
-              <Form.Label className="formFont pl-1">Search</Form.Label>
-              <Form.Control
-                className="formHeight"
-                type="text"
-                placeholder="Search"
-              />
-            </Form.Group>
-          </div>
-        </div>
         <table class="table table-hover mt-5">
           <thead>
             <tr>
@@ -112,13 +76,7 @@ const CustomeDesign = () => {
         </table>
       </Card.Body>
     </Card>
-
-    // <Card>
-    //   <Card.Body>
-
-    //   </Card.Body>
-    //   </Card>
   );
 };
 
-export default CustomeDesign;
+export default BasicTable;
