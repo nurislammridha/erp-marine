@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   handleChangeCertificateIssueAuthorityInput,
   issueAuthoritySubmitAction,
+  setIssuingAuthorityEditValue,
 } from "../../_redux/actions/CertificateIssueAuthorityAction";
 // import { Form } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
@@ -27,12 +28,19 @@ const IssueAuthorityEdit = (props) => {
   ];
 
   useEffect(() => {
-    console.log("Check Edit Props", props);
-  }, []);
+    dispatch(setIssuingAuthorityEditValue(props.editData));
+    console.log(
+      "Checking CertificateIssueAuthirityInput",
+      CertificateIssueAuthirityInput
+    );
+  }, [dispatch]);
 
   const CertificateIssueAuthirityInput = useSelector(
     (state) =>
       state.certificateIssueAuthorityInfo.CertificateIssueAuthirityInput
+  );
+  const defaultEditData = useSelector(
+    (state) => state.certificateIssueAuthorityInfo.editDefaultData
   );
   const handleChangeTextInput = (name, value) => {
     dispatch(handleChangeCertificateIssueAuthorityInput(name, value));
