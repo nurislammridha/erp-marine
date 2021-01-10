@@ -40,6 +40,7 @@ import CertificateMainReducer from "../modules/certificates/certificate-main/_re
 import CertificateTypeReducer from "../modules/certificates/certificate-types/_redux/reducers/CertificateTypeReducer";
 import CertificateIssueAuthorityReducer from "../modules/certificates/issue-authority/_redux/reducers/CertificateIssueAuthorityReducer";
 import CertificateCategoryReducer from "../modules/certificates/certificate-category/_redux/reducers/CertificateCategoryReducer";
+import CertificateListReducer from "../modules/certificates/certificate-master/_redux/reducers/CertificateListReducer";
 
 /** 
 | Domain : CCO
@@ -95,6 +96,7 @@ export const rootReducer = combineReducers({
   certificateMainInfo: CertificateMainReducer,
   certificateIssueAuthorityInfo: CertificateIssueAuthorityReducer,
   CertificateCategoryReducer: CertificateCategoryReducer,
+  CertificateListReducer:CertificateListReducer,
   certificateTypeInfo: CertificateTypeReducer,
 });
 

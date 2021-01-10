@@ -1,79 +1,83 @@
-import Axios from "axios";
-import { toast } from 'react-toastify';
-import { generateFormDataFromObject } from "../../../../master/utils/FileHelper";
+import * as Types from "../types/Type";
+import axios from "axios";
 import { showToast } from "../../../../master/utils/ToastHelper";
 
-// import * as Types from "../types/Types";
 
-export const handleChangeProductInputAction = (name, value, e, isEdit = false) => (dispatch) => {
-    let data = {
+export const handleChangeCertificateTypeInput = (name, value) => (dispatch) => {
+    const formData = {
         name: name,
         value: value,
-    }
-    // const type = !isEdit ? Types.CHANGE_CERTIFICATE_INPUT : Types.CHANGE_CERTIFICATE_INPUT_UPDATE;
-    // dispatch({ type: type, payload: data });
-
-    if (name === 'image') {
-        let reader = new FileReader();
-        const file = e.target.files[0];
-        reader.onloadend = () => {
-            data.name = 'imagePreviewUrl';
-            data.value = reader.result;
-            // dispatch({ type: type, payload: data });
-        }
-        reader.readAsDataURL(file)
-    }
-
-};
-
-export const getCertificateMasterListAction = (page, searchText = null, isPublic = false) => async(dispatch) => {
-    let response = {
-        products: [],
-        status: false,
-        message: "",
-        isLoading: true,
-        errors: []
     };
-    // dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
-    let url = '';
-    url =`${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1&paginateNo=1`;
-
-    if (searchText === null) {
-        url = `${url}&paginateNo=${page}`;
-    } else {
-        url = `${process.env.REACT_APP_API_URL}certificate/details?search=${searchText}`
-    }
-
-    try {
-        await Axios.get(url)
-            .then((res) => {
-                console.log('ReponseCertificate',res);
-                const { data, message, status } = res.data;
-                response.status = status;
-                response.certificates = data.data;
-                response.message = message;
-                response.certificatesPaginatedData = data;
-                response.isLoading = false;
-            })
-            .catch((err) => {
-                console.log('ErrorCertificate1')
-                toast.error(err);
-            });
-    } catch (error) {
-        console.log('ErrorCertificate2')
-        response.message = 'Something Went Wrong !';
-        toast.error(error);
-    }
-
-    response.isLoading = false;
-    // dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
+    dispatch({
+        type: Types.CHANGE_CERTIFICATE_MASTER_INPUT,
+        payload: formData,
+    });
 };
 
+export const getCertificateMasterList = (searchValue = "", status = "") => async (dispatch) => {
+    alert();
+    let isActive = status == "" ? 1 : parseInt(status);
+    let url = `http://10.17.3.78:8082/iMarineAPI/public/api/v1/certificate/certificateList`;
 
-export const deleteProductImagePreview = () => (dispatch) => {
-    let data = {
-        name: 'imagePreviewUrl',
-        value: null,
-    }
-    // dispatch({ type: Types.CHANGE_CERTIFICATE_INPUT, payload: data });
+    // console.log('url', url);
+
+    // if (searchValue !== "" || isActive !== "") {
+    //     url += `?search=${searchValue}&isActive=${isActive}`;
+    // }
+
+    axios.get(url)
+        .then((res) => {
+            console.log('res', res);
+            dispatch({ type: Types.GET_CERTIFICATE_MASTER_LIST, payload: res.data.data });
+        });
+};
+
+export const certificateMasterSubmitAction = (CertificateTypeInput) => (dispatch) => {
+
+    let responseList = {
+        isLoading: true,
+        data: {},
+        status: false,
+    };
+    dispatch({
+        type: Types.CREATE_CERTIFICATE_MASTER_LIST,
+        payload: responseList,
+    });
+
+    let postUrl = `http://10.17.3.78:8082/iMarineAPI/public/api/v1/certificate/certificateList`;
+    axios
+        .post(postUrl, CertificateTypeInput)
+        .then(function (response) {
+            console.log('CertificateTypeInput', response)
+            responseList.data = response.data;
+            responseList.isLoading = false;
+            responseList.status = response.data.status;
+            if (response.data.status) {
+                showToast("success", response.data.message);
+                dispatch({
+                    type: Types.CREATE_CERTIFICATE_MASTER_LIST,
+                    payload: responseList,
+                });
+            } else {
+                console.log('error data', response.data);
+                showToast("error", response.data.message);
+            }
+        })
+        .catch(function (error) {
+
+            responseList.isLoading = false;
+            // const errorsResponse = JSON.parse(error.request.response.errors.strCertificateTypeName[0]);
+            // console.log('error', errorsResponse);
+            // const message = errorsResponse.message;
+            // responseList.message = message;
+            // responseList.errors = errorsResponse.errors;
+            const message =
+                "Something went wrong ! Please fill all inputs and try again !";
+            showToast("error", message);
+
+            dispatch({
+                type: Types.CREATE_CERTIFICATE_MASTER_LIST,
+                payload: responseList,
+            });
+        });
 };
