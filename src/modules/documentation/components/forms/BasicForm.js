@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Form, Card, Button, Row, Col } from "react-bootstrap";
+import { Form, Card, Button, Row, Col, InputGroup } from "react-bootstrap";
+// import { DateRangePickerWrapper } from "storybook";
 
 const BasicForm = () => {
   return (
@@ -65,7 +66,7 @@ const BasicForm = () => {
               <Form.Check className="mt-3" type="radio" aria-label="radio 1" />
 
               <div className="col-lg-3 col-md-6 col-10">
-                <Form.Group as={Row} controlId="formPlaintextPassword">
+                <Form.Group as={Row} controlId="">
                   <Form.Label className="formFont pl-1" column sm="3">
                     Password
                   </Form.Label>
@@ -95,6 +96,26 @@ const BasicForm = () => {
                 </Form.Group>
               </div>
             </div>
+            <Form.Group as={Col} md="4" controlId="">
+              <Form.Label>Pic an image</Form.Label>
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text id="inputGroupPrepend">
+                    <i class="fas fa-download"></i>
+                  </InputGroup.Text>
+                </InputGroup.Prepend>
+                <Form.Control
+                  type="text"
+                  placeholder="Upload Vessel images"
+                  aria-describedby="inputGroupPrepend"
+                  required
+                  className="bg-white "
+                />
+                <Form.Control.Feedback type="invalid" className="bg-white">
+                  Upload Vessel images
+                </Form.Control.Feedback>
+              </InputGroup>
+            </Form.Group>
             <Button className="mr-4 col-1 saveButton" variant="primary">
               Save
             </Button>

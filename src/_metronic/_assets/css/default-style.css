@@ -82,6 +82,7 @@ ul.sticky-toolbar.nav.flex-column.pl-2.pr-2.pt-3.pb-3.mt-4 {
 
 .formHeight {
   height: 30px;
+  background: #f3f6f9;
 }
 
 label.formFont.form-label {
