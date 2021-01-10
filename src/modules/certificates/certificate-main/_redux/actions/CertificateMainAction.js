@@ -50,7 +50,7 @@ export const MainCertificateCreateAction = (certificateInfoInput) => (dispatch) 
              responseList.isLoading = false;
              responseList.status = response.data.status;
              if (response.data.status) {
-               showToast("success", response.data.message);
+               showToast("successs", response.data.message);
                dispatch({
                  type: Types.CERTIFICATE_MAIN_SUBMIT,
                  payload: responseList,
