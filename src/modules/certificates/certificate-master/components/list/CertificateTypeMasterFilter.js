@@ -69,8 +69,13 @@ const CertificateTypeMasterFilter = () => {
                             as={Row}
                             controlId="formPlaintextPassword"
                         >
+<<<<<<< HEAD
                             <Form.Label>status</Form.Label>
                             <Col sm="10">
+=======
+                            <Form.Label>Category</Form.Label>
+                            <Col sm="8">
+>>>>>>> origin/farid
                                 <RHFInput
                                     as={<Select options={statusOptions} />}
                                     rules={{ required: false }}
