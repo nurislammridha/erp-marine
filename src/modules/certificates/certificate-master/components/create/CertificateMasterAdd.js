@@ -5,13 +5,14 @@ import Select from "react-select";
 import { useHistory, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
+import { handleChangeCertificateMasterInput, certificateMasterSubmitAction } from "../../_redux/actions/CertificateListAction";
 // import { certificatetypeSubmitAction, handleChangeCertificateTypeInput } from "../../_redux/actions/CertificateListAction";
 
 
 const CertificateMasterAdd = () => {
     const history = useHistory();
     const { register, handleSubmit, errors, setValue } = useForm();
-    const certificateTypeInput = useSelector((state) => state.certificateTypeInfo.certificateTypeInput);
+    const CertificateMasterInput = useSelector((state) => state.CertificateListReducer.CertificateMasterInput);
     const dispatch = useDispatch();
     const statusOptions = [
         {
@@ -26,16 +27,16 @@ const CertificateMasterAdd = () => {
 
 
     const handleChangeTextInput = (name, value) => {
-        // dispatch(handleChangeCertificateTypeInput(name, value));
+        dispatch(handleChangeCertificateMasterInput(name, value));
     };
 
     const onSubmit = (data) => {
-        // dispatch(certificatetypeSubmitAction(certificateTypeInput));
+        dispatch(certificateMasterSubmitAction(CertificateMasterInput));
     };
 
-    useEffect(() => {
-        dispatch();
-    }, [])
+    // useEffect(() => {
+    //     dispatch();
+    // }, [])
 
 
     return (
@@ -50,35 +51,35 @@ const CertificateMasterAdd = () => {
                         <label className="form-label">Certificate  Name</label>
                         <Form.Control type="text"
                             type="text"
-                            value={certificateTypeInput.strCertificateTypeName}
+                            // value={CertificateMasterInput.strCertificateName}
                             name="strCertificateTypeName"
                             onChange={(e) =>
-                                handleChangeTextInput("strCertificateTypeName", e.target.value)
+                                handleChangeTextInput("strCertificateName", e.target.value)
                             }
                         />
                     </div>
                     <div className="col-sm-6">
-                        <label className="form-label">Vessel</label>
+                        <label className="form-label">Vessel Name</label>
                         <RHFInput
                             as={<Select options={statusOptions} />}
                             rules={{ required: false }}
-                            name="isActive"
+                            name="strVesselName"
                             register={register}
-                            value={certificateTypeInput.isActive}
+                            // value={CertificateMasterInput.strVesselName}
                             setValue={setValue}
-                            onChange={(e) => handleChangeTextInput("isActive", e.value)}
+                            onChange={(e) => handleChangeTextInput("strVesselName", e.value)}
                         />
                     </div>
                     <div className="col-sm-6">
-                        <label className="form-label">Certificate Name</label>
+                        <label className="form-label">Category Name</label>
                         <RHFInput
                             as={<Select options={statusOptions} />}
                             rules={{ required: false }}
-                            name="isActive"
+                            name="strCertificateCategoriName"
                             register={register}
-                            value={certificateTypeInput.isActive}
+                            // value={CertificateMasterInput.strCertificateCategoriName}
                             setValue={setValue}
-                            onChange={(e) => handleChangeTextInput("isActive", e.value)}
+                            onChange={(e) => handleChangeTextInput("strCertificateCategoriName", e.value)}
                         />
                     </div>
                 </div>

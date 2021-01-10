@@ -3,7 +3,7 @@ import axios from "axios";
 import { showToast } from "../../../../master/utils/ToastHelper";
 
 
-export const handleChangeCertificateTypeInput = (name, value) => (dispatch) => {
+export const handleChangeCertificateMasterInput = (name, value) => (dispatch) => {
     const formData = {
         name: name,
         value: value,
@@ -31,7 +31,7 @@ export const getCertificateMasterList = (searchValue = "", status = "") => async
         });
 };
 
-export const certificateMasterSubmitAction = (CertificateTypeInput) => (dispatch) => {
+export const certificateMasterSubmitAction = (CertificateMasterInput) => (dispatch) => {
 
     let responseList = {
         isLoading: true,
@@ -45,9 +45,9 @@ export const certificateMasterSubmitAction = (CertificateTypeInput) => (dispatch
 
     let postUrl = `http://10.17.3.78:8082/iMarineAPI/public/api/v1/certificate/certificateList`;
     axios
-        .post(postUrl, CertificateTypeInput)
+        .post(postUrl, CertificateMasterInput)
         .then(function (response) {
-            console.log('CertificateTypeInput', response)
+            console.log('CertificateMasterInput', response)
             responseList.data = response.data;
             responseList.isLoading = false;
             responseList.status = response.data.status;
