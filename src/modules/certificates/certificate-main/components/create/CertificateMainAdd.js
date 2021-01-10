@@ -108,7 +108,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   }, []);
 
   const onSubmit = async (e) => {
-    alert();
     dispatch(MainCertificateCreateAction(certificateInfoInput));
   };
 

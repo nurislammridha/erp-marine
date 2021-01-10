@@ -5,7 +5,7 @@ import Select from "react-select";
 import { useHistory, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { handleChangeCertificateMasterInput, certificateMasterSubmitAction } from "../../_redux/actions/CertificateListAction";
+import { handleChangeCertificateMasterInput, certificateMasterSubmitAction, getCertificateMasterList } from "../../_redux/actions/CertificateListAction";
 import { getCertificateCategory } from "../../../certificate-main/_redux/actions/CertificateMainAction";
 // import { certificatetypeSubmitAction, handleChangeCertificateTypeInput } from "../../_redux/actions/CertificateListAction";
 
@@ -13,9 +13,9 @@ import { getCertificateCategory } from "../../../certificate-main/_redux/actions
 const CertificateMasterAdd = () => {
     const history = useHistory();
     const { register, handleSubmit, errors, setValue } = useForm();
-    const CertificateMasterInput = useSelector((state) => state.CertificateListReducer.CertificateMasterInput);
+    const CertificateMasterInput = useSelector((state) => state.CertificateListReducer.certificateMasterInput);
     const certificatesCategoryOptionData = useSelector((state) => state.certificateMainInfo.certificatesCategoryOptionData);
-    console.log('certificatesCategoryOptionData',certificatesCategoryOptionData);
+    console.log('CertificateMasterInput',CertificateMasterInput);
     const dispatch = useDispatch();
     const statusOptions = [
         {
@@ -39,10 +39,12 @@ const CertificateMasterAdd = () => {
         }
     ]
 
+    const certificateMainInfoChange = (name, value, e = null) => {
+        console.log('Name',name,"value",value);
+        dispatch(handleChangeCertificateMasterInput(name, value, e));
+      };
 
-    const handleChangeTextInput = (name, value) => {
-        dispatch(handleChangeCertificateMasterInput(name, value));
-    };
+  
 
     const onSubmit = (data) => {
         dispatch(certificateMasterSubmitAction(CertificateMasterInput));
@@ -50,6 +52,8 @@ const CertificateMasterAdd = () => {
 
     useEffect(() => {
         dispatch(getCertificateCategory());
+        dispatch(getCertificateMasterList());
+        // dispatch(handleChangeCertificateMasterInput());
     }, [])
 
 
@@ -65,11 +69,11 @@ const CertificateMasterAdd = () => {
                         <label className="form-label">Certificate  Name</label>
                         <Form.Control type="text"
                             type="text"
-                            // value={CertificateMasterInput.strCertificateName}
-                            name="strCertificateTypeName"
+                            value={certificateMainInfoChange.strCertificateName}
+                            name="strCertificateName"
                             onChange={(e) =>
-                                handleChangeTextInput("strCertificateName", e.target.value)
-                            }
+                                certificateMainInfoChange("strCertificateName", e.target.value)
+                              }
                         />
                     </div>
                     <div className="col-sm-6">
@@ -79,9 +83,12 @@ const CertificateMasterAdd = () => {
                             rules={{ required: false }}
                             name="strVesselName"
                             register={register}
-                            // value={CertificateMasterInput.strVesselName}
+                            value={vesselName.strVesselName}
                             setValue={setValue}
-                            onChange={(e) => handleChangeTextInput("strVesselName", e.value)}
+                            onChange={(option) => {
+                                certificateMainInfoChange("strVesselName", option.label);
+                                certificateMainInfoChange("intVesselID", option.value);
+                              }}
                         />
                     </div>
                     <div className="col-sm-6">
@@ -89,11 +96,14 @@ const CertificateMasterAdd = () => {
                         <RHFInput
                             as={<Select options={certificatesCategoryOptionData} />}
                             rules={{ required: false }}
-                            name="strCertificateCategoriName"
+                            name="intCertificateCategoriId"
                             register={register}
-                            // value={CertificateMasterInput.strCertificateCategoriName}
+                            value={certificatesCategoryOptionData.strCertificateCategoriName}
                             setValue={setValue}
-                            onChange={(e) => handleChangeTextInput("strCertificateCategoriName", e.value)}
+                            onChange={(option) => {
+                                certificateMainInfoChange("strCertificateCategoriName", option.label);
+                                certificateMainInfoChange("intCategoryID", option.value);
+                              }}
                         />
                     </div>
                 </div>
