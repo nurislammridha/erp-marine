@@ -9,11 +9,13 @@ import { certificatecategorySubmitAction,handleCertificateCategoryInput } from "
 
 const CertificateCategoryAdd = () => {
   const history = useHistory();
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit, watch, errors, setValue } = useForm();
   const dispatch = useDispatch();
+
   const getCategoryInpuData = useSelector(
     (state) => state.CertificateCategoryReducer.certificateCategoryInput
   );
+  console.log('getCategoryInpuData :>> ', getCategoryInpuData);
   const categoryInputChange = (name, value) => {
     dispatch(handleCertificateCategoryInput(name, value));
   };
@@ -34,9 +36,6 @@ const CertificateCategoryAdd = () => {
   ];
 
   const loading = false;
-
-  //add boiler info in multiple list
-
   return (
     <>
       <form
@@ -52,20 +51,27 @@ const CertificateCategoryAdd = () => {
             value={getCategoryInpuData.strCertificateCategoriName}
             placeholder="Type Category Name"
             name="strCertificateCategoriName"
-            onChange={(e) => categoryInputChange("strCertificateCategoriName", e.target.value)}
+            onChange={(e) =>
+              categoryInputChange("strCertificateCategoriName", e.target.value)
+            }
           />
         </div>
 
         <div className="form-group mt-0">
-          <label className="form-label">Parent Category <span className="text-info"> (Optional)</span></label>
+          <label className="form-label">
+            Parent Category <span className="text-info"> (Optional)</span>
+          </label>
           <RHFInput
-              as={<Select options={statusOptions} />}
-              rules={{ required: false }}
-              name="intCargoTypeID"
-              register={register}
-              value={''}
-              onChange={() => console.log('e')}
-              setValue={""}
+            as={<Select options={statusOptions} />}
+            rules={{ required: false }}
+            name="intCargoTypeID"
+            register={register}
+            value={getCategoryInpuData.intCargoTypeID}
+            onChange={(option) => {
+              categoryInputChange("intCargoTypeName", option.label);
+              categoryInputChange("intCargoTypeID", option.value);
+            }}
+            setValue={setValue}
           />
         </div>
         <div className="form-group row">
@@ -74,7 +80,9 @@ const CertificateCategoryAdd = () => {
 
         {loading && (
           <button type="submit" class="btn btn-primary btn-lg" disabled={true}>
-            <span><i className="fa fa-check"></i>  Submitting...</span>
+            <span>
+              <i className="fa fa-check"></i> Submitting...
+            </span>
             <span className="ml-3 spinner spinner-white"></span>
           </button>
         )}
