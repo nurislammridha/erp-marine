@@ -3,12 +3,31 @@ import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useHistory, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { EditCertificateTypeList } from "../../_redux/actions/CertificateTypeAction";
 
 
-const CertificateTypeEdit = () => {
+const CertificateTypeEdit = (props) => {
+
+    const {
+        intCertificateTypeID,
+        strCertificateTypeName,
+        isActive,
+    } = props;
+
+    const [certificateEditInfo, setCertificateEditInfo] = React.useState({
+
+        intCertificateTypeID: intCertificateTypeID,
+        strCertificateTypeName: strCertificateTypeName,
+        isActive: isActive,
+    });
+    console.log('certificateEditInfo:', certificateEditInfo)
+    const dispatch = useDispatch();
     const history = useHistory();
     const { register, handleSubmit, errors, setValue } = useForm();
+    const certificateTypeInput = useSelector((state) => state.certificateTypeInfo.certificateTypeInput);
+    console.log('certificateTypeData', certificateTypeInput);
 
     const statusOptions = [
         {
@@ -21,34 +40,47 @@ const CertificateTypeEdit = () => {
         }
     ]
 
-    //add boiler info in multiple list
+    // const handleChangeTextInput = (name, value) => {
+    //     dispatch(handleChangeCertificateTypeInput(name, value));
+    // };
+    // const handleChange = ({ currentTarget: input }) => {
+    //     const certificateEditInfoData = { ...certificateEditInfo };
+    //     certificateEditInfoData[input.name] = input.value;
+    //     setCertificateEditInfo(certificateEditInfoData);
+    // };
+
+    // const onSubmit = (data) => {
+    //     dispatch(EditCertificateTypeList(certificateEditInfo));
+    // };
 
 
     return (
         <>
             <form
                 className="form form-label-right"
+                // onSubmit={handleSubmit(onSubmit)}
                 method="post"
             >
                 <div className="form-group row mt-5">
                     <div className="col-sm-6">
                         <label className="form-label">Certificate Type Name</label>
-                        <Form.Control
+                        <Form.Control type="text"
                             type="text"
-                            placeholder=""
+                            name="strCertificateTypeName"
+                            value={certificateTypeInput.strCertificateTypeName}
+                        // onChange={handleChange}
                         />
                     </div>
-
-
                     <div className="col-sm-6">
                         <label className="form-label">Status</label>
                         <RHFInput
                             as={<Select options={statusOptions} />}
                             rules={{ required: false }}
-                            name="intVesselID"
+                            name="isActive"
                             register={register}
-                            value={""}
+                            value={certificateTypeInput.isActive ? "Active" : "Inactive"}
                             setValue={setValue}
+                        // onChange={(e) => handleChangeTextInput("isActive", e.value)}
                         />
                     </div>
 
