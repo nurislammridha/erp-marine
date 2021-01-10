@@ -81,7 +81,6 @@ export const deleteProductImagePreview = () => (dispatch) => {
 
 
 export const getCertificateCategory = (data) => (dispatch) => {
-alert();
     Axios
     .get(
       `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/category`

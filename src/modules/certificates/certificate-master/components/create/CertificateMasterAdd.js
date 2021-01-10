@@ -6,6 +6,7 @@ import { useHistory, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { handleChangeCertificateMasterInput, certificateMasterSubmitAction } from "../../_redux/actions/CertificateListAction";
+import { getCertificateCategory } from "../../../certificate-main/_redux/actions/CertificateMainAction";
 // import { certificatetypeSubmitAction, handleChangeCertificateTypeInput } from "../../_redux/actions/CertificateListAction";
 
 
@@ -13,6 +14,8 @@ const CertificateMasterAdd = () => {
     const history = useHistory();
     const { register, handleSubmit, errors, setValue } = useForm();
     const CertificateMasterInput = useSelector((state) => state.CertificateListReducer.CertificateMasterInput);
+    const certificatesCategoryOptionData = useSelector((state) => state.certificateMainInfo.certificatesCategoryOptionData);
+    console.log('certificatesCategoryOptionData',certificatesCategoryOptionData);
     const dispatch = useDispatch();
     const statusOptions = [
         {
@@ -21,6 +24,17 @@ const CertificateMasterAdd = () => {
         },
         {
             label: 'Inactive',
+            value: "0"
+        }
+    ]
+
+    const vesselName = [
+        {
+            label: 'Akij Noor',
+            value: "1"
+        },
+        {
+            label: 'Akij Pearl',
             value: "0"
         }
     ]
@@ -34,9 +48,9 @@ const CertificateMasterAdd = () => {
         dispatch(certificateMasterSubmitAction(CertificateMasterInput));
     };
 
-    // useEffect(() => {
-    //     dispatch();
-    // }, [])
+    useEffect(() => {
+        dispatch(getCertificateCategory());
+    }, [])
 
 
     return (
@@ -61,7 +75,7 @@ const CertificateMasterAdd = () => {
                     <div className="col-sm-6">
                         <label className="form-label">Vessel Name</label>
                         <RHFInput
-                            as={<Select options={statusOptions} />}
+                            as={<Select options={vesselName} />}
                             rules={{ required: false }}
                             name="strVesselName"
                             register={register}
@@ -73,7 +87,7 @@ const CertificateMasterAdd = () => {
                     <div className="col-sm-6">
                         <label className="form-label">Category Name</label>
                         <RHFInput
-                            as={<Select options={statusOptions} />}
+                            as={<Select options={certificatesCategoryOptionData} />}
                             rules={{ required: false }}
                             name="strCertificateCategoriName"
                             register={register}
