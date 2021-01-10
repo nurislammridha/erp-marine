@@ -1,58 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import {
-  GetVesselList,
-  DeleteVessel,
-  VesselEmptyDeleteMessage,
-} from "../../../../../domains/Vessel/_redux/actions/VesselAction";
+import { withRouter } from "react-router-dom";
+import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
+import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
+import { getCertificateMainListAction } from "../../_redux/actions/CertificateMainAction";
 
-const CertificateMainList = withRouter(({ history, props }) => {
+const CertificateMainList = withRouter(({history,props}) => {
   const dispatch = useDispatch();
-  const [employeeInfo, setEmployeeInfo] = React.useState({
-    vesselList: [],
-  });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchText, setSearchText] = useState("");
 
-  const vesselList = useSelector((state) => state.vesselInfo.vesselList);
-  const deleteMessage = useSelector((state) => state.vesselInfo.deleteMessage);
-  const deleteStatus = useSelector((state) => state.vesselInfo.deleteStatus);
-
+  const isLoading = useSelector((state) => state.certificateMainInfo.isLoading);
+  const certificates = useSelector(
+    (state) => state.certificateMainInfo.certificates
+  );
+  const certificatesPaginatedData = useSelector(
+    (state) => state.certificateMainInfo.certificatesPaginatedData
+  );
+  // console.log("certificates.length", certificates.length);
   useEffect(() => {
-    dispatch(GetVesselList());
-    if (typeof deleteMessage === null || typeof deleteMessage === "undefined") {
-      toast.error("Something Went Wrong", {
-        autoClose: 2000,
-        className: "dangerColor",
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    } else {
-      if (deleteStatus && deleteMessage.length > 0) {
-        toast.success(deleteMessage, {
-          autoClose: 2000,
-          className: "primaryColor",
-          position: toast.POSITION.BOTTOM_RIGHT,
-        });
-        dispatch(VesselEmptyDeleteMessage());
-        history.push("/vessels/list");
-      }
+    dispatch(getCertificateMainListAction(currentPage));
+  }, [dispatch, currentPage]);
 
-      if (!deleteStatus && deleteMessage.length > 0) {
-        toast.error(deleteMessage, {
-          autoClose: 2000,
-          className: "dangerColor",
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        dispatch(VesselEmptyDeleteMessage());
-      }
-    }
-  }, [deleteMessage, deleteStatus, dispatch, props]);
-
-  const vesselDelete = async (intID) => {
-    // let deleteData = await DeleteVessel(intID);
-    dispatch(DeleteVessel(intID));
-    dispatch(GetVesselList());
+  const changePage = (data) => {
+    setCurrentPage(data.page);
+    dispatch(getCertificateMainListAction(data.page));
   };
+
+  const searchProduct = (e) => {
+    const searchText = e.target.value;
+    setSearchText(searchText);
+    if (searchText.length === 0) {
+      dispatch(getCertificateMainListAction(currentPage));
+    } else {
+      dispatch(getCertificateMainListAction(currentPage, searchText));
+    }
+  };
+
+  const certificateDelete=()=>{
+
+  }
 
   return (
     <>
@@ -60,7 +47,7 @@ const CertificateMainList = withRouter(({ history, props }) => {
         <div className="card card-custom gutter-b">
           <div className="card-header">
             <div className="card-title">
-              <h3 class="card-label">Certificate Main List</h3>
+              <h3 class="card-label">Certificate List</h3>
             </div>
             <div className="card-toolbar">
               <a
@@ -69,62 +56,63 @@ const CertificateMainList = withRouter(({ history, props }) => {
                 }}
               >
                 <button type="button" class="btn btn-primary">
-                  Create Certificate
+                  New Certificate
                 </button>
               </a>
             </div>
           </div>
-          <div className="card-body">
-            <form className="form form-label-right">
-            </form>
-            <div className="react-bootstrap-table table-responsive">
-              <table className="table table table-head-custom table-vertical-center">
-                <thead>
-                  <tr>
-                    <td>SL</td>
-                    <td>NAME OF THE CERTIFICATES</td>
-                    <td>CERTIFICATE TYPE</td>
-                    <td>VESSEL NAME</td>
-                    <td>ISSUE DATE</td>
-                    <td>EXPIRY DATE</td>
-                    <td>ATTACHMENTS</td>
-                    <td>REMARKS</td>
-                    <td>ACTION</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  {vesselList &&
-                    vesselList.map((item, index) => (
-                      <tr key={index}>
+          <div className="mb-2 ml-2">
+            <div className="float-left">
+              <input
+                type="search"
+                value={searchText}
+                className="form-control product-search-input"
+                placeholder="Search By Title, Description, Price"
+                onChange={searchProduct}
+              />
+            </div>
+            <div className="float-right">
+              <PaginationLaravel
+                isDescription={false}
+                changePage={changePage}
+                data={certificatesPaginatedData}
+              />
+            </div>
+            <div className="clearfix"></div>
+          </div>
+          {isLoading && <LoadingSpinner text="Loading Certificates..." />}
+          {!isLoading && certificates.length === 0 && (
+            <div className="alert alert-warning">Sorry ! No Certificates Found.</div>
+          )}
+          {!isLoading && certificates.length > 0 && (
+            <>
+              <div className="table-responsive ml-2">
+                <table className="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th className="td-sl">Sl</th>
+                      <th className="td-product-title">Product</th>
+                      <th>Price</th>
+                      <th className="td-description">Description</th>
+                      <th className="td-upload-info">Upload Information</th>
+                      <th className="td-upload-info">Upload Information</th>
+                      <th className="td-action">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {certificates.map((certificate, index) => (
+                      <tr>
                         <td>{index + 1}</td>
-                        <td>{item.strVesselName}</td>
-                        <td>{item.strIMONumber}</td>
-                        <td>{item.strVesselTypeName}</td>
-                        <td>{item.strBuildYear}</td>
-                        <td>{item.numDeadWeight}</td>
-                        <td>{item.strYardCountryName}</td>
-                        <td>
-                          {item.ysnOwn == "1" ? (
-                            <button
-                              type="button"
-                              className="badge badge-primary border-0"
-                            >
-                              Own Vessel
-                            </button>
-                          ) : (
-                            <button
-                              type="button"
-                              className="badge badge-danger border-0"
-                            >
-                              Other's Vessel
-                            </button>
-                          )}
-                        </td>
+                        <td>{certificate.strCustomeCode}</td>
+                        <td>{certificate.intNotOnBoard}</td>
+                        <td>{certificate.dteCertificateValidUntil}</td>
+                        <td>{certificate.dteExtendedUntil}</td>
+                        <td>{certificate.dteExtendedUntil}</td>
                         <td>
                           <a
                             className="btn btn-icon btn-light btn-hover-info btn-sm"
                             onClick={() => {
-                              history.push("/vessels/edit", { vessel: item });
+                              history.push("/certificates-main/edit");
                             }}
                           >
                             <i className="fa fa-edit"></i>
@@ -138,7 +126,7 @@ const CertificateMainList = withRouter(({ history, props }) => {
                                   "Are you sure you wish to delete this item?"
                                 )
                               )
-                                vesselDelete(item.intID);
+                                certificateDelete(certificate.intID);
                             }}
                           >
                             <i className="fa fa-trash"></i>
@@ -146,14 +134,16 @@ const CertificateMainList = withRouter(({ history, props }) => {
                         </td>
                       </tr>
                     ))}
-                  {vesselList == null && (
-                    <p className="text-danger text-center">No Data Found</p>
-                  )}
-                </tbody>
-                <tfoot></tfoot>
-              </table>
-            </div>
-          </div>
+                  </tbody>
+                </table>
+
+                <PaginationLaravel
+                  changePage={changePage}
+                  data={certificatesPaginatedData}
+                />
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>

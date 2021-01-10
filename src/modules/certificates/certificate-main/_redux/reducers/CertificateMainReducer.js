@@ -3,7 +3,13 @@ import * as Types from "../types/Types";
 // Initial state
 const initialState = {
     certificates: [],
+
     certificatesPaginatedData: null,
+    certificatesCategoryOptionData:[],
+    certificatesNameOptionData:[],
+    certificatesTypeOptionData:[],
+    certificatesIssueByOptionData:[],
+
     isLoading: false,
     productData: {
         id: 0,
@@ -37,6 +43,26 @@ const CertificateMainReducer = (state = initialState, action) => {
                 certificates: action.payload.certificates,
                 certificatesPaginatedData: action.payload.certificatesPaginatedData,
                 isLoading: action.payload.isLoading
+            };
+        case Types.GET_CERTIFICATE_CATEGORY:
+            return {
+                ...state,
+                certificatesCategoryOptionData: getCertificateCategoryName(action.payload),
+            };
+        case Types.GET_CERTIFICATE_NAME:
+            return {
+                ...state,
+                certificatesNameOptionData: getCertificateName(action.payload),
+            };
+        case Types.GET_CERTIFICATE_TYPE:
+            return {
+                ...state,
+                certificatesTypeOptionData: getCertificateTypeName(action.payload),
+            };
+        case Types.GET_CERTIFICATE_ISSUE_BY:
+            return {
+                ...state,
+                certificatesIssueByOptionData: getIssueName(action.payload),
             };
 
         case Types.CHANGE_CERTIFICATE_INPUT:
@@ -143,5 +169,58 @@ const CertificateMainReducer = (state = initialState, action) => {
     }
     return newState;
 };
+
+const getCertificateCategoryName = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intCategoryID,
+                label: item.strCertificateCategoriName,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+}
+const getCertificateName = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intCertificateID,
+                label: item.strCertificateName,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+}
+const getCertificateTypeName = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intCertificateTypeID,
+                label: item.strCertificateTypeName,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+}
+const getIssueName = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intIssuingAuthorityID,
+                label: item.strIssuingAuthorityName,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+}
 
 export default CertificateMainReducer;

@@ -109,7 +109,7 @@ function Login(props) {
       {/* begin::Head */}
       <img className="loginpageLogo  " src="/media/logos/logo.png" alt="logo" />
       <div className="mb-10 mb-lg-7">
-        <h1 className="font-size-h1 heading  text-bold">Welcome to iShip</h1>
+        <h1 className="font-size-h1 heading  text-bold">Welcome to iMarine</h1>
         {/* <h1 className="site_name_login">
           iMarine
         </h1> */}
@@ -180,6 +180,7 @@ function Login(props) {
             />
           </Form.Group>
         </div>
+
         <div className="form-group justify-content-between align-items-center mt-3">
           <p className="float-right text-right">
             <Link
@@ -197,14 +198,14 @@ function Login(props) {
             id="kt_login_signin_submit"
             type="submit"
             disabled={formik.isSubmitting}
-            className={`btn btn-primary loginButton`}
+            className={`btn btn-primary loginButton overlay__caption`}
           >
             <span className="loginText">Log in</span>
             {loading && <span className="ml-3 spinner spinner-white"></span>}
           </button>
         </div>
         <p className="mt-5 ">
-          <Link className="signupText" to="">
+          <Link className="signupText " to="">
             Don't have account? <b>SIGNUP</b>
           </Link>
         </p>

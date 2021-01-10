@@ -6,6 +6,7 @@ const BarChart = () => {
 
     datasets: [
       {
+
         label: "User Count",
 
         backgroundColor: [
@@ -24,36 +25,37 @@ const BarChart = () => {
       },
     ],
   };
-    return ( 
+  return (
     <>
-             <div className="chart__box  bg-white">
-              <p>All</p>
-              <h4 className="text-bold">Users Count</h4>
-              <div className="test">
-                <Bar
-                  data={barProperties}
-                  width={120}
-                  height={60}
-                  options={
-                    {
-                      // title: {
-                      //   display: true,
-                      //   text: "User Count",
-                      //   fontSize: 12,
-                      // },
-                      // legend: {
-                      //   display: true,
-                      //   position: "left",
-                      // },
-                    }
-                  }
-                />
-              </div>
-            </div>
+      <div className="chart__box chart__box__custom bg-white">
+        <div className="chart__head">
+          <p>All</p>
+          <h4 className="text-bold">Users Count</h4>
+        </div>
+        <div className="test">
+          <Bar
+            data={barProperties}
+            width="100%" height="45%"
+            options={
+              {
+                // title: {
+                //   display: true,
+                //   text: "User Count",
+                //   fontSize: 12,
+                // },
+                // legend: {
+                //   display: true,
+                //   position: "left",
+                // },
+              }
+            }
+          />
+        </div>
+      </div>
 
     </>
 
-     );
+  );
 }
- 
+
 export default BarChart;

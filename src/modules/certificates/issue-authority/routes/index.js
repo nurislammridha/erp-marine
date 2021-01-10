@@ -4,8 +4,8 @@ import IssueAutorityListContainer from "../views/IssueAuthorityListContainer";
 
 const issueAuthorityRoutes = [
   {
-    path: "/certificates/issue-authority/list",
-    name: "Issue Autority List",
+    path: "/certificate/configure/issuing-authority",
+    name: "Issuing Autority List",
     component: IssueAutorityListContainer,
     exact: true,
   },

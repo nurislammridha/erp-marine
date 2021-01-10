@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Button, Image, Col, Row, Table, Dropdown } from "react-bootstrap";
 import Modal from 'react-bootstrap/Modal';
@@ -8,17 +8,31 @@ import Pdf from "react-to-pdf";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import ReactToPrint from "react-to-print-advanced";
 import CertificateTypeAdd from "../components/create/CertificateTypeAdd";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getCertificateTypeList } from "../_redux/actions/CertificateTypeAction";
+import SimpleModal from "../../../../modules/master/components/Modal/SimpleModal";
 
 const CertificateTypeContainer = () => {
 
   const history = useHistory();
   const ref = React.createRef();
-
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const modalStatus = useSelector((state) => state.certificateTypeInfo.status);
+
+  useEffect(() => {
+    if (modalStatus) {
+      setShow(false);
+      dispatch(getCertificateTypeList());
+    }
+  }, [modalStatus]);
+
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
+  const [showTypeModal, setShowTypeModal] = useState(false);
+  const [showCertificateModal, setShowCertificateModal] = useState(false);
+  const [showIssuedByModal, setShowIssuedByModal] = useState(false);
 
   return (
     <div className="card card-custom gutter-b">
@@ -85,8 +99,7 @@ const CertificateTypeContainer = () => {
           >
             Add New
           </Button>
-          <Modal show={show} onHide={handleClose}>
-
+          {/* <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Add Certificate Type</Modal.Title>
             </Modal.Header>
@@ -96,7 +109,15 @@ const CertificateTypeContainer = () => {
                 Cancel
               </Button>
             </Modal.Footer>
-          </Modal>
+          </Modal> */}
+
+          <SimpleModal
+            show={show}
+            handleClose={() => handleClose()}
+            modalTitle={"Certificate Type Add"}
+          >
+            <CertificateTypeAdd />
+          </SimpleModal>
 
         </div>
         <div className="clearfix"></div>

@@ -5,9 +5,9 @@ const DashBoardCard = () => {
            <>
 
 
-                   <div className="container dashboard__pb">
-        <div className="row">
-          <div className="col-lg-3">
+        <div className="container dashboard__pb">
+          <div className="row  justify-content-md-around ">
+          <div className="col-lg-3  col-md-4 col-sm-12 ">
             <div className="paid__widget">
               <div className="widget__left">
                 <span></span>
@@ -18,7 +18,7 @@ const DashBoardCard = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-3">
+            <div className="col-lg-3 col-md-4 col-sm-12  ">
             <div className="paid__widget">
               <div className="widget__left">
                 <span></span>
@@ -29,7 +29,7 @@ const DashBoardCard = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-3">
+            <div className="col-lg-3 col-md-4 col-sm-12 ">
             <div className="paid__widget">
               <div className="widget__left">
                 <span></span>
@@ -40,7 +40,7 @@ const DashBoardCard = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-3">
+            <div className="col-lg-3 col-md-4 col-sm-12 ">
             <div className="paid__widget">
               <div className="widget__left">
                 <span></span>
