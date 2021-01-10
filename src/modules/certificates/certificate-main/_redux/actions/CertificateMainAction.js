@@ -2,9 +2,8 @@ import Axios from "axios";
 import { toast } from 'react-toastify';
 import { generateFormDataFromObject } from "../../../../master/utils/FileHelper";
 import { showToast } from "../../../../master/utils/ToastHelper";
-
 import * as Types from "../types/Types";
-
+//input handle
 export const handleChangeProductInputAction = (name, value, e, isEdit = false) => (dispatch) => {
     let data = {
         name: name,
@@ -23,8 +22,55 @@ export const handleChangeProductInputAction = (name, value, e, isEdit = false) =
         }
         reader.readAsDataURL(file)
     }
-
 };
+
+// submit main certificate info 
+export const MainCertificateCreateAction = (certificateInfoInput) => (dispatch) => {
+    // if (certificateInfoInput.intVesselID.length === 0) {
+    //     showToast('error', "Vassel can't be blank!")
+    // }
+
+    console.log("certificateInfoInput :>> ", certificateInfoInput);
+         let responseList = {
+           isLoading: true,
+           data: {},
+           status: false,
+         };
+        //  dispatch({
+        //    type: Types.CERTIFICATE_MAIN_SUBMITTING,
+        //    payload: responseList,
+        //  });
+
+         let postUrl = `http://10.17.2.189:8080/api/v1/certificates/details/store `;
+         Axios
+           .post(postUrl, certificateInfoInput)
+             .then(function (response) {
+               console.log("response :>> ", response);
+             responseList.data = response.data;
+             responseList.isLoading = false;
+             responseList.status = response.data.status;
+             if (response.data.status) {
+               showToast("success", response.data.message);
+               dispatch({
+                 type: Types.CERTIFICATE_MAIN_SUBMIT,
+                 payload: responseList,
+               });
+             } else {
+               showToast("error", response.data.message);
+             }
+           })
+           .catch(function(error) {
+             responseList.isLoading = false;
+             const message =
+               "Something went wrong ! Please fill all inputs and try again !";
+             showToast("error", message);
+
+             dispatch({
+               type: Types.CERTIFICATE_MAIN_SUBMIT,
+               payload: responseList,
+             });
+           });
+       };
 
 export const getCertificateMainListAction = (page, searchText = null, isPublic = false) => async (dispatch) => {
     let response = {
@@ -107,14 +153,14 @@ export const getCertificateName = (data) => (dispatch) => {
     });
    
 };
-export const getCertificateType = (data) => (dispatch) => {
+export const getCertificateType = () => (dispatch) => {
     Axios
     .get(
-      `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/type`
+      `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/types`
     )
     .then((res) => {
       let data = res.data.data;
-      console.log(res);
+      console.log("res certificate type", data);
       dispatch({ type: Types.GET_CERTIFICATE_TYPE, payload: data });
     });
    
