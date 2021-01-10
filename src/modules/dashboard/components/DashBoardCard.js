@@ -1,11 +1,8 @@
-import React from 'react'
+import React from "react";
 const DashBoardCard = () => {
-    return ( 
-
-           <>
-
-
-                   <div className="container dashboard__pb">
+  return (
+    <>
+      <div className="container dashboard__pb">
         <div className="row">
           <div className="col-lg-3">
             <div className="paid__widget">
@@ -53,11 +50,8 @@ const DashBoardCard = () => {
           </div>
         </div>
       </div>
+    </>
+  );
+};
 
-
-           </>
-
-     );
-}
- 
 export default DashBoardCard;
