@@ -32,7 +32,6 @@ const CertificateMainReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case Types.CERTIFICATE_LIST_DASHBOARD:
-            console.log('action.payload.certificates',action.payload.certificates);
             return {
                 ...state,
                 certificates: action.payload.certificates,

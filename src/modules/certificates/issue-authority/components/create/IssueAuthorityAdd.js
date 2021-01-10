@@ -5,6 +5,7 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  getIssuingAuthorities,
   handleChangeCertificateIssueAuthorityInput,
   issueAuthoritySubmitAction,
 } from "../../_redux/actions/CertificateIssueAuthorityAction";
@@ -35,6 +36,7 @@ const IssueAuthorityAdd = () => {
 
   const submiteIssuingAuthority = (data) => {
     dispatch(issueAuthoritySubmitAction(CertificateIssueAuthirityInput));
+    dispatch(getIssuingAuthorities());
   };
 
   return (

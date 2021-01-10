@@ -17,7 +17,6 @@ const CertificateMainList = withRouter(({history,props}) => {
   const certificatesPaginatedData = useSelector(
     (state) => state.certificateMainInfo.certificatesPaginatedData
   );
-  // console.log("certificates.length", certificates.length);
   useEffect(() => {
     dispatch(getCertificateMainListAction(currentPage));
   }, [dispatch, currentPage]);
