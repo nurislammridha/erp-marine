@@ -4,6 +4,7 @@ const initialState = {
   issuingAuthorities: [],
   issuingAuthoritiesData: null,
   isLoading: false,
+  status: false,
   CertificateIssueAuthirityInput: {
     strIssuingAuthorityName: "",
     isActive: "1",
