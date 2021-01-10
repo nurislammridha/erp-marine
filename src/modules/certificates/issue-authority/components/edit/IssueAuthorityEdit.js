@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import {
   handleChangeCertificateIssueAuthorityInput,
-  issueAuthoritySubmitAction,
+  issueAuthorityEditAction,
   setIssuingAuthorityEditValue,
 } from "../../_redux/actions/CertificateIssueAuthorityAction";
 // import { Form } from "react-bootstrap";
@@ -29,10 +29,6 @@ const IssueAuthorityEdit = (props) => {
 
   useEffect(() => {
     dispatch(setIssuingAuthorityEditValue(props.editData));
-    console.log(
-      "Checking CertificateIssueAuthirityInput",
-      CertificateIssueAuthirityInput
-    );
   }, [dispatch]);
 
   const CertificateIssueAuthirityInput = useSelector(
@@ -47,7 +43,12 @@ const IssueAuthorityEdit = (props) => {
   };
 
   const submiteIssuingAuthority = (data) => {
-    dispatch(issueAuthoritySubmitAction(CertificateIssueAuthirityInput));
+    dispatch(
+      issueAuthorityEditAction(
+        CertificateIssueAuthirityInput,
+        props.editData.intIssuingAuthorityID
+      )
+    );
   };
 
   return (

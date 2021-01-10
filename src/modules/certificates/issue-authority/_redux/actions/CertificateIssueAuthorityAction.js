@@ -279,3 +279,46 @@ export const setIssuingAuthorityEditValue = (editValue) => (dispatch) => {
     payload: formData,
   });
 };
+
+export const issueAuthorityEditAction = (
+  CertificateIssueAuthirityInput,
+  intIssuingAuthorityID
+) => (dispatch) => {
+  let responseList = {
+    isLoading: true,
+    data: {},
+    status: false,
+  };
+  dispatch({
+    type: Types.EDIT_ISSUING_AUTHORITY,
+    payload: responseList,
+  });
+
+  let editUrl = `http://192.168.206.1:82/iMarineAPI/public/api/v1/certificate/issuingAuthority/${intIssuingAuthorityID}`;
+  Axios.put(editUrl, CertificateIssueAuthirityInput)
+    .then(function(response) {
+      responseList.data = response.data;
+      responseList.isLoading = false;
+      responseList.status = response.data.status;
+      if (response.data.status) {
+        showToast("success", response.data.message);
+        dispatch({
+          type: Types.EDIT_ISSUING_AUTHORITY,
+          payload: responseList,
+        });
+      } else {
+        showToast("error", response.data.message);
+      }
+    })
+    .catch(function(error) {
+      responseList.isLoading = false;
+      const message =
+        "Something went wrong ! Please fill all inputs and try again !";
+      showToast("error", message);
+
+      dispatch({
+        type: Types.EDIT_ISSUING_AUTHORITY,
+        payload: responseList,
+      });
+    });
+};

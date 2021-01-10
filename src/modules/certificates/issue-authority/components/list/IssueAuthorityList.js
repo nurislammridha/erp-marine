@@ -14,6 +14,9 @@ const IssueAuthorityList = (props) => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
+  const modalEditStatus = useSelector(
+    (state) => state.certificateIssueAuthorityInfo.editStatus
+  );
 
   const isLoading = useSelector(
     (state) => state.certificateIssueAuthorityInfo.isLoading
@@ -27,7 +30,11 @@ const IssueAuthorityList = (props) => {
 
   useEffect(() => {
     dispatch(getIssuingAuthorities(currentPage));
-  }, [dispatch, currentPage]);
+
+    if (modalEditStatus) {
+      setShow(false);
+    }
+  }, [dispatch, currentPage, modalEditStatus]);
 
   const changePage = (data) => {
     setCurrentPage(data.page);
