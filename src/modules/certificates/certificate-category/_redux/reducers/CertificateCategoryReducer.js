@@ -34,6 +34,12 @@ function CertificateCategoryReducer(state = initiliazeState, action) {
                 certificateCategoryList: action.payload,
           };
 
+        case Types.SET_CERTIFICATE_CATEGORY_EDIT_DATA:
+          return {
+              ...state,
+              certificateCategoryInput: action.payload,
+          };
+
 
       default:
       break;

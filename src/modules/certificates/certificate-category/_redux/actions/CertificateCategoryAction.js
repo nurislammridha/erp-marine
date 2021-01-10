@@ -68,3 +68,17 @@ export const getCertificateCategoryListData = (searchValue = "", status = "") =>
             dispatch({ type: Types.GET_CERTIFICATE_CATEGORY_LIST, payload: res.data.data });
         });
 };
+
+export const setCertificateCategoryEditValue = (editValue) => (dispatch) => {
+    // console.log('cHECK editValue', editValue);
+    const formData = {
+        
+        strCertificateCategoriName: editValue.strCertificateCategoriName,
+        isActive: editValue.isActive,
+        intActionBy: 1,
+    };
+    dispatch({
+      type: Types.SET_CERTIFICATE_CATEGORY_EDIT_DATA,
+      payload: formData,
+    });
+  };

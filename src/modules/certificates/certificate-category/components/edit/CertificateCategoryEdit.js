@@ -1,92 +1,97 @@
 import React, { useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
+import { Button, Modal, Form, Col, Row } from "react-bootstrap";
+// import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useHistory, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import { 
+    certificatecategorySubmitAction,
+    setCertificateCategoryEditValue,
+    handleCertificateCategoryInput,
+} from "../../_redux/actions/CertificateCategoryAction";
 
 
-const CertificateTypeEdit = () => {
+const CertificateCategoryEdit = (props) => {
     const history = useHistory();
     const { register, handleSubmit, errors, setValue } = useForm();
+    const dispatch = useDispatch();
 
-    const statusOptions = [
+    const action = [
         {
-            label: 'Active',
-            value: 0
+          label: "Active",
+          value: 0,
         },
         {
-            label: 'Inactive',
-            value: 1
-        }
-    ]
+          label: "In Active",
+          value: 1,
+        },
+      ];
 
-    //add boiler info in multiple list
+      useEffect(() => {
+        // dispatch(setCertificateCategoryEditValue(props.editData));
+      }, []);
 
+      const CertificateCategoryInput = useSelector(
+        (state) =>
+          state.CertificateCategoryReducer.certificateCategoryInput
+      );
+      const handleChangeTextInput = (name, value) => {
+        dispatch(handleCertificateCategoryInput(name, value));
+      };
+
+      const submiteCategory = (data) => {
+        dispatch(certificatecategorySubmitAction(CertificateCategoryInput));
+      };
 
     return (
-        <>
-            <form
-                className="form form-label-right"
-                method="post"
-            >
-                <div className="form-group row mt-5">
-                    <div className="col-sm-4">
-                        <label className="form-label">Certificate Name</label>
-                        <Form.Control type="text"
-                            placeholder=""
-                        />
-                    </div>
-
-
-
-                    <div className="col-sm-4">
-                        <label className="form-label">Certificate Type</label>
-                        <RHFInput
-                            as={<Select options={statusOptions} />}
-                            rules={{ required: false }}
-                            name="intCargoTypeID"
-                            register={register}
-                            value={""}
-                            setValue={setValue}
-                        />
-                    </div>
-                    <div className="col-sm-4">
-                        <label className="form-label">Action</label>
-                        <RHFInput
-                            as={<Select options={statusOptions} />}
-                            rules={{ required: false }}
-                            name="intVesselID"
-                            register={register}
-                            value={""}
-                            setValue={setValue}
-                        />
-                    </div>
-
-                </div>
-
-                <div className="form-group row">
-                    <div className="col-sm-10"></div>
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg">
-                    <span>Save Changes</span>
-                </button>
-
-                {/* {loading && (
-                    <button type="submit" class="btn btn-primary btn-lg" disabled={true}>
-                        <span>Submitting...</span>
-                        <span className="ml-3 spinner spinner-white"></span>
-                    </button>
-                )}
-
-                {!loading && (
-                    <button type="submit" class="btn btn-primary btn-lg">
-                        <span>Submit</span>
-                    </button>
-                )} */}
-            </form>
-        </>
+        <Form onSubmit={handleSubmit(submiteCategory)} method="post">
+        <Form.Group as={Row} controlId="formAuthorityName">
+          <Form.Label column sm="3">
+          Certificate Category Name:
+          </Form.Label>
+          <Col sm="9">
+            <Form.Control
+              type="text"
+              placeholder="Certificate Category name"
+              value={CertificateCategoryInput.strCertificateCategoriName}
+              name="strCertificateCategoriName"
+              ref={register({
+                required: false,
+                maxLength: 100,
+              })}
+              onChange={(e) =>
+                handleChangeTextInput("strCertificateCategoriName", e.target.value)
+              }
+            />
+          </Col>
+        </Form.Group>
+        {/* <Form.Group as={Row} controlId="formPlaintextPassword">
+          <Form.Label column sm="3">
+            Status:
+          </Form.Label>
+          <Col sm="9">
+            <RHFInput
+              as={<Select options={action} />}
+              rules={{ required: false }}
+              name="isActiveStatus"
+              register={register}
+              value={action.label}
+              setValue={""}
+            />
+          </Col>
+        </Form.Group> */}
+        <Form.Group as={Row} controlId="formPlaintextPassword">
+          <Form.Label column sm="3"></Form.Label>
+          <Col sm="9">
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Col>
+        </Form.Group>
+      </Form>
     );
 };
 
-export default CertificateTypeEdit;
+export default CertificateCategoryEdit;

@@ -4,7 +4,9 @@ import Modal from 'react-bootstrap/Modal';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import CertificateCategoryEdit from '../edit/CertificateCategoryEdit'
-import { getCertificateCategoryListData } from "../../_redux/actions/CertificateCategoryAction";
+import { getCertificateCategoryListData, setCertificateCategoryEditValue } from "../../_redux/actions/CertificateCategoryAction";
+import SimpleModal from "../../../../master/components/Modal/SimpleModal";
+// import CertificateCategoryEdit from "../edit/CertificateCategoryEdit";
 
 
 
@@ -16,14 +18,31 @@ const CertificateCategoryList = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [editItem, setEditItem] = useState({});
 
     useEffect(() => {
 
         dispatch(getCertificateCategoryListData());
     }, []);
 
+    const handleEdit = (editItem) => {
+        console.log('editItem', editItem);
+        setEditItem(editItem);
+        setShow(true);
+        dispatch(setCertificateCategoryEditValue(editItem));
+    };
+
     return (
         <div className="react-bootstrap-table table-responsive">
+        <SimpleModal
+            show={show}
+            handleClose={() => handleClose()}
+            modalTitle={"Edit Certificate Category"}
+        >
+                          
+            <CertificateCategoryEdit  />
+                    
+        </SimpleModal>
             <table className="table mt-2 tbl-standard" id="table-to-xls">
                 <thead>
                     <tr>
@@ -40,14 +59,24 @@ const CertificateCategoryList = () => {
                             <td>{item.strCertificateCategoriName}</td>
                             <td>{item.intActionBy}</td>
                             <td>{item.isActive ? "Active" : "Inactive"}</td>
-                            <td>
+                            {/*<td>
                                 {" "}
                                 <Link to={``}>
                                     <i className="far fa-eye mr-3"></i>
                                 </Link>
                                 <i className="far fa-edit ml-2" onClick={handleShow}></i>
 
-                            </td>
+                            </td>*/}
+                            <td>
+                            <a
+                              className="btn btn-icon btn-light btn-hover-info btn-sm"
+                              onClick={() => {
+                                handleEdit(item);
+                              }}
+                            >
+                              <i className="fa fa-edit"></i>
+                            </a>
+                          </td>
                         </tr>
                     ))}
                 </tbody>
