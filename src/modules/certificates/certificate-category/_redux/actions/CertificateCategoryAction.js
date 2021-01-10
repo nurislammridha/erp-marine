@@ -1,7 +1,7 @@
-// import * as Types from "../types/Types";
 import * as Types from "../types/Types";
 import axios from "axios";
 import { showToast } from "../../../../master/utils/ToastHelper";
+import Axios from "axios";
 export const handleCertificateCategoryInput = (name, value) => (dispatch) => {
   const categoryData = {
     name: name,
@@ -54,3 +54,17 @@ export const certificatecategorySubmitAction = (getCategoryInpuData) => (dispatc
       });
 };
 
+export const getCertificateCategoryListData = (searchValue = "", status = "") => async (dispatch) => {
+    let isActive = status == "" ? 1 : parseInt(status);
+    let url = `http://10.3.203.16:82/iMarineAPI/public/api/v1/certificate/category`;
+
+    if (searchValue !== "" || isActive !== "") {
+        url += `?search=${searchValue}&isActive=${isActive}`;
+    }  
+
+    axios.get(url)
+        .then((res) => {
+            console.log(res);
+            dispatch({ type: Types.GET_CERTIFICATE_CATEGORY_LIST, payload: res.data.data });
+        });
+};
