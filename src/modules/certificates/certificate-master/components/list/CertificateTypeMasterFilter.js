@@ -52,33 +52,8 @@ const CertificateTypeMasterFilter = () => {
                             as={Row}
                             controlId="formPlaintextPassword"
                         >
-                            <Form.Label>Category</Form.Label>
+                            <Form.Label>status</Form.Label>
                             <Col sm="10">
-                                <RHFInput
-                                    as={<Select options={statusOptions} />}
-                                    rules={{ required: false }}
-                                    name="isActive"
-                                    register={register}
-                                    // value={certificateTypeInput.isActive}
-                                    // onChange={(option) => {
-                                    //     handleChangeTextInput("strCargoTypeName", option.label);
-                                    //     handleChangeTextInput("isActive", option.value);
-                                    //     dispatch(getCertificateTypeList(search, option.value));
-                                    // }}
-                                    setValue={setValue}
-
-                                />
-                            </Col>
-                        </Form.Group>
-                    </div>
-                    <div className="col-lg-3 col-md-6 col-10">
-                        <Form.Group
-                            className="noonReportInput"
-                            as={Row}
-                            controlId="formPlaintextPassword"
-                        >
-                            <Form.Label>Vessel</Form.Label>
-                            <Col sm="8">
                                 <RHFInput
                                     as={<Select options={statusOptions} />}
                                     rules={{ required: false }}
