@@ -5,7 +5,7 @@ import CertificateCategoryContainer from "../views/CertificateCategoryContainer"
 
 const certificateCategoryRoutes = [
   {
-    path: "/certificates/category/list",
+    path: "/certificate/configure/categories",
     name: "Certificate Category List",
     component: CertificateCategoryContainer,
     exact: true,

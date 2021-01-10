@@ -4,9 +4,15 @@ import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { handleChangeCertificateIssueAuthorityInput } from "../../_redux/actions/CertificateIssueAuthorityAction";
+import {
+  handleChangeCertificateIssueAuthorityInput,
+  issueAuthoritySubmitAction,
+} from "../../_redux/actions/CertificateIssueAuthorityAction";
+// import { Form } from "react-bootstrap";
+import { useHistory, Link } from "react-router-dom";
 
 const IssueAuthorityAdd = () => {
+  const history = useHistory();
   const { register, handleSubmit, errors, setValue } = useForm();
   const dispatch = useDispatch();
   const action = [
@@ -27,8 +33,12 @@ const IssueAuthorityAdd = () => {
     dispatch(handleChangeCertificateIssueAuthorityInput(name, value));
   };
 
+  const submiteIssuingAuthority = (data) => {
+    dispatch(issueAuthoritySubmitAction(CertificateIssueAuthirityInput));
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit(submiteIssuingAuthority)} method="post">
       <Form.Group as={Row} controlId="formAuthorityName">
         <Form.Label column sm="3">
           Authority Name:
@@ -37,19 +47,19 @@ const IssueAuthorityAdd = () => {
           <Form.Control
             type="text"
             placeholder="Type Authority name"
-            value={CertificateIssueAuthirityInput.authorityName}
-            name="authorityName"
+            value={CertificateIssueAuthirityInput.strIssuingAuthorityName}
+            name="strIssuingAuthorityName"
             ref={register({
               required: false,
               maxLength: 100,
             })}
             onChange={(e) =>
-              handleChangeTextInput("authorityName", e.target.value)
+              handleChangeTextInput("strIssuingAuthorityName", e.target.value)
             }
           />
         </Col>
       </Form.Group>
-      <Form.Group as={Row} controlId="formPlaintextPassword">
+      {/* <Form.Group as={Row} controlId="formPlaintextPassword">
         <Form.Label column sm="3">
           Status:
         </Form.Label>
@@ -63,7 +73,7 @@ const IssueAuthorityAdd = () => {
             setValue={""}
           />
         </Col>
-      </Form.Group>
+      </Form.Group> */}
       <Form.Group as={Row} controlId="formPlaintextPassword">
         <Form.Label column sm="3"></Form.Label>
         <Col sm="9">

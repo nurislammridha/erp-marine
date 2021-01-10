@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-import { Button, Modal, Dropdown } from "react-bootstrap";
-import IssueAuthorityFilter from "../components/list/IssueAuthorityFilter";
-import IssueAuthorityList from "../components/list/IssueAuthorityList";
+import { useHistory } from "react-router-dom";
+import { Form, Button, Dropdown } from "react-bootstrap";
+import Modal from 'react-bootstrap/Modal';
+import CertificateTypeList from "../../../../certificates/certificate-types/components/list/CertificateTypeList";
 import Pdf from "react-to-pdf";
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import ReactToPrint from "react-to-print-advanced";
-import IssueAuthorityAdd from "../components/create/IssueAuthorityAdd";
+import CertificateTypeMasterFilter from "./CertificateTypeMasterFilter";
 
-const IssueAutorityListContainer = (props) => {
-  const [show, setShow] = useState(false);
+const CertificateMasterContainer = () => {
+
+  const history = useHistory();
   const ref = React.createRef();
+
+  const [show, setShow] = useState(false);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -17,7 +22,7 @@ const IssueAutorityListContainer = (props) => {
     <div className="card card-custom gutter-b">
       <div className="row pt-5 pl-4 pb-3">
         <div className="col-xl-9 col-lg-9 col-md-9 col-6">
-          <h3>Issuing Authority List</h3>
+          <h3>Certificate List</h3>
         </div>
         <div className="col-xl-3 col-lg-3 col-md-3 col-6 VoyageListBtn">
           <Dropdown className="d-inline mr-2">
@@ -32,10 +37,10 @@ const IssueAutorityListContainer = (props) => {
             <Dropdown.Menu>
               <Pdf
                 targetRef={ref}
-                filename="code-example.pdf"
+                filename="Certificate-category.pdf"
                 x={0.5}
                 y={0.5}
-                scale={1.2}
+                scale={0.93}
               >
                 {({ toPdf }) => (
                   <Dropdown.Item onClick={toPdf}>
@@ -51,7 +56,7 @@ const IssueAutorityListContainer = (props) => {
                   <ReactHTMLTableToExcel
                     className="excelBtn ml-1"
                     table="table-to-xls"
-                    filename="tablexls"
+                    filename="Certificate-category"
                     sheet="tablexls"
                     buttonText="Excel"
                   />
@@ -76,22 +81,14 @@ const IssueAutorityListContainer = (props) => {
           >
             Add New
           </Button>
-
-          <Modal
-            show={show}
-            onHide={handleClose}
-            backdrop="static"
-            keyboard={false}
-          >
+          <Modal size="md" show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Create Issue Authority List</Modal.Title>
+              <Modal.Title>Create Certificate Master</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-              <IssueAuthorityAdd />
-            </Modal.Body>
+            {/* <Modal.Body>{<CertificateCategoryAdd />}</Modal.Body> */}
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
-                Close
+                Cancel
               </Button>
             </Modal.Footer>
           </Modal>
@@ -99,12 +96,12 @@ const IssueAutorityListContainer = (props) => {
         <div className="clearfix"></div>
       </div>
 
-      <IssueAuthorityFilter />
+      <CertificateTypeMasterFilter/>
       <div className="container" id="id" ref={ref}>
-        <IssueAuthorityList />
+        <CertificateTypeList />
       </div>
     </div>
   );
 };
 
-export default IssueAutorityListContainer;
+export default CertificateMasterContainer;

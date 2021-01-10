@@ -3,15 +3,15 @@ import { toast } from 'react-toastify';
 import { generateFormDataFromObject } from "../../../../master/utils/FileHelper";
 import { showToast } from "../../../../master/utils/ToastHelper";
 
-import * as Types from "../types/Types";
+// import * as Types from "../types/Types";
 
 export const handleChangeProductInputAction = (name, value, e, isEdit = false) => (dispatch) => {
     let data = {
         name: name,
         value: value,
     }
-    const type = !isEdit ? Types.CHANGE_CERTIFICATE_INPUT : Types.CHANGE_CERTIFICATE_INPUT_UPDATE;
-    dispatch({ type: type, payload: data });
+    // const type = !isEdit ? Types.CHANGE_CERTIFICATE_INPUT : Types.CHANGE_CERTIFICATE_INPUT_UPDATE;
+    // dispatch({ type: type, payload: data });
 
     if (name === 'image') {
         let reader = new FileReader();
@@ -19,30 +19,29 @@ export const handleChangeProductInputAction = (name, value, e, isEdit = false) =
         reader.onloadend = () => {
             data.name = 'imagePreviewUrl';
             data.value = reader.result;
-            dispatch({ type: type, payload: data });
+            // dispatch({ type: type, payload: data });
         }
         reader.readAsDataURL(file)
     }
 
 };
 
-export const getCertificateMainListAction = (page, searchText = null, isPublic = false) => async(dispatch) => {
+export const getCertificateMasterListAction = (page, searchText = null, isPublic = false) => async(dispatch) => {
     let response = {
-        certificates: [],
+        products: [],
         status: false,
         message: "",
         isLoading: true,
         errors: []
     };
-    dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
+    // dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
     let url = '';
     url =`${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1&paginateNo=1`;
 
-    if (searchText !== null) {
-        // url += `&paginateNo=${page}`;
-        url += `&search=${searchText}`
+    if (searchText === null) {
+        url = `${url}&paginateNo=${page}`;
     } else {
-        // url += `&certificate/details?search=${searchText}`
+        url = `${process.env.REACT_APP_API_URL}certificate/details?search=${searchText}`
     }
 
     try {
@@ -67,7 +66,7 @@ export const getCertificateMainListAction = (page, searchText = null, isPublic =
     }
 
     response.isLoading = false;
-    dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
+    // dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
 };
 
 
@@ -76,5 +75,5 @@ export const deleteProductImagePreview = () => (dispatch) => {
         name: 'imagePreviewUrl',
         value: null,
     }
-    dispatch({ type: Types.CHANGE_CERTIFICATE_INPUT, payload: data });
+    // dispatch({ type: Types.CHANGE_CERTIFICATE_INPUT, payload: data });
 };

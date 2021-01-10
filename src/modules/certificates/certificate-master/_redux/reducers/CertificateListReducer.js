@@ -27,12 +27,11 @@ const initialState = {
     deleteMessage: '',
 };
 
-const CertificateMainReducer = (state = initialState, action) => {
+const CertificateListReducer = (state = initialState, action) => {
     const newState = {...state };
 
     switch (action.type) {
         case Types.CERTIFICATE_LIST_DASHBOARD:
-            console.log('action.payload.certificates',action.payload.certificates);
             return {
                 ...state,
                 certificates: action.payload.certificates,
@@ -145,4 +144,4 @@ const CertificateMainReducer = (state = initialState, action) => {
     return newState;
 };
 
-export default CertificateMainReducer;
+export default CertificateListReducer;

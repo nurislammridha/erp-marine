@@ -4,7 +4,6 @@ import * as Types from "../types/Types";
 
 
 export const GetCargoTypeList = () => async (dispatch) => {
-    let data = {};
     const headers = {
         "Content-Type": "application/json",
     };
@@ -15,13 +14,11 @@ export const GetCargoTypeList = () => async (dispatch) => {
             { headers: headers }
         )
         .then((res) => {
-            let data = res.data;
-            dispatch({ type: Types.GET_CARGO_TYPE_LIST, payload: data });
+            dispatch({ type: Types.GET_CARGO_TYPE_LIST, payload: res.data });
         });
 
 };
 export const GetPortList = () => async (dispatch) => {
-    let data = {};
     const headers = {
         "Content-Type": "application/json",
     };
@@ -74,9 +71,7 @@ export const handleChangeBrands = (name, value, e = null) => (dispatch) => {
     dispatch({ type: Types.CHANGE_ATTACHMENT, payload: data });
   };
 export const SaveDemandEntry = (stateData,attachmentPreview) => async (dispatch) => {
-    const intCreatedBy = 1;
-    console.log('stateData', stateData);
-    
+    const intCreatedBy = 1;    
     let data = {
         status: false,
         message: "",
@@ -105,11 +100,7 @@ export const SaveDemandEntry = (stateData,attachmentPreview) => async (dispatch)
         strShipper : stateData.shipper != null ? stateData.shipper.label : "NO",
        
     }
-
-    console.log('postData2',postData);
-
     axios
-        // .post(`http://iapps.akij.net/asll/public/api/v1/voyageLighter/postvesselDemandQntStore`,postData)
         .post(`http://iapps.akij.net/asll/public/api/v1/voyageLighter/postvesselDemandQntStore`, postData)
         .then(res => {
             console.log('res', res.data);
@@ -123,7 +114,6 @@ export const SaveDemandEntry = (stateData,attachmentPreview) => async (dispatch)
             dispatch({ type: Types.SUBMIT_DEMAND, payload: data });
         })
         .catch((err) => {
-            console.log("ErrorData", err);
             data = {
                 status: false,
                 message: err.data,
@@ -137,7 +127,6 @@ export const SaveDemandEntry = (stateData,attachmentPreview) => async (dispatch)
 
 
 export const GetApprovePendingList = () => async (dispatch) => {
-    let data = {};
     const headers = {
         "Content-Type": "application/json",
     };
@@ -184,8 +173,6 @@ export const GetDemandSheetDetByID = async (intID) => {
     const headers = {
         "Content-Type": "application/json",
     };
-    console.log("intdemandid",intID);
-
 
     await axios
         .get(
@@ -193,7 +180,6 @@ export const GetDemandSheetDetByID = async (intID) => {
             { headers: headers }
         )
         .then((res) => {
-            console.log('ResponseDetails',res);
              data = res.data;
             return data;
 
@@ -205,10 +191,7 @@ export const GetDemandSheetDetByID = async (intID) => {
 
 export const SaveDemandApproveEntry = (stateData) => async (dispatch) => {
 
-    console.log('update approve data',stateData);
-
     const intCreatedBy = 1;
-    console.log('stateData', stateData);
     let data = {
         status: false,
         message: "",
@@ -234,13 +217,10 @@ export const SaveDemandApproveEntry = (stateData) => async (dispatch) => {
         // portFrom:stateData.portFrom.
     }
 
-    console.log('postData Aprv',postData);
-
     axios
         // .post(`http://iapps.akij.net/asll/public/api/v1/voyageLighter/postvesselDemandQntStore`, postData)
         .post(`http://iapps.akij.net/asll/public/api/v1/voyageLighter/postvesselDemandQntApproveStore`, postData)
         .then(res => {
-            console.log('res', res);
             data = {
                 status: res.data.status,
                 message: res.data.message,
@@ -251,7 +231,6 @@ export const SaveDemandApproveEntry = (stateData) => async (dispatch) => {
             dispatch({ type: Types.SUBMIT_DEMAND, payload: data });
         })
         .catch((err) => {
-            console.log("ErrorData", err);
             data = {
                 status: false,
                 message: err.data,
@@ -265,7 +244,6 @@ export const SaveDemandApproveEntry = (stateData) => async (dispatch) => {
 
 
 export const GetApproveCompleteList = () => async (dispatch) => {
-    let data = {};
     const headers = {
         "Content-Type": "application/json",
     };
@@ -291,8 +269,6 @@ export const GetDemanApproveDetByID = async (intID) => {
     const headers = {
         "Content-Type": "application/json",
     };
-    console.log("intdemandid",intID);
-
 
     await axios
         .get(
@@ -300,7 +276,6 @@ export const GetDemanApproveDetByID = async (intID) => {
             { headers: headers }
         )
         .then((res) => {
-            console.log('ResponseDetails',res);
              data = res.data;
             return data;
 
@@ -312,10 +287,7 @@ export const GetDemanApproveDetByID = async (intID) => {
 
 export const UpdateDemandInformation = (stateData) => async (dispatch) => {
 
-    console.log('UpdateDemandInformation',stateData);
-
     const intUpdatedBy = 1;
-    console.log('stateData', stateData);
     let data = {
         status: false,
         message: "",
@@ -329,16 +301,10 @@ export const UpdateDemandInformation = (stateData) => async (dispatch) => {
         // portFrom:stateData.portFrom.
     }
 
-    console.log('UpdateDemandInformation before Axios',postData);
-
-    axios
-        
-        
-        .put(
+    axios.put(
             `http://iapps.akij.net/asll/public/api/v1/voyageLighter/updateApprovedInformationDataDemandSheet?intID=${stateData.intDemandsheetid}`, postData
         )
         .then(res => {
-            console.log('res', res);
             data = {
                 status: res.data.status,
                 message: res.data.message,
@@ -362,7 +328,6 @@ export const UpdateDemandInformation = (stateData) => async (dispatch) => {
 };
 
 export const GetShipperList = () => async (dispatch) => {
-    let data = {};
     const headers = {
         "Content-Type": "application/json",
     };
@@ -373,28 +338,16 @@ export const GetShipperList = () => async (dispatch) => {
             { headers: headers }
         )
         .then((res) => {
-            let data = res.data;
-            dispatch({ type: Types.GET_SHIPPER_LIST, payload: data });
+            dispatch({ type: Types.GET_SHIPPER_LIST, payload: res.data });
         });
 
 };
 
 
-export const GetChartererList = () => async (dispatch) => {
-    let data = {};
-    const headers = {
-        "Content-Type": "application/json",
-    };
-
-    axios
-        .get(
-            `http://iapps.akij.net/asll/public/api/v1/voyageLighter/getChartererList`,
-            { headers: headers }
-        )
+export const GetChartererList = () => (dispatch) => {
+    axios.get(`http://iapps.akij.net/asll/public/api/v1/voyageLighter/getChartererList`)
         .then((res) => {
-            let data = res.data;
-            dispatch({ type: Types.GET_CHARTERER_LIST, payload: data });
+            dispatch({ type: Types.GET_CHARTERER_LIST, payload: res.data });
         });
-
 };
 
