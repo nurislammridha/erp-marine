@@ -36,6 +36,8 @@ import VoyageActivityBunkerReducer from "../modules/voyage/_redux/reducers/Voyag
 import VoyageActivityOfficerReducer from "../modules/voyage/_redux/reducers/VoyageActivityOfficerReducer";
 import VoyageActivityAuxEngn2Reducer from "../modules/voyage/_redux/reducers/VoyageActivityAuxEngn2Reducer";
 import VoyageActivityAuxEngn3Reducer from "../modules/voyage/_redux/reducers/VoyageActivityAuxEngn3Reducer";
+import CertificateMainReducer from "../modules/certificates/certificate-main/_redux/reducers/CertificateMainReducer";
+import CertificateTypeReducer from "../modules/certificates/certificate-types/_redux/reducers/CertificateTypeReducer";
 
 
 /** 
@@ -44,50 +46,54 @@ import VoyageActivityAuxEngn3Reducer from "../modules/voyage/_redux/reducers/Voy
 // import authMenuPermissionReducer from "../app/modules/Auth/_redux/menu-permission/authMenuPermissionReducer";
 
 export const rootReducer = combineReducers({
-         auth: auth.reducer,
-         customers: customersSlice.reducer,
-         products: productsSlice.reducer,
-         remarks: remarksSlice.reducer,
-         specifications: specificationsSlice.reducer,
+  auth: auth.reducer,
+  customers: customersSlice.reducer,
+  products: productsSlice.reducer,
+  remarks: remarksSlice.reducer,
+  specifications: specificationsSlice.reducer,
 
-         /** Menu Reducers */
-         menu: authMenuPermissionReducer,
+  /** Menu Reducers */
+  menu: authMenuPermissionReducer,
 
-         /** CCO Reducers */
-         controllingUnit: ControllingUnitReducer,
+  /** CCO Reducers */
+  controllingUnit: ControllingUnitReducer,
 
-         /** CCO Reducers */
-         employeeInfo: EmployeeReducer,
-         employeeEducationInfo: EmployeeEducationReducer,
-         employeeRecordInfo: EmployeeRecordReducer,
-         employeeDocumentInfo: EmployeeDocumentReducer,
-         employeeCertificateInfo: EmployeeCertificateReducer,
-         employeeBankDetailsInfo: EmployeeBankDetailsReducer,
-         employeeReferenceInfo: EmployeeReferenceReducer,
-         vesselInfo: VesselReducer,
-         voyageInfo: VoyageReducer,
-         voyageData: VoyageReducer,
-         voyageActivityInfo: VoyageActivityReducer,
-         VoyageActivityOfficerReducer: VoyageActivityOfficerReducer,
-         additionDeductionInfo: AdditionDeductionReducer,
-         vesselItemInfo: VesselItemReducer,
-         employeeSigningInfo: EmployeeSigningReducer,
-         currencyInfo: CurrencyReducer,
-         vesselAccountInfo: VesselAccountReducer,
-         VoyageActivityBoilerReducer: VoyageActivityBoilerReducer,
-         voyageAux1: VoyageActivityAuxEngnReducer,
-         voyageAux2: VoyageActivityAuxEngn2Reducer,
-         voyageAux3: VoyageActivityAuxEngn3Reducer,
+  /** CCO Reducers */
+  employeeInfo: EmployeeReducer,
+  employeeEducationInfo: EmployeeEducationReducer,
+  employeeRecordInfo: EmployeeRecordReducer,
+  employeeDocumentInfo: EmployeeDocumentReducer,
+  employeeCertificateInfo: EmployeeCertificateReducer,
+  certificateTypeInfo: CertificateTypeReducer,
+  employeeBankDetailsInfo: EmployeeBankDetailsReducer,
+  employeeReferenceInfo: EmployeeReferenceReducer,
+  vesselInfo: VesselReducer,
+  voyageInfo: VoyageReducer,
+  voyageData: VoyageReducer,
+  voyageActivityInfo: VoyageActivityReducer,
+  VoyageActivityOfficerReducer: VoyageActivityOfficerReducer,
+  additionDeductionInfo: AdditionDeductionReducer,
+  vesselItemInfo: VesselItemReducer,
+  employeeSigningInfo: EmployeeSigningReducer,
+  currencyInfo: CurrencyReducer,
+  vesselAccountInfo: VesselAccountReducer,
+  VoyageActivityBoilerReducer: VoyageActivityBoilerReducer,
+  voyageAux1: VoyageActivityAuxEngnReducer,
+  voyageAux2: VoyageActivityAuxEngn2Reducer,
+  voyageAux3: VoyageActivityAuxEngn3Reducer,
 
-         /** Procurement Module Reducers */
-         purchaseRequisition: PurchaseRequisitionReducer,
-         demand: DemandReducer,
+  /** Procurement Module Reducers */
+  purchaseRequisition: PurchaseRequisitionReducer,
+  demand: DemandReducer,
 
-         /** Promotion */
-         promotion: EmployeePromotionReducer,
+  /** Promotion */
+  promotion: EmployeePromotionReducer,
 
-         VoyageActivityBunkerReducer: VoyageActivityBunkerReducer,
-       });
+  VoyageActivityBunkerReducer: VoyageActivityBunkerReducer,
+
+  /**Certificates */
+  certificateMainInfo: CertificateMainReducer
+});
 
 export function* rootSaga() {
   yield all([auth.saga()]);
