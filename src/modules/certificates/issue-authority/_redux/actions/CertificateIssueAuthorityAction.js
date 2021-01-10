@@ -11,7 +11,6 @@ export const handleChangeCertificateIssueAuthorityInput = (name, value) => (
     name: name,
     value: value,
   };
-  console.log("formData", formData);
   dispatch({
     type: Types.CHANGE_CERTIFICATE_ISSUE_AUTHORITY_INPUT,
     payload: formData,
@@ -267,4 +266,16 @@ export const issueAuthoritySubmitAction = (CertificateIssueAuthirityInput) => (
         payload: responseList,
       });
     });
+};
+
+export const setIssuingAuthorityEditValue = (editValue) => (dispatch) => {
+  const formData = {
+    strIssuingAuthorityName: editValue.strIssuingAuthorityName,
+    isActive: editValue.isActive,
+    intActionBy: 1272,
+  };
+  dispatch({
+    type: Types.SET_ISSUING_AUTHORITY_EDIT_DATA,
+    payload: formData,
+  });
 };

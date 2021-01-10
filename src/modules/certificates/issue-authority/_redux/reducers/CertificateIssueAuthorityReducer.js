@@ -4,11 +4,13 @@ const initialState = {
   issuingAuthorities: [],
   issuingAuthoritiesData: null,
   isLoading: false,
+  status: false,
   CertificateIssueAuthirityInput: {
-    strIssuingAuthorityName: "New issuing authority",
+    strIssuingAuthorityName: "",
     isActive: "1",
     intActionBy: 1272,
   },
+  editDefaultData: {},
   errors: [],
   addStatus: false,
   editStatus: false,
@@ -48,6 +50,12 @@ const CertificateIssueAuthorityReducer = (state = initialState, action) => {
       return {
         ...state,
         status: action.payload.status,
+      };
+
+    case Types.SET_ISSUING_AUTHORITY_EDIT_DATA:
+      return {
+        ...state,
+        CertificateIssueAuthirityInput: action.payload,
       };
 
     // case Types.LOADING:
