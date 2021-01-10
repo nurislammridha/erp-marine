@@ -8,7 +8,6 @@ import CertificateTypeEdit from "../edit/CertificateTypeEdit";
 
 const CertificateTypeList = () => {
 
-
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
