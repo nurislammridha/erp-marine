@@ -23,7 +23,6 @@ export const getCertificateTypeList = (searchValue = "", status = "") => async (
     if (searchValue !== "" || isActive !== "") {
         url += `?search=${searchValue}&isActive=${isActive}`;
     }
-
     axios.get(url)
         .then((res) => {
             dispatch({ type: Types.GET_CERTIFICATE_TYPE_LIST, payload: res.data });
@@ -77,5 +76,32 @@ export const certificatetypeSubmitAction = (CertificateTypeInput) => (dispatch) 
                 type: Types.CREATE_CERTIFICATE_TYPE,
                 payload: responseList,
             });
+        });
+};
+
+
+export const EditCertificateTypeList = (id) => (dispatch) => {
+    console.log("id: ", id)
+    axios
+        .get(
+            `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/types/${id}`
+        )
+
+        .then((res) => {
+
+            console.log('res:', res)
+            // let data = res.data.data;
+            // Set Data for voyage activity input
+            // if (data !== null) {
+            //     const updatedData = {
+            //         intCertificateTypeID: data.intCertificateTypeID,
+            //         strCertificateTypeName: data.strCertificateTypeName,
+            //         isActive: data.isActive,
+            //     };
+            dispatch({
+                type: Types.EDIT_CERTIFICATE_TYPE_LIST,
+                payload: res.data,
+            });
+
         });
 };

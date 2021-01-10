@@ -3,7 +3,9 @@ import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useHistory, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { EditCertificateTypeList } from "../../_redux/actions/CertificateTypeAction";
 
 
 const CertificateTypeEdit = (props) => {
@@ -20,9 +22,12 @@ const CertificateTypeEdit = (props) => {
         strCertificateTypeName: strCertificateTypeName,
         isActive: isActive,
     });
-
+    console.log('certificateEditInfo:', certificateEditInfo)
+    const dispatch = useDispatch();
     const history = useHistory();
     const { register, handleSubmit, errors, setValue } = useForm();
+    const certificateTypeInput = useSelector((state) => state.certificateTypeInfo.certificateTypeInput);
+    console.log('certificateTypeData', certificateTypeInput);
 
     const statusOptions = [
         {
@@ -38,9 +43,14 @@ const CertificateTypeEdit = (props) => {
     // const handleChangeTextInput = (name, value) => {
     //     dispatch(handleChangeCertificateTypeInput(name, value));
     // };
+    // const handleChange = ({ currentTarget: input }) => {
+    //     const certificateEditInfoData = { ...certificateEditInfo };
+    //     certificateEditInfoData[input.name] = input.value;
+    //     setCertificateEditInfo(certificateEditInfoData);
+    // };
 
     // const onSubmit = (data) => {
-    //     dispatch(certificatetypeSubmitAction(certificateTypeInput));
+    //     dispatch(EditCertificateTypeList(certificateEditInfo));
     // };
 
 
@@ -57,14 +67,10 @@ const CertificateTypeEdit = (props) => {
                         <Form.Control type="text"
                             type="text"
                             name="strCertificateTypeName"
-                            value={certificateEditInfo.strCertificateTypeName}
-                        // onChange={(e) =>
-                        //     handleChangeTextInput("strCertificateTypeName", e.target.value)
-                        // }
+                            value={certificateTypeInput.strCertificateTypeName}
+                        // onChange={handleChange}
                         />
                     </div>
-
-
                     <div className="col-sm-6">
                         <label className="form-label">Status</label>
                         <RHFInput
@@ -72,7 +78,7 @@ const CertificateTypeEdit = (props) => {
                             rules={{ required: false }}
                             name="isActive"
                             register={register}
-                            value={certificateEditInfo.isActive}
+                            value={certificateTypeInput.isActive ? "Active" : "Inactive"}
                             setValue={setValue}
                         // onChange={(e) => handleChangeTextInput("isActive", e.value)}
                         />

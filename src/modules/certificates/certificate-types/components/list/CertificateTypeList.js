@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CertificateTypeEdit from "../edit/CertificateTypeEdit";
-import { getCertificateTypeList } from "../../_redux/actions/CertificateTypeAction";
+import { EditCertificateTypeList, getCertificateTypeList } from "../../_redux/actions/CertificateTypeAction";
 import { useDispatch, useSelector } from "react-redux";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 
-const CertificateTypeList = () => {
+const CertificateTypeList = (props) => {
 
     const dispatch = useDispatch();
     const certificateTypeData = useSelector((state) => state.certificateTypeInfo.certificateTypeList);
@@ -18,6 +18,13 @@ const CertificateTypeList = () => {
     useEffect(() => {
         dispatch(getCertificateTypeList());
     }, []);
+
+
+
+    const handlegetEdit = (data) => {
+        handleShow();
+        dispatch(EditCertificateTypeList(data));
+    }
 
     return (
         <div className="react-bootstrap-table table-responsive">
@@ -46,7 +53,7 @@ const CertificateTypeList = () => {
                                         <i className="far fa-eye mr-3"></i>
                                     </Link>
 
-                                    <a><i className="far fa-edit ml-2" onClick={handleShow}></i></a>
+                                    <a><i className="far fa-edit ml-2" onClick={() => handlegetEdit(item.intCertificateTypeID)}></i></a>
 
                                 </td>
                             </tr>
