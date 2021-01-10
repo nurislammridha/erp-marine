@@ -3,8 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { getIssuingAuthorities } from "../../_redux/actions/CertificateIssueAuthorityAction";
 import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import SimpleModal from "../../../../master/components/Modal/SimpleModal";
+import IssueAuthorityEdit from "../edit/IssueAuthorityEdit";
 
 const IssueAuthorityList = (props) => {
+  const [show, setShow] = useState(false);
+  const [editItem, setEditItem] = useState({});
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
@@ -21,7 +27,6 @@ const IssueAuthorityList = (props) => {
 
   useEffect(() => {
     dispatch(getIssuingAuthorities(currentPage));
-    console.log("issuingAuthorities", issuingAuthorities);
   }, [dispatch, currentPage]);
 
   const changePage = (data) => {
@@ -39,8 +44,22 @@ const IssueAuthorityList = (props) => {
     }
   };
 
+  const handleEdit = (editItem) => {
+    setEditItem(editItem);
+    setShow(true);
+  };
+
   return (
     <div className="react-bootstrap-table table-responsive">
+      <SimpleModal
+        show={show}
+        handleClose={() => handleClose()}
+        modalTitle={"Edit Issue Authority"}
+      >
+                      
+        <IssueAuthorityEdit editData={editItem} />
+                    
+      </SimpleModal>
       <table className="table mt-2 tbl-standard" id="table-to-xls">
         <thead>
           <tr>
@@ -58,11 +77,21 @@ const IssueAuthorityList = (props) => {
                   <td>{index + 1}</td>
                   <td>{item.strIssuingAuthorityName}</td>
                   <td>{item.isActive === 1 ? "Active" : "Inactive"}</td>
-                  <td>
+                  {/* <td>
                     {" "}
                     <Link to={`/voyage/list/${""}`}>
                       <i className="far fa-eye mr-3"></i>
                     </Link>
+                  </td> */}
+                  <td>
+                    <a
+                      className="btn btn-icon btn-light btn-hover-info btn-sm"
+                      onClick={() => {
+                        handleEdit(item);
+                      }}
+                    >
+                      <i className="fa fa-edit"></i>
+                    </a>
                   </td>
                 </tr>
               ))}
