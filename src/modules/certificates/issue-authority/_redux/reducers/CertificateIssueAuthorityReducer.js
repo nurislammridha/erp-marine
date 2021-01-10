@@ -5,7 +5,7 @@ const initialState = {
   issuingAuthoritiesData: null,
   isLoading: false,
   CertificateIssueAuthirityInput: {
-    strIssuingAuthorityName: "New issuing authority",
+    strIssuingAuthorityName: "",
     isActive: "1",
     intActionBy: 1272,
   },
