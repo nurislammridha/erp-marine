@@ -12,7 +12,7 @@ import {
   VesselEmptyMessage,
 } from "../../../../../domains/Vessel/_redux/actions/VesselAction";
 import { RHFInput } from "react-hook-form-input";
-import { deleteProductImagePreview, handleChangeProductInputAction } from "../../_redux/actions/CertificateMainAction";
+import { deleteProductImagePreview, handleChangeProductInputAction,getCertificateCategory, getCertificateType, getCertificateIssueBy, getCertificateName } from "../../_redux/actions/CertificateMainAction";
 import CertificateCategoryAddModal from "../../../certificate-category/components/create/CertificateCategoryAddModal";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 import CertificateCategoryAdd from "../../../certificate-category/components/create/CertificateCategoryAdd";
@@ -70,6 +70,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const addMessage = useSelector((state) => state.vesselInfo.addMessage);
   const serverErrors = useSelector((state) => state.certificateMainInfo.errors);
   const productData = useSelector((state) => state.certificateMainInfo.productData);
+  const certificatesCategoryOption = useSelector((state) => state.certificateMainInfo.certificatesCategoryOptionData);
+  const certificatesNameOption = useSelector((state) => state.certificateMainInfo.certificatesNameOptionData);
+  const certificatesTypeOption = useSelector((state) => state.certificateMainInfo.certificatesTypeOptionData);
+  const certificatesIssueByOption = useSelector((state) => state.certificateMainInfo.certificatesIssueByOptionData);
+  console.log('certificatesTypeOption',certificatesNameOption);
   const vesselTypeList = useSelector(
     (state) => state.vesselInfo.vesselTypeList
   );
@@ -103,6 +108,10 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   useEffect(() => {
     dispatch(GetVesselTypeAction());
     dispatch(GetCountryDataAction());
+    dispatch(getCertificateCategory());
+    dispatch(getCertificateType());
+    dispatch(getCertificateIssueBy());
+    dispatch(getCertificateName());
 
     if (typeof addMessage === null || typeof addMessage === "undefined") {
       disableLoading();
@@ -162,24 +171,24 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               method="post"
             >
               <div className="form-group row mt-1">
-                {/* <div className="col-lg-3">
+                <div className="col-lg-3">
                   <label className="form-label">Vessel</label>
                   <RHFInput
                     as={<Select options={vesselType} />}
                     rules={{ required: true }}
-                    name="vesselData"
+                    name="intVesselID"
                     register={register}
                     value=""
-                    onChange={(e) => selectHandle(e, "vesselData")}
+                    onChange={(e) => selectHandle(e, "intVesselID")}
                     setValue={setValue}
                   />
 
                   <div className="inputError margin-minus-10">
-                    {errors.vesselData &&
-                      errors.vesselData.type === "required" &&
+                    {errors.intVesselID &&
+                      errors.intVesselID.type === "required" &&
                       "Vessel Can't be blank"}
                   </div>
-                </div> */}
+                </div>
 
                 <div className="col-lg-3">
                   <SimpleModal
@@ -194,11 +203,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <div className="input-area-add">
                     <div className="float-left">
                       <RHFInput
-                        as={<Select options={vesselType} />}
+                        as={<Select options={certificatesCategoryOption} />}
                         rules={{ required: true }}
-                        name="certificateTypeData"
+                        name="intCategoryID"
                         register={register}
-                        onChange={(e) => selectHandle(e, "certificateTypeData")}
+                        onChange={(e) => selectHandle(e, "intCategoryID")}
                         setValue={setValue}
                       />
                     </div>
@@ -210,10 +219,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       </button>
                     </div>
                   </div>
-
                   <div className="inputError margin-minus-10">
-                    {errors.certificateTypeData &&
-                      errors.certificateTypeData.type === "required" &&
+                    {errors.intCategoryID &&
+                      errors.intCategoryID.type === "required" &&
                       "Vessel Type Can't be blank"}
                   </div>
                 </div>
@@ -233,11 +241,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <div className="input-area-add">
                     <div className="float-left">
                       <RHFInput
-                        as={<Select options={vesselType} />}
+                        as={<Select options={certificatesNameOption} />}
                         rules={{ required: true }}
-                        name="certificateTypeData"
+                        name="intCertificateID"
                         register={register}
-                        onChange={(e) => selectHandle(e, "certificateTypeData")}
+                        onChange={(e) => selectHandle(e, "intCertificateID")}
                         setValue={setValue}
                       />
                     </div>
@@ -251,8 +259,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </div>
 
                   <div className="inputError margin-minus-10">
-                    {errors.certificateTypeData &&
-                      errors.certificateTypeData.type === "required" &&
+                    {errors.intCertificateID &&
+                      errors.intCertificateID.type === "required" &&
                       "Vessel Type Can't be blank"}
                   </div>
                 </div>
@@ -262,12 +270,12 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <div className="input-area-add">
                     <div className="float-left">
                       <RHFInput
-                        as={<Select options={vesselType} />}
+                        as={<Select options={certificatesTypeOption} />}
                         rules={{ required: true }}
-                        name="certificateTypeData"
+                        name="intCertificateTypeID"
                         register={register}
                         value=""
-                        onChange={(e) => selectHandle(e, "certificateTypeData")}
+                        onChange={(e) => selectHandle(e, "intCertificateTypeID")}
                         setValue={setValue}
                       />
                     </div>
@@ -280,8 +288,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     </div>
                   </div>
                   <div className="inputError margin-minus-10">
-                    {errors.certificateTypeData &&
-                      errors.certificateTypeData.type === "required" &&
+                    {errors.intCertificateTypeID &&
+                      errors.intCertificateTypeID.type === "required" &&
                       "Vessel Type Can't be blank"}
                   </div>
                 </div>
@@ -305,7 +313,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <label className="form-label mt-2">Code</label>
                   <Form.Control
                     type="text"
-                    name="strIssueCode"
+                    name="strCustomeCode"
                     className="fromStyle"
                     onChange={handleChange}
                     ref={register({
@@ -314,8 +322,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     })}
                   />
                   <div className="inputError margin-minus-8">
-                    {errors.strIssueCode &&
-                      errors.strIssueCode.type === "required" &&
+                    {errors.strCustomeCode &&
+                      errors.strCustomeCode.type === "required" &&
                       "Code can't be blank"}
                   </div>
                 </div>
@@ -334,9 +342,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <div className="input-area-add">
                     <div className="float-left">
                       <RHFInput
-                        as={<Select options={vesselType} />}
+                        as={<Select options={certificatesIssueByOption} />}
                         rules={{ required: true }}
-                        name="certificateNameData"
+                        name="intIssuingAuthorityID"
                         register={register}
                         value=""
                         onChange={(e) => selectHandle(e, "certificateTypeData")}
@@ -354,8 +362,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
 
                   <div className="inputError margin-minus-10">
-                    {errors.certificateNameData &&
-                      errors.certificateNameData.type === "required" &&
+                    {errors.intIssuingAuthorityID &&
+                      errors.intIssuingAuthorityID.type === "required" &&
                       "Certificate Name Can't be blank"}
                   </div>
                 </div>
@@ -408,12 +416,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     />
                   </Form.Group>
                 </div>
-
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Issue Date</label>
+                  <label className="form-label mt-2">Ship Folder NO</label>
                   <Form.Control
-                    type="date"
-                    name="dteIssueDate"
+                    type="text"
+                    name="strShipFolderNo"
                     className="fromStyle"
                     onChange={handleChange}
                     ref={register({
@@ -422,12 +429,59 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     })}
                   />
                   <div className="inputError margin-minus-8">
-                    {errors.dteIssueDate &&
-                      errors.dteIssueDate.type === "required" &&
+                    {errors.strShipFolderNo &&
+                      errors.strShipFolderNo.type === "required" &&
+                      "Location can't be blank"}
+                  </div>
+                </div>
+                <div className="col-lg-3 mt-3">
+                  <label htmlFor="">{''}</label>
+                  <Form.Group controlId="formBasicChecbox">
+                    <Form.Check
+                      className="forgotPasswordText  "
+                      type="checkbox"
+                      label="isExtendedUntil"
+                    />
+                  </Form.Group>
+                </div>
+
+               
+                <div className="col-lg-3">
+                  <label className="form-label mt-2">Certificate Issue date</label>
+                  <Form.Control
+                    type="date"
+                    name="dteCertificateValidUntil"
+                    className="fromStyle"
+                    onChange={handleChange}
+                    ref={register({
+                      required: true,
+                      maxLength: 100,
+                    })}
+                  />
+                  <div className="inputError margin-minus-8">
+                    {errors.dteCertificateValidUntil &&
+                      errors.dteCertificateValidUntil.type === "required" &&
                       "Issue Date can't be blank"}
                   </div>
                 </div>
-
+                <div className="col-lg-3">
+                  <label className="form-label mt-2">Certificate Valid date</label>
+                  <Form.Control
+                    type="date"
+                    name="dteCertificateValidUntil"
+                    className="fromStyle"
+                    onChange={handleChange}
+                    ref={register({
+                      required: true,
+                      maxLength: 100,
+                    })}
+                  />
+                  <div className="inputError margin-minus-8">
+                    {errors.dteCertificateValidUntil &&
+                      errors.dteCertificateValidUntil.type === "required" &&
+                      "Issue Date can't be blank"}
+                  </div>
+                </div>
                 <div className="col-lg-3">
                   <label className="form-label mt-2">Expiry Date</label>
                   <Form.Control
@@ -446,6 +500,79 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       "Expiry Date can't be blank"}
                   </div>
                 </div>
+                <div className="col-lg-3">
+                  <label className="form-label mt-2">Extend Date</label>
+                  <Form.Control
+                    type="date"
+                    name="dteExtendedUntil"
+                    className="fromStyle"
+                    onChange={handleChange}
+                    ref={register({
+                      required: true,
+                      maxLength: 100,
+                    })}
+                  />
+                  <div className="inputError margin-minus-8">
+                    {errors.dteExtendedUntil &&
+                      errors.dteExtendedUntil.type === "required" &&
+                      "Expiry Date can't be blank"}
+                  </div>
+                </div>
+                <div className="col-lg-3">
+                  <label className="form-label mt-2">Last Survey</label>
+                  <Form.Control
+                    type="date"
+                    name="dteLastSurvey"
+                    className="fromStyle"
+                    onChange={handleChange}
+                    ref={register({
+                      required: true,
+                      maxLength: 100,
+                    })}
+                  />
+                  <div className="inputError margin-minus-8">
+                    {errors.dteLastSurvey &&
+                      errors.dteLastSurvey.type === "required" &&
+                      "Expiry Date can't be blank"}
+                  </div>
+                </div>
+                <div className="col-lg-3">
+                  <label className="form-label mt-2">Next Survey</label>
+                  <Form.Control
+                    type="date"
+                    name="dteNextSurvey"
+                    className="fromStyle"
+                    onChange={handleChange}
+                    ref={register({
+                      required: true,
+                      maxLength: 100,
+                    })}
+                  />
+                  <div className="inputError margin-minus-8">
+                    {errors.dteNextSurvey &&
+                      errors.dteNextSurvey.type === "required" &&
+                      "Expiry Date can't be blank"}
+                  </div>
+                </div>
+                <div className="col-lg-3">
+                  <label className="form-label mt-2">Endorsement Date</label>
+                  <Form.Control
+                    type="date"
+                    name="dteLastEndorsementDate"
+                    className="fromStyle"
+                    onChange={handleChange}
+                    ref={register({
+                      required: true,
+                      maxLength: 100,
+                    })}
+                  />
+                  <div className="inputError margin-minus-8">
+                    {errors.dteLastEndorsementDate &&
+                      errors.dteLastEndorsementDate.type === "required" &&
+                      "Expiry Date can't be blank"}
+                  </div>
+                </div>
+                
                 <div className="col-lg-3">
                   <label className="form-label mt-2">Issueing Authority</label>
                   <Form.Control
@@ -486,6 +613,42 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     })}
                   />
                 </div>
+                <div className="col-lg-3">
+                  <label className="form-label mt-2">Office Remarks</label>
+                  <Form.Control
+                    type="text"
+                    name="strOfficeRemarks"
+                    className="fromStyle"
+                    onChange={handleChange}
+                    ref={register({
+                      required: true,
+                      maxLength: 100,
+                    })}
+                  />
+                  <div className="inputError margin-minus-8">
+                    {errors.strOfficeRemarks &&
+                      errors.strOfficeRemarks.type === "required" &&
+                      "Expiry Date can't be blank"}
+                  </div>
+                </div>
+                <div className="col-lg-3">
+                  <label className="form-label mt-2">Ship remarks</label>
+                  <Form.Control
+                    type="text"
+                    name="strShipRemarks"
+                    className="fromStyle"
+                    onChange={handleChange}
+                    ref={register({
+                      required: true,
+                      maxLength: 100,
+                    })}
+                  />
+                  <div className="inputError margin-minus-8">
+                    {errors.strShipRemarks &&
+                      errors.strShipRemarks.type === "required" &&
+                      "Expiry Date can't be blank"}
+                  </div>
+                </div>
 
                 <div className="col-lg-3 mt-8">
                   <Form.Group controlId="formGridCity">
@@ -517,20 +680,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       </div>
                     }
                   </Form.Group>
-                </div>
-
-                <div className="col-lg-3">
-                  <label className="form-label mt-2">Remarks</label>
-                  <Form.Control
-                    type="text"
-                    name="dteNextSurvey"
-                    className="fromStyle"
-                    onChange={handleChange}
-                    ref={register({
-                      required: false,
-                      maxLength: 100,
-                    })}
-                  />
                 </div>
               </div>
 
