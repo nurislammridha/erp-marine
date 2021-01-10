@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import {
   handleChangeCertificateIssueAuthorityInput,
-  issueAuthoritySubmitAction,
+  issueAuthorityEditAction,
   setIssuingAuthorityEditValue,
 } from "../../_redux/actions/CertificateIssueAuthorityAction";
 // import { Form } from "react-bootstrap";
@@ -29,10 +29,6 @@ const IssueAuthorityEdit = (props) => {
 
   useEffect(() => {
     dispatch(setIssuingAuthorityEditValue(props.editData));
-    console.log(
-      "Checking CertificateIssueAuthirityInput",
-      CertificateIssueAuthirityInput
-    );
   }, [dispatch]);
 
   const CertificateIssueAuthirityInput = useSelector(
@@ -47,7 +43,12 @@ const IssueAuthorityEdit = (props) => {
   };
 
   const submiteIssuingAuthority = (data) => {
-    dispatch(issueAuthoritySubmitAction(CertificateIssueAuthirityInput));
+    dispatch(
+      issueAuthorityEditAction(
+        CertificateIssueAuthirityInput,
+        props.editData.intIssuingAuthorityID
+      )
+    );
   };
 
   return (
@@ -72,7 +73,7 @@ const IssueAuthorityEdit = (props) => {
           />
         </Col>
       </Form.Group>
-      {/* <Form.Group as={Row} controlId="formPlaintextPassword">
+      <Form.Group as={Row} controlId="formPlaintextPassword">
         <Form.Label column sm="3">
           Status:
         </Form.Label>
@@ -80,18 +81,19 @@ const IssueAuthorityEdit = (props) => {
           <RHFInput
             as={<Select options={action} />}
             rules={{ required: false }}
-            name="isActiveStatus"
+            name="isActive"
             register={register}
             value={action.label}
-            setValue={""}
+            onChange={(e) => handleChangeTextInput("isActive", e.value)}
+            setValue={setValue}
           />
         </Col>
-      </Form.Group> */}
+      </Form.Group>
       <Form.Group as={Row} controlId="formPlaintextPassword">
         <Form.Label column sm="3"></Form.Label>
         <Col sm="9">
           <Button variant="primary" type="submit">
-            Submit
+            Update
           </Button>
         </Col>
       </Form.Group>
