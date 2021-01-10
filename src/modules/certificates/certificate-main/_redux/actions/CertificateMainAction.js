@@ -26,7 +26,7 @@ export const handleChangeProductInputAction = (name, value, e, isEdit = false) =
 
 };
 
-export const getCertificateMainListAction = (page, searchText = null, isPublic = false) => async(dispatch) => {
+export const getCertificateMainListAction = (page, searchText = null, isPublic = false) => async (dispatch) => {
     let response = {
         certificates: [],
         status: false,
@@ -36,7 +36,7 @@ export const getCertificateMainListAction = (page, searchText = null, isPublic =
     };
     dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
     let url = '';
-    url =`${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1&paginateNo=1`;
+    url = `${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1&paginateNo=1`;
 
     if (searchText !== null) {
         // url += `&paginateNo=${page}`;
@@ -48,7 +48,7 @@ export const getCertificateMainListAction = (page, searchText = null, isPublic =
     try {
         await Axios.get(url)
             .then((res) => {
-                console.log('ReponseCertificate',res);
+                console.log('ReponseCertificate', res);
                 const { data, message, status } = res.data;
                 response.status = status;
                 response.certificates = data.data;
@@ -77,4 +77,56 @@ export const deleteProductImagePreview = () => (dispatch) => {
         value: null,
     }
     dispatch({ type: Types.CHANGE_CERTIFICATE_INPUT, payload: data });
+};
+
+
+export const getCertificateCategory = (data) => (dispatch) => {
+alert();
+    Axios
+    .get(
+      `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/category`
+    )
+    .then((res) => {
+     
+      let data = res.data.data;
+      dispatch({ type: Types.GET_CERTIFICATE_CATEGORY, payload: data });
+    });
+
+   
+};
+export const getCertificateName = (data) => (dispatch) => {
+
+    Axios
+    .get(
+      `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/certificateList`
+    )
+    .then((res) => {
+      let data = res.data.data;
+      console.log(res);
+      dispatch({ type: Types.GET_CERTIFICATE_NAME, payload: data });
+    });
+   
+};
+export const getCertificateType = (data) => (dispatch) => {
+    Axios
+    .get(
+      `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/type`
+    )
+    .then((res) => {
+      let data = res.data.data;
+      console.log(res);
+      dispatch({ type: Types.GET_CERTIFICATE_TYPE, payload: data });
+    });
+   
+};
+export const getCertificateIssueBy = (data) => (dispatch) => {
+    Axios
+    .get(
+      `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/issuingAuthority`
+    )
+    .then((res) => {
+      let data = res.data.data;
+      dispatch({ type: Types.GET_CERTIFICATE_ISSUE_BY, payload: data });
+    });
+   
 };

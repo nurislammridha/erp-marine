@@ -53,7 +53,7 @@ const CertificateTypeMasterFilter = () => {
                             controlId="formPlaintextPassword"
                         >
                             <Form.Label>Category</Form.Label>
-                            <Col sm="10">
+                            <Col sm="8">
                                 <RHFInput
                                     as={<Select options={statusOptions} />}
                                     rules={{ required: false }}
