@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCertificateTypeList } from "../../../certificate-types/_redux/actions/CertificateTypeAction";
 import { getCertificateMasterList } from "../../_redux/actions/CertificateListAction";
+import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 
 const CertificateMasterFilterList = () => {
 
@@ -55,22 +56,14 @@ const CertificateMasterFilterList = () => {
                 </tbody>
             </table>
 
-            <Modal size="lg" 
-            show={show} 
-            // onHide={handleClose}
+            <SimpleModal
+                show={show}
+                size="lg"
+                handleClose={() => handleClose()}
+                modalTitle={"Certificate Type Add"}
             >
-                <Modal.Header closeButton>
-                    <Modal.Title>Certificate Master Edit</Modal.Title>
-                </Modal.Header>
-                {/* <Modal.Body>{<CertificateTypeEdit />}</Modal.Body> */}
-                <Modal.Footer>
-                    <Button variant="secondary" 
-                    // onClick={handleClose}
-                    >
-                        Cancel
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                {/* <CertificateTypeEdit /> */}
+            </SimpleModal>
         </div>
     );
 };

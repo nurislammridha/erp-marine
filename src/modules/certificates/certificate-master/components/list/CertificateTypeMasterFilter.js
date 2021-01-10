@@ -11,6 +11,10 @@ const CertificateTypeMasterFilter = () => {
     const [search, setSearch] = useState("");
     const [type, setType] = useState("");
     const dispatch = useDispatch();
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     // const certificateTypeInput = useSelector((state) => state.certificateTypeInfo.certificateTypeInput);
     const { register, setValue } = useForm();
     const statusOptions = [
@@ -33,6 +37,19 @@ const CertificateTypeMasterFilter = () => {
         // dispatch(getCertificateTypeList(value, type));
 
     };
+
+    
+    
+
+   
+
+
+
+
+    const handlegetEdit = (data) => {
+        handleShow();
+        // dispatch(EditCertificateTypeList(data));
+    }
 
 
     return (

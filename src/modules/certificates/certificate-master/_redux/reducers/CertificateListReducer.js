@@ -41,6 +41,7 @@ const CertificateMasterReducer = (state = initialState, action) => {
             return {
                 ...state,
                 status: action.payload.status
+            
 
 
             };
