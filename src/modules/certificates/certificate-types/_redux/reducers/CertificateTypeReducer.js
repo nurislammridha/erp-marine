@@ -49,6 +49,13 @@ const CertificateTypeReducer = (state = initialState, action) => {
             };
             break;
 
+        case Types.UPDATE_CERTIFICATE_TYPE_LIST:
+            console.log('action.payload,', action.payload);
+            return {
+                ...state,
+                status: action.payload.status
+            };
+
         // case Types.VOYAGE_SUBMIT:
         //     if (action.payload.status) {
         //         return {

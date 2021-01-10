@@ -9,6 +9,7 @@ const CertificateTypeList = (props) => {
 
     const dispatch = useDispatch();
     const certificateTypeData = useSelector((state) => state.certificateTypeInfo.certificateTypeList);
+    const modalStatus = useSelector((state) => state.certificateTypeInfo.status);
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -17,13 +18,19 @@ const CertificateTypeList = (props) => {
 
     useEffect(() => {
         dispatch(getCertificateTypeList());
-    }, []);
+        if (modalStatus) {
+            setShow(false);
+            dispatch(getCertificateTypeList());
+        }
+
+    }, [modalStatus]);
 
 
 
     const handlegetEdit = (data) => {
         handleShow();
         dispatch(EditCertificateTypeList(data));
+
     }
 
     return (

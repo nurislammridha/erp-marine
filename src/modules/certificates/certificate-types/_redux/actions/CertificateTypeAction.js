@@ -89,19 +89,56 @@ export const EditCertificateTypeList = (id) => (dispatch) => {
 
         .then((res) => {
 
-            console.log('res:', res)
-            // let data = res.data.data;
-            // Set Data for voyage activity input
-            // if (data !== null) {
-            //     const updatedData = {
-            //         intCertificateTypeID: data.intCertificateTypeID,
-            //         strCertificateTypeName: data.strCertificateTypeName,
-            //         isActive: data.isActive,
-            //     };
             dispatch({
                 type: Types.EDIT_CERTIFICATE_TYPE_LIST,
                 payload: res.data,
             });
 
+        });
+};
+
+export const UpdateCertificateTypeList = (certificateEditInfoData) => async (dispatch) => {
+
+    console.log('certificateEditInfoData:', certificateEditInfoData)
+    let data = {
+        status: false,
+        message: "",
+    };
+
+    let postData = {
+        intCertificateTypeID: certificateEditInfoData.intCertificateTypeID,
+        strCertificateTypeName: certificateEditInfoData.strCertificateTypeName,
+        intActionBy: 1,
+        isActive: certificateEditInfoData.isActive
+
+    }
+
+    console.log('postData', postData);
+
+
+    axios
+        .put(
+            `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/types/update`, postData
+        )
+        .then(async (response) => {
+
+            data = {
+                status: true,
+                message: response.data.message,
+            };
+            if (response.data.status) {
+                showToast("success", response.data.message);
+                dispatch({ type: Types.UPDATE_CERTIFICATE_TYPE_LIST, payload: data });
+            } else {
+                showToast("error", response.data.message);
+            }
+        })
+        .catch((err) => {
+
+            data = {
+                status: false,
+                message: err.data,
+            };
+            dispatch({ type: Types.UPDATE_CERTIFICATE_TYPE_LIST, payload: data });
         });
 };
