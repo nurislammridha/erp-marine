@@ -15,8 +15,10 @@ export const handleChangeCertificateTypeInput = (name, value) => (dispatch) => {
 };
 
 export const getCertificateTypeList = (searchValue = "", status = "") => async (dispatch) => {
+
+
     let isActive = status == "" ? 1 : parseInt(status);
-    let url = `http://10.3.203.136:8081/iMarineAPI/public/api/v1/certificate/types`;
+    let url = `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/types`;
 
     if (searchValue !== "" || isActive !== "") {
         url += `?search=${searchValue}&isActive=${isActive}`;
@@ -40,7 +42,7 @@ export const certificatetypeSubmitAction = (CertificateTypeInput) => (dispatch) 
         payload: responseList,
     });
 
-    let postUrl = `http://10.3.203.136:8081/iMarineAPI/public/api/v1/certificate/types`;
+    let postUrl = `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/types`;
     axios
         .post(postUrl, CertificateTypeInput)
         .then(function (response) {

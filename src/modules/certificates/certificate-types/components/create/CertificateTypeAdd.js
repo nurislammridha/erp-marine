@@ -30,7 +30,6 @@ const CertificateTypeAdd = () => {
     };
 
     const onSubmit = (data) => {
-
         dispatch(certificatetypeSubmitAction(certificateTypeInput));
     };
 

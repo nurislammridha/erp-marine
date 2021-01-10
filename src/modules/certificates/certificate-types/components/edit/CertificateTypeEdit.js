@@ -6,7 +6,21 @@ import { useHistory, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 
-const CertificateTypeEdit = () => {
+const CertificateTypeEdit = (props) => {
+
+    const {
+        intCertificateTypeID,
+        strCertificateTypeName,
+        isActive,
+    } = props;
+
+    const [certificateEditInfo, setCertificateEditInfo] = React.useState({
+
+        intCertificateTypeID: intCertificateTypeID,
+        strCertificateTypeName: strCertificateTypeName,
+        isActive: isActive,
+    });
+
     const history = useHistory();
     const { register, handleSubmit, errors, setValue } = useForm();
 
@@ -21,21 +35,32 @@ const CertificateTypeEdit = () => {
         }
     ]
 
-    //add boiler info in multiple list
+    // const handleChangeTextInput = (name, value) => {
+    //     dispatch(handleChangeCertificateTypeInput(name, value));
+    // };
+
+    // const onSubmit = (data) => {
+    //     dispatch(certificatetypeSubmitAction(certificateTypeInput));
+    // };
 
 
     return (
         <>
             <form
                 className="form form-label-right"
+                // onSubmit={handleSubmit(onSubmit)}
                 method="post"
             >
                 <div className="form-group row mt-5">
                     <div className="col-sm-6">
                         <label className="form-label">Certificate Type Name</label>
-                        <Form.Control
+                        <Form.Control type="text"
                             type="text"
-                            placeholder=""
+                            name="strCertificateTypeName"
+                            value={certificateEditInfo.strCertificateTypeName}
+                        // onChange={(e) =>
+                        //     handleChangeTextInput("strCertificateTypeName", e.target.value)
+                        // }
                         />
                     </div>
 
@@ -45,10 +70,11 @@ const CertificateTypeEdit = () => {
                         <RHFInput
                             as={<Select options={statusOptions} />}
                             rules={{ required: false }}
-                            name="intVesselID"
+                            name="isActive"
                             register={register}
-                            value={""}
+                            value={certificateEditInfo.isActive}
                             setValue={setValue}
+                        // onChange={(e) => handleChangeTextInput("isActive", e.value)}
                         />
                     </div>
 
