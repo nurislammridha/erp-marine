@@ -36,21 +36,28 @@ export const MainCertificateCreateAction = (certificateInfoInput) => (dispatch) 
            data: {},
            status: false,
          };
+
+         const headers = {
+            'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+        };
+        
+    
         //  dispatch({
         //    type: Types.CERTIFICATE_MAIN_SUBMITTING,
         //    payload: responseList,
         //  });
 
-         let postUrl = `http://10.17.2.189:8080/api/v1/certificates/details/store `;
+         
+         let postUrl = `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/details`;
          Axios
-           .post(postUrl, certificateInfoInput)
+           .post(postUrl, certificateInfoInput, { headers: headers })
              .then(function (response) {
                console.log("response :>> ", response);
              responseList.data = response.data;
              responseList.isLoading = false;
              responseList.status = response.data.status;
              if (response.data.status) {
-               showToast("success", response.data.message);
+               showToast("successs", response.data.message);
                dispatch({
                  type: Types.CERTIFICATE_MAIN_SUBMIT,
                  payload: responseList,
