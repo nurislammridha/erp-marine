@@ -15,7 +15,6 @@ export const handleChangeCertificateTypeInput = (name, value) => (dispatch) => {
 };
 
 export const getCertificateMasterList = (searchValue = "", status = "") => async (dispatch) => {
-    alert();
     let isActive = status == "" ? 1 : parseInt(status);
     let url = `http://10.17.3.78:8082/iMarineAPI/public/api/v1/certificate/certificateList`;
 

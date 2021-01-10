@@ -64,6 +64,7 @@ const CertificateMasterAdd = withRouter(({ history, props }) => {
     (state) => state.vesselInfo.vesselTypeList
   );
   const countryList = useSelector((state) => state.vesselInfo.countryList);
+  
   let vesselType = [];
   if (vesselTypeList.data) {
     vesselTypeList.data.forEach((item) => {
