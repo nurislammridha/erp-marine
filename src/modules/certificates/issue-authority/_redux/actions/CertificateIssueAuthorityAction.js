@@ -11,7 +11,6 @@ export const handleChangeCertificateIssueAuthorityInput = (name, value) => (
     name: name,
     value: value,
   };
-  console.log("formData", formData);
   dispatch({
     type: Types.CHANGE_CERTIFICATE_ISSUE_AUTHORITY_INPUT,
     payload: formData,
@@ -264,6 +263,61 @@ export const issueAuthoritySubmitAction = (CertificateIssueAuthirityInput) => (
 
       dispatch({
         type: Types.POST_ISSUING_AUTHORITY,
+        payload: responseList,
+      });
+    });
+};
+
+export const setIssuingAuthorityEditValue = (editValue) => (dispatch) => {
+  const formData = {
+    strIssuingAuthorityName: editValue.strIssuingAuthorityName,
+    isActive: editValue.isActive,
+    intActionBy: 1272,
+  };
+  dispatch({
+    type: Types.SET_ISSUING_AUTHORITY_EDIT_DATA,
+    payload: formData,
+  });
+};
+
+export const issueAuthorityEditAction = (
+  CertificateIssueAuthirityInput,
+  intIssuingAuthorityID
+) => (dispatch) => {
+  let responseList = {
+    isLoading: true,
+    data: {},
+    status: false,
+  };
+  dispatch({
+    type: Types.EDIT_ISSUING_AUTHORITY,
+    payload: responseList,
+  });
+
+  let editUrl = `http://192.168.206.1:82/iMarineAPI/public/api/v1/certificate/issuingAuthority/${intIssuingAuthorityID}`;
+  Axios.put(editUrl, CertificateIssueAuthirityInput)
+    .then(function(response) {
+      responseList.data = response.data;
+      responseList.isLoading = false;
+      responseList.status = response.data.status;
+      if (response.data.status) {
+        showToast("success", response.data.message);
+        dispatch({
+          type: Types.EDIT_ISSUING_AUTHORITY,
+          payload: responseList,
+        });
+      } else {
+        showToast("error", response.data.message);
+      }
+    })
+    .catch(function(error) {
+      responseList.isLoading = false;
+      const message =
+        "Something went wrong ! Please fill all inputs and try again !";
+      showToast("error", message);
+
+      dispatch({
+        type: Types.EDIT_ISSUING_AUTHORITY,
         payload: responseList,
       });
     });
