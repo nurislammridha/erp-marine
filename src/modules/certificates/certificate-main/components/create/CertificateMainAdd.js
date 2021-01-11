@@ -20,6 +20,7 @@ import CertificateCategoryAddModal from "../../../certificate-category/component
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 import CertificateCategoryAdd from "../../../certificate-category/components/create/CertificateCategoryAdd";
 import CertificateTypeAdd from "../../../certificate-types/components/create/CertificateTypeAdd";
+import { getCertificateChildCategoryData, getCertificateParentCategoryData } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -59,10 +60,18 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const certificatesNameOption = useSelector(
     (state) => state.certificateMainInfo.certificatesNameOptionData
   );
+  const certificateParentCategoryList = useSelector(
+    (state) => state.CertificateCategoryReducer.certificateParentCategoryList
+  );
+
+  const certificateChildCategoryList = useSelector(
+    (state) => state.CertificateCategoryReducer.certificateChildCategoryList
+  );
+
   const certificatesTypeOption = useSelector(
     (state) => state.certificateMainInfo.certificatesTypeOptionData
   );
-  console.log("certificatesTypeOption :>> ", certificatesTypeOption);
+
   const certificatesIssueByOption = useSelector(
     (state) => state.certificateMainInfo.certificatesIssueByOptionData
   );
@@ -77,6 +86,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
     dispatch(getCertificateType());
     dispatch(getCertificateIssueBy());
     dispatch(getCertificateName());
+    dispatch(getCertificateParentCategoryData());
   }, []);
 
   const onSubmit = async (e) => {
@@ -107,20 +117,16 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 <div className="col-lg-3">
                   <label className="form-label">Category</label>
                   <RHFInput
-                    as={<Select options={certificatesCategoryOption} />}
+                    as={<Select options={certificateParentCategoryList} />}
                     rules={{ required: true }}
                     name="intCategoryID"
                     register={register}
-                    value={certificateInfoInput.intCategoryID}
+                    // value={certificateInfoInput.intCategoryID}
                     onChange={(option) => {
-                      certificateMainInfoChange(
-                        "intCategoryName",
-                        option.label
-                      );
-                      certificateMainInfoChange(
-                        "intCategoryID",
-                        option.value
-                      );
+                      certificateMainInfoChange("intCategoryName", "");
+                      certificateMainInfoChange("intCategoryID", "");
+                      setValue('intCategoryID', '');
+                      dispatch(getCertificateChildCategoryData(option.value))
                     }}
                     setValue={setValue}
                   />
@@ -140,20 +146,14 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <div className="input-area-add">
                     <div className="float-left">
                       <RHFInput
-                        as={<Select options={certificatesCategoryOption} />}
+                        as={<Select options={certificateChildCategoryList} />}
                         rules={{ required: true }}
                         name="intCategoryID"
                         register={register}
                         value={certificateInfoInput.intCategoryID}
                         onChange={(option) => {
-                          certificateMainInfoChange(
-                            "intCategoryName",
-                            option.label
-                          );
-                          certificateMainInfoChange(
-                            "intCategoryID",
-                            option.value
-                          );
+                          certificateMainInfoChange("intCategoryName", option.label);
+                          certificateMainInfoChange("intCategoryID", option.value);
                         }}
                         setValue={setValue}
                       />

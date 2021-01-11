@@ -1,6 +1,8 @@
 import * as Types from "../types/Types";
 const initiliazeState = {
   certificateCategoryList: [],
+  certificateParentCategoryList: [],
+  certificateChildCategoryList: [],
   status: false,
   isLoading: false,
   certificatesCategoryPaginatedData: null,
@@ -22,7 +24,6 @@ function CertificateCategoryReducer(state = initiliazeState, action) {
         certificateCategoryInput,
       };
     case Types.CERTIFICATE_CATEGORY_STORE:
-      console.log("action.payload,", action.payload);
       return {
         ...state,
         status: action.payload.status,
@@ -36,6 +37,18 @@ function CertificateCategoryReducer(state = initiliazeState, action) {
         certificatesCategoryPaginatedData:
           action.payload.certificatesPaginatedData,
         isLoading: action.payload.isLoading,
+      };
+
+      case Types.GET_CERTIFICATE_PARENT_CATEGORY_LIST:
+      return {
+        ...state,
+        certificateParentCategoryList: getCertificateCategoryList(action.payload),
+      };
+
+      case Types.GET_CERTIFICATE_CHILD_CATEGORY_LIST:
+      return {
+        ...state,
+        certificateChildCategoryList: getCertificateCategoryList(action.payload),
       };
 
     case Types.SET_CERTIFICATE_CATEGORY_EDIT_DATA:
@@ -56,5 +69,19 @@ function CertificateCategoryReducer(state = initiliazeState, action) {
   }
   return state;
 }
+
+const getCertificateCategoryList = (data) => {
+  let options = [];
+  if (data) {
+    data.forEach((item) => {
+      let itemData = {
+        value: item.intCategoryID,
+        label: item.strCertificateCategoryName,
+      };
+      options.push(itemData);
+    });
+  }
+  return options;
+};
 
 export default CertificateCategoryReducer;
