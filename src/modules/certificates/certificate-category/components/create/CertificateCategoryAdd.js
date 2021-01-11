@@ -65,7 +65,7 @@ const CertificateCategoryAdd = () => {
           />
         </div>
 
-        <div className="form-group mt-0">
+        {/*<div className="form-group mt-0">
           <label className="form-label">Parent Category <span className="text-info"> (Optional)</span></label>
           <RHFInput
               as={<Select options={statusOptions} />}
@@ -76,7 +76,8 @@ const CertificateCategoryAdd = () => {
               onChange={() => console.log('e')}
               setValue={""}
           />
-        </div>
+        </div>*/}
+
         <div className="form-group row">
           <div className="col-sm-10"></div>
         </div>
