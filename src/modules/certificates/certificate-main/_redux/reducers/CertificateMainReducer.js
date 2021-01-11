@@ -13,14 +13,14 @@ const initialState = {
   vesselTypeOptionData:[],
 
   isLoading: false,
-  productData: {
-    id: 0,
-    title: "",
-    description: "",
-    price: "",
-    image: null,
-    imagePreviewUrl: null,
-  },
+  //   productData: {
+  //     id: 0,
+  //     title: "",
+  //     description: "",
+  //     price: "",
+  //     image: null,
+  //     imagePreviewUrl: null,
+  //   },
   certificateMainInfo: {
     intVesselID: null,
     intCertificateID: null,
@@ -31,21 +31,22 @@ const initialState = {
     strIssuedPlace: "",
     strLocation: "",
     intCertificateTypeID: null,
-    intNotOnBoard: null,
+    intNotOnBoard: 1,
     dteCertificateIssueDate: "",
     dteCertificateValidUntil: "",
     isExtendedUntil: true,
     dteExtendedUntil: "",
     dteLastSurvey: "",
     dteNextSurvey: "",
-    dteLastEndorsementDate: "",
+    dteLastEndorsementDate: "2021-01-06",
     strOfficeRemarks: "",
-    imagePreviewUrl: null,
+    // image: null,
+    // imagePreviewUrl: null,
     strShipRemarks: "",
     intActionBy: 100,
-    dteLastActionDateTime: "",
-    dteServerDateTime: "",
-    isActive: true,
+    dteLastActionDateTime: "2021-01-06",
+    dteServerDateTime: "2021-01-06",
+      isActive: true,
   },
   productEditData: null,
   productDetail: null,
@@ -55,6 +56,7 @@ const initialState = {
   editing: false,
   deleteStatus: false,
   deleting: false,
+  certificateSingleData: {},
 
   addMessage: "",
   editMessage: "",
@@ -91,8 +93,8 @@ const CertificateMainReducer = (state = initialState, action) => {
         ...state,
         certificatesNameOptionData: getCertificateName(action.payload),
       };
-      case Types.GET_CERTIFICATE_TYPE:
-          console.log("action.payload type :>> ", action.payload);
+    case Types.GET_CERTIFICATE_TYPE:
+      console.log("action.payload type :>> ", action.payload);
       return {
         ...state,
         certificatesTypeOptionData: getCertificateTypeName(action.payload),
@@ -129,12 +131,11 @@ const CertificateMainReducer = (state = initialState, action) => {
         ...state,
         isLoading: action.payload,
       };
-      
-   case Types.GET_MAIN_CERTIFICATE_SINGLE_DATA: 
-   return{
-     ...state,
-     certificateMainEdit: action.payload
-   }
+    case Types.GET_MAIN_CERTIFICATE_SINGLE_DATA: 
+      return {
+        ...state,
+        certificateSingleData: action.payload
+      };
 
     case Types.CHANGE_CERTIFICATE_INPUT_UPDATE:
       const productEditData = { ...state.productEditData };
@@ -226,7 +227,7 @@ const CertificateMainReducer = (state = initialState, action) => {
           description: "",
           price: "",
           image: null,
-          imagePreviewUrl: null,
+        //   imagePreviewUrl: null,
         },
       };
 

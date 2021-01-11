@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
 import { getCertificateMainListAction } from "../../_redux/actions/CertificateMainAction";
@@ -82,7 +82,9 @@ const CertificateMainList = withRouter(({history,props}) => {
           </div>
           {isLoading && <LoadingSpinner text="Loading Certificates..." />}
           {!isLoading && certificates.length === 0 && (
-            <div className="alert alert-warning">Sorry ! No Certificates Found.</div>
+            <div className="alert alert-warning">
+              Sorry ! No Certificates Found.
+            </div>
           )}
           {!isLoading && certificates.length > 0 && (
             <>
@@ -109,14 +111,11 @@ const CertificateMainList = withRouter(({history,props}) => {
                         <td>{certificate.dteExtendedUntil}</td>
                         <td>{certificate.dteExtendedUntil}</td>
                         <td>
-                          <a
-                            className="btn btn-icon btn-light btn-hover-info btn-sm"
-                            onClick={() => {
-                              history.push("/certificates-main/edit");
-                            }}
-                          >
-                            <i className="fa fa-edit"></i>
-                          </a>
+                          {/* <button className="btn btn-icon btn-light btn-hover-info btn-sm">
+                            <Link to={`/certificates-main/edit/${certificate.intCertificateDetailsID}`}>
+                              <i className="fa fa-edit"></i>
+                            </Link>
+                          </button> */}
                           &nbsp;&nbsp;&nbsp;
                           <a
                             className="btn btn-icon btn-light btn-hover-danger btn-sm"

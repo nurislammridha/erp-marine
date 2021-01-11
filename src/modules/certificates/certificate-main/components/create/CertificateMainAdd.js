@@ -347,12 +347,12 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <label className="form-label mt-2">Issue Place</label>
                   <Form.Control
                     type="text"
-                    name="strIssuePlace"
+                    name="strIssuedPlace"
                     className="fromStyle"
                     value={certificateInfoInput.strIssuePlace}
                     onChange={(e) =>
                       certificateMainInfoChange(
-                        "strCustomeCode",
+                        "strIssuedPlace",
                         e.target.value
                       )
                     }
@@ -693,7 +693,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </div> */}
                 </div>
 
-                <div className="col-lg-3 mt-8">
+                {/* <div className="col-lg-3 mt-8">
                   <Form.Group controlId="formGridCity">
                     <Form.Label>
                       Attachment{" "}
@@ -737,7 +737,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       </div>
                     )}
                   </Form.Group>
-                </div>
+                </div> */}
               </div>
 
               <div className="form-group row">
@@ -755,14 +755,10 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     Next
                     </button> */}
                   {/* {loading && ( */}
-                    <button
-                      type="submit"
-                      class="btn btn-primary btn-lg"
-                     
-                    >
-                      <span>Submite</span>
-                      {/* <span className="ml-3 spinner spinner-white"></span> */} 
-                    </button>
+                  <button type="submit" class="btn btn-primary btn-lg">
+                    <span>Submite</span>
+                    {/* <span className="ml-3 spinner spinner-white"></span> */}
+                  </button>
                   {/* )} */}
 
                   {/* {!loading && (

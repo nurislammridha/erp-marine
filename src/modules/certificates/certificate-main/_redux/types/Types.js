@@ -21,7 +21,8 @@ export const GET_CERTIFICATE_ISSUE_BY = "GET_CERTIFICATE_ISSUE_BY";
 export const GET_VESSEL_TYPE = "GET_VESSEL_TYPE";
 /*************** CERTIFICATE ******************/
 
-/******/
+/*********create main certificate************/
 export const CERTIFICATE_MAIN_SUBMIT = "CERTIFICATE_MAIN_SUBMIT";
 export const CERTIFICATE_MAIN_SUBMITTING = "CERTIFICATE_MAIN_SUBMITTING";
+/*********get single certificate info************/
 export const GET_MAIN_CERTIFICATE_SINGLE_DATA = "GET_MAIN_CERTIFICATE_SINGLE_DATA";
