@@ -10,41 +10,41 @@ const DashBoardCard = () => {
                 <span></span>
               </div>
               <div className="widget__right">
-                <p>Paid amount</p>
                 <h4>2,00,000 BDT</h4>
+                <p>Total Expense</p>
               </div>
             </div>
           </div>
           <div className="col-lg-3">
-            <div className="paid__widget">
+            <div className="paid__widget one">
               <div className="widget__left">
                 <span></span>
               </div>
               <div className="widget__right">
-                <p>Paid amount</p>
                 <h4>2,00,000 BDT</h4>
+                <p>Total Employee</p>
               </div>
             </div>
           </div>
           <div className="col-lg-3">
-            <div className="paid__widget">
+            <div className="paid__widget two">
               <div className="widget__left">
                 <span></span>
               </div>
               <div className="widget__right">
-                <p>Paid amount</p>
                 <h4>2,00,000 BDT</h4>
+                <p>Total Certificates</p>
               </div>
             </div>
           </div>
           <div className="col-lg-3">
-            <div className="paid__widget">
+            <div className="paid__widget three">
               <div className="widget__left">
                 <span></span>
               </div>
               <div className="widget__right">
-                <p>Paid amount</p>
                 <h4>2,00,000 BDT</h4>
+                <p>New Contacts</p>
               </div>
             </div>
           </div>
