@@ -8,6 +8,7 @@ import {
   handleChangeCertificateIssueAuthorityInput,
   issueAuthorityEditAction,
   setIssuingAuthorityEditValue,
+  getIssuingAuthorities,
 } from "../../_redux/actions/CertificateIssueAuthorityAction";
 // import { Form } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
@@ -16,20 +17,29 @@ const IssueAuthorityEdit = (props) => {
   const history = useHistory();
   const { register, handleSubmit, errors, setValue } = useForm();
   const dispatch = useDispatch();
+  const isLoading = useSelector(
+    (state) => state.certificateIssueAuthorityInfo.isLoading
+  );
+  const editStatus = useSelector(
+    (state) => state.certificateIssueAuthorityInfo.editStatus
+  );
   const action = [
     {
       label: "Active",
-      value: 1,
+      value: "1",
     },
     {
       label: "In Active",
-      value: 2,
+      value: "0",
     },
   ];
 
   useEffect(() => {
     dispatch(setIssuingAuthorityEditValue(props.editData));
-  }, [dispatch]);
+    if (editStatus) {
+      dispatch(getIssuingAuthorities());
+    }
+  }, [dispatch, editStatus]);
 
   const CertificateIssueAuthirityInput = useSelector(
     (state) =>
@@ -92,9 +102,19 @@ const IssueAuthorityEdit = (props) => {
       <Form.Group as={Row} controlId="formPlaintextPassword">
         <Form.Label column sm="3"></Form.Label>
         <Col sm="9">
-          <Button variant="primary" type="submit">
-            Update
-          </Button>
+          {!isLoading && (
+            <Button variant="primary" type="submit">
+              Update
+            </Button>
+          )}
+          {isLoading && (
+            <Button variant="primary" type="submit" disabled={true}>
+              <span className="p-2">
+                <i className="fa fa-check"></i> Updating...
+              </span>
+              <span className="ml-3 spinner spinner-white "></span>
+            </Button>
+          )}
         </Col>
       </Form.Group>
     </Form>

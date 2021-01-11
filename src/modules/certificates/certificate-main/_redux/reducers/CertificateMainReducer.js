@@ -12,7 +12,6 @@ const initialState = {
   certificatesTypeOptionData: [],
   certificatesIssueByOptionData: [],
   vesselTypeOptionData: [],
-
   isLoading: false,
   //   productData: {
   //     id: 0,

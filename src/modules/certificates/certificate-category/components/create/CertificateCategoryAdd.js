@@ -82,17 +82,16 @@ const CertificateCategoryAdd = () => {
             }}
             setValue={setValue}
           />
-        </div>
+        </div>*/}
+
         <div className="form-group row">
           <div className="col-sm-10"></div>
         </div>
 
-        {loading && (
-          <button type="submit" className="btn btn-primary btn-lg" disabled={true}>
-            <span>
-              <i className="fa fa-check"></i> Submitting...
-            </span>
-            <span className="ml-3 spinner spinner-white"></span>
+        {isLoading && (
+          <button type="submit" class="btn btn-primary saveButton" disabled={true}>
+            <span className="p-2">Submitting...</span>
+            <span className="ml-3 spinner spinner-white "></span>
           </button>
         )}
 

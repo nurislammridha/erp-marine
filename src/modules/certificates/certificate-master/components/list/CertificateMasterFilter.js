@@ -7,14 +7,11 @@ import Modal from 'react-bootstrap/Modal';
 import Pdf from "react-to-pdf";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import ReactToPrint from "react-to-print-advanced";
-// import CertificateTypeMasterFilter from "./CertificateTypeMasterFilter";
-// import CertificateMasterList from "./CertificateMasterList";
-import { getCertificateMasterList } from "../_redux/actions/CertificateListAction";
-import CertificateMasterList from "../components/list/CertificateMasterList";
-import CertificateMasterAdd from "../components/create/CertificateMasterAdd";
-import CertificateCategoryFilter from "../../certificate-category/components/list/CertificateCategoryFilter";
+import CertificateTypeMasterFilter from "./CertificateTypeMasterFilter";
+import CertificateMasterFilterList from "./CertificateMasterFilterList";
+import { getCertificateMasterList } from "../../_redux/actions/CertificateListAction";
 
-const CertificateMasterContainer = () => {
+const CertificateMasterList = () => {
   const certificateMasterData = useSelector((state) => state.CertificateListReducer.certificateMasterList);
   console.log('certificateMasterData', certificateMasterData);
   const dispatch = useDispatch();
@@ -89,21 +86,20 @@ const CertificateMasterContainer = () => {
           <Button
             className="pl-3 pr-3 text-bold"
             variant="primary"
-             onClick={handleShow}
+            // onClick={handleShow}
           >
             Add New
           </Button>
-          <Modal size="md" 
-          show={show} 
-          onHide={handleClose}
+          <Modal size="md" show={show} 
+          // onHide={handleClose}
           >
             <Modal.Header closeButton>
               <Modal.Title>Create Certificate Master</Modal.Title>
             </Modal.Header>
-            <Modal.Body>{<CertificateMasterAdd />}</Modal.Body>
+            {/* <Modal.Body>{<CertificateCategoryAdd />}</Modal.Body> */}
             <Modal.Footer>
               <Button variant="secondary" 
-               onClick={handleClose}
+              // onClick={handleClose}
               >
                 Cancel
               </Button>
@@ -112,13 +108,12 @@ const CertificateMasterContainer = () => {
         </div>
         <div className="clearfix"></div>
       </div>
-
-       <CertificateCategoryFilter/>
-      <div className="container" id="id" ref={ref}>
-        <CertificateMasterList/>
+      
+          <div className="container" id="id" ref={ref}>
+        <CertificateMasterFilterList/>
       </div>
     </div>
   );
 };
 
-export default CertificateMasterContainer;
+export default CertificateMasterList;
