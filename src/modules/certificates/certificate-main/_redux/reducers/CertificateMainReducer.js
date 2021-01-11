@@ -5,10 +5,12 @@ const initialState = {
   certificates: [],
 
   certificatesPaginatedData: null,
+  certificateMainEdit: [],
   certificatesCategoryOptionData: [],
   certificatesNameOptionData: [],
   certificatesTypeOptionData: [],
   certificatesIssueByOptionData: [],
+  vesselTypeOptionData:[],
 
   isLoading: false,
   productData: {
@@ -77,6 +79,13 @@ const CertificateMainReducer = (state = initialState, action) => {
           action.payload
         ),
       };
+    case Types.GET_VESSEL_TYPE:
+      return {
+        ...state,
+        vesselTypeOptionData: getvesselType(
+          action.payload
+        ),
+      };
     case Types.GET_CERTIFICATE_NAME:
       return {
         ...state,
@@ -115,16 +124,17 @@ const CertificateMainReducer = (state = initialState, action) => {
           isLoading: false,
         };
       }
-
-    
-
     case Types.CERTIFICATE_MAIN_SUBMITTING:
       return {
         ...state,
         isLoading: action.payload,
       };
       
-    //SELF
+   case Types.GET_MAIN_CERTIFICATE_SINGLE_DATA: 
+   return{
+     ...state,
+     certificateMainEdit: action.payload
+   }
 
     case Types.CHANGE_CERTIFICATE_INPUT_UPDATE:
       const productEditData = { ...state.productEditData };
@@ -278,5 +288,17 @@ const getIssueName = (data) => {
   }
   return options;
 };
-
+const getvesselType = (data) => {
+  let options = [];
+  if (data) {
+    data.forEach((item) => {
+      let itemData = {
+        value: item.intID,
+        label: item.strName,
+      };
+      options.push(itemData);
+    });
+  }
+  return options;
+};
 export default CertificateMainReducer;

@@ -5,12 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Select from "react-select";
-import {
-  GetVesselTypeAction,
-  GetCountryDataAction,
-  AddVessel,
-  VesselEmptyMessage,
-} from "../../../../../domains/Vessel/_redux/actions/VesselAction";
 import { RHFInput } from "react-hook-form-input";
 import {
   deleteProductImagePreview,
@@ -20,6 +14,7 @@ import {
   getCertificateIssueBy,
   getCertificateName,
   MainCertificateCreateAction,
+  GetVesselTypeAction
 } from "../../_redux/actions/CertificateMainAction";
 import CertificateCategoryAddModal from "../../../certificate-category/components/create/CertificateCategoryAddModal";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
@@ -57,7 +52,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const certificateInfoInput = useSelector(
     (state) => state.certificateMainInfo.certificateMainInfo
   );
-  console.log('certificateInfoInput :>> ', certificateInfoInput);
+  
   const certificatesCategoryOption = useSelector(
     (state) => state.certificateMainInfo.certificatesCategoryOptionData
   );
@@ -72,43 +67,23 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
     (state) => state.certificateMainInfo.certificatesIssueByOptionData
   );
 
-  const vesselTypeList = useSelector(
-    (state) => state.vesselInfo.vesselTypeList
+  const vesselTypeOption = useSelector(
+    (state) => state.certificateMainInfo.vesselTypeOptionData
   );
-  // const countryList = useSelector((state) => state.vesselInfo.countryList);
-  let vesselType = [];
-  if (vesselTypeList.data) {
-    vesselTypeList.data.forEach((item) => {
-      let items = {
-        value: item.intID,
-        label: item.strName,
-      };
-      vesselType.push(items);
-    });
-  }
-
-  // let Country = [];
-  // if (countryList) {
-  //   countryList.data.forEach((item) => {
-  //     let items = {
-  //       value: item.intID,
-  //       label: item.strName,
-  //     };
-  //     Country.push(items);
-  //   });
-  // }
+  
+  
   useEffect(() => {
     dispatch(GetVesselTypeAction());
     dispatch(getCertificateCategory());
     dispatch(getCertificateType());
     dispatch(getCertificateIssueBy());
-    dispatch(getCertificateName());
-
-    
+    dispatch(getCertificateName()); 
   }, []);
 
+
+  
+
   const onSubmit = async (e) => {
-    alert();
     dispatch(MainCertificateCreateAction(certificateInfoInput));
   };
 
@@ -136,7 +111,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 <div className="col-lg-3">
                   <label className="form-label">Vessel</label>
                   <RHFInput
-                    as={<Select options={vesselType} />}
+                    as={<Select options={vesselTypeOption} />}
                     rules={{ required: false }}
                     name="intVesselID"
                     register={register}

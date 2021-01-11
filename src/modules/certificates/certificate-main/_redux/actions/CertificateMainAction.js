@@ -48,7 +48,7 @@ export const MainCertificateCreateAction = (certificateInfoInput) => (dispatch) 
         //  });
 
          
-         let postUrl = `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/details`;
+         let postUrl = `${process.env.REACT_APP_API_URL}certificate/details`;
          Axios
            .post(postUrl, certificateInfoInput, { headers: headers })
              .then(function (response) {
@@ -132,13 +132,30 @@ export const deleteProductImagePreview = () => (dispatch) => {
     dispatch({ type: Types.CHANGE_CERTIFICATE_INPUT, payload: data });
 };
 
+export const GetVesselTypeAction = () => async (dispatch) => {
+  let data = {};
+  const headers = {
+    "Content-Type": "application/json",
+  };
+  Axios
+    .get(`http://iapps.akij.net/asll/public/api/v1/asll/vessel/types`, {
+      headers: headers,
+    })
+    .then((res) => {
+      console.log('res',res);
+      let data = res.data.data;
+      dispatch({ type: Types.GET_VESSEL_TYPE, payload: data });
+    });
+};
+
 
 export const getCertificateCategory = (data) => (dispatch) => {
-alert();
+
     Axios
     .get(
-      `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/category`
+      `${process.env.REACT_APP_API_URL}certificate/category`
     )
+    
     .then((res) => {
      
       let data = res.data.data;
@@ -151,7 +168,7 @@ export const getCertificateName = (data) => (dispatch) => {
 
     Axios
     .get(
-      `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/certificateList`
+      `${process.env.REACT_APP_API_URL}certificate/certificateList`
     )
     .then((res) => {
       let data = res.data.data;
@@ -163,7 +180,7 @@ export const getCertificateName = (data) => (dispatch) => {
 export const getCertificateType = () => (dispatch) => {
     Axios
     .get(
-      `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/types`
+      `${process.env.REACT_APP_API_URL}certificate/types`
     )
     .then((res) => {
       let data = res.data.data;
@@ -175,7 +192,7 @@ export const getCertificateType = () => (dispatch) => {
 export const getCertificateIssueBy = (data) => (dispatch) => {
     Axios
     .get(
-      `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/issuingAuthority`
+      `${process.env.REACT_APP_API_URL}certificate/issuingAuthority`
     )
     .then((res) => {
       let data = res.data.data;
@@ -183,3 +200,15 @@ export const getCertificateIssueBy = (data) => (dispatch) => {
     });
    
 };
+export const getMainCertificateSingleData = (id) => (dispatch) => {
+    Axios.get(
+      `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/details/${id}`
+    ).then((res) => {
+      let data = res.data;
+      console.log("res :>> ", res);
+      dispatch({
+        type: Types.GET_MAIN_CERTIFICATE_SINGLE_DATA,
+        payload: data,
+      });
+    });
+  }; 
