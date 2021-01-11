@@ -3,35 +3,38 @@ import Axios from "axios";
 import { showToast } from "../../../../master/utils/ToastHelper";
 import { getEmployeeId } from "../../../../../app/modules/Auth/_redux/authCrud";
 
-
-export const handleChangeCertificateMasterInput = (name, value) => async(dispatch) => {
-    let employeeId= await getEmployeeId();
-    const formData = {
-        name: name,
-        value: value
-    };
-    console.log('formData',formData);
-    dispatch({
-        type: Types.CHANGE_CERTIFICATE_MASTER_INPUT,
-        payload: formData
-    });
+export const handleChangeCertificateMasterInput = (name, value) => async (
+  dispatch
+) => {
+  let employeeId = await getEmployeeId();
+  const formData = {
+    name: name,
+    value: value,
+  };
+  console.log("formData", formData);
+  dispatch({
+    type: Types.CHANGE_CERTIFICATE_MASTER_INPUT,
+    payload: formData,
+  });
 };
 
 export const getCertificateMasterList = (searchValue = "", status = "") => async (dispatch) => {
     let isActive = status == "" ? 1 : parseInt(status);
     let url = `http://10.17.2.31:8082/iMarineAPI/public/api/v1/certificate/certificateList`;
 
-    // console.log('url', url);
+  // console.log('url', url);
 
-    // if (searchValue !== "" || isActive !== "") {
-    //     url += `?search=${searchValue}&isActive=${isActive}`;
-    // }
+  // if (searchValue !== "" || isActive !== "") {
+  //     url += `?search=${searchValue}&isActive=${isActive}`;
+  // }
 
-    Axios.get(url)
-        .then((res) => {
-            console.log('res', res);
-            dispatch({ type: Types.GET_CERTIFICATE_MASTER_LIST, payload: res.data.data });
-        });
+  Axios.get(url).then((res) => {
+    console.log("res", res);
+    dispatch({
+      type: Types.GET_CERTIFICATE_MASTER_LIST,
+      payload: res.data.data,
+    });
+  });
 };
 
 export const certificateMasterSubmitAction = (certificateInfoInput) => (dispatch) => {
