@@ -79,7 +79,7 @@ const CertificateCategoryList = () => {
                         <tr>
                             <td>{item.strCertificateCategoriName}</td>
                             <td>{item.intActionBy}</td>
-                            <td>{item.isActive ? "Active" : "Inactive"}</td>
+                            <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
                             {/*<td>
                                 {" "}
                                 <Link to={``}>
