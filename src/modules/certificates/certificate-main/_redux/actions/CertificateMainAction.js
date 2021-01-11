@@ -169,7 +169,7 @@ export const GetVesselTypeAction = () => async (dispatch) => {
       headers: headers,
     })
     .then((res) => {
-      console.log('res',res);
+      console.log('resss',res);
       let data = res.data.data;
       dispatch({ type: Types.GET_VESSEL_TYPE, payload: data });
     });
