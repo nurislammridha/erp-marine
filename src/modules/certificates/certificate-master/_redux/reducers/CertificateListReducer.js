@@ -3,7 +3,7 @@ import * as Types from "../types/Type";
 const initialState = {
   certificateMasterInput: {
     strCertificateName: "",
-    strCertificateCategoriName: "",
+    strCertificateCategoryName: "",
     strVesselName: "",
     intCategoryID: "",
     intVesselID: null,

@@ -47,7 +47,7 @@ const CertificateMasterFilterList = () => {
             certificateMasterData.map((item, index) => (
               <tr>
                 <td>{item.strCertificateName}</td>
-                <td>{item.strCertificateCategoriName}</td>
+                <td>{item.strCertificateCategoryName}</td>
                 <td>{item.strVesselName}</td>
                 <td>{item.isActive ? "Active" : "Inactive"}</td>
                 <td>

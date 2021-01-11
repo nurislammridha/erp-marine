@@ -103,10 +103,10 @@ const certificatesCategoryOptionData = useSelector((state) => state.certificateM
                             rules={{ required: false }}
                             name="intCertificateCategoriId"
                             register={register}
-                            value={certificatesCategoryOptionData.strCertificateCategoriName}
+                            value={certificatesCategoryOptionData.strCertificateCategoryName}
                             setValue={setValue}
                             onChange={(option) => {
-                                certificateMainInfoChange("strCertificateCategoriName", option.label);
+                                certificateMainInfoChange("strCertificateCategoryName", option.label);
                                 certificateMainInfoChange("intCategoryID", option.value);
                               }}
                         />

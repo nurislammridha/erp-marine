@@ -103,11 +103,11 @@ const CertificateMasterAdd = () => {
               rules={{ required: false }}
               name="intCertificateCategoriId"
               register={register}
-              value={certificatesCategoryOptionData.strCertificateCategoriName}
+              value={certificatesCategoryOptionData.strCertificateCategoryName}
               setValue={setValue}
               onChange={(option) => {
                 certificateMainInfoChange(
-                  "strCertificateCategoriName",
+                  "strCertificateCategoryName",
                   option.label
                 );
                 certificateMainInfoChange("intCategoryID", option.value);

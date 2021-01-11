@@ -57,11 +57,11 @@ const CertificateCategoryAdd = () => {
           <Form.Control
             type="text"
             ref={register}
-            value={getCategoryInpuData.strCertificateCategoriName}
+            value={getCategoryInpuData.strCertificateCategoryName}
             placeholder="Type Category Name"
-            name="strCertificateCategoriName"
+            name="strCertificateCategoryName"
             onChange={(e) =>
-              categoryInputChange("strCertificateCategoriName", e.target.value)
+              categoryInputChange("strCertificateCategoryName", e.target.value)
             }
           />
         </div>

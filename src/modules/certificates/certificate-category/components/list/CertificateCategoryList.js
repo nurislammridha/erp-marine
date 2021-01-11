@@ -121,7 +121,7 @@ const CertificateCategoryList = () => {
                 {certificateCategoryData &&
                     certificateCategoryData.map((item, index) => (
                         <tr>
-                            <td>{item.strCertificateCategoriName}</td>
+                            <td>{item.strCertificateCategoryName}</td>
                             <td>{item.intActionBy}</td>
                             <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
                             {/*<td>

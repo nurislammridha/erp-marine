@@ -5,7 +5,7 @@ const initiliazeState = {
   isLoading: false,
   certificatesCategoryPaginatedData: null,
   certificateCategoryInput: {
-    strCertificateCategoriName: "",
+    strCertificateCategoryName: "",
     intActionBy: "1",
     isActive: "1",
   },

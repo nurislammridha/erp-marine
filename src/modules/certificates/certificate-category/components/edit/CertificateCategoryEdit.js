@@ -78,14 +78,14 @@ const CertificateCategoryEdit = (props) => {
             <Form.Control
               type="text"
               placeholder="Certificate Category name"
-              value={CertificateCategoryInput.strCertificateCategoriName}
-              name="strCertificateCategoriName"
+              value={CertificateCategoryInput.strCertificateCategoryName}
+              name="strCertificateCategoryName"
               ref={register({
                 required: false,
                 maxLength: 100,
               })}
               onChange={(e) =>
-                handleChangeTextInput("strCertificateCategoriName", e.target.value)
+                handleChangeTextInput("strCertificateCategoryName", e.target.value)
               }
             />
           </Col>
