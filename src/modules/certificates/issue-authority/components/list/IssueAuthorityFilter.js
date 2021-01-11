@@ -43,6 +43,7 @@ const IssueAuthorityFilter = () => {
       <div className="form-group row ml-2">
         <div className="col-lg-3 col-md-6 col-10">
           <Form.Control
+            className="formHeight"
             type="text"
             placeholder="Search"
             value={search}
@@ -56,10 +57,12 @@ const IssueAuthorityFilter = () => {
             as={Row}
             controlId="formPlaintextPassword"
           >
-            <Form.Label className="mt-2">Status</Form.Label>
+            <Form.Label className="formFont mt-2">Status</Form.Label>
             <Col sm="9">
               <RHFInput
-                as={<Select options={action} />}
+                as={
+                  <Select options={action} className="formSelect formHeight" />
+                }
                 rules={{ required: false }}
                 name="isActive"
                 register={register}

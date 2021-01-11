@@ -35,6 +35,7 @@ export const getIssuingAuthorities = (
   let isActive = status == "" ? "" : parseInt(status);
 
   let url = `http://192.168.206.1:82/iMarineAPI/public/api/v1/certificate/issuingAuthority`;
+  // let url = `${process.env.REACT_APP_API_URL}certificate/issuingAuthority`;
   // let url = "";
   // url = isPublic
   //   ? `${process.env.REACT_APP_API_URL}certificate/issuingAuthority`
@@ -245,7 +246,8 @@ export const issueAuthoritySubmitAction = (CertificateIssueAuthirityInput) => (
     payload: responseList,
   });
 
-  let postUrl = `${process.env.REACT_APP_API_URL}certificate/issuingAuthority`;
+  let postUrl = `http://192.168.206.1:82/iMarineAPI/public/api/v1/certificate/issuingAuthority`;
+  // let postUrl = `${process.env.REACT_APP_API_URL}certificate/issuingAuthority`;
   Axios.post(postUrl, CertificateIssueAuthirityInput)
     .then(function(response) {
       responseList.data = response.data;
@@ -302,6 +304,7 @@ export const issueAuthorityEditAction = (
   });
 
   let editUrl = `http://192.168.206.1:82/iMarineAPI/public/api/v1/certificate/issuingAuthority/${intIssuingAuthorityID}`;
+  // let editUrl = `${process.env.REACT_APP_API_URL}certificate/issuingAuthority/${intIssuingAuthorityID}`;
   Axios.put(editUrl, CertificateIssueAuthirityInput)
     .then(function(response) {
       responseList.data = response.data;
