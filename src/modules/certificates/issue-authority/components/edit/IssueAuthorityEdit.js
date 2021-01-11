@@ -19,11 +19,11 @@ const IssueAuthorityEdit = (props) => {
   const action = [
     {
       label: "Active",
-      value: 1,
+      value: "1",
     },
     {
       label: "In Active",
-      value: 2,
+      value: "0",
     },
   ];
 

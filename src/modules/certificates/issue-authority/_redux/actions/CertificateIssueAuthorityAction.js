@@ -18,9 +18,10 @@ export const handleChangeCertificateIssueAuthorityInput = (name, value) => (
 };
 
 export const getIssuingAuthorities = (
-  page,
-  searchText = null,
-  isPublic = false
+  // page,
+  searchText = "",
+  // isPublic = false,
+  status = ""
 ) => async (dispatch) => {
   let response = {
     issuingAuthorities: [],
@@ -30,6 +31,9 @@ export const getIssuingAuthorities = (
     errors: [],
   };
   dispatch({ type: Types.GET_ISSUING_AUTHORITY_LIST, payload: response });
+
+  let isActive = status == "" ? 1 : parseInt(status);
+
   let url = `http://192.168.206.1:82/iMarineAPI/public/api/v1/certificate/issuingAuthority`;
   // let url = "";
   // url = isPublic
@@ -42,6 +46,9 @@ export const getIssuingAuthorities = (
   //   url = `${process.env.REACT_APP_API_URL}products/view/search?search=${searchText}`;
   // }
 
+  if (searchText !== "" || isActive !== "") {
+    url += `?search=${searchText}&isActive=${isActive}`;
+  }
   try {
     await Axios.get(url)
       .then((res) => {
