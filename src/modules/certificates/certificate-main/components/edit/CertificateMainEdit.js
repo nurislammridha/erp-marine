@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams, withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Select from "react-select";
-import {
-  GetVesselTypeAction,
-  GetCountryDataAction,
-  AddVessel,
-  VesselEmptyMessage,
-} from "../../../../../domains/Vessel/_redux/actions/VesselAction";
 import { RHFInput } from "react-hook-form-input";
 import {
   deleteProductImagePreview,
@@ -20,21 +13,24 @@ import {
   getCertificateIssueBy,
   getCertificateName,
   MainCertificateCreateAction,
+  GetVesselTypeAction,
   getMainCertificateSingleData,
 } from "../../_redux/actions/CertificateMainAction";
 import CertificateCategoryAddModal from "../../../certificate-category/components/create/CertificateCategoryAddModal";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 import CertificateCategoryAdd from "../../../certificate-category/components/create/CertificateCategoryAdd";
 import CertificateTypeAdd from "../../../certificate-types/components/create/CertificateTypeAdd";
+import { useParams } from "react-router-dom";
 
-const CertificateMainEdit = withRouter(({ history, props }) => {
-  // const { id } = useParams();
+const CertificateMainEdit = () => {
+  const { id } = useParams();
   const { register, handleSubmit, errors, setValue } = useForm();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState([]);
   toast.configure();
 
+  // self work
   const [imagePreviewUrl, setImagePreviewUrl] = React.useState(null);
   //input change with redux
   const certificateMainInfoChange = (name, value, e = null) => {
@@ -52,8 +48,12 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
   const addStatus = useSelector((state) => state.vesselInfo.addStatus);
   const addMessage = useSelector((state) => state.vesselInfo.addMessage);
   const serverErrors = useSelector((state) => state.certificateMainInfo.errors);
+
   const certificateInfoInput = useSelector(
     (state) => state.certificateMainInfo.certificateMainInfo
+  );
+  const certificateMainEditInfo = useSelector(
+    (state) => state.certificateMainInfo.certificateMainEdit
   );
   const certificatesCategoryOption = useSelector(
     (state) => state.certificateMainInfo.certificatesCategoryOptionData
@@ -67,20 +67,10 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
   const certificatesIssueByOption = useSelector(
     (state) => state.certificateMainInfo.certificatesIssueByOptionData
   );
-  
-  const vesselTypeList = useSelector(
-    (state) => state.vesselInfo.vesselTypeList
+
+  const vesselTypeOption = useSelector(
+    (state) => state.certificateMainInfo.vesselTypeOptionData
   );
-  let vesselType = [];
-  if (vesselTypeList.data) {
-    vesselTypeList.data.forEach((item) => {
-      let items = {
-        value: item.intID,
-        label: item.strName,
-      };
-      vesselType.push(items);
-    });
-  }
 
   useEffect(() => {
     dispatch(GetVesselTypeAction());
@@ -88,6 +78,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
     dispatch(getCertificateType());
     dispatch(getCertificateIssueBy());
     dispatch(getCertificateName());
+    dispatch(getMainCertificateSingleData(id));
   }, []);
 
   const onSubmit = async (e) => {
@@ -99,7 +90,6 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
   const [showCertificateModal, setShowCertificateModal] = useState(false);
   const [showIssuedByModal, setShowIssuedByModal] = useState(false);
 
-  
   return (
     <>
       <div className="container">
@@ -119,7 +109,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                 <div className="col-lg-3">
                   <label className="form-label">Vessel</label>
                   <RHFInput
-                    as={<Select options={vesselType} />}
+                    as={<Select options={vesselTypeOption} />}
                     rules={{ required: false }}
                     name="intVesselID"
                     register={register}
@@ -750,7 +740,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
 
               <div className="form-group row">
                 <div className="col-sm-10">
-                  <a
+                  {/* <a
                     onClick={() => {
                       history.push("/certificates-main/list");
                     }}
@@ -758,7 +748,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                     <button type="button" class="btn btn-secondary btn-lg mr-2">
                       Back
                     </button>
-                  </a>
+                  </a> */}
                   {/* <button type="submit" class="btn btn-primary btn-lg">
                     Next
                     </button> */}
@@ -791,6 +781,6 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
       </div>
     </>
   );
-});
+};
 
 export default CertificateMainEdit;

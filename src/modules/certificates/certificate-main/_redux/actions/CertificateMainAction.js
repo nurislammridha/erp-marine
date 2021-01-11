@@ -72,10 +72,9 @@ export const MainCertificateCreateAction = (certificateInfoInput) => (
   //    type: Types.CERTIFICATE_MAIN_SUBMITTING,
   //    payload: responseList,
   //  });
-  let postUrl = `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/details`;
+  let postUrl = `http://10.17.2.85:8080/IMarineApi/public/api/v1/certificate/details`;
   Axios.post(postUrl, certificateInfoInput)
     .then(function(response) {
-      console.log("response :>> ", response);
       responseList.data = response.data;
       responseList.isLoading = false;
       responseList.status = response.data.status;
@@ -117,7 +116,7 @@ export const getCertificateMainListAction = (
   };
   dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
   let url = "";
-  url = `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/details?isPaginated=1`;
+  url = `http://10.17.2.85:8080/IMarineApi/public/api/v1/certificate/details?isPaginated=1`;
 
   if (searchText !== null) {
     // url += `&paginateNo=${page}`;
@@ -177,7 +176,7 @@ export const GetVesselTypeAction = () => async (dispatch) => {
 
 
 export const getCertificateCategory = (data) => (dispatch) => {
-
+  let url = `${process.env.REACT_APP_API_URL}certificate/category`;
     Axios
     .get(
       `${process.env.REACT_APP_API_URL}certificate/category`
@@ -228,14 +227,15 @@ export const getCertificateIssueBy = (data) => (dispatch) => {
   
 };
 export const getMainCertificateSingleData = (id) => (dispatch) => {
-    Axios.get(
-      `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/details/${id}`
-    ).then((res) => {
-      let data = res.data;
-      console.log("res :>> ", res);
-      dispatch({
-        type: Types.GET_MAIN_CERTIFICATE_SINGLE_DATA,
-        payload: data,
-      });
-    });
+  Axios.get(`${process.env.REACT_APP_API_URL}certificate/details/${id}`)
+    .then(
+      (res) => {
+        let data = res.data.data;
+        console.log("res edit data :>> ", data);
+        dispatch({
+          type: Types.GET_MAIN_CERTIFICATE_SINGLE_DATA,
+          payload: data,
+        });
+      }
+    );
   }; 

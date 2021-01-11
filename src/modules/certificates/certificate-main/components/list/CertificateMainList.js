@@ -5,7 +5,7 @@ import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
 import { getCertificateMainListAction } from "../../_redux/actions/CertificateMainAction";
 
-const CertificateMainList = withRouter(({history,props}) => {
+const CertificateMainList = withRouter(({ history, props }) => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
@@ -37,9 +37,7 @@ const CertificateMainList = withRouter(({history,props}) => {
     }
   };
 
-  const certificateDelete=()=>{
-
-  }
+  const certificateDelete = () => {};
 
   return (
     <>
@@ -111,13 +109,15 @@ const CertificateMainList = withRouter(({history,props}) => {
                         <td>{certificate.dteExtendedUntil}</td>
                         <td>{certificate.dteExtendedUntil}</td>
                         <td>
-                          {/* <button className="btn btn-icon btn-light btn-hover-info btn-sm">
-                            <Link to={`/certificates-main/edit/${certificate.intCertificateDetailsID}`}>
+                          <button className="btn btn-icon btn-light btn-hover-info btn-sm">
+                            <Link
+                              to={`/certificates-main/edit/${certificate.intCertificateDetailsID}`}
+                            >
                               <i className="fa fa-edit"></i>
                             </Link>
-                          </button> */}
+                          </button>
                           &nbsp;&nbsp;&nbsp;
-                          <a
+                          <button
                             className="btn btn-icon btn-light btn-hover-danger btn-sm"
                             onClick={() => {
                               if (
@@ -129,7 +129,7 @@ const CertificateMainList = withRouter(({history,props}) => {
                             }}
                           >
                             <i className="fa fa-trash"></i>
-                          </a>
+                          </button>
                         </td>
                       </tr>
                     ))}

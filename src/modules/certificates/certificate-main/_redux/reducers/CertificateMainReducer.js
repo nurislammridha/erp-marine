@@ -94,7 +94,6 @@ const CertificateMainReducer = (state = initialState, action) => {
         certificatesNameOptionData: getCertificateName(action.payload),
       };
     case Types.GET_CERTIFICATE_TYPE:
-      console.log("action.payload type :>> ", action.payload);
       return {
         ...state,
         certificatesTypeOptionData: getCertificateTypeName(action.payload),
@@ -132,9 +131,10 @@ const CertificateMainReducer = (state = initialState, action) => {
         isLoading: action.payload,
       };
     case Types.GET_MAIN_CERTIFICATE_SINGLE_DATA: 
+      console.log('action single data :>> ', action.payload);
       return {
         ...state,
-        certificateSingleData: action.payload
+        certificateMainInfo: action.payload,
       };
 
     case Types.CHANGE_CERTIFICATE_INPUT_UPDATE:
