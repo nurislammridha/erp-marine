@@ -9,6 +9,7 @@ export const handleCertificateCategoryInput = (name, value) => (dispatch) => {
   };
   dispatch({ type: Types.CERTIFICATE_CATEGORY_CREATE, payload: categoryData });
 };
+
 export const certificatecategorySubmitAction = (getCategoryInpuData) => (dispatch) => {
 
   let responseList = {
@@ -21,7 +22,7 @@ export const certificatecategorySubmitAction = (getCategoryInpuData) => (dispatc
       payload: responseList,
   });
 
-  let postUrl = `http://10.3.203.16:82/iMarineAPI/public/api/v1/certificate/category`;
+  let postUrl = `http://10.17.2.189:8080/api/v1/certificate/category`;
   axios
       .post(postUrl, getCategoryInpuData)
       .then(function (response) {
@@ -36,7 +37,6 @@ export const certificatecategorySubmitAction = (getCategoryInpuData) => (dispatc
                   payload: responseList,
               });
           } else {
-              console.log('error data', response.data);
               showToast("error", response.data.message);
           }
       })
