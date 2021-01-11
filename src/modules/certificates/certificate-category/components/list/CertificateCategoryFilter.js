@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Form, Button, Image, Col, Row, Table } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import { useForm } from "react-hook-form";
@@ -31,6 +31,9 @@ const CertificateCategoryFilter = () => {
         dispatch(getCertificateCategoryListData(value, type));
 
     };
+    useEffect(() => {
+       dispatch(getCertificateCategoryListData());
+    }, [])
     return (
         <div className="container">
             <form className="form form-label-right" method="post">

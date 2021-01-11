@@ -8,6 +8,7 @@ const initiliazeState = {
       intActionBy: '1',
       isActive: '1'
   },
+  editStatus: false,
 };
 
 function CertificateCategoryReducer(state = initiliazeState, action) {
@@ -38,6 +39,13 @@ function CertificateCategoryReducer(state = initiliazeState, action) {
           return {
               ...state,
               certificateCategoryInput: action.payload,
+          };
+
+        case Types.EDIT_CERTIFICATE_CATEGORY:
+            return {
+              ...state,
+              editStatus: action.payload.status,
+              isLoading:action.payload.isLoading
           };
 
 

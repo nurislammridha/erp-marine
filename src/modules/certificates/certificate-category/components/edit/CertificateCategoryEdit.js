@@ -7,13 +7,16 @@ import { useHistory, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { 
-    certificatecategorySubmitAction,
+    certificateCategoryEditAction,
     setCertificateCategoryEditValue,
     handleCertificateCategoryInput,
+    getCertificateCategoryListData,
 } from "../../_redux/actions/CertificateCategoryAction";
+import { typeOf } from "react-is";
 
 
 const CertificateCategoryEdit = (props) => {
+  console.log('props', props);
     const history = useHistory();
     const { register, handleSubmit, errors, setValue } = useForm();
     const dispatch = useDispatch();
@@ -21,32 +24,52 @@ const CertificateCategoryEdit = (props) => {
     const action = [
         {
           label: "Active",
-          value: 0,
+          value: "1",
         },
         {
           label: "In Active",
-          value: 1,
+          value: "0",
         },
       ];
 
+      {/*useEffect(() => {
+        dispatch(setCertificateCategoryEditValue(props.editData));
+      }, []);*/}
+
       useEffect(() => {
-        // dispatch(setCertificateCategoryEditValue(props.editData));
-      }, []);
+        dispatch(setCertificateCategoryEditValue(props.editData));
+      }, [dispatch]);
 
       const CertificateCategoryInput = useSelector(
         (state) =>
           state.CertificateCategoryReducer.certificateCategoryInput
       );
+
+      const status = useSelector((state) => state.CertificateCategoryReducer.editStatus);
+      const isLoading = useSelector((state) => state.CertificateCategoryReducer.isLoading);
+
       const handleChangeTextInput = (name, value) => {
         dispatch(handleCertificateCategoryInput(name, value));
       };
 
-      const submiteCategory = (data) => {
-        dispatch(certificatecategorySubmitAction(CertificateCategoryInput));
+      const updateCertificateCategory = (data) => {
+        dispatch(
+          certificateCategoryEditAction(
+          CertificateCategoryInput,
+          props.editData.intCategoryID
+      )
+        );
       };
 
+      useEffect(() => {
+        if(status){
+            dispatch(getCertificateCategoryListData());
+        }
+        
+    }, [status])
+
     return (
-        <Form onSubmit={handleSubmit(submiteCategory)} method="post">
+        <Form onSubmit={handleSubmit(updateCertificateCategory)} method="post">
         <Form.Group as={Row} controlId="formAuthorityName">
           <Form.Label column sm="3">
           Certificate Category Name:
@@ -82,12 +105,44 @@ const CertificateCategoryEdit = (props) => {
             />
           </Col>
         </Form.Group> */}
+
+        <Form.Group as={Row} controlId="formPlaintextPassword">
+        <Form.Label column sm="3">
+          Status:
+        </Form.Label>
+        <Col sm="9">
+          <RHFInput
+            as={<Select options={action} />}
+            rules={{ required: false }}
+            name="isActive"
+            register={register}
+            value={action.label}
+            onChange={(e) => handleChangeTextInput("isActive", e.value)}
+            setValue={setValue}
+          />
+        </Col>
+      </Form.Group>
+
         <Form.Group as={Row} controlId="formPlaintextPassword">
           <Form.Label column sm="3"></Form.Label>
           <Col sm="9">
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+
+            {/*<Button variant="primary" type="submit">
+              Update
+            </Button>*/}
+
+            {isLoading && (
+              <button type="submit" class="btn btn-primary saveButton" disabled={true}>
+                <span className="p-2"><i className="fa fa-check"></i>  Updating...</span>
+                <span className="ml-3 spinner spinner-white "></span>
+              </button>
+            )}
+    
+            {!isLoading && (
+              <button type="submit" class="btn btn-primary saveButton">
+                <span>Update</span>
+              </button>
+            )}
           </Col>
         </Form.Group>
       </Form>
