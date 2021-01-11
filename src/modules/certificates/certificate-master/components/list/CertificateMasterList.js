@@ -108,9 +108,8 @@ const CertificateMasterList = () => {
         </div>
         <div className="clearfix"></div>
       </div>
-
-      <CertificateTypeMasterFilter/>
-      <div className="container" id="id" ref={ref}>
+      
+          <div className="container" id="id" ref={ref}>
         <CertificateMasterFilterList/>
       </div>
     </div>

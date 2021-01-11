@@ -75,7 +75,6 @@ const CertificateMasterFilterList = () => {
                                     onClick={() => {
                                     handleEdit(item);
                                     }}></i>
-
                                 </td>
                             </tr>
                         ))}
