@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import Modal from 'react-bootstrap/Modal';
+import { useDispatch, useSelector } from "react-redux";
+import { getCertificateCategoryListData } from '../../_redux/actions/CertificateCategoryAction';
 import CertificateCategoryAdd from './CertificateCategoryAdd';
 
 const CertificateCategoryAddModal = (props) => {
     const { show, handleClose, handleShow } = props;
+ 
 
     return (
         <Modal
