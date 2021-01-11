@@ -1,79 +1,123 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button, Image, Col, Row, Table, Dropdown } from "react-bootstrap";
-import Modal from 'react-bootstrap/Modal';
+import {
+  Form,
+  Button,
+  Image,
+  Col,
+  Row,
+  Table,
+  Dropdown,
+} from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import CertificateCategoryEdit from '../edit/CertificateCategoryEdit'
-import { getCertificateCategoryListData, setCertificateCategoryEditValue } from "../../_redux/actions/CertificateCategoryAction";
+import CertificateCategoryEdit from "../edit/CertificateCategoryEdit";
+import {
+  getCertificateCategoryListData,
+  setCertificateCategoryEditValue,
+} from "../../_redux/actions/CertificateCategoryAction";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
-
-
+import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
+import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 
 const CertificateCategoryList = () => {
+  const dispatch = useDispatch();
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [editItem, setEditItem] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
 
-    const dispatch = useDispatch();
-    const certificateCategoryData = useSelector((state) => state.CertificateCategoryReducer.certificateCategoryList);
+  const certificateCategoryData = useSelector(
+    (state) => state.CertificateCategoryReducer.certificateCategoryList
+  );
+  console.log("certificateCategoryData", certificateCategoryData);
+  const modalEditStatus = useSelector(
+    (state) => state.CertificateCategoryReducer.editStatus
+  );
+  const isLoading = useSelector(
+    (state) => state.CertificateCategoryReducer.isLoading
+  );
 
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    const [editItem, setEditItem] = useState({});
+  const certificatesCategoryPaginatedData = useSelector(
+    (state) =>
+      state.CertificateCategoryReducer.certificatesCategoryPaginatedData
+  );
 
-    const modalEditStatus = useSelector(
-        (state) => state.CertificateCategoryReducer.editStatus
-    );
+  useEffect(() => {
+    dispatch(getCertificateCategoryListData(currentPage));
+  }, [dispatch, currentPage]);
 
-    // const status = useSelector(
-    //     (state) => state.CertificateCategoryReducer.editStatus
-    // );
+  const changePage = (data) => {
+    setCurrentPage(data.page);
+    dispatch(getCertificateCategoryListData(data.page));
+  };
+  // const status = useSelector(
+  //     (state) => state.CertificateCategoryReducer.editStatus
+  // );
 
-    // useEffect(() => {
-    //     if(status){
-    //         handleClose();
-    //     }
-       
-    // }, []);
+  // useEffect(() => {
+  //     if(status){
+  //         handleClose();
+  //     }
 
+  // }, []);
 
-    useEffect(() => {
-        if (modalEditStatus) {
-          setShow(false);
-        }
-      }, [modalEditStatus]);
+  useEffect(() => {
+    if (modalEditStatus) {
+      setShow(false);
+    }
+  }, [modalEditStatus]);
 
-    const handleEdit = (editItem) => {
-        setEditItem(editItem);
-        setShow(true);
-    };
+  const handleEdit = (editItem) => {
+    setEditItem(editItem);
+    setShow(true);
+  };
 
-    // const handleEdit = (data) => {
-       
-    //     setEditItem(data);
-    //     setShow(true);
-    //     dispatch(setCertificateCategoryEditValue(data));
-    // };
+  // const handleEdit = (data) => {
 
-    return (
-        <div className="react-bootstrap-table table-responsive">
-        <SimpleModal
-            show={show}
-            handleClose={() => handleClose()}
-            modalTitle={"Edit Certificate Category"}
-        >
-                          
-            <CertificateCategoryEdit  editData={editItem}/>
-                    
-        </SimpleModal>
+  //     setEditItem(data);
+  //     setShow(true);
+  //     dispatch(setCertificateCategoryEditValue(data));
+  // };
+
+  return (
+    <>
+      <div className="float-right">
+        <PaginationLaravel
+          isDescription={true}
+          changePage={changePage}
+          data={certificatesCategoryPaginatedData}
+        />
+      </div>
+      {isLoading && <LoadingSpinner text="Loading Certificate Category..." />}
+      {!isLoading && certificateCategoryData.length === 0 && (
+        <div className="alert alert-warning">
+          Sorry ! No Certificate category Found.
+        </div>
+      )}
+      {!isLoading && certificateCategoryData.length > 0 && (
+        <>
+          <div className="react-bootstrap-table table-responsive">
+            <SimpleModal
+              show={show}
+              handleClose={() => handleClose()}
+              modalTitle={"Edit Certificate Category"}
+            >
+                            
+              <CertificateCategoryEdit editData={editItem} />
+                          
+            </SimpleModal>
             <table className="table mt-2 tbl-standard" id="table-to-xls">
-                <thead>
-                    <tr>
-                        <th scope="col">Certificate Type</th>
-                        <th scope="col">Action By</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
+              <thead>
+                <tr>
+                  <th scope="col">Certificate Type</th>
+                  <th scope="col">Action By</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
                 {certificateCategoryData &&
                     certificateCategoryData.map((item, index) => (
                         <tr>
@@ -88,21 +132,25 @@ const CertificateCategoryList = () => {
                                 <i className="far fa-edit ml-2" onClick={handleShow}></i>
 
                             </td>*/}
-                            <td>
-                            <a
-                              className="btn btn-icon btn-light btn-hover-info btn-sm"
-                              onClick={() => {
-                                handleEdit(item);
-                              }}
-                            >
-                              <i className="fa fa-edit"></i>
-                            </a>
-                          </td>
-                        </tr>
-                    ))}
-                </tbody>
+                      <td>
+                        <a
+                          className="btn btn-icon btn-light btn-hover-info btn-sm"
+                          onClick={() => {
+                            handleEdit(item);
+                          }}
+                        >
+                          <i className="fa fa-edit"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
             </table>
-
+            <PaginationLaravel
+              isDescription={true}
+              changePage={changePage}
+              data={certificatesCategoryPaginatedData}
+            />
             {/*<Modal size="lg" show={show} onHide={handleClose}>
 
                 <Modal.Header closeButton>
@@ -115,8 +163,11 @@ const CertificateCategoryList = () => {
               </Button>
                 </Modal.Footer>
                             </Modal>*/}
-        </div>
-    );
+          </div>
+        </>
+      )}
+    </>
+  );
 };
 
 export default CertificateCategoryList;
