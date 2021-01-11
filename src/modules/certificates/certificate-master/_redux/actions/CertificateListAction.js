@@ -18,15 +18,12 @@ export const handleChangeCertificateMasterInput = (name, value) => async(dispatc
 };
 
 export const getCertificateMasterList = (searchValue = "", status = "") => async (dispatch) => {
-    let isActive = status == "" ? 1 : parseInt(status);
+    let isActive = status == "" ? "" : parseInt(status);
     let url = `http://10.17.2.31:8082/iMarineAPI/public/api/v1/certificate/certificateList`;
 
-    // console.log('url', url);
-
-    // if (searchValue !== "" || isActive !== "") {
-    //     url += `?search=${searchValue}&isActive=${isActive}`;
-    // }
-
+    if (searchValue !== "" || isActive !== "") {
+        url += `?search=${searchValue}&isActive=${isActive}`;
+    }
     Axios.get(url)
         .then((res) => {
             console.log('res', res);

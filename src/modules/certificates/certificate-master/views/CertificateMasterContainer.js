@@ -12,7 +12,7 @@ import ReactToPrint from "react-to-print-advanced";
 import { getCertificateMasterList } from "../_redux/actions/CertificateListAction";
 import CertificateMasterList from "../components/list/CertificateMasterList";
 import CertificateMasterAdd from "../components/create/CertificateMasterAdd";
-import CertificateCategoryFilter from "../../certificate-category/components/list/CertificateCategoryFilter";
+import CertificateMasterFilter from "../components/list/CertificateMasterFilter";
 
 const CertificateMasterContainer = () => {
   const certificateMasterData = useSelector((state) => state.CertificateListReducer.certificateMasterList);
@@ -113,7 +113,7 @@ const CertificateMasterContainer = () => {
         <div className="clearfix"></div>
       </div>
 
-       <CertificateCategoryFilter/>
+       <CertificateMasterFilter/>
       <div className="container" id="id" ref={ref}>
         <CertificateMasterList/>
       </div>

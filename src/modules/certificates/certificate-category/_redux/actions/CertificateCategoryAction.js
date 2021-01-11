@@ -60,7 +60,8 @@ export const getCertificateCategoryListData = (searchValue = "", status = "") =>
 
     if (searchValue !== "" || isActive !== "") {
         url += `?search=${searchValue}&isActive=${isActive}`;
-    }  
+    }
+    console.log('url', url);
 
     axios.get(url)
         .then((res) => {

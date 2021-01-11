@@ -13,8 +13,10 @@ import { getCertificateCategory } from "../../../certificate-main/_redux/actions
 const CertificateMasterAdd = () => {
     const history = useHistory();
     const { register, handleSubmit, errors, setValue } = useForm();
+    
+    const isLoading = useSelector((state) => state.CertificateCategoryReducer.isLoading);
     const CertificateMasterInput = useSelector((state) => state.CertificateListReducer.certificateMasterInput);
-    const certificatesCategoryOptionData = useSelector((state) => state.certificateMainInfo.certificatesCategoryOptionData);
+    const CertificatesCategoryOptionData = useSelector((state) => state.certificateMainInfo.certificatesCategoryOptionData);
     console.log('CertificateMasterInput',CertificateMasterInput);
     const dispatch = useDispatch();
     const statusOptions = [
@@ -94,11 +96,11 @@ const CertificateMasterAdd = () => {
                     <div className="col-sm-6">
                         <label className="form-label">Category Name</label>
                         <RHFInput
-                            as={<Select options={certificatesCategoryOptionData} />}
+                            as={<Select options={CertificatesCategoryOptionData} />}
                             rules={{ required: false }}
                             name="intCertificateCategoriId"
                             register={register}
-                            value={certificatesCategoryOptionData.strCertificateCategoriName}
+                            value={CertificatesCategoryOptionData.strCertificateCategoriName}
                             setValue={setValue}
                             onChange={(option) => {
                                 certificateMainInfoChange("strCertificateCategoriName", option.label);
@@ -111,22 +113,19 @@ const CertificateMasterAdd = () => {
                 <div className="form-group row">
                     <div className="col-sm-10"></div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg">
-                    <span>Submit</span>
-                </button>
 
-                {/* {loading && (
-                    <button type="submit" class="btn btn-primary btn-lg" disabled={true}>
-                        <span>Submitting...</span>
-                        <span className="ml-3 spinner spinner-white"></span>
-                    </button>
+                {isLoading && (
+                <button type="submit" class="btn btn-primary saveButton" disabled={true}>
+                    <span className="p-2"><i className="fa fa-check"></i>  Submitting...</span>
+                    <span className="ml-3 spinner spinner-white "></span>
+                </button>
                 )}
 
-                {!loading && (
-                    <button type="submit" class="btn btn-primary btn-lg">
-                        <span>Submit</span>
-                    </button>
-                )} */}
+                {!isLoading && (
+                <button type="submit" class="btn btn-primary saveButton">
+                    <span>Submit</span>
+                </button>
+                )}
             </form>
         </>
     );

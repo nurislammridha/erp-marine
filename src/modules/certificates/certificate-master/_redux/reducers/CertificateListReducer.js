@@ -25,7 +25,6 @@ const CertificateMasterReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case Types.CHANGE_CERTIFICATE_MASTER_INPUT:
-            console.log('action.payload.value',action.payload);
             const certificateMasterInputData = { ...state.certificateMasterInput };
             certificateMasterInputData[action.payload.name] = action.payload.value;
             return {
@@ -47,14 +46,12 @@ const CertificateMasterReducer = (state = initialState, action) => {
                 }
 
         case Types.GET_CERTIFICATE_MASTER_LIST:
-            console.log('action.payload,', action.payload);
             return {
                 ...state,
                 certificateMasterList: action.payload,
             };
 
         case Types.CREATE_CERTIFICATE_MASTER_LIST:
-            console.log('action.payload,', action.payload);
             return {
                 ...state,
                 status: action.payload.status

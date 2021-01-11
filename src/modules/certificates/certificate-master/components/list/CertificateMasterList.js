@@ -17,7 +17,6 @@ const CertificateMasterList = () => {
 
     const dispatch = useDispatch();
     const certificateMasterData = useSelector((state) => state.CertificateListReducer.certificateMasterList);
-    console.log('certificateMasterData', certificateMasterData);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
