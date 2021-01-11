@@ -29,7 +29,8 @@ const IssueAuthorityList = (props) => {
   );
 
   useEffect(() => {
-    dispatch(getIssuingAuthorities(currentPage));
+    // dispatch(getIssuingAuthorities(currentPage));
+    dispatch(getIssuingAuthorities());
 
     if (modalEditStatus) {
       setShow(false);
