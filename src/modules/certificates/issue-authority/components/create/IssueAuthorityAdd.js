@@ -47,6 +47,7 @@ const IssueAuthorityAdd = () => {
 
   const submiteIssuingAuthority = (data) => {
     dispatch(issueAuthoritySubmitAction(CertificateIssueAuthirityInput));
+    dispatch(getIssuingAuthorities());
   };
 
   return (

@@ -37,7 +37,7 @@ export const getIssuingAuthorities = (
   let url = `http://192.168.206.1:82/iMarineAPI/public/api/v1/certificate/issuingAuthority`;
   // let url = "";
   // url = isPublic
-  //   ? `${process.env.REACT_APP_API_URL}products/view/all`
+  //   ? `${process.env.REACT_APP_API_URL}certificate/issuingAuthority`
   //   : `${process.env.REACT_APP_API_URL}products`;
 
   // if (searchText === null) {
@@ -245,7 +245,7 @@ export const issueAuthoritySubmitAction = (CertificateIssueAuthirityInput) => (
     payload: responseList,
   });
 
-  let postUrl = `http://192.168.206.1:82/iMarineAPI/public/api/v1/certificate/issuingAuthority`;
+  let postUrl = `${process.env.REACT_APP_API_URL}certificate/issuingAuthority`;
   Axios.post(postUrl, CertificateIssueAuthirityInput)
     .then(function(response) {
       responseList.data = response.data;

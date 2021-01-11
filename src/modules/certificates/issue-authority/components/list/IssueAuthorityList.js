@@ -70,6 +70,7 @@ const IssueAuthorityList = (props) => {
       <table className="table mt-2 tbl-standard" id="table-to-xls">
         <thead>
           <tr>
+            <th scope="col">SL</th>
             <th scope="col">Authority Name</th>
             <th scope="col">Status</th>
             <th scope="col">Action</th>
@@ -80,6 +81,7 @@ const IssueAuthorityList = (props) => {
             <>
               {issuingAuthorities.map((item, index) => (
                 <tr>
+                  <td>{index + 1}</td>
                   <td>{item.strIssuingAuthorityName}</td>
                   <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
                   {/* <td>
