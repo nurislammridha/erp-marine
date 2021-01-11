@@ -1,4 +1,5 @@
 import * as Types from "../types/Types";
+import moment from "moment";
 
 // Initial state
 const initialState = {
@@ -10,7 +11,7 @@ const initialState = {
   certificatesNameOptionData: [],
   certificatesTypeOptionData: [],
   certificatesIssueByOptionData: [],
-  vesselTypeOptionData:[],
+  vesselTypeOptionData: [],
 
   isLoading: false,
   //   productData: {
@@ -34,19 +35,19 @@ const initialState = {
     intNotOnBoard: 1,
     dteCertificateIssueDate: "",
     dteCertificateValidUntil: "",
-    isExtendedUntil: true,
+    isExtendedUntil: false,
     dteExtendedUntil: "",
-    dteLastSurvey: "",
-    dteNextSurvey: "",
-    dteLastEndorsementDate: "2021-01-06",
+    dteLastSurvey: moment().format("YYYY-MM-DD"),
+    dteNextSurvey: moment().format("YYYY-MM-DD"),
+    dteLastEndorsementDate: moment().format("YYYY-MM-DD"),
     strOfficeRemarks: "",
     // image: null,
     // imagePreviewUrl: null,
     strShipRemarks: "",
     intActionBy: 100,
-    dteLastActionDateTime: "2021-01-06",
-    dteServerDateTime: "2021-01-06",
-      isActive: true,
+    dteLastActionDateTime: moment().format("YYYY-MM-DD"),
+    dteServerDateTime: moment().format("YYYY-MM-DD"),
+    isActive: false,
   },
   productEditData: null,
   productDetail: null,
@@ -131,7 +132,6 @@ const CertificateMainReducer = (state = initialState, action) => {
         isLoading: action.payload,
       };
     case Types.GET_MAIN_CERTIFICATE_SINGLE_DATA: 
-      console.log('action single data :>> ', action.payload);
       return {
         ...state,
         certificateMainInfo: action.payload,
@@ -144,39 +144,44 @@ const CertificateMainReducer = (state = initialState, action) => {
         ...state,
         productEditData,
       };
-
-    case Types.CERTIFICATE_DETAIL:
+    case Types.MAIN_CERTIFICATE_UPDATE:
       return {
-        ...state,
-        productDetail: action.payload.productDetail,
-        isLoading: action.payload.isLoading,
+        certificateMainInfo: initialState.certificateMainInfo,
+        isLoading: false,
       };
 
-    case Types.EDIT_CERTIFICATE_INFO:
-      return {
-        ...state,
-        productEditData: action.payload.productDetail,
-        isLoading: action.payload.isLoading,
-      };
+    // case Types.CERTIFICATE_DETAIL:
+    //   return {
+    //     ...state,
+    //     productDetail: action.payload.productDetail,
+    //     isLoading: action.payload.isLoading,
+    //   };
 
-    case Types.CREATE_CERTIFICATE:
-      return {
-        ...state,
-        addMessage: action.payload.message,
-        addStatus: action.payload.status,
-        isLoading: action.payload.isLoading,
-        errors: action.payload.errors,
-      };
+    // case Types.EDIT_CERTIFICATE_INFO:
+    //   return {
+    //     ...state,
+    //     productEditData: action.payload.productDetail,
+    //     isLoading: action.payload.isLoading,
+    //   };
 
-    case Types.UPDATE_CERTIFICATE:
-      return {
-        ...state,
-        editMessage: action.payload.message,
-        editStatus: action.payload.status,
-        editing: action.payload.editing,
-        isLoading: action.payload.isLoading,
-        errors: action.payload.errors,
-      };
+    // case Types.CREATE_CERTIFICATE:
+    //   return {
+    //     ...state,
+    //     addMessage: action.payload.message,
+    //     addStatus: action.payload.status,
+    //     isLoading: action.payload.isLoading,
+    //     errors: action.payload.errors,
+    //   };
+
+    // case Types.UPDATE_CERTIFICATE:
+    //   return {
+    //     ...state,
+    //     editMessage: action.payload.message,
+    //     editStatus: action.payload.status,
+    //     editing: action.payload.editing,
+    //     isLoading: action.payload.isLoading,
+    //     errors: action.payload.errors,
+    //   };
 
     case Types.DELETE_CERTIFICATE:
       // Remove that product from this list

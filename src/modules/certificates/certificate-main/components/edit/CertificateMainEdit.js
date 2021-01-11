@@ -15,6 +15,7 @@ import {
   MainCertificateCreateAction,
   GetVesselTypeAction,
   getMainCertificateSingleData,
+  mainCertificateEdit,
 } from "../../_redux/actions/CertificateMainAction";
 import CertificateCategoryAddModal from "../../../certificate-category/components/create/CertificateCategoryAddModal";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
@@ -24,6 +25,7 @@ import { useParams } from "react-router-dom";
 
 const CertificateMainEdit = () => {
   const { id } = useParams();
+
   const { register, handleSubmit, errors, setValue } = useForm();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -82,7 +84,8 @@ const CertificateMainEdit = () => {
   }, []);
 
   const onSubmit = async (e) => {
-    dispatch(MainCertificateCreateAction(certificateInfoInput));
+   console.log('id testing:>> ', id);
+    dispatch(mainCertificateEdit(certificateInfoInput, id));
   };
 
   const [showCategoryModal, setShowCategoryModal] = useState(false);
