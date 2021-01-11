@@ -513,6 +513,11 @@ input.form-check-input.position-static {
   text-transform: uppercase;
 }
 h1.tableheading {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 600;
+  color: #212121;
+  margin-top: 5px;
+}
+i.tableFilter {
+  color: #3699ff;
 }

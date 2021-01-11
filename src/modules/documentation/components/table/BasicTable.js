@@ -13,26 +13,27 @@ const BasicTable = () => {
             <h1 className="tableheading">Voyage List</h1>
 
             <Form.Group as={Col} controlId="formGridState">
-              <Form.Control as="select">
+              <Form.Control as="select" className="formSelect">
                 <option>Type</option>
                 <option>A</option>
               </Form.Control>
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridState">
-              <Form.Control as="select">
+              <Form.Control as="select" className="formSelect">
                 <option>Type</option>
                 <option>A</option>
               </Form.Control>
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridState">
-              <Form.Control as="select">
+              <Form.Control as="select" className="formSelect">
                 <option>Vessel</option>
                 <option>A</option>
               </Form.Control>
             </Form.Group>
             <i className="fas fa-filter mt-3 mr-2"></i>
+            <i className="far fa-filter"></i>
             <Button variant="primary">Add New</Button>
           </div>
 
