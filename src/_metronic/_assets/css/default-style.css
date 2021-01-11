@@ -83,6 +83,8 @@ ul.sticky-toolbar.nav.flex-column.pl-2.pr-2.pt-3.pb-3.mt-4 {
 .formHeight {
   height: 30px;
   background: #f3f6f9;
+  font-size: 10px !important;
+  font-weight: 500;
 }
 
 label.formFont.form-label {
@@ -93,12 +95,44 @@ label.formFont.form-label {
 button.saveButton {
   height: 29px;
   line-height: 10px;
+  background-color: #789dfe !important;
+  font-weight: 500;
+  border-radius: 3px;
 }
 
 .cancelButton {
-  background-color: #aeaeae !important;
+  background-color: #e5eaee !important;
+  height: 29px;
+  line-height: 10px;
+  color: #464e5f !important;
+  font-weight: 500;
+  border-radius: 3px;
 }
-
+.formSelect {
+  height: 30px;
+  font-size: 10px !important;
+  background: #f3f6f9;
+  font-weight: 500;
+  padding-top: 5px;
+}
+.chooseFileText {
+  color: #b5b5c3;
+}
+.fileInput {
+  border-bottom-right-radius: 6px !important;
+  border-top-right-radius: 6px !important;
+}
+input.fileInput,
+span#inputGroupPrepend {
+  height: 30px;
+}
+.formCheckBox {
+  border: none !important;
+}
+.formCheckBox {
+  border: 1px solid red !important;
+  background: red;
+}
 /* DashBoard Main Page Design Starts */
 
 .dashboard__pb {
