@@ -21,7 +21,7 @@ export const certificatecategorySubmitAction = (getCategoryInpuData) => (dispatc
     payload: responseList,
   });
 
-  let postUrl = `http://10.17.2.31:8082/iMarineAPI/public/api/v1/certificate/category`;
+  let postUrl = `${process.env.REACT_APP_API_URL}certificate/category`;
   axios
       .post(postUrl, getCategoryInpuData)
       .then(function (response) {
@@ -135,7 +135,7 @@ export const getCertificateCategoryListData = (
 export const setCertificateCategoryEditValue = (editValue) => (dispatch) => {
   // console.log('cHECK editValue', editValue);
   const formData = {
-    strCertificateCategoriName: editValue.strCertificateCategoriName,
+    strCertificateCategoryName: editValue.strCertificateCategoryName,
     isActive: editValue.isActive,
     intActionBy: 1,
   };
@@ -160,7 +160,7 @@ export const certificateCategoryEditAction = (
       payload: responseList,
     });
   
-    let editUrl = `http://10.3.203.16:82/iMarineAPI/public/api/v1/certificate/category/${intCategoryID}`;
+    let editUrl = `${process.env.REACT_APP_API_URL}certificate/category/${intCategoryID}`;
     axios.put(editUrl, certificateCategoryInput)
       .then(function(response) {
         responseList.data = response.data;

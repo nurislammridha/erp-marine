@@ -36,6 +36,7 @@ const initialState = {
     dteCertificateValidUntil: "",
     isExtendedUntil: false,
     dteExtendedUntil: "",
+    isSurvey: false,
     dteLastSurvey: moment().format("YYYY-MM-DD"),
     dteNextSurvey: moment().format("YYYY-MM-DD"),
     dteLastEndorsementDate: moment().format("YYYY-MM-DD"),
@@ -43,10 +44,10 @@ const initialState = {
     // image: null,
     // imagePreviewUrl: null,
     strShipRemarks: "",
-    intActionBy: 100,
+    intActionBy: null,
     dteLastActionDateTime: moment().format("YYYY-MM-DD"),
     dteServerDateTime: moment().format("YYYY-MM-DD"),
-    isActive: false,
+    isActive: true,
   },
   productEditData: null,
   productDetail: null,
@@ -247,7 +248,7 @@ const getCertificateCategoryName = (data) => {
     data.forEach((item) => {
       let itemData = {
         value: item.intCategoryID,
-        label: item.strCertificateCategoriName,
+        label: item.strCertificateCategoryName,
       };
       options.push(itemData);
     });

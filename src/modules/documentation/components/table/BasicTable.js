@@ -39,7 +39,7 @@ const BasicTable = () => {
             </Button>
           </div>
 
-          <table className="table mt-5 voyageTable">
+          <table className="table mt-5 voyageTable table-responsive">
             <thead>
               <tr>
                 <th scope="col">

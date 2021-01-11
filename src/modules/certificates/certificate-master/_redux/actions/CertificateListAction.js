@@ -84,7 +84,7 @@ export const setMasterCertificateEditValue = (editValue) => (dispatch) => {
   console.log('editValue', editValue);
   const formData = {
     strCertificateName: editValue.strCertificateName,
-    strCertificateCategoriName: editValue.strCertificateCategoriName,
+    strCertificateCategoryName: editValue.strCertificateCategoryName,
     strVesselName: editValue.strVesselName,
     isActive: editValue.isActive,
     intActionBy: 1272,
