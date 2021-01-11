@@ -90,9 +90,13 @@ const CertificateCategoryList = () => {
           data={certificatesCategoryPaginatedData}
         />
       </div>
-      {isLoading && <LoadingSpinner text="Loading Certificate Category..." />}
+      {isLoading && (
+        <div className="mt-5">
+          <LoadingSpinner text="Loading Certificate Category..." />
+        </div>
+      )}
       {!isLoading && certificateCategoryData.length === 0 && (
-        <div className="alert alert-warning">
+        <div className="alert alert-warning mt-5">
           Sorry ! No Certificate category Found.
         </div>
       )}
@@ -119,12 +123,12 @@ const CertificateCategoryList = () => {
               </thead>
               <tbody>
                 {certificateCategoryData &&
-                    certificateCategoryData.map((item, index) => (
-                        <tr>
-                            <td>{item.strCertificateCategoriName}</td>
-                            <td>{item.intActionBy}</td>
-                            <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
-                            {/*<td>
+                  certificateCategoryData.map((item, index) => (
+                    <tr>
+                      <td>{item.strCertificateCategoriName}</td>
+                      <td>{item.intActionBy}</td>
+                      <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
+                      {/*<td>
                                 {" "}
                                 <Link to={``}>
                                     <i className="far fa-eye mr-3"></i>
