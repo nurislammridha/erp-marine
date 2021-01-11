@@ -93,12 +93,13 @@ const IssueAuthorityList = (props) => {
                   </td> */}
                   <td>
                     <a
-                      className="btn btn-icon btn-light btn-hover-info btn-sm"
+                      // className="btn btn-icon btn-light btn-hover-info btn-sm"
                       onClick={() => {
                         handleEdit(item);
                       }}
                     >
-                      <i className="fa fa-edit"></i>
+                      {/* <i className="fa fa-edit"></i> */}
+                      <i className="far fa-edit editIcon"></i>
                     </a>
                   </td>
                 </tr>
