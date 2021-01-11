@@ -1,12 +1,14 @@
-// import * as Types from "../types/Types";
-import * as Types from "../types/Types"
+import * as Types from "../types/Types";
 const initiliazeState = {
   certificateCategoryList: [],
+  status: false,
+  isLoading:false,
   certificateCategoryInput: {
       strCertificateCategoriName: '',
       intActionBy: '1',
       isActive: '1'
   },
+  editStatus: false,
 };
 
 function CertificateCategoryReducer(state = initiliazeState, action) {
@@ -22,7 +24,28 @@ function CertificateCategoryReducer(state = initiliazeState, action) {
         console.log('action.payload,', action.payload);
           return {
               ...state,
-              status: action.payload.status
+              status: action.payload.status,
+              isLoading:action.payload.isLoading
+          };
+      
+        case Types.GET_CERTIFICATE_CATEGORY_LIST:
+          console.log('action.payload',action.payload);
+          return {
+                ...state,
+                certificateCategoryList: action.payload,
+          };
+
+        case Types.SET_CERTIFICATE_CATEGORY_EDIT_DATA:
+          return {
+              ...state,
+              certificateCategoryInput: action.payload,
+          };
+
+        case Types.EDIT_CERTIFICATE_CATEGORY:
+            return {
+              ...state,
+              editStatus: action.payload.status,
+              isLoading:action.payload.isLoading
           };
 
 

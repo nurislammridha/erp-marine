@@ -2,83 +2,121 @@ import React, { useEffect, useState } from "react";
 import { Form, Button, Image, Col, Row, Table, Dropdown } from "react-bootstrap";
 import Modal from 'react-bootstrap/Modal';
 import { Link } from "react-router-dom";
-import CertificateTypeEdit from "../edit/CertificateTypeEdit";
-// import { GetVoyageList } from "../../../_redux/actions/VoyageAction";
+import { useDispatch, useSelector } from "react-redux";
+import CertificateCategoryEdit from '../edit/CertificateCategoryEdit'
+import { getCertificateCategoryListData, setCertificateCategoryEditValue } from "../../_redux/actions/CertificateCategoryAction";
+import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 
 
-const CertificateTypeList = () => {
 
+const CertificateCategoryList = () => {
+
+    const dispatch = useDispatch();
+    const certificateCategoryData = useSelector((state) => state.CertificateCategoryReducer.certificateCategoryList);
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [editItem, setEditItem] = useState({});
+
+    const modalEditStatus = useSelector(
+        (state) => state.CertificateCategoryReducer.editStatus
+    );
+
+    // const status = useSelector(
+    //     (state) => state.CertificateCategoryReducer.editStatus
+    // );
+
+    // useEffect(() => {
+    //     if(status){
+    //         handleClose();
+    //     }
+       
+    // }, []);
+
+
+    useEffect(() => {
+        if (modalEditStatus) {
+          setShow(false);
+        }
+      }, [modalEditStatus]);
+
+    const handleEdit = (editItem) => {
+        setEditItem(editItem);
+        setShow(true);
+    };
+
+    // const handleEdit = (data) => {
+       
+    //     setEditItem(data);
+    //     setShow(true);
+    //     dispatch(setCertificateCategoryEditValue(data));
+    // };
 
     return (
         <div className="react-bootstrap-table table-responsive">
+        <SimpleModal
+            show={show}
+            handleClose={() => handleClose()}
+            modalTitle={"Edit Certificate Category"}
+        >
+                          
+            <CertificateCategoryEdit  editData={editItem}/>
+                    
+        </SimpleModal>
             <table className="table mt-2 tbl-standard" id="table-to-xls">
                 <thead>
                     <tr>
                         <th scope="col">Certificate Type</th>
+                        <th scope="col">Action By</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>SSC</td>
-                        <td>Active</td>
-                        <td>
-                            {" "}
-                            <Link to={``}>
-                                <i className="far fa-eye mr-3"></i>
-                            </Link>
-                            <Button className="" onClick={handleShow}>
-                                <i className="far fa-edit"></i>
-                            </Button>
+                {certificateCategoryData &&
+                    certificateCategoryData.map((item, index) => (
+                        <tr>
+                            <td>{item.strCertificateCategoriName}</td>
+                            <td>{item.intActionBy}</td>
+                            <td>{item.isActive ? "Active" : "Inactive"}</td>
+                            {/*<td>
+                                {" "}
+                                <Link to={``}>
+                                    <i className="far fa-eye mr-3"></i>
+                                </Link>
+                                <i className="far fa-edit ml-2" onClick={handleShow}></i>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>HSC</td>
-                        <td>Active</td>
-                        <td>
-                            {" "}
-                            <Link to={``}>
-                                <i className="far fa-eye mr-3"></i>
-                            </Link>
-
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>B.Sc</td>
-                        <td>Inactive</td>
-                        <td>
-                            {" "}
-                            <Link to={``}>
-                                <i className="far fa-eye mr-3"></i>
-                            </Link>
-
-                        </td>
-                    </tr>
-
+                            </td>*/}
+                            <td>
+                            <a
+                              className="btn btn-icon btn-light btn-hover-info btn-sm"
+                              onClick={() => {
+                                handleEdit(item);
+                              }}
+                            >
+                              <i className="fa fa-edit"></i>
+                            </a>
+                          </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
 
-            <Modal size="lg" show={show} onHide={handleClose}>
+            {/*<Modal size="lg" show={show} onHide={handleClose}>
 
                 <Modal.Header closeButton>
-                    <Modal.Title>Certificate Type Edit</Modal.Title>
+                    <Modal.Title>Certificate Category Edit</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>{<CertificateTypeEdit />}</Modal.Body>
+                <Modal.Body>{<CertificateCategoryEdit />}</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Cancel
               </Button>
                 </Modal.Footer>
-            </Modal>
+                            </Modal>*/}
         </div>
     );
 };
 
-export default CertificateTypeList;
+export default CertificateCategoryList;
