@@ -9,14 +9,16 @@ import { certificatecategorySubmitAction,getCertificateCategoryListData,handleCe
 
 const CertificateCategoryAdd = () => {
   const history = useHistory();
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit, watch, errors, setValue } = useForm();
   const dispatch = useDispatch();
+
   const getCategoryInpuData = useSelector(
     (state) => state.CertificateCategoryReducer.certificateCategoryInput
   );
   const status = useSelector((state) => state.CertificateCategoryReducer.status);
   const isLoading = useSelector((state) => state.CertificateCategoryReducer.isLoading);
 
+  console.log('getCategoryInpuData :>> ', getCategoryInpuData);
   const categoryInputChange = (name, value) => {
     dispatch(handleCertificateCategoryInput(name, value));
   };
@@ -43,9 +45,6 @@ const CertificateCategoryAdd = () => {
   ];
 
   const loading = false;
-
-  //add boiler info in multiple list
-
   return (
     <>
       <form
@@ -61,35 +60,44 @@ const CertificateCategoryAdd = () => {
             value={getCategoryInpuData.strCertificateCategoriName}
             placeholder="Type Category Name"
             name="strCertificateCategoriName"
-            onChange={(e) => categoryInputChange("strCertificateCategoriName", e.target.value)}
+            onChange={(e) =>
+              categoryInputChange("strCertificateCategoriName", e.target.value)
+            }
           />
         </div>
 
         <div className="form-group mt-0">
-          <label className="form-label">Parent Category <span className="text-info"> (Optional)</span></label>
+          <label className="form-label">
+            Parent Category <span className="text-info"> (Optional)</span>
+          </label>
           <RHFInput
-              as={<Select options={statusOptions} />}
-              rules={{ required: false }}
-              name="intCargoTypeID"
-              register={register}
-              value={''}
-              onChange={() => console.log('e')}
-              setValue={""}
+            as={<Select options={statusOptions} />}
+            rules={{ required: false }}
+            name="intCargoTypeID"
+            register={register}
+            value={getCategoryInpuData.intCargoTypeID}
+            onChange={(option) => {
+              categoryInputChange("intCargoTypeName", option.label);
+              categoryInputChange("intCargoTypeID", option.value);
+            }}
+            setValue={setValue}
           />
         </div>
         <div className="form-group row">
           <div className="col-sm-10"></div>
         </div>
 
-        {isLoading && (
-          <button type="submit" class="btn btn-primary saveButton" disabled={true}>
-            <span className="p-2"><i className="fa fa-check"></i>  Submitting...</span>
-            <span className="ml-3 spinner spinner-white "></span>
+        {loading && (
+          <button type="submit" className="btn btn-primary btn-lg" disabled={true}>
+            <span>
+              <i className="fa fa-check"></i> Submitting...
+            </span>
+            <span className="ml-3 spinner spinner-white"></span>
           </button>
         )}
 
         {!isLoading && (
-          <button type="submit" class="btn btn-primary saveButton">
+          <button type="submit" className="btn btn-primary saveButton">
             <span>Submit</span>
           </button>
         )}

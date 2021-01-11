@@ -1,7 +1,6 @@
 import * as Types from "../types/Types";
 import axios from "axios";
 import { showToast } from "../../../../master/utils/ToastHelper";
-import Axios from "axios";
 export const handleCertificateCategoryInput = (name, value) => (dispatch) => {
   const categoryData = {
     name: name,
@@ -9,6 +8,7 @@ export const handleCertificateCategoryInput = (name, value) => (dispatch) => {
   };
   dispatch({ type: Types.CERTIFICATE_CATEGORY_CREATE, payload: categoryData });
 };
+
 export const certificatecategorySubmitAction = (getCategoryInpuData) => (dispatch) => {
 
   let responseList = {
@@ -21,7 +21,7 @@ export const certificatecategorySubmitAction = (getCategoryInpuData) => (dispatc
       payload: responseList,
   });
 
-  let postUrl = `http://10.3.203.16:82/iMarineAPI/public/api/v1/certificate/category`;
+  let postUrl = `http://10.17.2.189:8080/api/v1/certificate/category`;
   axios
       .post(postUrl, getCategoryInpuData)
       .then(function (response) {
@@ -36,7 +36,6 @@ export const certificatecategorySubmitAction = (getCategoryInpuData) => (dispatc
                   payload: responseList,
               });
           } else {
-              console.log('error data', response.data);
               showToast("error", response.data.message);
           }
       })
@@ -99,7 +98,7 @@ export const certificateCategoryEditAction = (
     });
   
     let editUrl = `http://10.3.203.16:82/iMarineAPI/public/api/v1/certificate/category/${intCategoryID}`;
-    Axios.put(editUrl, certificateCategoryInput)
+    axios.put(editUrl, certificateCategoryInput)
       .then(function(response) {
         responseList.data = response.data;
         responseList.isLoading = false;

@@ -1,24 +1,27 @@
 import * as Types from "../types/Types";
+import moment from "moment";
 
 // Initial state
 const initialState = {
   certificates: [],
 
   certificatesPaginatedData: null,
+  certificateMainEdit: [],
   certificatesCategoryOptionData: [],
   certificatesNameOptionData: [],
   certificatesTypeOptionData: [],
   certificatesIssueByOptionData: [],
+  vesselTypeOptionData: [],
 
   isLoading: false,
-  productData: {
-    id: 0,
-    title: "",
-    description: "",
-    price: "",
-    image: null,
-    imagePreviewUrl: null,
-  },
+  //   productData: {
+  //     id: 0,
+  //     title: "",
+  //     description: "",
+  //     price: "",
+  //     image: null,
+  //     imagePreviewUrl: null,
+  //   },
   certificateMainInfo: {
     intVesselID: null,
     intCertificateID: null,
@@ -29,21 +32,22 @@ const initialState = {
     strIssuedPlace: "",
     strLocation: "",
     intCertificateTypeID: null,
-    intNotOnBoard: null,
+    intNotOnBoard: 1,
     dteCertificateIssueDate: "",
     dteCertificateValidUntil: "",
-    isExtendedUntil: true,
+    isExtendedUntil: false,
     dteExtendedUntil: "",
-    dteLastSurvey: "",
-    dteNextSurvey: "",
-    dteLastEndorsementDate: "",
+    dteLastSurvey: moment().format("YYYY-MM-DD"),
+    dteNextSurvey: moment().format("YYYY-MM-DD"),
+    dteLastEndorsementDate: moment().format("YYYY-MM-DD"),
     strOfficeRemarks: "",
-    imagePreviewUrl: null,
+    // image: null,
+    // imagePreviewUrl: null,
     strShipRemarks: "",
     intActionBy: 100,
-    dteLastActionDateTime: "",
-    dteServerDateTime: "",
-    isActive: true,
+    dteLastActionDateTime: moment().format("YYYY-MM-DD"),
+    dteServerDateTime: moment().format("YYYY-MM-DD"),
+    isActive: false,
   },
   productEditData: null,
   productDetail: null,
@@ -53,6 +57,7 @@ const initialState = {
   editing: false,
   deleteStatus: false,
   deleting: false,
+  certificateSingleData: {},
 
   addMessage: "",
   editMessage: "",
@@ -77,13 +82,19 @@ const CertificateMainReducer = (state = initialState, action) => {
           action.payload
         ),
       };
+    case Types.GET_VESSEL_TYPE:
+      return {
+        ...state,
+        vesselTypeOptionData: getvesselType(
+          action.payload
+        ),
+      };
     case Types.GET_CERTIFICATE_NAME:
       return {
         ...state,
         certificatesNameOptionData: getCertificateName(action.payload),
       };
-      case Types.GET_CERTIFICATE_TYPE:
-          console.log("action.payload type :>> ", action.payload);
+    case Types.GET_CERTIFICATE_TYPE:
       return {
         ...state,
         certificatesTypeOptionData: getCertificateTypeName(action.payload),
@@ -115,16 +126,16 @@ const CertificateMainReducer = (state = initialState, action) => {
           isLoading: false,
         };
       }
-
-    
-
     case Types.CERTIFICATE_MAIN_SUBMITTING:
       return {
         ...state,
         isLoading: action.payload,
       };
-      
-    //SELF
+    case Types.GET_MAIN_CERTIFICATE_SINGLE_DATA: 
+      return {
+        ...state,
+        certificateMainInfo: action.payload,
+      };
 
     case Types.CHANGE_CERTIFICATE_INPUT_UPDATE:
       const productEditData = { ...state.productEditData };
@@ -133,39 +144,44 @@ const CertificateMainReducer = (state = initialState, action) => {
         ...state,
         productEditData,
       };
-
-    case Types.CERTIFICATE_DETAIL:
+    case Types.MAIN_CERTIFICATE_UPDATE:
       return {
-        ...state,
-        productDetail: action.payload.productDetail,
-        isLoading: action.payload.isLoading,
+        certificateMainInfo: initialState.certificateMainInfo,
+        isLoading: false,
       };
 
-    case Types.EDIT_CERTIFICATE_INFO:
-      return {
-        ...state,
-        productEditData: action.payload.productDetail,
-        isLoading: action.payload.isLoading,
-      };
+    // case Types.CERTIFICATE_DETAIL:
+    //   return {
+    //     ...state,
+    //     productDetail: action.payload.productDetail,
+    //     isLoading: action.payload.isLoading,
+    //   };
 
-    case Types.CREATE_CERTIFICATE:
-      return {
-        ...state,
-        addMessage: action.payload.message,
-        addStatus: action.payload.status,
-        isLoading: action.payload.isLoading,
-        errors: action.payload.errors,
-      };
+    // case Types.EDIT_CERTIFICATE_INFO:
+    //   return {
+    //     ...state,
+    //     productEditData: action.payload.productDetail,
+    //     isLoading: action.payload.isLoading,
+    //   };
 
-    case Types.UPDATE_CERTIFICATE:
-      return {
-        ...state,
-        editMessage: action.payload.message,
-        editStatus: action.payload.status,
-        editing: action.payload.editing,
-        isLoading: action.payload.isLoading,
-        errors: action.payload.errors,
-      };
+    // case Types.CREATE_CERTIFICATE:
+    //   return {
+    //     ...state,
+    //     addMessage: action.payload.message,
+    //     addStatus: action.payload.status,
+    //     isLoading: action.payload.isLoading,
+    //     errors: action.payload.errors,
+    //   };
+
+    // case Types.UPDATE_CERTIFICATE:
+    //   return {
+    //     ...state,
+    //     editMessage: action.payload.message,
+    //     editStatus: action.payload.status,
+    //     editing: action.payload.editing,
+    //     isLoading: action.payload.isLoading,
+    //     errors: action.payload.errors,
+    //   };
 
     case Types.DELETE_CERTIFICATE:
       // Remove that product from this list
@@ -216,7 +232,7 @@ const CertificateMainReducer = (state = initialState, action) => {
           description: "",
           price: "",
           image: null,
-          imagePreviewUrl: null,
+        //   imagePreviewUrl: null,
         },
       };
 
@@ -278,5 +294,17 @@ const getIssueName = (data) => {
   }
   return options;
 };
-
+const getvesselType = (data) => {
+  let options = [];
+  if (data) {
+    data.forEach((item) => {
+      let itemData = {
+        value: item.intID,
+        label: item.strName,
+      };
+      options.push(itemData);
+    });
+  }
+  return options;
+};
 export default CertificateMainReducer;
