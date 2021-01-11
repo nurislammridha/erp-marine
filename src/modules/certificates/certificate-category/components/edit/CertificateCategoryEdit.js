@@ -132,14 +132,14 @@ const CertificateCategoryEdit = (props) => {
             </Button>*/}
 
             {isLoading && (
-              <button type="submit" class="btn btn-primary saveButton btn-lg" disabled={true}>
+              <button type="submit" class="btn btn-primary saveButton" disabled={true}>
                 <span className="p-2">Updating...</span>
                 <span className="ml-3 spinner spinner-white "></span>
               </button>
             )}
     
             {!isLoading && (
-              <button type="submit" class="btn btn-primary saveButton btn-lg">
+              <button type="submit" class="btn btn-primary saveButton">
                 <span>Update</span>
               </button>
             )}
