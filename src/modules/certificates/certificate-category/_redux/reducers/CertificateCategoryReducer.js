@@ -3,6 +3,7 @@ const initiliazeState = {
   certificateCategoryList: [],
   status: false,
   isLoading: false,
+  certificatesCategoryPaginatedData: null,
   certificateCategoryInput: {
     strCertificateCategoriName: "",
     intActionBy: "1",
@@ -29,10 +30,12 @@ function CertificateCategoryReducer(state = initiliazeState, action) {
       };
 
     case Types.GET_CERTIFICATE_CATEGORY_LIST:
-      console.log("action.payload", action.payload);
       return {
         ...state,
-        certificateCategoryList: action.payload,
+        certificateCategoryList: action.payload.certificates,
+        certificatesCategoryPaginatedData:
+          action.payload.certificatesPaginatedData,
+        isLoading: action.payload.isLoading,
       };
 
     case Types.SET_CERTIFICATE_CATEGORY_EDIT_DATA:

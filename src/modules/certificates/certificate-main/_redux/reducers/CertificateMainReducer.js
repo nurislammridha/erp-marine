@@ -9,7 +9,6 @@ const initialState = {
   certificatesNameOptionData: [],
   certificatesTypeOptionData: [],
   certificatesIssueByOptionData: [],
-
   isLoading: false,
   productData: {
     id: 0,

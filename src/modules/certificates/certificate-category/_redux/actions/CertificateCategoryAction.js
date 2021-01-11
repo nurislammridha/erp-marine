@@ -2,6 +2,7 @@ import * as Types from "../types/Types";
 import axios from "axios";
 import { showToast } from "../../../../master/utils/ToastHelper";
 import Axios from "axios";
+import { toast } from "react-toastify";
 export const handleCertificateCategoryInput = (name, value) => (dispatch) => {
   const categoryData = {
     name: name,
@@ -55,23 +56,82 @@ export const certificatecategorySubmitAction = (getCategoryInpuData) => (
 };
 
 export const getCertificateCategoryListData = (
-  searchValue = "",
-  status = ""
+  status = "",
+  searchText = null,
+  page
 ) => async (dispatch) => {
-  let isActive = status == "" ? 1 : parseInt(status);
-  let url = `http://10.3.203.16:82/iMarineAPI/public/api/v1/certificate/category`;
+  // let isActive = status == "" ? 1 : parseInt(status);
+  // let url = `${process.env.REACT_APP_API_URL}certificate/category?isPaginated=1`;
 
-  if (searchValue !== "" || isActive !== "") {
-    url += `?search=${searchValue}&isActive=${isActive}`;
+  // if (searchValue !== "" || isActive !== "") {
+  //   url += `?search=${searchValue}&isActive=${isActive}`;
+  // }
+
+  // // axios.get(url).then((res) => {
+  // //   console.log("ResponseCategory", res);
+  // //   dispatch({
+  // //     type: Types.GET_CERTIFICATE_CATEGORY_LIST,
+  // //     payload: res.data.data,
+  // //   });
+  // // });
+  // try {
+  //   await Axios.get(url)
+  //     .then((res) => {
+  //       const { data, message, status } = res.data;
+  //       res.status = status;
+  //       res.certificates = data.data;
+  //       res.message = message;
+  //       res.certificatesPaginatedData = data;
+  //       res.isLoading = false;
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err);
+  //     });
+  // } catch (error) {
+  //   res.message = "Something Went Wrong !";
+  //   toast.error(error);
+  // }
+
+  // res.isLoading = false;
+  // dispatch({ type: Types.GET_CERTIFICATE_CATEGORY_LIST, payload: res });
+  let response = {
+    certificates: [],
+    status: false,
+    message: "",
+    isLoading: true,
+    errors: [],
+  };
+  dispatch({ type: Types.GET_CERTIFICATE_CATEGORY_LIST, payload: response });
+  let url = "";
+  url = `${process.env.REACT_APP_API_URL}certificate/category?isPaginated=1`;
+
+  // if (searchText !== null) {
+  //     // url += `&paginateNo=${page}`;
+  //     url += `&search=${searchText}`
+  // } else {
+  //     // url += `&certificate/details?search=${searchText}`
+  // }
+
+  try {
+    await Axios.get(url)
+      .then((res) => {
+        const { data, message, status } = res.data;
+        response.status = status;
+        response.certificates = data.data;
+        response.message = message;
+        response.certificatesPaginatedData = data;
+        response.isLoading = false;
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
+  } catch (error) {
+    response.message = "Something Went Wrong !";
+    toast.error(error);
   }
 
-  axios.get(url).then((res) => {
-    console.log(res);
-    dispatch({
-      type: Types.GET_CERTIFICATE_CATEGORY_LIST,
-      payload: res.data.data,
-    });
-  });
+  response.isLoading = false;
+  dispatch({ type: Types.GET_CERTIFICATE_CATEGORY_LIST, payload: response });
 };
 
 export const setCertificateCategoryEditValue = (editValue) => (dispatch) => {

@@ -17,22 +17,41 @@ import {
   setCertificateCategoryEditValue,
 } from "../../_redux/actions/CertificateCategoryAction";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
+import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
+import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 
 const CertificateCategoryList = () => {
   const dispatch = useDispatch();
-  const certificateCategoryData = useSelector(
-    (state) => state.CertificateCategoryReducer.certificateCategoryList
-  );
-
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [editItem, setEditItem] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
 
+  const certificateCategoryData = useSelector(
+    (state) => state.CertificateCategoryReducer.certificateCategoryList
+  );
+  console.log("certificateCategoryData", certificateCategoryData);
   const modalEditStatus = useSelector(
     (state) => state.CertificateCategoryReducer.editStatus
   );
+  const isLoading = useSelector(
+    (state) => state.CertificateCategoryReducer.isLoading
+  );
 
+  const certificatesCategoryPaginatedData = useSelector(
+    (state) =>
+      state.CertificateCategoryReducer.certificatesCategoryPaginatedData
+  );
+
+  useEffect(() => {
+    dispatch(getCertificateCategoryListData(currentPage));
+  }, [dispatch, currentPage]);
+
+  const changePage = (data) => {
+    setCurrentPage(data.page);
+    dispatch(getCertificateCategoryListData(data.page));
+  };
   // const status = useSelector(
   //     (state) => state.CertificateCategoryReducer.editStatus
   // );
@@ -63,33 +82,49 @@ const CertificateCategoryList = () => {
   // };
 
   return (
-    <div className="react-bootstrap-table table-responsive">
-      <SimpleModal
-        show={show}
-        handleClose={() => handleClose()}
-        modalTitle={"Edit Certificate Category"}
-      >
-                      
-        <CertificateCategoryEdit editData={editItem} />
-                    
-      </SimpleModal>
-      <table className="table mt-2 tbl-standard" id="table-to-xls">
-        <thead>
-          <tr>
-            <th scope="col">Certificate Type</th>
-            <th scope="col">Action By</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {certificateCategoryData &&
-            certificateCategoryData.map((item, index) => (
-              <tr>
-                <td>{item.strCertificateCategoriName}</td>
-                <td>{item.intActionBy}</td>
-                <td>{item.isActive ? "Active" : "Inactive"}</td>
-                {/*<td>
+    <>
+      <div className="float-right">
+        <PaginationLaravel
+          isDescription={true}
+          changePage={changePage}
+          data={certificatesCategoryPaginatedData}
+        />
+      </div>
+      {isLoading && <LoadingSpinner text="Loading Certificate Category..." />}
+      {!isLoading && certificateCategoryData.length === 0 && (
+        <div className="alert alert-warning">
+          Sorry ! No Certificate category Found.
+        </div>
+      )}
+      {!isLoading && certificateCategoryData.length > 0 && (
+        <>
+          <div className="react-bootstrap-table table-responsive">
+            <SimpleModal
+              show={show}
+              handleClose={() => handleClose()}
+              modalTitle={"Edit Certificate Category"}
+            >
+                            
+              <CertificateCategoryEdit editData={editItem} />
+                          
+            </SimpleModal>
+            <table className="table mt-2 tbl-standard" id="table-to-xls">
+              <thead>
+                <tr>
+                  <th scope="col">Certificate Type</th>
+                  <th scope="col">Action By</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {certificateCategoryData &&
+                  certificateCategoryData.map((item, index) => (
+                    <tr>
+                      <td>{item.strCertificateCategoriName}</td>
+                      <td>{item.intActionBy}</td>
+                      <td>{item.isActive ? "Active" : "Inactive"}</td>
+                      {/*<td>
                                 {" "}
                                 <Link to={``}>
                                     <i className="far fa-eye mr-3"></i>
@@ -97,22 +132,26 @@ const CertificateCategoryList = () => {
                                 <i className="far fa-edit ml-2" onClick={handleShow}></i>
 
                             </td>*/}
-                <td>
-                  <a
-                    className="btn btn-icon btn-light btn-hover-info btn-sm"
-                    onClick={() => {
-                      handleEdit(item);
-                    }}
-                  >
-                    <i className="fa fa-edit"></i>
-                  </a>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
-
-      {/*<Modal size="lg" show={show} onHide={handleClose}>
+                      <td>
+                        <a
+                          className="btn btn-icon btn-light btn-hover-info btn-sm"
+                          onClick={() => {
+                            handleEdit(item);
+                          }}
+                        >
+                          <i className="fa fa-edit"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+            <PaginationLaravel
+              isDescription={true}
+              changePage={changePage}
+              data={certificatesCategoryPaginatedData}
+            />
+            {/*<Modal size="lg" show={show} onHide={handleClose}>
 
                 <Modal.Header closeButton>
                     <Modal.Title>Certificate Category Edit</Modal.Title>
@@ -124,7 +163,10 @@ const CertificateCategoryList = () => {
               </Button>
                 </Modal.Footer>
                             </Modal>*/}
-    </div>
+          </div>
+        </>
+      )}
+    </>
   );
 };
 
