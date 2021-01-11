@@ -14,7 +14,7 @@ import {
   getCertificateIssueBy,
   getCertificateName,
   MainCertificateCreateAction,
-  GetVesselTypeAction
+  GetVesselTypeAction,
 } from "../../_redux/actions/CertificateMainAction";
 import CertificateCategoryAddModal from "../../../certificate-category/components/create/CertificateCategoryAddModal";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
@@ -35,7 +35,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
     dispatch(handleChangeProductInputAction(name, value, e));
   };
 
-
   // const enableLoading = () => {
   //   setLoading(true);
   // };
@@ -44,15 +43,13 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   //   setLoading(false);
   // };
 
-
-
   const addStatus = useSelector((state) => state.vesselInfo.addStatus);
   const addMessage = useSelector((state) => state.vesselInfo.addMessage);
   const serverErrors = useSelector((state) => state.certificateMainInfo.errors);
   const certificateInfoInput = useSelector(
     (state) => state.certificateMainInfo.certificateMainInfo
   );
-  
+
   const certificatesCategoryOption = useSelector(
     (state) => state.certificateMainInfo.certificatesCategoryOptionData
   );
@@ -70,18 +67,14 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const vesselTypeOption = useSelector(
     (state) => state.certificateMainInfo.vesselTypeOptionData
   );
-  
-  
+
   useEffect(() => {
     dispatch(GetVesselTypeAction());
     dispatch(getCertificateCategory());
     dispatch(getCertificateType());
     dispatch(getCertificateIssueBy());
-    dispatch(getCertificateName()); 
+    dispatch(getCertificateName());
   }, []);
-
-
-  
 
   const onSubmit = async (e) => {
     dispatch(MainCertificateCreateAction(certificateInfoInput));
@@ -107,23 +100,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               onSubmit={handleSubmit(onSubmit)}
               method="post"
             >
-              <div className="form-group row mt-1">
-                <div className="col-lg-3">
-                  <label className="form-label">Vessel</label>
-                  <RHFInput
-                    as={<Select options={vesselTypeOption} />}
-                    rules={{ required: true }}
-                    name="intVesselID"
-                    register={register}
-                    value={certificateInfoInput.intVesselID}
-                    onChange={(option) => {
-                      certificateMainInfoChange("strVesselName", option.label);
-                      certificateMainInfoChange("intVesselID", option.value);
-                    }}
-                    setValue={setValue}
-                  />
-                </div>
-
+              <div className="form-group row mt-1 border">
                 <div className="col-lg-3">
                   <SimpleModal
                     show={showCategoryModal}
@@ -168,6 +145,53 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     </div>
                   </div>
                 </div>
+
+                {/*====Sub Category=====*/}
+                <div className="col-lg-3">
+                  <SimpleModal
+                    show={showCategoryModal}
+                    handleClose={() => setShowCategoryModal(false)}
+                    handleShow={() => setShowCategoryModal(true)}
+                    modalTitle={"Certificate Sub Category"}
+                  >
+                    <CertificateCategoryAdd />
+                  </SimpleModal>
+                  <label className="form-label">Sub Category</label>
+                  <div className="input-area-add">
+                    <div className="float-left">
+                      <RHFInput
+                        as={<Select options={certificatesCategoryOption} />}
+                        rules={{ required: true }}
+                        name="intCategoryID"
+                        register={register}
+                        value={certificateInfoInput.intCategoryID}
+                        onChange={(option) => {
+                          certificateMainInfoChange(
+                            "intCategoryName",
+                            option.label
+                          );
+                          certificateMainInfoChange(
+                            "intCategoryID",
+                            option.value
+                          );
+                        }}
+                        setValue={setValue}
+                      />
+                    </div>
+                    <div className="float-right">
+                      <button
+                        className="btn btn-default"
+                        type="button"
+                        onClick={() => {
+                          setShowCategoryModal(true);
+                        }}
+                      >
+                        <i className="fa fa-plus-circle"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                {/*====Sub Category=====*/}
 
                 <div className="col-lg-3">
                   <SimpleModal
@@ -292,6 +316,52 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div>
 
                 <div className="col-lg-3">
+                  <label className="form-label mt-2">Ship Folder NO</label>
+                  <Form.Control
+                    type="text"
+                    name="strShipFolderNo"
+                    className="fromStyle"
+                    value={certificateInfoInput.strShipFolderNo}
+                    onChange={(e) =>
+                      certificateMainInfoChange(
+                        "strShipFolderNo",
+                        e.target.value
+                      )
+                    }
+                    ref={register({
+                      required: true,
+                      maxLength: 100,
+                    })}
+                  />
+                  <div className="inputError margin-minus-8">
+                    {errors.strShipFolderNo &&
+                      errors.strShipFolderNo.type === "required" &&
+                      "Location can't be blank"}
+                  </div>
+                </div>
+
+                {/* <div className="col-lg-3">
+                  <label className="form-label mt-2">Issueing Authority</label>
+                  <Form.Control
+                    type="text"
+                    name="intIssuingAuthorityID"
+                    placeholder="Enter Issue Authority"
+                    className="fromStyle"
+                    value={certificateInfoInput.intIssuingAuthorityID}
+                    onChange={(e) =>
+                      certificateMainInfoChange(
+                        "intIssuingAuthorityID",
+                        e.target.value
+                      )
+                    }
+                    ref={register({
+                      required: true,
+                      maxLength: 100,
+                    })}
+                  />
+                </div> */}
+
+                <div className="col-lg-3">
                   <SimpleModal
                     show={showIssuedByModal}
                     handleClose={() => setShowIssuedByModal(false)}
@@ -301,7 +371,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     <CertificateCategoryAdd />
                   </SimpleModal>
 
-                  <label className="form-label">Issued By</label>
+                  <label className="form-label">Issueing Authority</label>
                   <div className="input-area-add">
                     <div className="float-left">
                       <RHFInput
@@ -342,7 +412,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       "Certificate Name Can't be blank"}
                   </div>
                 </div>
-
                 <div className="col-lg-3">
                   <label className="form-label mt-2">Issue Place</label>
                   <Form.Control
@@ -399,41 +468,10 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     />
                   </Form.Group>
                 </div>
-                <div className="col-lg-3">
-                  <label className="form-label mt-2">Ship Folder NO</label>
-                  <Form.Control
-                    type="text"
-                    name="strShipFolderNo"
-                    className="fromStyle"
-                    value={certificateInfoInput.strShipFolderNo}
-                    onChange={(e) =>
-                      certificateMainInfoChange(
-                        "strShipFolderNo",
-                        e.target.value
-                      )
-                    }
-                    ref={register({
-                      required: true,
-                      maxLength: 100,
-                    })}
-                  />
-                  <div className="inputError margin-minus-8">
-                    {errors.strShipFolderNo &&
-                      errors.strShipFolderNo.type === "required" &&
-                      "Location can't be blank"}
-                  </div>
-                </div>
-                <div className="col-lg-3 mt-3">
-                  <label htmlFor="">{""}</label>
-                  <Form.Group controlId="formBasicChecbox">
-                    <Form.Check
-                      className="forgotPasswordText  "
-                      type="checkbox"
-                      label="isExtendedUntil"
-                    />
-                  </Form.Group>
-                </div>
+              </div>
 
+              {/*=====certificate details close===*/}
+              <div className="form-group row mt-1 border">
                 <div className="col-lg-3">
                   <label className="form-label mt-2">
                     Certificate Issue date
@@ -446,32 +484,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     onChange={(e) =>
                       certificateMainInfoChange(
                         "dteCertificateIssueDate",
-                        e.target.value
-                      )
-                    }
-                    ref={register({
-                      required: true,
-                      maxLength: 100,
-                    })}
-                  />
-                  <div className="inputError margin-minus-8">
-                    {errors.dteCertificateValidUntil &&
-                      errors.dteCertificateValidUntil.type === "required" &&
-                      "Issue Date can't be blank"}
-                  </div>
-                </div>
-                <div className="col-lg-3">
-                  <label className="form-label mt-2">
-                    Certificate Valid date
-                  </label>
-                  <Form.Control
-                    type="date"
-                    name="dteCertificateValidUntil"
-                    className="fromStyle"
-                    value={certificateInfoInput.dteCertificateValidUntil}
-                    onChange={(e) =>
-                      certificateMainInfoChange(
-                        "dteCertificateValidUntil",
                         e.target.value
                       )
                     }
@@ -507,6 +519,43 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       "Expiry Date can't be blank"}
                   </div>
                 </div>
+                <div className="col-lg-3 mt-3">
+                  <label htmlFor="">{""}</label>
+                  <Form.Group controlId="formBasicChecbox">
+                    <Form.Check
+                      className="forgotPasswordText  "
+                      type="checkbox"
+                      label="isExtendedUntil"
+                    />
+                  </Form.Group>
+                </div>
+                <div className="col-lg-3">
+                  <label className="form-label mt-2">
+                    Certificate Valid date
+                  </label>
+                  <Form.Control
+                    type="date"
+                    name="dteCertificateValidUntil"
+                    className="fromStyle"
+                    value={certificateInfoInput.dteCertificateValidUntil}
+                    onChange={(e) =>
+                      certificateMainInfoChange(
+                        "dteCertificateValidUntil",
+                        e.target.value
+                      )
+                    }
+                    ref={register({
+                      required: true,
+                      maxLength: 100,
+                    })}
+                  />
+                  <div className="inputError margin-minus-8">
+                    {errors.dteCertificateValidUntil &&
+                      errors.dteCertificateValidUntil.type === "required" &&
+                      "Issue Date can't be blank"}
+                  </div>
+                </div>
+
                 <div className="col-lg-3">
                   <label className="form-label mt-2">Extend Date</label>
                   <Form.Control
@@ -531,8 +580,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       "Expiry Date can't be blank"}
                   </div>
                 </div>
-                {/* <div className="col-lg-3">
-                  <label className="form-label mt-2">Last Survey</label>
+                <div className="col-lg-3">
+                  <label className="form-label mt-2">Range From</label>
                   <Form.Control
                     type="date"
                     name="dteLastSurvey"
@@ -553,7 +602,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </div>
                 </div>
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Next Survey</label>
+                  <label className="form-label mt-2">Next To</label>
                   <Form.Control
                     type="date"
                     name="dteNextSurvey"
@@ -572,7 +621,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       errors.dteNextSurvey.type === "required" &&
                       "Expiry Date can't be blank"}
                   </div>
-                </div> */}
+                </div>
                 <div className="col-lg-3">
                   <label className="form-label mt-2">Endorsement Date</label>
                   <Form.Control
@@ -597,27 +646,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       "Expiry Date can't be blank"}
                   </div>
                 </div>
-
-                <div className="col-lg-3">
-                  <label className="form-label mt-2">Issueing Authority</label>
-                  <Form.Control
-                    type="text"
-                    name="intIssuingAuthorityID"
-                    placeholder="Enter Issue Authority"
-                    className="fromStyle"
-                    value={certificateInfoInput.intIssuingAuthorityID}
-                    onChange={(e) =>
-                      certificateMainInfoChange(
-                        "intIssuingAuthorityID",
-                        e.target.value
-                      )
-                    }
-                    ref={register({
-                      required: true,
-                      maxLength: 100,
-                    })}
-                  />
-                </div>
+              </div>
+              {/*certificate create dates close*/}
+              <div className="form-group row mt-1 border">
                 {/* <div className="col-lg-3">
                   <label className="form-label mt-2">Last Survey</label>
                   <Form.Control
@@ -747,7 +778,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       history.push("/certificates-main/list");
                     }}
                   >
-                    <button type="button" class="btn btn-secondary btn-lg mr-2">
+                    <button type="button" className="cancelButton btn mr-3">
                       Back
                     </button>
                   </a>
@@ -755,8 +786,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     Next
                     </button> */}
                   {/* {loading && ( */}
-                  <button type="submit" class="btn btn-primary btn-lg">
-                    <span>Submite</span>
+                  <button type="submit" className="mr-4 saveButton text-white btn">
+                    <span>Submit</span>
                     {/* <span className="ml-3 spinner spinner-white"></span> */}
                   </button>
                   {/* )} */}
