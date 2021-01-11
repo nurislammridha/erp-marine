@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Col, Row } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import { useForm } from "react-hook-form";
@@ -30,10 +30,13 @@ const IssueAuthorityFilter = () => {
     // dispatch(GetVoyageList(value, type));
   };
   const changeSearch = (value) => {
-    console.log("Search value", value);
     setSearch(value);
     dispatch(getIssuingAuthorities(value, type));
   };
+
+  useEffect(() => {
+    dispatch(getIssuingAuthorities());
+  }, []);
 
   return (
     <form className="form form-label-right" method="post">

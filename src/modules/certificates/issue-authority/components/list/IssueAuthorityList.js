@@ -81,7 +81,7 @@ const IssueAuthorityList = (props) => {
               {issuingAuthorities.map((item, index) => (
                 <tr>
                   <td>{item.strIssuingAuthorityName}</td>
-                  <td>{item.isActive === 1 ? "Active" : "Inactive"}</td>
+                  <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
                   {/* <td>
                     {" "}
                     <Link to={`/voyage/list/${""}`}>

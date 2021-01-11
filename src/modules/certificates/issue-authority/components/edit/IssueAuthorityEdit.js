@@ -16,6 +16,9 @@ const IssueAuthorityEdit = (props) => {
   const history = useHistory();
   const { register, handleSubmit, errors, setValue } = useForm();
   const dispatch = useDispatch();
+  const isLoading = useSelector(
+    (state) => state.certificateIssueAuthorityInfo.isLoading
+  );
   const action = [
     {
       label: "Active",
@@ -92,9 +95,19 @@ const IssueAuthorityEdit = (props) => {
       <Form.Group as={Row} controlId="formPlaintextPassword">
         <Form.Label column sm="3"></Form.Label>
         <Col sm="9">
-          <Button variant="primary" type="submit">
-            Update
-          </Button>
+          {!isLoading && (
+            <Button variant="primary" type="submit">
+              Update
+            </Button>
+          )}
+          {isLoading && (
+            <Button variant="primary" type="submit" disabled={true}>
+              <span className="p-2">
+                <i className="fa fa-check"></i> Updating...
+              </span>
+              <span className="ml-3 spinner spinner-white "></span>
+            </Button>
+          )}
         </Col>
       </Form.Group>
     </Form>
