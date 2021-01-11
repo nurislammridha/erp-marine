@@ -84,7 +84,7 @@ const CertificateCategoryAdd = () => {
 
         {isLoading && (
           <button type="submit" class="btn btn-primary saveButton" disabled={true}>
-            <span className="p-2"><i className="fa fa-check"></i>  Submitting...</span>
+            <span className="p-2">Submitting...</span>
             <span className="ml-3 spinner spinner-white "></span>
           </button>
         )}
