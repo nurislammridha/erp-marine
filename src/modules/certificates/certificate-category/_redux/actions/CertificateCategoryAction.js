@@ -54,7 +54,7 @@ export const certificatecategorySubmitAction = (getCategoryInpuData) => (dispatc
 };
 
 export const getCertificateCategoryListData = (searchValue = "", status = "") => async (dispatch) => {
-    let isActive = status == "" ? 1 : parseInt(status);
+    let isActive = status == "" ? "" : parseInt(status);
     let url = `http://10.3.203.16:82/iMarineAPI/public/api/v1/certificate/category`;
 
     if (searchValue !== "" || isActive !== "") {
