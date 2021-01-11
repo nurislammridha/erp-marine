@@ -10,7 +10,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
     {
       moduleName: "HR",
       moduleRouteUrl: "/employee",
-      moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
+      moduleImageIcon: "/media/svg/icons/Code/hr.svg",
       subModules: [
         {
           subModuleName: "Employee",
@@ -47,7 +47,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
     {
       moduleName: "Expense",
       moduleRouteUrl: "/addition-deduction",
-      moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
+      moduleImageIcon: "/media/svg/icons/Code/expense.svg",
       subModules: [
         {
           subModuleName: "New Expense",
@@ -122,7 +122,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
     {
       moduleName: "Certificate",
       moduleRouteUrl: "/certificates/list",
-      moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
+      moduleImageIcon: "/media/svg/icons/Code/certificates.svg",
       subModules: [
         {
           subModuleName: "Detail",
@@ -220,7 +220,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
     {
       moduleName: "Voyage",
       moduleRouteUrl: "/voyage",
-      moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
+      moduleImageIcon: "/media/svg/icons/Code/voyage.svg",
       subModules: [
         {
           subModuleName: "Voyage",
