@@ -8,23 +8,46 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCertificateTypeList } from "../../../certificate-types/_redux/actions/CertificateTypeAction";
 import { getCertificateMasterList } from "../../_redux/actions/CertificateListAction";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
+import CertificateMasterEdit from "../edit/CertificateMasterEdit";
 
 const CertificateMasterFilterList = () => {
 
+    const [show, setShow] = useState(false);
+    const [editItem, setEditItem] = useState({});
+    const modalEditStatus = useSelector(
+        (state) => state.CertificateListReducer.editStatus
+      );
 
     const dispatch = useDispatch();
     const certificateMasterData = useSelector((state) => state.CertificateListReducer.certificateMasterList);
     console.log('certificateMasterData', certificateMasterData);
 
-    const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const handleEdit = (editItem) => {
+        setEditItem(editItem);
+        setShow(true);
+      };
+
+
     useEffect(() => {
           dispatch(getCertificateMasterList());
-      }, []);
+          if (modalEditStatus) {
+            setShow(false);
+          }
+      }, [dispatch, modalEditStatus]);
 
     return (
         <div className="react-bootstrap-table table-responsive">
+            <SimpleModal
+            show={show}
+            handleClose={() => handleClose()}
+            modalTitle={"Edit Issue Authority"}
+            >         
+            <CertificateMasterEdit editData={editItem} />
+            </SimpleModal>
+            
             <table className="table mt-2 tbl-standard" id="table-to-xls">
                 <thead>
                     <tr>
@@ -48,22 +71,16 @@ const CertificateMasterFilterList = () => {
                                     <Link to={``}>
                                         <i className="far fa-eye mr-3"></i>
                                     </Link>
-                                    <i className="far fa-edit ml-2" onClick={handleShow}></i>
+                                    <i className="far fa-edit ml-2" 
+                                    onClick={() => {
+                                    handleEdit(item);
+                                    }}></i>
 
                                 </td>
                             </tr>
                         ))}
                 </tbody>
             </table>
-
-            <SimpleModal
-                show={show}
-                size="lg"
-                handleClose={() => handleClose()}
-                modalTitle={"Certificate Type Add"}
-            >
-                {/* <CertificateTypeEdit /> */}
-            </SimpleModal>
         </div>
     );
 };

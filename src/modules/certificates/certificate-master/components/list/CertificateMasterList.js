@@ -88,7 +88,7 @@ const CertificateMasterList = () => {
             variant="primary"
             // onClick={handleShow}
           >
-            Add News
+            Add New
           </Button>
           <Modal size="md" show={show} 
           // onHide={handleClose}

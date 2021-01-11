@@ -12,6 +12,7 @@ const initialState = {
         intActionBy:"2",
         isActive: "1"
     },
+    editStatus: false,
     certificateMasterList: [],
     status: false
 
@@ -57,10 +58,20 @@ const CertificateMasterReducer = (state = initialState, action) => {
             return {
                 ...state,
                 status: action.payload.status
-            
-
-
             };
+        case Types.SET_CERTIFICATE_MASTER_EDIT_DATA:
+            return {
+                ...state,
+                certificateMasterInput: action.payload,
+            };
+        
+            case Types.EDIT_CERTIFICATE_MASTER:
+            return {
+                ...state,
+                editStatus: action.payload.status,
+            };
+
+
         default:
             break;
     }
