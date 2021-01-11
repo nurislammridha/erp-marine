@@ -93,7 +93,7 @@ const BasicForm = () => {
                   <Form.Label className="formFont pl-1">Search</Form.Label>
                   <Form.Control
                     className="formHeight"
-                    type="text"
+                    type="search"
                     placeholder="Search"
                   />
                 </Form.Group>

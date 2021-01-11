@@ -32,9 +32,11 @@ const BasicTable = () => {
                 <option>A</option>
               </Form.Control>
             </Form.Group>
-            <i className="fas fa-filter mt-3 mr-2"></i>
+            <i className="fas fa-filter tableFilter mt-3 mr-2"></i>
             <i className="far fa-filter"></i>
-            <Button variant="primary">Add New</Button>
+            <Button className="btn-sm" variant="primary">
+              Add New
+            </Button>
           </div>
 
           <table className="table mt-5 voyageTable">
