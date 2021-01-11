@@ -553,3 +553,16 @@ h1.tableheading {
 i.tableFilter {
     color: #3699ff;
 }
+
+.input-area-add .float-left {
+    width: 80%;
+}
+
+.input-area-add .float-right {
+    width: 20%;
+}
+
+.input-area-add input,
+.input-area-add select {
+    border-radius: 0px!important;
+}
