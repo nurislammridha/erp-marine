@@ -14,15 +14,15 @@ const IssueAutorityListContainer = (props) => {
   const ref = React.createRef();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const modalStatus = useSelector(
-    (state) => state.certificateIssueAuthorityInfo.status
+  const modalAddStatus = useSelector(
+    (state) => state.certificateIssueAuthorityInfo.addStatus
   );
 
   useEffect(() => {
-    if (modalStatus) {
+    if (modalAddStatus) {
       setShow(false);
     }
-  }, [modalStatus]);
+  }, [modalAddStatus]);
 
   return (
     <div className="card card-custom gutter-b">
