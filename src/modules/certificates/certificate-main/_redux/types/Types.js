@@ -20,6 +20,8 @@ export const GET_CERTIFICATE_TYPE = "GET_CERTIFICATE_TYPE";
 export const GET_CERTIFICATE_ISSUE_BY = "GET_CERTIFICATE_ISSUE_BY";
 /*************** CERTIFICATE ******************/
 
-/******/
+/*********create main certificate************/
 export const CERTIFICATE_MAIN_SUBMIT = "CERTIFICATE_MAIN_SUBMIT";
 export const CERTIFICATE_MAIN_SUBMITTING = "CERTIFICATE_MAIN_SUBMITTING";
+/*********get single certificate info************/
+export const GET_MAIN_CERTIFICATE_SINGLE_DATA = "GET_MAIN_CERTIFICATE_SINGLE_DATA";

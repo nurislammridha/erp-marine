@@ -11,14 +11,14 @@ const initialState = {
   certificatesIssueByOptionData: [],
 
   isLoading: false,
-  productData: {
-    id: 0,
-    title: "",
-    description: "",
-    price: "",
-    image: null,
-    imagePreviewUrl: null,
-  },
+  //   productData: {
+  //     id: 0,
+  //     title: "",
+  //     description: "",
+  //     price: "",
+  //     image: null,
+  //     imagePreviewUrl: null,
+  //   },
   certificateMainInfo: {
     intVesselID: null,
     intCertificateID: null,
@@ -29,21 +29,46 @@ const initialState = {
     strIssuedPlace: "",
     strLocation: "",
     intCertificateTypeID: null,
-    intNotOnBoard: null,
+    intNotOnBoard: 1,
     dteCertificateIssueDate: "",
     dteCertificateValidUntil: "",
     isExtendedUntil: true,
     dteExtendedUntil: "",
     dteLastSurvey: "",
     dteNextSurvey: "",
-    dteLastEndorsementDate: "",
+    dteLastEndorsementDate: "2021-01-06",
     strOfficeRemarks: "",
-    imagePreviewUrl: null,
+    // image: null,
+    // imagePreviewUrl: null,
     strShipRemarks: "",
     intActionBy: 100,
-    dteLastActionDateTime: "",
-    dteServerDateTime: "",
-    isActive: true,
+    dteLastActionDateTime: "2021-01-06",
+    dteServerDateTime: "2021-01-06",
+      isActive: true,
+    
+    // intVesselID: 1,
+    // intCertificateID: 1,
+    // intCategoryID: 2,
+    // strCustomeCode: "ddd",
+    // intIssuingAuthorityID: 1,
+    // strShipFolderNo: "Flag",
+    // strIssuedPlace: "Bangladesh",
+    // strLocation: "2020",
+    // intCertificateTypeID: 1,
+    // intNotOnBoard: 100,
+    // dteCertificateIssueDate: "2021-01-06",
+    // dteCertificateValidUntil: "2021-01-06",
+    // isExtendedUntil: true,
+    // dteExtendedUntil: "2021-01-06",
+    // dteLastSurvey: "2021-01-06",
+    // dteNextSurvey: "2021-01-06",
+    // dteLastEndorsementDate: "2021-01-06",
+    // strOfficeRemarks: "2020",
+    // strShipRemarks: "Engine dd",
+    // intActionBy: 100,
+    // dteLastActionDateTime: "2021-01-06",
+    // dteServerDateTime: "2021-01-06",
+    // isActive: true,
   },
   productEditData: null,
   productDetail: null,
@@ -53,6 +78,7 @@ const initialState = {
   editing: false,
   deleteStatus: false,
   deleting: false,
+  certificateSingleData: {},
 
   addMessage: "",
   editMessage: "",
@@ -82,8 +108,8 @@ const CertificateMainReducer = (state = initialState, action) => {
         ...state,
         certificatesNameOptionData: getCertificateName(action.payload),
       };
-      case Types.GET_CERTIFICATE_TYPE:
-          console.log("action.payload type :>> ", action.payload);
+    case Types.GET_CERTIFICATE_TYPE:
+      console.log("action.payload type :>> ", action.payload);
       return {
         ...state,
         certificatesTypeOptionData: getCertificateTypeName(action.payload),
@@ -116,15 +142,16 @@ const CertificateMainReducer = (state = initialState, action) => {
         };
       }
 
-    
-
     case Types.CERTIFICATE_MAIN_SUBMITTING:
       return {
         ...state,
         isLoading: action.payload,
       };
-      
-    //SELF
+    case Types.GET_MAIN_CERTIFICATE_SINGLE_DATA: 
+      return {
+        ...state,
+        certificateSingleData: action.payload
+      };
 
     case Types.CHANGE_CERTIFICATE_INPUT_UPDATE:
       const productEditData = { ...state.productEditData };
@@ -216,7 +243,7 @@ const CertificateMainReducer = (state = initialState, action) => {
           description: "",
           price: "",
           image: null,
-          imagePreviewUrl: null,
+        //   imagePreviewUrl: null,
         },
       };
 
