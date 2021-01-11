@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Modal, Form, Col, Row } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   handleChangeCertificateIssueAuthorityInput,
   issueAuthoritySubmitAction,
+  getIssuingAuthorities,
 } from "../../_redux/actions/CertificateIssueAuthorityAction";
 // import { Form } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
@@ -17,6 +18,9 @@ const IssueAuthorityAdd = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(
     (state) => state.certificateIssueAuthorityInfo.isLoading
+  );
+  const addStatus = useSelector(
+    (state) => state.certificateIssueAuthorityInfo.addStatus
   );
   const action = [
     {
@@ -32,6 +36,11 @@ const IssueAuthorityAdd = () => {
     (state) =>
       state.certificateIssueAuthorityInfo.CertificateIssueAuthirityInput
   );
+  useEffect(() => {
+    if (addStatus) {
+      dispatch(getIssuingAuthorities());
+    }
+  }, [addStatus]);
   const handleChangeTextInput = (name, value) => {
     dispatch(handleChangeCertificateIssueAuthorityInput(name, value));
   };

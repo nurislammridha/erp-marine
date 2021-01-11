@@ -8,6 +8,7 @@ import {
   handleChangeCertificateIssueAuthorityInput,
   issueAuthorityEditAction,
   setIssuingAuthorityEditValue,
+  getIssuingAuthorities,
 } from "../../_redux/actions/CertificateIssueAuthorityAction";
 // import { Form } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
@@ -18,6 +19,9 @@ const IssueAuthorityEdit = (props) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(
     (state) => state.certificateIssueAuthorityInfo.isLoading
+  );
+  const editStatus = useSelector(
+    (state) => state.certificateIssueAuthorityInfo.editStatus
   );
   const action = [
     {
@@ -32,7 +36,10 @@ const IssueAuthorityEdit = (props) => {
 
   useEffect(() => {
     dispatch(setIssuingAuthorityEditValue(props.editData));
-  }, [dispatch]);
+    if (editStatus) {
+      dispatch(getIssuingAuthorities());
+    }
+  }, [dispatch, editStatus]);
 
   const CertificateIssueAuthirityInput = useSelector(
     (state) =>
