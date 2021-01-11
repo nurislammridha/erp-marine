@@ -68,14 +68,6 @@ export const getCertificateCategoryListData = (
   dispatch({ type: Types.GET_CERTIFICATE_CATEGORY_LIST, payload: response });
   let url = "";
   url = `${process.env.REACT_APP_API_URL}certificate/category?isPaginated=1`;
-
-  // if (searchText !== null) {
-  //     // url += `&paginateNo=${page}`;
-  //     url += `&search=${searchText}`
-  // } else {
-  //     // url += `&certificate/details?search=${searchText}`
-  // }
-
   try {
     await axios.get(url)
       .then((res) => {

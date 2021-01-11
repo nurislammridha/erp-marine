@@ -69,7 +69,8 @@ const CertificateMasterAdd = () => {
                 <div className="form-group row mt-5">
                     <div className="col-md-12">
                         <label className="form-label">Certificate  Name</label>
-                        <Form.Control type="text"
+                        <Form.Control className="formFont pl-1"
+                            className="formHeight"
                             type="text"
                             value={certificateMainInfoChange.strCertificateName}
                             name="strCertificateName"

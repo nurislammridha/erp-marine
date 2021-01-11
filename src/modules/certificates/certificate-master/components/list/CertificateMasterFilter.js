@@ -35,7 +35,9 @@ const CertificateMasterFilter = () => {
             <form className="form form-label-right" method="post">
                 <div className="form-group row ml-2">
                     <div className="col-lg-3 col-md-6 col-10">
-                        <Form.Control type="text"
+                        <Form.Control className="formFont pl-1"
+                            className="formHeight"
+                            type="text"
                             placeholder="Search"
                             value={search}
                             onChange={(e) => changeSearch(e.target.value)}
@@ -47,7 +49,7 @@ const CertificateMasterFilter = () => {
                         as={Row}
                         controlId="formPlaintextPassword"
                         >
-                        <Form.Label className="mt-2">Status</Form.Label>
+                        <Form.Label className="formFont pl-1" className="mt-2">Status</Form.Label>
                         <Col sm="9">
                             <RHFInput
                                 as={<Select options={statusOptions} />}

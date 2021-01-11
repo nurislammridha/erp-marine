@@ -39,7 +39,7 @@ const CertificateMasterContainer = () => {
         <div className="col-xl-3 col-lg-3 col-md-3 col-6 VoyageListBtn">
           <Dropdown className="d-inline mr-2">
             <Dropdown.Toggle
-              className="text-bold"
+              className="text-bold btn-sm"
               variant="light text-primary"
               id="dropdown-basic"
             >
@@ -87,7 +87,7 @@ const CertificateMasterContainer = () => {
             </Dropdown.Menu>
           </Dropdown>
           <Button
-            className="pl-3 pr-3 text-bold"
+            className="pl-3 pr-3 text-bold btn-sm"
             variant="primary"
              onClick={handleShow}
           >

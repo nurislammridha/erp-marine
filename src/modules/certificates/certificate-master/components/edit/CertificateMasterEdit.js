@@ -9,6 +9,8 @@ import { useHistory, Link } from "react-router-dom";
 import { certificateMasterEditAction, handleChangeCertificateMasterInput, setMasterCertificateEditValue } from "../../_redux/actions/CertificateListAction";
 
 const CertificateMasterEdit = (props) => {
+
+const isLoading = useSelector((state) => state.CertificateCategoryReducer.isLoading);
   const history = useHistory();
   const { register, handleSubmit, errors, setValue } = useForm();
   const dispatch = useDispatch();
@@ -72,7 +74,8 @@ const certificatesCategoryOptionData = useSelector((state) => state.certificateM
                 <div className="form-group row mt-5">
                     <div className="col-md-12">
                         <label className="form-label">Certificate Name</label>
-                        <Form.Control type="text"
+                        <Form.Control className="formFont pl-1"
+                            className="formHeight"
                             type="text"
                             value={CertificateMasterInput.strCertificateName}
                             name="strCertificateName"
@@ -116,22 +119,18 @@ const certificatesCategoryOptionData = useSelector((state) => state.certificateM
                 <div className="form-group row">
                     <div className="col-sm-10"></div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg">
-                    <span>update</span>
+                {isLoading && (
+                <button type="submit" class="btn btn-primary saveButton" disabled={true}>
+                    <span className="p-2"><i className="fa fa-check"></i>  updating...</span>
+                    <span className="ml-3 spinner spinner-white "></span>
                 </button>
-
-                {/* {loading && (
-                    <button type="submit" class="btn btn-primary btn-lg" disabled={true}>
-                        <span>Submitting...</span>
-                        <span className="ml-3 spinner spinner-white"></span>
-                    </button>
                 )}
 
-                {!loading && (
-                    <button type="submit" class="btn btn-primary btn-lg">
-                        <span>Submit</span>
-                    </button>
-                )} */}
+                {!isLoading && (
+                <button type="submit" class="btn btn-primary saveButton">
+                    <span>update</span>
+                </button>
+                )}
             </form>
         </>
   )

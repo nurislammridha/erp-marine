@@ -20,7 +20,8 @@ export const handleChangeCertificateMasterInput = (name, value) => async (
 
 export const getCertificateMasterList = (searchValue = "", status = "") => async (dispatch) => {
     let isActive = status == "" ? "" : parseInt(status);
-    let url = `http://10.17.2.31:8082/iMarineAPI/public/api/v1/certificate/certificateList`;
+    // let url = `http://10.17.2.31:8082/iMarineAPI/public/api/v1/certificate/certificateList`;
+    let url = `${process.env.REACT_APP_API_URL}certificate/certificateList`;
 
     if (searchValue !== "" || isActive !== "") {
         url += `?search=${searchValue}&isActive=${isActive}`;
@@ -101,7 +102,9 @@ export const certificateMasterEditAction = (CertificateMasterInput,intCertificat
     payload: responseList,
   });
 
-  let editUrl = `http://10.17.2.31:8082/iMarineAPI/public/api/v1/certificate/certificateList/${intCertificateID}`;
+  // let editUrl = `http://10.17.2.31:8082/iMarineAPI/public/api/v1/certificate/certificateList/${intCertificateID}`;
+  let editUrl = `${process.env.REACT_APP_API_URL}certificate/certificateList/${intCertificateID}`;
+  
   Axios.put(editUrl, CertificateMasterInput)
     .then(function(response) {
       responseList.data = response.data;
