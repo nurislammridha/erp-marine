@@ -82,7 +82,8 @@ const CertificateCategoryAdd = () => {
             }}
             setValue={setValue}
           />
-        </div>
+        </div>*/}
+
         <div className="form-group row">
           <div className="col-sm-10"></div>
         </div>

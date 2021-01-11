@@ -21,7 +21,7 @@ export const certificatecategorySubmitAction = (getCategoryInpuData) => (dispatc
       payload: responseList,
   });
 
-  let postUrl = `http://10.17.2.189:8080/api/v1/certificate/category`;
+  let postUrl = `http://10.17.2.31:8082/iMarineAPI/public/api/v1/certificate/category`;
   axios
       .post(postUrl, getCategoryInpuData)
       .then(function (response) {
