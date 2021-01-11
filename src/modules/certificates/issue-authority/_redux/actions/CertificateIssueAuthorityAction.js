@@ -32,7 +32,7 @@ export const getIssuingAuthorities = (
   };
   dispatch({ type: Types.GET_ISSUING_AUTHORITY_LIST, payload: response });
 
-  let isActive = status == "" ? 1 : parseInt(status);
+  let isActive = status == "" ? "" : parseInt(status);
 
   let url = `http://192.168.206.1:82/iMarineAPI/public/api/v1/certificate/issuingAuthority`;
   // let url = "";
