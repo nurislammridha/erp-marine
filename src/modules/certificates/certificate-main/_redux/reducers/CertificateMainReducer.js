@@ -12,6 +12,7 @@ const initialState = {
   certificatesTypeOptionData: [],
   certificatesIssueByOptionData: [],
   vesselTypeOptionData: [],
+  certificateStatus: [],
   isLoading: false,
   //   productData: {
   //     id: 0,
@@ -25,6 +26,7 @@ const initialState = {
     intVesselID: null,
     intCertificateID: null,
     intCategoryID: null,
+    intParentCategoryID: null,
     strCustomeCode: "",
     intIssuingAuthorityID: null,
     strShipFolderNo: "",
@@ -43,6 +45,7 @@ const initialState = {
     strOfficeRemarks: "",
     // image: null,
     // imagePreviewUrl: null,
+    certificateDates: [],
     strShipRemarks: "",
     intActionBy: null,
     dteLastActionDateTime: moment().format("YYYY-MM-DD"),
@@ -98,6 +101,11 @@ const CertificateMainReducer = (state = initialState, action) => {
       return {
         ...state,
         certificatesTypeOptionData: getCertificateTypeName(action.payload),
+      };
+    case Types.MAIN_CERTIFICATE_STATUS:
+      return {
+        ...state,
+        certificateStatus: getCertificateStatusList(action.payload),
       };
     case Types.GET_CERTIFICATE_ISSUE_BY:
       return {
@@ -307,4 +315,19 @@ const getvesselType = (data) => {
   }
   return options;
 };
+
+const getCertificateStatusList = (data) => {
+  let options = [];
+  if (data) {
+    data.forEach((item) => {
+      let itemData = {
+        value: item.intCertificateStatusID,
+        label: item.strStatus,
+      };
+      options.push(itemData);
+    });
+  }
+  return options;
+};
+
 export default CertificateMainReducer;

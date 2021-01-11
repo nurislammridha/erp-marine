@@ -238,3 +238,13 @@ export const mainCertificateEdit = (certificateInfoInput, id) => (dispatch) => {
     }
   });
 };
+
+
+
+export const getCertificateStatusData = () => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}certificate/status`;
+  Axios.get(url)
+    .then((res) => {
+      dispatch({ type: Types.MAIN_CERTIFICATE_STATUS, payload: res.data.data });
+    })
+};
