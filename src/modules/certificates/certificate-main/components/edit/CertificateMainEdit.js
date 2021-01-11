@@ -347,7 +347,7 @@ const CertificateMainEdit = () => {
                     type="text"
                     name="strIssuedPlace"
                     className="fromStyle"
-                    value={certificateInfoInput.strIssuePlace}
+                    value={certificateInfoInput.strIssuedPlace}
                     onChange={(e) =>
                       certificateMainInfoChange(
                         "strIssuedPlace",
