@@ -1,22 +1,17 @@
 import * as Types from "../types/Type";
 
-
 const initialState = {
-
-    certificateMasterInput: {
-        strCertificateName: "",
-        strCertificateCategoriName: "",
-        strVesselName: "",
-        intCategoryID:"",
-        intVesselID:null,
-        intActionBy:"2",
-        isActive: "1"
-    },
-    editStatus: false,
-    certificateMasterList: [],
-    status: false
-
-
+  certificateMasterInput: {
+    strCertificateName: "",
+    strCertificateCategoriName: "",
+    strVesselName: "",
+    intCategoryID: "",
+    intVesselID: null,
+    intActionBy: "2",
+    isActive: "1",
+  },
+  certificateMasterList: [],
+  status: false,
 };
 
 const CertificateMasterReducer = (state = initialState, action) => {

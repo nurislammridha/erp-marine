@@ -5,10 +5,13 @@ import Select from "react-select";
 import { useHistory, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { handleChangeCertificateMasterInput, certificateMasterSubmitAction, getCertificateMasterList } from "../../_redux/actions/CertificateListAction";
+import {
+  handleChangeCertificateMasterInput,
+  certificateMasterSubmitAction,
+  getCertificateMasterList,
+} from "../../_redux/actions/CertificateListAction";
 import { getCertificateCategory } from "../../../certificate-main/_redux/actions/CertificateMainAction";
 // import { certificatetypeSubmitAction, handleChangeCertificateTypeInput } from "../../_redux/actions/CertificateListAction";
-
 
 const CertificateMasterAdd = () => {
     const history = useHistory();
@@ -41,23 +44,20 @@ const CertificateMasterAdd = () => {
         }
     ]
 
-    const certificateMainInfoChange = (name, value, e = null) => {
-        console.log('Name',name,"value",value);
-        dispatch(handleChangeCertificateMasterInput(name, value, e));
-      };
+  const certificateMainInfoChange = (name, value, e = null) => {
+    console.log("Name", name, "value", value);
+    dispatch(handleChangeCertificateMasterInput(name, value, e));
+  };
 
-  
+  const onSubmit = (data) => {
+    dispatch(certificateMasterSubmitAction(CertificateMasterInput));
+  };
 
-    const onSubmit = (data) => {
-        dispatch(certificateMasterSubmitAction(CertificateMasterInput));
-    };
-
-    useEffect(() => {
-        dispatch(getCertificateCategory());
-        dispatch(getCertificateMasterList());
-        // dispatch(handleChangeCertificateMasterInput());
-    }, [])
-
+  useEffect(() => {
+    dispatch(getCertificateCategory());
+    dispatch(getCertificateMasterList());
+    // dispatch(handleChangeCertificateMasterInput());
+  }, []);
 
     return (
         <>

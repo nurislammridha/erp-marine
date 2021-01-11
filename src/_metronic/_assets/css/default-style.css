@@ -85,6 +85,9 @@ ul.sticky-toolbar.nav.flex-column.pl-2.pr-2.pt-3.pb-3.mt-4 {
 
 .formHeight {
     height: 30px;
+    background: #f3f6f9;
+    font-size: 10px !important;
+    font-weight: 500;
 }
 
 label.formFont.form-label {
@@ -95,10 +98,49 @@ label.formFont.form-label {
 button.saveButton {
     height: 29px;
     line-height: 10px;
+    background-color: #789dfe !important;
+    font-weight: 500;
+    border-radius: 3px;
 }
 
 .cancelButton {
-    background-color: #aeaeae !important;
+    background-color: #e5eaee !important;
+    height: 29px;
+    line-height: 10px;
+    color: #464e5f !important;
+    font-weight: 500;
+    border-radius: 3px;
+}
+
+.formSelect {
+    height: 30px;
+    font-size: 10px !important;
+    background: #f3f6f9;
+    font-weight: 500;
+    padding-top: 5px;
+}
+
+.chooseFileText {
+    color: #b5b5c3;
+}
+
+.fileInput {
+    border-bottom-right-radius: 6px !important;
+    border-top-right-radius: 6px !important;
+}
+
+input.fileInput,
+span#inputGroupPrepend {
+    height: 30px;
+}
+
+.formCheckBox {
+    border: none !important;
+}
+
+.formCheckBox {
+    border: 1px solid red !important;
+    background: red;
 }
 
 
@@ -109,24 +151,17 @@ button.saveButton {
 }
 
 .paid__widget {
-    height: 80px;
-    width: 215px;
     box-shadow: 0px 3px 6px #2c28281c;
     border-radius: 10px;
-    background: white;
+    background: #f64e60;
     overflow: hidden;
-    height: 80px;
-    width: 220px;
-    box-shadow: 0px 3px 6px #2c28281c;
-    border-radius: 10px;
-    background: white;
+    color: #ffff;
+    padding-bottom: 15px;
     overflow: hidden;
 }
 
 .widget__left {
-    float: left;
-    width: 30%;
-    padding-top: 20px;
+    padding-top: 15px;
     padding-left: 20px;
 }
 
@@ -135,64 +170,29 @@ button.saveButton {
     height: 30px;
     width: 30px;
     border-radius: 50%;
-    background: #40C297;
+    background: #fff;
 }
 
 .widget__right {
-    float: right;
-    width: 70%;
-    text-align: left;
-    padding-top: 20px;
-}
-
-.widget__right p {
-    color: #8898AA;
-    text-transform: uppercase;
-    font-size: 11px !important;
-}
-
-.widget__right h4 {
-    color: #4D4F5C;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.widget__left {
-    float: left;
-    width: 30%;
-    padding-top: 20px;
+    padding-top: 15px;
     padding-left: 20px;
 }
 
-.widget__left span {
-    display: block;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    background: #40c297;
-}
-
-.widget__right {
-    float: right;
-    width: 70%;
-    text-align: left;
-    padding-top: 20px;
-}
-
 .widget__right p {
-    color: #8898aa;
-    text-transform: uppercase;
-    font-size: 11px !important;
+    color: #ffff;
+    font-weight: 500;
+    font-size: 13px !important;
+    padding-top: 2px;
 }
 
 .widget__right h4 {
-    color: #4d4f5c;
-    font-weight: bold;
-    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 18px;
 }
 
 .chart__box {
-    box-shadow: 0px 2px 6px #2C28281C;
+    box-shadow: 0px 2px 6px #2c28281c;
     border-radius: 10px;
     padding-bottom: 10%;
     overflow: hidden;
@@ -209,7 +209,18 @@ button.saveButton {
     font-size: 14px !important;
     padding-left: 10px;
     color: #172b4d;
-    /* color:#F1F3F9; */
+}
+
+.paid__widget.one {
+    background-color: #6993ff;
+}
+
+.paid__widget.two {
+    background-color: #1bc5bd;
+}
+
+.paid__widget.three {
+    background-color: #ffa800;
 }
 
 .dough__main {
@@ -365,14 +376,13 @@ button.saveButton {
 }
 
 a#kt_login_forgot {
-    color: #172b4d !important;
+    color: #3699ff !important;
+    font-weight: 600;
 }
 
 button#kt_login_signin_submit {
-    background: #1d3d74;
-    border: 1px solid #1d3d74;
     box-shadow: #00000029 !important;
-    width: 201px;
+    margin: auto;
 }
 
 .heading {
@@ -381,7 +391,7 @@ button#kt_login_signin_submit {
 }
 
 span.loginText {
-    font-weight: 500;
+    font-weight: 600;
 }
 
 a {
@@ -391,50 +401,27 @@ a {
 
 img.loginpageLogo {
     width: 180px;
-    margin-bottom: 50px;
 }
 
-@media (min-width: 1200px) {
-    .login.login-1 .login-aside {
-        width: 100%;
-        max-width: 900px !important;
-    }
+.login.login-1 .login-aside {
+    height: 100vh;
 }
-
-@media (max-width: 1199px) {
-    .login.login-1 .login-aside {
-        width: 100%;
-        max-width: 650px !important;
-    }
-}
-
-
-/* .loginForm input#formBasicChecbox {
-  box-shadow: -5px 3px 5px #00000021 !important;
-  border: none !important;
-} */
 
 .loginForm input.form-control {
-    background: #fcfcfc !important;
+    background: #eef1f5 !important;
     height: 36px !important;
-    border: 1px solid #95989a4d;
-    box-shadow: 0px 2px 5px #00000010 !important;
+    border: 1px solid #eef1f5;
+    box-shadow: 0px 1px 5px #00000010 !important;
 }
 
-@media (max-width: 425px) {
-    .login-aside {
-        height: 400px !important;
-    }
-}
-
-img.loginpageLogo {
-    width: 99px;
-    margin-top: -130px;
+h1.font-size-h1.heading {
+    text-align: center;
+    font-weight: 500;
+    margin-top: -20px;
 }
 
 .heading {
     font-size: 22px !important;
-    margin-top: -55px;
 }
 
 .overlay__caption {
@@ -474,19 +461,97 @@ img.loginpageLogo {
 
 .login.login-1 .login-aside {
     width: 100%;
-    max-width: 900px !important;
 }
 
 .loginForm input.form-control {
-    background: #fcfcfc !important;
+    background: #eef1f5 !important;
     height: 36px !important;
     border: 1px solid #95989a4d;
-    box-shadow: -5px 3px 5px #00000029 !important;
+    box-shadow: 0px 1px 5px #00000029 !important;
 }
 
 .loginForm input#formBasicChecbox {
-    box-shadow: -5px 3px 5px #00000021 !important;
+    box-shadow: 0px 3px 5px #00000021 !important;
     border: none !important;
+}
+
+.flex-row-fluid.d-flex.flex-column.position-relative.loginPage {
+    max-width: 50% !important;
+}
+
+.login-aside.d-flex.flex-row-auto.loginBg {
+    max-width: 50%;
+}
+
+input.form-control.loginFormInput.emailinput.h-auto.py-5.px-6.is-valid {
+    width: 300px !important;
+}
+
+.login-signin {
+    width: 400px;
+}
+
+img.loginpageLogo {
+    margin: auto;
+    display: block;
+}
+
+
+/* Table */
+
+button.btn.approve {
+    background: #eee5ff;
+    color: #8950fc;
+    border-color: #eee5ff;
+    font-weight: 500;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 2;
+}
+
+i.editIcon {
+    background: #f3f6f9;
+    padding: 8px;
+    border-radius: 5px;
+    color: #3699ff;
+}
+
+
+/* i.editIcon:hover {
+  border: 2px solid #8950fc;
+  padding: 8px;
+} */
+
+input.form-check-input.position-static {
+    background: #f3f6f9;
+}
+
+.circulerBar {
+    width: 39px;
+}
+
+.voyageTable td {
+    font-weight: 600;
+    color: #464e5f;
+    font-size: 13px;
+}
+
+.voyageTable th {
+    font-weight: 600;
+    color: #b5b5c3;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+h1.tableheading {
+    font-size: 14px;
+    font-weight: 600;
+    color: #212121;
+    margin-top: 5px;
+}
+
+i.tableFilter {
+    color: #3699ff;
 }
 
 .input-area-add .float-left {
@@ -529,13 +594,6 @@ img.loginpageLogo {
     margin-left: 1px;
     margin-top: -2px;
 }
-
-
-/* button.saveButton {
-    height: 29px;
-    line-height: 10px;
-    width: 90px;
-} */
 
 .input-area-add .btn-default {
     border-radius: 0px!important;

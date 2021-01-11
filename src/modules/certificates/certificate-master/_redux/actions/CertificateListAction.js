@@ -3,18 +3,19 @@ import Axios from "axios";
 import { showToast } from "../../../../master/utils/ToastHelper";
 import { getEmployeeId } from "../../../../../app/modules/Auth/_redux/authCrud";
 
-
-export const handleChangeCertificateMasterInput = (name, value) => async(dispatch) => {
-    let employeeId= await getEmployeeId();
-    const formData = {
-        name: name,
-        value: value
-    };
-    console.log('formData',formData);
-    dispatch({
-        type: Types.CHANGE_CERTIFICATE_MASTER_INPUT,
-        payload: formData
-    });
+export const handleChangeCertificateMasterInput = (name, value) => async (
+  dispatch
+) => {
+  let employeeId = await getEmployeeId();
+  const formData = {
+    name: name,
+    value: value,
+  };
+  console.log("formData", formData);
+  dispatch({
+    type: Types.CHANGE_CERTIFICATE_MASTER_INPUT,
+    payload: formData,
+  });
 };
 
 export const getCertificateMasterList = (searchValue = "", status = "") => async (dispatch) => {

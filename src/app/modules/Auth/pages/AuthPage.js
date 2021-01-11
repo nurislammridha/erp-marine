@@ -22,14 +22,14 @@ export function AuthPage() {
 
   return (
     <>
-      <div className="d-flex flex-column flex-root  ">
+      <div className="d-flex flex-column flex-root   ">
         {/*begin::Login*/}
         <div
-          className="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-row-fluid bg-white order-xl-first order-lg-first order-sm-last "
+          className="login  login-1 login-signin-on d-flex flex-column flex-lg-row flex-row-fluid bg-white order-xl-first order-lg-first order-sm-last "
           id="kt_login"
         >
           {/*begin::Content*/}
-          <div className="flex-row-fluid d-flex flex-column position-relative p-7 overflow-hidden">
+          <div className="flex-row-fluid d-flex flex-column position-relative p-7 overflow-hidden loginPage">
             {/*begin::Content header*/}
             {/* <div className="position-absolute top-0 right-0 text-right mt-5 mb-15 mb-lg-0 flex-column-auto justify-content-center py-5 px-10">
                 <span className="font-weight-bold text-dark-50">Don't have an account yet?</span>
@@ -68,7 +68,7 @@ export function AuthPage() {
 
           {/*begin::Aside*/}
           <div
-            className=" login-aside d-flex flex-row-auto bgi-size-cover bgi-no-repeat p-10 p-lg-10  order-xl-last order-lg-last order-sm-last "
+            className=" login-aside d-flex flex-row-auto bgi-size-cover bgi-no-repeat p-10 p-lg-10  order-xl-last order-lg-last order-sm-last loginBg "
             style={{
               backgroundImage: `url(${toAbsoluteUrl(
                 "/media/bg/login-bg.png"

@@ -19,7 +19,7 @@ const certificateMainRoutes = [
     exact: true,
   },
   {
-    path: "/certificates-main/edit",
+    path: "/certificates-main/edit/:id",
     name: "Certificate Create",
     component: CertificateMainEditContainer,
     exact: true,

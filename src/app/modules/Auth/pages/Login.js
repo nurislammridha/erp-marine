@@ -105,11 +105,11 @@ function Login(props) {
   });
 
   return (
-    <div className="login-form login-signin" id="kt_login_signin_form ">
+    <div className="login-form login-signin " id="kt_login_signin_form ">
       {/* begin::Head */}
-      <img className="loginpageLogo  " src="/media/logos/logo.png" alt="logo" />
-      <div className="mb-10 mb-lg-7">
-        <h1 className="font-size-h1 heading  text-bold">Welcome to iMarine</h1>
+      <img className="loginpageLogo " src="/media/logos/logo.png" alt="logo" />
+      <div className=" ">
+        <h1 className="font-size-h1 heading text-center">Sign In</h1>
         {/* <h1 className="site_name_login">
           iMarine
         </h1> */}
@@ -117,6 +117,7 @@ function Login(props) {
       {/* end::Head */}
 
       {/*begin::Form*/}
+
       <form
         onSubmit={formik.handleSubmit}
         className="form fv-plugins-bootstrap fv-plugins-framework loginForm"
@@ -139,10 +140,11 @@ function Login(props) {
 
         <div className="form-group fv-plugins-icon-container">
           <label className="login-label">Email </label>
+          <div className=""></div>
           <input
             placeholder="Enter Email"
             type="text"
-            className={`form-control emailinput h-auto py-5 px-6 ${getInputClasses(
+            className={`form-control  emailinput h-auto py-5 px-6 ${getInputClasses(
               "email"
             )}`}
             name="email"
@@ -154,12 +156,24 @@ function Login(props) {
             </div>
           ) : null}
         </div>
+        <div className="form-group justify-content-between align-items-center mt-5">
+          <p className="float-right text-right text-primary">
+            <Link
+              to=""
+              className=" my-3 mr-2 forgotPasswordText"
+              id="kt_login_forgot"
+            >
+              Forgot Password?
+            </Link>
+          </p>
+        </div>
+
         <div className="form-group fv-plugins-icon-container">
           <label className="login-label">Password</label>
           <input
             placeholder="Enter Password"
             type="password"
-            className={`form-control emailinput h-auto py-5 px-6 ${getInputClasses(
+            className={`form-control emailinput  h-auto py-5 px-6 ${getInputClasses(
               "password"
             )}`}
             name="password"
@@ -171,7 +185,8 @@ function Login(props) {
             </div>
           ) : null}
         </div>
-        <div className="form-group justify-content-between align-items-center float-left">
+
+        {/* <div className="form-group justify-content-between align-items-center float-left">
           <Form.Group controlId="formBasicChecbox">
             <Form.Check
               className="forgotPasswordText  "
@@ -179,36 +194,25 @@ function Login(props) {
               label="Remember Me"
             />
           </Form.Group>
-        </div>
+        </div> */}
 
-        <div className="form-group justify-content-between align-items-center mt-3">
-          <p className="float-right text-right">
-            <Link
-              to=""
-              className=" my-3 mr-2 forgotPasswordText"
-              id="kt_login_forgot"
-            >
-              Forgot Password?
-            </Link>
-          </p>
-        </div>
         <div className="clearfix"></div>
-        <div className="mt-3">
+        <div className="mt-5 text-center">
           <button
             id="kt_login_signin_submit"
             type="submit"
             disabled={formik.isSubmitting}
             className={`btn btn-primary loginButton overlay__caption`}
           >
-            <span className="loginText">Log in</span>
+            <span className="loginText">Sign in</span>
             {loading && <span className="ml-3 spinner spinner-white"></span>}
           </button>
         </div>
-        <p className="mt-5 ">
+        {/* <p className="mt-5 ">
           <Link className="signupText " to="">
             Don't have account? <b>SIGNUP</b>
           </Link>
-        </p>
+        </p> */}
       </form>
       {/*end::Form*/}
     </div>

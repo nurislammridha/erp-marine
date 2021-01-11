@@ -22,14 +22,14 @@ import "react-datepicker/dist/react-datepicker.css";
 import {
   MetronicLayoutProvider,
   MetronicSplashScreenProvider,
-  MetronicSubheaderProvider
+  MetronicSubheaderProvider,
 } from "./_metronic/layout";
 import { MetronicI18nProvider } from "./_metronic/i18n";
 
-import "./_metronic/_assets/css/default-style.css"
-import "./_metronic/_assets/css/default-style-2.css"
+import "./_metronic/_assets/css/default-style.css";
+import "./_metronic/_assets/css/responsive.css";
+import "./_metronic/_assets/css/default-style-2.css";
 import "./styles/global-style.css";
-
 
 /**
  * Base URL of the website.
