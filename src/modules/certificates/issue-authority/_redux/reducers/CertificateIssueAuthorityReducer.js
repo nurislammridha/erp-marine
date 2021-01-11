@@ -49,6 +49,7 @@ const CertificateIssueAuthorityReducer = (state = initialState, action) => {
       return {
         ...state,
         addStatus: action.payload.status,
+        isLoading: action.payload.isLoading,
       };
 
     case Types.SET_ISSUING_AUTHORITY_EDIT_DATA:
@@ -61,6 +62,7 @@ const CertificateIssueAuthorityReducer = (state = initialState, action) => {
       return {
         ...state,
         editStatus: action.payload.status,
+        isLoading: action.payload.isLoading,
       };
 
     // case Types.LOADING:
