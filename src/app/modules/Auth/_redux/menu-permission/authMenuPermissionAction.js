@@ -247,7 +247,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
     {
       moduleName: "Reports",
       moduleRouteUrl: "/report",
-      moduleImageIcon: "/media/svg/icons/Shopping/Gift.svg",
+      moduleImageIcon: "/media/svg/icons/Code/report.svg",
       subModules: [
         {
           subModuleName: "Voyage Report",

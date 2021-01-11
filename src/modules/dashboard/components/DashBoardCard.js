@@ -7,10 +7,12 @@ const DashBoardCard = () => {
           <div className="col-lg-3">
             <div className="paid__widget">
               <div className="widget__left">
-                <span></span>
+                {/* <span></span>
+                 */}
+                <img src="/media/svg/icons/Code/expense.svg" alt="iMarine" />
               </div>
               <div className="widget__right">
-                <h4>2,00,000 BDT</h4>
+                <h4>2,00,000 </h4>
                 <p>Total Expense</p>
               </div>
             </div>
@@ -21,7 +23,7 @@ const DashBoardCard = () => {
                 <span></span>
               </div>
               <div className="widget__right">
-                <h4>2,00,000 BDT</h4>
+                <h4>2,00,000</h4>
                 <p>Total Employee</p>
               </div>
             </div>
@@ -32,7 +34,7 @@ const DashBoardCard = () => {
                 <span></span>
               </div>
               <div className="widget__right">
-                <h4>2,00,000 BDT</h4>
+                <h4>2,00,000 </h4>
                 <p>Total Certificates</p>
               </div>
             </div>
@@ -43,7 +45,7 @@ const DashBoardCard = () => {
                 <span></span>
               </div>
               <div className="widget__right">
-                <h4>2,00,000 BDT</h4>
+                <h4>2,00,000 </h4>
                 <p>New Contacts</p>
               </div>
             </div>
