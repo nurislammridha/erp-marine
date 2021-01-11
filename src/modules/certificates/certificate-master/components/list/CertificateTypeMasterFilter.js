@@ -11,6 +11,10 @@ const CertificateTypeMasterFilter = () => {
     const [search, setSearch] = useState("");
     const [type, setType] = useState("");
     const dispatch = useDispatch();
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     // const certificateTypeInput = useSelector((state) => state.certificateTypeInfo.certificateTypeInput);
     const { register, setValue } = useForm();
     const statusOptions = [
@@ -34,6 +38,19 @@ const CertificateTypeMasterFilter = () => {
 
     };
 
+    
+    
+
+   
+
+
+
+
+    const handlegetEdit = (data) => {
+        handleShow();
+        // dispatch(EditCertificateTypeList(data));
+    }
+
 
     return (
         <div className="container">
@@ -52,8 +69,13 @@ const CertificateTypeMasterFilter = () => {
                             as={Row}
                             controlId="formPlaintextPassword"
                         >
+<<<<<<< HEAD
                             <Form.Label>status</Form.Label>
                             <Col sm="10">
+=======
+                            <Form.Label>Category</Form.Label>
+                            <Col sm="8">
+>>>>>>> origin/farid
                                 <RHFInput
                                     as={<Select options={statusOptions} />}
                                     rules={{ required: false }}

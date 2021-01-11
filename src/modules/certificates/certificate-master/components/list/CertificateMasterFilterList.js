@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCertificateTypeList } from "../../../certificate-types/_redux/actions/CertificateTypeAction";
 import { getCertificateMasterList } from "../../_redux/actions/CertificateListAction";
+import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 
 const CertificateMasterFilterList = () => {
   const dispatch = useDispatch();

@@ -19,6 +19,32 @@ const initialState = {
     image: null,
     imagePreviewUrl: null,
   },
+  certificateMainInfo: {
+    intVesselID: null,
+    intCertificateID: null,
+    intCategoryID: null,
+    strCustomeCode: "",
+    intIssuingAuthorityID: null,
+    strShipFolderNo: "",
+    strIssuedPlace: "",
+    strLocation: "",
+    intCertificateTypeID: null,
+    intNotOnBoard: null,
+    dteCertificateIssueDate: "",
+    dteCertificateValidUntil: "",
+    isExtendedUntil: true,
+    dteExtendedUntil: "",
+    dteLastSurvey: "",
+    dteNextSurvey: "",
+    dteLastEndorsementDate: "",
+    strOfficeRemarks: "",
+    imagePreviewUrl: null,
+    strShipRemarks: "",
+    intActionBy: 100,
+    dteLastActionDateTime: "",
+    dteServerDateTime: "",
+    isActive: true,
+  },
   productEditData: null,
   productDetail: null,
   errors: [],
@@ -67,13 +93,35 @@ const CertificateMainReducer = (state = initialState, action) => {
         certificatesIssueByOptionData: getIssueName(action.payload),
       };
 
+    //SELFT
     case Types.CHANGE_CERTIFICATE_INPUT:
-      const productData = { ...state.productData };
-      productData[action.payload.name] = action.payload.value;
+      const certificateMainInfo = { ...state.certificateMainInfo };
+      certificateMainInfo[action.payload.name] = action.payload.value;
       return {
         ...state,
-        productData,
+        certificateMainInfo,
       };
+    case Types.CERTIFICATE_MAIN_SUBMIT:
+      if (action.payload.status) {
+        return {
+          ...state,
+          certificateMainInfo: initialState.certificateMainInfo,
+          isLoading: false,
+        };
+      } else {
+        return {
+          ...state,
+          isLoading: false,
+        };
+      }
+
+    case Types.CERTIFICATE_MAIN_SUBMITTING:
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
+
+    //SELF
 
     case Types.CHANGE_CERTIFICATE_INPUT_UPDATE:
       const productEditData = { ...state.productEditData };
