@@ -65,25 +65,6 @@ const CertificateCategoryAdd = () => {
             }
           />
         </div>
-
-        <div className="form-group mt-0">
-          <label className="form-label">
-            Parent Category <span className="text-info"> (Optional)</span>
-          </label>
-          <RHFInput
-            as={<Select options={statusOptions} />}
-            rules={{ required: false }}
-            name="intCargoTypeID"
-            register={register}
-            value={getCategoryInpuData.intCargoTypeID}
-            onChange={(option) => {
-              categoryInputChange("intCargoTypeName", option.label);
-              categoryInputChange("intCargoTypeID", option.value);
-            }}
-            setValue={setValue}
-          />
-        </div>*/}
-
         <div className="form-group row">
           <div className="col-sm-10"></div>
         </div>
