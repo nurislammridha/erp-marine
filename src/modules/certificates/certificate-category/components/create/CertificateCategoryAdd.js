@@ -1,11 +1,11 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Form } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
-import { certificatecategorySubmitAction,handleCertificateCategoryInput } from "../../_redux/actions/CertificateCategoryAction";
+import { certificatecategorySubmitAction,getCertificateCategoryListData,handleCertificateCategoryInput } from "../../_redux/actions/CertificateCategoryAction";
 
 const CertificateCategoryAdd = () => {
   const history = useHistory();
@@ -14,6 +14,9 @@ const CertificateCategoryAdd = () => {
   const getCategoryInpuData = useSelector(
     (state) => state.CertificateCategoryReducer.certificateCategoryInput
   );
+  const status = useSelector((state) => state.CertificateCategoryReducer.status);
+  const isLoading = useSelector((state) => state.CertificateCategoryReducer.isLoading);
+
   const categoryInputChange = (name, value) => {
     dispatch(handleCertificateCategoryInput(name, value));
   };
@@ -21,6 +24,12 @@ const CertificateCategoryAdd = () => {
   const submiteCategory = (data) => {
     dispatch(certificatecategorySubmitAction(getCategoryInpuData));
   };
+  useEffect(() => {
+      if(status){
+          dispatch(getCertificateCategoryListData());
+      }
+      
+  }, [status])
 
   const statusOptions = [
     {
@@ -72,14 +81,14 @@ const CertificateCategoryAdd = () => {
           <div className="col-sm-10"></div>
         </div>
 
-        {loading && (
-          <button type="submit" class="btn btn-primary btn-lg" disabled={true}>
-            <span><i className="fa fa-check"></i>  Submitting...</span>
-            <span className="ml-3 spinner spinner-white"></span>
+        {isLoading && (
+          <button type="submit" class="btn btn-primary saveButton" disabled={true}>
+            <span className="p-2"><i className="fa fa-check"></i>  Submitting...</span>
+            <span className="ml-3 spinner spinner-white "></span>
           </button>
         )}
 
-        {!loading && (
+        {!isLoading && (
           <button type="submit" class="btn btn-primary saveButton">
             <span>Submit</span>
           </button>

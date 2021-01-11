@@ -1,67 +1,60 @@
 import React, { useEffect, useState } from "react";
+import { Form, Button, Image, Col, Row, Table, Dropdown } from "react-bootstrap";
+import Modal from 'react-bootstrap/Modal';
 import { Link } from "react-router-dom";
-// import CertificateTypeEdit from "../";
-import { getCertificateMasterList } from "../_redux/actions/CertificateListAction";
+// import CertificateTypeEdit from "../edit/CertificateTypeEdit";
+// import { getCertificateTypeList } from "../../_redux/actions/CertificateTypeAction";
 import { useDispatch, useSelector } from "react-redux";
-import SimpleModal from "../../../master/components/Modal/SimpleModal";
+import { getCertificateTypeList } from "../../../certificate-types/_redux/actions/CertificateTypeAction";
+import { getCertificateMasterList } from "../../_redux/actions/CertificateListAction";
+import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 
-const CertificateTypeList = (props) => {
+const CertificateMasterFilterList = () => {
+
 
     const dispatch = useDispatch();
-    const certificateTypeData = useSelector((state) => state.certificateListReducer.certificateListReducer);
+    const certificateMasterData = useSelector((state) => state.CertificateListReducer.certificateMasterList);
+    console.log('certificateMasterData', certificateMasterData);
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-
     useEffect(() => {
-        // dispatch(getCertificateTypeList());
-    }, []);
-
-
-
-    const handlegetEdit = (data) => {
-        handleShow();
-        // dispatch(EditCertificateTypeList(data));
-    }
+          dispatch(getCertificateMasterList());
+      }, []);
 
     return (
         <div className="react-bootstrap-table table-responsive">
             <table className="table mt-2 tbl-standard" id="table-to-xls">
                 <thead>
                     <tr>
-                        <th scope="col">Certificate Type</th>
-                        <th scope="col">Created By</th>
-                        <th scope="col">Created Time</th>
+                        <th scope="col">Certificate Name</th>
+                        <th scope="col">Category Name</th>
+                        <th scope="col">Vessel Name</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
-
                     </tr>
                 </thead>
                 <tbody>
-                    {getCertificateMasterList &&
-                        getCertificateMasterList.map((item, index) => (
+                    {certificateMasterData &&
+                        certificateMasterData.map((item, index) => (
                             <tr>
-                                <td>{item.strCertificateTypeName}</td>
-                                <td>{item.intActionBy}</td>
-                                <td>{item.dteLastActionDateTime}</td>
+                                <td>{item.strCertificateName}</td>
+                                <td>{item.strCertificateCategoriName}</td>
+                                <td>{item.strVesselName}</td>
                                 <td>{item.isActive ? "Active" : "Inactive"}</td>
                                 <td>
                                     {" "}
                                     <Link to={``}>
                                         <i className="far fa-eye mr-3"></i>
                                     </Link>
-
-                                    <a><i className="far fa-edit ml-2" onClick={() => handlegetEdit(item.intCertificateTypeID)}></i></a>
+                                    <i className="far fa-edit ml-2" onClick={handleShow}></i>
 
                                 </td>
                             </tr>
                         ))}
-
                 </tbody>
             </table>
-
 
             <SimpleModal
                 show={show}
@@ -75,4 +68,4 @@ const CertificateTypeList = (props) => {
     );
 };
 
-export default CertificateTypeList;
+export default CertificateMasterFilterList;

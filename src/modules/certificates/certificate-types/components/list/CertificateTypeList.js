@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button, Image, Col, Row, Table, Dropdown } from "react-bootstrap";
-import Modal from 'react-bootstrap/Modal';
 import { Link } from "react-router-dom";
 import CertificateTypeEdit from "../edit/CertificateTypeEdit";
-import { getCertificateTypeList } from "../../_redux/actions/CertificateTypeAction";
+import { EditCertificateTypeList, getCertificateTypeList } from "../../_redux/actions/CertificateTypeAction";
 import { useDispatch, useSelector } from "react-redux";
+import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 
-const CertificateTypeList = () => {
-
+const CertificateTypeList = (props) => {
 
     const dispatch = useDispatch();
     const certificateTypeData = useSelector((state) => state.certificateTypeInfo.certificateTypeList);
@@ -16,10 +14,17 @@ const CertificateTypeList = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    useEffect(() => {
 
+    useEffect(() => {
         dispatch(getCertificateTypeList());
     }, []);
+
+
+
+    const handlegetEdit = (data) => {
+        handleShow();
+        dispatch(EditCertificateTypeList(data));
+    }
 
     return (
         <div className="react-bootstrap-table table-responsive">
@@ -47,7 +52,8 @@ const CertificateTypeList = () => {
                                     <Link to={``}>
                                         <i className="far fa-eye mr-3"></i>
                                     </Link>
-                                    <i className="far fa-edit ml-2" onClick={handleShow}></i>
+
+                                    <a><i className="far fa-edit ml-2" onClick={() => handlegetEdit(item.intCertificateTypeID)}></i></a>
 
                                 </td>
                             </tr>
@@ -56,17 +62,15 @@ const CertificateTypeList = () => {
                 </tbody>
             </table>
 
-            <Modal size="lg" show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Certificate Type Edit</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{<CertificateTypeEdit />}</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Cancel
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+
+            <SimpleModal
+                show={show}
+                size="lg"
+                handleClose={() => handleClose()}
+                modalTitle={"Certificate Type Add"}
+            >
+                <CertificateTypeEdit />
+            </SimpleModal>
         </div>
     );
 };

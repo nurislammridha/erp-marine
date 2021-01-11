@@ -29,10 +29,7 @@ const CertificateTypeContainer = () => {
     }
   }, [modalStatus]);
 
-  const [showCategoryModal, setShowCategoryModal] = useState(false);
-  const [showTypeModal, setShowTypeModal] = useState(false);
-  const [showCertificateModal, setShowCertificateModal] = useState(false);
-  const [showIssuedByModal, setShowIssuedByModal] = useState(false);
+
 
   return (
     <div className="card card-custom gutter-b">
@@ -99,17 +96,7 @@ const CertificateTypeContainer = () => {
           >
             Add New
           </Button>
-          {/* <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Add Certificate Type</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{<CertificateTypeAdd />}</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Cancel
-              </Button>
-            </Modal.Footer>
-          </Modal> */}
+
 
           <SimpleModal
             show={show}

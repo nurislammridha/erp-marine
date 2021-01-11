@@ -39,9 +39,15 @@ const CertificateTypeReducer = (state = initialState, action) => {
             return {
                 ...state,
                 status: action.payload.status
-
-
             };
+
+        case Types.EDIT_CERTIFICATE_TYPE_LIST:
+            console.log('action.payload', action.payload);
+            return {
+                ...state,
+                certificateTypeInput: action.payload.data,
+            };
+            break;
 
         // case Types.VOYAGE_SUBMIT:
         //     if (action.payload.status) {
