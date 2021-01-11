@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import CertificateCategoryEdit from '../edit/CertificateCategoryEdit'
 import { getCertificateCategoryListData, setCertificateCategoryEditValue } from "../../_redux/actions/CertificateCategoryAction";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
-// import CertificateCategoryEdit from "../edit/CertificateCategoryEdit";
 
 
 
@@ -20,17 +19,39 @@ const CertificateCategoryList = () => {
     const handleShow = () => setShow(true);
     const [editItem, setEditItem] = useState({});
 
-    useEffect(() => {
+    const modalEditStatus = useSelector(
+        (state) => state.CertificateCategoryReducer.editStatus
+    );
 
-        dispatch(getCertificateCategoryListData());
-    }, []);
+    // const status = useSelector(
+    //     (state) => state.CertificateCategoryReducer.editStatus
+    // );
+
+    // useEffect(() => {
+    //     if(status){
+    //         handleClose();
+    //     }
+       
+    // }, []);
+
+
+    useEffect(() => {
+        if (modalEditStatus) {
+          setShow(false);
+        }
+      }, [modalEditStatus]);
 
     const handleEdit = (editItem) => {
-        console.log('editItem', editItem);
         setEditItem(editItem);
         setShow(true);
-        dispatch(setCertificateCategoryEditValue(editItem));
     };
+
+    // const handleEdit = (data) => {
+       
+    //     setEditItem(data);
+    //     setShow(true);
+    //     dispatch(setCertificateCategoryEditValue(data));
+    // };
 
     return (
         <div className="react-bootstrap-table table-responsive">
@@ -40,7 +61,7 @@ const CertificateCategoryList = () => {
             modalTitle={"Edit Certificate Category"}
         >
                           
-            <CertificateCategoryEdit  />
+            <CertificateCategoryEdit  editData={editItem}/>
                     
         </SimpleModal>
             <table className="table mt-2 tbl-standard" id="table-to-xls">
@@ -82,7 +103,7 @@ const CertificateCategoryList = () => {
                 </tbody>
             </table>
 
-            <Modal size="lg" show={show} onHide={handleClose}>
+            {/*<Modal size="lg" show={show} onHide={handleClose}>
 
                 <Modal.Header closeButton>
                     <Modal.Title>Certificate Category Edit</Modal.Title>
@@ -93,7 +114,7 @@ const CertificateCategoryList = () => {
                         Cancel
               </Button>
                 </Modal.Footer>
-            </Modal>
+                            </Modal>*/}
         </div>
     );
 };
