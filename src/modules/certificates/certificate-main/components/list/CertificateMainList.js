@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
+import { generateStringDateFromDate } from "../../../../master/utils/DateHelper";
+import { Form, Card, Button, Row, Col } from "react-bootstrap";
 import { getCertificateMainListAction } from "../../_redux/actions/CertificateMainAction";
 
 const CertificateMainList = withRouter(({ history, props }) => {
@@ -17,6 +19,7 @@ const CertificateMainList = withRouter(({ history, props }) => {
   const certificatesPaginatedData = useSelector(
     (state) => state.certificateMainInfo.certificatesPaginatedData
   );
+  console.log("certificates", certificates);
   useEffect(() => {
     dispatch(getCertificateMainListAction(currentPage));
   }, [dispatch, currentPage]);
@@ -40,74 +43,72 @@ const CertificateMainList = withRouter(({ history, props }) => {
 
   return (
     <>
-      <div className="container">
-        <div className="card card-custom gutter-b">
-          <div className="card-header">
-            <div className="card-title">
-              <h3 class="card-label">Certificate List</h3>
+      <Card>
+        <Card.Body>
+          <div className="container">
+            <div className="row">
+              <h1 className="tableheading">Voyage List</h1>
+
+              <Form.Group as={Col} controlId="formGridState">
+                <input
+                  type="search"
+                  value={searchText}
+                  className="form-control product-search-input"
+                  placeholder="Search By Title, Description, Price"
+                  onChange={searchProduct}
+                />
+              </Form.Group>
+         
+              <i className="fas fa-filter tableFilter mt-3 mr-2"></i>
+              <i className="far fa-filter"></i>
+              <Button className="btn-sm" variant="primary">
+                Add New
+              </Button>
             </div>
-            <div className="card-toolbar">
-              <a
-                onClick={() => {
-                  history.push("/certificates-main/create");
-                }}
-              >
-                <button type="button" class="btn btn-primary">
-                  New Certificate
-                </button>
-              </a>
-            </div>
-          </div>
-          <div className="mb-2 ml-2">
-            <div className="float-left">
-              <input
-                type="search"
-                value={searchText}
-                className="form-control product-search-input"
-                placeholder="Search By Title, Description, Price"
-                onChange={searchProduct}
-              />
-            </div>
-            <div className="float-right">
-              <PaginationLaravel
-                isDescription={false}
-                changePage={changePage}
-                data={certificatesPaginatedData}
-              />
-            </div>
-            <div className="clearfix"></div>
-          </div>
-          {isLoading && <LoadingSpinner text="Loading Certificates..." />}
+            {isLoading && <LoadingSpinner text="Loading Certificates..." />}
           {!isLoading && certificates.length === 0 && (
             <div className="alert alert-warning">
               Sorry ! No Certificates Found.
             </div>
           )}
-          {!isLoading && certificates.length > 0 && (
-            <>
-              <div className="table-responsive ml-2">
-                <table className="table table-bordered">
-                  <thead>
+            <table className="table mt-5 voyageTable table-responsive">
+            <thead>
                     <tr>
                       <th className="td-sl">Sl</th>
-                      <th className="td-product-title">Product</th>
-                      <th>Price</th>
-                      <th className="td-description">Description</th>
-                      <th className="td-upload-info">Upload Information</th>
-                      <th className="td-upload-info">Upload Information</th>
-                      <th className="td-action">Action</th>
+                      <th scope="col">Folder No.</th>
+                      <th scope="col">Code</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Issued By</th>
+                      <th scope="col">Issued Place</th>
+                      <th scope="col">Location</th>
+                      <th scope="col">Issued Date</th>
+                      <th scope="col">Valid Until</th>
+                      <th scope="col">Entended Until</th>
+                      <th scope="col">Last Endorsement</th>
+                      <th scope="col">Not On Board</th>
+                      <th scope="col">Due Date</th>
+                      <th >Action</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {certificates.map((certificate, index) => (
+              <tbody>
+              {certificates.map((certificate, index) => (
                       <tr>
                         <td>{index + 1}</td>
+                        <td>{certificate.strShipFolderNo}</td>
                         <td>{certificate.strCustomeCode}</td>
-                        <td>{certificate.intNotOnBoard}</td>
-                        <td>{certificate.dteCertificateValidUntil}</td>
-                        <td>{certificate.dteExtendedUntil}</td>
-                        <td>{certificate.dteExtendedUntil}</td>
-                        <td>
+                        <td>{certificate.strShipRemarks}</td>
+                        <td>{certificate.strCertificateTypeName}</td>
+                        <td>{certificate.strIssuingAuthorityName}</td>
+                        <td>{certificate.strIssuedPlace}</td>
+                        <td>{certificate.strLocation}</td>
+                        <td>{generateStringDateFromDate(certificate.dteCertificateIssueDate)}</td>
+                        <td>{generateStringDateFromDate(certificate.dteCertificateValidUntil)}</td>
+                        <td>{generateStringDateFromDate(certificate.dteExtendedUntil)}</td>
+                        <td>{generateStringDateFromDate(certificate.dteLastEndorsementDate)}</td>
+                        <td>{certificate.intNotOnBoard==="1"?'Yes':'No'}</td>
+                        <td>10</td>
+                        <td className="">
                           <button className="btn btn-icon btn-light btn-hover-info btn-sm">
                             <Link
                               to={`/certificates-main/edit/${certificate.intCertificateDetailsID}`}
@@ -132,18 +133,15 @@ const CertificateMainList = withRouter(({ history, props }) => {
                         </td>
                       </tr>
                     ))}
-                  </tbody>
-                </table>
-
-                <PaginationLaravel
+              </tbody>
+            </table>
+          </div>
+          <PaginationLaravel
                   changePage={changePage}
                   data={certificatesPaginatedData}
                 />
-              </div>
-            </>
-          )}
-        </div>
-      </div>
+        </Card.Body>
+      </Card>
     </>
   );
 });
