@@ -50,8 +50,8 @@ const CertificateMainList = () => {
     dispatch(getCertificateMainListAction(data.page));
   };
 
-  const certificateSelect =(category)=>{
-    dispatch(getCertificateMainListAction(currentPage,searchText, 1, category));
+  const certificateSelect = (category) => {
+    dispatch(getCertificateMainListAction(currentPage, searchText, 1, category));
   }
 
   const searchProduct = (e) => {
@@ -138,76 +138,71 @@ const CertificateMainList = () => {
               </Link>
             </div>
             {isLoading && <LoadingSpinner text="Loading Certificates..." />}
-            {!isLoading && certificates.length === 0 && (
-              <div className="alert alert-warning">
-                Sorry ! No Certificates Found.
-              </div>
-            )}
-            <table className="table mt-5 certificate-list tbl-standard table-responsive">
-              <thead>
-                <tr>
-                  <th className="td-sl">#</th>
-                  {/* <th scope="col">Folder No.</th> */}
-                  <th scope="col">Code</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Issued By</th>
-                  <th scope="col">Issued Place</th>
-                  <th scope="col">Location</th>
-                  <th scope="col">Issued Date</th>
-                  <th scope="col">Valid Until</th>
-                  <th scope="col">Entended Until</th>
-                  <th scope="col">Last Endorsement</th>
-                  <th scope="col">Not On Board</th>
-                  <th scope="col">Due Date</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {certificates.map((certificate, index) => (
-                  <tr
-                    className={getCertificateColorClass(
-                      certificate.differenceDays
-                    )}
-                  >
-                    <td>{index + 1}</td>
-                    {/* <td>{certificate.strShipFolderNo}</td> */}
-                    <td>{certificate.strCustomeCode}</td>
-                    <td>{certificate.strShipRemarks}</td>
-                    <td>{certificate.strCertificateTypeName}</td>
-                    <td>{certificate.strIssuingAuthorityName}</td>
-                    <td>{certificate.strIssuedPlace}</td>
-                    <td>{certificate.strLocation}</td>
-                    <td>
-                      {
-                        certificate.dteCertificateIssueDate !== null ? generateStringDateFromDate(
-                          certificate.dteCertificateIssueDate
-                        ) : ''
-                      }
-                    </td>
-                    <td>
-                      {certificate.dteCertificateValidUntil !== null ?generateStringDateFromDate(
-                        certificate.dteCertificateValidUntil
-                      ): ''}
-                    </td>
-                    <td>
-                      {certificate.dteExtendedUntil !== null ? generateStringDateFromDate(certificate.dteExtendedUntil) : ''}
-                    </td>
-                    <td>
-                      {certificate.dteLastEndorsementDate !== null ? generateStringDateFromDate(
-                        certificate.dteLastEndorsementDate
-                      ): ''}
-                    </td>
-                    <td>{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
-                    <td>{certificate.differenceDays}</td>
-                    <td className="">
-                      <button className="btn btn-icon btn-light btn-hover-info btn-sm">
+            {
+              !isLoading &&
+              <table className="table mt-5 certificate-list tbl-standard table-responsive">
+                <thead>
+                  <tr>
+                    <th className="td-sl">#</th>
+                    {/* <th scope="col">Folder No.</th> */}
+                    <th scope="col">Code</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Issued By</th>
+                    <th scope="col">Issued Place</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Issued Date</th>
+                    <th scope="col">Valid Until</th>
+                    <th scope="col">Entended Until</th>
+                    <th scope="col">Last Endorsement</th>
+                    <th scope="col">Not On Board</th>
+                    <th scope="col">Due Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {certificates.map((certificate, index) => (
+                    <tr
+                      className={getCertificateColorClass(
+                        certificate.differenceDays
+                      )}
+                    >
+                      <td>{index + 1}</td>
+                      {/* <td>{certificate.strShipFolderNo}</td> */}
+                      <td>{certificate.strCustomeCode}</td>
+                      <td>{certificate.strShipRemarks}</td>
+                      <td>{certificate.strCertificateTypeName}</td>
+                      <td>{certificate.strIssuingAuthorityName}</td>
+                      <td>{certificate.strIssuedPlace}</td>
+                      <td>{certificate.strLocation}</td>
+                      <td>
+                        {
+                          certificate.dteCertificateIssueDate !== null ? generateStringDateFromDate(
+                            certificate.dteCertificateIssueDate
+                          ) : ''
+                        }
+                      </td>
+                      <td>
+                        {certificate.dteCertificateValidUntil !== null ? generateStringDateFromDate(
+                          certificate.dteCertificateValidUntil
+                        ) : ''}
+                      </td>
+                      <td>
+                        {certificate.dteExtendedUntil !== null ? generateStringDateFromDate(certificate.dteExtendedUntil) : ''}
+                      </td>
+                      <td>
+                        {certificate.dteLastEndorsementDate !== null ? generateStringDateFromDate(
+                          certificate.dteLastEndorsementDate
+                        ) : ''}
+                      </td>
+                      <td>{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
+                      <td>{certificate.differenceDays}</td>
+                      <td className="">
                         <Link
                           to={`/certificates-main/edit/${certificate.intCertificateDetailsID}`}
                         >
-                          <i className="fa fa-edit"></i>
+                          <i className="fa fa-edit text-success"></i>
                         </Link>
-                      </button>
                       &nbsp;&nbsp;&nbsp;
                       {/* <button
                         className="btn btn-icon btn-light btn-hover-danger btn-sm"
@@ -222,11 +217,19 @@ const CertificateMainList = () => {
                       >
                         <i className="fa fa-trash"></i>
                       </button> */}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            }
+
+            {!isLoading && certificates.length === 0 && (
+              <div className="alert alert-warning">
+                Sorry ! No Certificates Found.
+              </div>
+            )}
+
           </div>
           <PaginationLaravel
             changePage={changePage}
