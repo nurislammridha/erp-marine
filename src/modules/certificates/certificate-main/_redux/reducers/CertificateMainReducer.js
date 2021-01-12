@@ -99,6 +99,15 @@ const CertificateMainReducer = (state = initialState, action) => {
       };
       break;
 
+      case Types.DELETE_SURVEY_MULTIPLE_DATA:
+      const multiDataSetOld = { ...state.certificateMainInfo };
+      multiDataSetOld.certificateDates.splice( action.payload, 1);
+      return {
+        ...state,
+        certificateMainInfo: multiDataSetOld,
+      };
+      break;
+
     case Types.GET_VESSEL_TYPE:
       return {
         ...state,

@@ -146,7 +146,23 @@ export const getCertificateMainListAction = (
 };
 
 export const certificateMultipleDataAdd = (data) => (dispatch) => {
-  console.log('data', data);
+  if (data.intCertificateID === null) {
+    showToast("error", "Please select a certificate first !");
+    return false;
+  }
+  if (data.dteFromSurvey === null) {
+    showToast("error", "Please give survey from date !");
+    return false;
+  }
+  if (data.dteToSurvey === null) {
+    showToast("error", "Please give survey to date !");
+    return false;
+  }
+  if (data.intCertificateStatusID === null) {
+    showToast("error", "Please select a survey status !");
+    return false;
+  }
+
   const singleDetail = {
     intCertificateID: data.intCertificateID,
     intCertificateDetailsID: null,
@@ -157,6 +173,10 @@ export const certificateMultipleDataAdd = (data) => (dispatch) => {
     isActive: true
   }
   dispatch({ type: Types.ADD_MULTIPLE_DATA, payload: singleDetail });
+}
+
+export const certificateMultipleDataDelete = (index) => (dispatch) => {
+  dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_DATA, payload: index });
 }
 
 export const deleteProductImagePreview = () => (dispatch) => {
@@ -183,7 +203,7 @@ export const GetVesselTypeAction = () => async (dispatch) => {
 export const getCertificateCategory = (data) => (dispatch) => {
     Axios
     .get(
-      `http://10.17.2.31:8082/iMarineAPI/public/api/v1/certificate/category`
+      `${process.env.REACT_APP_API_URL}certificate/category`
     )
     .then((res) => {
      

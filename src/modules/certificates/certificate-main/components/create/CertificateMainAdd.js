@@ -17,6 +17,7 @@ import {
   GetVesselTypeAction,
   getCertificateStatusData,
   certificateMultipleDataAdd,
+  certificateMultipleDataDelete,
 } from "../../_redux/actions/CertificateMainAction";
 import CertificateCategoryAddModal from "../../../certificate-category/components/create/CertificateCategoryAddModal";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
@@ -102,6 +103,10 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
   const addMultipleData = () => {
     dispatch(certificateMultipleDataAdd(certificateInfoInput));
+  }
+
+  const deleteMultipleData = (index) => {
+    dispatch(certificateMultipleDataDelete(index));
   }
 
   const [showCategoryModal, setShowCategoryModal] = useState(false);
@@ -706,8 +711,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                               <td>{date.dteToSurvey}</td>
                               <td>{date.strCertificateStatusName}</td>
                               <td style={{ width: 70, textAlign: 'center' }}>
-                                <i className="fa fa-edit text-success mr-2"></i>
-                                <i className="fa fa-trash text-danger"></i>
+                                {/* <i className="fa fa-edit text-success mr-2"></i> */}
+                                <i className="fa fa-trash text-danger pointer" onClick={() => deleteMultipleData(index)}></i>
                               </td>
                             </tr>
                           ))
