@@ -100,7 +100,7 @@ button.saveButton {
   height: 29px;
   line-height: 10px;
   background-color: #789dfe !important;
-  font-weight: 500;
+  font-weight: 400;
   border-radius: 3px;
 }
 
@@ -109,7 +109,7 @@ button.saveButton {
   height: 29px;
   line-height: 10px;
   color: #464e5f !important;
-  font-weight: 500;
+  font-weight: 400;
   border-radius: 3px;
 }
 
@@ -512,13 +512,11 @@ input.form-check-input.position-static {
 }
 
 .voyageTable td {
-  font-weight: 600;
   color: #464e5f;
   font-size: 13px;
 }
 
 .voyageTable th {
-  font-weight: 600;
   color: #b5b5c3;
   font-size: 12px;
   text-transform: uppercase;
@@ -660,25 +658,10 @@ input.MuiInputBase-input {
   margin-left: 10px;
 }
 
-input#react-select-2-input {
-  /* height: 30px !important; */
-}
-.table.table-head-custom thead tr {
-  font-weight: 600;
-  color: #080808 !important;
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  border-bottom: 1px solid #ecf0f3;
-  /* background-color: #ecf0f3 !important; */
-  padding: 8px;
-}
 .table.table-head-custom thead th,
 .table.table-head-custom thead tr {
-  font-weight: 600;
-  color: #080808 !important;
   font-size: 1rem;
-  text-transform: uppercase;
+
   letter-spacing: 0.1rem;
   border-bottom: 1px solid #ecf0f3;
   /* background-color: #ecf0f3 !important; */
@@ -687,13 +670,20 @@ input#react-select-2-input {
 .table {
   margin-bottom: 2px !important;
 }
-
+.table.table-head-custom thead td {
+  color: #464e5f;
+  font-weight: 400 !important;
+}
+.table.table-head-custom thead th {
+  color: #b5b5c3;
+  font-weight: 600;
+}
 .table {
   width: 100%;
   margin-bottom: 1rem;
-  color: #464e5f;
+  /* color: #464e5f; */
   background-color: transparent;
 }
 .react-datepicker-wrapper {
-   width: 100%;
+  width: 100% !important;
 }
