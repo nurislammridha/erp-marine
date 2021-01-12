@@ -19,7 +19,7 @@ import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 
-const CertificateMainList = withRouter(({ history, props }) => {
+const CertificateMainList = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit, errors, setValue } = useForm();
   const [currentPage, setCurrentPage] = useState(1);
@@ -92,8 +92,8 @@ const CertificateMainList = withRouter(({ history, props }) => {
                 <input
                   type="search"
                   value={searchText}
-                  className="form-control product-search-input"
-                  placeholder="Search By Title, Description, Price"
+                  className="form-control product-search-input formHeight"
+                  placeholder="Search"
                   onChange={searchProduct}
                 />
               </Form.Group>
@@ -143,7 +143,7 @@ const CertificateMainList = withRouter(({ history, props }) => {
                 Sorry ! No Certificates Found.
               </div>
             )}
-            <table className="table mt-5 certificate-list table-responsive">
+            <table className="table mt-5 certificate-list tbl-standard table-responsive">
               <thead>
                 <tr>
                   <th className="td-sl">#</th>
@@ -236,6 +236,6 @@ const CertificateMainList = withRouter(({ history, props }) => {
       </Card>
     </>
   );
-});
+}
 
 export default CertificateMainList;
