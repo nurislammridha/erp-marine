@@ -6,10 +6,7 @@ const initialState = {
   certificateMasterInput: {
     strCertificateName: "",
     strCertificateCategoryName: "",
-    strVesselName: "",
-    intCategoryID: "",
-    intVesselID: null,
-    intActionBy: "2",
+    intActionBy: "1",
     isActive: "1",
   },
   certificateMasterList: [],

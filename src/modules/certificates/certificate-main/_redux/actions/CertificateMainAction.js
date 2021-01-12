@@ -11,7 +11,6 @@ export const handleChangeProductInputAction = (
   e,
   isEdit = false
 ) => (dispatch) => {
-
   let data = {
     name: name,
     value: value,
@@ -21,17 +20,16 @@ export const handleChangeProductInputAction = (
     : Types.CHANGE_CERTIFICATE_INPUT_UPDATE;
   dispatch({ type: type, payload: data });
 
-  // if (name === "multipleAttachments") {
-
-  //   let reader = new FileReader();
-  //   const file = e.target.files;
-  //   reader.onloadend = () => {
-  //     data.name = "imagePreviewUrl";
-  //     data.value = reader.result;
-  //     dispatch({ type: type, payload: data });
-  //   };
-  //   reader.readAsDataURL(file);
-  // }
+  if (name === "image") {
+    let reader = new FileReader();
+    const file = e.target.files[0];
+    reader.onloadend = () => {
+      data.name = "imagePreviewUrl";
+      data.value = reader.result;
+      dispatch({ type: type, payload: data });
+    };
+    reader.readAsDataURL(file);
+  }
 };
 
 // submit main certificate info
@@ -121,7 +119,7 @@ export const getCertificateMainListAction = (
   };
   dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
   let url = "";
-  url = `${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1&page=${page}`;
+  url = `${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1`;
 
   if (searchText !== null) {
     // url += `&paginateNo=${page}`;

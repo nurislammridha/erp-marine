@@ -33,7 +33,7 @@ import {
 } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
 import { checkAttchmentValidation } from "../../../../master/utils/FileHelper";
 import { showToast } from "../../../../master/utils/ToastHelper";
-import PreviewAttachment from "../../../../master/components/previews/PreviewAttachment";
+import PreviewAttachment from '../../../../master/components/previews/PreviewAttachment';
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -151,8 +151,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const deleteMultipleAttachmentData = (index) => {
     dispatch(certificateMultipleAttachmentDelete(index));
   };
-
-
 
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [showTypeModal, setShowTypeModal] = useState(false);
@@ -978,9 +976,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               </div>
 
               <div className="form-group row mt-1 border mt-2 pb-3 bg-light">
-                <div className="col-lg-4">
-                  <label className="form-label mt-2">Attachments</label>
-                  {/* <Form.Control
+                <div className="col-lg-3">
+                    <label className="form-label mt-2">Attachments</label>
+                    {/* <Form.Control
                       type="file"
                       name="multipleAttachments[]"
                       className="fromStyle formHeight" 

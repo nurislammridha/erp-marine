@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
-import { generateStringDateFromDate } from "../../../../master/utils/DateHelper";
+// import { generateStringDateFromDate } from "../../../../master/utils/DateHelper";
 import { Form, Card, Button, Row, Col } from "react-bootstrap";
 import { getCertificateMainListAction } from "../../_redux/actions/CertificateMainAction";
 import './style.css';
+import { generateStringDateFromDate } from "../../../../../domains/CCO/utils/DateHelper";
 
 const CertificateMainList = withRouter(({ history, props }) => {
   const dispatch = useDispatch();
@@ -118,22 +119,24 @@ const CertificateMainList = withRouter(({ history, props }) => {
                     <td>{certificate.strIssuedPlace}</td>
                     <td>{certificate.strLocation}</td>
                     <td>
-                      {generateStringDateFromDate(
-                        certificate.dteCertificateIssueDate
-                      )}
+                      {
+                        certificate.dteCertificateIssueDate !== null ? generateStringDateFromDate(
+                          certificate.dteCertificateIssueDate
+                        ) : ''
+                      }
                     </td>
                     <td>
-                      {generateStringDateFromDate(
+                      {certificate.dteCertificateValidUntil !== null ?generateStringDateFromDate(
                         certificate.dteCertificateValidUntil
-                      )}
+                      ): ''}
                     </td>
                     <td>
-                      {generateStringDateFromDate(certificate.dteExtendedUntil)}
+                      {certificate.dteExtendedUntil !== null ? generateStringDateFromDate(certificate.dteExtendedUntil) : ''}
                     </td>
                     <td>
-                      {generateStringDateFromDate(
+                      {certificate.dteLastEndorsementDate !== null ? generateStringDateFromDate(
                         certificate.dteLastEndorsementDate
-                      )}
+                      ): ''}
                     </td>
                     <td>{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
                     <td>{certificate.differenceDays}</td>

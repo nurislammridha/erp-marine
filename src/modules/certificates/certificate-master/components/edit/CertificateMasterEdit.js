@@ -6,11 +6,11 @@ import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 // import { Form } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
-import { certificateMasterEditAction, handleChangeCertificateMasterInput, setMasterCertificateEditValue } from "../../_redux/actions/CertificateListAction";
+import { certificateMasterEditAction, getCertificateMasterList, handleChangeCertificateMasterInput, setMasterCertificateEditValue } from "../../_redux/actions/CertificateListAction";
 
 const CertificateMasterEdit = (props) => {
 
-const isLoading = useSelector((state) => state.CertificateCategoryReducer.isLoading);
+const isLoading = useSelector((state) => state.CertificateListReducer.isLoading);
   const history = useHistory();
   const { register, handleSubmit, errors, setValue } = useForm();
   const dispatch = useDispatch();
@@ -24,56 +24,55 @@ const isLoading = useSelector((state) => state.CertificateCategoryReducer.isLoad
       value: "0",
     },
   ];
-  const vesselName = [
-    {
-        label: 'Akij Noor',
-        value: "1"
-    },
-    {
-        label: 'Akij Pearl',
-        value: "0"
-    }
-];
+//   const vesselName = [
+//     {
+//         label: 'Akij Noor',
+//         value: "1"
+//     },
+//     {
+//         label: 'Akij Pearl',
+//         value: "0"
+//     }
+// ];
+const editStatus = useSelector(
+  (state) => state.CertificateListReducer.editStatus
+);
 
-const certificatesCategoryOptionData = useSelector((state) => state.certificateMainInfo.certificatesCategoryOptionData);
+const CertificatesCategoryOptionData = useSelector((state) => state.certificateMainInfo.certificatesCategoryOptionData);
   const certificateMainInfoChange = (name, value, e = null) => {
     console.log('Name',name,"value",value);
-    dispatch(handleChangeCertificateMasterInput(name, value, e));
+    dispatch(handleChangeCertificateMasterInput(name, value));
   };
-
-  useEffect(() => {
-      console.log('props.editData', props.editData);
-    dispatch(setMasterCertificateEditValue(props.editData));
-  }, [dispatch]);
 
   const CertificateMasterInput = useSelector(
     (state) =>
       state.CertificateListReducer.certificateMasterInput
   );
 
-  const defaultEditData = useSelector(
-    (state) => state.CertificateListReducer.editDefaultData
-  );
+  useEffect(() => {
+    dispatch(setMasterCertificateEditValue(CertificateMasterInput));
+    if (editStatus) {
+      dispatch(getCertificateMasterList());
+    }
+  }, [dispatch, editStatus]);
 
   const submitecertificateMaster = (data) => {
-    dispatch(
-        certificateMasterEditAction(
-        CertificateMasterInput,
-        props.editData.intCertificateID
-      )
+    dispatch(certificateMasterEditAction(CertificateMasterInput, CertificateMasterInput.intCertificateID)
     );
   };
 
   return (
     <>
+        
             <form
                 className="form form-label-right"
                 onSubmit={handleSubmit(submitecertificateMaster)}
                 method="post"
             >
                 <div className="form-group row mt-5">
+        
                     <div className="col-md-12">
-                        <label className="form-label">Certificate Name</label>
+                        <label className="form-label">Certificate  Name</label>
                         <Form.Control className="formFont pl-1"
                             className="formHeight"
                             type="text"
@@ -84,29 +83,15 @@ const certificatesCategoryOptionData = useSelector((state) => state.certificateM
                               }
                         />
                     </div>
-                    <div className="col-sm-6">
-                        <label className="form-label">Vessel Name</label>
-                        <RHFInput
-                            as={<Select options={vesselName} />}
-                            rules={{ required: false }}
-                            name="label"
-                            register={register}
-                            value={vesselName.label}
-                            setValue={setValue}
-                            onChange={(option) => {
-                                certificateMainInfoChange("label", option.label);
-                                certificateMainInfoChange("value", option.value);
-                              }}
-                        />
-                    </div>
-                    <div className="col-sm-6">
+                    
+                    <div className="col-sm-12">
                         <label className="form-label">Category Name</label>
                         <RHFInput
-                            as={<Select options={certificatesCategoryOptionData} />}
+                            as={<Select options={CertificatesCategoryOptionData} />}
                             rules={{ required: false }}
-                            name="intCertificateCategoriId"
+                            name="intCategoryID"
                             register={register}
-                            value={certificatesCategoryOptionData.strCertificateCategoryName}
+                            value={CertificatesCategoryOptionData.strCertificateCategoryName}
                             setValue={setValue}
                             onChange={(option) => {
                                 certificateMainInfoChange("strCertificateCategoryName", option.label);

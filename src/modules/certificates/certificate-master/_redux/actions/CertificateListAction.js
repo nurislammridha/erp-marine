@@ -6,12 +6,11 @@ import { getEmployeeId } from "../../../../../app/modules/Auth/_redux/authCrud";
 export const handleChangeCertificateMasterInput = (name, value) => async (
   dispatch
 ) => {
-  let employeeId = await getEmployeeId();
+  // let employeeId = await getEmployeeId();
   const formData = {
     name: name,
     value: value,
   };
-  console.log("formData", formData);
   dispatch({
     type: Types.CHANGE_CERTIFICATE_MASTER_INPUT,
     payload: formData,
@@ -75,13 +74,12 @@ export const certificateMasterSubmitAction = (CertificateMasterInput) => (dispat
       });
 };
 
-export const setMasterCertificateEditValue = (editValue) => (dispatch) => {
-  console.log('editValue', editValue);
+export const setMasterCertificateEditValue = (certificateMasterInput) => (dispatch) => {
+  console.log('certificateMasterInput',certificateMasterInput);
   const formData = {
-    strCertificateName: editValue.strCertificateName,
-    strCertificateCategoryName: editValue.strCertificateCategoryName,
-    strVesselName: editValue.strVesselName,
-    isActive: editValue.isActive,
+    strCertificateName: certificateMasterInput.strCertificateName,
+    strCertificateCategoryName: certificateMasterInput.strCertificateCategoryName,
+    isActive: certificateMasterInput.isActive,
     intActionBy: 1272,
   };
   dispatch({
@@ -91,6 +89,7 @@ export const setMasterCertificateEditValue = (editValue) => (dispatch) => {
 };
 
 export const certificateMasterEditAction = (CertificateMasterInput,intCertificateID) => (dispatch) => {
+  console.log('editUrl', CertificateMasterInput);
   let responseList = {
     isLoading: true,
     data: {},
@@ -101,9 +100,9 @@ export const certificateMasterEditAction = (CertificateMasterInput,intCertificat
     payload: responseList,
   });
 
-  // let editUrl = `http://10.17.2.31:8082/iMarineAPI/public/api/v1/certificate/certificateList/${intCertificateID}`;
+  // let editUrl = `http://10.17.2.19:8082/iMarineAPI/public/api/v1/certificate/certificateList/${intCertificateID}`;
   let editUrl = `${process.env.REACT_APP_API_URL}certificate/certificateList/${intCertificateID}`;
-  
+
   Axios.put(editUrl, CertificateMasterInput)
     .then(function(response) {
       responseList.data = response.data;
