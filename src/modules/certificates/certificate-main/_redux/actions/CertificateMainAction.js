@@ -145,6 +145,20 @@ export const getCertificateMainListAction = (
   dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
 };
 
+export const certificateMultipleDataAdd = (data) => (dispatch) => {
+  console.log('data', data);
+  const singleDetail = {
+    intCertificateID: data.intCertificateID,
+    intCertificateDetailsID: null,
+    dteFromSurvey: data.dteFromSurvey,
+    dteToSurvey: data.dteToSurvey,
+    intCertificateStatusID: data.intCertificateStatusID,
+    strCertificateStatusName: data.strCertificateStatusName,
+    isActive: true
+  }
+  dispatch({ type: Types.ADD_MULTIPLE_DATA, payload: singleDetail });
+}
+
 export const deleteProductImagePreview = () => (dispatch) => {
   let data = {
     name: "imagePreviewUrl",

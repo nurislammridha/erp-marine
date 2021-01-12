@@ -50,6 +50,10 @@ const initialState = {
     intActionBy: null,
     dteLastActionDateTime: moment().format("YYYY-MM-DD"),
     dteServerDateTime: moment().format("YYYY-MM-DD"),
+    dteFromSurvey: moment().format("YYYY-MM-DD"),
+    dteToSurvey: moment().format("YYYY-MM-DD"),
+    intCertificateStatusID: "",
+    strCertificateStatusName: "",
     isActive: true,
   },
   productEditData: null,
@@ -85,6 +89,16 @@ const CertificateMainReducer = (state = initialState, action) => {
           action.payload
         ),
       };
+
+    case Types.ADD_MULTIPLE_DATA:
+      const multipleDataset = { ...state.certificateMainInfo };
+      multipleDataset.certificateDates = [action.payload, ...multipleDataset.certificateDates];
+      return {
+        ...state,
+        certificateMainInfo: multipleDataset,
+      };
+      break;
+
     case Types.GET_VESSEL_TYPE:
       return {
         ...state,
@@ -139,7 +153,7 @@ const CertificateMainReducer = (state = initialState, action) => {
         ...state,
         isLoading: action.payload,
       };
-    case Types.GET_MAIN_CERTIFICATE_SINGLE_DATA: 
+    case Types.GET_MAIN_CERTIFICATE_SINGLE_DATA:
       return {
         ...state,
         certificateMainInfo: action.payload,
@@ -195,7 +209,7 @@ const CertificateMainReducer = (state = initialState, action) => {
       // Remove that product from this list
       const prodPaginatedData = { ...state.certificatesPaginatedData };
       const updateProductData = prodPaginatedData.data.splice(
-        prodPaginatedData.data.findIndex(function(i) {
+        prodPaginatedData.data.findIndex(function (i) {
           return i.id === action.payload.product.id;
         }),
         1
@@ -240,7 +254,7 @@ const CertificateMainReducer = (state = initialState, action) => {
           description: "",
           price: "",
           image: null,
-        //   imagePreviewUrl: null,
+          //   imagePreviewUrl: null,
         },
       };
 
