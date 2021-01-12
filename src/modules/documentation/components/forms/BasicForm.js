@@ -151,10 +151,10 @@ const BasicForm = () => {
                   />
                 </Form.Group>
               </div>
-              <div className="">
+              {/* <div className="">
                 <Form.Group as={Col} md="" controlId="">
                   <Form.Label className="formFont">Pic an image</Form.Label>
-                  <InputGroup>
+                  <InputGroup className="custome-inputfile">
                     <InputGroup.Prepend>
                       <InputGroup.Text
                         id="inputGroupPrepend"
@@ -164,17 +164,30 @@ const BasicForm = () => {
                       </InputGroup.Text>
                     </InputGroup.Prepend>
                     <Form.Control
-                      type="text"
+                      type="file"
                       placeholder="No file chosen"
                       aria-describedby="inputGroupPrepend"
                       required
-                      className="bg-white fileInput "
+                      className="bg-white fileInput formHeight "
                     />
                     <Form.Control.Feedback type="invalid" className="bg-white">
                       No file chosen
                     </Form.Control.Feedback>
                   </InputGroup>
                 </Form.Group>
+              </div> */}
+              <div className="col-lg-3">
+                <label className="formFont">Pic an image</label>
+                <div className="custom-file formHeight">
+                  <input
+                    type="file"
+                    className="custom-file-input"
+                    id="customFile"
+                  />
+                  <label className="custom-file-label" for="customFile">
+                    Choose file
+                  </label>
+                </div>
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6">
                 <label className="formFont">Select Course</label>
