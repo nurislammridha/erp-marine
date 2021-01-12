@@ -21,7 +21,12 @@ export const certificatecategorySubmitAction = (getCategoryInpuData) => (dispatc
     payload: responseList,
   });
 
+ 
+
   let postUrl = `${process.env.REACT_APP_API_URL}certificate/category`;
+  if(getCategoryInpuData.intParentsCategoryID == null){
+    getCategoryInpuData.intParentsCategoryID=0
+  }
   axios
     .post(postUrl, getCategoryInpuData)
     .then(function (response) {
