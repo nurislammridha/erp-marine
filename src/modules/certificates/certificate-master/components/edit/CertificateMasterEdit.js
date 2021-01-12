@@ -35,7 +35,7 @@ const isLoading = useSelector((state) => state.CertificateCategoryReducer.isLoad
     }
 ];
 
-const certificatesCategoryOptionData = useSelector((state) => state.certificateMainInfo.certificatesCategoryOptionData);
+const CertificatesCategoryOptionData = useSelector((state) => state.certificateMainInfo.certificatesCategoryOptionData);
   const certificateMainInfoChange = (name, value, e = null) => {
     console.log('Name',name,"value",value);
     dispatch(handleChangeCertificateMasterInput(name, value));
@@ -69,7 +69,7 @@ const certificatesCategoryOptionData = useSelector((state) => state.certificateM
             >
                 <div className="form-group row mt-5">
                     <div className="col-md-12">
-                        <label className="form-label">Certificate Name</label>
+                        <label className="form-label">Certificate  Name</label>
                         <Form.Control className="formFont pl-1"
                             className="formHeight"
                             type="text"
@@ -81,19 +81,19 @@ const certificatesCategoryOptionData = useSelector((state) => state.certificateM
                         />
                     </div>
                     
-                    <div className="col-sm-6">
+                    <div className="col-sm-12">
                         <label className="form-label">Category Name</label>
                         <RHFInput
-                            as={<Select options={certificatesCategoryOptionData} />}
+                            as={<Select options={CertificatesCategoryOptionData} />}
                             rules={{ required: false }}
                             name="intCategoryID"
                             register={register}
-                            value={certificatesCategoryOptionData.strCertificateCategoryName}
+                            value={CertificatesCategoryOptionData.strCertificateCategoryName}
+                            setValue={setValue}
                             onChange={(option) => {
                                 certificateMainInfoChange("strCertificateCategoryName", option.label);
                                 certificateMainInfoChange("intCategoryID", option.value);
                               }}
-                            setValue={setValue}
                         />
                     </div>
                 </div>
