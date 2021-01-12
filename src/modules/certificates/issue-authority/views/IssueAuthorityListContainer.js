@@ -91,7 +91,7 @@ const IssueAutorityListContainer = (props) => {
               <SimpleModal
                 show={show}
                 handleClose={() => handleClose()}
-                modalTitle={"Certificate Type Add"}
+                modalTitle={"Add Issue Authority"}
               >
                 <IssueAuthorityAdd />
               </SimpleModal>
