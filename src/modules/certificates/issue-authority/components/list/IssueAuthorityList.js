@@ -63,10 +63,10 @@ const IssueAuthorityList = (props) => {
       <table className="table mt-5 voyageTable">
         <thead>
           <tr>
-            <th scope="col">
+            {/* <th scope="col">
               {" "}
               <Form.Check type="checkbox" />
-            </th>
+            </th> */}
 
             <th scope="col">SL</th>
             <th scope="col">Authority Name</th>
@@ -78,10 +78,10 @@ const IssueAuthorityList = (props) => {
           {issuingAuthorities &&
             issuingAuthorities.map((item, index) => (
               <tr>
-                <th scope="row">
+                {/* <th scope="row">
                   {" "}
                   <Form.Check type="checkbox" />
-                </th>
+                </th> */}
                 <td>{index + 1}</td>
                 <td>{item.strIssuingAuthorityName}</td>
                 <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
