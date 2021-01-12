@@ -11,7 +11,6 @@ export const handleChangeProductInputAction = (
   e,
   isEdit = false
 ) => (dispatch) => {
-  console.log('name',name);
   let data = {
     name: name,
     value: value,
@@ -104,7 +103,8 @@ export const MainCertificateCreateAction =  (certificateInfoInput) =>  async (
 export const getCertificateMainListAction = (
   page,
   searchText = null,
-  isPublic = false
+  isPublic = false,
+  category=null,
 ) => async (dispatch) => {
   let response = {
     certificates: [],
@@ -122,6 +122,10 @@ export const getCertificateMainListAction = (
     url += `&search=${searchText}`;
   } else {
     // url += `&certificate/details?search=${searchText}`
+  }
+
+  if(category!==null){
+    url +=`&category=${category}`;
   }
 
   try {
@@ -270,12 +274,10 @@ export const mainCertificateEdit = (certificateInfoInput, id) => (dispatch) => {
   //    type: Types.CERTIFICATE_MAIN_SUBMITTING,
   //    payload: responseList,
   //  });
-  console.log('id for updated:>> ', id);
   Axios.put(
     `${process.env.REACT_APP_API_URL}certificate/details/${id}`,
     certificateInfoInput
   ).then((res) => {
-    console.log("update certificate response :>> ", res);
     // dispatch({ type: Types.MAIN_CERTIFICATE_UPDATE, payload: res.data});
     if (res.data.status) {
       showToast("successs", res.data.message);

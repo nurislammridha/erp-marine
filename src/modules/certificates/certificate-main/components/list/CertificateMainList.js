@@ -5,11 +5,22 @@ import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
 import { generateStringDateFromDate } from "../../../../master/utils/DateHelper";
 import { Form, Card, Button, Row, Col } from "react-bootstrap";
-import { getCertificateMainListAction } from "../../_redux/actions/CertificateMainAction";
-import './style.css';
+import {
+  getCertificateCategory,
+  getCertificateMainListAction,
+} from "../../_redux/actions/CertificateMainAction";
+import "./style.css";
+import {
+  getCertificateChildCategoryData,
+  getCertificateParentCategoryData,
+} from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
+import { RHFInput } from "react-hook-form-input";
+import Select from "react-select";
+import { useForm } from "react-hook-form";
 
 const CertificateMainList = withRouter(({ history, props }) => {
   const dispatch = useDispatch();
+  const { register, handleSubmit, errors, setValue } = useForm();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
 
@@ -20,15 +31,27 @@ const CertificateMainList = withRouter(({ history, props }) => {
   const certificatesPaginatedData = useSelector(
     (state) => state.certificateMainInfo.certificatesPaginatedData
   );
-  console.log("certificates", certificates);
+  const certificateParentCategoryList = useSelector(
+    (state) => state.CertificateCategoryReducer.certificateParentCategoryList
+  );
+
+  const certificateChildCategoryList = useSelector(
+    (state) => state.CertificateCategoryReducer.certificateChildCategoryList
+  );
   useEffect(() => {
     dispatch(getCertificateMainListAction(currentPage));
+    dispatch(getCertificateCategory());
+    dispatch(getCertificateParentCategoryData());
   }, [dispatch, currentPage]);
 
   const changePage = (data) => {
     setCurrentPage(data.page);
     dispatch(getCertificateMainListAction(data.page));
   };
+
+  const certificateSelect =(category)=>{
+    dispatch(getCertificateMainListAction(currentPage,searchText, 1, category));
+  }
 
   const searchProduct = (e) => {
     const searchText = e.target.value;
@@ -44,13 +67,13 @@ const CertificateMainList = withRouter(({ history, props }) => {
 
   const getCertificateColorClass = (difference) => {
     let rowClassName = "";
-    if(difference === 0){
+    if (difference === 0) {
       rowClassName = "bg-row-0-days";
-    }else if(difference > 0 && difference <= 30 ){
+    } else if (difference > 0 && difference <= 30) {
       rowClassName = "bg-row-30-between";
-    }else if(difference > 30 && difference <= 60){
+    } else if (difference > 30 && difference <= 60) {
       rowClassName = "bg-row-60-days";
-    }else if(difference > 60){
+    } else if (difference > 60) {
       rowClassName = "bg-row-60-more";
     }
     return rowClassName;
@@ -71,6 +94,39 @@ const CertificateMainList = withRouter(({ history, props }) => {
                   className="form-control product-search-input"
                   placeholder="Search By Title, Description, Price"
                   onChange={searchProduct}
+                />
+              </Form.Group>
+              <Form.Group as={Col} controlId="formGridState">
+                <RHFInput
+                  as={<Select options={certificateParentCategoryList} />}
+                  rules={{ required: true }}
+                  name="intCategoryID"
+                  register={register}
+                  value={certificateParentCategoryList.intParentCategoryID}
+                  onChange={(option) => {
+                    certificateSelect(
+                      option.value
+                    );
+                    setValue("intCategoryID", "");
+                    dispatch(getCertificateChildCategoryData(option.value));
+                  }}
+                  setValue={setValue}
+                />
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="formGridState">
+                <RHFInput
+                  as={<Select options={certificateChildCategoryList} />}
+                  rules={{ required: true }}
+                  name="intCategoryID"
+                  register={register}
+                  value={certificateChildCategoryList.intCategoryID}
+                  onChange={(option) => {
+                    certificateSelect(
+                      option.value
+                    );
+                  }}
+                  setValue={setValue}
                 />
               </Form.Group>
 
@@ -108,7 +164,11 @@ const CertificateMainList = withRouter(({ history, props }) => {
               </thead>
               <tbody>
                 {certificates.map((certificate, index) => (
-                  <tr className={getCertificateColorClass(certificate.differenceDays)}>
+                  <tr
+                    className={getCertificateColorClass(
+                      certificate.differenceDays
+                    )}
+                  >
                     <td>{index + 1}</td>
                     {/* <td>{certificate.strShipFolderNo}</td> */}
                     <td>{certificate.strCustomeCode}</td>
