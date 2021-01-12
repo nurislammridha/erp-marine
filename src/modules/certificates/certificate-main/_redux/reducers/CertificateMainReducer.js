@@ -41,7 +41,7 @@ const initialState = {
     isSurvey: false,
     dteLastSurvey: moment().format("YYYY-MM-DD"),
     dteNextSurvey: moment().format("YYYY-MM-DD"),
-    dteLastEndorsementDate: moment().format("YYYY-MM-DD"),
+    dteLastEndorsementDate: '',
     strOfficeRemarks: "",
     // image: null,
     // imagePreviewUrl: null,
