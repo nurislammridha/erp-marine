@@ -112,6 +112,42 @@ const BasicTable = () => {
             </tbody>
           </table>
         </div>
+        {/*  */}
+        <div className="react-bootstrap-table table-responsive">
+          <table className="table table table-head-custom table-vertical-center">
+            <thead>
+              <tr>
+                <th tabindex="0">
+                  {" "}
+                  <Form.Group controlId="formBasicChecbox">
+                    <Form.Check type="checkbox" />
+                  </Form.Group>
+                </th>
+                <th>SL</th>
+                <th> Name</th>
+                <th> Code</th>
+
+                <th class="text-right pr-3">Actions</th>
+              </tr>
+              <tr>
+                <th scope="row">
+                  {" "}
+                  <Form.Check type="checkbox" />
+                </th>
+                <td>#01</td>
+
+                <td>Durres(Durazzo)</td>
+                <td>Akij Noor</td>
+
+                <td className="text-right pr-3 mt-3">
+                  {" "}
+                  <i className="far fa-edit editIcon"></i>
+                  <i className="fas fa-trash-alt editIcon ml-4"></i>
+                </td>
+              </tr>
+            </thead>
+          </table>
+        </div>
       </Card.Body>
     </Card>
   );
