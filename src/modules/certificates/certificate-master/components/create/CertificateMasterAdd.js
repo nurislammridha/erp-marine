@@ -84,22 +84,8 @@ const CertificateMasterAdd = () => {
                               }
                         />
                     </div>
-                    {/* <div className="col-sm-6">
-                        <label className="form-label">Vessel Name</label>
-                        <RHFInput
-                            as={<Select options={vesselName} />}
-                            rules={{ required: false }}
-                            name="value"
-                            register={register}
-                            value={CertificateMasterInput.label}
-                            setValue={setValue}
-                            onChange={(option) => {
-                                certificateMainInfoChange("label", option.label);
-                                certificateMainInfoChange("value", option.value);
-                              }}
-                        />
-                    </div> */}
-                    <div className="col-sm-6">
+                    
+                    <div className="col-sm-12">
                         <label className="form-label">Category Name</label>
                         <RHFInput
                             as={<Select options={CertificatesCategoryOptionData} />}

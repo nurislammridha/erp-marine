@@ -38,7 +38,7 @@ const isLoading = useSelector((state) => state.CertificateCategoryReducer.isLoad
 const certificatesCategoryOptionData = useSelector((state) => state.certificateMainInfo.certificatesCategoryOptionData);
   const certificateMainInfoChange = (name, value, e = null) => {
     console.log('Name',name,"value",value);
-    dispatch(handleChangeCertificateMasterInput(name, value, e));
+    dispatch(handleChangeCertificateMasterInput(name, value));
   };
 
   useEffect(() => {
@@ -49,10 +49,6 @@ const certificatesCategoryOptionData = useSelector((state) => state.certificateM
   const CertificateMasterInput = useSelector(
     (state) =>
       state.CertificateListReducer.certificateMasterInput
-  );
-
-  const defaultEditData = useSelector(
-    (state) => state.CertificateListReducer.editDefaultData
   );
 
   const submitecertificateMaster = (data) => {

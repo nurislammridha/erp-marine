@@ -93,7 +93,8 @@ const IssueAutorityListContainer = (props) => {
             handleClose={() => handleClose()}
             modalTitle={"Create Issue Authority"}
           >
-          <IssueAuthorityAdd />
+                          
+            <IssueAuthorityAdd />
                         
           </SimpleModal>
         </div>
