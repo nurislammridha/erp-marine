@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import Select from "react-select";
 import { RHFInput } from "react-hook-form-input";
 import DatePicker from "react-datepicker";
+import FileBase64 from "react-file-base64";
 
 import {
   deleteProductImagePreview,
@@ -29,6 +30,8 @@ import {
   getCertificateChildCategoryData,
   getCertificateParentCategoryData,
 } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
+import { checkAttchmentValidation } from "../../../../master/utils/FileHelper";
+import { showToast } from "../../../../master/utils/ToastHelper";
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -40,11 +43,32 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   // self work
   const [imagePreviewUrl, setImagePreviewUrl] = React.useState(null);
   //input change with redux
-  const certificateMainInfoChange = (name, value, e = null) => {
-    console.log(name);
-    console.log(value);
 
+  const certificateMainInfoChange = (name, value, e = null) => {
     dispatch(handleChangeProductInputAction(name, value, e));
+
+    if (name === "images") {
+      const attachment = value;
+      const { type } = attachment;
+
+      const validatedData = checkAttchmentValidation(attachment);
+      if (validatedData.isValidated) {
+        let reader = new FileReader();
+        if (type === "application/pdf") {
+          setImagePreviewUrl("/media/default/icons/pdf.png");
+        } else if (type === "application/msword") {
+          setImagePreviewUrl("/media/default/icons/word.png");
+        } else {
+          setImagePreviewUrl("/media/default/icons/image.jpg");
+        }
+      } else {
+        showToast("error", validatedData.message);
+      }
+      // setEmployeeInfo(employeeInfoData);
+    } else {
+      // setEmployeeInfo(employeeInfoData);
+    }
+    
   };
 
   // const enableLoading = () => {
@@ -63,7 +87,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
     (state) => state.certificateMainInfo.certificateMainInfo
   );
 
-  console.log("certificateInfoInput :>> ", certificateInfoInput);
   const certificatesCategoryOption = useSelector(
     (state) => state.certificateMainInfo.certificatesCategoryOptionData
   );
@@ -114,6 +137,13 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
   const deleteMultipleData = (index) => {
     dispatch(certificateMultipleDataDelete(index));
+  };
+
+  const getFiles = (files) => {
+    console.log('files[0]', files[0]);
+    
+    // multipleAttachmentAdd()
+    // handleChangeProductInputAction("multipleAttachments", files[0]);
   };
 
   const [showCategoryModal, setShowCategoryModal] = useState(false);
@@ -933,6 +963,31 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div> */}
               </div>
 
+              <div className="form-group row mt-1 border mt-2 pb-3 bg-light">
+                <div className="col-lg-3">
+                    <label className="form-label mt-2">Attachments</label>
+                    {/* <Form.Control
+                      type="file"
+                      name="multipleAttachments[]"
+                      className="fromStyle formHeight" 
+                      onChange={(e) =>
+                        certificateMainInfoChange(
+                          "multipleAttachments",
+                          e.target.value
+                        )
+                      }
+                      ref={register({
+                        required: false,
+                        maxLength: 100,
+                      })}
+                    /> */}
+                    <FileBase64
+                      name="multipleAttachments"
+                      multiple={true}
+                      onDone={getFiles.bind(this)}
+                    />
+                  </div>
+              </div>
               <div className="form-group row">
                 <div className="col-sm-10">
                   <a

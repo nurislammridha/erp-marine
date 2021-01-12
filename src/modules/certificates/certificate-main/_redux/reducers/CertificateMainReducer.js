@@ -56,6 +56,18 @@ const initialState = {
     intCertificateStatusID: "",
     strCertificateStatusName: "",
     isActive: true,
+    file: null,
+    filePreviewUrl: null,
+    multipleAttachments: [
+      // {
+      //   base64: null,
+      //   name: '',
+      //   size: 0,
+      //   file: null,
+      //   type: '',
+      //   filePreviewUrl: null,
+      // }
+    ]
   },
   productEditData: null,
   productDetail: null,
