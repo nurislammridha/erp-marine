@@ -56,6 +56,18 @@ const initialState = {
     intCertificateStatusID: "",
     strCertificateStatusName: "",
     isActive: true,
+    file: null,
+    filePreviewUrl: null,
+    multipleAttachments: [
+      // {
+      //   base64: null,
+      //   name: '',
+      //   size: 0,
+      //   file: null,
+      //   type: '',
+      //   filePreviewUrl: null,
+      // }
+    ]
   },
   productEditData: null,
   productDetail: null,
@@ -139,6 +151,7 @@ const CertificateMainReducer = (state = initialState, action) => {
 
     //SELFT
     case Types.CHANGE_CERTIFICATE_INPUT:
+      console.log('action.payload',action.payload);
       const certificateMainInfo = { ...state.certificateMainInfo };
       certificateMainInfo[action.payload.name] = action.payload.value;
       return {
