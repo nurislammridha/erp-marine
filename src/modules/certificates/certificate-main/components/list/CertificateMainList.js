@@ -44,10 +44,10 @@ const CertificateMainList = withRouter(({ history, props }) => {
         <div className="card card-custom gutter-b">
           <div className="card-header">
             <div className="card-title">
-              <h3 class="card-label">Certificate List</h3>
+              <h3 className="card-label">Certificate List</h3>
             </div>
             <div className="card-toolbar">
-              <a
+              <a href
                 onClick={() => {
                   history.push("/certificates-main/create");
                 }}
