@@ -70,7 +70,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
     } else {
       // setEmployeeInfo(employeeInfoData);
     }
-
   };
 
   // const enableLoading = () => {
@@ -567,9 +566,14 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                             minDate={
                               certificateInfoInput.dteCertificateIssueDate
                             }
-                            selected={certificateInfoInput.dteCertificateExpiryDate}
+                            selected={
+                              certificateInfoInput.dteCertificateExpiryDate
+                            }
                             onChange={(e) =>
-                              certificateMainInfoChange("dteCertificateExpiryDate", e)
+                              certificateMainInfoChange(
+                                "dteCertificateExpiryDate",
+                                e
+                              )
                             }
                             ref={register({
                               required: true,

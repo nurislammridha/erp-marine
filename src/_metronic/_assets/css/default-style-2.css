@@ -69,9 +69,9 @@ svg.CircularProgressbar.progress__bar {
     height: 420px;
     margin-bottom: 25px;
   }
-  .doughunt__stat {
+  /* .doughunt__stat {
     padding-top: 23%;
-  }
+  } */
 }
 
 /*  small devices (portrait phones, less than 576px) */
@@ -107,11 +107,6 @@ svg.CircularProgressbar.progress__bar {
   }
   .doughunt__stat {
     padding-left: 26%;
-  }
-
-  .dashboard__pb {
-    padding-bottom: 30px;
-    padding-left: 9%;
   }
 }
 /* extra small */

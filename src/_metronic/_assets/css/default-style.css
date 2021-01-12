@@ -606,65 +606,52 @@ i.tableFilter {
 .css-1okebmr-indicatorSeparator {
   margin-top: 4px !important;
 }
-
 .css-yk16xz-control {
   background: #fff !important;
   height: 30px !important;
   min-height: 30px !important;
   border: 1px solid #e5eaee !important;
 }
-
 .css-1pahdxg-control {
   background: #fff !important;
   height: 30px !important;
   min-height: 30px !important;
   border: 1px solid #e5eaee !important;
 }
-
 .css-g1d714-ValueContainer {
   padding: 3px !important;
 }
-
 .css-1wa3eu0-placeholder {
   top: 44% !important;
 }
-
 .css-tlfecz-indicatorContainer {
   padding-top: 2px !important;
 }
-
 .css-1uccc91-singleValue {
   top: 44% !important;
 }
-
-.css-1hb7zxy-IndicatorsContainer {
-  /* padding: 0px !important; */
-}
-
 .searchInput {
-  background: #f3f6f9 !important;
+  background: #fff !important;
   height: 30px !important;
-  /* min-height: 30px !important; */
+
   border: 1px solid #e5eaee !important;
   box-shadow: none !important;
 }
-
+.searchInput i.flaticon-search {
+  padding-left: 5px !important;
+}
 button.MuiButtonBase-root.MuiIconButton-root.searchPlaceholder {
   padding: 0px !important;
   padding-top: 2px !important;
 }
-
 input.MuiInputBase-input {
   margin-left: 10px;
 }
-
 .table.table-head-custom thead th,
 .table.table-head-custom thead tr {
   font-size: 1rem;
-
   letter-spacing: 0.1rem;
   border-bottom: 1px solid #ecf0f3;
-  /* background-color: #ecf0f3 !important; */
   padding: 8px;
 }
 .table {
@@ -681,9 +668,28 @@ input.MuiInputBase-input {
 .table {
   width: 100%;
   margin-bottom: 1rem;
-  /* color: #464e5f; */
   background-color: transparent;
 }
 .react-datepicker-wrapper {
   width: 100% !important;
+}
+.modal-body  {
+  padding: 0.75rem;
+}
+input[type="file"] {
+  border: 1px solid #e5eaee;
+  border-radius: 4px;
+}
+.MuiPaper-rounded {
+  border-radius: 6px !important;
+}
+.custome-datepicker {
+  position: relative;
+}
+
+i.fas.fa-calendar-alt {
+  position: absolute;
+  top: 4px;
+  color: #000000;
+  left: 142px;
 }
