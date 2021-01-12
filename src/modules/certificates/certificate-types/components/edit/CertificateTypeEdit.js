@@ -5,7 +5,7 @@ import Select from "react-select";
 import { useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { EditCertificateTypeList } from "../../_redux/actions/CertificateTypeAction";
+import { handleChangeCertificateTypeInput, UpdateCertificateTypeList } from "../../_redux/actions/CertificateTypeAction";
 
 
 const CertificateTypeEdit = (props) => {
@@ -22,12 +22,13 @@ const CertificateTypeEdit = (props) => {
         strCertificateTypeName: strCertificateTypeName,
         isActive: isActive,
     });
-    console.log('certificateEditInfo:', certificateEditInfo)
+
+
     const dispatch = useDispatch();
     const history = useHistory();
     const { register, handleSubmit, errors, setValue } = useForm();
     const certificateTypeInput = useSelector((state) => state.certificateTypeInfo.certificateTypeInput);
-    console.log('certificateTypeData', certificateTypeInput);
+    const modalStatus = useSelector((state) => state.certificateTypeInfo.status);
 
     const statusOptions = [
         {
@@ -40,25 +41,30 @@ const CertificateTypeEdit = (props) => {
         }
     ]
 
-    // const handleChangeTextInput = (name, value) => {
-    //     dispatch(handleChangeCertificateTypeInput(name, value));
-    // };
-    // const handleChange = ({ currentTarget: input }) => {
+
+
+    // const handleChange = (name, value, { currentTarget: input }) => {
     //     const certificateEditInfoData = { ...certificateEditInfo };
+    //     dispatch(handleChangeCertificateTypeInput(name, value));
     //     certificateEditInfoData[input.name] = input.value;
     //     setCertificateEditInfo(certificateEditInfoData);
+
     // };
 
-    // const onSubmit = (data) => {
-    //     dispatch(EditCertificateTypeList(certificateEditInfo));
-    // };
+    const handleChangeTextInput = (name, value) => {
+        dispatch(handleChangeCertificateTypeInput(name, value));
+    };
+
+    const onSubmit = () => {
+        dispatch(UpdateCertificateTypeList(certificateTypeInput));
+    };
 
 
     return (
         <>
             <form
                 className="form form-label-right"
-                // onSubmit={handleSubmit(onSubmit)}
+                onSubmit={handleSubmit(onSubmit)}
                 method="post"
             >
                 <div className="form-group row mt-5">
@@ -68,7 +74,9 @@ const CertificateTypeEdit = (props) => {
                             type="text"
                             name="strCertificateTypeName"
                             value={certificateTypeInput.strCertificateTypeName}
-                        // onChange={handleChange}
+                            onChange={(e) =>
+                                handleChangeTextInput("strCertificateTypeName", e.target.value)
+                            }
                         />
                     </div>
                     <div className="col-sm-6">
