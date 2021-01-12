@@ -11,6 +11,7 @@ import {
     setCertificateCategoryEditValue,
     handleCertificateCategoryInput,
     getCertificateCategoryListData,
+    getCertificateParentCategoryData,
 } from "../../_redux/actions/CertificateCategoryAction";
 import { typeOf } from "react-is";
 
@@ -36,7 +37,12 @@ const CertificateCategoryEdit = (props) => {
         dispatch(setCertificateCategoryEditValue(props.editData));
       }, []);*/}
 
+      const certificateParentCategoryList = useSelector(
+        (state) => state.CertificateCategoryReducer.certificateParentCategoryList
+      );
+
       useEffect(() => {
+        dispatch(getCertificateParentCategoryData());
         dispatch(setCertificateCategoryEditValue(props.editData));
       }, [dispatch]);
 
@@ -44,6 +50,10 @@ const CertificateCategoryEdit = (props) => {
         (state) =>
           state.CertificateCategoryReducer.certificateCategoryInput
       );
+
+      const categoryInputChange = (name, value) => {
+        dispatch(handleCertificateCategoryInput(name, value));
+      };
 
       const status = useSelector((state) => state.CertificateCategoryReducer.editStatus);
       const isLoading = useSelector((state) => state.CertificateCategoryReducer.isLoading);
@@ -70,7 +80,8 @@ const CertificateCategoryEdit = (props) => {
 
     return (
         <Form onSubmit={handleSubmit(updateCertificateCategory)} method="post">
-        <Form.Group as={Row} controlId="formAuthorityName">
+        <div className="col-md-12">
+          <Form.Group as={Row} controlId="formAuthorityName">
           <Form.Label column sm="3">
           Certificate Category Name:
           </Form.Label>
@@ -89,7 +100,8 @@ const CertificateCategoryEdit = (props) => {
               }
             />
           </Col>
-        </Form.Group>
+          </Form.Group>
+        </div>
         {/* <Form.Group as={Row} controlId="formPlaintextPassword">
           <Form.Label column sm="3">
             Status:
@@ -106,23 +118,46 @@ const CertificateCategoryEdit = (props) => {
           </Col>
         </Form.Group> */}
 
+        <div className="col-md-12">
+          <Form.Group as={Row} controlId="formPlaintextPassword">
+          <Form.Label column sm="3">
+            Status:
+          </Form.Label>
+          <Col sm="9">
+            <RHFInput
+              as={<Select options={action} />}
+              rules={{ required: false }}
+              name="isActive"
+              register={register}
+              value={action.label}
+              onChange={(e) => handleChangeTextInput("isActive", e.value)}
+              setValue={setValue}
+            />
+          </Col>
+          </Form.Group>
+        </div>
+
+        <div className="col-md-12">
         <Form.Group as={Row} controlId="formPlaintextPassword">
         <Form.Label column sm="3">
-          Status:
+          Parent Category:
         </Form.Label>
         <Col sm="9">
           <RHFInput
-            as={<Select options={action} />}
+            as={<Select options={certificateParentCategoryList} />}
             rules={{ required: false }}
-            name="isActive"
+            name="intParentsCategoryID"
             register={register}
-            value={action.label}
-            onChange={(e) => handleChangeTextInput("isActive", e.value)}
+            value={certificateParentCategoryList.intParentsCategoryID}
+            onChange={(option) => {
+              categoryInputChange("strCertificateCategoryName", option.label);
+              categoryInputChange("intParentsCategoryID", option.value);
+            }}
             setValue={setValue}
           />
         </Col>
-      </Form.Group>
-
+        </Form.Group>
+      </div>
         <Form.Group as={Row} controlId="formPlaintextPassword">
           <Form.Label column sm="3"></Form.Label>
           <Col sm="9">
@@ -132,14 +167,14 @@ const CertificateCategoryEdit = (props) => {
             </Button>*/}
 
             {isLoading && (
-              <button type="submit" class="btn btn-primary saveButton" disabled={true}>
+              <button type="submit" class="btn btn-primary saveButton text-white" disabled={true}>
                 <span className="p-2">Updating...</span>
                 <span className="ml-3 spinner spinner-white "></span>
               </button>
             )}
     
             {!isLoading && (
-              <button type="submit" class="btn btn-primary saveButton">
+              <button type="submit" class="btn btn-primary saveButton text-white">
                 <span>Update</span>
               </button>
             )}

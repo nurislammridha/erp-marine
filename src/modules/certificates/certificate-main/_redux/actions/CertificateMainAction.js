@@ -176,6 +176,15 @@ export const certificateMultipleDataAdd = (data) => (dispatch) => {
   dispatch({ type: Types.ADD_MULTIPLE_DATA, payload: singleDetail });
 }
 
+
+export const multipleAttachmentAdd = (data) => (dispatch) => {
+  const singleDetail = {
+    file: data.file,
+    filePreviewUrl: data.filePreviewUrl
+  }
+  dispatch({ type: Types.ADD_MULTIPLE_DATA_ATTACHMENT, payload: singleDetail });
+}
+
 export const certificateMultipleDataDelete = (index) => (dispatch) => {
   dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_DATA, payload: index });
 }

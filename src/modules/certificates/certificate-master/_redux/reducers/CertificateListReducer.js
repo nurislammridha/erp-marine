@@ -1,6 +1,8 @@
 import * as Types from "../types/Type";
 
 const initialState = {
+  isLoading: false,
+  addStatus: false,
   certificateMasterInput: {
     strCertificateName: "",
     strCertificateCategoryName: "",
@@ -20,25 +22,20 @@ const CertificateMasterReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case Types.CHANGE_CERTIFICATE_MASTER_INPUT:
-            const certificateMasterInputData = { ...state.certificateMasterInput };
-            certificateMasterInputData[action.payload.name] = action.payload.value;
+            const CertificateMasterInputData = { ...state.certificateMasterInput };
+            CertificateMasterInputData[action.payload.name] = action.payload.value;
             return {
                 ...state,
-                certificateMasterInput:certificateMasterInputData,
+                certificateMasterInput:CertificateMasterInputData,
             };
+
         case Types.CERTIFICATE_MASTER_SUBMIT:
-                if (action.payload.status) {
-                  return {
-                    ...state,
-                    certificateMainInfo: initialState.certificateMainInfo,
-                    isLoading: false,
-                  };
-                } else {
-                  return {
-                    ...state,
-                    isLoading: false,
-                  };
-                }
+          return {
+            ...state,
+            status: action.payload.status,
+            addStatus: action.payload.status,
+            isLoading: action.payload.isLoading,
+        };
 
         case Types.GET_CERTIFICATE_MASTER_LIST:
             return {
@@ -49,8 +46,10 @@ const CertificateMasterReducer = (state = initialState, action) => {
         case Types.CREATE_CERTIFICATE_MASTER_LIST:
             return {
                 ...state,
-                status: action.payload.status
+                status: action.payload.status,
+                isLoading: action.payload.isLoading
             };
+
         case Types.SET_CERTIFICATE_MASTER_EDIT_DATA:
             return {
                 ...state,

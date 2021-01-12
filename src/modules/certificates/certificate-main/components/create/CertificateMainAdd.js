@@ -6,6 +6,9 @@ import { Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Select from "react-select";
 import { RHFInput } from "react-hook-form-input";
+import DatePicker from "react-datepicker";
+import FileBase64 from "react-file-base64";
+
 import {
   deleteProductImagePreview,
   handleChangeProductInputAction,
@@ -23,7 +26,12 @@ import CertificateCategoryAddModal from "../../../certificate-category/component
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 import CertificateCategoryAdd from "../../../certificate-category/components/create/CertificateCategoryAdd";
 import CertificateTypeAdd from "../../../certificate-types/components/create/CertificateTypeAdd";
-import { getCertificateChildCategoryData, getCertificateParentCategoryData } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
+import {
+  getCertificateChildCategoryData,
+  getCertificateParentCategoryData,
+} from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
+import { checkAttchmentValidation } from "../../../../master/utils/FileHelper";
+import { showToast } from "../../../../master/utils/ToastHelper";
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -35,11 +43,32 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   // self work
   const [imagePreviewUrl, setImagePreviewUrl] = React.useState(null);
   //input change with redux
-  const certificateMainInfoChange = (name, value, e = null) => {
-    console.log(name);
-    console.log(value);
 
+  const certificateMainInfoChange = (name, value, e = null) => {
     dispatch(handleChangeProductInputAction(name, value, e));
+
+    if (name === "images") {
+      const attachment = value;
+      const { type } = attachment;
+
+      const validatedData = checkAttchmentValidation(attachment);
+      if (validatedData.isValidated) {
+        let reader = new FileReader();
+        if (type === "application/pdf") {
+          setImagePreviewUrl("/media/default/icons/pdf.png");
+        } else if (type === "application/msword") {
+          setImagePreviewUrl("/media/default/icons/word.png");
+        } else {
+          setImagePreviewUrl("/media/default/icons/image.jpg");
+        }
+      } else {
+        showToast("error", validatedData.message);
+      }
+      // setEmployeeInfo(employeeInfoData);
+    } else {
+      // setEmployeeInfo(employeeInfoData);
+    }
+    
   };
 
   // const enableLoading = () => {
@@ -104,11 +133,18 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
   const addMultipleData = () => {
     dispatch(certificateMultipleDataAdd(certificateInfoInput));
-  }
+  };
 
   const deleteMultipleData = (index) => {
     dispatch(certificateMultipleDataDelete(index));
-  }
+  };
+
+  const getFiles = (files) => {
+    console.log('files[0]', files[0]);
+    
+    // multipleAttachmentAdd()
+    // handleChangeProductInputAction("multipleAttachments", files[0]);
+  };
 
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [showTypeModal, setShowTypeModal] = useState(false);
@@ -142,9 +178,12 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     onChange={(option) => {
                       certificateMainInfoChange("intCategoryName", "");
                       certificateMainInfoChange("intCategoryID", "");
-                      certificateMainInfoChange("intParentCategoryID", option.value);
-                      setValue('intCategoryID', '');
-                      dispatch(getCertificateChildCategoryData(option.value))
+                      certificateMainInfoChange(
+                        "intParentCategoryID",
+                        option.value
+                      );
+                      setValue("intCategoryID", "");
+                      dispatch(getCertificateChildCategoryData(option.value));
                     }}
                     setValue={setValue}
                   />
@@ -170,8 +209,14 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         register={register}
                         value={certificateInfoInput.intCategoryID}
                         onChange={(option) => {
-                          certificateMainInfoChange("intCategoryName", option.label);
-                          certificateMainInfoChange("intCategoryID", option.value);
+                          certificateMainInfoChange(
+                            "intCategoryName",
+                            option.label
+                          );
+                          certificateMainInfoChange(
+                            "intCategoryID",
+                            option.value
+                          );
                         }}
                         setValue={setValue}
                       />
@@ -314,7 +359,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div>
 
                 <div className="col-lg-3">
-                  <label className="form-label mt-2 formFont">Ship Folder No (Optional)</label>
+                  <label className="form-label mt-2 formFont">
+                    Ship Folder No (Optional)
+                  </label>
                   <Form.Control
                     type="text"
                     name="strShipFolderNo"
@@ -406,7 +453,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </div>
                 </div>
                 <div className="col-lg-3">
-                  <label className="form-label mt-2 formFont ">Issue Place</label>
+                  <label className="form-label mt-2 formFont ">
+                    Issue Place
+                  </label>
                   <Form.Control
                     type="text"
                     name="strIssuedPlace"
@@ -469,16 +518,13 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <label className="form-label mt-2">
                     Certificate Issue date
                   </label>
-                  <Form.Control
-                    type="date"
+                  <DatePicker
                     name="dteCertificateIssueDate"
-                    className="fromStyle formHeight" 
-                    value={certificateInfoInput.dteCertificateIssueDate}
+                    className="form-control fromStyle formHeight"
+                    placeholderText="select issue date"
+                    selected={certificateInfoInput.dteCertificateIssueDate}
                     onChange={(e) =>
-                      certificateMainInfoChange(
-                        "dteCertificateIssueDate",
-                        e.target.value
-                      )
+                      certificateMainInfoChange("dteCertificateIssueDate", e)
                     }
                     ref={register({
                       required: true,
@@ -492,59 +538,88 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </div>
                 </div>
 
-                {
-                  certificateInfoInput.intCertificateTypeID != 4 && certificateInfoInput.intCertificateTypeID !== null &&
-                  <>
-                    <div className="col-lg-3">
-                      <label className="form-label mt-2">Expiry Date</label>
-                      <Form.Control
-                        type="date"
-                        name="dteExpiryDate"
-                        className="fromStyle formHeight" 
-                        value={certificateInfoInput.dteExpiryDate}
-                        onChange={(e) =>
-                          certificateMainInfoChange("dteExpiryDate", e.target.value)
-                        }
-                        ref={register({
-                          required: false,
-                          maxLength: 100,
-                        })}
-                      />
-                      {/* <div className="inputError margin-minus-8">
-                        {errors.dteExpiryDate &&
-                          errors.dteExpiryDate.type === "required" &&
+                {certificateInfoInput.intCertificateTypeID !== 4 &&
+                  certificateInfoInput.intCertificateTypeID !== null && (
+                    <>
+                      <div className="col-lg-3">
+                        <label className="form-label mt-2">Expiry Date</label>{" "}
+                        <div>
+                          <DatePicker
+                            name="dteCertificateExpiryDate"
+                            className="form-control fromStyle formHeight custome-date"
+                            placeholderText="select expiry date"
+                            disabled={
+                              certificateInfoInput.dteCertificateIssueDate
+                                ? false
+                                : true
+                            }
+                            minDate={
+                              certificateInfoInput.dteCertificateIssueDate
+                            }
+                            selected={certificateInfoInput.dteCertificateExpiryDate}
+                            onChange={(e) =>
+                              certificateMainInfoChange("dteCertificateExpiryDate", e)
+                            }
+                            ref={register({
+                              required: true,
+                              maxLength: 100,
+                            })}
+                          />
+                        </div>
+                        {/* <div className="inputError margin-minus-8">
+                        {errors.dteCertificateExpiryDate &&
+                          errors.dteCertificateExpiryDate.type === "required" &&
                           "Expiry Date can't be blank"}
                       </div> */}
-                    </div>
-                    <div className="col-lg-3">
-                      <label className="form-label mt-2">
-                        Certificate Valid date
-                      </label>
-                      <Form.Control
-                        type="date"
-                        name="dteCertificateValidUntil"
-                        className="fromStyle formHeight" 
-                        value={certificateInfoInput.dteCertificateValidUntil}
-                        onChange={(e) =>
-                          certificateMainInfoChange(
-                            "dteCertificateValidUntil",
-                            e.target.value
-                          )
-                        }
-                        ref={register({
-                          required: false,
-                          maxLength: 100,
-                        })}
-                      />
-                      {/* <div className="inputError margin-minus-8">
+                      </div>
+                      <div className="col-lg-3">
+                        <label className="form-label mt-2">
+                          Certificate Valid date
+                        </label>
+                        {/* <Form.Control
+                          type="date"
+                          name="dteCertificateValidUntil"
+                          className="fromStyle formHeight"
+                          value={certificateInfoInput.dteCertificateValidUntil}
+                          onChange={(e) =>
+                            certificateMainInfoChange(
+                              "dteCertificateValidUntil",
+                              e.target.value
+                            )
+                          }
+                          ref={register({
+                            required: false,
+                            maxLength: 100,
+                          })}
+                        /> */}
+                        <div>
+                          <DatePicker
+                            name="dteCertificateValidUntil"
+                            className="form-control fromStyle formHeight custome-date"
+                            placeholderText="select certificate valid date"
+                            selected={
+                              certificateInfoInput.dteCertificateValidUntil
+                            }
+                            onChange={(e) =>
+                              certificateMainInfoChange(
+                                "dteCertificateValidUntil",
+                                e
+                              )
+                            }
+                            ref={register({
+                              required: true,
+                              maxLength: 100,
+                            })}
+                          />
+                        </div>
+                        {/* <div className="inputError margin-minus-8">
                         {errors.dteCertificateValidUntil &&
                           errors.dteCertificateValidUntil.type === "required" &&
                           "Valid Until Date can't be blank"}
                       </div> */}
-                    </div>
-                  </>
-                }
-
+                      </div>
+                    </>
+                  )}
 
                 <div className="col-lg-3">
                   <label className="form-label">
@@ -565,12 +640,14 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     </label>
                   </label>
 
-                  <Form.Control
+                  {/* <Form.Control
                     type="date"
                     name="dteExtendedUntil"
-                    className="fromStyle formHeight" 
+                    className="fromStyle formHeight"
                     style={{ marginTop: -3 }}
-                    disabled={certificateInfoInput.isExtendedUntil ? false : true}
+                    disabled={
+                      certificateInfoInput.isExtendedUntil ? false : true
+                    }
                     value={certificateInfoInput.dteExtendedUntil}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -582,7 +659,25 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       required: false,
                       maxLength: 100,
                     })}
-                  />
+                  // /> */}
+                  <div>
+                    <DatePicker
+                      name="dteExtendedUntil"
+                      className="form-control fromStyle formHeight custome-date"
+                      placeholderText="select certificate valid date"
+                      disabled={
+                        certificateInfoInput.isExtendedUntil ? false : true
+                      }
+                      selected={certificateInfoInput.dteExtendedUntil}
+                      onChange={(e) =>
+                        certificateMainInfoChange("dteExtendedUntil", e)
+                      }
+                      ref={register({
+                        required: true,
+                        maxLength: 100,
+                      })}
+                    />
+                  </div>
                   {/* <div className="inputError margin-minus-8">
                     {errors.dteExtendedUntil &&
                       errors.dteExtendedUntil.type === "required" &&
@@ -591,10 +686,10 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div>
                 <div className="col-lg-3">
                   <label className="form-label mt-2">Endorsement Date</label>
-                  <Form.Control
+                  {/* <Form.Control
                     type="date"
                     name="dteLastEndorsementDate"
-                    className="fromStyle formHeight" 
+                    className="fromStyle formHeight"
                     value={certificateInfoInput.dteLastEndorsementDate}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -606,28 +701,44 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       required: true,
                       maxLength: 100,
                     })}
-                  />
+                  /> */}
+                  <div>
+                    <DatePicker
+                      name="dteLastEndorsementDate"
+                      className="form-control fromStyle formHeight custome-date"
+                      placeholderText="select certificate valid date"
+                      selected={certificateInfoInput.dteLastEndorsementDate}
+                      onChange={(e) =>
+                        certificateMainInfoChange("dteLastEndorsementDate", e)
+                      }
+                      ref={register({
+                        required: true,
+                        maxLength: 100,
+                      })}
+                    />
+                  </div>
                   <div className="inputError margin-minus-8">
                     {errors.dteLastEndorsementDate &&
                       errors.dteLastEndorsementDate.type === "required" &&
                       "Endorsement Date can't be blank"}
                   </div>
                 </div>
-
               </div>
               {/*certificate create dates close*/}
-              {
-                certificateInfoInput.intParentCategoryID == 4 &&
+              {certificateInfoInput.intParentCategoryID == 4 && (
                 <div className="form-group row mt-2 mb-2 border pb-3 bg-light">
                   <div className="col-lg-3">
                     <label className="form-label mt-2">From Survey</label>
                     <Form.Control
                       type="date"
                       name="dteFromSurvey"
-                      className="fromStyle formHeight" 
+                      className="fromStyle formHeight"
                       value={certificateInfoInput.dteFromSurvey}
                       onChange={(e) =>
-                        certificateMainInfoChange("dteFromSurvey", e.target.value)
+                        certificateMainInfoChange(
+                          "dteFromSurvey",
+                          e.target.value
+                        )
                       }
                       ref={register({
                         required: false,
@@ -645,7 +756,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     <Form.Control
                       type="date"
                       name="dteToSurvey"
-                      className="fromStyle formHeight" 
+                      className="fromStyle formHeight"
                       value={certificateInfoInput.dteToSurvey}
                       onChange={(e) =>
                         certificateMainInfoChange("dteToSurvey", e.target.value)
@@ -683,7 +794,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     />
                   </div>
                   <div className="col-lg-3">
-                    <button type="button" className="btn saveButton text-white mt-11" onClick={() => addMultipleData()}>
+                    <button
+                      type="button"
+                      className="btn saveButton text-white mt-11"
+                      onClick={() => addMultipleData()}
+                    >
                       <span> Add </span>
                     </button>
                   </div>
@@ -699,27 +814,28 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {
-                          certificateInfoInput.certificateDates.map((date, index) => (
+                        {certificateInfoInput.certificateDates.map(
+                          (date, index) => (
                             <tr>
                               <td>{index + 1}</td>
                               <td>{date.dteFromSurvey}</td>
                               <td>{date.dteToSurvey}</td>
                               <td>{date.strCertificateStatusName}</td>
-                              <td style={{ width: 70, textAlign: 'center' }}>
+                              <td style={{ width: 70, textAlign: "center" }}>
                                 {/* <i className="fa fa-edit text-success mr-2"></i> */}
-                                <i className="fa fa-trash text-danger pointer" onClick={() => deleteMultipleData(index)}></i>
+                                <i
+                                  className="fa fa-trash text-danger pointer"
+                                  onClick={() => deleteMultipleData(index)}
+                                ></i>
                               </td>
                             </tr>
-                          ))
-                        }
-
+                          )
+                        )}
                       </tbody>
                     </table>
                   </div>
                 </div>
-              }
-
+              )}
 
               <div className="form-group row mt-1 border mt-2 pb-3 bg-light">
                 {/* <div className="col-lg-3">
@@ -754,7 +870,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     as="textarea"
                     type="text"
                     name="strOfficeRemarks"
-                    className="fromStyle formHeight" 
+                    className="fromStyle formHeight"
                     disabled={true}
                     value={certificateInfoInput.strOfficeRemarks}
                     onChange={(e) =>
@@ -780,7 +896,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     as="textarea"
                     type="text"
                     name="strShipRemarks"
-                    className="fromStyle formHeight" 
+                    className="fromStyle formHeight"
                     value={certificateInfoInput.strShipRemarks}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -847,6 +963,31 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div> */}
               </div>
 
+              <div className="form-group row mt-1 border mt-2 pb-3 bg-light">
+                <div className="col-lg-3">
+                    <label className="form-label mt-2">Attachments</label>
+                    {/* <Form.Control
+                      type="file"
+                      name="multipleAttachments[]"
+                      className="fromStyle formHeight" 
+                      onChange={(e) =>
+                        certificateMainInfoChange(
+                          "multipleAttachments",
+                          e.target.value
+                        )
+                      }
+                      ref={register({
+                        required: false,
+                        maxLength: 100,
+                      })}
+                    /> */}
+                    <FileBase64
+                      name="multipleAttachments"
+                      multiple={true}
+                      onDone={getFiles.bind(this)}
+                    />
+                  </div>
+              </div>
               <div className="form-group row">
                 <div className="col-sm-10">
                   <a
@@ -860,14 +1001,21 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </a>
 
                   {isLoading && (
-                    <button type="submit" className="mr-4 saveButton text-white btn" disabled={true}>
+                    <button
+                      type="submit"
+                      className="mr-4 saveButton text-white btn"
+                      disabled={true}
+                    >
                       <span>Submitting</span>
                       <span className="ml-3 spinner spinner-white"></span>
                     </button>
                   )}
 
                   {!isLoading && (
-                    <button type="submit" className="mr-4 saveButton text-white btn">
+                    <button
+                      type="submit"
+                      className="mr-4 saveButton text-white btn"
+                    >
                       <span>Submit</span>
                     </button>
                   )}

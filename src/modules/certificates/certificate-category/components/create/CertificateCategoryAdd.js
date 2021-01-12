@@ -8,6 +8,7 @@ import Select from "react-select";
 import {
   certificatecategorySubmitAction,
   getCertificateCategoryListData,
+  getCertificateParentCategoryData,
   handleCertificateCategoryInput,
 } from "../../_redux/actions/CertificateCategoryAction";
 
@@ -19,6 +20,13 @@ const CertificateCategoryAdd = () => {
   const getCategoryInpuData = useSelector(
     (state) => state.CertificateCategoryReducer.certificateCategoryInput
   );
+
+  const certificateParentCategoryList = useSelector(
+    (state) => state.CertificateCategoryReducer.certificateParentCategoryList
+  );
+
+  // console.log('certificateParentCategoryList', certificateParentCategoryList);
+
   const status = useSelector(
     (state) => state.CertificateCategoryReducer.status
   );
@@ -35,6 +43,7 @@ const CertificateCategoryAdd = () => {
     dispatch(certificatecategorySubmitAction(getCategoryInpuData));
   };
   useEffect(() => {
+    dispatch(getCertificateParentCategoryData());
     if (status) {
       dispatch(getCertificateCategoryListData());
     }
@@ -50,6 +59,11 @@ const CertificateCategoryAdd = () => {
       value: 1,
     },
   ];
+
+  // useEffect(() => {
+  //   dispatch(getCertificateParentCategoryData());
+  // }, []);
+
 
   const loading = false;
   return (
@@ -78,15 +92,15 @@ const CertificateCategoryAdd = () => {
             Parent Category <span className="text-info"> (Optional)</span>
           </label>
           <RHFInput
-            as={<Select options={statusOptions} />}
+            as={<Select options={certificateParentCategoryList} />}
             rules={{ required: false }}
-            name="intCargoTypeID"
+            name="intParentsCategoryID"
             className="formSelect pt-0"
             register={register}
-            value={getCategoryInpuData.intCargoTypeID}
+            value={certificateParentCategoryList.intParentsCategoryID}
             onChange={(option) => {
-              categoryInputChange("intCargoTypeName", option.label);
-              categoryInputChange("intCargoTypeID", option.value);
+              categoryInputChange("strCertificateCategoryName", option.label);
+              categoryInputChange("intParentsCategoryID", option.value);
             }}
             setValue={setValue}
           />
@@ -98,7 +112,7 @@ const CertificateCategoryAdd = () => {
         {isLoading && (
           <button
             type="submit"
-            class="btn btn-primary saveButton mt-3"
+            class="btn btn-primary saveButton text-white mt-3"
             disabled={true}
           >
             <span className="p-1">Submitting...</span>
@@ -106,7 +120,7 @@ const CertificateCategoryAdd = () => {
           </button>
         )}
         {!isLoading && (
-          <button type="submit" className="btn btn-primary saveButton mt-3">
+          <button type="submit" className="btn btn-primary saveButton text-white mt-3">
             <span>Submit</span>
           </button>
         )}

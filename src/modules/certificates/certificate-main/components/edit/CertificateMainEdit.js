@@ -491,11 +491,11 @@ const CertificateMainEdit = () => {
                   <label className="form-label mt-2">Expiry Date</label>
                   <Form.Control
                     type="date"
-                    name="dteExpiryDate"
+                    name="dteCertificateExpiryDate"
                     className="fromStyle"
-                    value={certificateInfoInput.dteExpiryDate}
+                    value={certificateInfoInput.dteCertificateExpiryDate}
                     onChange={(e) =>
-                      certificateMainInfoChange("dteExpiryDate", e.target.value)
+                      certificateMainInfoChange("dteCertificateExpiryDate", e.target.value)
                     }
                     // ref={register({
                     //   required: false,
@@ -503,8 +503,8 @@ const CertificateMainEdit = () => {
                     // })}
                   />
                   {/* <div className="inputError margin-minus-8">
-                    {errors.dteExpiryDate &&
-                      errors.dteExpiryDate.type === "required" &&
+                    {errors.dteCertificateExpiryDate &&
+                      errors.dteCertificateExpiryDate.type === "required" &&
                       "Expiry Date can't be blank"}
                   </div> */}
                 </div>

@@ -38,7 +38,7 @@ const isLoading = useSelector((state) => state.CertificateCategoryReducer.isLoad
 const certificatesCategoryOptionData = useSelector((state) => state.certificateMainInfo.certificatesCategoryOptionData);
   const certificateMainInfoChange = (name, value, e = null) => {
     console.log('Name',name,"value",value);
-    dispatch(handleChangeCertificateMasterInput(name, value, e));
+    dispatch(handleChangeCertificateMasterInput(name, value));
   };
 
   useEffect(() => {
@@ -51,15 +51,11 @@ const certificatesCategoryOptionData = useSelector((state) => state.certificateM
       state.CertificateListReducer.certificateMasterInput
   );
 
-  const defaultEditData = useSelector(
-    (state) => state.CertificateListReducer.editDefaultData
-  );
-
   const submitecertificateMaster = (data) => {
     dispatch(
         certificateMasterEditAction(
         CertificateMasterInput,
-        props.editData.intIssuingAuthorityID
+        props.editData.intCertificateID
       )
     );
   };
@@ -89,13 +85,13 @@ const certificatesCategoryOptionData = useSelector((state) => state.certificateM
                         <RHFInput
                             as={<Select options={vesselName} />}
                             rules={{ required: false }}
-                            name="strVesselName"
+                            name="label"
                             register={register}
-                            value={vesselName.strVesselName}
+                            value={vesselName.label}
                             setValue={setValue}
                             onChange={(option) => {
-                                certificateMainInfoChange("strVesselName", option.label);
-                                certificateMainInfoChange("intVesselID", option.value);
+                                certificateMainInfoChange("label", option.label);
+                                certificateMainInfoChange("value", option.value);
                               }}
                         />
                     </div>

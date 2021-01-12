@@ -234,14 +234,15 @@ const BasicForm = () => {
               label="custome checkbox"
             />
 
-            <div className="mt-5">
+            <div className="mt-5 float-right">
               <Button className="mr-4  saveButton text-white" variant="">
-                Save
+                Submit
               </Button>
               <Button className=" cancelButton " variant="">
                 Cancel
               </Button>
             </div>
+            <div className="clearfix"></div>
           </form>
         </Card.Body>
       </Card>
