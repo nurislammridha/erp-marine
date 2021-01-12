@@ -3,8 +3,61 @@ import { Form, Card, Button, Row, Col, InputGroup } from "react-bootstrap";
 // import { DateRangePickerWrapper } from "storybook";
 // import * as Icon from "react-icons/fi";
 import Checkbox from "react-custom-checkbox";
+import { RHFInput } from "react-hook-form-input";
+import Select from "react-select";
+import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import { InputBase, Paper, IconButton, Divider } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const BasicForm = () => {
+  const { register, handleSubmit, errors, setValue } = useForm();
+  const courseData = [
+    {
+      id: 1,
+      name: "cse",
+    },
+    {
+      id: 1,
+      name: "EEE",
+    },
+    {
+      id: 1,
+      name: "MBA",
+    },
+  ];
+
+  let CourseName = [];
+  if (courseData) {
+    courseData.forEach((item) => {
+      let items = {
+        value: item.id,
+        label: item.name,
+      };
+      CourseName.push(items);
+    });
+  }
+  // const classes8 = useStyles8();
+  // const useStyles8 = makeStyles({
+  //   root: {
+  //     padding: "2px",
+  //     display: "flex",
+  //     alignItems: "center",
+  //     width: 250,
+  //   },
+  //   input: {
+  //     marginLeft: 8,
+  //     flex: 1,
+  //   },
+  //   iconButton: {
+  //     padding: 10,
+  //   },
+  //   divider: {
+  //     width: 1,
+  //     height: 28,
+  //     margin: 4,
+  //   },
+  // });
   return (
     <>
       <Card>
@@ -122,6 +175,43 @@ const BasicForm = () => {
                     </Form.Control.Feedback>
                   </InputGroup>
                 </Form.Group>
+              </div>
+              <div className="col-xl-3 col-lg-3 col-md-6">
+                <label className="formFont">Select Course</label>
+                <RHFInput
+                  as={<Select options={CourseName} />}
+                  rules={{ required: false }}
+                  name="courseData"
+                  register={register}
+                  value={CourseName.label}
+                  setValue={setValue}
+                />
+              </div>
+
+              <div className="col-xl-3 col-lg-3 col-md-6">
+                <label className="formFont">Select Course</label>
+                <RHFInput
+                  as={<Select options={CourseName} />}
+                  rules={{ required: false }}
+                  name="courseData"
+                  register={register}
+                  value={CourseName.label}
+                  setValue={setValue}
+                />
+              </div>
+
+              <div className="col-xl-4 col-lg-4 col-md-6 mt-3">
+                <Paper className="searchInput">
+                  <InputBase
+                    placeholder="Search Employee Here"
+                    // inputProps={{ "aria-label": "Search Google Maps" }}
+                    // onChange={(e) => searchEmployee(e)}
+                    // value={employeeInfo.employeeName}
+                  />
+                  <IconButton aria-label="Search" className="searchPlaceholder">
+                    <i className="flaticon-search "></i>
+                  </IconButton>
+                </Paper>
               </div>
             </div>
             <Form.Check className="mt-3" type="radio" aria-label="radio 1" />
