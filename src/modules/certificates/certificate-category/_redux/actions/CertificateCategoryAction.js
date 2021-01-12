@@ -58,40 +58,6 @@ export const getCertificateCategoryListData = (
   searchText = null,
   page
 ) => async (dispatch) => {
-  // let isActive = status == "" ? 1 : parseInt(status);
-  // let url = `${process.env.REACT_APP_API_URL}certificate/category?isPaginated=1`;
-
-  // if (searchValue !== "" || isActive !== "") {
-  //   url += `?search=${searchValue}&isActive=${isActive}`;
-  // }
-
-  // // axios.get(url).then((res) => {
-  // //   console.log("ResponseCategory", res);
-  // //   dispatch({
-  // //     type: Types.GET_CERTIFICATE_CATEGORY_LIST,
-  // //     payload: res.data.data,
-  // //   });
-  // // });
-  // try {
-  //   await Axios.get(url)
-  //     .then((res) => {
-  //       const { data, message, status } = res.data;
-  //       res.status = status;
-  //       res.certificates = data.data;
-  //       res.message = message;
-  //       res.certificatesPaginatedData = data;
-  //       res.isLoading = false;
-  //     })
-  //     .catch((err) => {
-  //       toast.error(err);
-  //     });
-  // } catch (error) {
-  //   res.message = "Something Went Wrong !";
-  //   toast.error(error);
-  // }
-
-  // res.isLoading = false;
-  // dispatch({ type: Types.GET_CERTIFICATE_CATEGORY_LIST, payload: res });
   let response = {
     certificates: [],
     status: false,
@@ -102,14 +68,6 @@ export const getCertificateCategoryListData = (
   dispatch({ type: Types.GET_CERTIFICATE_CATEGORY_LIST, payload: response });
   let url = "";
   url = `${process.env.REACT_APP_API_URL}certificate/category?isPaginated=1`;
-
-  // if (searchText !== null) {
-  //     // url += `&paginateNo=${page}`;
-  //     url += `&search=${searchText}`
-  // } else {
-  //     // url += `&certificate/details?search=${searchText}`
-  // }
-
   try {
     await axios.get(url)
       .then((res) => {

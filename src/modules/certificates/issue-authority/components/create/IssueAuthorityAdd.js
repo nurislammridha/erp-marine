@@ -53,11 +53,12 @@ const IssueAuthorityAdd = () => {
   return (
     <Form onSubmit={handleSubmit(submiteIssuingAuthority)} method="post">
       <Form.Group as={Row} controlId="formAuthorityName">
-        <Form.Label column sm="3">
+        <Form.Label className="formFont pl-1" column sm="3">
           Authority Name:
         </Form.Label>
         <Col sm="9">
           <Form.Control
+            className="formHeight"
             type="text"
             placeholder="Type Authority name"
             value={CertificateIssueAuthirityInput.strIssuingAuthorityName}
@@ -88,15 +89,20 @@ const IssueAuthorityAdd = () => {
         </Col>
       </Form.Group> */}
       <Form.Group as={Row} controlId="formPlaintextPassword">
-        <Form.Label column sm="3"></Form.Label>
+        <Form.Label className="formFont pl-1" column sm="3"></Form.Label>
         <Col sm="9">
           {!isLoading && (
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" className="saveButton">
               Submit
             </Button>
           )}
           {isLoading && (
-            <Button variant="primary" type="submit" disabled={true}>
+            <Button
+              variant="primary"
+              type="submit"
+              className="saveButton"
+              disabled={true}
+            >
               <span className="p-2">
                 <i className="fa fa-check"></i> Submitting...
               </span>

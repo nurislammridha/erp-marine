@@ -69,7 +69,6 @@ const CertificateTypeList = (props) => {
                 </tbody>
             </table>
 
-
             <SimpleModal
                 show={show}
                 size="lg"

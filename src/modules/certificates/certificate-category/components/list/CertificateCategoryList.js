@@ -115,8 +115,8 @@ const CertificateCategoryList = () => {
             <table className="table mt-2 tbl-standard" id="table-to-xls">
               <thead>
                 <tr>
-                  <th scope="col">Certificate Type</th>
-                  <th scope="col">Action By</th>
+                  <th scope="col">Category Name</th>
+                  <th scope="col">Parent Category</th>
                   <th scope="col">Status</th>
                   <th scope="col">Action</th>
                 </tr>
@@ -126,7 +126,7 @@ const CertificateCategoryList = () => {
                   certificateCategoryData.map((item, index) => (
                     <tr>
                       <td>{item.strCertificateCategoryName}</td>
-                      <td>{item.intActionBy}</td>
+                      <td>{item.intParentsCategoryID}</td>
                       <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
                       {/*<td>
                                 {" "}
