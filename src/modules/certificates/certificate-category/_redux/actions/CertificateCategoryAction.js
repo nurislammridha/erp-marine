@@ -1,7 +1,7 @@
 import * as Types from "../types/Types";
 import axios from "axios";
 import { showToast } from "../../../../master/utils/ToastHelper";
-
+import Axios from "axios";
 export const handleCertificateCategoryInput = (name, value) => (dispatch) => {
   const categoryData = {
     name: name,

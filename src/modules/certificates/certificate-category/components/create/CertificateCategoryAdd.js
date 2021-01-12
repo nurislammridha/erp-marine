@@ -34,7 +34,6 @@ const CertificateCategoryAdd = () => {
     (state) => state.CertificateCategoryReducer.isLoading
   );
 
-  console.log("getCategoryInpuData :>> ", getCategoryInpuData);
   const categoryInputChange = (name, value) => {
     dispatch(handleCertificateCategoryInput(name, value));
   };
