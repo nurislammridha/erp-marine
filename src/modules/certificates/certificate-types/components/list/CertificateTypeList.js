@@ -52,7 +52,7 @@ const CertificateTypeList = (props) => {
                             <tr>
                                 <td>{index + 1}</td>
                                 <td>{item.strCertificateTypeName}</td>
-                                <td>{item.isActive ? "Active" : "Inactive"}</td>
+                                <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
                                 <td className="mt-3">
                                     <a>
                                         <i
