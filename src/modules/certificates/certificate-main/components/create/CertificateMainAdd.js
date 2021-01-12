@@ -21,6 +21,7 @@ import {
   getCertificateStatusData,
   certificateMultipleDataAdd,
   certificateMultipleDataDelete,
+  certificateMultipleAttachmentDelete,
 } from "../../_redux/actions/CertificateMainAction";
 import CertificateCategoryAddModal from "../../../certificate-category/components/create/CertificateCategoryAddModal";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
@@ -141,10 +142,16 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   };
 
   const getFiles = (files) => {
-    console.log('files', files);
+    if (files.length > 0) {
+      files.forEach(file => {
+        const filesUpdated = [file, ...certificateInfoInput.multipleAttachments];
+        dispatch(handleChangeProductInputAction("multipleAttachments", filesUpdated));
+      });
+    }
+  };
 
-    // multipleAttachmentAdd()
-    dispatch(handleChangeProductInputAction("multipleAttachments", files));
+  const deleteMultipleAttachmentData = (index) => {
+    dispatch(certificateMultipleAttachmentDelete(index));
   };
 
 
@@ -991,38 +998,48 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   />
                 </div>
                 <div className="col-lg-8">
-                  <table className="table tbl-standard table-bordered tbl-survey">
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Image Name</th>
-                        <th>Image Size</th>
-                        <th>Image View</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {certificateInfoInput.multipleAttachments.map(
-                        (date, index) => (
-                          <tr>
-                            <td>{index + 1}</td>
-                            <td>{date.name}</td>
-                            <td>{date.size}</td>
-                            <td>{" "}
-                              <img src={date.imagePreviewUrl} width="40px" />
-                            </td>
-                            <td style={{ width: 70, textAlign: "center" }}>
-                              {/* <i className="fa fa-edit text-success mr-2"></i> */}
-                              <i
-                                className="fa fa-trash text-danger pointer"
-                                onClick={() => deleteMultipleData(index)}
-                              ></i>
-                            </td>
-                          </tr>
-                        )
-                      )}
-                    </tbody>
-                  </table>
+                  {
+                    certificateInfoInput.multipleAttachments.length > 0
+                    &&
+                    <table className="table tbl-standard table-bordered tbl-survey">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Image Name</th>
+                          <th>Image Size</th>
+                          <th>Image View</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {certificateInfoInput.multipleAttachments.map(
+                          (attachment, index) => (
+                            <tr>
+                              <td>{index + 1}</td>
+                              <td>{attachment.name}</td>
+                              <td>{attachment.size}</td>
+                              <td>{" "}
+                                <PreviewAttachment
+                                  url={'files/' + attachment.name}
+                                  title="Preview"
+                                  height={50}
+                                  width={50}
+                                />
+                              </td>
+                              <td style={{ width: 70, textAlign: "center" }}>
+                                {/* <i className="fa fa-edit text-success mr-2"></i> */}
+                                <i
+                                  className="fa fa-trash text-danger pointer"
+                                  onClick={() => deleteMultipleAttachmentData(index)}
+                                ></i>
+                              </td>
+                            </tr>
+                          )
+                        )}
+                      </tbody>
+                    </table>
+
+                  }
                 </div>
               </div>
               <div className="form-group row">

@@ -112,12 +112,21 @@ const CertificateMainReducer = (state = initialState, action) => {
       };
       break;
 
-      case Types.DELETE_SURVEY_MULTIPLE_DATA:
+    case Types.DELETE_SURVEY_MULTIPLE_DATA:
       const multiDataSetOld = { ...state.certificateMainInfo };
-      multiDataSetOld.certificateDates.splice( action.payload, 1);
+      multiDataSetOld.certificateDates.splice(action.payload, 1);
       return {
         ...state,
         certificateMainInfo: multiDataSetOld,
+      };
+      break;
+
+    case Types.DELETE_SURVEY_MULTIPLE_ATTACHMENT:
+      const multiDataSetAttachment = { ...state.certificateMainInfo };
+      multiDataSetAttachment.multipleAttachments.splice(action.payload, 1);
+      return {
+        ...state,
+        certificateMainInfo: multiDataSetAttachment,
       };
       break;
 
@@ -151,9 +160,9 @@ const CertificateMainReducer = (state = initialState, action) => {
 
     //SELFT
     case Types.CHANGE_CERTIFICATE_INPUT:
-      console.log('action.payload',action.payload);
       const certificateMainInfo = { ...state.certificateMainInfo };
       certificateMainInfo[action.payload.name] = action.payload.value;
+
       return {
         ...state,
         certificateMainInfo,

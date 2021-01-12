@@ -11,7 +11,7 @@ export const handleChangeProductInputAction = (
   e,
   isEdit = false
 ) => (dispatch) => {
-  console.log('name',name);
+
   let data = {
     name: name,
     value: value,
@@ -189,6 +189,10 @@ export const multipleAttachmentAdd = (data) => (dispatch) => {
 
 export const certificateMultipleDataDelete = (index) => (dispatch) => {
   dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_DATA, payload: index });
+}
+
+export const certificateMultipleAttachmentDelete = (index) => (dispatch) => {
+  dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_ATTACHMENT, payload: index });
 }
 
 export const deleteProductImagePreview = () => (dispatch) => {
