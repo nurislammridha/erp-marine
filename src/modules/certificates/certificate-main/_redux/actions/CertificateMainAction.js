@@ -112,7 +112,7 @@ export const getCertificateMainListAction = (
   };
   dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
   let url = "";
-  url = `${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1`;
+  url = `${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1&page=${page}`;
 
   if (searchText !== null) {
     // url += `&paginateNo=${page}`;
