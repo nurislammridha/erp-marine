@@ -35,7 +35,7 @@ const CertificateTypeList = (props) => {
 
     return (
 
-        <div className="react-bootstrap-table table-responsive">
+        <div className="react-bootstrap-table table-responsive pr-7">
             <table className="table mt-2 tbl-standard">
                 <thead>
                     <tr>

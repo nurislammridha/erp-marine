@@ -30,10 +30,10 @@ const CertificateTypeContainer = () => {
     <Card>
       <Card.Body>
         <div className="container">
-          <div className="row">
+          <div className="container row">
             <h1 className="tableheading">Certificate Type List</h1>
             <CertificateTypeFilter />
-            <Dropdown className="d-inline mr-2">
+            <Dropdown className="d-inline">
               <Dropdown.Toggle
                 className="btn btn-sm"
                 variant="light text-primary"
@@ -83,7 +83,7 @@ const CertificateTypeContainer = () => {
               </Dropdown.Menu>
             </Dropdown>
             <Button
-              className="btn btn-sm"
+              className="btn btn-sm ml-5"
               variant="primary"
               onClick={handleShow}
             >
