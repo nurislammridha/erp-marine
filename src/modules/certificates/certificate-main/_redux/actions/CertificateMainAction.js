@@ -88,13 +88,10 @@ export const MainCertificateCreateAction =  (certificateInfoInput) =>  async (
         "Something went wrong ! Please fill all inputs and try again !";
     });
 
-    console.log('responseList', responseList);
-    showToast("successs", 'Welcome');
-
     if (responseList.status) {
-      showToast("successs", responseList.message);
+      toast.success(responseList.message);
     } else {
-      showToast("error", responseList.message);
+      toast.error(responseList.message);
     }
     dispatch({
       type: Types.CERTIFICATE_MAIN_SUBMIT,

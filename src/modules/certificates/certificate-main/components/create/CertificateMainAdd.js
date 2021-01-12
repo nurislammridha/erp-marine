@@ -279,7 +279,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter Flag"
                     name="strVesselFlag"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -339,7 +339,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     type="text"
                     name="intIssuingAuthorityID"
                     placeholder="Enter Issue Authority"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     value={certificateInfoInput.intIssuingAuthorityID}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -472,7 +472,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <Form.Control
                     type="date"
                     name="dteCertificateIssueDate"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     value={certificateInfoInput.dteCertificateIssueDate}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -500,7 +500,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       <Form.Control
                         type="date"
                         name="dteExpiryDate"
-                        className="fromStyle"
+                        className="fromStyle formHeight" 
                         value={certificateInfoInput.dteExpiryDate}
                         onChange={(e) =>
                           certificateMainInfoChange("dteExpiryDate", e.target.value)
@@ -523,7 +523,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       <Form.Control
                         type="date"
                         name="dteCertificateValidUntil"
-                        className="fromStyle"
+                        className="fromStyle formHeight" 
                         value={certificateInfoInput.dteCertificateValidUntil}
                         onChange={(e) =>
                           certificateMainInfoChange(
@@ -568,7 +568,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <Form.Control
                     type="date"
                     name="dteExtendedUntil"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     style={{ marginTop: -3 }}
                     disabled={certificateInfoInput.isExtendedUntil ? false : true}
                     value={certificateInfoInput.dteExtendedUntil}
@@ -594,7 +594,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <Form.Control
                     type="date"
                     name="dteLastEndorsementDate"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     value={certificateInfoInput.dteLastEndorsementDate}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -624,7 +624,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     <Form.Control
                       type="date"
                       name="dteFromSurvey"
-                      className="fromStyle"
+                      className="fromStyle formHeight" 
                       value={certificateInfoInput.dteFromSurvey}
                       onChange={(e) =>
                         certificateMainInfoChange("dteFromSurvey", e.target.value)
@@ -645,7 +645,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     <Form.Control
                       type="date"
                       name="dteToSurvey"
-                      className="fromStyle"
+                      className="fromStyle formHeight" 
                       value={certificateInfoInput.dteToSurvey}
                       onChange={(e) =>
                         certificateMainInfoChange("dteToSurvey", e.target.value)
@@ -727,7 +727,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <Form.Control
                     type="date"
                     name="dteLastSurvey"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -740,7 +740,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <Form.Control
                     type="date"
                     name="dteNextSurvey"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -754,7 +754,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     as="textarea"
                     type="text"
                     name="strOfficeRemarks"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     disabled={true}
                     value={certificateInfoInput.strOfficeRemarks}
                     onChange={(e) =>
@@ -780,7 +780,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     as="textarea"
                     type="text"
                     name="strShipRemarks"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     value={certificateInfoInput.strShipRemarks}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -815,7 +815,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       onChange={(e) =>
                         certificateMainInfoChange("image", e.target.files[0], e)
                       }
-                      className="fromStyle"
+                      className="fromStyle formHeight" 
                       ref={register}
                     />
                     {serverErrors["image"] && (
