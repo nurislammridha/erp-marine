@@ -169,7 +169,7 @@ export const GetVesselTypeAction = () => async (dispatch) => {
 export const getCertificateCategory = (data) => (dispatch) => {
     Axios
     .get(
-      `http://10.17.2.31:8082/iMarineAPI/public/api/v1/certificate/category`
+      `${process.env.REACT_APP_API_URL}certificate/category`
     )
     .then((res) => {
      
