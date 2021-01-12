@@ -17,6 +17,7 @@ import {
   GetVesselTypeAction,
   getCertificateStatusData,
   certificateMultipleDataAdd,
+  certificateMultipleDataDelete,
 } from "../../_redux/actions/CertificateMainAction";
 import CertificateCategoryAddModal from "../../../certificate-category/components/create/CertificateCategoryAddModal";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
@@ -52,6 +53,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const addStatus = useSelector((state) => state.vesselInfo.addStatus);
   const addMessage = useSelector((state) => state.vesselInfo.addMessage);
   const serverErrors = useSelector((state) => state.certificateMainInfo.errors);
+  const isLoading = useSelector((state) => state.certificateMainInfo.isLoading);
   const certificateInfoInput = useSelector(
     (state) => state.certificateMainInfo.certificateMainInfo
   );
@@ -81,7 +83,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const certificateStatus = useSelector(
     (state) => state.certificateMainInfo.certificateStatus
   );
-  
+
   const vesselTypeOption = useSelector(
     (state) => state.certificateMainInfo.vesselTypeOptionData
   );
@@ -102,6 +104,10 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
   const addMultipleData = () => {
     dispatch(certificateMultipleDataAdd(certificateInfoInput));
+  }
+
+  const deleteMultipleData = (index) => {
+    dispatch(certificateMultipleDataDelete(index));
   }
 
   const [showCategoryModal, setShowCategoryModal] = useState(false);
@@ -273,7 +279,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter Flag"
                     name="strVesselFlag"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -283,11 +289,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div> */}
 
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Code</label>
+                  <label className="form-label mt-2 formFont">Code</label>
                   <Form.Control
                     type="text"
                     name="strCustomeCode"
-                    className="fromStyle"
+                    className="fromStyle formHeight"
                     value={certificateInfoInput.strCustomeCode}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -303,16 +309,16 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <div className="inputError margin-minus-8">
                     {errors.strCustomeCode &&
                       errors.strCustomeCode.type === "required" &&
-                      "Code can't be blank"}
+                      "Certificate Code can't be blank"}
                   </div>
                 </div>
 
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Ship Folder No</label>
+                  <label className="form-label mt-2 formFont">Ship Folder No (Optional)</label>
                   <Form.Control
                     type="text"
                     name="strShipFolderNo"
-                    className="fromStyle"
+                    className="fromStyle formHeight"
                     value={certificateInfoInput.strShipFolderNo}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -321,15 +327,10 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       )
                     }
                     ref={register({
-                      required: true,
+                      required: false,
                       maxLength: 100,
                     })}
                   />
-                  <div className="inputError margin-minus-8">
-                    {errors.strShipFolderNo &&
-                      errors.strShipFolderNo.type === "required" &&
-                      "Location can't be blank"}
-                  </div>
                 </div>
 
                 {/* <div className="col-lg-3">
@@ -338,7 +339,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     type="text"
                     name="intIssuingAuthorityID"
                     placeholder="Enter Issue Authority"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     value={certificateInfoInput.intIssuingAuthorityID}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -405,11 +406,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </div>
                 </div>
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Issue Place</label>
+                  <label className="form-label mt-2 formFont ">Issue Place</label>
                   <Form.Control
                     type="text"
                     name="strIssuedPlace"
-                    className="fromStyle"
+                    className="fromStyle formHeight"
                     value={certificateInfoInput.strIssuedPlace}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -430,11 +431,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div>
 
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Location</label>
+                  <label className="form-label mt-2 formFont">Location</label>
                   <Form.Control
                     type="text"
                     name="strLocation"
-                    className="fromStyle"
+                    className="fromStyle formHeight"
                     value={certificateInfoInput.strLocation}
                     onChange={(e) =>
                       certificateMainInfoChange("strLocation", e.target.value)
@@ -447,7 +448,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <div className="inputError margin-minus-8">
                     {errors.strLocation &&
                       errors.strLocation.type === "required" &&
-                      "Location can't be blank"}
+                      "Certificate Issue Location can't be blank"}
                   </div>
                 </div>
                 <div className="col-lg-3 mt-3">
@@ -471,7 +472,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <Form.Control
                     type="date"
                     name="dteCertificateIssueDate"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     value={certificateInfoInput.dteCertificateIssueDate}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -499,21 +500,21 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       <Form.Control
                         type="date"
                         name="dteExpiryDate"
-                        className="fromStyle"
+                        className="fromStyle formHeight" 
                         value={certificateInfoInput.dteExpiryDate}
                         onChange={(e) =>
                           certificateMainInfoChange("dteExpiryDate", e.target.value)
                         }
                         ref={register({
-                          required: true,
+                          required: false,
                           maxLength: 100,
                         })}
                       />
-                      <div className="inputError margin-minus-8">
+                      {/* <div className="inputError margin-minus-8">
                         {errors.dteExpiryDate &&
                           errors.dteExpiryDate.type === "required" &&
                           "Expiry Date can't be blank"}
-                      </div>
+                      </div> */}
                     </div>
                     <div className="col-lg-3">
                       <label className="form-label mt-2">
@@ -522,7 +523,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       <Form.Control
                         type="date"
                         name="dteCertificateValidUntil"
-                        className="fromStyle"
+                        className="fromStyle formHeight" 
                         value={certificateInfoInput.dteCertificateValidUntil}
                         onChange={(e) =>
                           certificateMainInfoChange(
@@ -531,15 +532,15 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                           )
                         }
                         ref={register({
-                          required: true,
+                          required: false,
                           maxLength: 100,
                         })}
                       />
-                      <div className="inputError margin-minus-8">
+                      {/* <div className="inputError margin-minus-8">
                         {errors.dteCertificateValidUntil &&
                           errors.dteCertificateValidUntil.type === "required" &&
-                          "Issue Date can't be blank"}
-                      </div>
+                          "Valid Until Date can't be blank"}
+                      </div> */}
                     </div>
                   </>
                 }
@@ -567,7 +568,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <Form.Control
                     type="date"
                     name="dteExtendedUntil"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     style={{ marginTop: -3 }}
                     disabled={certificateInfoInput.isExtendedUntil ? false : true}
                     value={certificateInfoInput.dteExtendedUntil}
@@ -578,22 +579,22 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       )
                     }
                     ref={register({
-                      required: true,
+                      required: false,
                       maxLength: 100,
                     })}
                   />
-                  <div className="inputError margin-minus-8">
+                  {/* <div className="inputError margin-minus-8">
                     {errors.dteExtendedUntil &&
                       errors.dteExtendedUntil.type === "required" &&
                       "Expiry Date can't be blank"}
-                  </div>
+                  </div> */}
                 </div>
                 <div className="col-lg-3">
                   <label className="form-label mt-2">Endorsement Date</label>
                   <Form.Control
                     type="date"
                     name="dteLastEndorsementDate"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     value={certificateInfoInput.dteLastEndorsementDate}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -609,7 +610,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <div className="inputError margin-minus-8">
                     {errors.dteLastEndorsementDate &&
                       errors.dteLastEndorsementDate.type === "required" &&
-                      "Expiry Date can't be blank"}
+                      "Endorsement Date can't be blank"}
                   </div>
                 </div>
 
@@ -623,48 +624,48 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     <Form.Control
                       type="date"
                       name="dteFromSurvey"
-                      className="fromStyle"
+                      className="fromStyle formHeight" 
                       value={certificateInfoInput.dteFromSurvey}
                       onChange={(e) =>
                         certificateMainInfoChange("dteFromSurvey", e.target.value)
                       }
                       ref={register({
-                        required: true,
+                        required: false,
                         maxLength: 100,
                       })}
                     />
-                    <div className="inputError margin-minus-8">
+                    {/* <div className="inputError margin-minus-8">
                       {errors.dteFromSurvey &&
                         errors.dteFromSurvey.type === "required" &&
                         "Expiry Date can't be blank"}
-                    </div>
+                    </div> */}
                   </div>
                   <div className="col-lg-3">
                     <label className="form-label mt-2">To Survey</label>
                     <Form.Control
                       type="date"
                       name="dteToSurvey"
-                      className="fromStyle"
+                      className="fromStyle formHeight" 
                       value={certificateInfoInput.dteToSurvey}
                       onChange={(e) =>
                         certificateMainInfoChange("dteToSurvey", e.target.value)
                       }
                       ref={register({
-                        required: true,
+                        required: false,
                         maxLength: 100,
                       })}
                     />
-                    <div className="inputError margin-minus-8">
+                    {/* <div className="inputError margin-minus-8">
                       {errors.dteToSurvey &&
                         errors.dteToSurvey.type === "required" &&
                         "Expiry Date can't be blank"}
-                    </div>
+                    </div> */}
                   </div>
                   <div className="col-lg-3">
                     <label className="form-label mt-2">Survey Status</label>
                     <RHFInput
                       as={<Select options={certificateStatus} />}
-                      rules={{ required: true }}
+                      rules={{ required: false }}
                       name="intCertificateStatusID"
                       register={register}
                       value={certificateInfoInput.intCertificateStatusID}
@@ -701,18 +702,18 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         {
                           certificateInfoInput.certificateDates.map((date, index) => (
                             <tr>
-                              <td>{index+1}</td>
+                              <td>{index + 1}</td>
                               <td>{date.dteFromSurvey}</td>
                               <td>{date.dteToSurvey}</td>
                               <td>{date.strCertificateStatusName}</td>
                               <td style={{ width: 70, textAlign: 'center' }}>
-                                <i className="fa fa-edit text-success mr-2"></i>
-                                <i className="fa fa-trash text-danger"></i>
+                                {/* <i className="fa fa-edit text-success mr-2"></i> */}
+                                <i className="fa fa-trash text-danger pointer" onClick={() => deleteMultipleData(index)}></i>
                               </td>
                             </tr>
                           ))
                         }
-                       
+
                       </tbody>
                     </table>
                   </div>
@@ -726,7 +727,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <Form.Control
                     type="date"
                     name="dteLastSurvey"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -739,7 +740,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <Form.Control
                     type="date"
                     name="dteNextSurvey"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -753,7 +754,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     as="textarea"
                     type="text"
                     name="strOfficeRemarks"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     disabled={true}
                     value={certificateInfoInput.strOfficeRemarks}
                     onChange={(e) =>
@@ -763,15 +764,15 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       )
                     }
                     ref={register({
-                      required: true,
+                      required: false,
                       maxLength: 100,
                     })}
                   />
-                  <div className="inputError margin-minus-8">
+                  {/* <div className="inputError margin-minus-8">
                     {errors.strOfficeRemarks &&
                       errors.strOfficeRemarks.type === "required" &&
                       "Expiry Date can't be blank"}
-                  </div>
+                  </div> */}
                 </div>
                 <div className="col-lg-3">
                   <label className="form-label mt-2">Ship remarks</label>
@@ -779,7 +780,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     as="textarea"
                     type="text"
                     name="strShipRemarks"
-                    className="fromStyle"
+                    className="fromStyle formHeight" 
                     value={certificateInfoInput.strShipRemarks}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -788,15 +789,15 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       )
                     }
                     ref={register({
-                      required: true,
+                      required: false,
                       maxLength: 100,
                     })}
                   />
-                  <div className="inputError margin-minus-8">
+                  {/* <div className="inputError margin-minus-8">
                     {errors.strShipRemarks &&
                       errors.strShipRemarks.type === "required" &&
                       "Expiry Date can't be blank"}
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* <div className="col-lg-3 mt-8">
@@ -814,7 +815,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       onChange={(e) =>
                         certificateMainInfoChange("image", e.target.files[0], e)
                       }
-                      className="fromStyle"
+                      className="fromStyle formHeight" 
                       ref={register}
                     />
                     {serverErrors["image"] && (
@@ -857,21 +858,19 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       Back
                     </button>
                   </a>
-                  {/* <button type="submit" class="btn btn-primary btn-lg">
-                    Next
-                    </button> */}
-                  {/* {loading && ( */}
-                  <button type="submit" className="mr-4 saveButton text-white btn">
-                    <span>Submit</span>
-                    {/* <span className="ml-3 spinner spinner-white"></span> */}
-                  </button>
-                  {/* )} */}
 
-                  {/* {!loading && (
-                    <button type="submit" class="btn btn-primary btn-lg">
+                  {isLoading && (
+                    <button type="submit" className="mr-4 saveButton text-white btn" disabled={true}>
+                      <span>Submitting</span>
+                      <span className="ml-3 spinner spinner-white"></span>
+                    </button>
+                  )}
+
+                  {!isLoading && (
+                    <button type="submit" className="mr-4 saveButton text-white btn">
                       <span>Submit</span>
                     </button>
-                  )} */}
+                  )}
                 </div>
               </div>
             </form>

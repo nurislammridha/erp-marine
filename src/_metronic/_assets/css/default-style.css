@@ -85,12 +85,16 @@ ul.sticky-toolbar.nav.flex-column.pl-2.pr-2.pt-3.pb-3.mt-4 {
 
 .formHeight {
     height: 30px;
-    background: #f3f6f9;
+    background: #fff;
     font-size: 10px !important;
     font-weight: 500;
 }
 
-label.formFont.form-label {
+.form-input-white {
+    background: #fff;
+}
+
+.formFont {
     font-size: 11px !important;
     margin-bottom: 0px !important;
 }
@@ -570,8 +574,12 @@ i.tableFilter {
     margin-left: -1px;
     width: 16px;
     height: 16px;
-    margin-top: -2px;
+    margin-top: -9px;
     margin-bottom: -1px;
+}
+
+.btn.btn-default i {
+    color: #d9e0e6;
 }
 
 .btn-modal-close i {
@@ -580,12 +588,14 @@ i.tableFilter {
     margin-top: -2px;
 }
 
-.input-area-add .btn-default {
+.input-area-add .btn-default,
+.input-area-add .btn-default:hover {
     border-radius: 0px !important;
     background: white;
-    border-color: #cccccc;
+    border-color: #ecf0f3;
     border-left: 0px !important;
     margin-left: -3px;
+    height: 30px;
 }
 
 .tbl-survey {
@@ -594,9 +604,71 @@ i.tableFilter {
 }
 
 .tbl-survey thead {
-    background: red!important;
+    background: red !important;
 }
 
 .tbl-survey th {
     background: #789dfe38;
+}
+
+
+/* basic form */
+
+.css-1okebmr-indicatorSeparator {
+    margin-top: 4px !important;
+}
+
+.css-yk16xz-control {
+    background: #fff !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    border: 1px solid #e5eaee !important;
+}
+
+.css-1pahdxg-control {
+    background: #fff !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    border: 1px solid #e5eaee !important;
+}
+
+.css-g1d714-ValueContainer {
+    padding: 3px !important;
+}
+
+.css-1wa3eu0-placeholder {
+    top: 44% !important;
+}
+
+.css-tlfecz-indicatorContainer {
+    padding-top: 2px !important;
+}
+
+.css-1uccc91-singleValue {
+    top: 44% !important;
+}
+
+.css-1hb7zxy-IndicatorsContainer {
+    /* padding: 0px !important; */
+}
+
+.searchInput {
+    background: #f3f6f9 !important;
+    height: 30px !important;
+    /* min-height: 30px !important; */
+    border: 1px solid #e5eaee !important;
+    box-shadow: none !important;
+}
+
+button.MuiButtonBase-root.MuiIconButton-root.searchPlaceholder {
+    padding: 0px !important;
+    padding-top: 2px !important;
+}
+
+input.MuiInputBase-input {
+    margin-left: 10px;
+}
+
+input#react-select-2-input {
+    /* height: 30px !important; */
 }

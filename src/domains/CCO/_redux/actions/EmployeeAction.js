@@ -21,7 +21,7 @@ export const GetEmployeeList = () => async (dispatch) => {
     "Content-Type": "application/json",
   };
   const intVesselId = await getVesselId();
-  const url = `${process.env.REACT_APP_API_URL}asllhr/getEmployeePersonal?intVesselId=${intVesselId}`;
+  const url = `http://iapps.akij.net/asll/public/api/v1/asllhr/getEmployeePersonal?intVesselId=${intVesselId}`;
   axios
     .get(url, {
       headers: headers,

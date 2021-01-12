@@ -33,7 +33,7 @@ const initialState = {
     strIssuedPlace: "",
     strLocation: "",
     intCertificateTypeID: null,
-    intNotOnBoard: 1,
+    intNotOnBoard: 0,
     dteCertificateIssueDate: "",
     dteCertificateValidUntil: "",
     isExtendedUntil: false,
@@ -96,6 +96,15 @@ const CertificateMainReducer = (state = initialState, action) => {
       return {
         ...state,
         certificateMainInfo: multipleDataset,
+      };
+      break;
+
+      case Types.DELETE_SURVEY_MULTIPLE_DATA:
+      const multiDataSetOld = { ...state.certificateMainInfo };
+      multiDataSetOld.certificateDates.splice( action.payload, 1);
+      return {
+        ...state,
+        certificateMainInfo: multiDataSetOld,
       };
       break;
 

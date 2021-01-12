@@ -9,8 +9,10 @@ const initialState = {
         isActive: "1"
     },
     certificateTypeList: [],
-    status: false
-
+    status: false,
+    isLoading: false,
+    editStatus: false,
+    editing: false
 
 };
 
@@ -38,7 +40,8 @@ const CertificateTypeReducer = (state = initialState, action) => {
             console.log('action.payload,', action.payload);
             return {
                 ...state,
-                status: action.payload.status
+                status: action.payload.status,
+                isLoading: action.payload.isLoading,
             };
 
         case Types.EDIT_CERTIFICATE_TYPE_LIST:
@@ -48,6 +51,14 @@ const CertificateTypeReducer = (state = initialState, action) => {
                 certificateTypeInput: action.payload.data,
             };
             break;
+
+        case Types.UPDATE_CERTIFICATE_TYPE_LIST:
+            console.log('action.payload,', action.payload);
+            return {
+                ...state,
+                editStatus: action.payload.status,
+                isLoading: action.payload.isLoading,
+            };
 
         // case Types.VOYAGE_SUBMIT:
         //     if (action.payload.status) {

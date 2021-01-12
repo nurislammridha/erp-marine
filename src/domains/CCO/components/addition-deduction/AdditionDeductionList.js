@@ -120,8 +120,12 @@ const AdditionDeductionList = withRouter(({ history, props }) => {
   const employeeInfoList = useSelector(
     (state) => state.employeeInfo.employeeInfoList
   );
-  const addStatus = useSelector((state) => state.additionDeductionInfo.addStatus);
-  const addMessage = useSelector((state) => state.additionDeductionInfo.addMessage);
+  const addStatus = useSelector(
+    (state) => state.additionDeductionInfo.addStatus
+  );
+  const addMessage = useSelector(
+    (state) => state.additionDeductionInfo.addMessage
+  );
   const VesselList = useSelector((state) => state.vesselInfo.vesselListOptions);
   const vesselAccountDetails = useSelector(
     (state) => state.additionDeductionInfo.vesselAccountDetails
@@ -144,7 +148,10 @@ const AdditionDeductionList = withRouter(({ history, props }) => {
       VesselItemList.push(items);
     });
   }
-console.log('additionDeductionByEmployeeList',additionDeductionByEmployeeList);
+  console.log(
+    "additionDeductionByEmployeeList",
+    additionDeductionByEmployeeList
+  );
   useEffect(() => {
     const yearData = {
       label: moment().format("YYYY"),
