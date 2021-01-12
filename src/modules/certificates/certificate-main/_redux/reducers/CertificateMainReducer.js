@@ -33,7 +33,7 @@ const initialState = {
     strIssuedPlace: "",
     strLocation: "",
     intCertificateTypeID: null,
-    intNotOnBoard: 1,
+    intNotOnBoard: 0,
     dteCertificateIssueDate: "",
     dteCertificateValidUntil: "",
     isExtendedUntil: false,

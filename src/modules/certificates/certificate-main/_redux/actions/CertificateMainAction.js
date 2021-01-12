@@ -1,5 +1,6 @@
 import Axios from "axios";
 import { toast } from "react-toastify";
+import { getEmployeeId, getVesselId } from "../../../../../app/modules/Auth/_redux/authCrud";
 import { generateFormDataFromObject } from "../../../../master/utils/FileHelper";
 import { showToast } from "../../../../master/utils/ToastHelper";
 import * as Types from "../types/Types";
@@ -32,13 +33,17 @@ export const handleChangeProductInputAction = (
 };
 
 // submit main certificate info
-export const MainCertificateCreateAction = (certificateInfoInput) => (
+export const MainCertificateCreateAction =  (certificateInfoInput) =>  async (
   dispatch
 ) => {
-  if (certificateInfoInput.intVesselID === null) {
-    showToast("error", "Vassel can't be blank!");
-    return false;
+  const vesselID = getVesselId();
+  if(vesselID === null){
+    certificateInfoInput.intVesselID = 1;
+  }else{
+    certificateInfoInput.intVesselID = vesselID;
   }
+  certificateInfoInput.intActionBy = getEmployeeId();
+
   if (certificateInfoInput.intCertificateID === null) {
     showToast("error", "Certificate can't be blank!");
     return false;
@@ -48,53 +53,49 @@ export const MainCertificateCreateAction = (certificateInfoInput) => (
     return false;
   }
   if (certificateInfoInput.strCustomeCode === null) {
-    showToast("error", "Custome code can't be blank!");
+    showToast("error", "Certificate Code can't be blank!");
     return false;
   }
   if (certificateInfoInput.intIssuingAuthorityID === null) {
-    showToast("error", "Issue Autherity code can't be blank!");
+    showToast("error", "Issue Autherity can't be blank!");
     return false;
   }
+
   let responseList = {
     isLoading: true,
     data: {},
     status: false,
+    message: ''
   };
-
-  //      const headers = {
-  //         'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-  // };
 
   dispatch({
     type: Types.CERTIFICATE_MAIN_SUBMITTING,
     payload: responseList,
   });
-  let postUrl = `${process.env.REACT_APP_API_URL}certificate/details`;
-  Axios.post(postUrl, certificateInfoInput)
-    .then(function(response) {
-      responseList.data = response.data;
-      responseList.isLoading = false;
-      responseList.status = response.data.status;
-      if (response.data.status) {
-        showToast("successs", response.data.message);
-        dispatch({
-          type: Types.CERTIFICATE_MAIN_SUBMIT,
-          payload: responseList,
-        });
-      } else {
-        showToast("error", response.data.message);
-      }
-    })
-    .catch(function(error) {
-      responseList.isLoading = false;
-      const message =
-        "Something went wrong ! Please fill all inputs and try again !";
-      showToast("error", message);
 
-      dispatch({
-        type: Types.CERTIFICATE_MAIN_SUBMIT,
-        payload: responseList,
-      });
+  let postUrl = `${process.env.REACT_APP_API_URL}certificate/details`;
+  await Axios.post(postUrl, certificateInfoInput)
+    .then(response => {
+      const { status, data, message } = response.data;
+      responseList.data = data;
+      responseList.isLoading = false;
+      responseList.status = status;
+      responseList.message = message;
+    })
+    .catch(error => {
+      responseList.isLoading = false;
+      responseList.message =
+        "Something went wrong ! Please fill all inputs and try again !";
+    });
+
+    if (responseList.status) {
+      toast.success(responseList.message);
+    } else {
+      toast.error(responseList.message);
+    }
+    dispatch({
+      type: Types.CERTIFICATE_MAIN_SUBMIT,
+      payload: responseList,
     });
 };
 
