@@ -139,7 +139,7 @@ const CertificateMainList = () => {
             </div>
             {isLoading && <LoadingSpinner text="Loading Certificates..." />}
             {
-              !isLoading &&
+              !isLoading  && certificates.length > 0 &&
               <table className="table mt-5 certificate-list tbl-standard table-responsive">
                 <thead>
                   <tr>
@@ -225,7 +225,7 @@ const CertificateMainList = () => {
             }
 
             {!isLoading && certificates.length === 0 && (
-              <div className="alert alert-warning">
+              <div className="alert border-1 p-4">
                 Sorry ! No Certificates Found.
               </div>
             )}
