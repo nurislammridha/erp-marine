@@ -47,70 +47,55 @@ const IssueAuthorityAdd = () => {
 
   const submiteIssuingAuthority = (data) => {
     dispatch(issueAuthoritySubmitAction(CertificateIssueAuthirityInput));
-    dispatch(getIssuingAuthorities());
   };
 
   return (
     <Form onSubmit={handleSubmit(submiteIssuingAuthority)} method="post">
-      <Form.Group as={Row} controlId="formAuthorityName">
-        <Form.Label className="formFont pl-1" column sm="3">
-          Authority Name:
-        </Form.Label>
-        <Col sm="9">
-          <Form.Control
-            className="formHeight"
-            type="text"
-            placeholder="Type Authority name"
-            value={CertificateIssueAuthirityInput.strIssuingAuthorityName}
-            name="strIssuingAuthorityName"
-            ref={register({
-              required: false,
-              maxLength: 100,
-            })}
-            onChange={(e) =>
-              handleChangeTextInput("strIssuingAuthorityName", e.target.value)
-            }
-          />
-        </Col>
-      </Form.Group>
-      {/* <Form.Group as={Row} controlId="formPlaintextPassword">
-        <Form.Label column sm="3">
-          Status:
-        </Form.Label>
-        <Col sm="9">
-          <RHFInput
-            as={<Select options={action} />}
-            rules={{ required: false }}
-            name="isActiveStatus"
-            register={register}
-            value={action.label}
-            setValue={""}
-          />
-        </Col>
-      </Form.Group> */}
-      <Form.Group as={Row} controlId="formPlaintextPassword">
-        <Form.Label className="formFont pl-1" column sm="3"></Form.Label>
-        <Col sm="9">
-          {!isLoading && (
-            <Button variant="primary" type="submit" className="saveButton">
-              Submit
-            </Button>
-          )}
-          {isLoading && (
-            <Button
-              variant="primary"
-              type="submit"
-              className="saveButton"
-              disabled={true}
-            >
-              <span className="p-2">
-                <i className="fa fa-check"></i> Submitting...
+      <div className="container">
+        <Form.Group as={Row} controlId="formAuthorityName">
+          <Form.Label className="formFont pl-1 ml-3" column sm="12">
+            Authority Name:
+          </Form.Label>
+          <Col sm="12">
+            <Form.Control
+              className="formHeight"
+              type="text"
+              placeholder="Type Authority name"
+              value={CertificateIssueAuthirityInput.strIssuingAuthorityName}
+              name="strIssuingAuthorityName"
+              ref={register({
+                required: false,
+                maxLength: 100,
+              })}
+              onChange={(e) =>
+                handleChangeTextInput("strIssuingAuthorityName", e.target.value)
+              }
+            />
+          </Col>
+        </Form.Group>
+
+        <Form.Group as={Row} controlId="formPlaintextPassword">
+          <Col sm="12">
+            {!isLoading && (
+              <Button variant="primary" type="submit" className="saveButton">
+                Submit
+              </Button>
+            )}
+            {isLoading && (
+              <Button
+                variant="primary"
+                type="submit"
+                className="saveButton"
+                disabled={true}
+              >
+                <span className="p-2"> Submitting...
               </span>
-              <span className="ml-3 spinner spinner-white "></span>
-            </Button>
-          )}
-        </Col>
-      </Form.Group>
+                <span className="ml-3 spinner spinner-white "></span>
+              </Button>
+            )}
+          </Col>
+        </Form.Group>
+      </div>
     </Form>
   );
 };

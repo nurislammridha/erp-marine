@@ -86,8 +86,8 @@ ul.sticky-toolbar.nav.flex-column.pl-2.pr-2.pt-3.pb-3.mt-4 {
 .formHeight {
     height: 30px;
     background: #fff;
-    font-size: 10px !important;
-    font-weight: 500;
+    font-size: 12px !important;
+    font-weight: 400;
 }
 
 .form-input-white {

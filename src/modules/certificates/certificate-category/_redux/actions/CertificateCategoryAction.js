@@ -30,7 +30,6 @@ export const certificatecategorySubmitAction = (getCategoryInpuData) => (dispatc
   axios
     .post(postUrl, getCategoryInpuData)
     .then(function (response) {
-      console.log('CertificateCategory', response)
       responseList.data = response.data;
       responseList.isLoading = false;
       responseList.status = response.data.status;
@@ -40,6 +39,9 @@ export const certificatecategorySubmitAction = (getCategoryInpuData) => (dispatc
           type: Types.CERTIFICATE_CATEGORY_STORE,
           payload: responseList,
         });
+        if(getCategoryInpuData.intParentsCategoryID !== null){
+          dispatch(getCertificateChildCategoryData(getCategoryInpuData.intParentsCategoryID));
+        }
       } else {
         showToast("error", response.data.message);
       }

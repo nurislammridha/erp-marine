@@ -1,6 +1,7 @@
 import * as Types from "../types/Types";
 import axios from "axios";
 import { showToast } from "../../../../master/utils/ToastHelper";
+import { getCertificateType } from "../../../certificate-main/_redux/actions/CertificateMainAction";
 
 
 export const handleChangeCertificateTypeInput = (name, value) => (dispatch) => {
@@ -54,6 +55,7 @@ export const certificatetypeSubmitAction = (CertificateTypeInput) => (dispatch) 
                     type: Types.CREATE_CERTIFICATE_TYPE,
                     payload: responseList,
                 });
+                dispatch(getCertificateType());
             } else {
                 showToast("error", response.data.message);
             }

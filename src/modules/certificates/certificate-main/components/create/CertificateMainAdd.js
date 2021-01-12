@@ -25,6 +25,7 @@ import {
 import CertificateMasterAdd from "../../../certificate-master/components/create/CertificateMasterAdd";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 import CertificateCategoryAdd from "../../../certificate-category/components/create/CertificateCategoryAdd";
+import IssueAuthorityAdd from "../../../issue-authority/components/create/IssueAuthorityAdd";
 import CertificateTypeAdd from "../../../certificate-types/components/create/CertificateTypeAdd";
 import {
   getCertificateChildCategoryData,
@@ -158,14 +159,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
                 {/*====Sub Category=====*/}
                 <div className="col-lg-3">
-                  <SimpleModal
-                    show={showCategoryModal}
-                    handleClose={() => setShowCategoryModal(false)}
-                    handleShow={() => setShowCategoryModal(true)}
-                    modalTitle={"Certificate Sub Category"}
-                  >
-                    <CertificateCategoryAdd />
-                  </SimpleModal>
                   <label className="form-label">Sub Category</label>
                   <div className="input-area-add">
                     <div className="float-left">
@@ -361,15 +354,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div> */}
 
                 <div className="col-lg-3">
-                  <SimpleModal
-                    show={showIssuedByModal}
-                    handleClose={() => setShowIssuedByModal(false)}
-                    handleShow={() => setShowIssuedByModal(true)}
-                    modalTitle={"Issued By"}
-                  >
-                    <CertificateCategoryAdd />
-                  </SimpleModal>
-
                   <label className="form-label">Issueing Authority</label>
                   <div className="input-area-add">
                     <div className="float-left">
@@ -1037,10 +1021,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               show={showTypeModal}
               handleClose={() => setShowTypeModal(false)}
               handleShow={() => setShowTypeModal(true)}
-              modalTitle={"Type Name"}
+              modalTitle={"Certificate Type"}
             >
               <CertificateTypeAdd />
             </SimpleModal>
+
             <SimpleModal
               show={showCertificateModal}
               handleClose={() => setShowCertificateModal(false)}
@@ -1048,6 +1033,24 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               modalTitle={"Certificate Name"}
             >
               <CertificateMasterAdd />
+            </SimpleModal>
+
+            <SimpleModal
+              show={showCategoryModal}
+              handleClose={() => setShowCategoryModal(false)}
+              handleShow={() => setShowCategoryModal(true)}
+              modalTitle={"Certificate Sub Category"}
+            >
+              <CertificateCategoryAdd />
+            </SimpleModal>
+
+            <SimpleModal
+              show={showIssuedByModal}
+              handleClose={() => setShowIssuedByModal(false)}
+              handleShow={() => setShowIssuedByModal(true)}
+              modalTitle={"Issueing Authority"}
+            >
+              <IssueAuthorityAdd />
             </SimpleModal>
 
           </div>

@@ -1,7 +1,7 @@
 import * as Types from "../types/Types";
 import Axios from "axios";
 import { toast } from "react-toastify";
-// import { generateFormDataFromObject } from "../../../master/utils/FileHelper";
+import { getCertificateIssueBy } from '../../../certificate-main/_redux/actions/CertificateMainAction'
 import { showToast } from "../../../../master/utils/ToastHelper";
 
 export const handleChangeCertificateIssueAuthorityInput = (name, value) => (
@@ -23,7 +23,6 @@ export const getIssuingAuthorities = (
   status = "",
   page
 ) => async (dispatch) => {
-  console.log("page", page);
   let response = {
     issuingAuthorities: [],
     status: false,
@@ -77,7 +76,6 @@ export const issueAuthoritySubmitAction = (CertificateIssueAuthirityInput) => (
     payload: responseList,
   });
 
-  // let postUrl = `http://192.168.206.1:82/iMarineAPI/public/api/v1/certificate/issuingAuthority`;
   let postUrl = `${process.env.REACT_APP_API_URL}certificate/issuingAuthority`;
   Axios.post(postUrl, CertificateIssueAuthirityInput)
     .then(function(response) {
@@ -90,6 +88,7 @@ export const issueAuthoritySubmitAction = (CertificateIssueAuthirityInput) => (
           type: Types.POST_ISSUING_AUTHORITY,
           payload: responseList,
         });
+        dispatch(getCertificateIssueBy());
       } else {
         console.log("error data", response.data);
         showToast("error", response.data.message);

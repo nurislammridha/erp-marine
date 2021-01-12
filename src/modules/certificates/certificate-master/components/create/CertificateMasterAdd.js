@@ -15,12 +15,10 @@ import { getCertificateCategory } from "../../../certificate-main/_redux/actions
 const CertificateMasterAdd = () => {
     const history = useHistory();
     const { register, handleSubmit, errors, setValue } = useForm();
-    
     const isLoading = useSelector((state) => state.CertificateListReducer.isLoading);
     const addStatus = useSelector((state) => state.CertificateListReducer.addStatus);
     const CertificateMasterInput = useSelector((state) => state.CertificateListReducer.certificateMasterInput);
     const CertificatesCategoryOptionData = useSelector((state) => state.certificateMainInfo.certificatesCategoryOptionData);
-    console.log('CertificateMasterInput',CertificateMasterInput);
     const dispatch = useDispatch();
     const statusOptions = [
         {
@@ -113,8 +111,7 @@ const CertificateMasterAdd = () => {
             )}
             {isLoading && (
                 <Button variant="primary" type="submit" className="saveButton" disabled={true}>
-                <span className="p-2">
-                    <i className="fa fa-check"></i> Submitting...
+                <span className="p-2"> Submitting...
                 </span>
                 <span className="ml-3 spinner spinner-white "></span>
                 </Button>
