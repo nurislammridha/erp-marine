@@ -40,17 +40,17 @@ const CertificateMainList = withRouter(({ history, props }) => {
     }
   };
 
-  const certificateDelete = () => {};
+  const certificateDelete = () => { };
 
   const getCertificateColorClass = (difference) => {
     let rowClassName = "";
-    if(difference === 0){
+    if (difference === 0) {
       rowClassName = "bg-row-0-days";
-    }else if(difference > 0 && difference <= 30 ){
+    } else if (difference > 0 && difference <= 30) {
       rowClassName = "bg-row-30-between";
-    }else if(difference > 30 && difference <= 60){
+    } else if (difference > 30 && difference <= 60) {
       rowClassName = "bg-row-60-days";
-    }else if(difference > 60){
+    } else if (difference > 60) {
       rowClassName = "bg-row-60-more";
     }
     return rowClassName;
@@ -76,9 +76,9 @@ const CertificateMainList = withRouter(({ history, props }) => {
 
               <i className="fas fa-filter tableFilter mt-3 mr-2"></i>
               <i className="far fa-filter"></i>
-              <Button className="btn-sm" variant="primary">
+              <Link to='/certificates-main/create' className="btn btn-primary text-center text-white">
                 Add New
-              </Button>
+              </Link>
             </div>
             {isLoading && <LoadingSpinner text="Loading Certificates..." />}
             {!isLoading && certificates.length === 0 && (

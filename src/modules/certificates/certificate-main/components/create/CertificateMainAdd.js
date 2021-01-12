@@ -991,11 +991,13 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         maxLength: 100,
                       })}
                     /> */}
-                  <FileBase64
-                    name="multipleAttachments"
-                    multiple={true}
-                    onDone={getFiles.bind(this)}
-                  />
+                  <div className="attachment-file">
+                    <FileBase64
+                      name="multipleAttachments"
+                      multiple={true}
+                      onDone={getFiles.bind(this)}
+                    />
+                  </div>
                 </div>
                 <div className="col-lg-8">
                   {

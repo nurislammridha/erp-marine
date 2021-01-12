@@ -1,15 +1,26 @@
-.certificate-list{
+.certificate-list {}
 
-}
-.certificate-list th{
+.certificate-list th {
     padding-left: 10px!important;
 }
+
 .bg-row-0-days {
     background: #F7BA00;
 }
+
+.bg-row-0-days td {
+    padding-left: 10px!important;
+}
+
 .bg-row-30-between {
     background: #ffecee;
 }
+
 .bg-row-30-between td {
     padding-left: 10px!important;
+}
+
+.attachment-file input {
+    background: white;
+    width: 100%!important;
 }
