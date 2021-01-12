@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useHistory, Link } from "react-router-dom";
@@ -11,13 +11,13 @@ import {
   getCertificateMasterList,
 } from "../../_redux/actions/CertificateListAction";
 import { getCertificateCategory } from "../../../certificate-main/_redux/actions/CertificateMainAction";
-// import { certificatetypeSubmitAction, handleChangeCertificateTypeInput } from "../../_redux/actions/CertificateListAction";
 
 const CertificateMasterAdd = () => {
     const history = useHistory();
     const { register, handleSubmit, errors, setValue } = useForm();
     
-    const isLoading = useSelector((state) => state.CertificateCategoryReducer.isLoading);
+    const isLoading = useSelector((state) => state.CertificateListReducer.isLoading);
+    const addStatus = useSelector((state) => state.CertificateListReducer.addStatus);
     const CertificateMasterInput = useSelector((state) => state.CertificateListReducer.certificateMasterInput);
     const CertificatesCategoryOptionData = useSelector((state) => state.certificateMainInfo.certificatesCategoryOptionData);
     console.log('CertificateMasterInput',CertificateMasterInput);
@@ -44,20 +44,25 @@ const CertificateMasterAdd = () => {
         }
     ]
 
-  const certificateMainInfoChange = (name, value, e = null) => {
+  const certificateMainInfoChange = (name, value) => {
     console.log("Name", name, "value", value);
-    dispatch(handleChangeCertificateMasterInput(name, value, e));
-  };
-
-  const onSubmit = (data) => {
-    dispatch(certificateMasterSubmitAction(CertificateMasterInput));
+    dispatch(handleChangeCertificateMasterInput(name, value));
   };
 
   useEffect(() => {
+    if (addStatus) {
+        dispatch(getCertificateMasterList());
+    }
+  }, [addStatus]);
+
+  useEffect(() => {
     dispatch(getCertificateCategory());
-    dispatch(getCertificateMasterList());
-    // dispatch(handleChangeCertificateMasterInput());
   }, []);
+
+  const onSubmit = (data) => {
+    dispatch(certificateMasterSubmitAction(CertificateMasterInput));
+    dispatch(getCertificateMasterList());
+  };
 
     return (
         <>
@@ -72,7 +77,7 @@ const CertificateMasterAdd = () => {
                         <Form.Control className="formFont pl-1"
                             className="formHeight"
                             type="text"
-                            value={certificateMainInfoChange.strCertificateName}
+                            value={CertificateMasterInput.strCertificateName}
                             name="strCertificateName"
                             onChange={(e) =>
                                 certificateMainInfoChange("strCertificateName", e.target.value)
@@ -84,13 +89,13 @@ const CertificateMasterAdd = () => {
                         <RHFInput
                             as={<Select options={vesselName} />}
                             rules={{ required: false }}
-                            name="strVesselName"
+                            name="value"
                             register={register}
-                            value={vesselName.strVesselName}
+                            value={CertificateMasterInput.label}
                             setValue={setValue}
                             onChange={(option) => {
-                                certificateMainInfoChange("strVesselName", option.label);
-                                certificateMainInfoChange("intVesselID", option.value);
+                                certificateMainInfoChange("label", option.label);
+                                certificateMainInfoChange("value", option.value);
                               }}
                         />
                     </div>
@@ -99,12 +104,12 @@ const CertificateMasterAdd = () => {
                         <RHFInput
                             as={<Select options={CertificatesCategoryOptionData} />}
                             rules={{ required: false }}
-                            name="intCertificateCategoriId"
+                            name="intCategoryID"
                             register={register}
-                            value={CertificatesCategoryOptionData.strCertificateCategoriName}
+                            value={CertificatesCategoryOptionData.strCertificateCategoryName}
                             setValue={setValue}
                             onChange={(option) => {
-                                certificateMainInfoChange("strCertificateCategoriName", option.label);
+                                certificateMainInfoChange("strCertificateCategoryName", option.label);
                                 certificateMainInfoChange("intCategoryID", option.value);
                               }}
                         />
@@ -115,18 +120,19 @@ const CertificateMasterAdd = () => {
                     <div className="col-sm-10"></div>
                 </div>
 
-                {isLoading && (
-                <button type="submit" class="btn btn-primary saveButton" disabled={true}>
-                    <span className="p-2"><i className="fa fa-check"></i>  Submitting...</span>
-                    <span className="ml-3 spinner spinner-white "></span>
-                </button>
-                )}
-
-                {!isLoading && (
-                <button type="submit" class="btn btn-primary saveButton">
-                    <span>Submit</span>
-                </button>
-                )}
+            {!isLoading && (
+                <Button variant="primary" type="submit" className="saveButton">
+                    Submit
+                </Button>
+            )}
+            {isLoading && (
+                <Button variant="primary" type="submit" className="saveButton" disabled={true}>
+                <span className="p-2">
+                    <i className="fa fa-check"></i> Submitting...
+                </span>
+                <span className="ml-3 spinner spinner-white "></span>
+                </Button>
+            )}
             </form>
         </>
     );

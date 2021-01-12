@@ -64,13 +64,11 @@ const CertificateMasterList = () => {
                                 <td>{item.isActive ? "Active" : "Inactive"}</td>
                                 <td>
                                     {" "}
-                                    <Link to={``}>
-                                        <i className="far fa-eye mr-3"></i>
-                                    </Link>
                                     <i className="far fa-edit editIcon ml-2" 
                                     onClick={() => {
                                     handleEdit(item);
-                                    }}></i>
+                                    }}>
+                                    </i>
                                 </td>
                             </tr>
                         ))}

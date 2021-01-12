@@ -13,6 +13,7 @@ import { getCertificateMasterList } from "../_redux/actions/CertificateListActio
 import CertificateMasterList from "../components/list/CertificateMasterList";
 import CertificateMasterAdd from "../components/create/CertificateMasterAdd";
 import CertificateMasterFilter from "../components/list/CertificateMasterFilter";
+import SimpleModal from "../../../../modules/master/components/Modal/SimpleModal";
 
 const CertificateMasterContainer = () => {
   const certificateMasterData = useSelector((state) => state.CertificateListReducer.certificateMasterList);
@@ -20,15 +21,21 @@ const CertificateMasterContainer = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const ref = React.createRef();
+  const modalAddStatus = useSelector((state) => state.certificateIssueAuthorityInfo.addStatus);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
         dispatch(getCertificateMasterList());
     }, []);
 
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+    useEffect(() => {
+      if (modalAddStatus) {
+        setShow(false);
+      }
+    }, [modalAddStatus]);
 
   return (
     <div className="card card-custom gutter-b">
@@ -89,26 +96,18 @@ const CertificateMasterContainer = () => {
           <Button
             className="pl-3 pr-3 text-bold btn-sm"
             variant="primary"
-             onClick={handleShow}
-          >
+            onClick={handleShow}>
             Add New
           </Button>
-          <Modal size="md" 
-          show={show} 
-          onHide={handleClose}
+
+          <SimpleModal
+            show={show}
+            handleClose={() => handleClose()}
+            modalTitle={"Create Certificate Master"}
           >
-            <Modal.Header closeButton>
-              <Modal.Title>Create Certificate Master</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{<CertificateMasterAdd />}</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" 
-               onClick={handleClose}
-              >
-                Cancel
-              </Button>
-            </Modal.Footer>
-          </Modal>
+          <CertificateMasterAdd />
+                        
+          </SimpleModal>
         </div>
         <div className="clearfix"></div>
       </div>

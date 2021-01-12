@@ -33,23 +33,22 @@ export const getCertificateMasterList = (searchValue = "", status = "") => async
         });
 };
 
-export const certificateMasterSubmitAction = (certificateInfoInput) => (dispatch) => {
-    console.log("certificateInfoInput :>> ", certificateInfoInput);
+export const certificateMasterSubmitAction = (CertificateMasterInput) => (dispatch) => {
          let responseList = {
            isLoading: true,
            data: {},
            status: false,
          };
-        //  dispatch({
-        //    type: Types.CERTIFICATE_MAIN_SUBMITTING,
-        //    payload: responseList,
-        //  });
+         dispatch({
+           type: Types.CERTIFICATE_MASTER_SUBMIT,
+           payload: responseList,
+         });
 
          let postUrl = `${process.env.REACT_APP_API_URL}certificate/certificateList`;
          Axios
-           .post(postUrl, certificateInfoInput)
+           .post(postUrl, CertificateMasterInput)
              .then(function (response) {
-               console.log("response :>> ", response);
+               console.log("response :", response);
              responseList.data = response.data;
              responseList.isLoading = false;
              responseList.status = response.data.status;
