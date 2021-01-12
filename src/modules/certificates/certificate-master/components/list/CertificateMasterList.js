@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 // import React, { useEffect, useState } from "react";
 // import { Form, Button, Image, Col, Row, Table, Dropdown } from "react-bootstrap";
 // import Modal from 'react-bootstrap/Modal';
@@ -74,7 +72,6 @@
 
 // export default CertificateMasterList;
 
->>>>>>> origin/nur
 import React, { useEffect, useState } from "react";
 import {
   Form,
@@ -155,7 +152,7 @@ const CertificateMasterList = () => {
         show={show}
         size="lg"
         handleClose={() => handleClose()}
-        modalTitle={"Certificate Type Add"}
+        modalTitle={"Certificate Master Edit"}
       >
         <CertificateMasterEdit />
       </SimpleModal>
