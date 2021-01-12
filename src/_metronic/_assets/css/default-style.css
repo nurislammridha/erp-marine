@@ -134,15 +134,6 @@ span#inputGroupPrepend {
     height: 30px;
 }
 
-.formCheckBox {
-    border: none !important;
-}
-
-.formCheckBox {
-    border: 1px solid red !important;
-    background: red;
-}
-
 
 /* DashBoard Main Page Design Starts */
 
@@ -156,33 +147,19 @@ span#inputGroupPrepend {
     background: #f64e60;
     overflow: hidden;
     color: #ffff;
-    padding-bottom: 15px;
+    padding: 20px;
     overflow: hidden;
 }
 
-.widget__left {
-    padding-top: 15px;
-    padding-left: 20px;
-}
-
-.widget__left span {
-    display: block;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    background: #fff;
-}
-
 .widget__right {
-    padding-top: 15px;
-    padding-left: 20px;
+    padding-top: 10px;
 }
 
 .widget__right p {
     color: #ffff;
     font-weight: 500;
     font-size: 13px !important;
-    padding-top: 2px;
+    padding-top: 7px;
 }
 
 .widget__right h4 {
@@ -315,6 +292,14 @@ span#inputGroupPrepend {
 
 .dough__num {
     font-weight: 500;
+}
+
+.widget__left img {
+    width: 30px;
+}
+
+.widget__left.three img {
+    width: 20px;
 }
 
 
@@ -564,7 +549,7 @@ i.tableFilter {
 
 .input-area-add input,
 .input-area-add select {
-    border-radius: 0px!important;
+    border-radius: 0px !important;
 }
 
 .btn-modal-close {
@@ -596,9 +581,22 @@ i.tableFilter {
 }
 
 .input-area-add .btn-default {
-    border-radius: 0px!important;
+    border-radius: 0px !important;
     background: white;
     border-color: #cccccc;
-    border-left: 0px!important;
+    border-left: 0px !important;
     margin-left: -3px;
+}
+
+.tbl-survey {
+    width: 74.5%;
+    margin: 10px 0px 10px 0px;
+}
+
+.tbl-survey thead {
+    background: red!important;
+}
+
+.tbl-survey th {
+    background: #789dfe38;
 }

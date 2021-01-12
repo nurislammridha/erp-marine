@@ -37,42 +37,45 @@ const CertificateTypeFilter = () => {
 
 
     return (
-        <div className="container">
-            <form className="form form-label-right" method="post">
-                <div className="form-group row ml-2">
-                    <div className="col-lg-3 col-md-6 col-10">
-                        <Form.Control type="text"
-                            placeholder="Search"
-                            value={search}
-                            onChange={(e) => changeSearch(e.target.value)}
-                        />
-                    </div>
-                    <div className="col-lg-3 col-md-6 col-10">
-                        <Form.Group
-                            className="noonReportInput"
-                            as={Row}
-                            controlId="formPlaintextPassword"
-                        >
-                            <Form.Label className="mt-2">Status</Form.Label>
-                            <Col sm="9">
-                                <RHFInput
-                                    as={<Select options={statusOptions} />}
-                                    rules={{ required: false }}
-                                    name="isActive"
-                                    register={register}
-                                    value={certificateTypeInput.isActive}
-                                    onChange={(option) => {
-                                        setType(option.value);
-                                        dispatch(getCertificateTypeList(search, option.value));
-                                    }}
-                                    setValue={setValue}
-                                />
-                            </Col>
-                        </Form.Group>
-                    </div>
-                </div>
-            </form >
-        </div>
+      <div className="container">
+        <form className="form form-label-right" method="post">
+          <div className="form-group row ml-2">
+            <div className="col-lg-3 col-md-6 col-10">
+              <Form.Control
+                className="formHeight"
+                type="text"
+                placeholder="Search"
+                value={search}
+                onChange={(e) => changeSearch(e.target.value)}
+              />
+            </div>
+            <div className="col-lg-3 col-md-6 col-10">
+              <Form.Group
+                className="noonReportInput"
+                as={Row}
+                controlId="formPlaintextPassword"
+              >
+                <Form.Label className="mt-2 tableheading">Status</Form.Label>
+                <Col sm="9">
+                  <RHFInput
+                    className="formSelect pt-0"
+                    as={<Select options={statusOptions} />}
+                    rules={{ required: false }}
+                    name="isActive"
+                    register={register}
+                    value={certificateTypeInput.isActive}
+                    onChange={(option) => {
+                      setType(option.value);
+                      dispatch(getCertificateTypeList(search, option.value));
+                    }}
+                    setValue={setValue}
+                  />
+                </Col>
+              </Form.Group>
+            </div>
+          </div>
+        </form>
+      </div>
     );
 };
 

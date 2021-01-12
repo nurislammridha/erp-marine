@@ -167,8 +167,12 @@ export const GetVesselTypeAction = () => async (dispatch) => {
 };
 
 export const getCertificateCategory = (data) => (dispatch) => {
-  Axios.get(`${process.env.REACT_APP_API_URL}certificate/category`).then(
-    (res) => {
+    Axios
+    .get(
+      `http://10.17.2.31:8082/iMarineAPI/public/api/v1/certificate/category`
+    )
+    .then((res) => {
+     
       let data = res.data.data;
       dispatch({ type: Types.GET_CERTIFICATE_CATEGORY, payload: data });
     }
@@ -237,4 +241,14 @@ export const mainCertificateEdit = (certificateInfoInput, id) => (dispatch) => {
       showToast("error", res.data.message);
     }
   });
+};
+
+
+
+export const getCertificateStatusData = () => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}certificate/status`;
+  Axios.get(url)
+    .then((res) => {
+      dispatch({ type: Types.MAIN_CERTIFICATE_STATUS, payload: res.data.data });
+    })
 };

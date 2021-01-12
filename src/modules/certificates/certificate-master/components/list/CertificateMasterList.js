@@ -17,7 +17,6 @@ const CertificateMasterList = () => {
 
     const dispatch = useDispatch();
     const certificateMasterData = useSelector((state) => state.CertificateListReducer.certificateMasterList);
-    console.log('certificateMasterData', certificateMasterData);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -60,7 +59,7 @@ const CertificateMasterList = () => {
                         certificateMasterData.map((item, index) => (
                             <tr>
                                 <td>{item.strCertificateName}</td>
-                                <td>{item.strCertificateCategoriName}</td>
+                                <td>{item.strCertificateCategoryName}</td>
                                 <td>{item.strVesselName}</td>
                                 <td>{item.isActive ? "Active" : "Inactive"}</td>
                                 <td>
@@ -68,7 +67,7 @@ const CertificateMasterList = () => {
                                     <Link to={``}>
                                         <i className="far fa-eye mr-3"></i>
                                     </Link>
-                                    <i className="far fa-edit ml-2" 
+                                    <i className="far fa-edit editIcon ml-2" 
                                     onClick={() => {
                                     handleEdit(item);
                                     }}></i>
