@@ -59,7 +59,7 @@ const certificatesCategoryOptionData = useSelector((state) => state.certificateM
     dispatch(
         certificateMasterEditAction(
         CertificateMasterInput,
-        props.editData.intIssuingAuthorityID
+        props.editData.intCertificateID
       )
     );
   };
@@ -89,13 +89,13 @@ const certificatesCategoryOptionData = useSelector((state) => state.certificateM
                         <RHFInput
                             as={<Select options={vesselName} />}
                             rules={{ required: false }}
-                            name="strVesselName"
+                            name="label"
                             register={register}
-                            value={vesselName.strVesselName}
+                            value={vesselName.label}
                             setValue={setValue}
                             onChange={(option) => {
-                                certificateMainInfoChange("strVesselName", option.label);
-                                certificateMainInfoChange("intVesselID", option.value);
+                                certificateMainInfoChange("label", option.label);
+                                certificateMainInfoChange("value", option.value);
                               }}
                         />
                     </div>
