@@ -1,5 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { GetEmployeeList } from "../../../domains/CCO/_redux/actions/EmployeeAction";
+import { getCertificateMainListAction } from "../../certificates/certificate-main/_redux/actions/CertificateMainAction";
 const DashBoardCard = () => {
+  const dispatch = useDispatch();
+  //get total employee
+  const employeeInfoList = useSelector(
+    (state) => state.employeeInfo.employeeInfoList
+  );
+  //get total certificates
+  const certificateList = useSelector(
+    (state) => state.certificateMainInfo.certificates
+  );
+  //========================
+   const certificatesPaginatedData = useSelector(
+     (state) => state.certificateMainInfo.certificatesPaginatedData
+  );
+
+  useEffect(() => {
+    dispatch(GetEmployeeList());
+    dispatch(getCertificateMainListAction());
+  }, []);
   return (
     <>
       <div className="container dashboard__pb">
@@ -21,7 +42,7 @@ const DashBoardCard = () => {
                 <img src="/media/svg/icons/Code/user.svg" alt="iMarine" />
               </div>
               <div className="widget__right">
-                <h4>400</h4>
+                <h4>{employeeInfoList && employeeInfoList.length}</h4>
                 <p>Total Employee</p>
               </div>
             </div>
@@ -32,7 +53,7 @@ const DashBoardCard = () => {
                 <img src="/media/svg/icons/Code/Vector.svg" alt="iMarine" />
               </div>
               <div className="widget__right">
-                <h4>86 </h4>
+                <h4>{certificateList && certificateList.length} </h4>
                 <p>Total Certificates</p>
               </div>
             </div>
@@ -43,7 +64,7 @@ const DashBoardCard = () => {
                 <img src="/media/svg/icons/Code/Group.svg" alt="iMarine" />
               </div>
               <div className="widget__right">
-                <h4>50 </h4>
+                <h4>---</h4>
                 <p>New Contacts</p>
               </div>
             </div>
