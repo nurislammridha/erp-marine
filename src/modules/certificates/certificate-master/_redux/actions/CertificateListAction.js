@@ -1,79 +1,136 @@
+import * as Types from "../types/Type";
 import Axios from "axios";
-import { toast } from 'react-toastify';
-import { generateFormDataFromObject } from "../../../../master/utils/FileHelper";
 import { showToast } from "../../../../master/utils/ToastHelper";
+import { getEmployeeId } from "../../../../../app/modules/Auth/_redux/authCrud";
 
-// import * as Types from "../types/Types";
-
-export const handleChangeProductInputAction = (name, value, e, isEdit = false) => (dispatch) => {
-    let data = {
-        name: name,
-        value: value,
-    }
-    // const type = !isEdit ? Types.CHANGE_CERTIFICATE_INPUT : Types.CHANGE_CERTIFICATE_INPUT_UPDATE;
-    // dispatch({ type: type, payload: data });
-
-    if (name === 'image') {
-        let reader = new FileReader();
-        const file = e.target.files[0];
-        reader.onloadend = () => {
-            data.name = 'imagePreviewUrl';
-            data.value = reader.result;
-            // dispatch({ type: type, payload: data });
-        }
-        reader.readAsDataURL(file)
-    }
-
+export const handleChangeCertificateMasterInput = (name, value) => async (
+  dispatch
+) => {
+  let employeeId = await getEmployeeId();
+  const formData = {
+    name: name,
+    value: value,
+  };
+  console.log("formData", formData);
+  dispatch({
+    type: Types.CHANGE_CERTIFICATE_MASTER_INPUT,
+    payload: formData,
+  });
 };
 
-export const getCertificateMasterListAction = (page, searchText = null, isPublic = false) => async(dispatch) => {
-    let response = {
-        products: [],
-        status: false,
-        message: "",
-        isLoading: true,
-        errors: []
-    };
-    // dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
-    let url = '';
-    url =`${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1&paginateNo=1`;
+export const getCertificateMasterList = (searchValue = "", status = "") => async (dispatch) => {
+    let isActive = status == "" ? 1 : parseInt(status);
+    let url = `http://10.17.2.31:8082/iMarineAPI/public/api/v1/certificate/certificateList`;
 
-    if (searchText === null) {
-        url = `${url}&paginateNo=${page}`;
-    } else {
-        url = `${process.env.REACT_APP_API_URL}certificate/details?search=${searchText}`
-    }
+  // console.log('url', url);
 
-    try {
-        await Axios.get(url)
-            .then((res) => {
-                console.log('ReponseCertificate',res);
-                const { data, message, status } = res.data;
-                response.status = status;
-                response.certificates = data.data;
-                response.message = message;
-                response.certificatesPaginatedData = data;
-                response.isLoading = false;
-            })
-            .catch((err) => {
-                console.log('ErrorCertificate1')
-                toast.error(err);
-            });
-    } catch (error) {
-        console.log('ErrorCertificate2')
-        response.message = 'Something Went Wrong !';
-        toast.error(error);
-    }
+  // if (searchValue !== "" || isActive !== "") {
+  //     url += `?search=${searchValue}&isActive=${isActive}`;
+  // }
 
-    response.isLoading = false;
-    // dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
+  Axios.get(url).then((res) => {
+    console.log("res", res);
+    dispatch({
+      type: Types.GET_CERTIFICATE_MASTER_LIST,
+      payload: res.data.data,
+    });
+  });
 };
 
+export const certificateMasterSubmitAction = (certificateInfoInput) => (dispatch) => {
+    console.log("certificateInfoInput :>> ", certificateInfoInput);
+         let responseList = {
+           isLoading: true,
+           data: {},
+           status: false,
+         };
+        //  dispatch({
+        //    type: Types.CERTIFICATE_MAIN_SUBMITTING,
+        //    payload: responseList,
+        //  });
 
-export const deleteProductImagePreview = () => (dispatch) => {
-    let data = {
-        name: 'imagePreviewUrl',
-        value: null,
-    }
-    // dispatch({ type: Types.CHANGE_CERTIFICATE_INPUT, payload: data });
+         let postUrl = `${process.env.REACT_APP_API_URL}certificate/certificateList`;
+         Axios
+           .post(postUrl, certificateInfoInput)
+             .then(function (response) {
+               console.log("response :>> ", response);
+             responseList.data = response.data;
+             responseList.isLoading = false;
+             responseList.status = response.data.status;
+             if (response.data.status) {
+               showToast("successs", response.data.message);
+               dispatch({
+                 type: Types.CERTIFICATE_MASTER_SUBMIT,
+                 payload: responseList,
+               });
+             } else {
+               showToast("error", response.data.message);
+             }
+           })
+        .catch(function(error) {
+          responseList.isLoading = false;
+          const message =
+            "Something went wrong ! Please fill all inputs and try again !";
+          showToast("error", message);
+
+        dispatch({
+          type: Types.CERTIFICATE_MASTER_SUBMIT,
+          payload: responseList,
+        });
+      });
+};
+
+export const setMasterCertificateEditValue = (editValue) => (dispatch) => {
+  console.log('editValue', editValue);
+  const formData = {
+    strCertificateName: editValue.strCertificateName,
+    strCertificateCategoryName: editValue.strCertificateCategoryName,
+    strVesselName: editValue.strVesselName,
+    isActive: editValue.isActive,
+    intActionBy: 1272,
+  };
+  dispatch({
+    type: Types.SET_CERTIFICATE_MASTER_EDIT_DATA,
+    payload: formData,
+  });
+};
+
+export const certificateMasterEditAction = (CertificateMasterInput,intCertificateID) => (dispatch) => {
+  let responseList = {
+    isLoading: true,
+    data: {},
+    status: false,
+  };
+  dispatch({
+    type: Types.EDIT_CERTIFICATE_MASTER,
+    payload: responseList,
+  });
+
+  let editUrl = `http://10.17.2.31:8082/iMarineAPI/public/api/v1/certificate/certificateList/${intCertificateID}`;
+  Axios.put(editUrl, CertificateMasterInput)
+    .then(function(response) {
+      responseList.data = response.data;
+      responseList.isLoading = false;
+      responseList.status = response.data.status;
+      if (response.data.status) {
+        showToast("success", response.data.message);
+        dispatch({
+          type: Types.EDIT_CERTIFICATE_MASTER,
+          payload: responseList,
+        });
+      } else {
+        showToast("error", response.data.message);
+      }
+    })
+    .catch(function(error) {
+      responseList.isLoading = false;
+      const message =
+        "Something went wrong ! Please fill all inputs and try again !";
+      showToast("error", message);
+
+      dispatch({
+        type: Types.EDIT_CERTIFICATE_MASTER,
+        payload: responseList,
+      });
+    });
 };

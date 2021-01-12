@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Button, Dropdown } from "react-bootstrap";
-import Modal from 'react-bootstrap/Modal';
-import CertificateTypeFilter from "../../certificate-types/components/list/CertificateTypeFilter";
-import CertificateTypeList from "../../certificate-types/components/list/CertificateTypeList";
+import Modal from "react-bootstrap/Modal";
 import Pdf from "react-to-pdf";
-import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import ReactToPrint from "react-to-print-advanced";
 import { useDispatch, useSelector } from "react-redux";
+import SimpleModal from "../../../../modules/master/components/Modal/SimpleModal";
 import CertificateCategoryAdd from "../components/create/CertificateCategoryAdd";
-
+import CertificateCategoryList from "../components/list/CertificateCategoryList";
+import CertificateCategoryFilter from "../components/list/CertificateCategoryFilter";
 
 const CertificateCategoryContainer = () => {
-
   const history = useHistory();
   const ref = React.createRef();
   const dispatch = useDispatch();
@@ -20,13 +19,15 @@ const CertificateCategoryContainer = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  // const modalStatus = useSelector((state) => state.getCategoryInpuData.status);
+  const modalStatus = useSelector(
+    (state) => state.CertificateCategoryReducer.status
+  );
 
-  // useEffect(() => {
-  //   if (modalStatus) {
-  //     setShow(false);
-  //   }
-  // }, [modalStatus]);
+  useEffect(() => {
+    if (modalStatus) {
+      setShow(false);
+    }
+  }, [modalStatus]);
 
   return (
     <div className="card card-custom gutter-b">
@@ -37,7 +38,7 @@ const CertificateCategoryContainer = () => {
         <div className="col-xl-3 col-lg-3 col-md-3 col-6 VoyageListBtn">
           <Dropdown className="d-inline mr-2">
             <Dropdown.Toggle
-              className="text-bold"
+              className="btn btn-sm text-bold"
               variant="light text-primary"
               id="dropdown-basic"
             >
@@ -85,13 +86,13 @@ const CertificateCategoryContainer = () => {
             </Dropdown.Menu>
           </Dropdown>
           <Button
-            className="pl-3 pr-3 text-bold"
+            className="pl-3 pr-3 text-bold btn btn-sm"
             variant="primary"
             onClick={handleShow}
           >
             Add New
           </Button>
-          <Modal size="md" show={show} onHide={handleClose}>
+          {/*<Modal size="md" show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Create Certificate Category</Modal.Title>
             </Modal.Header>
@@ -101,14 +102,21 @@ const CertificateCategoryContainer = () => {
                 Cancel
               </Button>
             </Modal.Footer>
-          </Modal>
+                </Modal>*/}
+          <SimpleModal
+            show={show}
+            handleClose={() => handleClose()}
+            modalTitle={"Certificate Category Add"}
+          >
+            <CertificateCategoryAdd />
+          </SimpleModal>
         </div>
         <div className="clearfix"></div>
       </div>
 
-      <CertificateTypeFilter />
+      <CertificateCategoryFilter />
       <div className="container" id="id" ref={ref}>
-        <CertificateTypeList />
+        <CertificateCategoryList />
       </div>
     </div>
   );

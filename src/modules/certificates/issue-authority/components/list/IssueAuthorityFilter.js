@@ -1,27 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Col, Row } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
+import { getIssuingAuthorities } from "../../_redux/actions/CertificateIssueAuthorityAction";
 
 const IssueAuthorityFilter = () => {
-  const { register, handleSubmit, errors, setValue } = useForm();
+  const [search, setSearch] = useState("");
+  const [type, setType] = useState("");
+  const dispatch = useDispatch();
+  const CertificateIssueAuthirityInput = useSelector(
+    (state) =>
+      state.certificateIssueAuthorityInfo.CertificateIssueAuthirityInput
+  );
+  const { register, setValue } = useForm();
   const action = [
     {
       label: "Active",
-      value: 1,
+      value: "1",
     },
     {
-      label: "In Active",
-      value: 2,
+      label: "Inactive",
+      value: "0",
     },
   ];
+
+  const handleChangeTextInput = (name, value) => {
+    // dispatch(GetVoyageList(value, type));
+  };
+  const changeSearch = (value) => {
+    setSearch(value);
+    dispatch(getIssuingAuthorities(value, type));
+  };
+
+  useEffect(() => {
+    dispatch(getIssuingAuthorities());
+  }, []);
 
   return (
     <form className="form form-label-right" method="post">
       <div className="form-group row ml-2">
         <div className="col-lg-3 col-md-6 col-10">
-          <Form.Control type="text" placeholder="Search" value={""} />
+          <Form.Control
+            type="text"
+            placeholder="Search"
+            value={search}
+            onChange={(e) => changeSearch(e.target.value)}
+          />
         </div>
 
         <div className="col-lg-3 col-md-6 col-10">
@@ -35,10 +61,14 @@ const IssueAuthorityFilter = () => {
               <RHFInput
                 as={<Select options={action} />}
                 rules={{ required: false }}
-                name="intVesselID"
+                name="isActive"
                 register={register}
-                value={action.label}
-                setValue={""}
+                value={CertificateIssueAuthirityInput.isActive}
+                onChange={(option) => {
+                  setType(option.value);
+                  dispatch(getIssuingAuthorities(search, option.value));
+                }}
+                setValue={setValue}
               />
             </Col>
           </Form.Group>

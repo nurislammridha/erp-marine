@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Button, Modal, Dropdown } from "react-bootstrap";
 import IssueAuthorityFilter from "../components/list/IssueAuthorityFilter";
 import IssueAuthorityList from "../components/list/IssueAuthorityList";
@@ -6,12 +7,22 @@ import Pdf from "react-to-pdf";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import ReactToPrint from "react-to-print-advanced";
 import IssueAuthorityAdd from "../components/create/IssueAuthorityAdd";
+import SimpleModal from "../../../../modules/master/components/Modal/SimpleModal";
 
 const IssueAutorityListContainer = (props) => {
   const [show, setShow] = useState(false);
   const ref = React.createRef();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const modalAddStatus = useSelector(
+    (state) => state.certificateIssueAuthorityInfo.addStatus
+  );
+
+  useEffect(() => {
+    if (modalAddStatus) {
+      setShow(false);
+    }
+  }, [modalAddStatus]);
 
   return (
     <div className="card card-custom gutter-b">
@@ -77,24 +88,15 @@ const IssueAutorityListContainer = (props) => {
             Add New
           </Button>
 
-          <Modal
+          <SimpleModal
             show={show}
-            onHide={handleClose}
-            backdrop="static"
-            keyboard={false}
+            handleClose={() => handleClose()}
+            modalTitle={"Create Issue Authority"}
           >
-            <Modal.Header closeButton>
-              <Modal.Title>Create Issue Authority List</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <IssueAuthorityAdd />
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
+                          
+            <IssueAuthorityAdd />
+                        
+          </SimpleModal>
         </div>
         <div className="clearfix"></div>
       </div>
