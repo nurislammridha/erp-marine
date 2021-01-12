@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { Form } from "react-bootstrap";
-import { toast } from "react-toastify";
 import Select from "react-select";
 import { RHFInput } from "react-hook-form-input";
 import DatePicker from "react-datepicker";
@@ -23,7 +22,7 @@ import {
   certificateMultipleDataDelete,
   certificateMultipleAttachmentDelete,
 } from "../../_redux/actions/CertificateMainAction";
-import CertificateCategoryAddModal from "../../../certificate-category/components/create/CertificateCategoryAddModal";
+import CertificateMasterAdd from "../../../certificate-master/components/create/CertificateMasterAdd";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 import CertificateCategoryAdd from "../../../certificate-category/components/create/CertificateCategoryAdd";
 import CertificateTypeAdd from "../../../certificate-types/components/create/CertificateTypeAdd";
@@ -31,54 +30,15 @@ import {
   getCertificateChildCategoryData,
   getCertificateParentCategoryData,
 } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
-import { checkAttchmentValidation } from "../../../../master/utils/FileHelper";
-import { showToast } from "../../../../master/utils/ToastHelper";
 import PreviewAttachment from '../../../../master/components/previews/PreviewAttachment';
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  const [files, setFiles] = useState([]);
-  toast.configure();
-
-  // self work
-  const [imagePreviewUrl, setImagePreviewUrl] = React.useState(null);
-  //input change with redux
 
   const certificateMainInfoChange = (name, value, e = null) => {
     dispatch(handleChangeProductInputAction(name, value, e));
-
-    if (name === "images") {
-      const attachment = value;
-      const { type } = attachment;
-
-      const validatedData = checkAttchmentValidation(attachment);
-      if (validatedData.isValidated) {
-        let reader = new FileReader();
-        if (type === "application/pdf") {
-          setImagePreviewUrl("/media/default/icons/pdf.png");
-        } else if (type === "application/msword") {
-          setImagePreviewUrl("/media/default/icons/word.png");
-        } else {
-          setImagePreviewUrl("/media/default/icons/image.jpg");
-        }
-      } else {
-        showToast("error", validatedData.message);
-      }
-      // setEmployeeInfo(employeeInfoData);
-    } else {
-      // setEmployeeInfo(employeeInfoData);
-    }
   };
-
-  // const enableLoading = () => {
-  //   setLoading(true);
-  // };
-
-  // const disableLoading = () => {
-  //   setLoading(false);
-  // };
 
   const addStatus = useSelector((state) => state.vesselInfo.addStatus);
   const addMessage = useSelector((state) => state.vesselInfo.addMessage);
@@ -244,14 +204,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 {/*====Sub Category=====*/}
 
                 <div className="col-lg-3">
-                  <SimpleModal
-                    show={showCertificateModal}
-                    handleClose={() => setShowCertificateModal(false)}
-                    handleShow={() => setShowCertificateModal(true)}
-                    modalTitle={"Certificate Name"}
-                  >
-                    <div>Add Here Component</div>
-                  </SimpleModal>
                   <label className="form-label">Certificate Name</label>
                   <div className="input-area-add">
                     <div className="float-left">
@@ -977,8 +929,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
               <div className="form-group row mt-1 border mt-2 pb-3 bg-light">
                 <div className="col-lg-3">
-                    <label className="form-label mt-2">Attachments</label>
-                    {/* <Form.Control
+                  <label className="form-label mt-2">Attachments</label>
+                  {/* <Form.Control
                       type="file"
                       name="multipleAttachments[]"
                       className="fromStyle formHeight" 
@@ -1089,6 +1041,15 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
             >
               <CertificateTypeAdd />
             </SimpleModal>
+            <SimpleModal
+              show={showCertificateModal}
+              handleClose={() => setShowCertificateModal(false)}
+              handleShow={() => setShowCertificateModal(true)}
+              modalTitle={"Certificate Name"}
+            >
+              <CertificateMasterAdd />
+            </SimpleModal>
+
           </div>
         </div>
       </div>

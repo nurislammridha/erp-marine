@@ -597,7 +597,7 @@ i.tableFilter {
 }
 
 .tbl-survey {
-    width: 74.5%;
+    width: 74.5%!important;
     margin: 10px 0px 10px 0px;
 }
 
