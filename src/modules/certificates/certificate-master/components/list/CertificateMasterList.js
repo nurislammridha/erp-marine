@@ -49,7 +49,7 @@ const CertificateMasterList = () => {
                     <tr>
                         <th scope="col">Certificate Name</th>
                         <th scope="col">Category Name</th>
-                        <th scope="col">Vessel Name</th>
+                        {/* <th scope="col">Vessel Name</th> */}
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -60,17 +60,15 @@ const CertificateMasterList = () => {
                             <tr>
                                 <td>{item.strCertificateName}</td>
                                 <td>{item.strCertificateCategoryName}</td>
-                                <td>{item.strVesselName}</td>
+                                {/* <td>{item.strVesselName}</td> */}
                                 <td>{item.isActive ? "Active" : "Inactive"}</td>
                                 <td>
                                     {" "}
-                                    <Link to={``}>
-                                        <i className="far fa-eye mr-3"></i>
-                                    </Link>
                                     <i className="far fa-edit editIcon ml-2" 
                                     onClick={() => {
                                     handleEdit(item);
-                                    }}></i>
+                                    }}>
+                                    </i>
                                 </td>
                             </tr>
                         ))}

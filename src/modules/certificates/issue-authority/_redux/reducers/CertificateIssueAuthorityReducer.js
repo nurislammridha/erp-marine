@@ -26,6 +26,7 @@ const CertificateIssueAuthorityReducer = (state = initialState, action) => {
   const newState = { ...state };
 
   switch (action.type) {
+    
     case Types.CHANGE_CERTIFICATE_ISSUE_AUTHORITY_INPUT:
       const CertificateIssueAuthirityInput = {
         ...state.CertificateIssueAuthirityInput,
@@ -64,41 +65,6 @@ const CertificateIssueAuthorityReducer = (state = initialState, action) => {
         editStatus: action.payload.status,
         isLoading: action.payload.isLoading,
       };
-
-    // case Types.LOADING:
-    //   return {
-    //     ...state,
-    //     isLoading: action.payload,
-    //   };
-
-    // case Types.EDITING:
-    //   return {
-    //     ...state,
-    //     editing: action.payload,
-    //   };
-
-    // case Types.DELETING:
-    //   return {
-    //     ...state,
-    //     deleting: action.payload,
-    //   };
-
-    // case Types.EMPTY_PRODUCT_MESSAGE:
-    //   return {
-    //     ...state,
-    //     addMessage: null,
-    //     editMessage: null,
-    //     deleteMessage: null,
-    //     productData: {
-    //       id: 0,
-    //       title: "",
-    //       description: "",
-    //       price: "",
-    //       image: null,
-    //       imagePreviewUrl: null,
-    //     },
-    //   };
-    // break;
 
     default:
       break;
