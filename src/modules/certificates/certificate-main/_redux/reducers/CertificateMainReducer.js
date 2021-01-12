@@ -151,6 +151,7 @@ const CertificateMainReducer = (state = initialState, action) => {
 
     //SELFT
     case Types.CHANGE_CERTIFICATE_INPUT:
+      console.log('action.payload',action.payload);
       const certificateMainInfo = { ...state.certificateMainInfo };
       certificateMainInfo[action.payload.name] = action.payload.value;
       return {
