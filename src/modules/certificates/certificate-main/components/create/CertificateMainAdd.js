@@ -32,6 +32,7 @@ import {
 } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
 import { checkAttchmentValidation } from "../../../../master/utils/FileHelper";
 import { showToast } from "../../../../master/utils/ToastHelper";
+import PreviewAttachment from "../../../../master/components/previews/PreviewAttachment";
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -68,7 +69,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
     } else {
       // setEmployeeInfo(employeeInfoData);
     }
-    
+
   };
 
   // const enableLoading = () => {
@@ -86,7 +87,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const certificateInfoInput = useSelector(
     (state) => state.certificateMainInfo.certificateMainInfo
   );
-
+  console.log('certificateInfoInput', certificateInfoInput)
   const certificatesCategoryOption = useSelector(
     (state) => state.certificateMainInfo.certificatesCategoryOptionData
   );
@@ -140,11 +141,13 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   };
 
   const getFiles = (files) => {
-    console.log('files[0]', files[0]);
-    
+    console.log('files', files);
+
     // multipleAttachmentAdd()
-    // handleChangeProductInputAction("multipleAttachments", files[0]);
+    dispatch(handleChangeProductInputAction("multipleAttachments", files));
   };
+
+
 
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [showTypeModal, setShowTypeModal] = useState(false);
@@ -964,9 +967,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               </div>
 
               <div className="form-group row mt-1 border mt-2 pb-3 bg-light">
-                <div className="col-lg-3">
-                    <label className="form-label mt-2">Attachments</label>
-                    {/* <Form.Control
+                <div className="col-lg-4">
+                  <label className="form-label mt-2">Attachments</label>
+                  {/* <Form.Control
                       type="file"
                       name="multipleAttachments[]"
                       className="fromStyle formHeight" 
@@ -981,12 +984,46 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         maxLength: 100,
                       })}
                     /> */}
-                    <FileBase64
-                      name="multipleAttachments"
-                      multiple={true}
-                      onDone={getFiles.bind(this)}
-                    />
-                  </div>
+                  <FileBase64
+                    name="multipleAttachments"
+                    multiple={true}
+                    onDone={getFiles.bind(this)}
+                  />
+                </div>
+                <div className="col-lg-8">
+                  <table className="table tbl-standard table-bordered tbl-survey">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Image Name</th>
+                        <th>Image Size</th>
+                        <th>Image View</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {certificateInfoInput.multipleAttachments.map(
+                        (date, index) => (
+                          <tr>
+                            <td>{index + 1}</td>
+                            <td>{date.name}</td>
+                            <td>{date.size}</td>
+                            <td>{" "}
+                              <img src={date.imagePreviewUrl} width="40px" />
+                            </td>
+                            <td style={{ width: 70, textAlign: "center" }}>
+                              {/* <i className="fa fa-edit text-success mr-2"></i> */}
+                              <i
+                                className="fa fa-trash text-danger pointer"
+                                onClick={() => deleteMultipleData(index)}
+                              ></i>
+                            </td>
+                          </tr>
+                        )
+                      )}
+                    </tbody>
+                  </table>
+                </div>
               </div>
               <div className="form-group row">
                 <div className="col-sm-10">
