@@ -687,3 +687,6 @@ input.MuiInputBase-input {
 .react-datepicker-wrapper {
   width: 100% !important;
 }
+.modal-body  {
+  padding: 0.75rem;
+}
