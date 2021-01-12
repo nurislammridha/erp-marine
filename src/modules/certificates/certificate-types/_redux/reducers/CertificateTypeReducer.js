@@ -12,7 +12,7 @@ const initialState = {
     status: false,
     isLoading: false,
     editStatus: false,
-    editing: false
+
 
 };
 
@@ -37,7 +37,7 @@ const CertificateTypeReducer = (state = initialState, action) => {
             };
 
         case Types.CREATE_CERTIFICATE_TYPE:
-            console.log('action.payload,', action.payload);
+
             return {
                 ...state,
                 status: action.payload.status,
@@ -45,7 +45,7 @@ const CertificateTypeReducer = (state = initialState, action) => {
             };
 
         case Types.EDIT_CERTIFICATE_TYPE_LIST:
-            console.log('action.payload', action.payload);
+
             return {
                 ...state,
                 certificateTypeInput: action.payload.data,
@@ -53,42 +53,12 @@ const CertificateTypeReducer = (state = initialState, action) => {
             break;
 
         case Types.UPDATE_CERTIFICATE_TYPE_LIST:
-            console.log('action.payload,', action.payload);
+
             return {
                 ...state,
                 editStatus: action.payload.status,
                 isLoading: action.payload.isLoading,
             };
-
-        // case Types.VOYAGE_SUBMIT:
-        //     if (action.payload.status) {
-        //         return {
-        //             ...state,
-        //             voyageInput: initialState.voyageInput,
-        //             isLoading: false,
-        //         };
-        //     } else {
-        //         return {
-        //             ...state,
-        //             isLoading: false,
-        //         };
-        //     }
-
-        //     break;
-
-        // case Types.VOYAGE_SUBMITTING:
-        //     return {
-        //         ...state,
-        //         isLoading: action.payload,
-        //     };
-        //     break;
-
-        // case Types.GET_LAST_VOYAGE:
-        //     return {
-        //         ...state,
-        //         lastVoyageData: action.payload.data
-        //     };
-        //     break;
 
         default:
             break;
