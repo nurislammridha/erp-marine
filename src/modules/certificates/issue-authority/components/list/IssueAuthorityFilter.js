@@ -8,7 +8,7 @@ import { getIssuingAuthorities } from "../../_redux/actions/CertificateIssueAuth
 
 const IssueAuthorityFilter = () => {
   const [search, setSearch] = useState("");
-  const [type, setType] = useState("");
+  const [type, setType] = useState(1);
   const dispatch = useDispatch();
   const CertificateIssueAuthirityInput = useSelector(
     (state) =>
@@ -31,11 +31,11 @@ const IssueAuthorityFilter = () => {
   };
   const changeSearch = (value) => {
     setSearch(value);
-    dispatch(getIssuingAuthorities(value, type));
+    dispatch(getIssuingAuthorities(value, type, 1));
   };
 
   useEffect(() => {
-    dispatch(getIssuingAuthorities());
+    dispatch(getIssuingAuthorities("", "", 1));
   }, []);
 
   return (
@@ -60,7 +60,7 @@ const IssueAuthorityFilter = () => {
           value={CertificateIssueAuthirityInput.isActive}
           onChange={(option) => {
             setType(option.value);
-            dispatch(getIssuingAuthorities(search, option.value));
+            dispatch(getIssuingAuthorities(search, option.value, 1));
           }}
           setValue={setValue}
         />

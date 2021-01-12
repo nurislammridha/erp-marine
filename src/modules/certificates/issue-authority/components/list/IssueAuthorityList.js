@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 import IssueAuthorityEdit from "../edit/IssueAuthorityEdit";
 import CertificateTypeEdit from "../../../certificate-types/components/edit/CertificateTypeEdit";
+import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
+import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 
 const IssueAuthorityList = (props) => {
   const [show, setShow] = useState(false);
@@ -29,9 +31,13 @@ const IssueAuthorityList = (props) => {
     (state) => state.certificateIssueAuthorityInfo.issuingAuthoritiesData
   );
 
+  const issuingAuthoritiesPaginatedData = useSelector(
+    (state) =>
+      state.certificateIssueAuthorityInfo.issuingAuthoritiesPaginatedData
+  );
+
   useEffect(() => {
-    // dispatch(getIssuingAuthorities(currentPage));
-    dispatch(getIssuingAuthorities());
+    dispatch(getIssuingAuthorities("", "", currentPage));
 
     if (modalEditStatus) {
       setShow(false);
@@ -40,16 +46,16 @@ const IssueAuthorityList = (props) => {
 
   const changePage = (data) => {
     setCurrentPage(data.page);
-    dispatch(getIssuingAuthorities(data.page));
+    dispatch(getIssuingAuthorities("", "", data.page));
   };
 
   const searchProduct = (e) => {
     const searchText = e.target.value;
     setSearchText(searchText);
     if (searchText.length === 0) {
-      dispatch(getIssuingAuthorities(currentPage));
+      dispatch(getIssuingAuthorities("", "", currentPage));
     } else {
-      dispatch(getIssuingAuthorities(currentPage, searchText));
+      dispatch(getIssuingAuthorities(searchText, "1", currentPage));
     }
   };
 
@@ -60,56 +66,84 @@ const IssueAuthorityList = (props) => {
 
   return (
     <>
-      <table className="table mt-5 voyageTable">
-        <thead>
-          <tr>
-            <th scope="col">
-              {" "}
-              <Form.Check type="checkbox" />
-            </th>
+      {/* <div className="float-right">
+        <PaginationLaravel
+          isDescription={true}
+          changePage={changePage}
+          data={issuingAuthoritiesPaginatedData}
+        />
+      </div> */}
+      {isLoading && (
+        <div className="mt-5">
+          <LoadingSpinner text="Loading Issuing Authority..." />
+        </div>
+      )}
+      {!isLoading && issuingAuthorities.length === 0 && (
+        <div className="alert alert-warning mt-5">
+          Sorry ! No Issuing Authority Found.
+        </div>
+      )}
+      {!isLoading && issuingAuthorities.length > 0 && (
+        <>
+          <div className="react-bootstrap-table table-responsive">
+            <table className="table mt-2 tbl-standard">
+              <thead>
+                <tr>
+                  {/* <th scope="col">
+                    {" "}
+                    <Form.Check type="checkbox" />
+                  </th> */}
 
-            <th scope="col">SL</th>
-            <th scope="col">Authority Name</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {issuingAuthorities &&
-            issuingAuthorities.map((item, index) => (
-              <tr>
-                <th scope="row">
-                  {" "}
-                  <Form.Check type="checkbox" />
-                </th>
-                <td>{index + 1}</td>
-                <td>{item.strIssuingAuthorityName}</td>
-                <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
-                {/* <td>
+                  <th scope="col">SL</th>
+                  <th scope="col">Authority Name</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {issuingAuthorities &&
+                  issuingAuthorities.map((item, index) => (
+                    <tr>
+                      {/* <th scope="row">
+                        {" "}
+                        <Form.Check type="checkbox" />
+                      </th> */}
+                      <td>{index + 1}</td>
+                      <td>{item.strIssuingAuthorityName}</td>
+                      <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
+                      {/* <td>
                     {" "}
                     <Link to={`/voyage/list/${""}`}>
                       <i className="far fa-eye mr-3"></i>
                     </Link>
                   </td> */}
-                <td>
-                  <button
-                    className="btn"
-                    onClick={() => handleEdit(item)}>
-                    <i className="far fa-edit editIcon"></i>
-                  </button>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
-
-      <SimpleModal
-        show={show}
-        handleClose={() => handleClose()}
-        modalTitle={"Certificate Type Edit"}
-      >
-        <IssueAuthorityEdit editData={editItem} />
-      </SimpleModal>
+                      <td>
+                        <button
+                          className="btn"
+                          onClick={() => handleEdit(item)}
+                        >
+                          <i className="far fa-edit editIcon"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+            <PaginationLaravel
+              isDescription={true}
+              changePage={changePage}
+              data={issuingAuthoritiesPaginatedData}
+            />
+            <SimpleModal
+              show={show}
+              handleClose={() => handleClose()}
+              modalTitle={"Edit Issuing Authority"}
+            >
+              <IssueAuthorityEdit editData={editItem} />
+            </SimpleModal>
+          </div>
+        </>
+      )}
     </>
   );
 };
