@@ -81,7 +81,7 @@ export const certificatetypeSubmitAction = (CertificateTypeInput) => (dispatch) 
 
 
 export const EditCertificateTypeList = (id) => (dispatch) => {
-    console.log("id: ", id)
+
     axios
         .get(
             `${process.env.REACT_APP_API_URL}certificate/types/${id}`
@@ -98,8 +98,8 @@ export const EditCertificateTypeList = (id) => (dispatch) => {
 };
 
 export const UpdateCertificateTypeList = (certificateEditInfoData) => async (dispatch) => {
+    console.log('certificateEditInfoData:', certificateEditInfoData);
 
-    console.log('certificateEditInfoData:', certificateEditInfoData)
     let data = {
         status: false,
         message: "",

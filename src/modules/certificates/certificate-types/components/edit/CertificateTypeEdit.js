@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
+import { Button, Modal, Form, Col, Row } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useHistory, Link } from "react-router-dom";
@@ -28,7 +28,9 @@ const CertificateTypeEdit = (props) => {
     const history = useHistory();
     const { register, handleSubmit, errors, setValue } = useForm();
     const certificateTypeInput = useSelector((state) => state.certificateTypeInfo.certificateTypeInput);
-    const modalStatus = useSelector((state) => state.certificateTypeInfo.status);
+    const isLoading = useSelector(
+        (state) => state.certificateTypeInfo.isLoading
+    );
 
     const statusOptions = [
         {
@@ -36,20 +38,11 @@ const CertificateTypeEdit = (props) => {
             value: "1"
         },
         {
-            label: 'Inactive',
+            label: 'In Active',
             value: "0"
         }
     ]
 
-
-
-    // const handleChange = (name, value, { currentTarget: input }) => {
-    //     const certificateEditInfoData = { ...certificateEditInfo };
-    //     dispatch(handleChangeCertificateTypeInput(name, value));
-    //     certificateEditInfoData[input.name] = input.value;
-    //     setCertificateEditInfo(certificateEditInfoData);
-
-    // };
 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeCertificateTypeInput(name, value));
@@ -67,52 +60,71 @@ const CertificateTypeEdit = (props) => {
                 onSubmit={handleSubmit(onSubmit)}
                 method="post"
             >
-                <div className="form-group row mt-5">
-                    <div className="col-sm-6">
-                        <label className="form-label">Certificate Type Name</label>
-                        <Form.Control type="text"
+
+                <Form.Group as={Row} controlId="formAuthorityName">
+                    <Form.Label className="formFont pl-1" column sm="3">
+                        Certificate Type Name:
+                    </Form.Label>
+                    <Col sm="9">
+                        <Form.Control
+                            className="formHeight"
                             type="text"
-                            name="strCertificateTypeName"
                             value={certificateTypeInput.strCertificateTypeName}
+                            name="strCertificateTypeName"
+                            ref={register({
+                                required: false,
+                                maxLength: 100,
+                            })}
                             onChange={(e) =>
                                 handleChangeTextInput("strCertificateTypeName", e.target.value)
                             }
                         />
-                    </div>
-                    <div className="col-sm-6">
-                        <label className="form-label">Status</label>
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} controlId="formPlaintextPassword">
+                    <Form.Label className="formFont pl-1" column sm="3">
+                        Status:
+                    </Form.Label>
+                    <Col sm="9">
                         <RHFInput
                             as={<Select options={statusOptions} />}
                             rules={{ required: false }}
                             name="isActive"
                             register={register}
-                            value={certificateTypeInput.isActive ? "Active" : "Inactive"}
+                            value={statusOptions.value}
+                            onChange={(e) => handleChangeTextInput("isActive", e.value)}
                             setValue={setValue}
-                        // onChange={(e) => handleChangeTextInput("isActive", e.value)}
                         />
-                    </div>
+                    </Col>
+                </Form.Group>
 
-                </div>
 
                 <div className="form-group row">
                     <div className="col-sm-10"></div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg">
-                    <span>Save Changes</span>
-                </button>
-
-                {/* {loading && (
-                    <button type="submit" class="btn btn-primary btn-lg" disabled={true}>
-                        <span>Submitting...</span>
-                        <span className="ml-3 spinner spinner-white"></span>
-                    </button>
-                )}
-
-                {!loading && (
-                    <button type="submit" class="btn btn-primary btn-lg">
-                        <span>Submit</span>
-                    </button>
-                )} */}
+                <Form.Group as={Row} controlId="formPlaintextPassword">
+                    <Form.Label className="formFont pl-1" column sm="3"></Form.Label>
+                    <Col sm="9">
+                        {!isLoading && (
+                            <Button variant="primary" type="submit" className="saveButton">
+                                Update
+                            </Button>
+                        )}
+                        {isLoading && (
+                            <Button
+                                variant="primary"
+                                type="submit"
+                                className="saveButton"
+                                disabled={true}
+                            >
+                                <span className="p-2">
+                                    <i className="fa fa-check"></i> Updating...
+                                </span>
+                                <span className="ml-3 spinner spinner-white "></span>
+                            </Button>
+                        )}
+                    </Col>
+                </Form.Group>
             </form>
         </>
     );
