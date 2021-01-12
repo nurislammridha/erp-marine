@@ -84,7 +84,7 @@ const CertificateMasterAdd = () => {
                               }
                         />
                     </div>
-                    <div className="col-sm-6">
+                    {/* <div className="col-sm-6">
                         <label className="form-label">Vessel Name</label>
                         <RHFInput
                             as={<Select options={vesselName} />}
@@ -98,7 +98,7 @@ const CertificateMasterAdd = () => {
                                 certificateMainInfoChange("value", option.value);
                               }}
                         />
-                    </div>
+                    </div> */}
                     <div className="col-sm-6">
                         <label className="form-label">Category Name</label>
                         <RHFInput
