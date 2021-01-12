@@ -145,7 +145,7 @@ export function UserProfileDropdown(props) {
           <div className="navi-separator mt-3"></div> */}
 
           <div className="navi-footer  px-8 py-5">
-            <Link
+            <Link to=""
               // to="/logout"
               className="btn btn-light-primary font-weight-bold"
               onClick={() => logoutButton()}
