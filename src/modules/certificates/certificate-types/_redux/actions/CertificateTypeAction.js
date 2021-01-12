@@ -18,7 +18,7 @@ export const getCertificateTypeList = (searchValue = "", status = "") => async (
 
 
     let isActive = status == "" ? 1 : parseInt(status);
-    let url = `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/types`;
+    let url = `${process.env.REACT_APP_API_URL}certificate/types`;
 
     if (searchValue !== "" || isActive !== "") {
         url += `?search=${searchValue}&isActive=${isActive}`;
@@ -41,7 +41,7 @@ export const certificatetypeSubmitAction = (CertificateTypeInput) => (dispatch) 
         payload: responseList,
     });
 
-    let postUrl = `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/types`;
+    let postUrl = `${process.env.REACT_APP_API_URL}certificate/types`;
     axios
         .post(postUrl, CertificateTypeInput)
         .then(function (response) {
@@ -84,7 +84,7 @@ export const EditCertificateTypeList = (id) => (dispatch) => {
     console.log("id: ", id)
     axios
         .get(
-            `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/types/${id}`
+            `${process.env.REACT_APP_API_URL}certificate/types/${id}`
         )
 
         .then((res) => {
@@ -118,7 +118,7 @@ export const UpdateCertificateTypeList = (certificateEditInfoData) => async (dis
 
     axios
         .put(
-            `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/types/update`, postData
+            `${process.env.REACT_APP_API_URL}certificate/types/update`, postData
         )
         .then(async (response) => {
 

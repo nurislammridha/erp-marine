@@ -52,13 +52,10 @@ const CertificateTypeEdit = (props) => {
     // };
 
     const handleChangeTextInput = (name, value) => {
-
         dispatch(handleChangeCertificateTypeInput(name, value));
-
     };
 
     const onSubmit = () => {
-
         dispatch(UpdateCertificateTypeList(certificateTypeInput));
     };
 
