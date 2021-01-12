@@ -17,7 +17,6 @@ const CertificateMasterList = () => {
 
     const dispatch = useDispatch();
     const certificateMasterData = useSelector((state) => state.CertificateListReducer.certificateMasterList);
-    console.log('certificateMasterData', certificateMasterData);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -68,7 +67,7 @@ const CertificateMasterList = () => {
                                     <Link to={``}>
                                         <i className="far fa-eye mr-3"></i>
                                     </Link>
-                                    <i className="far fa-edit ml-2" 
+                                    <i className="far fa-edit editIcon ml-2" 
                                     onClick={() => {
                                     handleEdit(item);
                                     }}></i>
