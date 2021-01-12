@@ -515,7 +515,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         <label className="form-label mt-2">Expiry Date</label>{" "}
                         <div>
                           <DatePicker
-                            name="dteExpiryDate"
+                            name="dteCertificateExpiryDate"
                             className="form-control fromStyle formHeight custome-date"
                             placeholderText="select expiry date"
                             disabled={
@@ -526,9 +526,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                             minDate={
                               certificateInfoInput.dteCertificateIssueDate
                             }
-                            selected={certificateInfoInput.dteExpiryDate}
+                            selected={certificateInfoInput.dteCertificateExpiryDate}
                             onChange={(e) =>
-                              certificateMainInfoChange("dteExpiryDate", e)
+                              certificateMainInfoChange("dteCertificateExpiryDate", e)
                             }
                             ref={register({
                               required: true,
@@ -537,8 +537,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                           />
                         </div>
                         {/* <div className="inputError margin-minus-8">
-                        {errors.dteExpiryDate &&
-                          errors.dteExpiryDate.type === "required" &&
+                        {errors.dteCertificateExpiryDate &&
+                          errors.dteCertificateExpiryDate.type === "required" &&
                           "Expiry Date can't be blank"}
                       </div> */}
                       </div>
