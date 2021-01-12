@@ -113,7 +113,7 @@ const CertificateTypeEdit = (props) => {
                                 disabled={true}
                             >
                                 <span className="p-2">
-                                    <i className="fa fa-check"></i> Updating...
+                                    Updating...
                                 </span>
                                 <span className="ml-3 spinner spinner-white "></span>
                             </Button>
