@@ -18,11 +18,12 @@ export const handleChangeCertificateIssueAuthorityInput = (name, value) => (
 };
 
 export const getIssuingAuthorities = (
-  // page,
   searchText = "",
   // isPublic = false,
-  status = ""
+  status = "",
+  page
 ) => async (dispatch) => {
+  console.log("page", page);
   let response = {
     issuingAuthorities: [],
     status: false,
@@ -33,17 +34,24 @@ export const getIssuingAuthorities = (
   dispatch({ type: Types.GET_ISSUING_AUTHORITY_LIST, payload: response });
 
   let isActive = status == "" ? "" : parseInt(status);
-
   // let url = `http://192.168.206.1:82/iMarineAPI/public/api/v1/certificate/issuingAuthority`;
   let url = `${process.env.REACT_APP_API_URL}certificate/issuingAuthority`;
 
   if (searchText !== "" || isActive !== "") {
-    url += `?search=${searchText}&isActive=${isActive}`;
+    url += `?search=${searchText}&isActive=${isActive}&isPaginated=1&paginateNo=15`;
+  } else {
+    url += `?isPaginated=1&paginateNo=15`;
   }
+
   try {
     await Axios.get(url)
       .then((res) => {
-        response.issuingAuthorities = res.data.data;
+        const { data, message, status } = res.data;
+        response.status = status;
+        response.issuingAuthorities = data.data;
+        response.message = message;
+        response.productsPaginatedData = data;
+        response.isLoading = false;
       })
       .catch((err) => {
         toast.error(err);
@@ -52,7 +60,7 @@ export const getIssuingAuthorities = (
     response.message = "Something Went Wrong !";
     toast.error(error);
   }
-  // response.isLoading = false;
+  response.isLoading = false;
   dispatch({ type: Types.GET_ISSUING_AUTHORITY_LIST, payload: response });
 };
 
