@@ -175,6 +175,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               className="form form-label-right"
               onSubmit={handleSubmit(onSubmit)}
               method="post"
+              encType="multipart/form-data"
             >
               <div className="form-group row mt-0 border pb-3 bg-light pt-3">
                 <div className="col-lg-3">
