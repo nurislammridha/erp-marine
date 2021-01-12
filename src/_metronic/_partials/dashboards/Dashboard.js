@@ -9,11 +9,11 @@ import CircularProgressBar from "../../../modules/master/components/CircularProg
 
 export function Dashboard() {
   const uiService = useHtmlClassService();
-  const layoutProps = useMemo(() => {
-    return {
-      demo: objectPath.get(uiService.config, "demo"),
-    };
-  }, [uiService]);
+  // const layoutProps = useMemo(() => {
+  //   return {
+  //     demo: objectPath.get(uiService.config, "demo"),
+  //   };
+  // }, [uiService]);
   return (
     <>
       {/* <DashboardMain /> */}
