@@ -34,14 +34,16 @@ export function AsideMenuList({ layoutProps }) {
           <i className="menu-icon flaticon-more-v2"></i>
         </li>
         {/* end:: section */}
-        
+
         <li
           className={`menu-item ${getMenuItemActive("/dashboard")}`}
           aria-haspopup="true"
         >
           <NavLink className="menu-link" to="/dashboard">
             <span className="svg-icon menu-icon">
-              <SVG src={toAbsoluteUrl("/media/svg/icons/sidebar/icon-dashboard.svg")} />
+              <SVG
+                src={toAbsoluteUrl("/media/svg/icons/sidebar/dashboard.svg")}
+              />
             </span>
             <span className="menu-text">Dashboard</span>
           </NavLink>
@@ -49,7 +51,7 @@ export function AsideMenuList({ layoutProps }) {
         {/*end::1 Level*/}
 
         {/* Modules */}
-        {typeof menuList != 'undefined' &&
+        {typeof menuList != "undefined" &&
           menuList.map((menu, index) => (
             <li
               className={`menu-item menu-item-submenu ${getMenuItemActive(
@@ -71,71 +73,73 @@ export function AsideMenuList({ layoutProps }) {
               </NavLink>
 
               {/* Sub Menus of Module */}
-              {typeof menu.subModules !== 'undefined' && menu.subModules.map((subMenu, subIndex) => (
-                <div className="menu-submenu " key={subIndex}>
-                  <i className="menu-arrow" />
-                  <ul className="menu-subnav">
-                    <li
-                      className="menu-item  menu-item-parent"
-                      aria-haspopup="true"
-                    >
-                      <span className="menu-link">
-                        <span className="menu-text">{menu.menuName}</span>
-                      </span>
-                    </li>
-                    <li
-                      className={`menu-item menu-item-submenu ${getMenuItemActive(
-                        subMenu.subModuleRouteUrl
-                      )}`}
-                      aria-haspopup="true"
-                      data-menu-toggle="hover"
-                    >
-                      <NavLink
-                        className="menu-link menu-toggle"
-                        to="/google-material/inputs"
+              {typeof menu.subModules !== "undefined" &&
+                menu.subModules.map((subMenu, subIndex) => (
+                  <div className="menu-submenu " key={subIndex}>
+                    <i className="menu-arrow" />
+                    <ul className="menu-subnav">
+                      <li
+                        className="menu-item  menu-item-parent"
+                        aria-haspopup="true"
                       >
-                        <i className={subMenu.subModuleIcon}>
-                          <span />
-                        </i>
-                        <span className="menu-text">
-                          {subMenu.subModuleName}
+                        <span className="menu-link">
+                          <span className="menu-text">{menu.menuName}</span>
                         </span>
-                        <i className="menu-arrow" />
-                      </NavLink>
-                      <div className="menu-submenu ">
-                        <i className="menu-arrow" />
-                        <ul className="menu-subnav">
-                          {subMenu.features.map((featureMenu, featureIndex) => (
-                            <li
-                              className={`menu-item  ${getMenuItemActive(
-                                featureMenu.featureRouteUrl
-                              )}`}
-                              aria-haspopup="true"
-                              key={featureIndex}
-                            >
-                              <NavLink
-                                className="menu-link"
-                                to={featureMenu.featureRouteUrl}
-                              >
-                                <i className={featureMenu.featureIcon}>
-                                  <span />
-                                </i>
-                                <span className="menu-text">
-                                  {featureMenu.featureName}
-                                </span>
-                              </NavLink>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </li>
-                    {/*end::2 Level*/}
-                  </ul>
-                </div>
-              ))}
+                      </li>
+                      <li
+                        className={`menu-item menu-item-submenu ${getMenuItemActive(
+                          subMenu.subModuleRouteUrl
+                        )}`}
+                        aria-haspopup="true"
+                        data-menu-toggle="hover"
+                      >
+                        <NavLink
+                          className="menu-link menu-toggle"
+                          to="/google-material/inputs"
+                        >
+                          <i className={subMenu.subModuleIcon}>
+                            <span />
+                          </i>
+                          <span className="menu-text">
+                            {subMenu.subModuleName}
+                          </span>
+                          <i className="menu-arrow" />
+                        </NavLink>
+                        <div className="menu-submenu ">
+                          <i className="menu-arrow" />
+                          <ul className="menu-subnav">
+                            {subMenu.features.map(
+                              (featureMenu, featureIndex) => (
+                                <li
+                                  className={`menu-item  ${getMenuItemActive(
+                                    featureMenu.featureRouteUrl
+                                  )}`}
+                                  aria-haspopup="true"
+                                  key={featureIndex}
+                                >
+                                  <NavLink
+                                    className="menu-link"
+                                    to={featureMenu.featureRouteUrl}
+                                  >
+                                    <i className={featureMenu.featureIcon}>
+                                      <span />
+                                    </i>
+                                    <span className="menu-text">
+                                      {featureMenu.featureName}
+                                    </span>
+                                  </NavLink>
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        </div>
+                      </li>
+                      {/*end::2 Level*/}
+                    </ul>
+                  </div>
+                ))}
             </li>
           ))}
-      
       </ul>
 
       {/* end::Menu Nav */}

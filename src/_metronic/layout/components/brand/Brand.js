@@ -16,7 +16,7 @@ export function Brand() {
         "aside.self.minimize.toggle"
       ),
       headerLogo: uiService.getLogo(),
-      headerStickyLogo: uiService.getStickyLogo()
+      headerStickyLogo: uiService.getStickyLogo(),
     };
   }, [uiService]);
 
@@ -29,16 +29,24 @@ export function Brand() {
       >
         {/* begin::Logo */}
         <Link to="/dashboard" className="brand-logo">
-          <img alt="logo" src={layoutProps.headerLogo} style={{  width: 100 }} /> 
-          <span className="site-name">{ '' }</span>
+          {/* <img alt="logo" src={layoutProps.headerLogo} style={{  width: 100 }} />  */}
+          <h1 className="asideHeading">Imarine</h1>
+          <span className="site-name">{""}</span>
         </Link>
         {/* end::Logo */}
 
         {layoutProps.asideSelfMinimizeToggle && (
           <>
-            <button className="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
+            <button
+              className="brand-toggle btn btn-sm px-0"
+              id="kt_aside_toggle"
+            >
               <span className="svg-icon svg-icon-xl">
-                <SVG src={toAbsoluteUrl("/media/svg/icons/Navigation/Angle-double-left.svg")} />
+                <SVG
+                  src={toAbsoluteUrl(
+                    "/media/svg/icons/Navigation/Angle-double-left.svg"
+                  )}
+                />
               </span>
             </button>
           </>

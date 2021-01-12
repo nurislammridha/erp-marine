@@ -1,21 +1,17 @@
 import * as Types from "../types/Type";
 
-
 const initialState = {
-
-    certificateMasterInput: {
-        strCertificateName: "",
-        strCertificateCategoriName: "",
-        strVesselName: "",
-        intCategoryID:"",
-        intVesselID:null,
-        intActionBy:"2",
-        isActive: "1"
-    },
-    certificateMasterList: [],
-    status: false
-
-
+  certificateMasterInput: {
+    strCertificateName: "",
+    strCertificateCategoryName: "",
+    strVesselName: "",
+    intCategoryID: "",
+    intVesselID: null,
+    intActionBy: "2",
+    isActive: "1",
+  },
+  certificateMasterList: [],
+  status: false,
 };
 
 const CertificateMasterReducer = (state = initialState, action) => {
@@ -24,7 +20,6 @@ const CertificateMasterReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case Types.CHANGE_CERTIFICATE_MASTER_INPUT:
-            console.log('action.payload.value',action.payload);
             const certificateMasterInputData = { ...state.certificateMasterInput };
             certificateMasterInputData[action.payload.name] = action.payload.value;
             return {
@@ -46,21 +41,29 @@ const CertificateMasterReducer = (state = initialState, action) => {
                 }
 
         case Types.GET_CERTIFICATE_MASTER_LIST:
-            console.log('action.payload,', action.payload);
             return {
                 ...state,
                 certificateMasterList: action.payload,
             };
 
         case Types.CREATE_CERTIFICATE_MASTER_LIST:
-            console.log('action.payload,', action.payload);
             return {
                 ...state,
                 status: action.payload.status
-            
-
-
             };
+        case Types.SET_CERTIFICATE_MASTER_EDIT_DATA:
+            return {
+                ...state,
+                certificateMasterInput: action.payload,
+            };
+        
+            case Types.EDIT_CERTIFICATE_MASTER:
+            return {
+                ...state,
+                editStatus: action.payload.status,
+            };
+
+
         default:
             break;
     }

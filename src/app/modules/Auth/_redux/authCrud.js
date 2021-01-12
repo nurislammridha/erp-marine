@@ -46,7 +46,7 @@ export async function login(email, password) {
         await axios
           .get(
             // `http://api1.akij.net:8055/api/EmployeeProfile/GetEmployeeJobStationsByQuery?query=strOfficeEmail="${username}@akij.net"`,
-            `${process.env.REACT_APP_API_URL}hr/getUserDataByUserEmail?strOfficeEmail=${username}@akij.net`
+            `http://iapps.akij.net/asll/public/api/v1/hr/getUserDataByUserEmail?strOfficeEmail=${username}@akij.net`
           )
           .then(async function(response) {
             let responsData = response.data.data[0];

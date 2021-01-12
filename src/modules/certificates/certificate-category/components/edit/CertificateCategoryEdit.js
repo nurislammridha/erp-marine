@@ -78,14 +78,14 @@ const CertificateCategoryEdit = (props) => {
             <Form.Control
               type="text"
               placeholder="Certificate Category name"
-              value={CertificateCategoryInput.strCertificateCategoriName}
-              name="strCertificateCategoriName"
+              value={CertificateCategoryInput.strCertificateCategoryName}
+              name="strCertificateCategoryName"
               ref={register({
                 required: false,
                 maxLength: 100,
               })}
               onChange={(e) =>
-                handleChangeTextInput("strCertificateCategoriName", e.target.value)
+                handleChangeTextInput("strCertificateCategoryName", e.target.value)
               }
             />
           </Col>
@@ -133,7 +133,7 @@ const CertificateCategoryEdit = (props) => {
 
             {isLoading && (
               <button type="submit" class="btn btn-primary saveButton" disabled={true}>
-                <span className="p-2"><i className="fa fa-check"></i>  Updating...</span>
+                <span className="p-2">Updating...</span>
                 <span className="ml-3 spinner spinner-white "></span>
               </button>
             )}

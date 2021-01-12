@@ -55,9 +55,6 @@ export const MainCertificateCreateAction = (certificateInfoInput) => (
     showToast("error", "Issue Autherity code can't be blank!");
     return false;
   }
-
-  console.log("certificateInfoInput post data :>> ", certificateInfoInput);
-
   let responseList = {
     isLoading: true,
     data: {},
@@ -68,14 +65,13 @@ export const MainCertificateCreateAction = (certificateInfoInput) => (
   //         'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
   // };
 
-  //  dispatch({
-  //    type: Types.CERTIFICATE_MAIN_SUBMITTING,
-  //    payload: responseList,
-  //  });
-  let postUrl = `h${process.env.REACT_APP_API_URL}certificate/details`;
+  dispatch({
+    type: Types.CERTIFICATE_MAIN_SUBMITTING,
+    payload: responseList,
+  });
+  let postUrl = `${process.env.REACT_APP_API_URL}certificate/details`;
   Axios.post(postUrl, certificateInfoInput)
     .then(function(response) {
-      console.log("response :>> ", response);
       responseList.data = response.data;
       responseList.isLoading = false;
       responseList.status = response.data.status;
@@ -86,7 +82,6 @@ export const MainCertificateCreateAction = (certificateInfoInput) => (
           payload: responseList,
         });
       } else {
-        console.log("error :>> ", response.data.message);
         showToast("error", response.data.message);
       }
     })
@@ -129,7 +124,6 @@ export const getCertificateMainListAction = (
   try {
     await Axios.get(url)
       .then((res) => {
-        console.log("ReponseCertificate", res);
         const { data, message, status } = res.data;
         response.status = status;
         response.certificates = data.data;
@@ -164,77 +158,97 @@ export const GetVesselTypeAction = () => async (dispatch) => {
   const headers = {
     "Content-Type": "application/json",
   };
-  Axios
-    .get(`http://iapps.akij.net/asll/public/api/v1/asll/vessel/types`, {
-      headers: headers,
-    })
-    .then((res) => {
-      console.log('resss',res);
-      let data = res.data.data;
-      dispatch({ type: Types.GET_VESSEL_TYPE, payload: data });
-    });
+  Axios.get(`http://iapps.akij.net/asll/public/api/v1/asll/vessel/types`, {
+    headers: headers,
+  }).then((res) => {
+    let data = res.data.data;
+    dispatch({ type: Types.GET_VESSEL_TYPE, payload: data });
+  });
 };
-
 
 export const getCertificateCategory = (data) => (dispatch) => {
     Axios
     .get(
-      `${process.env.REACT_APP_API_URL}certificate/category`
+      `http://10.17.2.31:8082/iMarineAPI/public/api/v1/certificate/category`
     )
-    
     .then((res) => {
      
       let data = res.data.data;
       dispatch({ type: Types.GET_CERTIFICATE_CATEGORY, payload: data });
-    });
-
-   
+    }
+  );
 };
 export const getCertificateName = (data) => (dispatch) => {
-
-    Axios
-    .get(
-      `${process.env.REACT_APP_API_URL}certificate/certificateList`
-    )
-    .then((res) => {
+  Axios.get(`${process.env.REACT_APP_API_URL}certificate/certificateList`).then(
+    (res) => {
       let data = res.data.data;
-      console.log(res);
       dispatch({ type: Types.GET_CERTIFICATE_NAME, payload: data });
-    });
-   
+    }
+  );
 };
 export const getCertificateType = () => (dispatch) => {
-    Axios
-    .get(
-      `${process.env.REACT_APP_API_URL}certificate/types`
-    )
-    .then((res) => {
-      let data = res.data.data;
-      console.log("res certificate type", data);
-      dispatch({ type: Types.GET_CERTIFICATE_TYPE, payload: data });
-    });
-   
+  Axios.get(`${process.env.REACT_APP_API_URL}certificate/types`).then((res) => {
+    let data = res.data.data;
+    dispatch({ type: Types.GET_CERTIFICATE_TYPE, payload: data });
+  });
 };
 export const getCertificateIssueBy = (data) => (dispatch) => {
-    Axios
-    .get(
-      `${process.env.REACT_APP_API_URL}certificate/issuingAuthority`
-    )
-    .then((res) => {
-      let data = res.data.data;
-      dispatch({ type: Types.GET_CERTIFICATE_ISSUE_BY, payload: data });
-    });
-  
+  Axios.get(
+    `${process.env.REACT_APP_API_URL}certificate/issuingAuthority`
+  ).then((res) => {
+    let data = res.data.data;
+    dispatch({ type: Types.GET_CERTIFICATE_ISSUE_BY, payload: data });
+  });
 };
-export const getMainCertificateSingleData = (id) => (dispatch) => {
-    Axios.get(
-      `http://10.17.2.189:8080/IMarineApi/public/api/v1/certificate/details/${id}`
-    ).then((res) => {
-      let data = res.data;
-      console.log("res :>> ", res);
-      dispatch({
-        type: Types.GET_MAIN_CERTIFICATE_SINGLE_DATA,
-        payload: data,
-      });
-    });
-  }; 
+
+export const getMainCertificateSingleData = (id) => (dispatch) => {
+  Axios.get(`${process.env.REACT_APP_API_URL}certificate/details/${id}`).then(
+    (res) => {
+      let data = res.data.data;
+      dispatch({
+        type: Types.GET_MAIN_CERTIFICATE_SINGLE_DATA,
+        payload: data,
+      });
+    }
+  );
+};
+
+// update main certificate
+export const mainCertificateEdit = (certificateInfoInput, id) => (dispatch) => {
+  //  let responseList = {
+  //    isLoading: true,
+  //    data: {},
+  //    status: false,
+  //  };
+  //  dispatch({
+  //    type: Types.CERTIFICATE_MAIN_SUBMITTING,
+  //    payload: responseList,
+  //  });
+  console.log('id for updated:>> ', id);
+  Axios.put(
+    `${process.env.REACT_APP_API_URL}certificate/details/${id}`,
+    certificateInfoInput
+  ).then((res) => {
+    console.log("update certificate response :>> ", res);
+    // dispatch({ type: Types.MAIN_CERTIFICATE_UPDATE, payload: res.data});
+    if (res.data.status) {
+      showToast("successs", res.data.message);
+      dispatch({
+        type: Types.MAIN_CERTIFICATE_UPDATE,
+        payload: res.data,
+      });
+    } else {
+      showToast("error", res.data.message);
+    }
+  });
+};
+
+
+
+export const getCertificateStatusData = () => (dispatch) => {
+  const url = `${process.env.REACT_APP_API_URL}certificate/status`;
+  Axios.get(url)
+    .then((res) => {
+      dispatch({ type: Types.MAIN_CERTIFICATE_STATUS, payload: res.data.data });
+    })
+};

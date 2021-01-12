@@ -8,10 +8,11 @@ import Pdf from "react-to-pdf";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import ReactToPrint from "react-to-print-advanced";
 // import CertificateTypeMasterFilter from "./CertificateTypeMasterFilter";
-// import CertificateMasterFilterList from "./CertificateMasterFilterList";
+// import CertificateMasterList from "./CertificateMasterList";
 import { getCertificateMasterList } from "../_redux/actions/CertificateListAction";
-import CertificateMasterFilterList from "../components/list/CertificateMasterFilterList";
+import CertificateMasterList from "../components/list/CertificateMasterList";
 import CertificateMasterAdd from "../components/create/CertificateMasterAdd";
+import CertificateMasterFilter from "../components/list/CertificateMasterFilter";
 
 const CertificateMasterContainer = () => {
   const certificateMasterData = useSelector((state) => state.CertificateListReducer.certificateMasterList);
@@ -38,7 +39,7 @@ const CertificateMasterContainer = () => {
         <div className="col-xl-3 col-lg-3 col-md-3 col-6 VoyageListBtn">
           <Dropdown className="d-inline mr-2">
             <Dropdown.Toggle
-              className="text-bold"
+              className="text-bold btn-sm"
               variant="light text-primary"
               id="dropdown-basic"
             >
@@ -86,11 +87,11 @@ const CertificateMasterContainer = () => {
             </Dropdown.Menu>
           </Dropdown>
           <Button
-            className="pl-3 pr-3 text-bold"
+            className="pl-3 pr-3 text-bold btn-sm"
             variant="primary"
              onClick={handleShow}
           >
-            Add News
+            Add New
           </Button>
           <Modal size="md" 
           show={show} 
@@ -112,9 +113,9 @@ const CertificateMasterContainer = () => {
         <div className="clearfix"></div>
       </div>
 
-       <CertificateMasterFilterList/>
+       <CertificateMasterFilter/>
       <div className="container" id="id" ref={ref}>
-        {/* <CertificateMasterFilterList/> */}
+        <CertificateMasterList/>
       </div>
     </div>
   );

@@ -29,7 +29,8 @@ const IssueAuthorityList = (props) => {
   );
 
   useEffect(() => {
-    dispatch(getIssuingAuthorities(currentPage));
+    // dispatch(getIssuingAuthorities(currentPage));
+    dispatch(getIssuingAuthorities());
 
     if (modalEditStatus) {
       setShow(false);
@@ -83,7 +84,7 @@ const IssueAuthorityList = (props) => {
                 <tr>
                   <td>{index + 1}</td>
                   <td>{item.strIssuingAuthorityName}</td>
-                  <td>{item.isActive === 1 ? "Active" : "Inactive"}</td>
+                  <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
                   {/* <td>
                     {" "}
                     <Link to={`/voyage/list/${""}`}>
@@ -92,12 +93,13 @@ const IssueAuthorityList = (props) => {
                   </td> */}
                   <td>
                     <a
-                      className="btn btn-icon btn-light btn-hover-info btn-sm"
+                      // className="btn btn-icon btn-light btn-hover-info btn-sm"
                       onClick={() => {
                         handleEdit(item);
                       }}
                     >
-                      <i className="fa fa-edit"></i>
+                      {/* <i className="fa fa-edit"></i> */}
+                      <i className="far fa-edit editIcon"></i>
                     </a>
                   </td>
                 </tr>

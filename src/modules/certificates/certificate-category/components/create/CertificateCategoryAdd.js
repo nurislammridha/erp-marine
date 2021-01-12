@@ -1,11 +1,15 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
-import { certificatecategorySubmitAction,getCertificateCategoryListData,handleCertificateCategoryInput } from "../../_redux/actions/CertificateCategoryAction";
+import {
+  certificatecategorySubmitAction,
+  getCertificateCategoryListData,
+  handleCertificateCategoryInput,
+} from "../../_redux/actions/CertificateCategoryAction";
 
 const CertificateCategoryAdd = () => {
   const history = useHistory();
@@ -26,11 +30,10 @@ const CertificateCategoryAdd = () => {
     dispatch(certificatecategorySubmitAction(getCategoryInpuData));
   };
   useEffect(() => {
-      if(status){
-          dispatch(getCertificateCategoryListData());
-      }
-      
-  }, [status])
+    if (status) {
+      dispatch(getCertificateCategoryListData());
+    }
+  }, [status]);
 
   const statusOptions = [
     {
@@ -47,32 +50,33 @@ const CertificateCategoryAdd = () => {
   return (
     <>
       <form
-        className="form form-label-right"
+        className="form form-label-right voyageEngineerForm"
         onSubmit={handleSubmit(submiteCategory)}
         method="post"
       >
         <div className="form-group mt-0">
-          <label className="form-label">Category Name</label>
+          <label className="form-label formFont">Category Name</label>
           <Form.Control
             type="text"
+            className="formHeight"
             ref={register}
-            value={getCategoryInpuData.strCertificateCategoriName}
+            value={getCategoryInpuData.strCertificateCategoryName}
             placeholder="Type Category Name"
-            name="strCertificateCategoriName"
+            name="strCertificateCategoryName"
             onChange={(e) =>
-              categoryInputChange("strCertificateCategoriName", e.target.value)
+              categoryInputChange("strCertificateCategoryName", e.target.value)
             }
           />
         </div>
-
-        <div className="form-group mt-0">
-          <label className="form-label">
+        <div className="form-group mt-0 ">
+          <label className="form-label formFont">
             Parent Category <span className="text-info"> (Optional)</span>
           </label>
           <RHFInput
             as={<Select options={statusOptions} />}
             rules={{ required: false }}
             name="intCargoTypeID"
+            className="formSelect pt-0"
             register={register}
             value={getCategoryInpuData.intCargoTypeID}
             onChange={(option) => {
@@ -82,19 +86,22 @@ const CertificateCategoryAdd = () => {
             setValue={setValue}
           />
         </div>
+
         <div className="form-group row">
           <div className="col-sm-10"></div>
         </div>
-
         {isLoading && (
-          <button type="submit" class="btn btn-primary saveButton" disabled={true}>
-            <span className="p-2"><i className="fa fa-check"></i>  Submitting...</span>
+          <button
+            type="submit"
+            class="btn btn-primary saveButton mt-3"
+            disabled={true}
+          >
+            <span className="p-1">Submitting...</span>
             <span className="ml-3 spinner spinner-white "></span>
           </button>
         )}
-
         {!isLoading && (
-          <button type="submit" class="btn btn-primary saveButton">
+          <button type="submit" className="btn btn-primary saveButton mt-3">
             <span>Submit</span>
           </button>
         )}

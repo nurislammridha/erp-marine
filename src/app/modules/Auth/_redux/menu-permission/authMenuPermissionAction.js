@@ -10,7 +10,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
     {
       moduleName: "HR",
       moduleRouteUrl: "/employee",
-      moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
+      moduleImageIcon: "/media/svg/icons/Code/hr.svg",
       subModules: [
         {
           subModuleName: "Employee",
@@ -41,13 +41,40 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
             },
           ],
         },
+        {
+          subModuleName: "Vessel",
+          subModuleRouteUrl: "/vessel-list",
+          subModuleIcon: "menu-bullet menu-bullet-dot",
+          features: [
+            {
+              featureName: "Vessel List",
+              featureRouteUrl: "/vessels/list",
+              featureIcon: "menu-bullet menu-bullet-dot",
+            },
+            {
+              featureName: "Create Vessel",
+              featureRouteUrl: "/vessels/add",
+              featureIcon: "menu-bullet menu-bullet-dot",
+            },
+            {
+              featureName: "Vessel Account",
+              featureRouteUrl: "/vessels/vessel-account",
+              featureIcon: "menu-bullet menu-bullet-dot",
+            },
+            {
+              featureName: "Vessel Items",
+              featureRouteUrl: "/vessel-items/list",
+              featureIcon: "menu-bullet menu-bullet-dot",
+            },
+          ],
+        },
       ],
     },
 
     {
       moduleName: "Expense",
       moduleRouteUrl: "/addition-deduction",
-      moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
+      moduleImageIcon: "/media/svg/icons/Code/expense.svg",
       subModules: [
         {
           subModuleName: "New Expense",
@@ -74,55 +101,10 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
       ],
     },
 
-    /**
-        | Module : Vessel
-        */
-    {
-      moduleName: "Vessel",
-      moduleRouteUrl: "/vessels/list",
-      moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
-      subModules: [
-        {
-          subModuleName: "Vessel",
-          subModuleRouteUrl: "/vessel-list",
-          subModuleIcon: "menu-bullet menu-bullet-dot",
-          features: [
-            {
-              featureName: "Vessel List",
-              featureRouteUrl: "/vessels/list",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-            {
-              featureName: "Create Vessel",
-              featureRouteUrl: "/vessels/add",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-            {
-              featureName: "Vessel Account",
-              featureRouteUrl: "/vessels/vessel-account",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-          ],
-        },
-        {
-          subModuleName: "Vessel Items",
-          subModuleRouteUrl: "/vessel-items/list",
-          subModuleIcon: "menu-bullet menu-bullet-dot",
-          features: [
-            {
-              featureName: "Item List",
-              featureRouteUrl: "/vessel-items/list",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-          ],
-        },
-      ],
-    },
-
     {
       moduleName: "Certificate",
       moduleRouteUrl: "/certificates/list",
-      moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
+      moduleImageIcon: "/media/svg/icons/Code/certificates.svg",
       subModules: [
         {
           subModuleName: "Detail",
@@ -170,57 +152,57 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
         },
       ],
     },
-    {
-      moduleName: "Procurement",
-      moduleRouteUrl: "/vessels/list",
-      moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
-      subModules: [
-        {
-          subModuleName: "Procurement",
-          subModuleRouteUrl: "/supply-chain/procurement",
-          subModuleIcon: "menu-bullet menu-bullet-dot",
-          features: [
-            {
-              featureName: "Purchase Requisition (Indent)",
-              featureRouteUrl: "/supply-chain/procurement/purchase-requisition",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-            {
-              featureName: "Cargo Booking",
-              featureRouteUrl: "/supply-chain/procurement/demand-entry",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-            {
-              featureName: "Pending Top Sheet",
-              featureRouteUrl: "/supply-chain/procurement/top-sheet",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-            {
-              featureName: "Cargo Pending Details",
-              featureRouteUrl:
-                "/supply-chain/procurement/cargo-pending-details",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-            {
-              featureName: "Approve Top Sheet",
-              featureRouteUrl: "/supply-chain/procurement/aprv-top-sheet",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-            {
-              featureName: "Booking Update Detaills",
-              featureRouteUrl:
-                "/supply-chain/procurement/booking-unpdate-details",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-          ],
-        },
-      ],
-    },
+    // {
+    //   moduleName: "Procurement",
+    //   moduleRouteUrl: "/vessels/list",
+    //   moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
+    //   subModules: [
+    //     {
+    //       subModuleName: "Procurement",
+    //       subModuleRouteUrl: "/supply-chain/procurement",
+    //       subModuleIcon: "menu-bullet menu-bullet-dot",
+    //       features: [
+    //         {
+    //           featureName: "Purchase Requisition (Indent)",
+    //           featureRouteUrl: "/supply-chain/procurement/purchase-requisition",
+    //           featureIcon: "menu-bullet menu-bullet-dot",
+    //         },
+    //         {
+    //           featureName: "Cargo Booking",
+    //           featureRouteUrl: "/supply-chain/procurement/demand-entry",
+    //           featureIcon: "menu-bullet menu-bullet-dot",
+    //         },
+    //         {
+    //           featureName: "Pending Top Sheet",
+    //           featureRouteUrl: "/supply-chain/procurement/top-sheet",
+    //           featureIcon: "menu-bullet menu-bullet-dot",
+    //         },
+    //         {
+    //           featureName: "Cargo Pending Details",
+    //           featureRouteUrl:
+    //             "/supply-chain/procurement/cargo-pending-details",
+    //           featureIcon: "menu-bullet menu-bullet-dot",
+    //         },
+    //         {
+    //           featureName: "Approve Top Sheet",
+    //           featureRouteUrl: "/supply-chain/procurement/aprv-top-sheet",
+    //           featureIcon: "menu-bullet menu-bullet-dot",
+    //         },
+    //         {
+    //           featureName: "Booking Update Detaills",
+    //           featureRouteUrl:
+    //             "/supply-chain/procurement/booking-unpdate-details",
+    //           featureIcon: "menu-bullet menu-bullet-dot",
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
 
     {
       moduleName: "Voyage",
       moduleRouteUrl: "/voyage",
-      moduleImageIcon: "/media/svg/icons/Code/Compiling.svg",
+      moduleImageIcon: "/media/svg/icons/Code/voyage.svg",
       subModules: [
         {
           subModuleName: "Voyage",
@@ -265,7 +247,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
     {
       moduleName: "Reports",
       moduleRouteUrl: "/report",
-      moduleImageIcon: "/media/svg/icons/Shopping/Gift.svg",
+      moduleImageIcon: "/media/svg/icons/Code/report.svg",
       subModules: [
         {
           subModuleName: "Voyage Report",
