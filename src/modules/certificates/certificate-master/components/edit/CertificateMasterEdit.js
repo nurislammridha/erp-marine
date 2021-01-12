@@ -80,34 +80,20 @@ const certificatesCategoryOptionData = useSelector((state) => state.certificateM
                               }
                         />
                     </div>
-                    <div className="col-sm-6">
-                        <label className="form-label">Vessel Name</label>
-                        <RHFInput
-                            as={<Select options={vesselName} />}
-                            rules={{ required: false }}
-                            name="label"
-                            register={register}
-                            value={vesselName.label}
-                            setValue={setValue}
-                            onChange={(option) => {
-                                certificateMainInfoChange("label", option.label);
-                                certificateMainInfoChange("value", option.value);
-                              }}
-                        />
-                    </div>
+                    
                     <div className="col-sm-6">
                         <label className="form-label">Category Name</label>
                         <RHFInput
                             as={<Select options={certificatesCategoryOptionData} />}
                             rules={{ required: false }}
-                            name="intCertificateCategoriId"
+                            name="intCategoryID"
                             register={register}
                             value={certificatesCategoryOptionData.strCertificateCategoryName}
-                            setValue={setValue}
                             onChange={(option) => {
                                 certificateMainInfoChange("strCertificateCategoryName", option.label);
                                 certificateMainInfoChange("intCategoryID", option.value);
                               }}
+                            setValue={setValue}
                         />
                     </div>
                 </div>

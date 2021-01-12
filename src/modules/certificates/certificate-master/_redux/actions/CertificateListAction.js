@@ -76,11 +76,9 @@ export const certificateMasterSubmitAction = (CertificateMasterInput) => (dispat
 };
 
 export const setMasterCertificateEditValue = (editValue) => (dispatch) => {
-  console.log('editValue', editValue);
   const formData = {
     strCertificateName: editValue.strCertificateName,
     strCertificateCategoryName: editValue.strCertificateCategoryName,
-    strVesselName: editValue.strVesselName,
     isActive: editValue.isActive,
     intActionBy: 1272,
   };
