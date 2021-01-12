@@ -289,11 +289,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div> */}
 
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Code</label>
+                  <label className="form-label mt-2 formFont">Code</label>
                   <Form.Control
                     type="text"
                     name="strCustomeCode"
-                    className="fromStyle"
+                    className="fromStyle formHeight"
                     value={certificateInfoInput.strCustomeCode}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -314,11 +314,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div>
 
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Ship Folder No (Optional)</label>
+                  <label className="form-label mt-2 formFont">Ship Folder No (Optional)</label>
                   <Form.Control
                     type="text"
                     name="strShipFolderNo"
-                    className="fromStyle"
+                    className="fromStyle formHeight"
                     value={certificateInfoInput.strShipFolderNo}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -406,11 +406,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </div>
                 </div>
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Issue Place</label>
+                  <label className="form-label mt-2 formFont ">Issue Place</label>
                   <Form.Control
                     type="text"
                     name="strIssuedPlace"
-                    className="fromStyle"
+                    className="fromStyle formHeight"
                     value={certificateInfoInput.strIssuedPlace}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -431,11 +431,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div>
 
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Location</label>
+                  <label className="form-label mt-2 formFont">Location</label>
                   <Form.Control
                     type="text"
                     name="strLocation"
-                    className="fromStyle"
+                    className="fromStyle formHeight"
                     value={certificateInfoInput.strLocation}
                     onChange={(e) =>
                       certificateMainInfoChange("strLocation", e.target.value)
