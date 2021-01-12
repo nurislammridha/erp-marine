@@ -35,6 +35,7 @@ const initialState = {
     intCertificateTypeID: null,
     intNotOnBoard: 0,
     dteCertificateIssueDate: "",
+    dteCertificateExpiryDate: "",
     dteCertificateValidUntil: "",
     isExtendedUntil: false,
     dteExtendedUntil: "",
