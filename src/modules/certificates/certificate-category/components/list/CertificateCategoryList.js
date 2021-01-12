@@ -84,11 +84,11 @@ const CertificateCategoryList = () => {
   return (
     <>
       <div className="float-right">
-        <PaginationLaravel
+        {/*<PaginationLaravel
           isDescription={true}
           changePage={changePage}
           data={certificatesCategoryPaginatedData}
-        />
+        />*/}
       </div>
       {isLoading && (
         <div className="mt-5">
