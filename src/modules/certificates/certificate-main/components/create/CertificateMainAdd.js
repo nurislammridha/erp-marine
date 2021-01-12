@@ -16,6 +16,7 @@ import {
   MainCertificateCreateAction,
   GetVesselTypeAction,
   getCertificateStatusData,
+  certificateMultipleDataAdd,
 } from "../../_redux/actions/CertificateMainAction";
 import CertificateCategoryAddModal from "../../../certificate-category/components/create/CertificateCategoryAddModal";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
@@ -98,6 +99,10 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const onSubmit = async (e) => {
     dispatch(MainCertificateCreateAction(certificateInfoInput));
   };
+
+  const addMultipleData = () => {
+    dispatch(certificateMultipleDataAdd(certificateInfoInput));
+  }
 
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [showTypeModal, setShowTypeModal] = useState(false);
@@ -617,11 +622,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     <label className="form-label mt-2">From Survey</label>
                     <Form.Control
                       type="date"
-                      name="dteLastSurvey"
+                      name="dteFromSurvey"
                       className="fromStyle"
-                      value={certificateInfoInput.dteLastSurvey}
+                      value={certificateInfoInput.dteFromSurvey}
                       onChange={(e) =>
-                        certificateMainInfoChange("dteLastSurvey", e.target.value)
+                        certificateMainInfoChange("dteFromSurvey", e.target.value)
                       }
                       ref={register({
                         required: true,
@@ -629,8 +634,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       })}
                     />
                     <div className="inputError margin-minus-8">
-                      {errors.dteLastSurvey &&
-                        errors.dteLastSurvey.type === "required" &&
+                      {errors.dteFromSurvey &&
+                        errors.dteFromSurvey.type === "required" &&
                         "Expiry Date can't be blank"}
                     </div>
                   </div>
@@ -638,11 +643,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     <label className="form-label mt-2">To Survey</label>
                     <Form.Control
                       type="date"
-                      name="dteNextSurvey"
+                      name="dteToSurvey"
                       className="fromStyle"
-                      value={certificateInfoInput.dteNextSurvey}
+                      value={certificateInfoInput.dteToSurvey}
                       onChange={(e) =>
-                        certificateMainInfoChange("dteNextSurvey", e.target.value)
+                        certificateMainInfoChange("dteToSurvey", e.target.value)
                       }
                       ref={register({
                         required: true,
@@ -650,8 +655,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       })}
                     />
                     <div className="inputError margin-minus-8">
-                      {errors.dteNextSurvey &&
-                        errors.dteNextSurvey.type === "required" &&
+                      {errors.dteToSurvey &&
+                        errors.dteToSurvey.type === "required" &&
                         "Expiry Date can't be blank"}
                     </div>
                   </div>
@@ -660,16 +665,16 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     <RHFInput
                       as={<Select options={certificateStatus} />}
                       rules={{ required: true }}
-                      name="intCategoryID"
+                      name="intCertificateStatusID"
                       register={register}
-                      value={certificateInfoInput.intCategoryID}
+                      value={certificateInfoInput.intCertificateStatusID}
                       onChange={(option) => {
                         certificateMainInfoChange(
-                          "intCategoryName",
+                          "strCertificateStatusName",
                           option.label
                         );
                         certificateMainInfoChange(
-                          "intCategoryID",
+                          "intCertificateStatusID",
                           option.value
                         );
                       }}
@@ -677,10 +682,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     />
                   </div>
                   <div className="col-lg-3">
-                    <button type="button" className="btn saveButton text-white mt-11">
-                      <span>
-                        {/* <i className="fa fa-plus-circle text-white"></i>  */}
-                    Add </span>
+                    <button type="button" className="btn saveButton text-white mt-11" onClick={() => addMultipleData()}>
+                      <span> Add </span>
                     </button>
                   </div>
                   <div className="col-lg-12">
@@ -695,16 +698,21 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>01/12/2021</td>
-                          <td>01/12/2021</td>
-                          <td>Pending</td>
-                          <td style={{ width: 70, textAlign: 'center' }}>
-                            <i className="fa fa-edit text-success mr-2"></i>
-                            <i className="fa fa-trash text-danger"></i>
-                          </td>
-                        </tr>
+                        {
+                          certificateInfoInput.certificateDates.map((date, index) => (
+                            <tr>
+                              <td>{index+1}</td>
+                              <td>{date.dteFromSurvey}</td>
+                              <td>{date.dteToSurvey}</td>
+                              <td>{date.strCertificateStatusName}</td>
+                              <td style={{ width: 70, textAlign: 'center' }}>
+                                <i className="fa fa-edit text-success mr-2"></i>
+                                <i className="fa fa-trash text-danger"></i>
+                              </td>
+                            </tr>
+                          ))
+                        }
+                       
                       </tbody>
                     </table>
                   </div>
