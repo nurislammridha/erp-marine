@@ -68,7 +68,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
     } else {
       // setEmployeeInfo(employeeInfoData);
     }
-    
   };
 
   // const enableLoading = () => {
@@ -140,8 +139,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   };
 
   const getFiles = (files) => {
-    console.log('files[0]', files[0]);
-    
+    console.log("files[0]", files[0]);
+
     // multipleAttachmentAdd()
     // handleChangeProductInputAction("multipleAttachments", files[0]);
   };
@@ -556,9 +555,14 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                             minDate={
                               certificateInfoInput.dteCertificateIssueDate
                             }
-                            selected={certificateInfoInput.dteCertificateExpiryDate}
+                            selected={
+                              certificateInfoInput.dteCertificateExpiryDate
+                            }
                             onChange={(e) =>
-                              certificateMainInfoChange("dteCertificateExpiryDate", e)
+                              certificateMainInfoChange(
+                                "dteCertificateExpiryDate",
+                                e
+                              )
                             }
                             ref={register({
                               required: true,
@@ -965,8 +969,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
               <div className="form-group row mt-1 border mt-2 pb-3 bg-light">
                 <div className="col-lg-3">
-                    <label className="form-label mt-2">Attachments</label>
-                    {/* <Form.Control
+                  <label className="form-label mt-2">Attachments</label>
+                  {/* <Form.Control
                       type="file"
                       name="multipleAttachments[]"
                       className="fromStyle formHeight" 
@@ -981,12 +985,13 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         maxLength: 100,
                       })}
                     /> */}
-                    <FileBase64
-                      name="multipleAttachments"
-                      multiple={true}
-                      onDone={getFiles.bind(this)}
-                    />
-                  </div>
+
+                  <FileBase64
+                    name="multipleAttachments"
+                    multiple={true}
+                    onDone={getFiles.bind(this)}
+                  />
+                </div>
               </div>
               <div className="form-group row">
                 <div className="col-sm-10">

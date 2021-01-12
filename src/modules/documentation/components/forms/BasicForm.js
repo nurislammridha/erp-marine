@@ -1,17 +1,17 @@
 import * as React from "react";
-import { Form, Card, Button, Row, Col, InputGroup } from "react-bootstrap";
-// import { DateRangePickerWrapper } from "storybook";
-// import * as Icon from "react-icons/fi";
+import { Form, Card, Button } from "react-bootstrap";
+import { useState } from "react";
+
 import Checkbox from "react-custom-checkbox";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
+
 import { InputBase, Paper, IconButton, Divider } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import DatePicker from "react-datepicker";
 
 const BasicForm = () => {
-  const { register, handleSubmit, errors, setValue } = useForm();
+  const { register, setValue } = useForm();
   const courseData = [
     {
       id: 1,
@@ -37,27 +37,7 @@ const BasicForm = () => {
       CourseName.push(items);
     });
   }
-  // const classes8 = useStyles8();
-  // const useStyles8 = makeStyles({
-  //   root: {
-  //     padding: "2px",
-  //     display: "flex",
-  //     alignItems: "center",
-  //     width: 250,
-  //   },
-  //   input: {
-  //     marginLeft: 8,
-  //     flex: 1,
-  //   },
-  //   iconButton: {
-  //     padding: 10,
-  //   },
-  //   divider: {
-  //     width: 1,
-  //     height: 28,
-  //     margin: 4,
-  //   },
-  // });
+  const [startDate, setStartDate] = useState(new Date());
   return (
     <>
       <Card>
@@ -213,17 +193,18 @@ const BasicForm = () => {
                 />
               </div>
 
-              <div className="col-xl-4 col-lg-4 col-md-6 mt-3">
+              <div className="col-xl-3 col-lg-3 col-md-6">
+                <label className="formFont">Custome Searchbar</label>
                 <Paper className="searchInput">
+                  <IconButton aria-label="Search" className="searchPlaceholder">
+                    <i className="flaticon-search "></i>
+                  </IconButton>
                   <InputBase
                     placeholder="Search Employee Here"
                     // inputProps={{ "aria-label": "Search Google Maps" }}
                     // onChange={(e) => searchEmployee(e)}
                     // value={employeeInfo.employeeName}
                   />
-                  <IconButton aria-label="Search" className="searchPlaceholder">
-                    <i className="flaticon-search "></i>
-                  </IconButton>
                 </Paper>
               </div>
             </div>
@@ -256,6 +237,19 @@ const BasicForm = () => {
               </Button>
             </div>
             <div className="clearfix"></div>
+            <div className="col-lg-3 custome-datepicker">
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+              />
+              <i className="fas fa-calendar-alt"></i>
+            </div>
+            <div className="col-lg-3 mt-3 datepicker">
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+              />
+            </div>
           </form>
         </Card.Body>
       </Card>
