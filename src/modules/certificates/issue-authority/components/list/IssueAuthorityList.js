@@ -118,12 +118,7 @@ const IssueAuthorityList = (props) => {
                     </Link>
                   </td> */}
                       <td>
-                        <button
-                          className="btn"
-                          onClick={() => handleEdit(item)}
-                        >
-                          <i className="far fa-edit editIcon"></i>
-                        </button>
+                          <i className="far fa-edit pointer editIcon" onClick={() => handleEdit(item)}></i>
                       </td>
                     </tr>
                   ))}

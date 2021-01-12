@@ -728,3 +728,7 @@ i.fas.fa-calendar-alt {
     color: #fff!important;
     z-index: 0;
 }
+
+.pointer {
+    cursor: pointer;
+}

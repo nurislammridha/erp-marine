@@ -33,7 +33,7 @@ const CertificateCategoryContainer = () => {
     <div className="card card-custom gutter-b">
       <div className="row pt-5 pl-4 pb-3">
         <div className="col-xl-9 col-lg-9 col-md-9 col-6">
-          <h3>Certificate Categories List</h3>
+          <h3>Certificate Categories</h3>
         </div>
         <div className="col-xl-3 col-lg-3 col-md-3 col-6 VoyageListBtn">
           <Dropdown className="d-inline mr-2">
@@ -55,14 +55,14 @@ const CertificateCategoryContainer = () => {
               >
                 {({ toPdf }) => (
                   <Dropdown.Item onClick={toPdf}>
-                    <i class="far fa-file-pdf"></i>
+                    <i className="far fa-file-pdf"></i>
                     <span className="ml-3">Pdf</span>
                   </Dropdown.Item>
                 )}
               </Pdf>
 
               <Dropdown.Item href="#/action-2">
-                <i class="far fa-file-excel mt-1"></i>
+                <i className="far fa-file-excel mt-1"></i>
                 {
                   <ReactHTMLTableToExcel
                     className="excelBtn ml-1"
@@ -77,7 +77,7 @@ const CertificateCategoryContainer = () => {
               <ReactToPrint
                 trigger={() => (
                   <Dropdown.Item href="#/action-1" onClick={window.print}>
-                    <i class="fas fa-print"></i>
+                    <i className="fas fa-print"></i>
                     <span className="ml-2">Print</span>
                   </Dropdown.Item>
                 )}
