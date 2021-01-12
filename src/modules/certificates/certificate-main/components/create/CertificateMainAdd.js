@@ -53,6 +53,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const addStatus = useSelector((state) => state.vesselInfo.addStatus);
   const addMessage = useSelector((state) => state.vesselInfo.addMessage);
   const serverErrors = useSelector((state) => state.certificateMainInfo.errors);
+  const isLoading = useSelector((state) => state.certificateMainInfo.isLoading);
   const certificateInfoInput = useSelector(
     (state) => state.certificateMainInfo.certificateMainInfo
   );
@@ -82,7 +83,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const certificateStatus = useSelector(
     (state) => state.certificateMainInfo.certificateStatus
   );
-  
+
   const vesselTypeOption = useSelector(
     (state) => state.certificateMainInfo.vesselTypeOptionData
   );
@@ -308,12 +309,12 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <div className="inputError margin-minus-8">
                     {errors.strCustomeCode &&
                       errors.strCustomeCode.type === "required" &&
-                      "Code can't be blank"}
+                      "Certificate Code can't be blank"}
                   </div>
                 </div>
 
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Ship Folder No</label>
+                  <label className="form-label mt-2">Ship Folder No (Optional)</label>
                   <Form.Control
                     type="text"
                     name="strShipFolderNo"
@@ -326,15 +327,10 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       )
                     }
                     ref={register({
-                      required: true,
+                      required: false,
                       maxLength: 100,
                     })}
                   />
-                  <div className="inputError margin-minus-8">
-                    {errors.strShipFolderNo &&
-                      errors.strShipFolderNo.type === "required" &&
-                      "Location can't be blank"}
-                  </div>
                 </div>
 
                 {/* <div className="col-lg-3">
@@ -452,7 +448,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <div className="inputError margin-minus-8">
                     {errors.strLocation &&
                       errors.strLocation.type === "required" &&
-                      "Location can't be blank"}
+                      "Certificate Issue Location can't be blank"}
                   </div>
                 </div>
                 <div className="col-lg-3 mt-3">
@@ -510,15 +506,15 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                           certificateMainInfoChange("dteExpiryDate", e.target.value)
                         }
                         ref={register({
-                          required: true,
+                          required: false,
                           maxLength: 100,
                         })}
                       />
-                      <div className="inputError margin-minus-8">
+                      {/* <div className="inputError margin-minus-8">
                         {errors.dteExpiryDate &&
                           errors.dteExpiryDate.type === "required" &&
                           "Expiry Date can't be blank"}
-                      </div>
+                      </div> */}
                     </div>
                     <div className="col-lg-3">
                       <label className="form-label mt-2">
@@ -536,15 +532,15 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                           )
                         }
                         ref={register({
-                          required: true,
+                          required: false,
                           maxLength: 100,
                         })}
                       />
-                      <div className="inputError margin-minus-8">
+                      {/* <div className="inputError margin-minus-8">
                         {errors.dteCertificateValidUntil &&
                           errors.dteCertificateValidUntil.type === "required" &&
-                          "Issue Date can't be blank"}
-                      </div>
+                          "Valid Until Date can't be blank"}
+                      </div> */}
                     </div>
                   </>
                 }
@@ -583,15 +579,15 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       )
                     }
                     ref={register({
-                      required: true,
+                      required: false,
                       maxLength: 100,
                     })}
                   />
-                  <div className="inputError margin-minus-8">
+                  {/* <div className="inputError margin-minus-8">
                     {errors.dteExtendedUntil &&
                       errors.dteExtendedUntil.type === "required" &&
                       "Expiry Date can't be blank"}
-                  </div>
+                  </div> */}
                 </div>
                 <div className="col-lg-3">
                   <label className="form-label mt-2">Endorsement Date</label>
@@ -614,7 +610,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <div className="inputError margin-minus-8">
                     {errors.dteLastEndorsementDate &&
                       errors.dteLastEndorsementDate.type === "required" &&
-                      "Expiry Date can't be blank"}
+                      "Endorsement Date can't be blank"}
                   </div>
                 </div>
 
@@ -634,15 +630,15 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         certificateMainInfoChange("dteFromSurvey", e.target.value)
                       }
                       ref={register({
-                        required: true,
+                        required: false,
                         maxLength: 100,
                       })}
                     />
-                    <div className="inputError margin-minus-8">
+                    {/* <div className="inputError margin-minus-8">
                       {errors.dteFromSurvey &&
                         errors.dteFromSurvey.type === "required" &&
                         "Expiry Date can't be blank"}
-                    </div>
+                    </div> */}
                   </div>
                   <div className="col-lg-3">
                     <label className="form-label mt-2">To Survey</label>
@@ -655,21 +651,21 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         certificateMainInfoChange("dteToSurvey", e.target.value)
                       }
                       ref={register({
-                        required: true,
+                        required: false,
                         maxLength: 100,
                       })}
                     />
-                    <div className="inputError margin-minus-8">
+                    {/* <div className="inputError margin-minus-8">
                       {errors.dteToSurvey &&
                         errors.dteToSurvey.type === "required" &&
                         "Expiry Date can't be blank"}
-                    </div>
+                    </div> */}
                   </div>
                   <div className="col-lg-3">
                     <label className="form-label mt-2">Survey Status</label>
                     <RHFInput
                       as={<Select options={certificateStatus} />}
-                      rules={{ required: true }}
+                      rules={{ required: false }}
                       name="intCertificateStatusID"
                       register={register}
                       value={certificateInfoInput.intCertificateStatusID}
@@ -706,7 +702,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         {
                           certificateInfoInput.certificateDates.map((date, index) => (
                             <tr>
-                              <td>{index+1}</td>
+                              <td>{index + 1}</td>
                               <td>{date.dteFromSurvey}</td>
                               <td>{date.dteToSurvey}</td>
                               <td>{date.strCertificateStatusName}</td>
@@ -717,7 +713,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                             </tr>
                           ))
                         }
-                       
+
                       </tbody>
                     </table>
                   </div>
@@ -768,15 +764,15 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       )
                     }
                     ref={register({
-                      required: true,
+                      required: false,
                       maxLength: 100,
                     })}
                   />
-                  <div className="inputError margin-minus-8">
+                  {/* <div className="inputError margin-minus-8">
                     {errors.strOfficeRemarks &&
                       errors.strOfficeRemarks.type === "required" &&
                       "Expiry Date can't be blank"}
-                  </div>
+                  </div> */}
                 </div>
                 <div className="col-lg-3">
                   <label className="form-label mt-2">Ship remarks</label>
@@ -793,15 +789,15 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       )
                     }
                     ref={register({
-                      required: true,
+                      required: false,
                       maxLength: 100,
                     })}
                   />
-                  <div className="inputError margin-minus-8">
+                  {/* <div className="inputError margin-minus-8">
                     {errors.strShipRemarks &&
                       errors.strShipRemarks.type === "required" &&
                       "Expiry Date can't be blank"}
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* <div className="col-lg-3 mt-8">
@@ -862,21 +858,19 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       Back
                     </button>
                   </a>
-                  {/* <button type="submit" class="btn btn-primary btn-lg">
-                    Next
-                    </button> */}
-                  {/* {loading && ( */}
-                  <button type="submit" className="mr-4 saveButton text-white btn">
-                    <span>Submit</span>
-                    {/* <span className="ml-3 spinner spinner-white"></span> */}
-                  </button>
-                  {/* )} */}
 
-                  {/* {!loading && (
-                    <button type="submit" class="btn btn-primary btn-lg">
+                  {isLoading && (
+                    <button type="submit" className="mr-4 saveButton text-white btn" disabled={true}>
+                      <span>Submitting</span>
+                      <span className="ml-3 spinner spinner-white"></span>
+                    </button>
+                  )}
+
+                  {!isLoading && (
+                    <button type="submit" className="mr-4 saveButton text-white btn">
                       <span>Submit</span>
                     </button>
-                  )} */}
+                  )}
                 </div>
               </div>
             </form>
