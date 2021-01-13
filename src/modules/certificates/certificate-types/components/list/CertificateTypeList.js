@@ -36,7 +36,7 @@ const CertificateTypeList = (props) => {
     return (
 
         <div className="react-bootstrap-table table-responsive pr-7">
-            <table className="table mt-2 tbl-standard voyageTable">
+            <table className="table mt-2 tbl-standard voyageTable" id="table-to-xls">   //don't remove the table id
                 <thead>
                     <tr>
                         <th scope="col">No</th>
