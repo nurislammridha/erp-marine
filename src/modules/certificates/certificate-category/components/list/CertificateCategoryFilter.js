@@ -8,7 +8,7 @@ import { getCertificateCategoryListData } from "../../_redux/actions/Certificate
 
 const CertificateCategoryFilter = () => {
   const [search, setSearch] = useState("");
-  const [type, setType] = useState("");
+  const [type, setType] = useState(1);
   const dispatch = useDispatch();
   const certificateCategoryInput = useSelector(
     (state) => state.CertificateCategoryReducer.certificateCategoryInput
@@ -30,53 +30,43 @@ const CertificateCategoryFilter = () => {
   };
   const changeSearch = (value) => {
     setSearch(value);
-    dispatch(getCertificateCategoryListData(value, type));
+    dispatch(getCertificateCategoryListData(value, type, 1));
   };
   useEffect(() => {
-    dispatch(getCertificateCategoryListData());
+    dispatch(getCertificateCategoryListData("", "", 1));
   }, []);
   return (
-    <div className="container">
-      <form className="form form-label-right voyageEngineerForm" method="post">
-        <div className="form-group row ml-2">
-          <div className="col-lg-3 col-md-6 col-10">
-            <Form.Control
-              type="text"
-              className="formHeight"
-              placeholder="Search"
-              value={search}
-              onChange={(e) => changeSearch(e.target.value)}
-            />
-          </div>
-          <div className="col-lg-3 col-md-6 col-10">
-            <Form.Group
-              className="noonReportInput"
-              as={Row}
-              controlId="formPlaintextPassword"
-            >
-              <Form.Label className="mt-2 formFont">Status</Form.Label>
-              <Col sm="9">
-                <RHFInput
-                  as={<Select options={statusOptions} />}
-                  rules={{ required: false }}
-                  name="isActive"
-                  className="formSelect pt-0"
-                  register={register}
-                  value={certificateCategoryInput.isActive}
-                  onChange={(option) => {
-                    setType(option.value);
-                    dispatch(
-                      getCertificateCategoryListData(search, option.value)
-                    );
-                  }}
-                  setValue={setValue}
-                />
-              </Col>
-            </Form.Group>
-          </div>
-        </div>
-      </form>
-    </div>
+    <>
+    <Form.Group as={Col} controlId="formGridState">
+    <Form.Control
+    type="text"
+    className="formHeight"
+    placeholder="Search"
+    value={search}
+    onChange={(e) => changeSearch(e.target.value)}
+    />
+  </Form.Group>
+  <Form.Label className="formFont pl-1 mt-2">Status</Form.Label>
+  <Form.Group as={Col} controlId="formGridState">
+    <RHFInput
+    as={<Select options={statusOptions} />}
+      rules={{ required: false }}
+      name="isActive"
+      className="formSelect pt-0"
+      register={register}
+      value={certificateCategoryInput.isActive}
+      onChange={(option) => {
+      setType(option.value);
+      dispatch(
+      getCertificateCategoryListData(search, option.value, 1)
+      );
+    }}
+    setValue={setValue}
+    />
+
+  </Form.Group>
+
+</>
   );
 };
 
