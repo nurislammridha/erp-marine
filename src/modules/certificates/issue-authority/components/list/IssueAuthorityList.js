@@ -15,7 +15,7 @@ const IssueAuthorityList = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const dispatch = useDispatch();
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(15);
   const [searchText, setSearchText] = useState("");
   const modalEditStatus = useSelector(
     (state) => state.certificateIssueAuthorityInfo.editStatus
@@ -66,13 +66,6 @@ const IssueAuthorityList = (props) => {
 
   return (
     <>
-      {/* <div className="float-right">
-        <PaginationLaravel
-          isDescription={true}
-          changePage={changePage}
-          data={issuingAuthoritiesPaginatedData}
-        />
-      </div> */}
       {isLoading && (
         <div className="mt-5">
           <LoadingSpinner text="Loading Issuing Authority..." />
@@ -89,11 +82,6 @@ const IssueAuthorityList = (props) => {
             <table className="table mt-2 tbl-standard">
               <thead>
                 <tr>
-                  {/* <th scope="col">
-                    {" "}
-                    <Form.Check type="checkbox" />
-                  </th> */}
-
                   <th scope="col">SL</th>
                   <th scope="col">Authority Name</th>
                   <th scope="col">Status</th>
@@ -104,21 +92,14 @@ const IssueAuthorityList = (props) => {
                 {issuingAuthorities &&
                   issuingAuthorities.map((item, index) => (
                     <tr>
-                      {/* <th scope="row">
-                        {" "}
-                        <Form.Check type="checkbox" />
-                      </th> */}
                       <td>{index + 1}</td>
                       <td>{item.strIssuingAuthorityName}</td>
                       <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
-                      {/* <td>
-                    {" "}
-                    <Link to={`/voyage/list/${""}`}>
-                      <i className="far fa-eye mr-3"></i>
-                    </Link>
-                  </td> */}
                       <td>
-                          <i className="far fa-edit pointer editIcon" onClick={() => handleEdit(item)}></i>
+                        <i
+                          className="far fa-edit pointer editIcon"
+                          onClick={() => handleEdit(item)}
+                        ></i>
                       </td>
                     </tr>
                   ))}
@@ -132,7 +113,7 @@ const IssueAuthorityList = (props) => {
             <SimpleModal
               show={show}
               handleClose={() => handleClose()}
-              modalTitle={"Edit Issuing Authority"}
+              modalTitle={"Edit Issue Authority"}
             >
               <IssueAuthorityEdit editData={editItem} />
             </SimpleModal>

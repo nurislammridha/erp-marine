@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Modal, Form, Col, Row } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
@@ -9,12 +9,12 @@ import {
   issueAuthoritySubmitAction,
   getIssuingAuthorities,
 } from "../../_redux/actions/CertificateIssueAuthorityAction";
-// import { Form } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
 
 const IssueAuthorityAdd = () => {
   const history = useHistory();
   const { register, handleSubmit, errors, setValue } = useForm();
+  const [currentPage, setCurrentPage] = useState(15);
   const dispatch = useDispatch();
   const isLoading = useSelector(
     (state) => state.certificateIssueAuthorityInfo.isLoading
@@ -22,23 +22,13 @@ const IssueAuthorityAdd = () => {
   const addStatus = useSelector(
     (state) => state.certificateIssueAuthorityInfo.addStatus
   );
-  const action = [
-    {
-      label: "Active",
-      value: 1,
-    },
-    {
-      label: "In Active",
-      value: 2,
-    },
-  ];
   const CertificateIssueAuthirityInput = useSelector(
     (state) =>
       state.certificateIssueAuthorityInfo.CertificateIssueAuthirityInput
   );
   useEffect(() => {
     if (addStatus) {
-      dispatch(getIssuingAuthorities());
+      dispatch(getIssuingAuthorities("", "", currentPage));
     }
   }, [addStatus]);
   const handleChangeTextInput = (name, value) => {
@@ -88,8 +78,7 @@ const IssueAuthorityAdd = () => {
                 className="saveButton"
                 disabled={true}
               >
-                <span className="p-2"> Submitting...
-              </span>
+                <span className="p-2"> Submitting...</span>
                 <span className="ml-3 spinner spinner-white "></span>
               </Button>
             )}

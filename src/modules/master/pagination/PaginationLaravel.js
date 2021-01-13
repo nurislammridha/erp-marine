@@ -7,8 +7,7 @@ const PaginationLaravel = (props) => {
 
   return (
     <>
-      {
-        typeof data !== "undefined" && data !== null && data.total > 0 &&
+      {typeof data !== "undefined" && data !== null && data.total > 0 && (
         <>
           {typeof data !== "undefined" &&
             data != null &&
@@ -30,9 +29,9 @@ const PaginationLaravel = (props) => {
                 <div className="mx-auto">
                   <div className="row col-12">
                     <div className="col-12">
-                      Data - {data.from} to {data.from + data.per_page} | Total{" "}
-                      {data.total < data.per_page ? data.total : data.per_page} |
-                  Out of {data.total}
+                      Data - {data.from} to {data.per_page} | Total{" "}
+                      {data.total < data.per_page ? data.total : data.per_page}{" "}
+                      | Out of {data.total}
                     </div>
 
                     {/* {
@@ -46,8 +45,7 @@ const PaginationLaravel = (props) => {
               </div>
             )}
         </>
-      }
-
+      )}
     </>
   );
 };

@@ -118,7 +118,7 @@ const CertificateMasterList = () => {
 
   return (
     <div className="react-bootstrap-table table-responsive">
-      <table className="table mt-4 tbl-standard voyageTable" id="table-to-xls">
+      <table className="table mt-4 tbl-standard" id="table-to-xls">
         <thead>
           <tr>
             <th scope="col">Certificate Name</th>

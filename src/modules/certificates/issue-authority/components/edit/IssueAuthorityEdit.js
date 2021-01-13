@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form, Col, Row } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
@@ -10,10 +10,10 @@ import {
   setIssuingAuthorityEditValue,
   getIssuingAuthorities,
 } from "../../_redux/actions/CertificateIssueAuthorityAction";
-// import { Form } from "react-bootstrap";
 
 const IssueAuthorityEdit = (props) => {
   const { register, handleSubmit, setValue } = useForm();
+  const [currentPage, setCurrentPage] = useState(15);
   const dispatch = useDispatch();
   const isLoading = useSelector(
     (state) => state.certificateIssueAuthorityInfo.isLoading
@@ -35,7 +35,7 @@ const IssueAuthorityEdit = (props) => {
   useEffect(() => {
     dispatch(setIssuingAuthorityEditValue(props.editData));
     if (editStatus) {
-      dispatch(getIssuingAuthorities());
+      dispatch(getIssuingAuthorities("", "", currentPage));
     }
   }, [dispatch, editStatus]);
 
@@ -61,66 +61,68 @@ const IssueAuthorityEdit = (props) => {
 
   return (
     <Form onSubmit={handleSubmit(submiteIssuingAuthority)} method="post">
-      <Form.Group as={Row} controlId="formAuthorityName">
-        <Form.Label className="formFont pl-1" column sm="4">
-          Authority Name:
-        </Form.Label>
-        <Col sm="8">
-          <Form.Control
-            className="formHeight"
-            type="text"
-            placeholder="Type Authority name"
-            value={CertificateIssueAuthirityInput.strIssuingAuthorityName}
-            name="strIssuingAuthorityName"
-            ref={register({
-              required: false,
-              maxLength: 100,
-            })}
-            onChange={(e) =>
-              handleChangeTextInput("strIssuingAuthorityName", e.target.value)
-            }
-          />
-        </Col>
-      </Form.Group>
-      <Form.Group as={Row} controlId="formPlaintextPassword">
-        <Form.Label className="formFont pl-1" column sm="4">
-          Status:
-        </Form.Label>
-        <Col sm="8">
-          <RHFInput
-            as={<Select options={action} />}
-            rules={{ required: false }}
-            name="isActive"
-            register={register}
-            value={action.label}
-            onChange={(e) => handleChangeTextInput("isActive", e.value)}
-            setValue={setValue}
-          />
-        </Col>
-      </Form.Group>
-      <Form.Group as={Row} controlId="formPlaintextPassword">
-        <Form.Label className="formFont pl-1" column sm="4"></Form.Label>
-        <Col sm="8">
-          {!isLoading && (
-            <Button variant="primary" type="submit" className="saveButton">
-              Update
-            </Button>
-          )}
-          {isLoading && (
-            <Button
-              variant="primary"
-              type="submit"
-              className="saveButton"
-              disabled={true}
-            >
-              <span className="p-2">
-                <i className="fa fa-check"></i> Updating...
-              </span>
-              <span className="ml-3 spinner spinner-white "></span>
-            </Button>
-          )}
-        </Col>
-      </Form.Group>
+      <div className="container">
+        <Form.Group as={Row} controlId="formAuthorityName">
+          <Form.Label className="formFont pl-1 ml-3" column sm="12">
+            Authority Name:
+          </Form.Label>
+          <Col sm="12">
+            <Form.Control
+              className="formHeight"
+              type="text"
+              placeholder="Type Authority name"
+              value={CertificateIssueAuthirityInput.strIssuingAuthorityName}
+              name="strIssuingAuthorityName"
+              ref={register({
+                required: false,
+                maxLength: 100,
+              })}
+              onChange={(e) =>
+                handleChangeTextInput("strIssuingAuthorityName", e.target.value)
+              }
+            />
+          </Col>
+        </Form.Group>
+        <Form.Group as={Row} controlId="formPlaintextPassword">
+          <Form.Label className="formFont pl-1 ml-3" column sm="12">
+            Status:
+          </Form.Label>
+          <Col sm="12">
+            <RHFInput
+              as={<Select options={action} />}
+              rules={{ required: false }}
+              name="isActive"
+              register={register}
+              value={action.label}
+              onChange={(e) => handleChangeTextInput("isActive", e.value)}
+              setValue={setValue}
+            />
+          </Col>
+        </Form.Group>
+        <Form.Group as={Row} controlId="formPlaintextPassword">
+          <Form.Label className="formFont pl-1" column sm="4"></Form.Label>
+          <Col sm="12">
+            {!isLoading && (
+              <Button variant="primary" type="submit" className="saveButton">
+                Update
+              </Button>
+            )}
+            {isLoading && (
+              <Button
+                variant="primary"
+                type="submit"
+                className="saveButton"
+                disabled={true}
+              >
+                <span className="p-2">
+                  <i className="fa fa-check"></i> Updating...
+                </span>
+                <span className="ml-3 spinner spinner-white "></span>
+              </Button>
+            )}
+          </Col>
+        </Form.Group>
+      </div>
     </Form>
   );
 };

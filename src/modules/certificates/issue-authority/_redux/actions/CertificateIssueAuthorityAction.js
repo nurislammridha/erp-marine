@@ -1,7 +1,7 @@
 import * as Types from "../types/Types";
 import Axios from "axios";
 import { toast } from "react-toastify";
-import { getCertificateIssueBy } from '../../../certificate-main/_redux/actions/CertificateMainAction'
+import { getCertificateIssueBy } from "../../../certificate-main/_redux/actions/CertificateMainAction";
 import { showToast } from "../../../../master/utils/ToastHelper";
 
 export const handleChangeCertificateIssueAuthorityInput = (name, value) => (
@@ -23,6 +23,7 @@ export const getIssuingAuthorities = (
   status = "",
   page
 ) => async (dispatch) => {
+  console.log("Checking page", page);
   let response = {
     issuingAuthorities: [],
     status: false,
@@ -33,15 +34,13 @@ export const getIssuingAuthorities = (
   dispatch({ type: Types.GET_ISSUING_AUTHORITY_LIST, payload: response });
 
   let isActive = status == "" ? "" : parseInt(status);
-  // let url = `http://192.168.206.1:82/iMarineAPI/public/api/v1/certificate/issuingAuthority`;
   let url = `${process.env.REACT_APP_API_URL}certificate/issuingAuthority`;
 
   if (searchText !== "" || isActive !== "") {
-    url += `?search=${searchText}&isActive=${isActive}&isPaginated=1&paginateNo=15`;
+    url += `?search=${searchText}&isActive=${isActive}&isPaginated=1&paginateNo=${page}`;
   } else {
-    url += `?isPaginated=1&paginateNo=15`;
+    url += `?isPaginated=1&paginateNo=${page}`;
   }
-
   try {
     await Axios.get(url)
       .then((res) => {
@@ -49,7 +48,8 @@ export const getIssuingAuthorities = (
         response.status = status;
         response.issuingAuthorities = data.data;
         response.message = message;
-        response.productsPaginatedData = data;
+        response.issuingAuthoritiesPaginatedData = data;
+        console.log("Issue data", data);
         response.isLoading = false;
       })
       .catch((err) => {
@@ -133,7 +133,6 @@ export const issueAuthorityEditAction = (
     payload: responseList,
   });
 
-  // let editUrl = `http://192.168.206.1:82/iMarineAPI/public/api/v1/certificate/issuingAuthority/${intIssuingAuthorityID}`;
   let editUrl = `${process.env.REACT_APP_API_URL}certificate/issuingAuthority/${intIssuingAuthorityID}`;
   Axios.put(editUrl, CertificateIssueAuthirityInput)
     .then(function(response) {
