@@ -4,6 +4,7 @@ import { Form, Card, Button, Col } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
+import TestDate from './TestDate';
 
 const LaytimeContainer = () => {
     const { register, setValue } = useForm();
@@ -186,7 +187,7 @@ const LaytimeContainer = () => {
 
                 </Card.Body>
             </Card>
-
+            <TestDate />
         </>
 
     );
