@@ -26,7 +26,7 @@ const CertificateCategoryList = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [editItem, setEditItem] = useState({});
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState("");
 
   const certificateCategoryData = useSelector(
     (state) => state.CertificateCategoryReducer.certificateCategoryList

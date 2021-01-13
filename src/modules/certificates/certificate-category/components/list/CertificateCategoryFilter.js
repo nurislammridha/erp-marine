@@ -8,7 +8,7 @@ import { getCertificateCategoryListData } from "../../_redux/actions/Certificate
 
 const CertificateCategoryFilter = () => {
   const [search, setSearch] = useState("");
-  const [type, setType] = useState("");
+  const [type, setType] = useState(1);
   const dispatch = useDispatch();
   const certificateCategoryInput = useSelector(
     (state) => state.CertificateCategoryReducer.certificateCategoryInput
@@ -30,10 +30,10 @@ const CertificateCategoryFilter = () => {
   };
   const changeSearch = (value) => {
     setSearch(value);
-    dispatch(getCertificateCategoryListData(value, type));
+    dispatch(getCertificateCategoryListData(value, type, 1));
   };
   useEffect(() => {
-    dispatch(getCertificateCategoryListData());
+    dispatch(getCertificateCategoryListData("", "", 1));
   }, []);
   return (
     <>
@@ -58,7 +58,7 @@ const CertificateCategoryFilter = () => {
       onChange={(option) => {
       setType(option.value);
       dispatch(
-      getCertificateCategoryListData(search, option.value)
+      getCertificateCategoryListData(search, option.value, 1)
       );
     }}
     setValue={setValue}

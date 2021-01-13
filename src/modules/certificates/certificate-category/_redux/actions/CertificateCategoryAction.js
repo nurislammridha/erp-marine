@@ -61,26 +61,36 @@ export const certificatecategorySubmitAction = (getCategoryInpuData) => (dispatc
 };
 
 export const getCertificateCategoryListData = (
+  searchText = "",
   status = "",
-  searchText = null,
   page
 ) => async (dispatch) => {
   let response = {
     certificates: [],
+    certificateCategoryList :[],
     status: false,
     message: "",
     isLoading: true,
     errors: [],
   };
   dispatch({ type: Types.GET_CERTIFICATE_CATEGORY_LIST, payload: response });
-  let url = "";
-  url = `${process.env.REACT_APP_API_URL}certificate/category?isPaginated=1`;
+  let isActive = status == "" ? "" : parseInt(status);
+  // let url = "";
+  // url = `${process.env.REACT_APP_API_URL}certificate/category?isPaginated=1`;
+  let url = `${process.env.REACT_APP_API_URL}certificate/category`;
+
+  if (searchText !== "" || isActive !== "") {
+    url += `?search=${searchText}&isActive=${isActive}&isPaginated=1&paginateNo=15`;
+  } else {
+    url += `?isPaginated=1&paginateNo=15`;
+  }
   try {
     await axios.get(url)
       .then((res) => {
         const { data, message, status } = res.data;
         response.status = status;
         response.certificates = data.data;
+        response.certificateCategoryList = data.data;
         response.message = message;
         response.certificatesPaginatedData = data;
         response.isLoading = false;
