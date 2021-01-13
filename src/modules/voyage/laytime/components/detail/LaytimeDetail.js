@@ -2,7 +2,7 @@ import React from 'react';
 
 const LaytimeDetail = () => {
     return (
-        <div className="container">
+        <div>
             <div className="card card-custom">
                 <div className="card-header">
                     <div className="card-title">

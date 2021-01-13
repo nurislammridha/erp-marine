@@ -39,7 +39,7 @@ const LaytimeInfo2Add = () => {
                                         />
                                     </div>
                                     <div className="row">
-                                        <div className="col-md-6">
+                                        <div className="col-md-6 pr-11">
                                             <label className="form-label">Port Name</label>
                                             <RHFInput
                                                 as={<Select options={""} />}
@@ -54,7 +54,7 @@ const LaytimeInfo2Add = () => {
                                                 <label className="form-label mt-2 formFont">Laytime Commenced</label>
                                                 <DatePicker
                                                     name=""
-                                                    className="form-control"
+                                                    className="form-control formHeight"
                                                     placeholderText=""
                                                     selected=""
                                                     ref={register({
@@ -67,7 +67,7 @@ const LaytimeInfo2Add = () => {
                                                 <label className="form-label mt-2 formFont">Laytime Comp.</label>
                                                 <DatePicker
                                                     name=""
-                                                    className="form-control"
+                                                    className="form-control formHeight"
                                                     placeholderText=""
                                                     selected=""
                                                     ref={register({
@@ -100,7 +100,7 @@ const LaytimeInfo2Add = () => {
                                                 />
                                             </div>
                                         </div>
-                                        <div className="col-md-6">
+                                        <div className="col-md-6 pr-11">
                                             <label className="form-label">Terms</label>
                                             <RHFInput
                                                 as={<Select options={""} />}
@@ -160,7 +160,7 @@ const LaytimeInfo2Add = () => {
                                                 <label className="form-label mt-2 formFont">Arrival Time</label>
                                                 <DatePicker
                                                     name=""
-                                                    className="form-control"
+                                                    className="form-control formHeight"
                                                     placeholderText=""
                                                     selected=""
                                                     ref={register({
@@ -248,7 +248,7 @@ const LaytimeInfo2Add = () => {
                                                 <label className="form-label mt-2 formFont">NOR Tender</label>
                                                 <DatePicker
                                                     name=""
-                                                    className="form-control"
+                                                    className="form-control formHeight"
                                                     placeholderText=""
                                                     selected=""
                                                     ref={register({

@@ -80,7 +80,7 @@ const LaytimeInfo1Add = () => {
                                         <label className="form-label mt-2 formFont">Commencement Date </label>
                                         <DatePicker
                                             name=""
-                                            className="form-control"
+                                            className="form-control formHeight"
                                             placeholderText="select issue date"
                                             selected=""
                                             ref={register({
@@ -106,7 +106,7 @@ const LaytimeInfo1Add = () => {
 
                                         <DatePicker
                                             name=""
-                                            className="form-control"
+                                            className="form-control formHeight"
                                             placeholderText="select issue date"
                                             selected=""
                                             ref={register({
@@ -121,7 +121,7 @@ const LaytimeInfo1Add = () => {
                                         <label className="form-label">C/P Date</label>
                                         <DatePicker
                                             name=""
-                                            className="form-control"
+                                            className="form-control formHeight"
                                             placeholderText="select issue date"
                                             selected=""
                                             ref={register({
