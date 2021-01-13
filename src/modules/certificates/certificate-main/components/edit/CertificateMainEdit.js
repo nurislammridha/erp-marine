@@ -367,7 +367,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                 </div> */}
 
                     <div className="col-lg-3">
-                      <label className="form-label">Issueing Authority</label>
+                      <label className="form-label">Issuing Authority</label>
                       <div className="input-area-add">
                         <div className="float-left">
                           <RHFInput
@@ -1029,7 +1029,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                   show={showIssuedByModal}
                   handleClose={() => setShowIssuedByModal(false)}
                   handleShow={() => setShowIssuedByModal(true)}
-                  modalTitle={"Issueing Authority"}
+                  modalTitle={"Issuing Authority"}
                 >
                   <IssueAuthorityAdd />
                 </SimpleModal>

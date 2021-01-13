@@ -354,7 +354,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div> */}
 
                 <div className="col-lg-3">
-                  <label className="form-label">Issueing Authority</label>
+                  <label className="form-label">Issuing Authority</label>
                   <div className="input-area-add">
                     <div className="float-left">
                       <RHFInput
