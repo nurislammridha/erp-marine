@@ -713,3 +713,7 @@ input.react-datepicker-ignore-onclickoutside {
 button#kt_login_signin_submit {
   width: 142px;
 }
+/* line chart */
+.line-chartsection {
+  border-radius: 12px;
+}

@@ -7,7 +7,6 @@ const LineChart = () => {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
     datasets: [
       {
-        label: "First dataset",
         data: [33, 53, 85, 41, 44, 65],
         fill: true,
         backgroundColor: "rgba(75,192,192,0.2)",
@@ -17,7 +16,7 @@ const LineChart = () => {
   };
 
   return (
-    <div className="App">
+    <div className="App card mt-5 p-5 line-chartsection">
       <Line data={data} />
     </div>
   );
