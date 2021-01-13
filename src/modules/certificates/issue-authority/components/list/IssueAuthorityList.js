@@ -15,7 +15,7 @@ const IssueAuthorityList = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const dispatch = useDispatch();
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(15);
   const [searchText, setSearchText] = useState("");
   const modalEditStatus = useSelector(
     (state) => state.certificateIssueAuthorityInfo.editStatus
@@ -37,6 +37,10 @@ const IssueAuthorityList = (props) => {
   );
 
   useEffect(() => {
+    console.log(
+      "issuingAuthoritiesPaginatedData",
+      issuingAuthoritiesPaginatedData
+    );
     dispatch(getIssuingAuthorities("", "", currentPage));
 
     if (modalEditStatus) {
@@ -66,13 +70,6 @@ const IssueAuthorityList = (props) => {
 
   return (
     <>
-      {/* <div className="float-right">
-        <PaginationLaravel
-          isDescription={true}
-          changePage={changePage}
-          data={issuingAuthoritiesPaginatedData}
-        />
-      </div> */}
       {isLoading && (
         <div className="mt-5">
           <LoadingSpinner text="Loading Issuing Authority..." />

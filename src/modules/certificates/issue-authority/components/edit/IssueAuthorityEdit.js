@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form, Col, Row } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
@@ -14,6 +14,7 @@ import {
 
 const IssueAuthorityEdit = (props) => {
   const { register, handleSubmit, setValue } = useForm();
+  const [currentPage, setCurrentPage] = useState(15);
   const dispatch = useDispatch();
   const isLoading = useSelector(
     (state) => state.certificateIssueAuthorityInfo.isLoading
@@ -35,7 +36,7 @@ const IssueAuthorityEdit = (props) => {
   useEffect(() => {
     dispatch(setIssuingAuthorityEditValue(props.editData));
     if (editStatus) {
-      dispatch(getIssuingAuthorities());
+      dispatch(getIssuingAuthorities("", "", currentPage));
     }
   }, [dispatch, editStatus]);
 

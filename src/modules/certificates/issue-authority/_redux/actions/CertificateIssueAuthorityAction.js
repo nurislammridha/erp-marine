@@ -1,7 +1,7 @@
 import * as Types from "../types/Types";
 import Axios from "axios";
 import { toast } from "react-toastify";
-import { getCertificateIssueBy } from '../../../certificate-main/_redux/actions/CertificateMainAction'
+import { getCertificateIssueBy } from "../../../certificate-main/_redux/actions/CertificateMainAction";
 import { showToast } from "../../../../master/utils/ToastHelper";
 
 export const handleChangeCertificateIssueAuthorityInput = (name, value) => (
@@ -23,6 +23,7 @@ export const getIssuingAuthorities = (
   status = "",
   page
 ) => async (dispatch) => {
+  console.log("Checking page", page);
   let response = {
     issuingAuthorities: [],
     status: false,
@@ -41,7 +42,7 @@ export const getIssuingAuthorities = (
   } else {
     url += `?isPaginated=1&paginateNo=15`;
   }
-
+  console.log("Issuin Authority url", url);
   try {
     await Axios.get(url)
       .then((res) => {
@@ -49,7 +50,8 @@ export const getIssuingAuthorities = (
         response.status = status;
         response.issuingAuthorities = data.data;
         response.message = message;
-        response.productsPaginatedData = data;
+        response.issuingAuthoritiesPaginatedData = data;
+        console.log("Issue data", data);
         response.isLoading = false;
       })
       .catch((err) => {
