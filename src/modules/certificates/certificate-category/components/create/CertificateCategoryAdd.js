@@ -99,7 +99,7 @@ const CertificateCategoryAdd = () => {
             register={register}
             value={certificateParentCategoryList.intParentsCategoryID}
             onChange={(option) => {
-              categoryInputChange("strCertificateCategoryName", option.label);
+              // categoryInputChange("strCertificateCategoryName", option.label);
               categoryInputChange("intParentsCategoryID", option.value);
             }}
             setValue={setValue}

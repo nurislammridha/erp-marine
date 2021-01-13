@@ -8,6 +8,7 @@ const initiliazeState = {
   certificatesCategoryPaginatedData: null,
   certificateCategoryInput: {
     strCertificateCategoryName: "",
+    intParentsCategoryID: "",
     intActionBy: "1",
     isActive: "1",
   },
