@@ -94,15 +94,15 @@ export const MainCertificateCreateAction = (certificateInfoInput) => async (
     toast.error(responseList.message);
   }
 
-  dispatch({
-    type: Types.CERTIFICATE_MAIN_SUBMITTING,
-    payload: false,
-  });
-
   // dispatch({
-  //   type: Types.CERTIFICATE_MAIN_SUBMIT,
-  //   payload: responseList,
+  //   type: Types.CERTIFICATE_MAIN_SUBMITTING,
+  //   payload: false,
   // });
+
+  dispatch({
+    type: Types.CERTIFICATE_MAIN_SUBMIT,
+    payload: responseList,
+  });
 };
 
 export const getCertificateMainListAction = (
@@ -110,6 +110,7 @@ export const getCertificateMainListAction = (
   searchText = null,
   isPublic = false,
   category = null,
+  expireDays = null
 ) => async (dispatch) => {
   let response = {
     certificates: [],
@@ -134,6 +135,10 @@ export const getCertificateMainListAction = (
 
   if (category !== null) {
     url += `&category=${category}`;
+  }
+
+  if (expireDays !== null) {
+    url += `&expireDays=${expireDays}`;
   }
 
   try {

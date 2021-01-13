@@ -24,10 +24,14 @@ const CertificateMainList = () => {
   const { register, handleSubmit, errors, setValue } = useForm();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
+  const [expireInDays, setExpireInDays] = useState(30);
 
   const isLoading = useSelector((state) => state.certificateMainInfo.isLoading);
   const certificates = useSelector(
     (state) => state.certificateMainInfo.certificates
+  );
+  const certificateExpireDaysList = useSelector(
+    (state) => state.certificateMainInfo.certificateExpireDaysList
   );
   const certificatesPaginatedData = useSelector(
     (state) => state.certificateMainInfo.certificatesPaginatedData
@@ -84,7 +88,6 @@ const CertificateMainList = () => {
     <>
       <Card>
         <Card.Body>
-          <div className="container">
             <div className="row">
               <h1 className="tableheading">Certificates</h1>
 
@@ -102,6 +105,7 @@ const CertificateMainList = () => {
                   as={<Select options={certificateParentCategoryList} />}
                   rules={{ required: true }}
                   name="intCategoryID"
+                  placeholder="Category"
                   register={register}
                   value={certificateParentCategoryList.intParentCategoryID}
                   onChange={(option) => {
@@ -119,6 +123,7 @@ const CertificateMainList = () => {
                 <RHFInput
                   as={<Select options={certificateChildCategoryList} />}
                   rules={{ required: true }}
+                  placeholder="Sub Category"
                   name="intCategoryID"
                   register={register}
                   value={certificateChildCategoryList.intCategoryID}
@@ -126,6 +131,24 @@ const CertificateMainList = () => {
                     certificateSelect(
                       option.value
                     );
+                  }}
+                  setValue={setValue}
+                />
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="formGridState">
+                <RHFInput
+                  as={<Select options={certificateExpireDaysList} />}
+                  rules={{ required: true }}
+                  placeholder="Expire In"
+                  name="intCategoryID"
+                  register={register}
+                  value={expireInDays}
+                  onChange={(option) => {
+                    setExpireInDays(
+                      option.value
+                    );
+                    dispatch(getCertificateMainListAction(currentPage, searchText, true, certificateChildCategoryList.intCategoryID, option.value));
                   }}
                   setValue={setValue}
                 />
@@ -230,7 +253,6 @@ const CertificateMainList = () => {
               </div>
             )}
 
-          </div>
           <PaginationLaravel
             changePage={changePage}
             data={certificatesPaginatedData}
