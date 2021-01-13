@@ -7,7 +7,7 @@ const PaginationLaravel = (props) => {
 
   return (
     <>
-      {typeof data !== "undefined" && data !== null && data.total > 0 && (
+      {typeof data !== "undefined" && data !== null && data.total > 20 && (
         <>
           {typeof data !== "undefined" &&
             data != null &&

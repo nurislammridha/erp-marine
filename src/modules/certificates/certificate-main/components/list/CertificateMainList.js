@@ -258,13 +258,13 @@ const CertificateMainList = () => {
             data={certificatesPaginatedData}
           />
 
-          {
+          {/* {
               !isLoading && certificates.length > 0 &&
               <div className="status-list">
                 <span className="dot"></span>
                 <span className="status-text">Due Date</span>
               </div>
-            }
+            } */}
         </Card.Body>
       </Card>
     </>
