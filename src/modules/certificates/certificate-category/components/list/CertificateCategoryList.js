@@ -83,13 +83,6 @@ const CertificateCategoryList = () => {
 
   return (
     <>
-      <div className="float-right">
-        <PaginationLaravel
-          isDescription={true}
-          changePage={changePage}
-          data={certificatesCategoryPaginatedData}
-        />
-      </div>
       {isLoading && (
         <div className="mt-5">
           <LoadingSpinner text="Loading Certificate Category..." />
@@ -126,7 +119,7 @@ const CertificateCategoryList = () => {
                   certificateCategoryData.map((item, index) => (
                     <tr>
                       <td>{item.strCertificateCategoryName}</td>
-                      <td>{item.intParentsCategoryID}</td>
+                      <td>{item.intParentsCategoryID != 0 ? item.parentCategoryName : ''}</td>
                       <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
                       {/*<td>
                                 {" "}

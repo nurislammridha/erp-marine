@@ -5,23 +5,12 @@ import Select from "react-select";
 import { useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { handleChangeCertificateTypeInput, UpdateCertificateTypeList } from "../../_redux/actions/CertificateTypeAction";
+import { getCertificateTypeList, handleChangeCertificateTypeInput, UpdateCertificateTypeList } from "../../_redux/actions/CertificateTypeAction";
 
 
 const CertificateTypeEdit = (props) => {
 
-    const {
-        intCertificateTypeID,
-        strCertificateTypeName,
-        isActive,
-    } = props;
 
-    const [certificateEditInfo, setCertificateEditInfo] = React.useState({
-
-        intCertificateTypeID: intCertificateTypeID,
-        strCertificateTypeName: strCertificateTypeName,
-        isActive: isActive,
-    });
 
 
     const dispatch = useDispatch();
@@ -30,6 +19,9 @@ const CertificateTypeEdit = (props) => {
     const certificateTypeInput = useSelector((state) => state.certificateTypeInfo.certificateTypeInput);
     const isLoading = useSelector(
         (state) => state.certificateTypeInfo.isLoading
+    );
+    const editStatus = useSelector(
+        (state) => state.certificateTypeInfo.editStatus
     );
 
     const statusOptions = [
@@ -42,7 +34,11 @@ const CertificateTypeEdit = (props) => {
             value: "0"
         }
     ]
-
+    useEffect(() => {
+        if (editStatus) {
+            dispatch(getCertificateTypeList());
+        }
+    }, [editStatus]);
 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeCertificateTypeInput(name, value));
@@ -65,9 +61,10 @@ const CertificateTypeEdit = (props) => {
                     <Form.Label className="formFont pl-1" column sm="3">
                         Certificate Type Name:
                     </Form.Label>
-                    <Col sm="9">
+                    <Col sm="9" className="mt-5">
                         <Form.Control
                             className="formHeight"
+
                             type="text"
                             value={certificateTypeInput.strCertificateTypeName}
                             name="strCertificateTypeName"
@@ -85,7 +82,7 @@ const CertificateTypeEdit = (props) => {
                     <Form.Label className="formFont pl-1" column sm="3">
                         Status:
                     </Form.Label>
-                    <Col sm="9">
+                    <Col sm="9" className="mt-2">
                         <RHFInput
                             as={<Select options={statusOptions} />}
                             rules={{ required: false }}
@@ -99,9 +96,7 @@ const CertificateTypeEdit = (props) => {
                 </Form.Group>
 
 
-                <div className="form-group row">
-                    <div className="col-sm-10"></div>
-                </div>
+
                 <Form.Group as={Row} controlId="formPlaintextPassword">
                     <Form.Label className="formFont pl-1" column sm="3"></Form.Label>
                     <Col sm="9">
@@ -118,7 +113,7 @@ const CertificateTypeEdit = (props) => {
                                 disabled={true}
                             >
                                 <span className="p-2">
-                                    <i className="fa fa-check"></i> Updating...
+                                    Updating...
                                 </span>
                                 <span className="ml-3 spinner spinner-white "></span>
                             </Button>

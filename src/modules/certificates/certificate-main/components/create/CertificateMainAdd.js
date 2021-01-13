@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { Form } from "react-bootstrap";
-import { toast } from "react-toastify";
 import Select from "react-select";
 import { RHFInput } from "react-hook-form-input";
 import DatePicker from "react-datepicker";
@@ -21,62 +20,26 @@ import {
   getCertificateStatusData,
   certificateMultipleDataAdd,
   certificateMultipleDataDelete,
+  certificateMultipleAttachmentDelete,
 } from "../../_redux/actions/CertificateMainAction";
-import CertificateCategoryAddModal from "../../../certificate-category/components/create/CertificateCategoryAddModal";
+import CertificateMasterAdd from "../../../certificate-master/components/create/CertificateMasterAdd";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 import CertificateCategoryAdd from "../../../certificate-category/components/create/CertificateCategoryAdd";
+import IssueAuthorityAdd from "../../../issue-authority/components/create/IssueAuthorityAdd";
 import CertificateTypeAdd from "../../../certificate-types/components/create/CertificateTypeAdd";
 import {
   getCertificateChildCategoryData,
   getCertificateParentCategoryData,
 } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
-import { checkAttchmentValidation } from "../../../../master/utils/FileHelper";
-import { showToast } from "../../../../master/utils/ToastHelper";
+import PreviewAttachment from '../../../../master/components/previews/PreviewAttachment';
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  const [files, setFiles] = useState([]);
-  toast.configure();
-
-  // self work
-  const [imagePreviewUrl, setImagePreviewUrl] = React.useState(null);
-  //input change with redux
 
   const certificateMainInfoChange = (name, value, e = null) => {
     dispatch(handleChangeProductInputAction(name, value, e));
-
-    if (name === "images") {
-      const attachment = value;
-      const { type } = attachment;
-
-      const validatedData = checkAttchmentValidation(attachment);
-      if (validatedData.isValidated) {
-        let reader = new FileReader();
-        if (type === "application/pdf") {
-          setImagePreviewUrl("/media/default/icons/pdf.png");
-        } else if (type === "application/msword") {
-          setImagePreviewUrl("/media/default/icons/word.png");
-        } else {
-          setImagePreviewUrl("/media/default/icons/image.jpg");
-        }
-      } else {
-        showToast("error", validatedData.message);
-      }
-      // setEmployeeInfo(employeeInfoData);
-    } else {
-      // setEmployeeInfo(employeeInfoData);
-    }
   };
-
-  // const enableLoading = () => {
-  //   setLoading(true);
-  // };
-
-  // const disableLoading = () => {
-  //   setLoading(false);
-  // };
 
   const addStatus = useSelector((state) => state.vesselInfo.addStatus);
   const addMessage = useSelector((state) => state.vesselInfo.addMessage);
@@ -85,7 +48,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const certificateInfoInput = useSelector(
     (state) => state.certificateMainInfo.certificateMainInfo
   );
-
   const certificatesCategoryOption = useSelector(
     (state) => state.certificateMainInfo.certificatesCategoryOptionData
   );
@@ -139,10 +101,16 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   };
 
   const getFiles = (files) => {
-    console.log("files[0]", files[0]);
+    if (files.length > 0) {
+      files.forEach(file => {
+        const filesUpdated = [file, ...certificateInfoInput.multipleAttachments];
+        dispatch(handleChangeProductInputAction("multipleAttachments", filesUpdated));
+      });
+    }
+  };
 
-    // multipleAttachmentAdd()
-    // handleChangeProductInputAction("multipleAttachments", files[0]);
+  const deleteMultipleAttachmentData = (index) => {
+    dispatch(certificateMultipleAttachmentDelete(index));
   };
 
   const [showCategoryModal, setShowCategoryModal] = useState(false);
@@ -164,6 +132,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               className="form form-label-right"
               onSubmit={handleSubmit(onSubmit)}
               method="post"
+              encType="multipart/form-data"
             >
               <div className="form-group row mt-0 border pb-3 bg-light pt-3">
                 <div className="col-lg-3">
@@ -190,14 +159,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
                 {/*====Sub Category=====*/}
                 <div className="col-lg-3">
-                  <SimpleModal
-                    show={showCategoryModal}
-                    handleClose={() => setShowCategoryModal(false)}
-                    handleShow={() => setShowCategoryModal(true)}
-                    modalTitle={"Certificate Sub Category"}
-                  >
-                    <CertificateCategoryAdd />
-                  </SimpleModal>
                   <label className="form-label">Sub Category</label>
                   <div className="input-area-add">
                     <div className="float-left">
@@ -236,14 +197,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 {/*====Sub Category=====*/}
 
                 <div className="col-lg-3">
-                  <SimpleModal
-                    show={showCertificateModal}
-                    handleClose={() => setShowCertificateModal(false)}
-                    handleShow={() => setShowCertificateModal(true)}
-                    modalTitle={"Certificate Name"}
-                  >
-                    <div>Add Here Component</div>
-                  </SimpleModal>
                   <label className="form-label">Certificate Name</label>
                   <div className="input-area-add">
                     <div className="float-left">
@@ -401,15 +354,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div> */}
 
                 <div className="col-lg-3">
-                  <SimpleModal
-                    show={showIssuedByModal}
-                    handleClose={() => setShowIssuedByModal(false)}
-                    handleShow={() => setShowIssuedByModal(true)}
-                    modalTitle={"Issued By"}
-                  >
-                    <CertificateCategoryAdd />
-                  </SimpleModal>
-
                   <label className="form-label">Issueing Authority</label>
                   <div className="input-area-add">
                     <div className="float-left">
@@ -985,12 +929,57 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         maxLength: 100,
                       })}
                     /> */}
+                  <div className="attachment-file">
+                    <FileBase64
+                      name="multipleAttachments"
+                      multiple={true}
+                      onDone={getFiles.bind(this)}
+                    />
+                  </div>
+                </div>
+                <div className="col-lg-8">
+                  {
+                    certificateInfoInput.multipleAttachments.length > 0
+                    &&
+                    <table className="table tbl-standard table-bordered tbl-survey">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Image Name</th>
+                          <th>Image Size</th>
+                          <th>Image View</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {certificateInfoInput.multipleAttachments.map(
+                          (attachment, index) => (
+                            <tr>
+                              <td>{index + 1}</td>
+                              <td>{attachment.name}</td>
+                              <td>{attachment.size}</td>
+                              <td>{" "}
+                                <PreviewAttachment
+                                  url={'files/' + attachment.name}
+                                  title="Preview"
+                                  height={50}
+                                  width={50}
+                                />
+                              </td>
+                              <td style={{ width: 70, textAlign: "center" }}>
+                                {/* <i className="fa fa-edit text-success mr-2"></i> */}
+                                <i
+                                  className="fa fa-trash text-danger pointer"
+                                  onClick={() => deleteMultipleAttachmentData(index)}
+                                ></i>
+                              </td>
+                            </tr>
+                          )
+                        )}
+                      </tbody>
+                    </table>
 
-                  <FileBase64
-                    name="multipleAttachments"
-                    multiple={true}
-                    onDone={getFiles.bind(this)}
-                  />
+                  }
                 </div>
               </div>
               <div className="form-group row">
@@ -1032,10 +1021,38 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               show={showTypeModal}
               handleClose={() => setShowTypeModal(false)}
               handleShow={() => setShowTypeModal(true)}
-              modalTitle={"Type Name"}
+              modalTitle={"Certificate Type"}
             >
               <CertificateTypeAdd />
             </SimpleModal>
+
+            <SimpleModal
+              show={showCertificateModal}
+              handleClose={() => setShowCertificateModal(false)}
+              handleShow={() => setShowCertificateModal(true)}
+              modalTitle={"Certificate Name"}
+            >
+              <CertificateMasterAdd />
+            </SimpleModal>
+
+            <SimpleModal
+              show={showCategoryModal}
+              handleClose={() => setShowCategoryModal(false)}
+              handleShow={() => setShowCategoryModal(true)}
+              modalTitle={"Certificate Sub Category"}
+            >
+              <CertificateCategoryAdd />
+            </SimpleModal>
+
+            <SimpleModal
+              show={showIssuedByModal}
+              handleClose={() => setShowIssuedByModal(false)}
+              handleShow={() => setShowIssuedByModal(true)}
+              modalTitle={"Issueing Authority"}
+            >
+              <IssueAuthorityAdd />
+            </SimpleModal>
+
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ import { getIssuingAuthorities } from "../../_redux/actions/CertificateIssueAuth
 
 const IssueAuthorityFilter = () => {
   const [search, setSearch] = useState("");
-  const [type, setType] = useState("");
+  const [type, setType] = useState(1);
   const dispatch = useDispatch();
   const CertificateIssueAuthirityInput = useSelector(
     (state) =>
@@ -31,53 +31,41 @@ const IssueAuthorityFilter = () => {
   };
   const changeSearch = (value) => {
     setSearch(value);
-    dispatch(getIssuingAuthorities(value, type));
+    dispatch(getIssuingAuthorities(value, type, 1));
   };
 
   useEffect(() => {
-    dispatch(getIssuingAuthorities());
+    dispatch(getIssuingAuthorities("", "", 1));
   }, []);
 
   return (
-    <form className="form form-label-right" method="post">
-      <div className="form-group row ml-2">
-        <div className="col-lg-3 col-md-6 col-10">
-          <Form.Control
-            className="formHeight"
-            type="text"
-            placeholder="Search"
-            value={search}
-            onChange={(e) => changeSearch(e.target.value)}
-          />
-        </div>
-
-        <div className="col-lg-3 col-md-6 col-10">
-          <Form.Group
-            className="noonReportInput"
-            as={Row}
-            controlId="formPlaintextPassword"
-          >
-            <Form.Label className="formFont mt-2">Status</Form.Label>
-            <Col sm="9">
-              <RHFInput
-                as={
-                  <Select options={action} className="formSelect formHeight" />
-                }
-                rules={{ required: false }}
-                name="isActive"
-                register={register}
-                value={CertificateIssueAuthirityInput.isActive}
-                onChange={(option) => {
-                  setType(option.value);
-                  dispatch(getIssuingAuthorities(search, option.value));
-                }}
-                setValue={setValue}
-              />
-            </Col>
-          </Form.Group>
-        </div>
-      </div>
-    </form>
+    <>
+      <Form.Group as={Col} controlId="formGridState">
+        <Form.Control
+          className="formHeight"
+          type="text"
+          placeholder="Search"
+          value={search}
+          onChange={(e) => changeSearch(e.target.value)}
+        />
+      </Form.Group>
+      <Form.Label className="formFont pl-1 mt-2">Status</Form.Label>
+      <Form.Group as={Col} controlId="formGridState">
+        <RHFInput
+          as={<Select options={action} className="formSelect formHeight" />}
+          rules={{ required: false }}
+          className="formSelect pt-0"
+          name="isActive"
+          register={register}
+          value={CertificateIssueAuthirityInput.isActive}
+          onChange={(option) => {
+            setType(option.value);
+            dispatch(getIssuingAuthorities(search, option.value, 1));
+          }}
+          setValue={setValue}
+        />
+      </Form.Group>
+    </>
   );
 };
 
