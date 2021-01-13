@@ -11,7 +11,6 @@ export const handleChangeProductInputAction = (
   e,
   isEdit = false
 ) => (dispatch) => {
-  console.log('name',name);
   let data = {
     name: name,
     value: value,
@@ -21,27 +20,26 @@ export const handleChangeProductInputAction = (
     : Types.CHANGE_CERTIFICATE_INPUT_UPDATE;
   dispatch({ type: type, payload: data });
 
-  // if (name === "multipleAttachments") {
-
-  //   let reader = new FileReader();
-  //   const file = e.target.files;
-  //   reader.onloadend = () => {
-  //     data.name = "imagePreviewUrl";
-  //     data.value = reader.result;
-  //     dispatch({ type: type, payload: data });
-  //   };
-  //   reader.readAsDataURL(file);
-  // }
+  if (name === "image") {
+    let reader = new FileReader();
+    const file = e.target.files[0];
+    reader.onloadend = () => {
+      data.name = "imagePreviewUrl";
+      data.value = reader.result;
+      dispatch({ type: type, payload: data });
+    };
+    reader.readAsDataURL(file);
+  }
 };
 
 // submit main certificate info
-export const MainCertificateCreateAction =  (certificateInfoInput) =>  async (
+export const MainCertificateCreateAction = (certificateInfoInput) => async (
   dispatch
 ) => {
   const vesselID = getVesselId();
-  if(vesselID === null){
+  if (vesselID === null) {
     certificateInfoInput.intVesselID = 1;
-  }else{
+  } else {
     certificateInfoInput.intVesselID = vesselID;
   }
   certificateInfoInput.intActionBy = getEmployeeId();
@@ -90,21 +88,29 @@ export const MainCertificateCreateAction =  (certificateInfoInput) =>  async (
         "Something went wrong ! Please fill all inputs and try again !";
     });
 
-    if (responseList.status) {
-      toast.success(responseList.message);
-    } else {
-      toast.error(responseList.message);
-    }
-    dispatch({
-      type: Types.CERTIFICATE_MAIN_SUBMIT,
-      payload: responseList,
-    });
+  if (responseList.status) {
+    toast.success(responseList.message);
+  } else {
+    toast.error(responseList.message);
+  }
+
+  // dispatch({
+  //   type: Types.CERTIFICATE_MAIN_SUBMITTING,
+  //   payload: false,
+  // });
+
+  dispatch({
+    type: Types.CERTIFICATE_MAIN_SUBMIT,
+    payload: responseList,
+  });
 };
 
 export const getCertificateMainListAction = (
   page,
   searchText = null,
-  isPublic = false
+  isPublic = false,
+  category = null,
+  expireDays = null
 ) => async (dispatch) => {
   let response = {
     certificates: [],
@@ -115,13 +121,24 @@ export const getCertificateMainListAction = (
   };
   dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
   let url = "";
-  url = `${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1&page=${page}`;
+  url = `${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1`;
+
+  if(page !== null || page === ""){
+    url += `&page=${page}`;
+  }
 
   if (searchText !== null) {
-    // url += `&paginateNo=${page}`;
     url += `&search=${searchText}`;
   } else {
     // url += `&certificate/details?search=${searchText}`
+  }
+
+  if (category !== null) {
+    url += `&category=${category}`;
+  }
+
+  if (expireDays !== null) {
+    url += `&expireDays=${expireDays}`;
   }
 
   try {
@@ -191,6 +208,10 @@ export const certificateMultipleDataDelete = (index) => (dispatch) => {
   dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_DATA, payload: index });
 }
 
+export const certificateMultipleAttachmentDelete = (index) => (dispatch) => {
+  dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_ATTACHMENT, payload: index });
+}
+
 export const deleteProductImagePreview = () => (dispatch) => {
   let data = {
     name: "imagePreviewUrl",
@@ -213,16 +234,16 @@ export const GetVesselTypeAction = () => async (dispatch) => {
 };
 
 export const getCertificateCategory = (data) => (dispatch) => {
-    Axios
+  Axios
     .get(
       `${process.env.REACT_APP_API_URL}certificate/category`
     )
     .then((res) => {
-     
+
       let data = res.data.data;
       dispatch({ type: Types.GET_CERTIFICATE_CATEGORY, payload: data });
     }
-  );
+    );
 };
 export const getCertificateName = (data) => (dispatch) => {
   Axios.get(`${process.env.REACT_APP_API_URL}certificate/certificateList`).then(
@@ -270,12 +291,10 @@ export const mainCertificateEdit = (certificateInfoInput, id) => (dispatch) => {
   //    type: Types.CERTIFICATE_MAIN_SUBMITTING,
   //    payload: responseList,
   //  });
-  console.log('id for updated:>> ', id);
   Axios.put(
     `${process.env.REACT_APP_API_URL}certificate/details/${id}`,
     certificateInfoInput
   ).then((res) => {
-    console.log("update certificate response :>> ", res);
     // dispatch({ type: Types.MAIN_CERTIFICATE_UPDATE, payload: res.data});
     if (res.data.status) {
       showToast("successs", res.data.message);

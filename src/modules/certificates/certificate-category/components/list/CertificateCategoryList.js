@@ -43,8 +43,6 @@ const CertificateCategoryList = () => {
     (state) =>
       state.CertificateCategoryReducer.certificatesCategoryPaginatedData
   );
-  
-  console.log("certificatesCategoryPaginatedData Now  :", certificatesCategoryPaginatedData);
 
   useEffect(() => {
     dispatch(getCertificateCategoryListData(currentPage));
@@ -84,18 +82,7 @@ const CertificateCategoryList = () => {
   // };
 
   return (
-
-
-
-
     <>
-      <div className="float-right">
-        {/*<PaginationLaravel
-          isDescription={true}
-          changePage={changePage}
-          data={certificatesCategoryPaginatedData}
-        />*/}
-      </div>
       {isLoading && (
         <div className="mt-5">
           <LoadingSpinner text="Loading Certificate Category..." />
@@ -107,53 +94,72 @@ const CertificateCategoryList = () => {
         </div>
       )}
       {!isLoading && certificateCategoryData.length > 0 && (
-
         <>
           <div className="react-bootstrap-table table-responsive">
-
-          <SimpleModal
-          show={show}
-          handleClose={() => handleClose()}
-          modalTitle={"Edit Certificate Category"}
-        >
-                        
-          <CertificateCategoryEdit editData={editItem} />
-                      
-        </SimpleModal>
-
-          <table className="table mt-5 voyageTable">
-          <thead>
-            <tr>
-              <th scope="col">Category Name</th>
-              <th scope="col">Parent Category</th>
-              <th scope="col">Status</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {certificateCategoryData &&
-              certificateCategoryData.map((item, index) => (
-                <tr>            
-                  <td>{item.strCertificateCategoryName}</td>
-                  <td>{item.intParentsCategoryID === '0' ? "-" : item.parentCategoryName}</td>
-                  <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
-                  <td>
-                    <button
-                      className="btn"
-                      onClick={() => handleEdit(item)}>
-                      <i className="far fa-edit editIcon"></i>
-                    </button>
-                  </td>
+            <SimpleModal
+              show={show}
+              handleClose={() => handleClose()}
+              modalTitle={"Edit Certificate Category"}
+            >
+                            
+              <CertificateCategoryEdit editData={editItem} />
+                          
+            </SimpleModal>
+            <table className="table mt-2 tbl-standard" id="table-to-xls">
+              <thead>
+                <tr>
+                  <th scope="col">Category Name</th>
+                  <th scope="col">Parent Category</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
                 </tr>
-              ))}
-          </tbody>
-        </table>
-  
-        <PaginationLaravel
-        isDescription={true}
-        changePage={changePage}
-        data={certificatesCategoryPaginatedData}
-      />
+              </thead>
+              <tbody>
+                {certificateCategoryData &&
+                  certificateCategoryData.map((item, index) => (
+                    <tr>
+                      <td>{item.strCertificateCategoryName}</td>
+                      <td>{item.intParentsCategoryID != 0 ? item.parentCategoryName : ''}</td>
+                      <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
+                      {/*<td>
+                                {" "}
+                                <Link to={``}>
+                                    <i className="far fa-eye mr-3"></i>
+                                </Link>
+                                <i className="far fa-edit ml-2" onClick={handleShow}></i>
+
+                            </td>*/}
+                      <td>
+                        <a
+                          className="btn btn-icon btn-light btn-hover-info btn-sm"
+                          onClick={() => {
+                            handleEdit(item);
+                          }}
+                        >
+                          <i className="fa fa-edit"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+            <PaginationLaravel
+              isDescription={true}
+              changePage={changePage}
+              data={certificatesCategoryPaginatedData}
+            />
+            {/*<Modal size="lg" show={show} onHide={handleClose}>
+
+                <Modal.Header closeButton>
+                    <Modal.Title>Certificate Category Edit</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{<CertificateCategoryEdit />}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Cancel
+              </Button>
+                </Modal.Footer>
+                            </Modal>*/}
           </div>
         </>
       )}

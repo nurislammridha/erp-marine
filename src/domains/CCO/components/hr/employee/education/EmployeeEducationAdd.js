@@ -362,7 +362,7 @@ const EmployeeEducationAdd = withRouter(({ history, props }) => {
                       {/* <td>{item.images}</td> */}
                       <td>
                         {" "}
-                        {/* <img src={item.imagePreviewUrl} width="40px" /> */}
+                        <img src={item.imagePreviewUrl} width="40px" />
                         {/* <img src={`data:image/jpeg;base64,${item.images}`} /> */}
                       </td>
                       <td>

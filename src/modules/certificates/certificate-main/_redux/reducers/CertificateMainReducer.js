@@ -82,6 +82,7 @@ const initialState = {
   addMessage: "",
   editMessage: "",
   deleteMessage: "",
+  certificateExpireDaysList: []
 };
 
 const CertificateMainReducer = (state = initialState, action) => {
@@ -94,6 +95,7 @@ const CertificateMainReducer = (state = initialState, action) => {
         certificates: action.payload.certificates,
         certificatesPaginatedData: action.payload.certificatesPaginatedData,
         isLoading: action.payload.isLoading,
+        certificateExpireDaysList: getCertificateExpireDaysList()
       };
     case Types.GET_CERTIFICATE_CATEGORY:
       return {
@@ -112,12 +114,21 @@ const CertificateMainReducer = (state = initialState, action) => {
       };
       break;
 
-      case Types.DELETE_SURVEY_MULTIPLE_DATA:
+    case Types.DELETE_SURVEY_MULTIPLE_DATA:
       const multiDataSetOld = { ...state.certificateMainInfo };
-      multiDataSetOld.certificateDates.splice( action.payload, 1);
+      multiDataSetOld.certificateDates.splice(action.payload, 1);
       return {
         ...state,
         certificateMainInfo: multiDataSetOld,
+      };
+      break;
+
+    case Types.DELETE_SURVEY_MULTIPLE_ATTACHMENT:
+      const multiDataSetAttachment = { ...state.certificateMainInfo };
+      multiDataSetAttachment.multipleAttachments.splice(action.payload, 1);
+      return {
+        ...state,
+        certificateMainInfo: multiDataSetAttachment,
       };
       break;
 
@@ -151,9 +162,9 @@ const CertificateMainReducer = (state = initialState, action) => {
 
     //SELFT
     case Types.CHANGE_CERTIFICATE_INPUT:
-      console.log('action.payload',action.payload);
       const certificateMainInfo = { ...state.certificateMainInfo };
       certificateMainInfo[action.payload.name] = action.payload.value;
+
       return {
         ...state,
         certificateMainInfo,
@@ -286,6 +297,35 @@ const CertificateMainReducer = (state = initialState, action) => {
   }
   return newState;
 };
+
+const getCertificateExpireDaysList = () => {
+  return [
+    {
+      label: 'Already Expired',
+      value: 0
+    },
+    {
+      label: '1 Month',
+      value: 30
+    },
+    {
+      label: '2 Months',
+      value: 60
+    },
+    {
+      label: '1 Year',
+      value: 365
+    },
+    {
+      label: '2 Year',
+      value: 365 * 2
+    },
+    {
+      label: 'Custom',
+      value: -1
+    }
+  ]
+}
 
 const getCertificateCategoryName = (data) => {
   let options = [];

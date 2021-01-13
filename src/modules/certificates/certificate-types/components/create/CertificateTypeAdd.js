@@ -1,35 +1,33 @@
-import React from "react";
-import { Form, Button } from "react-bootstrap";
-import { RHFInput } from "react-hook-form-input";
-import Select from "react-select";
-import { useHistory, Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Form, Button, Col, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { certificatetypeSubmitAction, handleChangeCertificateTypeInput } from "../../_redux/actions/CertificateTypeAction";
+import { certificatetypeSubmitAction, getCertificateTypeList, handleChangeCertificateTypeInput } from "../../_redux/actions/CertificateTypeAction";
 
 
 const CertificateTypeAdd = () => {
-    const history = useHistory();
-    const { register, handleSubmit, errors, setValue } = useForm();
-    const certificateTypeInput = useSelector((state) => state.certificateTypeInfo.certificateTypeInput);
+    const { handleSubmit } = useForm();
     const dispatch = useDispatch();
-    const statusOptions = [
-        {
-            label: 'Active',
-            value: "1"
-        },
-        {
-            label: 'Inactive',
-            value: "0"
+    const certificateTypeInput = useSelector((state) => state.certificateTypeInfo.certificateTypeInput);
+    const isLoading = useSelector(
+        (state) => state.certificateTypeInfo.isLoading
+    );
+    const addStatus = useSelector(
+        (state) => state.certificateTypeInfo.status
+    );
+
+    useEffect(() => {
+        if (addStatus) {
+            dispatch(getCertificateTypeList());
         }
-    ]
+    }, [addStatus]);
 
 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeCertificateTypeInput(name, value));
     };
 
-    const onSubmit = (data) => {
+    const onSubmit = () => {
         dispatch(certificatetypeSubmitAction(certificateTypeInput));
     };
 
@@ -60,37 +58,31 @@ const CertificateTypeAdd = () => {
                             />
                         </Form.Group>
                     </div>
-                    {/* <div className="col-sm-4">
-                        <label className="form-label">Status</label>
-                        <RHFInput
-                            as={<Select options={statusOptions} />}
-                            rules={{ required: false }}
-                            name="isActive"
-                            register={register}
-                            value={certificateTypeInput.isActive}
-                            setValue={setValue}
-                            onChange={(e) => handleChangeTextInput("isActive", e.value)}
-                        />
-                    </div> */}
                 </div>
 
-                <div className="form-group row">
-                    <div className="col-sm-10"></div>
-                </div>
-                <Button type="submit" className="mr-4  saveButton text-white" variant=""> Submit </Button>
+                <Form.Group as={Row} controlId="formPlaintextPassword">
+                    <Col sm="9">
+                        {!isLoading && (
+                            <Button variant="primary" type="submit" className="saveButton">
+                                Submit
+                            </Button>
+                        )}
+                        {isLoading && (
+                            <Button
+                                variant="primary"
+                                type="submit"
+                                className="saveButton"
+                                disabled={true}
+                            >
+                                <span className="p-2">
+                                    Submitting...
+                                </span>
+                                <span className="ml-3 spinner spinner-white "></span>
+                            </Button>
+                        )}
+                    </Col>
+                </Form.Group>
 
-                {/* {loading && (
-                    <button type="submit" class="btn btn-primary btn-lg" disabled={true}>
-                        <span>Submitting...</span>
-                        <span className="ml-3 spinner spinner-white"></span>
-                    </button>
-                )}
-
-                {!loading && (
-                    <button type="submit" class="btn btn-primary btn-lg">
-                        <span>Submit</span>
-                    </button>
-                )} */}
             </form>
         </>
     );

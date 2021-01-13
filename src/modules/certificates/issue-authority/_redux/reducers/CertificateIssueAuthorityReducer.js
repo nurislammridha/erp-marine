@@ -1,6 +1,7 @@
 import * as Types from "../types/Types";
 
 const initialState = {
+  issuingAuthoritiesPaginatedData: null,
   issuingAuthorities: [],
   issuingAuthoritiesData: null,
   isLoading: false,
@@ -26,7 +27,6 @@ const CertificateIssueAuthorityReducer = (state = initialState, action) => {
   const newState = { ...state };
 
   switch (action.type) {
-    
     case Types.CHANGE_CERTIFICATE_ISSUE_AUTHORITY_INPUT:
       const CertificateIssueAuthirityInput = {
         ...state.CertificateIssueAuthirityInput,
@@ -42,8 +42,9 @@ const CertificateIssueAuthorityReducer = (state = initialState, action) => {
       return {
         ...state,
         issuingAuthorities: action.payload.issuingAuthorities,
-        // productsPaginatedData: action.payload.productsPaginatedData,
-        // isLoading: action.payload.isLoading,
+        issuingAuthoritiesPaginatedData:
+          action.payload.issuingAuthoritiesPaginatedData,
+        isLoading: action.payload.isLoading,
       };
 
     case Types.POST_ISSUING_AUTHORITY:

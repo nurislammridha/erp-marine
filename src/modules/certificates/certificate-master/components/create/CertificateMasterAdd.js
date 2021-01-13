@@ -15,12 +15,10 @@ import { getCertificateCategory } from "../../../certificate-main/_redux/actions
 const CertificateMasterAdd = () => {
     const history = useHistory();
     const { register, handleSubmit, errors, setValue } = useForm();
-    
     const isLoading = useSelector((state) => state.CertificateListReducer.isLoading);
     const addStatus = useSelector((state) => state.CertificateListReducer.addStatus);
     const CertificateMasterInput = useSelector((state) => state.CertificateListReducer.certificateMasterInput);
     const CertificatesCategoryOptionData = useSelector((state) => state.certificateMainInfo.certificatesCategoryOptionData);
-    console.log('CertificateMasterInput',CertificateMasterInput);
     const dispatch = useDispatch();
     const statusOptions = [
         {
@@ -84,22 +82,8 @@ const CertificateMasterAdd = () => {
                               }
                         />
                     </div>
-                    {/* <div className="col-sm-6">
-                        <label className="form-label">Vessel Name</label>
-                        <RHFInput
-                            as={<Select options={vesselName} />}
-                            rules={{ required: false }}
-                            name="value"
-                            register={register}
-                            value={CertificateMasterInput.label}
-                            setValue={setValue}
-                            onChange={(option) => {
-                                certificateMainInfoChange("label", option.label);
-                                certificateMainInfoChange("value", option.value);
-                              }}
-                        />
-                    </div> */}
-                    <div className="col-sm-6">
+                    
+                    <div className="col-sm-12">
                         <label className="form-label">Category Name</label>
                         <RHFInput
                             as={<Select options={CertificatesCategoryOptionData} />}
@@ -127,8 +111,7 @@ const CertificateMasterAdd = () => {
             )}
             {isLoading && (
                 <Button variant="primary" type="submit" className="saveButton" disabled={true}>
-                <span className="p-2">
-                    <i className="fa fa-check"></i> Submitting...
+                <span className="p-2"> Submitting...
                 </span>
                 <span className="ml-3 spinner spinner-white "></span>
                 </Button>
