@@ -207,6 +207,15 @@ const BasicForm = () => {
                   />
                 </Paper>
               </div>
+              <div className="col-lg-3">
+                <label className="formFont">Custome Datepicker</label>
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  className="date-picker"
+                />
+                <i className="fas fa-calendar-alt"></i>
+              </div>
             </div>
             <Form.Check className="mt-3" type="radio" aria-label="radio 1" />
             <Form.Group controlId="formBasicChecbox">
@@ -237,19 +246,6 @@ const BasicForm = () => {
               </Button>
             </div>
             <div className="clearfix"></div>
-            <div className="col-lg-3 custome-datepicker">
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              />
-              <i className="fas fa-calendar-alt"></i>
-            </div>
-            <div className="col-lg-3 mt-3 datepicker">
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              />
-            </div>
           </form>
         </Card.Body>
       </Card>

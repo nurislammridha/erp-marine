@@ -689,7 +689,18 @@ input[type="file"] {
 
 i.fas.fa-calendar-alt {
   position: absolute;
-  top: 4px;
-  color: #000000;
-  left: 142px;
+  top: 26px;
+  color: #abb5be;
+  left: 249px;
+}
+input.date-picker,
+input.react-datepicker-ignore-onclickoutside {
+  width: 100% !important;
+  border-radius: 6px;
+  height: 30px;
+  border: 1px solid #e5eaee;
+  font-size: 10px !important;
+  color: #464e5f;
+  padding-left: 10px;
+  position: relative !important;
 }
