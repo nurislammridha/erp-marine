@@ -7,6 +7,7 @@ import VoyageDetailContainer from "../views/VoyageActivityDetailContainer";
 import VoyageListContainer from "../views/VoyageListContainer";
 import VoyageListDetailContainer from "../views/VoyageListDetailContainer";
 import VoyageAddContainer from "../views/VoyageAddContainer";
+import LaytimeContainer from "../laytime/views/LaytimeContainer";
 
 const routeVoyage = [
   {
@@ -49,6 +50,13 @@ const routeVoyage = [
     path: "/voyage/voyage-activity/create",
     name: "Voyage Activity Create",
     component: VoyageActivityCreateContainer,
+    exact: true,
+  },
+
+  {
+    path: "/voyage/laytime/laytimelist",
+    name: "Laytime List",
+    component: LaytimeContainer,
     exact: true,
   },
 ];
