@@ -337,7 +337,7 @@ export const getMainCertificateDeteailByID = (id) => (dispatch) => {
         label: data.category.strCategoryName,
         value: data.category.intCategoryID,
       }
-      // data.certificateDates = data.certificate_dates;
+      data.certificateDates = data.certificate_dates;
 
       dispatch({
         type: Types.GET_MAIN_CERTIFICATE_SINGLE_DATA,

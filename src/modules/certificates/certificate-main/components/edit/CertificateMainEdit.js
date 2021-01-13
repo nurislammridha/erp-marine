@@ -44,9 +44,6 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
   const certificateMainInfoChange = (name, value, e = null) => {
     dispatch(handleChangeProductInputAction(name, value, e));
   };
-
-  const addStatus = useSelector((state) => state.vesselInfo.addStatus);
-  const addMessage = useSelector((state) => state.vesselInfo.addMessage);
   const serverErrors = useSelector((state) => state.certificateMainInfo.errors);
   const isLoading = useSelector((state) => state.certificateMainInfo.isLoading);
   const certificateEditInfo = useSelector(
@@ -80,10 +77,6 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
 
   const certificateStatus = useSelector(
     (state) => state.certificateMainInfo.certificateStatus
-  );
-
-  const vesselTypeOption = useSelector(
-    (state) => state.certificateMainInfo.vesselTypeOptionData
   );
 
   useEffect(() => {
@@ -128,11 +121,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
   const [showTypeModal, setShowTypeModal] = useState(false);
   const [showCertificateModal, setShowCertificateModal] = useState(false);
   const [showIssuedByModal, setShowIssuedByModal] = useState(false);
-
-
   const startDate = new Date().toLocaleDateString();
-  const stareDate2 = moment(startDate).format("YYYY-MM-DD");
-  console.log('startDate :>> ', certificateEditInfo);
 
   return (
     <>
