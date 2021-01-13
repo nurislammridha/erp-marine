@@ -38,9 +38,9 @@ export const getIssuingAuthorities = (
   let url = `${process.env.REACT_APP_API_URL}certificate/issuingAuthority`;
 
   if (searchText !== "" || isActive !== "") {
-    url += `?search=${searchText}&isActive=${isActive}&isPaginated=1&paginateNo=15`;
+    url += `?search=${searchText}&isActive=${isActive}&isPaginated=1&paginateNo=${page}`;
   } else {
-    url += `?isPaginated=1&paginateNo=15`;
+    url += `?isPaginated=1&paginateNo=${page}`;
   }
   console.log("Issuin Authority url", url);
   try {
