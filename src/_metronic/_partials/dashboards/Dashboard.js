@@ -6,6 +6,7 @@ import BarChart from "../../../modules/master/components/Chart/BarChart";
 import DougHuntChart from "../../../modules/master/components/Chart/DougHuntChart";
 import DashBoardCard from "../../../modules/dashboard/components/DashBoardCard";
 import CircularProgressBar from "../../../modules/master/components/CircularProgressBar/CircularProgressBar";
+import LineChart from "../../../modules/master/components/Chart/LineChart";
 
 export function Dashboard() {
   const uiService = useHtmlClassService();
@@ -29,6 +30,11 @@ export function Dashboard() {
           <div className="col-lg-6 col-12">
             <BarChart />
           </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-6  col-12">{/* <LineChart /> */}</div>
+
+          <div className="col-lg-6  col-12"></div>
         </div>
       </div>
 

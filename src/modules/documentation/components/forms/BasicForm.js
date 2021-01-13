@@ -156,7 +156,7 @@ const BasicForm = () => {
                   </InputGroup>
                 </Form.Group>
               </div> */}
-              <div className="col-lg-3">
+              <div className="col-lg-3 col-md-6">
                 <label className="formFont">Pic an image</label>
                 <div className="custom-file formHeight">
                   <input
@@ -207,7 +207,7 @@ const BasicForm = () => {
                   />
                 </Paper>
               </div>
-              <div className="col-lg-3">
+              <div className="col-lg-3 col-md-6">
                 <label className="formFont">Custome Datepicker</label>
                 <DatePicker
                   selected={startDate}

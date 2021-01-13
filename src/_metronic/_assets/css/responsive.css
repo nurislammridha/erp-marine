@@ -37,6 +37,15 @@
   .doug__left {
     padding-top: 0px;
   }
+  .dashboard-cardsection {
+    padding-top: 30px;
+  }
+  .chart__box {
+    height: 407px !important;
+  }
+  .login-signin {
+    margin-top: -78px;
+  }
 }
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) {
@@ -44,9 +53,6 @@
 
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 425px) {
-  .loginBg {
-    height: 200px;
-  }
   .dashboard__pb {
     padding: 10px;
   }
@@ -57,4 +63,17 @@
   .chart__box {
     height: 506px !important;
   }
+
+  .loginBg {
+    display: none !important;
+  }
+  .login-signin {
+    margin-top: -150px !important;
+  }
+  .btn.btn-icon.btn-clean.btn-dropdown.btn-lg.mr-1 {
+    margin-right: 8px !important;
+  }
 }
+/* .login-signin {
+  margin-top: -213px !important;
+} */

@@ -704,3 +704,12 @@ input.react-datepicker-ignore-onclickoutside {
   padding-left: 10px;
   position: relative !important;
 }
+
+.loginBg {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+button#kt_login_signin_submit {
+  width: 142px;
+}
