@@ -65,6 +65,7 @@ const CertificateTypeList = (props) => {
             ))}
         </tbody>
       </table>
+      
 
       <SimpleModal
         show={show}
@@ -78,3 +79,15 @@ const CertificateTypeList = (props) => {
 };
 
 export default CertificateTypeList;
+
+
+{/* <div className="react-bootstrap-table table-responsive pr-7">
+<table className="table mt-2 tbl-standard voyageTable" id="table-to-xls">
+    <thead>
+        <tr>
+            <th scope="col">No</th>
+            <th scope="col">Certificate Type</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead> */}

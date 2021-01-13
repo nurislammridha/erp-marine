@@ -7,6 +7,9 @@ import VoyageDetailContainer from "../views/VoyageActivityDetailContainer";
 import VoyageListContainer from "../views/VoyageListContainer";
 import VoyageListDetailContainer from "../views/VoyageListDetailContainer";
 import VoyageAddContainer from "../views/VoyageAddContainer";
+import LaytimeContainer from "../laytime/views/LaytimeContainer";
+import LaytimeInfoContainer from "../laytime/views/LaytimeInfoContainer";
+import LaytimeInfo2Add from "../laytime/components/create/LaytimeInfo2Add";
 
 const routeVoyage = [
   {
@@ -51,6 +54,21 @@ const routeVoyage = [
     component: VoyageActivityCreateContainer,
     exact: true,
   },
+
+  {
+    path: "/voyage/laytime/laytimelist",
+    name: "Laytime List",
+    component: LaytimeContainer,
+    exact: true,
+  },
+
+  {
+    path: "/voyage/laytime/laytimeinfo",
+    name: "Laytime Info",
+    component: LaytimeInfoContainer,
+    exact: true,
+  },
+
 ];
 
 function getVoyageRoutes() {
