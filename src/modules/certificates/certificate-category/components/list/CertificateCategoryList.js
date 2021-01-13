@@ -96,18 +96,14 @@ const CertificateCategoryList = () => {
       {!isLoading && certificateCategoryData.length > 0 && (
         <>
           <div className="react-bootstrap-table table-responsive">
-            <SimpleModal
-              show={show}
-              handleClose={() => handleClose()}
-              modalTitle={"Edit Certificate Category"}
-            >
-                            
-              <CertificateCategoryEdit editData={editItem} />
-                          
-            </SimpleModal>
-            <table className="table mt-2 tbl-standard" id="table-to-xls">
+            <table className="table mt-2 tbl-standard">
               <thead>
                 <tr>
+                  {/* <th scope="col">
+                    {" "}
+                    <Form.Check type="checkbox" />
+                  </th> */}
+
                   <th scope="col">Category Name</th>
                   <th scope="col">Parent Category</th>
                   <th scope="col">Status</th>
@@ -121,23 +117,8 @@ const CertificateCategoryList = () => {
                       <td>{item.strCertificateCategoryName}</td>
                       <td>{item.intParentsCategoryID != 0 ? item.parentCategoryName : ''}</td>
                       <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
-                      {/*<td>
-                                {" "}
-                                <Link to={``}>
-                                    <i className="far fa-eye mr-3"></i>
-                                </Link>
-                                <i className="far fa-edit ml-2" onClick={handleShow}></i>
-
-                            </td>*/}
                       <td>
-                        <a
-                          className="btn btn-icon btn-light btn-hover-info btn-sm"
-                          onClick={() => {
-                            handleEdit(item);
-                          }}
-                        >
-                          <i className="fa fa-edit"></i>
-                        </a>
+                          <i className="far fa-edit pointer editIcon" onClick={() => handleEdit(item)}></i>
                       </td>
                     </tr>
                   ))}
@@ -148,18 +129,13 @@ const CertificateCategoryList = () => {
               changePage={changePage}
               data={certificatesCategoryPaginatedData}
             />
-            {/*<Modal size="lg" show={show} onHide={handleClose}>
-
-                <Modal.Header closeButton>
-                    <Modal.Title>Certificate Category Edit</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{<CertificateCategoryEdit />}</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Cancel
-              </Button>
-                </Modal.Footer>
-                            </Modal>*/}
+            <SimpleModal
+              show={show}
+              handleClose={() => handleClose()}
+              modalTitle={"Edit Certificate Category"}
+            >
+              <CertificateCategoryEdit editData={editItem} />
+            </SimpleModal>
           </div>
         </>
       )}
