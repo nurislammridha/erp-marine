@@ -37,10 +37,6 @@ const IssueAuthorityList = (props) => {
   );
 
   useEffect(() => {
-    console.log(
-      "issuingAuthoritiesPaginatedData",
-      issuingAuthoritiesPaginatedData
-    );
     dispatch(getIssuingAuthorities("", "", currentPage));
 
     if (modalEditStatus) {
@@ -86,11 +82,6 @@ const IssueAuthorityList = (props) => {
             <table className="table mt-2 tbl-standard">
               <thead>
                 <tr>
-                  {/* <th scope="col">
-                    {" "}
-                    <Form.Check type="checkbox" />
-                  </th> */}
-
                   <th scope="col">SL</th>
                   <th scope="col">Authority Name</th>
                   <th scope="col">Status</th>
@@ -101,19 +92,9 @@ const IssueAuthorityList = (props) => {
                 {issuingAuthorities &&
                   issuingAuthorities.map((item, index) => (
                     <tr>
-                      {/* <th scope="row">
-                        {" "}
-                        <Form.Check type="checkbox" />
-                      </th> */}
                       <td>{index + 1}</td>
                       <td>{item.strIssuingAuthorityName}</td>
                       <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
-                      {/* <td>
-                    {" "}
-                    <Link to={`/voyage/list/${""}`}>
-                      <i className="far fa-eye mr-3"></i>
-                    </Link>
-                  </td> */}
                       <td>
                         <i
                           className="far fa-edit pointer editIcon"

@@ -10,7 +10,6 @@ import {
   setIssuingAuthorityEditValue,
   getIssuingAuthorities,
 } from "../../_redux/actions/CertificateIssueAuthorityAction";
-// import { Form } from "react-bootstrap";
 
 const IssueAuthorityEdit = (props) => {
   const { register, handleSubmit, setValue } = useForm();

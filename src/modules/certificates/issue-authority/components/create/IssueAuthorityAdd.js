@@ -9,7 +9,6 @@ import {
   issueAuthoritySubmitAction,
   getIssuingAuthorities,
 } from "../../_redux/actions/CertificateIssueAuthorityAction";
-// import { Form } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
 
 const IssueAuthorityAdd = () => {
@@ -23,16 +22,6 @@ const IssueAuthorityAdd = () => {
   const addStatus = useSelector(
     (state) => state.certificateIssueAuthorityInfo.addStatus
   );
-  const action = [
-    {
-      label: "Active",
-      value: 1,
-    },
-    {
-      label: "In Active",
-      value: 2,
-    },
-  ];
   const CertificateIssueAuthirityInput = useSelector(
     (state) =>
       state.certificateIssueAuthorityInfo.CertificateIssueAuthirityInput

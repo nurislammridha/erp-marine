@@ -26,10 +26,6 @@ const IssueAuthorityFilter = () => {
       value: "0",
     },
   ];
-
-  const handleChangeTextInput = (name, value) => {
-    // dispatch(GetVoyageList(value, type));
-  };
   const changeSearch = (value) => {
     setSearch(value);
     dispatch(getIssuingAuthorities(value, type, currentPage));
