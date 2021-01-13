@@ -57,6 +57,7 @@ const CertificateMasterReducer = (state = initialState, action) => {
             return {
                 ...state,
                 editStatus: action.payload.status,
+                isLoading: action.payload.isLoading,
             };
 
 
