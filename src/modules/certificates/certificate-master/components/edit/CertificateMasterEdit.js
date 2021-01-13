@@ -50,7 +50,8 @@ const CertificatesCategoryOptionData = useSelector((state) => state.certificateM
   );
 
   useEffect(() => {
-    dispatch(setMasterCertificateEditValue(CertificateMasterInput));
+    // dispatch(setMasterCertificateEditValue(CertificateMasterInput));
+    dispatch(setMasterCertificateEditValue(props.editData));
     if (editStatus) {
       dispatch(getCertificateMasterList());
     }

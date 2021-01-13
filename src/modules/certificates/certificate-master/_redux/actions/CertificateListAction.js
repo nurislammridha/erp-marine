@@ -21,6 +21,7 @@ export const handleChangeCertificateMasterInput = (name, value) => async (
 export const getCertificateMasterList = (searchValue = "", status = "") => async (dispatch) => {
   let isActive = status == "" ? "" : parseInt(status);
   let url = `${process.env.REACT_APP_API_URL}certificate/certificateList`;
+  console.log('url', url);
 
   if (searchValue !== "" || isActive !== "") {
     url += `?search=${searchValue}&isActive=${isActive}`;
@@ -74,12 +75,11 @@ export const certificateMasterSubmitAction = (CertificateMasterInput) => (dispat
     });
 };
 
-export const setMasterCertificateEditValue = (certificateMasterInput) => (dispatch) => {
-  console.log('certificateMasterInput', certificateMasterInput);
+export const setMasterCertificateEditValue = (editData) => (dispatch) => {
   const formData = {
-    strCertificateName: certificateMasterInput.strCertificateName,
-    strCertificateCategoryName: certificateMasterInput.strCertificateCategoryName,
-    isActive: certificateMasterInput.isActive,
+    strCertificateName: editData.strCertificateName,
+    strCertificateCategoryName: editData.strCertificateCategoryName,
+    isActive: editData.isActive,
     intActionBy: 1272,
   };
   dispatch({
@@ -101,6 +101,7 @@ export const certificateMasterEditAction = (CertificateMasterInput, intCertifica
 
   // let editUrl = `http://10.17.2.19:8082/iMarineAPI/public/api/v1/certificate/certificateList/${intCertificateID}`;
   let editUrl = `${process.env.REACT_APP_API_URL}certificate/certificateList/${intCertificateID}`;
+  
 
   Axios.put(editUrl, CertificateMasterInput)
     .then(function (response) {
