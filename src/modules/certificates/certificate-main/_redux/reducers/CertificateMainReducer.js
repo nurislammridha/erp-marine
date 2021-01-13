@@ -4,7 +4,6 @@ import moment from "moment";
 // Initial state
 const initialState = {
   certificates: [],
-
   certificatesPaginatedData: null,
   certificateMainEdit: [],
   certificatesCategoryOptionData: [],
@@ -27,6 +26,7 @@ const initialState = {
     intCertificateID: null,
     intCategoryID: null,
     intParentCategoryID: null,
+    parentCategory: null,
     strCustomeCode: "",
     intIssuingAuthorityID: null,
     strShipFolderNo: "",
@@ -42,7 +42,7 @@ const initialState = {
     isSurvey: false,
     dteLastSurvey: moment().format("YYYY-MM-DD"),
     dteNextSurvey: moment().format("YYYY-MM-DD"),
-    dteLastEndorsementDate: '',
+    dteLastEndorsementDate: "",
     strOfficeRemarks: "",
     // image: null,
     // imagePreviewUrl: null,
@@ -67,8 +67,12 @@ const initialState = {
       //   type: '',
       //   filePreviewUrl: null,
       // }
-    ]
+    ],
   },
+
+  // update edit
+  isEditLoaded: false,
+  certificateEditInfo: null,
   productEditData: null,
   productDetail: null,
   errors: [],
@@ -82,7 +86,7 @@ const initialState = {
   addMessage: "",
   editMessage: "",
   deleteMessage: "",
-  certificateExpireDaysList: []
+  certificateExpireDaysList: [],
 };
 
 const CertificateMainReducer = (state = initialState, action) => {
@@ -188,9 +192,11 @@ const CertificateMainReducer = (state = initialState, action) => {
         isLoading: action.payload,
       };
     case Types.GET_MAIN_CERTIFICATE_SINGLE_DATA:
+      console.log('action.payload :>> ', action.payload);
       return {
         ...state,
-        certificateMainInfo: action.payload,
+        certificateEditInfo: action.payload,
+        isEditLoaded: true
       };
 
     case Types.CHANGE_CERTIFICATE_INPUT_UPDATE:

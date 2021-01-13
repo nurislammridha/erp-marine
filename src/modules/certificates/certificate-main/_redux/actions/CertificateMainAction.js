@@ -1,6 +1,11 @@
 import Axios from "axios";
 import { toast } from "react-toastify";
-import { getEmployeeId, getVesselId } from "../../../../../app/modules/Auth/_redux/authCrud";
+import moment from 'moment';
+
+import {
+  getEmployeeId,
+  getVesselId,
+} from "../../../../../app/modules/Auth/_redux/authCrud";
 import { generateFormDataFromObject } from "../../../../master/utils/FileHelper";
 import { showToast } from "../../../../master/utils/ToastHelper";
 import * as Types from "../types/Types";
@@ -65,7 +70,7 @@ export const MainCertificateCreateAction = (certificateInfoInput) => async (
     isLoading: true,
     data: {},
     status: false,
-    message: ''
+    message: "",
   };
 
   dispatch({
@@ -75,14 +80,14 @@ export const MainCertificateCreateAction = (certificateInfoInput) => async (
 
   let postUrl = `${process.env.REACT_APP_API_URL}certificate/details`;
   await Axios.post(postUrl, certificateInfoInput)
-    .then(response => {
+    .then((response) => {
       const { status, data, message } = response.data;
       responseList.data = data;
       responseList.isLoading = false;
       responseList.status = status;
       responseList.message = message;
     })
-    .catch(error => {
+    .catch((error) => {
       responseList.isLoading = false;
       responseList.message =
         "Something went wrong ! Please fill all inputs and try again !";
@@ -123,7 +128,7 @@ export const getCertificateMainListAction = (
   let url = "";
   url = `${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1`;
 
-  if(page !== null || page === ""){
+  if (page !== null || page === "") {
     url += `&page=${page}`;
   }
 
@@ -190,27 +195,26 @@ export const certificateMultipleDataAdd = (data) => (dispatch) => {
     dteToSurvey: data.dteToSurvey,
     intCertificateStatusID: data.intCertificateStatusID,
     strCertificateStatusName: data.strCertificateStatusName,
-    isActive: true
-  }
+    isActive: true,
+  };
   dispatch({ type: Types.ADD_MULTIPLE_DATA, payload: singleDetail });
-}
-
+};
 
 export const multipleAttachmentAdd = (data) => (dispatch) => {
   const singleDetail = {
     file: data.file,
-    filePreviewUrl: data.filePreviewUrl
-  }
+    filePreviewUrl: data.filePreviewUrl,
+  };
   dispatch({ type: Types.ADD_MULTIPLE_DATA_ATTACHMENT, payload: singleDetail });
-}
+};
 
 export const certificateMultipleDataDelete = (index) => (dispatch) => {
   dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_DATA, payload: index });
-}
+};
 
 export const certificateMultipleAttachmentDelete = (index) => (dispatch) => {
   dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_ATTACHMENT, payload: index });
-}
+};
 
 export const deleteProductImagePreview = () => (dispatch) => {
   let data = {
@@ -234,16 +238,12 @@ export const GetVesselTypeAction = () => async (dispatch) => {
 };
 
 export const getCertificateCategory = (data) => (dispatch) => {
-  Axios
-    .get(
-      `${process.env.REACT_APP_API_URL}certificate/category`
-    )
-    .then((res) => {
-
+  Axios.get(`${process.env.REACT_APP_API_URL}certificate/category`).then(
+    (res) => {
       let data = res.data.data;
       dispatch({ type: Types.GET_CERTIFICATE_CATEGORY, payload: data });
     }
-    );
+  );
 };
 export const getCertificateName = (data) => (dispatch) => {
   Axios.get(`${process.env.REACT_APP_API_URL}certificate/certificateList`).then(
@@ -268,10 +268,77 @@ export const getCertificateIssueBy = (data) => (dispatch) => {
   });
 };
 
-export const getMainCertificateSingleData = (id) => (dispatch) => {
+// export const getMainCertificateSingleData = (id) => (dispatch) => {
+//   Axios.get(`${process.env.REACT_APP_API_URL}certificate/details/${id}`).then(
+//     (res) => {
+//       let data = res.data.data;
+//       dispatch({
+//         type: Types.GET_MAIN_CERTIFICATE_SINGLE_DATA,
+//         payload: data,
+//       });
+//     }
+//   );
+// };
+
+// update main certificate
+
+// export const mainCertificateEdit = (certificateInfoInput, id) => (dispatch) => {
+//  let responseList = {
+//    isLoading: true,
+//    data: {},
+//    status: false,
+//  };
+//  dispatch({
+//    type: Types.CERTIFICATE_MAIN_SUBMITTING,
+//    payload: responseList,
+//  });
+//   Axios.put(
+//     `${process.env.REACT_APP_API_URL}certificate/details/${id}`,
+//     certificateInfoInput
+//   ).then((res) => {
+//     // dispatch({ type: Types.MAIN_CERTIFICATE_UPDATE, payload: res.data});
+//     if (res.data.status) {
+//       showToast("successs", res.data.message);
+//       dispatch({
+//         type: Types.MAIN_CERTIFICATE_UPDATE,
+//         payload: res.data,
+//       });
+//     } else {
+//       showToast("error", res.data.message);
+//     }
+//   });
+// };
+
+//Get main certificate single data
+export const getMainCertificateDeteailByID = (id) => (dispatch) => {
   Axios.get(`${process.env.REACT_APP_API_URL}certificate/details/${id}`).then(
     (res) => {
       let data = res.data.data;
+      if (data.multipleAttachments === null) {
+        data.multipleAttachments = [];
+      }
+      if (data.dteCertificateIssueDate === null) {
+        data.dteCertificateIssueDate = '';
+      }
+      if (data.dteCertificateExpiryDate === null) {
+        data.dteCertificateExpiryDate = '';
+      }
+      if (data.dteCertificateValidUntil === null) {
+        data.dteCertificateValidUntil = '';
+      }
+      if (data.dteExtendedUntil === null) {
+        data.dteExtendedUntil = '';
+      }
+      if (data.dteLastEndorsementDate === null) {
+        data.dteLastEndorsementDate = '';
+      }
+
+      data.category = {
+        label: data.category.strCategoryName,
+        value: data.category.intCategoryID,
+      }
+      // data.certificateDates = data.certificate_dates;
+
       dispatch({
         type: Types.GET_MAIN_CERTIFICATE_SINGLE_DATA,
         payload: data,
@@ -280,40 +347,9 @@ export const getMainCertificateSingleData = (id) => (dispatch) => {
   );
 };
 
-// update main certificate
-export const mainCertificateEdit = (certificateInfoInput, id) => (dispatch) => {
-  //  let responseList = {
-  //    isLoading: true,
-  //    data: {},
-  //    status: false,
-  //  };
-  //  dispatch({
-  //    type: Types.CERTIFICATE_MAIN_SUBMITTING,
-  //    payload: responseList,
-  //  });
-  Axios.put(
-    `${process.env.REACT_APP_API_URL}certificate/details/${id}`,
-    certificateInfoInput
-  ).then((res) => {
-    // dispatch({ type: Types.MAIN_CERTIFICATE_UPDATE, payload: res.data});
-    if (res.data.status) {
-      showToast("successs", res.data.message);
-      dispatch({
-        type: Types.MAIN_CERTIFICATE_UPDATE,
-        payload: res.data,
-      });
-    } else {
-      showToast("error", res.data.message);
-    }
-  });
-};
-
-
-
 export const getCertificateStatusData = () => (dispatch) => {
   const url = `${process.env.REACT_APP_API_URL}certificate/status`;
-  Axios.get(url)
-    .then((res) => {
-      dispatch({ type: Types.MAIN_CERTIFICATE_STATUS, payload: res.data.data });
-    })
+  Axios.get(url).then((res) => {
+    dispatch({ type: Types.MAIN_CERTIFICATE_STATUS, payload: res.data.data });
+  });
 };
