@@ -118,7 +118,10 @@ const IssueAuthorityList = (props) => {
                     </Link>
                   </td> */}
                       <td>
-                          <i className="far fa-edit pointer editIcon" onClick={() => handleEdit(item)}></i>
+                        <i
+                          className="far fa-edit pointer editIcon"
+                          onClick={() => handleEdit(item)}
+                        ></i>
                       </td>
                     </tr>
                   ))}
@@ -132,7 +135,7 @@ const IssueAuthorityList = (props) => {
             <SimpleModal
               show={show}
               handleClose={() => handleClose()}
-              modalTitle={"Edit Issuing Authority"}
+              modalTitle={"Edit Issue Authority"}
             >
               <IssueAuthorityEdit editData={editItem} />
             </SimpleModal>
