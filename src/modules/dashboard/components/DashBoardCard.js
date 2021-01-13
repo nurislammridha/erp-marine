@@ -13,8 +13,8 @@ const DashBoardCard = () => {
     (state) => state.certificateMainInfo.certificates
   );
   //========================
-   const certificatesPaginatedData = useSelector(
-     (state) => state.certificateMainInfo.certificatesPaginatedData
+  const certificatesPaginatedData = useSelector(
+    (state) => state.certificateMainInfo.certificatesPaginatedData
   );
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const DashBoardCard = () => {
   }, []);
   return (
     <>
-      <div className="container dashboard__pb">
+      <div className="container dashboard__pb dashboard-cardsection">
         <div className="row">
           <div className="col-xl-3 col-lg-3 col-md-6">
             <div className="paid__widget">

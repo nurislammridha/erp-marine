@@ -11,7 +11,6 @@ import { DropdownTopbarItemToggler } from "../../../../_partials/dropdowns";
 import { getEmployeeId } from "../../../../../app/modules/Auth/_redux/authCrud";
 
 export function UserProfileDropdown(props) {
-
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {
     return {
@@ -23,9 +22,9 @@ export function UserProfileDropdown(props) {
 
   const logoutButton = () => {
     const data = localStorage.removeItem("userData");
-    console.log('data', data);
-    window.location.href="/auth/login";
-  }
+    console.log("data", data);
+    window.location.href = "/auth/login";
+  };
 
   return (
     <Dropdown drop="down" alignRight>
@@ -38,10 +37,10 @@ export function UserProfileDropdown(props) {
             "btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2"
           }
         >
-          <span className="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">
+          <span className="text-muted font-weight-bold font-size-base d-md-inline mr-1">
             {/* Hi,  */}
             Hi, {props.user.strEmployeeName}
-          </span>{" "} 
+          </span>{" "}
         </div>
       </Dropdown.Toggle>
       <Dropdown.Menu className="p-0 m-0 dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
@@ -75,12 +74,14 @@ export function UserProfileDropdown(props) {
             >
               <div className="symbol bg-white-o-15 mr-3">
                 <span className="symbol-label text-success font-weight-bold font-size-h4">
-                {typeof props.user.strEmployeeName != 'undefined' ? props.user.strEmployeeName.charAt(0) : ''}
+                  {typeof props.user.strEmployeeName != "undefined"
+                    ? props.user.strEmployeeName.charAt(0)
+                    : ""}
                 </span>
                 {/*<img alt="Pic" className="hidden" src={user.pic} />*/}
               </div>
               <div className="text-white m-0 flex-grow-1 mr-3 font-size-h5">
-              {props.user.strEmployeeName}
+                {props.user.strEmployeeName}
               </div>
               {/* <span className="label label-success label-lg font-weight-bold label-inline">
                 3 messages
@@ -98,11 +99,8 @@ export function UserProfileDropdown(props) {
               <div className="navi-text">
                 <a href={`/employee/employee-edit/${getEmployeeId()}`}>
                   <div className="font-weight-bold">My Profile</div>
-                  <div className="text-muted">
-                    Update My Profile
-                  </div>
+                  <div className="text-muted">Update My Profile</div>
                 </a>
-                
               </div>
             </div>
           </a>
@@ -145,7 +143,8 @@ export function UserProfileDropdown(props) {
           <div className="navi-separator mt-3"></div> */}
 
           <div className="navi-footer  px-8 py-5">
-            <Link to=""
+            <Link
+              to=""
               // to="/logout"
               className="btn btn-light-primary font-weight-bold"
               onClick={() => logoutButton()}

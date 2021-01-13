@@ -6,7 +6,6 @@ const BarChart = () => {
 
     datasets: [
       {
-
         label: "User Count",
 
         backgroundColor: [
@@ -35,7 +34,8 @@ const BarChart = () => {
         <div className="test">
           <Bar
             data={barProperties}
-            width="100%" height="45%"
+            width="100%"
+            height="45%"
             options={
               {
                 // title: {
@@ -52,10 +52,8 @@ const BarChart = () => {
           />
         </div>
       </div>
-
     </>
-
   );
-}
+};
 
 export default BarChart;
