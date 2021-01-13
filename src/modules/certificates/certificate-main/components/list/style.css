@@ -8,15 +8,13 @@
     background: #ffc0c7;
 }
 
-.bg-row-0-days td {
-    padding-left: 10px!important;
-}
-
 .bg-row-30-between {
     background: #ffecee;
 }
 
-.bg-row-30-between td {
+.bg-row-30-between td,
+.bg-row-0-days td,
+.bg-row-60-more td {
     padding-left: 10px!important;
 }
 
@@ -27,4 +25,8 @@
 
 .certificate-list td {
     font-size: 12px!important;
+}
+
+.certificate-list tbody {
+    border-bottom: 1px solid #eef0f8!important;
 }
