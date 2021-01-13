@@ -64,15 +64,8 @@ const routeVoyage = [
 
   {
     path: "/voyage/laytime/laytimeinfo",
-    name: "Laytime List",
+    name: "Laytime Info",
     component: LaytimeInfoContainer,
-    exact: true,
-  },
-
-  {
-    path: "/voyage/laytime/laytimeinfo2",
-    name: "Laytime List",
-    component: LaytimeInfo2Add,
     exact: true,
   },
 
