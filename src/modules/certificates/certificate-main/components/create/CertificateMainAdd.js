@@ -101,6 +101,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   };
 
   const getFiles = (files) => {
+    console.log('files', files[0]);
+    
     if (files.length > 0) {
       files.forEach(file => {
         const filesUpdated = [file, ...certificateInfoInput.multipleAttachments];
@@ -953,7 +955,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {certificateInfoInput.multipleAttachments.map(
+                        {
+                        certificateInfoInput.multipleAttachments !== null &&
+                        certificateInfoInput.multipleAttachments.map(
                           (attachment, index) => (
                             <tr>
                               <td>{index + 1}</td>
@@ -961,7 +965,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                               <td>{attachment.size}</td>
                               <td>{" "}
                                 <PreviewAttachment
-                                  url={'files/' + attachment.name}
+                                  url={'/' + attachment.name}
+                                  base64={attachment.base64}
                                   title="Preview"
                                   height={50}
                                   width={50}
