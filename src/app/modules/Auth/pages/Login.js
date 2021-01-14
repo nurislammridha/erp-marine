@@ -107,8 +107,8 @@ function Login(props) {
   return (
     <div className="login-form login-signin " id="kt_login_signin_form ">
       {/* begin::Head */}
-      <img className="loginpageLogo " src="/media/logos/logo.png" alt="logo" />
-      <div className=" ">
+      <img className="loginpageLogo " src="/media/logos/logo.svg" alt="logo" />
+      <div className="mt-10 ">
         <h1 className="font-size-h1 heading text-center">Sign In</h1>
         {/* <h1 className="site_name_login">
           iMarine

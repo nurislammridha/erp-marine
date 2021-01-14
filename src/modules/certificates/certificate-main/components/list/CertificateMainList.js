@@ -4,7 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
 import { Form, Card, Button, Row, Col } from "react-bootstrap";
-import './style.css';
+import "./style.css";
 import { generateStringDateFromDate } from "../../../../../domains/CCO/utils/DateHelper";
 import {
   getCertificateCategory,
@@ -55,8 +55,10 @@ const CertificateMainList = () => {
   };
 
   const certificateSelect = (category) => {
-    dispatch(getCertificateMainListAction(currentPage, searchText, 1, category));
-  }
+    dispatch(
+      getCertificateMainListAction(currentPage, searchText, 1, category)
+    );
+  };
 
   const searchProduct = (e) => {
     const searchText = e.target.value;
@@ -68,7 +70,7 @@ const CertificateMainList = () => {
     }
   };
 
-  const certificateDelete = () => { };
+  const certificateDelete = () => {};
 
   const getCertificateColorClass = (difference) => {
     let rowClassName = "";
@@ -109,9 +111,7 @@ const CertificateMainList = () => {
                 register={register}
                 value={certificateParentCategoryList.intParentCategoryID}
                 onChange={(option) => {
-                  certificateSelect(
-                    option.value
-                  );
+                  certificateSelect(option.value);
                   setValue("intCategoryID", "");
                   dispatch(getCertificateChildCategoryData(option.value));
                 }}
@@ -128,9 +128,7 @@ const CertificateMainList = () => {
                 register={register}
                 value={certificateChildCategoryList.intCategoryID}
                 onChange={(option) => {
-                  certificateSelect(
-                    option.value
-                  );
+                  certificateSelect(option.value);
                 }}
                 setValue={setValue}
               />
@@ -145,10 +143,16 @@ const CertificateMainList = () => {
                 register={register}
                 value={expireInDays}
                 onChange={(option) => {
-                  setExpireInDays(
-                    option.value
+                  setExpireInDays(option.value);
+                  dispatch(
+                    getCertificateMainListAction(
+                      currentPage,
+                      searchText,
+                      true,
+                      certificateChildCategoryList.intCategoryID,
+                      option.value
+                    )
                   );
-                  dispatch(getCertificateMainListAction(currentPage, searchText, true, certificateChildCategoryList.intCategoryID, option.value));
                 }}
                 setValue={setValue}
               />
@@ -156,13 +160,15 @@ const CertificateMainList = () => {
 
             <i className="fas fa-filter tableFilter mt-3 mr-2"></i>
             <i className="far fa-filter"></i>
-            <Link to='/certificates-main/create' className="btn btn-primary text-center text-white">
+            <Link
+              to="/certificates-main/create"
+              className="btn btn-primary text-center text-white"
+            >
               Add New
-              </Link>
+            </Link>
           </div>
           {isLoading && <LoadingSpinner text="Loading Certificates..." />}
-          {
-            !isLoading && certificates.length > 0 &&
+          {!isLoading && certificates.length > 0 && (
             <table className="table mt-5 certificate-list tbl-standard table-responsive">
               <thead>
                 <tr>
@@ -185,7 +191,8 @@ const CertificateMainList = () => {
               </thead>
               <tbody>
                 {certificates.map((certificate, index) => (
-                  <tr key={index + 1}
+                  <tr
+                    key={index + 1}
                     className={getCertificateColorClass(
                       certificate.differenceDays
                     )}
@@ -199,24 +206,32 @@ const CertificateMainList = () => {
                     <td>{certificate.strIssuedPlace}</td>
                     <td>{certificate.strLocation}</td>
                     <td>
-                      {
-                        certificate.dteCertificateIssueDate !== null ? generateStringDateFromDate(
-                          certificate.dteCertificateIssueDate
-                        ) : ''
-                      }
+                      {certificate.dteCertificateIssueDate !== null
+                        ? generateStringDateFromDate(
+                            certificate.dteCertificateIssueDate
+                          )
+                        : ""}
                     </td>
                     <td>
-                      {certificate.dteCertificateValidUntil !== null ? generateStringDateFromDate(
-                        certificate.dteCertificateValidUntil
-                      ) : ''}
+                      {certificate.dteCertificateValidUntil !== null
+                        ? generateStringDateFromDate(
+                            certificate.dteCertificateValidUntil
+                          )
+                        : ""}
                     </td>
                     <td>
-                      {certificate.dteExtendedUntil !== null ? generateStringDateFromDate(certificate.dteExtendedUntil) : ''}
+                      {certificate.dteExtendedUntil !== null
+                        ? generateStringDateFromDate(
+                            certificate.dteExtendedUntil
+                          )
+                        : ""}
                     </td>
                     <td>
-                      {certificate.dteLastEndorsementDate !== null ? generateStringDateFromDate(
-                        certificate.dteLastEndorsementDate
-                      ) : ''}
+                      {certificate.dteLastEndorsementDate !== null
+                        ? generateStringDateFromDate(
+                            certificate.dteLastEndorsementDate
+                          )
+                        : ""}
                     </td>
                     <td>{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
                     <td>{certificate.differenceDays}</td>
@@ -245,38 +260,37 @@ const CertificateMainList = () => {
                 ))}
               </tbody>
             </table>
-          }
+          )}
 
           {!isLoading && certificates.length === 0 && (
             <div className="alert border-1 p-4">
               Sorry ! No Certificates Found.
             </div>
           )}
-           
+
           <PaginationLaravel
             changePage={changePage}
             data={certificatesPaginatedData}
           />
 
-          {
-              !isLoading && certificates.length > 0 &&
-              <div className="status-list">
-                <div className="custome-dots">
-                <span className="dot bg-row-0-days ml-5"></span>
+          {!isLoading && certificates.length > 0 && (
+            <div className="status-list">
+              <div className="custome-dots">
+                <span className="dot bg-row-0-days ml-5 "></span>
                 <span className="status-text ml-5">Expired</span>
                 <span className="dot bg-row-30-between ml-5"></span>
-                <span className="status-text ml-5">Due 30 Days</span>
+                <span className="status-text ml-5 ">Due 30 Days</span>
                 <span className="dot bg-row-60-days ml-5"></span>
                 <span className="status-text ml-5">Due 60 Days</span>
                 <span className="dot bg-row-more-60-days ml-5"></span>
                 <span className="status-text ml-5">Due More Than 60 Days</span>
               </div>
-              </div>
-            }
+            </div>
+          )}
         </Card.Body>
       </Card>
     </>
   );
-}
+};
 
 export default CertificateMainList;
