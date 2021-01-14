@@ -42,7 +42,7 @@ const LaytimeInfo1Add = () => {
             <div className="card card-custom gutter-b">
                 <div className="card-header">
                     <div className="card-title">
-                        <h3 className="card-label">Laytime Information-1</h3>
+                        <h3 className="card-label">Laytime Header</h3>
                     </div>
                 </div>
                 <div className="card-body">
@@ -178,14 +178,14 @@ const LaytimeInfo1Add = () => {
                             <div className="col-md-4">
                                 <div className="border rounded">
                                     <div className="row">
-                                        <div className="col-sm-6">
+                                        <div className="col-sm-5">
                                             <Form.Check
                                                 className="m-3"
                                                 type="radio"
                                                 label="REVERSIBLE"
                                             />
                                         </div>
-                                        <div className="col-sm-6">
+                                        <div className="col-sm-7">
                                             <Form.Check
                                                 className="m-3"
                                                 type="radio"

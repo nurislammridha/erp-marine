@@ -26,7 +26,7 @@ const LaytimeInfo2Add = () => {
                     <div className="card card-custom gutter-b">
                         <div className="card-header">
                             <div className="card-title">
-                                <h3 className="card-label">Laytime Information-2</h3>
+                                <h3 className="card-label">Laytime Row</h3>
                             </div>
                         </div>
                         <div className="card-body">
@@ -403,9 +403,9 @@ const LaytimeInfo2Add = () => {
                     <LaytimeDetail />
                 </div>
             </div>
-            <div>
-                <LaytimeMultipleAdd />
-            </div>
+
+            <LaytimeMultipleAdd />
+
 
         </div>
     );
