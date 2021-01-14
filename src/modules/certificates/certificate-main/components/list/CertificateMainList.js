@@ -258,13 +258,21 @@ const CertificateMainList = () => {
             data={certificatesPaginatedData}
           />
 
-          {/* {
+          {
               !isLoading && certificates.length > 0 &&
               <div className="status-list">
-                <span className="dot"></span>
-                <span className="status-text">Due Date</span>
+                <div className="custome-dots">
+                <span className="dot bg-row-0-days ml-5"></span>
+                <span className="status-text ml-5">Expired</span>
+                <span className="dot bg-row-30-between ml-5"></span>
+                <span className="status-text ml-5">Due 30 Days</span>
+                <span className="dot bg-row-60-days ml-5"></span>
+                <span className="status-text ml-5">Due 60 Days</span>
+                <span className="dot bg-row-more-60-days ml-5"></span>
+                <span className="status-text ml-5">Due More Than 60 Days</span>
               </div>
-            } */}
+              </div>
+            }
         </Card.Body>
       </Card>
     </>

@@ -33,7 +33,7 @@ const initialState = {
     strIssuedPlace: "",
     strLocation: "",
     intCertificateTypeID: null,
-    intNotOnBoard: 0,
+    intNotOnBoard: "0",
     dteCertificateIssueDate: "",
     dteCertificateExpiryDate: "",
     dteCertificateValidUntil: "",
@@ -227,11 +227,11 @@ const CertificateMainReducer = (state = initialState, action) => {
       };
 
     case Types.CHANGE_CERTIFICATE_INPUT_UPDATE:
-      const productEditData = { ...state.productEditData };
-      productEditData[action.payload.name] = action.payload.value;
+      const certificateEditInfoData = { ...state.certificateEditInfo };
+      certificateEditInfoData[action.payload.name] = action.payload.value;
       return {
         ...state,
-        productEditData,
+        certificateEditInfo: certificateEditInfoData,
       };
       
     case Types.MAIN_CERTIFICATE_UPDATE:

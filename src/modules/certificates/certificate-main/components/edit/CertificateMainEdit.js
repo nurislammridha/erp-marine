@@ -91,9 +91,9 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
     dispatch(getMainCertificateDeteailByID(id));
   }, []);
 
-  const onSubmit = async (data) => {
-    console.log('data', data);
-    
+  const onSubmit = (e) => {
+    e.preventDefault();
+    // console.log('data', data);
     dispatch(MainCertificateUpdateAction(certificateEditInfo, id));
   };
 
@@ -130,7 +130,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
     <>
       {
         !isEditLoaded &&
-        <LoadingSpinner text="Loading Certificate Details"/>
+        <LoadingSpinner text="Loading Certificate Details" />
       }
       {isEditLoaded && certificateEditInfo !== null && (
         <>
@@ -144,7 +144,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
               <div className="card-body">
                 <form
                   className="form form-label-right"
-                  onSubmit={handleSubmit(onSubmit)}
+                  onSubmit={onSubmit}
                   method="post"
                   encType="multipart/form-data"
                 >
@@ -491,6 +491,8 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                           className="forgotPasswordText  "
                           type="checkbox"
                           label="Not on Board"
+                          checked={certificateEditInfo.intNotOnBoard == "0" ? false : true}
+                          onChange={(e) => certificateMainInfoChange("intNotOnBoard", certificateEditInfo.intNotOnBoard == "0" ? "1" : "0")}
                         />
                       </Form.Group>
                     </div>
@@ -506,16 +508,17 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                         name="dteCertificateIssueDate"
                         type="date"
                         disableClock={true}
-                        locale="en-US"
                         className="form-control fromStyle formHeight"
                         placeholderText="select issue date"
-                        value={certificateEditInfo.dteCertificateIssueDate}
-                        onChange={(e) => certificateMainInfoChange("dteCertificateIssueDate", e)}
+                        dateFormat="MM-dd-yyyy"
+                        selected={certificateEditInfo.dteCertificateIssueDate !== '' ? moment(certificateEditInfo.dteCertificateIssueDate).toDate() : null}
+                        onChange={(date) => certificateMainInfoChange("dteCertificateIssueDate", date)}
                         ref={register({
                           required: true,
                           maxLength: 100,
                         })}
                       />
+
                       <div className="inputError margin-minus-8">
                         {errors.dteCertificateIssueDate &&
                           errors.dteCertificateIssueDate.type === "required" &&
@@ -534,19 +537,19 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                               <DatePicker
                                 name="dteCertificateExpiryDate"
                                 disableClock={true}
-                                locale="en-US"
-                                dateFormat="yyyy-MM-dd"
                                 className="form-control fromStyle formHeight custome-date"
                                 placeholderText="select expiry date"
                                 disabled={certificateEditInfo.dteCertificateIssueDate ? false : true}
                                 minDate={certificateEditInfo.dteCertificateIssueDate}
-                                value={certificateEditInfo.dteCertificateExpiryDate}
-                                onChange={(e) => certificateMainInfoChange("dteCertificateExpiryDate", e)}
+                                dateFormat="MM-dd-yyyy"
+                                selected={certificateEditInfo.dteCertificateExpiryDate !== "" ? moment(certificateEditInfo.dteCertificateExpiryDate).toDate() : null}
+                                onChange={(date) => certificateMainInfoChange("dteCertificateExpiryDate", date)}
                                 ref={register({
                                   required: true,
                                   maxLength: 100,
                                 })}
                               />
+
                             </div>
                             {/* <div className="inputError margin-minus-8">
                         {errors.dteCertificateExpiryDate &&
@@ -572,13 +575,12 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                             <div>
                               <DatePicker
                                 name="dteCertificateValidUntil"
-                                dateFormat="yyyy-MM-dd"
                                 disableClock={true}
-                                locale="en-US"
                                 className="form-control fromStyle formHeight custome-date"
                                 placeholderText="select certificate valid date"
-                                value={certificateEditInfo.dteCertificateValidUntil}
-                                onChange={(e) => certificateMainInfoChange("dteCertificateValidUntil", e)}
+                                dateFormat="MM-dd-yyyy"
+                                selected={certificateEditInfo.dteCertificateValidUntil !== "" ? moment(certificateEditInfo.dteCertificateValidUntil).toDate() : null}
+                                onChange={(date) => certificateMainInfoChange("dteCertificateValidUntil", date)}
                                 ref={register({
                                   required: true,
                                   maxLength: 100,
@@ -602,31 +604,32 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                             id="isExtendedUntil"
                             className="forgotPasswordText  "
                             type="checkbox"
-                            value={certificateEditInfo.isExtendedUntil}
-                            onChange={(e) =>
-                              certificateMainInfoChange(
-                                "isExtendedUntil",
-                                certificateEditInfo.isExtendedUntil
-                                  ? false
-                                  : true
-                              )
-                            }
+                            checked={(certificateEditInfo.isExtendedUntil == false || certificateEditInfo.isExtendedUntil == "0" ) ? false : true}
+                            onChange={(e) => {
+                              certificateMainInfoChange("isExtendedUntil", (certificateEditInfo.isExtendedUntil == false || certificateEditInfo.isExtendedUntil == "0") ? true : false);
+                              console.log('certificateEditInfo.isExtendedUntil', certificateEditInfo.isExtendedUntil);
+                              
+                             if(!certificateEditInfo.isExtendedUntil || certificateEditInfo.isExtendedUntil == "0"){
+                              certificateMainInfoChange("dteExtendedUntil", "")
+                             }
+                            }}
                           />
                         </label>
                       </label>
                       <div>
                         <DatePicker
                           name="dteExtendedUntil"
-                          dateFormat="yyyy-MM-dd"
                           disableClock={true}
-                          locale="en-US"
                           className="form-control fromStyle formHeight custome-date"
                           placeholderText="select certificate valid date"
                           disabled={certificateEditInfo.isExtendedUntil ? false : true}
-                          value={certificateEditInfo.dteExtendedUntil}
-                          onChange={(e) => certificateMainInfoChange("dteExtendedUntil", e)}
+                          dateFormat="MM-dd-yyyy"
+                          selected={certificateEditInfo.dteExtendedUntil !== "" ? moment(certificateEditInfo.dteExtendedUntil).toDate() : null}
+                          onChange={(date) => {
+                            certificateMainInfoChange("dteExtendedUntil", date)
+                          }}
                           ref={register({
-                            required: true,
+                            required: false,
                             maxLength: 100,
                           })}
                         />
@@ -644,13 +647,12 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                       <div>
                         <DatePicker
                           name="dteLastEndorsementDate"
-                          dateFormat="yyyy-MM-dd"
                           disableClock={true}
-                          locale="en-US"
                           className="form-control fromStyle formHeight custome-date"
                           placeholderText="select certificate valid date"
-                          value={certificateEditInfo.dteLastEndorsementDate}
-                          onChange={(e) => certificateMainInfoChange("dteLastEndorsementDate", e)}
+                          dateFormat="MM-dd-yyyy"
+                          selected={certificateEditInfo.dteLastEndorsementDate !== "" ? moment(certificateEditInfo.dteLastEndorsementDate).toDate() : null}
+                          onChange={(date) => certificateMainInfoChange("dteLastEndorsementDate", date)}
                           ref={register({
                             required: true,
                             maxLength: 100,
@@ -767,7 +769,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                                   <td>{index + 1}</td>
                                   <td>{date.dteFromSurvey}</td>
                                   <td>{date.dteToSurvey}</td>
-                                  <td>{date.strCertificateStatusName}</td>
+                                  <td>{date.status !== null ? date.status.strStatus : ''}</td>
                                   <td
                                     style={{ width: 70, textAlign: "center" }}
                                   >
