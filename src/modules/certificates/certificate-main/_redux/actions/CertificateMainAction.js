@@ -9,6 +9,7 @@ import {
 import { generateFormDataFromObject } from "../../../../master/utils/FileHelper";
 import { showToast } from "../../../../master/utils/ToastHelper";
 import * as Types from "../types/Types";
+import { getCertificateChildCategoryData } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
 //input handle
 export const handleChangeProductInputAction = (
   name,
@@ -334,8 +335,47 @@ export const getMainCertificateDeteailByID = (id) => (dispatch) => {
       }
 
       data.category = {
-        label: data.category.strCategoryName,
-        value: data.category.intCategoryID,
+        label: data.category.strCertificateCategoryName,
+        value: parseInt(data.category.intCategoryID) ,
+      }
+      if(data.certificate !== null){
+        data.certificate = {
+          label: data.certificate.strCertificateName,
+          value: parseInt(data.certificate.intCertificateID) ,
+        }
+      }else{
+        data.certificate = ''
+      }
+
+      if(data.issuing_authority !== null){
+        data.issuing_authority = {
+          label: data.issuing_authority.strIssuingAuthorityName,
+          value: parseInt(data.issuing_authority.intIssuingAuthorityID) ,
+        }
+      }else{
+        data.issuing_authority = ''
+      }
+
+      if(data.types !== null){
+        data.types = {
+          label: data.types.strCertificateTypeName,
+          value: parseInt(data.types.intCertificateTypeID) ,
+        }
+      }else{
+        data.types = ''
+      }
+
+      if(data.status !== null){
+        data.status = {
+          label: data.status.strStatus,
+          value: parseInt(data.status.intCertificateStatusID) ,
+        }
+      }else{
+        data.status = ''
+      }
+      
+      if(data.intParentCategoryID !== null){
+        dispatch(getCertificateChildCategoryData(data.intParentCategoryID));
       }
       data.certificateDates = data.certificate_dates;
 

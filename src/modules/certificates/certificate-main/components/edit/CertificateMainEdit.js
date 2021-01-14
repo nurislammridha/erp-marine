@@ -124,6 +124,9 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
   const [showIssuedByModal, setShowIssuedByModal] = useState(false);
   const startDate = new Date().toLocaleDateString();
 
+  console.log('certificateEditInfo', certificateEditInfo);
+  
+
   return (
     <>
       {
@@ -162,11 +165,13 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                             label: option.label,
                             value: option.value,
                           });
+                          certificateMainInfoChange("category", '');
                           certificateMainInfoChange(
                             "intParentCategoryID",
                             option.value
                           );
                           setValue("intCategoryID", "");
+                          setValue("category", "");
                           dispatch(
                             getCertificateChildCategoryData(option.value)
                           );
@@ -223,12 +228,16 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                             // rules={{ required: true }}
                             name="intCertificateID"
                             register={register}
-                            value={certificateEditInfo.intCertificateID}
+                            value={certificateEditInfo.certificate}
                             onChange={(option) => {
                               certificateMainInfoChange(
                                 "intCertificateName",
                                 option.label
                               );
+                              certificateMainInfoChange("certificate", {
+                                label: option.label,
+                                value: option.value,
+                              });
                               certificateMainInfoChange(
                                 "intCertificateID",
                                 option.value
@@ -260,12 +269,16 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                             // rules={{ required: true }}
                             name="intCertificateTypeID"
                             register={register}
-                            value={certificateEditInfo.intCertificateTypeID}
+                            value={certificateEditInfo.types}
                             onChange={(option) => {
                               certificateMainInfoChange(
                                 "intCertificateTypeName",
                                 option.label
                               );
+                              certificateMainInfoChange("types", {
+                                label: option.label,
+                                value: option.value,
+                              });
                               certificateMainInfoChange(
                                 "intCertificateTypeID",
                                 option.value
@@ -381,15 +394,17 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                             name="intIssuingAuthorityID"
                             register={register}
                             value={
-                              certificateEditInfo.intIssuingAuthorityID
-                                ? certificateEditInfo.intIssuingAuthorityID
-                                : ""
+                              certificateEditInfo.issuing_authority
                             }
                             onChange={(option) => {
                               certificateMainInfoChange(
                                 "intIssuingAuthorityName",
                                 option.label
                               );
+                              certificateMainInfoChange("issuing_authority", {
+                                label: option.label,
+                                value: option.value,
+                              });
                               certificateMainInfoChange(
                                 "intIssuingAuthorityID",
                                 option.value
@@ -708,12 +723,16 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                           rules={{ required: false }}
                           name="intCertificateStatusID"
                           register={register}
-                          value={certificateEditInfo.intCertificateStatusID}
+                          value={certificateEditInfo.status}
                           onChange={(option) => {
                             certificateMainInfoChange(
                               "strCertificateStatusName",
                               option.label
                             );
+                            certificateMainInfoChange("status", {
+                              label: option.label,
+                              value: option.value,
+                            });
                             certificateMainInfoChange(
                               "intCertificateStatusID",
                               option.value
