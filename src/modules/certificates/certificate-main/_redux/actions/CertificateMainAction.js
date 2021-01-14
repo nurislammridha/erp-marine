@@ -114,6 +114,9 @@ export const MainCertificateCreateAction = (certificateInfoInput) => async (
 export const MainCertificateUpdateAction = (certificateInfoInput, id) => async (
   dispatch
 ) => {
+  console.log('certificateInfoInput', certificateInfoInput);
+  // return false;
+  
   const vesselID = getVesselId();
   if (vesselID === null) {
     certificateInfoInput.intVesselID = 1;
@@ -124,6 +127,10 @@ export const MainCertificateUpdateAction = (certificateInfoInput, id) => async (
 
   if (certificateInfoInput.intCertificateID === null) {
     showToast("error", "Certificate can't be blank!");
+    return false;
+  }
+  if (certificateInfoInput.category === null) {
+    showToast("error", "Certificate category can't be blank!");
     return false;
   }
   if (certificateInfoInput.intCategoryID === null) {
@@ -270,9 +277,9 @@ export const certificateMultipleDataAdd = (data, isEdit = false) => (dispatch) =
     strCertificateStatusName: data.strCertificateStatusName,
     isActive: true,
   };
-  if(!isEdit){
+  if (!isEdit) {
     dispatch({ type: Types.ADD_MULTIPLE_DATA, payload: singleDetail });
-  }else{
+  } else {
     dispatch({ type: Types.ADD_MULTIPLE_DATA_EDIT, payload: singleDetail });
   }
 };
@@ -283,25 +290,25 @@ export const multipleAttachmentAdd = (data, isEdit = false) => (dispatch) => {
     filePreviewUrl: data.filePreviewUrl,
   };
 
-  if(!isEdit){
+  if (!isEdit) {
     dispatch({ type: Types.ADD_MULTIPLE_DATA_ATTACHMENT, payload: singleDetail });
-  }else{
+  } else {
     dispatch({ type: Types.ADD_MULTIPLE_DATA_ATTACHMENT_EDIT, payload: singleDetail });
   }
 };
 
 export const certificateMultipleDataDelete = (index, isEdit = false) => (dispatch) => {
-  if(!isEdit){
+  if (!isEdit) {
     dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_DATA, payload: index });
-  }else{
+  } else {
     dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_DATA_EDIT, payload: index });
   }
 };
 
 export const certificateMultipleAttachmentDelete = (index, isEdit = false) => (dispatch) => {
-  if(!isEdit){
+  if (!isEdit) {
     dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_ATTACHMENT, payload: index });
-  }else{
+  } else {
     dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_ATTACHMENT_EDIT, payload: index });
   }
 };
@@ -422,11 +429,15 @@ export const getMainCertificateDeteailByID = (id) => (dispatch) => {
       if (data.dteLastEndorsementDate === null) {
         data.dteLastEndorsementDate = '';
       }
-
-      data.category = {
-        label: data.category.strCertificateCategoryName,
-        value: parseInt(data.category.intCategoryID),
+      if (data.category !== null) {
+        data.category = {
+          label: data.category.strCertificateCategoryName,
+          value: parseInt(data.category.intCategoryID),
+        }
+      } else {
+        data.category = ''
       }
+
       if (data.certificate !== null) {
         data.certificate = {
           label: data.certificate.strCertificateName,

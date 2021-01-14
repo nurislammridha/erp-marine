@@ -450,6 +450,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       className="forgotPasswordText  "
                       type="checkbox"
                       label="Not on Board"
+                      onChange={(e) => certificateMainInfoChange("intNotOnBoard", certificateInfoInput.intNotOnBoard == "0" ? "1": "0")}
                     />
                   </Form.Group>
                 </div>
