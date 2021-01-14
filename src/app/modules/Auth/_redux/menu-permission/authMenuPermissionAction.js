@@ -238,6 +238,23 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
             // },
           ],
         },
+        {
+          subModuleName: "Laytime",
+          subModuleRouteUrl: "/voyage/laytime/laytimelist",
+          subModuleIcon: "menu-bullet menu-bullet-dot",
+          features: [
+            {
+              featureName: "Laytime List",
+              featureRouteUrl: "/voyage/laytime/laytimelist",
+              featureIcon: "menu-bullet menu-bullet-dot",
+            },
+            {
+              featureName: "Laytime Calculation",
+              featureRouteUrl: "/voyage/laytime/laytimeinfo",
+              featureIcon: "menu-bullet menu-bullet-dot",
+            },
+          ],
+        },
       ],
     },
 
