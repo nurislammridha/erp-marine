@@ -4,7 +4,7 @@ import React from "react";
 import { Line, Polar } from "react-chartjs-2";
 const PolarChart = () => {
   const data = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    // labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
     datasets: [
       {
         data: [33, 53, 85, 41, 44, 65],

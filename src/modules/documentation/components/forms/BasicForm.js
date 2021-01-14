@@ -120,7 +120,7 @@ const BasicForm = () => {
                 </Form.Label>
                 <Form.Control as="textarea" rows="3" />
               </Form.Group> */}
-            <div className="row">
+            <div className="form-group row">
               <div className="col-xl-3 col-lg-3 col-md-6">
                 <Form.Group>
                   <Form.Label className="formFont pl-1">Search</Form.Label>
@@ -156,7 +156,7 @@ const BasicForm = () => {
                   </InputGroup>
                 </Form.Group>
               </div> */}
-              <div className="col-lg-3 col-md-6">
+              <div className="col-lg-3 col-md-6 mb-2">
                 <label className="formFont">Pic an image</label>
                 <div className="custom-file formHeight">
                   <input
