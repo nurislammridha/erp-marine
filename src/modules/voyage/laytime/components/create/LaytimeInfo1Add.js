@@ -144,17 +144,46 @@ const LaytimeInfo1Add = () => {
                             </div>
 
                             <div className="col-md-4">
-                                <div className="border rounded mt-8">
-                                    <Form.Check
-                                        className="m-3"
-                                        type="radio"
-                                        label="REVERSIBLE"
-                                    />
-                                    <Form.Check
-                                        className="m-3"
-                                        type="radio"
-                                        label="NON-REVERSIBLE"
-                                    />
+                                <div className="border rounded">
+                                    <div className="row">
+                                        <div className="col-sm-6">
+                                            <Form.Check
+                                                className="m-3"
+                                                type="radio"
+                                                label="REVERSIBLE"
+                                            />
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <Form.Check
+                                                className="m-3"
+                                                type="radio"
+                                                label="NON-REVERSIBLE"
+                                            />
+                                        </div>
+                                    </div>
+                                    <hr></hr>
+                                    <div className="row m-3">
+                                        <Form.Check
+                                            className=""
+                                            type="checkbox"
+                                            label="Loading Port"
+                                        />
+                                        <a>
+                                            {<i class="fas fa-file ml-10"
+                                                onClick={() => handleClick()}></i>}
+                                        </a>
+                                    </div>
+                                    <div className="row m-3">
+                                        <Form.Check
+                                            className=""
+                                            type="checkbox"
+                                            label="Discharge Port"
+                                        />
+                                        <a>
+                                            {<i class="fas fa-file ml-6"
+                                                onClick={() => handleClick()}></i>}
+                                        </a>
+                                    </div>
                                 </div>
                                 <div className="border rounded mt-5">
                                     <Form.Check
@@ -167,31 +196,6 @@ const LaytimeInfo1Add = () => {
                                         type="radio"
                                         label="Not Always On Demurrage"
                                     />
-                                </div>
-                                <div className="border rounded mt-5">
-
-                                    <div className="row m-3">
-                                        <Form.Check
-                                            className=""
-                                            type="checkbox"
-                                            label="Loading Port"
-                                        />
-                                        <a>
-                                            {<i class="fas fa-file ml-3"
-                                                onClick={() => handleClick()}></i>}
-                                        </a>
-                                    </div>
-                                    <div className="row m-3">
-                                        <Form.Check
-                                            className=""
-                                            type="checkbox"
-                                            label="Discharge Port"
-                                        />
-                                        <a>
-                                            {<i class="fas fa-file ml-3"
-                                                onClick={() => handleClick()}></i>}
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
