@@ -5,6 +5,7 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import LaytimeDetail from '../detail/LaytimeDetail';
+import LaytimeMultipleAdd from './LaytimeMultipleAdd';
 
 const LaytimeInfo2Add = () => {
 
@@ -304,7 +305,9 @@ const LaytimeInfo2Add = () => {
                     <LaytimeDetail />
                 </div>
             </div>
-
+            <div>
+                <LaytimeMultipleAdd />
+            </div>
 
         </div>
     );
