@@ -138,7 +138,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
             <div className="card card-custom gutter-b">
               <div className="card-header">
                 <div className="card-title">
-                  <h3 className="card-label">Certificate Edit</h3>
+                  <h3 className="card-label">Certificate Edit <span className="badge badge-primary">{certificateEditInfo.strCustomeCode}</span></h3>
                 </div>
               </div>
               <div className="card-body">

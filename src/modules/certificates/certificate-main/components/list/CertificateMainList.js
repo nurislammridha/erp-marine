@@ -136,7 +136,7 @@ const CertificateMainList = () => {
               />
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridState">
+            {/* <Form.Group as={Col} controlId="formGridState">
               <RHFInput
                 as={<Select options={certificateExpireDaysList} />}
                 rules={{ required: true }}
@@ -152,7 +152,7 @@ const CertificateMainList = () => {
                 }}
                 setValue={setValue}
               />
-            </Form.Group>
+            </Form.Group> */}
 
             <i className="fas fa-filter tableFilter mt-3 mr-2"></i>
             <i className="far fa-filter"></i>
@@ -265,9 +265,9 @@ const CertificateMainList = () => {
                 <span className="dot bg-row-0-days ml-5"></span>
                 <span className="status-text ml-5">Expired</span>
                 <span className="dot bg-row-30-between ml-5"></span>
-                <span className="status-text ml-5">Due 30 Days</span>
+                <span className="status-text ml-5">Due Between 30 Days</span>
                 <span className="dot bg-row-60-days ml-5"></span>
-                <span className="status-text ml-5">Due 60 Days</span>
+                <span className="status-text ml-5">Due Between 60 Days</span>
                 <span className="dot bg-row-more-60-days ml-5"></span>
                 <span className="status-text ml-5">Due More Than 60 Days</span>
               </div>

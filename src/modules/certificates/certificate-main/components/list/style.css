@@ -47,3 +47,15 @@ span.dot.bg-row-more-60-days {
     background: #fff;
     border: 1px solid lightgray!important;
 }
+
+.custome-dots {
+    padding: 0px;
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
