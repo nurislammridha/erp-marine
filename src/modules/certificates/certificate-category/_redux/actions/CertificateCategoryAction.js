@@ -10,7 +10,9 @@ export const handleCertificateCategoryInput = (name, value) => (dispatch) => {
   dispatch({ type: Types.CERTIFICATE_CATEGORY_CREATE, payload: categoryData });
 };
 
-export const certificatecategorySubmitAction = (getCategoryInpuData) => (dispatch) => {
+export const certificatecategorySubmitAction = (getCategoryInpuData) => (
+  dispatch
+) => {
   let responseList = {
     isLoading: true,
     data: {},
@@ -21,15 +23,13 @@ export const certificatecategorySubmitAction = (getCategoryInpuData) => (dispatc
     payload: responseList,
   });
 
- 
-
   let postUrl = `${process.env.REACT_APP_API_URL}certificate/category`;
-  if(getCategoryInpuData.intParentsCategoryID == null){
-    getCategoryInpuData.intParentsCategoryID=0
+  if (getCategoryInpuData.intParentsCategoryID == null) {
+    getCategoryInpuData.intParentsCategoryID = 0;
   }
   axios
     .post(postUrl, getCategoryInpuData)
-    .then(function (response) {
+    .then(function(response) {
       responseList.data = response.data;
       responseList.isLoading = false;
       responseList.status = response.data.status;
@@ -39,15 +39,18 @@ export const certificatecategorySubmitAction = (getCategoryInpuData) => (dispatc
           type: Types.CERTIFICATE_CATEGORY_STORE,
           payload: responseList,
         });
-        if(getCategoryInpuData.intParentsCategoryID !== null){
-          dispatch(getCertificateChildCategoryData(getCategoryInpuData.intParentsCategoryID));
+        if (getCategoryInpuData.intParentsCategoryID !== null) {
+          dispatch(
+            getCertificateChildCategoryData(
+              getCategoryInpuData.intParentsCategoryID
+            )
+          );
         }
       } else {
         showToast("error", response.data.message);
       }
     })
-    .catch(function (error) {
-
+    .catch(function(error) {
       responseList.isLoading = false;
       const message =
         "Something went wrong ! Please fill all inputs and try again !";
@@ -67,7 +70,7 @@ export const getCertificateCategoryListData = (
 ) => async (dispatch) => {
   let response = {
     certificates: [],
-    certificateCategoryList :[],
+    certificateCategoryList: [],
     status: false,
     message: "",
     isLoading: true,
@@ -85,7 +88,8 @@ export const getCertificateCategoryListData = (
     url += `?isPaginated=1&paginateNo=15`;
   }
   try {
-    await axios.get(url)
+    await axios
+      .get(url)
       .then((res) => {
         const { data, message, status } = res.data;
         response.status = status;
@@ -107,27 +111,27 @@ export const getCertificateCategoryListData = (
   dispatch({ type: Types.GET_CERTIFICATE_CATEGORY_LIST, payload: response });
 };
 
-
-
 export const getCertificateParentCategoryData = () => (dispatch) => {
   const url = `${process.env.REACT_APP_API_URL}certificate/category/parent-categories/list`;
-  axios.get(url)
-    .then((res) => {
-      dispatch({ type: Types.GET_CERTIFICATE_PARENT_CATEGORY_LIST, payload: res.data.data });
-    })
+  axios.get(url).then((res) => {
+    dispatch({
+      type: Types.GET_CERTIFICATE_PARENT_CATEGORY_LIST,
+      payload: res.data.data,
+    });
+  });
 };
 
 export const getCertificateChildCategoryData = (parentID) => (dispatch) => {
   const url = `${process.env.REACT_APP_API_URL}certificate/category/child-categories/list/${parentID}`;
-  axios.get(url)
-    .then((res) => {
-      dispatch({ type: Types.GET_CERTIFICATE_CHILD_CATEGORY_LIST, payload: res.data.data });
-    })
+  axios.get(url).then((res) => {
+    dispatch({
+      type: Types.GET_CERTIFICATE_CHILD_CATEGORY_LIST,
+      payload: res.data.data,
+    });
+  });
 };
 
-
 export const setCertificateCategoryEditValue = (editValue) => (dispatch) => {
-  // console.log('cHECK editValue', editValue);
   const formData = {
     strCertificateCategoryName: editValue.strCertificateCategoryName,
     isActive: editValue.isActive,
@@ -143,7 +147,6 @@ export const certificateCategoryEditAction = (
   certificateCategoryInput,
   intCategoryID
 ) => (dispatch) => {
-
   let responseList = {
     isLoading: true,
     data: {},
@@ -155,8 +158,9 @@ export const certificateCategoryEditAction = (
   });
 
   let editUrl = `${process.env.REACT_APP_API_URL}certificate/category/${intCategoryID}`;
-  axios.put(editUrl, certificateCategoryInput)
-    .then(function (response) {
+  axios
+    .put(editUrl, certificateCategoryInput)
+    .then(function(response) {
       responseList.data = response.data;
       responseList.isLoading = false;
       responseList.status = response.data.status;
@@ -170,7 +174,7 @@ export const certificateCategoryEditAction = (
         showToast("error", response.data.message);
       }
     })
-    .catch(function (error) {
+    .catch(function(error) {
       responseList.isLoading = false;
       const message =
         "Something went wrong ! Please fill all inputs and try again !";
@@ -180,6 +184,5 @@ export const certificateCategoryEditAction = (
         type: Types.EDIT_CERTIFICATE_CATEGORY,
         payload: responseList,
       });
-    }
-    )
+    });
 };
