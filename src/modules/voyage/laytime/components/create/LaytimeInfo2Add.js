@@ -6,10 +6,18 @@ import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import LaytimeDetail from '../detail/LaytimeDetail';
 import LaytimeMultipleAdd from './LaytimeMultipleAdd';
+import { useSelector, useDispatch } from "react-redux";
+import { handleChangeLaytimeDetailInput } from '../../_redux/actions/LaytimeAction';
 
 const LaytimeInfo2Add = () => {
 
     const { register, handleSubmit, errors, setValue } = useForm();
+    const dispatch = useDispatch();
+    const laytimeDetailInput = useSelector((state) => state.laytimeDetailInfo.laytimeDetailInput);
+
+    const handleChangeTextInput = (name, value) => {
+        dispatch(handleChangeLaytimeDetailInput(name, value));
+    };
 
     return (
         <div className="container">
@@ -57,7 +65,7 @@ const LaytimeInfo2Add = () => {
                                                     name=""
                                                     className="form-control formHeight"
                                                     placeholderText=""
-                                                    selected=""
+
                                                     ref={register({
                                                         required: true,
                                                         maxLength: 100,
@@ -65,12 +73,12 @@ const LaytimeInfo2Add = () => {
                                                 />
                                             </div>
                                             <div className="col-md-4 ml-4 pl-0" style={{ minWidth: "37%" }}>
-                                                <label className="form-label mt-2 formFont">Laytime Comp.</label>
+                                                <label className="form-label mt-2 formFont">Laytime Completed</label>
                                                 <DatePicker
                                                     name=""
                                                     className="form-control formHeight"
                                                     placeholderText=""
-                                                    selected=""
+
                                                     ref={register({
                                                         required: true,
                                                         maxLength: 100,
@@ -89,15 +97,27 @@ const LaytimeInfo2Add = () => {
                                                     name=""
                                                     className="fromStyle formHeight"
                                                     value=""
+                                                    onChange={(e) =>
+                                                        handleChangeTextInput(
+                                                            "intVoyageNumber",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                             <div className="col-md-5">
                                                 <label className="form-label mt-2 formFont">B/L Quantity</label>
                                                 <Form.Control
                                                     type="number"
-                                                    name=""
+                                                    name="numBLQty"
                                                     className="fromStyle formHeight"
-                                                    value=""
+                                                    value={laytimeDetailInput.numBLQty}
+                                                    onChange={(e) =>
+                                                        handleChangeTextInput(
+                                                            "numBLQty",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                         </div>
@@ -119,9 +139,15 @@ const LaytimeInfo2Add = () => {
                                                 <label className="form-label mt-2 formFont">Time Allowed</label>
                                                 <Form.Control
                                                     type="number"
-                                                    name=""
+                                                    name="numTimeAllowed"
                                                     className="fromStyle formHeight"
-                                                    value=""
+                                                    value={laytimeDetailInput.numTimeAllowed}
+                                                    onChange={(e) =>
+                                                        handleChangeTextInput(
+                                                            "numTimeAllowed",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                             <div className="col-md-5">
@@ -131,6 +157,12 @@ const LaytimeInfo2Add = () => {
                                                     name=""
                                                     className="fromStyle formHeight"
                                                     value=""
+                                                    onChange={(e) =>
+                                                        handleChangeTextInput(
+                                                            "intVoyageNumber",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                         </div>
@@ -142,6 +174,12 @@ const LaytimeInfo2Add = () => {
                                                     name=""
                                                     className="fromStyle formHeight"
                                                     value=""
+                                                    onChange={(e) =>
+                                                        handleChangeTextInput(
+                                                            "intVoyageNumber",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                             <div className="col-md-5">
@@ -151,6 +189,12 @@ const LaytimeInfo2Add = () => {
                                                     name=""
                                                     className="fromStyle formHeight"
                                                     value=""
+                                                    onChange={(e) =>
+                                                        handleChangeTextInput(
+                                                            "intVoyageNumber",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                         </div>
@@ -163,7 +207,7 @@ const LaytimeInfo2Add = () => {
                                                     name=""
                                                     className="form-control formHeight"
                                                     placeholderText=""
-                                                    selected=""
+
                                                     ref={register({
                                                         required: true,
                                                         maxLength: 100,
@@ -177,6 +221,12 @@ const LaytimeInfo2Add = () => {
                                                     name=""
                                                     className="fromStyle formHeight"
                                                     value=""
+                                                    onChange={(e) =>
+                                                        handleChangeTextInput(
+                                                            "intVoyageNumber",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                         </div>
@@ -188,6 +238,12 @@ const LaytimeInfo2Add = () => {
                                                     name=""
                                                     className="fromStyle formHeight"
                                                     value=""
+                                                    onChange={(e) =>
+                                                        handleChangeTextInput(
+                                                            "intVoyageNumber",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                             <div className="col-md-5">
@@ -197,6 +253,12 @@ const LaytimeInfo2Add = () => {
                                                     name=""
                                                     className="fromStyle formHeight"
                                                     value=""
+                                                    onChange={(e) =>
+                                                        handleChangeTextInput(
+                                                            "intVoyageNumber",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                         </div>
@@ -207,18 +269,30 @@ const LaytimeInfo2Add = () => {
                                                 <label className="form-label mt-2 formFont">Demurrage Rate</label>
                                                 <Form.Control
                                                     type="number"
-                                                    name=""
+                                                    name="numDemurrageRate"
                                                     className="fromStyle formHeight"
-                                                    value=""
+                                                    value={laytimeDetailInput.numDemurrageRate}
+                                                    onChange={(e) =>
+                                                        handleChangeTextInput(
+                                                            "numDemurrageRate",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                             <div className="col-md-5">
                                                 <label className="form-label mt-2 formFont">USD</label>
                                                 <Form.Control
                                                     type="number"
-                                                    name=""
+                                                    name="intDemurrageCurrID"
                                                     className="fromStyle formHeight"
-                                                    value=""
+                                                    value={laytimeDetailInput.intDemurrageCurrID}
+                                                    onChange={(e) =>
+                                                        handleChangeTextInput(
+                                                            "intDemurrageCurrID",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                         </div>
@@ -227,18 +301,30 @@ const LaytimeInfo2Add = () => {
                                                 <label className="form-label mt-2 formFont">Despatch Rate</label>
                                                 <Form.Control
                                                     type="number"
-                                                    name=""
+                                                    name="numDespatchRate"
                                                     className="fromStyle formHeight"
-                                                    value=""
+                                                    value={laytimeDetailInput.numDespatchRate}
+                                                    onChange={(e) =>
+                                                        handleChangeTextInput(
+                                                            "numDespatchRate",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                             <div className="col-md-5">
                                                 <label className="form-label mt-2 formFont">Percentage</label>
                                                 <Form.Control
                                                     type="number"
-                                                    name=""
+                                                    name="numDespatchRatePercent"
                                                     className="fromStyle formHeight"
-                                                    value=""
+                                                    value={laytimeDetailInput.numDespatchRatePercent}
+                                                    onChange={(e) =>
+                                                        handleChangeTextInput(
+                                                            "numDespatchRatePercent",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                         </div>
@@ -251,7 +337,7 @@ const LaytimeInfo2Add = () => {
                                                     name=""
                                                     className="form-control formHeight"
                                                     placeholderText=""
-                                                    selected=""
+
                                                     ref={register({
                                                         required: true,
                                                         maxLength: 100,
@@ -265,6 +351,12 @@ const LaytimeInfo2Add = () => {
                                                     name=""
                                                     className="fromStyle formHeight"
                                                     value=""
+                                                    onChange={(e) =>
+                                                        handleChangeTextInput(
+                                                            "intVoyageNumber",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                         </div>
@@ -273,9 +365,15 @@ const LaytimeInfo2Add = () => {
                                                 <label className="form-label mt-2 formFont">Load Rate</label>
                                                 <Form.Control
                                                     type="number"
-                                                    name=""
+                                                    name="numLodingOrDischargeRate"
                                                     className="fromStyle formHeight"
-                                                    value=""
+                                                    value={laytimeDetailInput.numLodingOrDischargeRate}
+                                                    onChange={(e) =>
+                                                        handleChangeTextInput(
+                                                            "numLodingOrDischargeRate",
+                                                            e.target.value
+                                                        )
+                                                    }
                                                 />
                                             </div>
                                             <div className="col-md-5">
