@@ -3,6 +3,7 @@ import Axios from "axios";
 import { showToast } from "../../../../master/utils/ToastHelper";
 import { getEmployeeId } from "../../../../../app/modules/Auth/_redux/authCrud";
 import { getCertificateName } from "../../../certificate-main/_redux/actions/CertificateMainAction";
+import { toast } from "react-toastify";
 
 export const handleChangeCertificateMasterInput = (name, value) => async (
   dispatch
@@ -18,21 +19,60 @@ export const handleChangeCertificateMasterInput = (name, value) => async (
   });
 };
 
-export const getCertificateMasterList = (searchValue = "", status = "") => async (dispatch) => {
+export const getCertificateMasterList = (
+  searchValue = "",
+  status = "",
+  page
+) => async (dispatch) => {
+  let response = {
+    certificateMasterList: [],
+    status: false,
+    message: "",
+    isLoading: true,
+    errors: [],
+  };
+
+  dispatch({ type: Types.GET_CERTIFICATE_MASTER_LIST, payload: response });
+
   let isActive = status == "" ? "" : parseInt(status);
   let url = `${process.env.REACT_APP_API_URL}certificate/certificateList`;
 
   if (searchValue !== "" || isActive !== "") {
-    url += `?search=${searchValue}&isActive=${isActive}`;
+    url += `?search=${searchValue}&isActive=${isActive}&isPaginated=1&paginateNo=${page}`;
+  } else {
+    url += `?isPaginated=1&paginateNo=${page}`;
   }
-  Axios.get(url)
-    .then((res) => {
-      console.log('res', res);
-      dispatch({ type: Types.GET_CERTIFICATE_MASTER_LIST, payload: res.data.data });
-    });
+  // Axios.get(url).then((res) => {
+  //   console.log("res", res);
+  //   dispatch({
+  //     type: Types.GET_CERTIFICATE_MASTER_LIST,
+  //     payload: res.data.data,
+  //   });
+  // });
+  try {
+    await Axios.get(url)
+      .then((res) => {
+        const { data, message, status } = res.data;
+        response.status = status;
+        response.certificateMasterList = data.data;
+        response.message = message;
+        response.certificateMasterPaginatedData = data;
+        response.isLoading = false;
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
+  } catch (error) {
+    response.message = "Something Went Wrong !";
+    toast.error(error);
+  }
+  response.isLoading = false;
+  dispatch({ type: Types.GET_CERTIFICATE_MASTER_LIST, payload: response });
 };
 
-export const certificateMasterSubmitAction = (CertificateMasterInput) => (dispatch) => {
+export const certificateMasterSubmitAction = (CertificateMasterInput) => (
+  dispatch
+) => {
   let responseList = {
     isLoading: true,
     data: {},
@@ -44,9 +84,8 @@ export const certificateMasterSubmitAction = (CertificateMasterInput) => (dispat
   });
 
   let postUrl = `${process.env.REACT_APP_API_URL}certificate/certificateList`;
-  Axios
-    .post(postUrl, CertificateMasterInput)
-    .then(function (response) {
+  Axios.post(postUrl, CertificateMasterInput)
+    .then(function(response) {
       responseList.data = response.data;
       responseList.isLoading = false;
       responseList.status = response.data.status;
@@ -61,7 +100,7 @@ export const certificateMasterSubmitAction = (CertificateMasterInput) => (dispat
         showToast("error", response.data.message);
       }
     })
-    .catch(function (error) {
+    .catch(function(error) {
       responseList.isLoading = false;
       const message =
         "Something went wrong ! Please fill all inputs and try again !";
@@ -74,11 +113,14 @@ export const certificateMasterSubmitAction = (CertificateMasterInput) => (dispat
     });
 };
 
-export const setMasterCertificateEditValue = (certificateMasterInput) => (dispatch) => {
-  console.log('certificateMasterInput', certificateMasterInput);
+export const setMasterCertificateEditValue = (certificateMasterInput) => (
+  dispatch
+) => {
+  console.log("certificateMasterInput", certificateMasterInput);
   const formData = {
     strCertificateName: certificateMasterInput.strCertificateName,
-    strCertificateCategoryName: certificateMasterInput.strCertificateCategoryName,
+    strCertificateCategoryName:
+      certificateMasterInput.strCertificateCategoryName,
     isActive: certificateMasterInput.isActive,
     intActionBy: 1272,
   };
@@ -88,7 +130,10 @@ export const setMasterCertificateEditValue = (certificateMasterInput) => (dispat
   });
 };
 
-export const certificateMasterEditAction = (CertificateMasterInput, intCertificateID) => (dispatch) => {
+export const certificateMasterEditAction = (
+  CertificateMasterInput,
+  intCertificateID
+) => (dispatch) => {
   let responseList = {
     isLoading: true,
     data: {},
@@ -103,7 +148,7 @@ export const certificateMasterEditAction = (CertificateMasterInput, intCertifica
   let editUrl = `${process.env.REACT_APP_API_URL}certificate/certificateList/${intCertificateID}`;
 
   Axios.put(editUrl, CertificateMasterInput)
-    .then(function (response) {
+    .then(function(response) {
       responseList.data = response.data;
       responseList.isLoading = false;
       responseList.status = response.data.status;
@@ -117,7 +162,7 @@ export const certificateMasterEditAction = (CertificateMasterInput, intCertifica
         showToast("error", response.data.message);
       }
     })
-    .catch(function (error) {
+    .catch(function(error) {
       responseList.isLoading = false;
       const message =
         "Something went wrong ! Please fill all inputs and try again !";
