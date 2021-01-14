@@ -41,6 +41,7 @@ import CertificateTypeReducer from "../modules/certificates/certificate-types/_r
 import CertificateIssueAuthorityReducer from "../modules/certificates/issue-authority/_redux/reducers/CertificateIssueAuthorityReducer";
 import CertificateCategoryReducer from "../modules/certificates/certificate-category/_redux/reducers/CertificateCategoryReducer";
 import CertificateListReducer from "../modules/certificates/certificate-master/_redux/reducers/CertificateListReducer";
+import LaytimeInfoReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeInfoReducer";
 
 /** 
 | Domain : CCO
@@ -96,8 +97,9 @@ export const rootReducer = combineReducers({
   certificateMainInfo: CertificateMainReducer,
   certificateIssueAuthorityInfo: CertificateIssueAuthorityReducer,
   CertificateCategoryReducer: CertificateCategoryReducer,
-  CertificateListReducer:CertificateListReducer,
+  CertificateListReducer: CertificateListReducer,
   certificateTypeInfo: CertificateTypeReducer,
+  laytimeInfo: LaytimeInfoReducer
 });
 
 export function* rootSaga() {
