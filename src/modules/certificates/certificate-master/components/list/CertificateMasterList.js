@@ -187,7 +187,7 @@ const CertificateMasterList = () => {
               handleClose={() => handleClose()}
               modalTitle={"Certificate Master Edit"}
             >
-              <CertificateMasterEdit />
+              <CertificateMasterEdit editData={editItem}/>
             </SimpleModal>
           </div>
         </>

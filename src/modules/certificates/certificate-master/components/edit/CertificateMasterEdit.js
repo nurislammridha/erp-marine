@@ -49,7 +49,6 @@ const CertificateMasterEdit = (props) => {
     (state) => state.certificateMainInfo.certificatesCategoryOptionData
   );
   const certificateMainInfoChange = (name, value, e = null) => {
-    console.log("Name", name, "value", value);
     dispatch(handleChangeCertificateMasterInput(name, value));
   };
 
