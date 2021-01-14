@@ -5,11 +5,15 @@
 }
 
 .bg-row-0-days {
-    background: #ffc0c7;
+    background: #ffc0c7!important;
 }
 
 .bg-row-30-between {
     background: #ffecee;
+}
+
+.bg-row-60-more {
+    background: #d9ffe4;
 }
 
 .bg-row-30-between td,
@@ -29,4 +33,17 @@
 
 .certificate-list tbody {
     border-bottom: 1px solid #eef0f8!important;
+}
+
+span.dot.bg-row-30-between {
+    background: #ffecee;
+}
+
+span.dot.bg-row-60-days {
+    background: #d9ffe4;
+}
+
+span.dot.bg-row-more-60-days {
+    background: #fff;
+    border: 1px solid lightgray!important;
 }
