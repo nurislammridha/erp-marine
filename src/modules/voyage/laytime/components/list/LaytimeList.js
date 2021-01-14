@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getLaytimeList } from '../../_redux/actions/LaytimeInfoAction';
+import moment from "moment";
 
 const LaytimeList = () => {
     const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const LaytimeList = () => {
                                     <Form.Check type="checkbox" />
                                 </th>
                                 <td>{item.intVoyageNumber}</td>
-                                <td>{item.dteCommencedDate}</td>
+                                <td>{moment(item.dteCommencedDate).format("YYYY-MM-DD")}</td>
                                 <td>Md Akij Noor</td>
                                 <td>23,00,00 USD</td>
                                 <td>{item.numCommision}</td>
