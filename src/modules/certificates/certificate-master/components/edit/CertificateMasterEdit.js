@@ -68,7 +68,7 @@ const CertificateMasterEdit = (props) => {
     dispatch(
       certificateMasterEditAction(
         CertificateMasterInput,
-        CertificateMasterInput.intCertificateID
+        props.editData.intCertificateID
       )
     );
   };
