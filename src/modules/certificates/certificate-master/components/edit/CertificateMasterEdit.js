@@ -85,7 +85,7 @@ const CertificatesCategoryOptionData = useSelector((state) => state.certificateM
                         />
                     </div>
                     
-                    <div className="col-sm-12">
+                    <div className="col-sm-6">
                         <label className="form-label">Category Name</label>
                         <RHFInput
                             as={<Select options={CertificatesCategoryOptionData} />}
@@ -100,6 +100,18 @@ const CertificatesCategoryOptionData = useSelector((state) => state.certificateM
                               }}
                         />
                     </div>
+                    <div className="col-sm-6">
+                        <label className="form-label">Status</label>
+                      <RHFInput
+                        as={<Select options={action} />}
+                        rules={{ required: false }}
+                        name="isActive"
+                        register={register}
+                        value={action.label}
+                        onChange={(e) => certificateMainInfoChange("isActive", e.value)}
+                        setValue={setValue}
+                      />
+                      </div>
                 </div>
 
                 <div className="form-group row">
