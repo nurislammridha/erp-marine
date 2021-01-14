@@ -7,6 +7,8 @@ import DougHuntChart from "../../../modules/master/components/Chart/DougHuntChar
 import DashBoardCard from "../../../modules/dashboard/components/DashBoardCard";
 import CircularProgressBar from "../../../modules/master/components/CircularProgressBar/CircularProgressBar";
 import LineChart from "../../../modules/master/components/Chart/LineChart";
+import TableCircularProgressBar from "../../../modules/master/components/CircularProgressBar/TableCircularProgressBar";
+import PolarChart from "../../../modules/master/components/Chart/PolarChart";
 
 export function Dashboard() {
   const uiService = useHtmlClassService();
@@ -36,11 +38,13 @@ export function Dashboard() {
             <LineChart />
           </div>
 
-          <div className="col-lg-6  col-12"></div>
+          <div className="col-lg-6  col-12">
+            {/* <CircularProgressBar /> */}
+            {/* <TableCircularProgressBar /> */}
+            <PolarChart />
+          </div>
         </div>
       </div>
-
-      <CircularProgressBar />
 
       {/* DashBoard design Ends 11:00   */}
       {/* <CustomeDesign /> */}
