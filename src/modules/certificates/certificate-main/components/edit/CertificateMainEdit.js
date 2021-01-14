@@ -34,6 +34,7 @@ import {
   getCertificateParentCategoryData,
 } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
 import PreviewAttachment from "../../../../master/components/previews/PreviewAttachment";
+import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
 
 const CertificateMainEdit = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -125,6 +126,10 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
 
   return (
     <>
+      {
+        !isEditLoaded &&
+        <LoadingSpinner text="Loading Certificate Details"/>
+      }
       {isEditLoaded && certificateEditInfo !== null && (
         <>
           <div className="container">
