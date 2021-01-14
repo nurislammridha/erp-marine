@@ -26,13 +26,13 @@ export class HtmlClassService {
       subheader_container: [],
       content: [],
       content_container: [],
-      footer_container: []
+      footer_container: [],
     };
 
     this.attributes = {
       aside_menu: {},
       header_mobile: {},
-      header_menu: {}
+      header_menu: {},
     };
 
     // init base layout
@@ -56,7 +56,10 @@ export class HtmlClassService {
 
   preInit(layoutConfig) {
     const updatedConfig = Object.assign({}, layoutConfig);
-    const headerSelfFixedDesktop = objectPath.get(updatedConfig, "header.self.fixed.desktop");
+    const headerSelfFixedDesktop = objectPath.get(
+      updatedConfig,
+      "header.self.fixed.desktop"
+    );
     const subheaderFixed = objectPath.get(updatedConfig, "subheader.fixed");
     if (subheaderFixed && headerSelfFixedDesktop) {
       // Page::setOption('layout', 'subheader/style', 'solid');
@@ -114,7 +117,10 @@ export class HtmlClassService {
    * Init Layout
    */
   initLayout() {
-    const selfBodyBackgroundImage = objectPath.get(this.config, "self.body.background-image");
+    const selfBodyBackgroundImage = objectPath.get(
+      this.config,
+      "self.body.background-image"
+    );
     if (selfBodyBackgroundImage) {
       document.body.style.backgroundImage = `url("${selfBodyBackgroundImage}'")`;
     }
@@ -122,7 +128,7 @@ export class HtmlClassService {
     const _selfBodyClass = objectPath.get(this.config, "self.body.class");
     if (_selfBodyClass) {
       const bodyClasses = _selfBodyClass.toString().split(" ");
-      bodyClasses.forEach(cssClass => document.body.classList.add(cssClass));
+      bodyClasses.forEach((cssClass) => document.body.classList.add(cssClass));
     }
 
     // Offcanvas directions
@@ -134,14 +140,17 @@ export class HtmlClassService {
   /**
    * Init Loader
    */
-  initLoader() { }
+  initLoader() {}
 
   /**
    * Init Header
    */
   initHeader() {
     // Fixed header
-    const headerSelfFixedDesktop = objectPath.get(this.config, "header.self.fixed.desktop");
+    const headerSelfFixedDesktop = objectPath.get(
+      this.config,
+      "header.self.fixed.desktop"
+    );
     if (headerSelfFixedDesktop) {
       document.body.classList.add("header-fixed");
       objectPath.push(this.classes, "header", "header-fixed");
@@ -149,16 +158,25 @@ export class HtmlClassService {
       document.body.classList.add("header-static");
     }
 
-    const headerSelfFixedMobile = objectPath.get(this.config, "header.self.fixed.mobile");
+    const headerSelfFixedMobile = objectPath.get(
+      this.config,
+      "header.self.fixed.mobile"
+    );
     if (headerSelfFixedMobile) {
       document.body.classList.add("header-mobile-fixed");
       objectPath.push(this.classes, "header_mobile", "header-mobile-fixed");
     }
 
     // Menu
-    const headerMenuSelfDisplay = objectPath.get(this.config, "header.menu.self.display");
+    const headerMenuSelfDisplay = objectPath.get(
+      this.config,
+      "header.menu.self.display"
+    );
     if (headerMenuSelfDisplay) {
-      const headerMenuSelfLayout = objectPath.get(this.config, "header.menu.self.layout");
+      const headerMenuSelfLayout = objectPath.get(
+        this.config,
+        "header.menu.self.layout"
+      );
       const headerMenuLayoutCssClass = `header-menu-layout-${headerMenuSelfLayout}`;
       objectPath.push(this.classes, "header_menu", headerMenuLayoutCssClass);
 
@@ -188,7 +206,10 @@ export class HtmlClassService {
 
     // Fixed content head
     const subheaderFixed = objectPath.get(this.config, "subheader.fixed");
-    const headerSelfFixedDesktop = objectPath.get(this.config, "header.self.fixed.desktop");
+    const headerSelfFixedDesktop = objectPath.get(
+      this.config,
+      "header.self.fixed.desktop"
+    );
     if (subheaderFixed && headerSelfFixedDesktop) {
       document.body.classList.add("subheader-fixed");
       // Page::setOption('layout', 'subheader/style', 'solid'); => See preInit()
@@ -271,14 +292,19 @@ export class HtmlClassService {
 
     // Menu
     // Dropdown Submenu
-    const asideMenuDropdown = objectPath.get(this.config, "aside.menu.dropdown");
+    const asideMenuDropdown = objectPath.get(
+      this.config,
+      "aside.menu.dropdown"
+    );
     if (asideMenuDropdown) {
       objectPath.push(this.classes, "aside_menu", "aside-menu-dropdown");
       this.attributes.aside_menu["data-menu-dropdown"] = "1";
     }
 
     // Scrollable Menu
-    this.attributes.aside_menu["data-menu-scroll"] = asideMenuDropdown ? "0" : "1";
+    this.attributes.aside_menu["data-menu-scroll"] = asideMenuDropdown
+      ? "0"
+      : "1";
 
     const asideSubmenuDHoverTimeout = objectPath.get(
       this.config,
