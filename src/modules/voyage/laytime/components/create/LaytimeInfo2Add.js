@@ -49,8 +49,8 @@ const LaytimeInfo2Add = () => {
                                                 value=""
                                             />
                                         </div>
-                                        <div className="row col-md-6">
-                                            <div className="col-md-7">
+                                        <div className="row col-md-6 p-0">
+                                            <div className="col-md-6 p-0 mr-4">
                                                 <label className="form-label mt-2 formFont">Laytime Commenced</label>
                                                 <DatePicker
                                                     name=""
@@ -63,7 +63,7 @@ const LaytimeInfo2Add = () => {
                                                     })}
                                                 />
                                             </div>
-                                            <div className="col-md-5">
+                                            <div className="col-md-4 ml-4 pl-0" style={{ minWidth: "37%" }}>
                                                 <label className="form-label mt-2 formFont">Laytime Comp.</label>
                                                 <DatePicker
                                                     name=""
