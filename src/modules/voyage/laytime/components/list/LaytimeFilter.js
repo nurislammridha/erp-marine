@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, Button, Col } from "react-bootstrap";
 import DatePicker from '../datePicker/DatePicker';
+import { Link } from 'react-router-dom';
 
 const LaytimeFIlter = () => {
     return (
@@ -26,9 +27,11 @@ const LaytimeFIlter = () => {
                 <div className="col-md-2 mr-0 text-right">
                     <i className="fas fa-filter tableFilter mt-3 mr-2"></i>
                     <i className="far fa-filter"></i>
-                    <Button className="btn btn-sm" variant="primary">
-                        Calculate
-                </Button>
+                    <Link to="/voyage/laytime/laytimeinfo">
+                        <Button className="btn btn-sm" variant="primary">
+                            Calculate
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </div>
