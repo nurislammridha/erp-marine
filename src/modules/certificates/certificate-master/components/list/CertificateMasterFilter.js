@@ -9,6 +9,7 @@ import { getCertificateMasterList } from "../../_redux/actions/CertificateListAc
 const CertificateMasterFilter = () => {
   const [search, setSearch] = useState("");
   const [type, setType] = useState("");
+  const [currentPage, setCurrentPage] = useState(15);
   const dispatch = useDispatch();
   const CertificateMasterInput = useSelector(
     (state) => state.CertificateListReducer.certificateMasterInput
@@ -26,10 +27,10 @@ const CertificateMasterFilter = () => {
   ];
   const changeSearch = (value) => {
     setSearch(value);
-    dispatch(getCertificateMasterList(value, type));
+    dispatch(getCertificateMasterList(value, type, currentPage));
   };
   useEffect(() => {
-    dispatch(getCertificateMasterList());
+    dispatch(getCertificateMasterList("", "", currentPage));
   }, []);
   return (
     <>
@@ -53,7 +54,9 @@ const CertificateMasterFilter = () => {
           value={CertificateMasterInput.isActive}
           onChange={(option) => {
             setType(option.value);
-            dispatch(getCertificateMasterList(search, option.value));
+            dispatch(
+              getCertificateMasterList(search, option.value, currentPage)
+            );
           }}
           setValue={setValue}
         />
