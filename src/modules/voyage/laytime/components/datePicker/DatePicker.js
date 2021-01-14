@@ -4,18 +4,16 @@ import "react-dates/lib/css/_datepicker.css";
 import "react-dates/initialize";
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 
-const TestDate = () => {
+const DatePicker = () => {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [focusedInput, setFocusedInput] = useState("");
     const [isopen, setIsopen] = useState(false);
     return (
-        <div className="App">
-            <h1>Hello CodeSandbox</h1>
-
-            <div>
+        <div className="row">
+            <div className="col-sm-4">
                 <Dropdown>
-                    <Dropdown.Toggle variant="light" id="dropdown-basic">
+                    <Dropdown.Toggle variant="light" id="dropdown-basic" className="btn btn-sm">
                         Choose Date
           </Dropdown.Toggle>
 
@@ -31,8 +29,12 @@ const TestDate = () => {
             </Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
+            </div>
+            <div className="col-sm-8">
+
                 <div className={(isopen === false) ? "d-none" : "d-block"}>
                     <DateRangePicker
+
                         startDate={startDate} // momentPropTypes.momentObj or null,
                         startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
                         endDate={endDate} // momentPropTypes.momentObj or null,
@@ -45,11 +47,13 @@ const TestDate = () => {
                         onFocusChange={(focusedInput) => setFocusedInput(focusedInput)} // PropTypes.func.isRequired,
                     />
                 </div>
-
             </div>
+
+
+
         </div>
 
     );
 }
 
-export default TestDate;
+export default DatePicker;
