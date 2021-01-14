@@ -16,7 +16,7 @@ import {
   getCertificateType,
   getCertificateIssueBy,
   getCertificateName,
-  MainCertificateCreateAction,
+  MainCertificateUpdateAction,
   GetVesselTypeAction,
   getCertificateStatusData,
   certificateMultipleDataAdd,
@@ -43,7 +43,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
   const { id } = useParams();
 
   const certificateMainInfoChange = (name, value, e = null) => {
-    dispatch(handleChangeProductInputAction(name, value, e));
+    dispatch(handleChangeProductInputAction(name, value, e, true));
   };
   const serverErrors = useSelector((state) => state.certificateMainInfo.errors);
   const isLoading = useSelector((state) => state.certificateMainInfo.isLoading);
@@ -91,16 +91,18 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
     dispatch(getMainCertificateDeteailByID(id));
   }, []);
 
-  const onSubmit = async (e) => {
-    // dispatch(MainCertificateCreateAction(certificateEditInfo));
+  const onSubmit = async (data) => {
+    console.log('data', data);
+    
+    dispatch(MainCertificateUpdateAction(certificateEditInfo, id));
   };
 
   const addMultipleData = () => {
-    dispatch(certificateMultipleDataAdd(certificateEditInfo));
+    dispatch(certificateMultipleDataAdd(certificateEditInfo, true));
   };
 
   const deleteMultipleData = (index) => {
-    dispatch(certificateMultipleDataDelete(index));
+    dispatch(certificateMultipleDataDelete(index, true));
   };
 
   const getFiles = (files) => {
@@ -115,7 +117,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
   };
 
   const deleteMultipleAttachmentData = (index) => {
-    dispatch(certificateMultipleAttachmentDelete(index));
+    dispatch(certificateMultipleAttachmentDelete(index, true));
   };
 
   const [showCategoryModal, setShowCategoryModal] = useState(false);
@@ -123,9 +125,6 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
   const [showCertificateModal, setShowCertificateModal] = useState(false);
   const [showIssuedByModal, setShowIssuedByModal] = useState(false);
   const startDate = new Date().toLocaleDateString();
-
-  console.log('certificateEditInfo', certificateEditInfo);
-  
 
   return (
     <>
@@ -426,11 +425,11 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                         </div>
                       </div>
 
-                      <div className="inputError margin-minus-10">
+                      {/* <div className="inputError margin-minus-10">
                         {errors.intIssuingAuthorityID &&
                           errors.intIssuingAuthorityID.type === "required" &&
-                          "Certificate Name Can't be blank"}
-                      </div>
+                          "Certificate Issuing Authority Name Can't be blank"}
+                      </div> */}
                     </div>
                     <div className="col-lg-3">
                       <label className="form-label mt-2 formFont ">
@@ -518,8 +517,8 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                         })}
                       />
                       <div className="inputError margin-minus-8">
-                        {errors.dteCertificateValidUntil &&
-                          errors.dteCertificateValidUntil.type === "required" &&
+                        {errors.dteCertificateIssueDate &&
+                          errors.dteCertificateIssueDate.type === "required" &&
                           "Issue Date can't be blank"}
                       </div>
                     </div>
@@ -1005,7 +1004,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                           className="mr-4 saveButton text-white btn"
                           disabled={true}
                         >
-                          <span>Submitting</span>
+                          <span>Saving</span>
                           <span className="ml-3 spinner spinner-white"></span>
                         </button>
                       )}
@@ -1015,7 +1014,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                           type="submit"
                           className="mr-4 saveButton text-white btn"
                         >
-                          <span>Submit</span>
+                          <span>Save</span>
                         </button>
                       )}
                     </div>

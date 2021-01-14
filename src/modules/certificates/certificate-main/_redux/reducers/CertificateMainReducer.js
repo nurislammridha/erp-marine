@@ -118,6 +118,15 @@ const CertificateMainReducer = (state = initialState, action) => {
       };
       break;
 
+    case Types.ADD_MULTIPLE_DATA_EDIT:
+      const multipleDatasetEdit = { ...state.certificateEditInfo };
+      multipleDatasetEdit.certificateDates = [action.payload, ...multipleDatasetEdit.certificateDates];
+      return {
+        ...state,
+        certificateEditInfo: multipleDatasetEdit,
+      };
+      break;
+
     case Types.DELETE_SURVEY_MULTIPLE_DATA:
       const multiDataSetOld = { ...state.certificateMainInfo };
       multiDataSetOld.certificateDates.splice(action.payload, 1);
@@ -127,12 +136,30 @@ const CertificateMainReducer = (state = initialState, action) => {
       };
       break;
 
+    case Types.DELETE_SURVEY_MULTIPLE_DATA_EDIT:
+      const multiDataSetOldEdit = { ...state.certificateEditInfo };
+      multiDataSetOldEdit.certificateDates.splice(action.payload, 1);
+      return {
+        ...state,
+        certificateEditInfo: multiDataSetOldEdit,
+      };
+      break;
+
     case Types.DELETE_SURVEY_MULTIPLE_ATTACHMENT:
       const multiDataSetAttachment = { ...state.certificateMainInfo };
       multiDataSetAttachment.multipleAttachments.splice(action.payload, 1);
       return {
         ...state,
         certificateMainInfo: multiDataSetAttachment,
+      };
+      break;
+
+    case Types.DELETE_SURVEY_MULTIPLE_ATTACHMENT_EDIT:
+      const multiDataSetAttachmentEdit = { ...state.certificateEditInfo };
+      multiDataSetAttachmentEdit.multipleAttachments.splice(action.payload, 1);
+      return {
+        ...state,
+        certificateEditInfo: multiDataSetAttachmentEdit,
       };
       break;
 
@@ -191,8 +218,8 @@ const CertificateMainReducer = (state = initialState, action) => {
         ...state,
         isLoading: action.payload,
       };
+
     case Types.GET_MAIN_CERTIFICATE_SINGLE_DATA:
-      console.log('action.payload :>> ', action.payload);
       return {
         ...state,
         certificateEditInfo: action.payload,
@@ -206,11 +233,20 @@ const CertificateMainReducer = (state = initialState, action) => {
         ...state,
         productEditData,
       };
+      
     case Types.MAIN_CERTIFICATE_UPDATE:
-      return {
-        certificateMainInfo: initialState.certificateMainInfo,
-        isLoading: false,
-      };
+      if (action.payload.status) {
+        return {
+          ...state,
+          certificateEditInfo: initialState.certificateEditInfo,
+          isLoading: false,
+        };
+      } else {
+        return {
+          ...state,
+          isLoading: false,
+        };
+      }
 
     // case Types.CERTIFICATE_DETAIL:
     //   return {

@@ -111,6 +111,78 @@ export const MainCertificateCreateAction = (certificateInfoInput) => async (
   });
 };
 
+export const MainCertificateUpdateAction = (certificateInfoInput, id) => async (
+  dispatch
+) => {
+  const vesselID = getVesselId();
+  if (vesselID === null) {
+    certificateInfoInput.intVesselID = 1;
+  } else {
+    certificateInfoInput.intVesselID = vesselID;
+  }
+  certificateInfoInput.intActionBy = getEmployeeId();
+
+  if (certificateInfoInput.intCertificateID === null) {
+    showToast("error", "Certificate can't be blank!");
+    return false;
+  }
+  if (certificateInfoInput.intCategoryID === null) {
+    showToast("error", "Certificate category can't be blank!");
+    return false;
+  }
+  if (certificateInfoInput.strCustomeCode === null) {
+    showToast("error", "Certificate Code can't be blank!");
+    return false;
+  }
+  if (certificateInfoInput.intIssuingAuthorityID === null) {
+    showToast("error", "Issue Autherity can't be blank!");
+    return false;
+  }
+
+  let responseList = {
+    isLoading: true,
+    data: {},
+    status: false,
+    message: "",
+  };
+
+  dispatch({
+    type: Types.CERTIFICATE_MAIN_SUBMITTING,
+    payload: responseList,
+  });
+
+  let postUrl = `${process.env.REACT_APP_API_URL}certificate/details/${id}`;
+  await Axios.put(postUrl, certificateInfoInput)
+    .then((response) => {
+      const { status, data, message } = response.data;
+      responseList.data = data;
+      responseList.isLoading = false;
+      responseList.status = status;
+      responseList.message = message;
+    })
+    .catch((error) => {
+      responseList.isLoading = false;
+      responseList.message =
+        "Something went wrong ! Please fill all inputs and try again !";
+    });
+
+  if (responseList.status) {
+    toast.success(responseList.message);
+  } else {
+    toast.error(responseList.message);
+  }
+
+  // dispatch({
+  //   type: Types.CERTIFICATE_MAIN_SUBMITTING,
+  //   payload: false,
+  // });
+
+  dispatch({
+    type: Types.CERTIFICATE_MAIN_SUBMIT,
+    payload: responseList,
+  });
+};
+
 export const getCertificateMainListAction = (
   page,
   searchText = null,
@@ -171,7 +243,7 @@ export const getCertificateMainListAction = (
   dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
 };
 
-export const certificateMultipleDataAdd = (data) => (dispatch) => {
+export const certificateMultipleDataAdd = (data, isEdit = false) => (dispatch) => {
   if (data.intCertificateID === null) {
     showToast("error", "Please select a certificate first !");
     return false;
@@ -198,23 +270,40 @@ export const certificateMultipleDataAdd = (data) => (dispatch) => {
     strCertificateStatusName: data.strCertificateStatusName,
     isActive: true,
   };
-  dispatch({ type: Types.ADD_MULTIPLE_DATA, payload: singleDetail });
+  if(!isEdit){
+    dispatch({ type: Types.ADD_MULTIPLE_DATA, payload: singleDetail });
+  }else{
+    dispatch({ type: Types.ADD_MULTIPLE_DATA_EDIT, payload: singleDetail });
+  }
 };
 
-export const multipleAttachmentAdd = (data) => (dispatch) => {
+export const multipleAttachmentAdd = (data, isEdit = false) => (dispatch) => {
   const singleDetail = {
     file: data.file,
     filePreviewUrl: data.filePreviewUrl,
   };
-  dispatch({ type: Types.ADD_MULTIPLE_DATA_ATTACHMENT, payload: singleDetail });
+
+  if(!isEdit){
+    dispatch({ type: Types.ADD_MULTIPLE_DATA_ATTACHMENT, payload: singleDetail });
+  }else{
+    dispatch({ type: Types.ADD_MULTIPLE_DATA_ATTACHMENT_EDIT, payload: singleDetail });
+  }
 };
 
-export const certificateMultipleDataDelete = (index) => (dispatch) => {
-  dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_DATA, payload: index });
+export const certificateMultipleDataDelete = (index, isEdit = false) => (dispatch) => {
+  if(!isEdit){
+    dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_DATA, payload: index });
+  }else{
+    dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_DATA_EDIT, payload: index });
+  }
 };
 
-export const certificateMultipleAttachmentDelete = (index) => (dispatch) => {
-  dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_ATTACHMENT, payload: index });
+export const certificateMultipleAttachmentDelete = (index, isEdit = false) => (dispatch) => {
+  if(!isEdit){
+    dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_ATTACHMENT, payload: index });
+  }else{
+    dispatch({ type: Types.DELETE_SURVEY_MULTIPLE_ATTACHMENT_EDIT, payload: index });
+  }
 };
 
 export const deleteProductImagePreview = () => (dispatch) => {
@@ -336,45 +425,45 @@ export const getMainCertificateDeteailByID = (id) => (dispatch) => {
 
       data.category = {
         label: data.category.strCertificateCategoryName,
-        value: parseInt(data.category.intCategoryID) ,
+        value: parseInt(data.category.intCategoryID),
       }
-      if(data.certificate !== null){
+      if (data.certificate !== null) {
         data.certificate = {
           label: data.certificate.strCertificateName,
-          value: parseInt(data.certificate.intCertificateID) ,
+          value: parseInt(data.certificate.intCertificateID),
         }
-      }else{
+      } else {
         data.certificate = ''
       }
 
-      if(data.issuing_authority !== null){
+      if (data.issuing_authority !== null) {
         data.issuing_authority = {
           label: data.issuing_authority.strIssuingAuthorityName,
-          value: parseInt(data.issuing_authority.intIssuingAuthorityID) ,
+          value: parseInt(data.issuing_authority.intIssuingAuthorityID),
         }
-      }else{
+      } else {
         data.issuing_authority = ''
       }
 
-      if(data.types !== null){
+      if (data.types !== null) {
         data.types = {
           label: data.types.strCertificateTypeName,
-          value: parseInt(data.types.intCertificateTypeID) ,
+          value: parseInt(data.types.intCertificateTypeID),
         }
-      }else{
+      } else {
         data.types = ''
       }
 
-      if(data.status !== null){
+      if (data.status !== null) {
         data.status = {
           label: data.status.strStatus,
-          value: parseInt(data.status.intCertificateStatusID) ,
+          value: parseInt(data.status.intCertificateStatusID),
         }
-      }else{
+      } else {
         data.status = ''
       }
-      
-      if(data.intParentCategoryID !== null){
+
+      if (data.intParentCategoryID !== null) {
         dispatch(getCertificateChildCategoryData(data.intParentCategoryID));
       }
       data.certificateDates = data.certificate_dates;
