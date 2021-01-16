@@ -9,6 +9,8 @@ import CircularProgressBar from "../../../modules/master/components/CircularProg
 import LineChart from "../../../modules/master/components/Chart/LineChart";
 import TableCircularProgressBar from "../../../modules/master/components/CircularProgressBar/TableCircularProgressBar";
 import PolarChart from "../../../modules/master/components/Chart/PolarChart";
+import SalesPaymentTable from "../../../modules/master/components/DashboardTable/SalesPaymentTable";
+import PurchasePaymentTable from "../../../modules/master/components/DashboardTable/PurchasePaymentTable";
 
 export function Dashboard() {
   const uiService = useHtmlClassService();
@@ -44,10 +46,16 @@ export function Dashboard() {
             <PolarChart />
           </div>
         </div>
-      </div>
+        <div className="row mt-5">
+          <div className="col-lg-6  col-12">
+            <SalesPaymentTable />
+          </div>
 
-      {/* DashBoard design Ends 11:00   */}
-      {/* <CustomeDesign /> */}
+          <div className="col-lg-6  col-12">
+            <PurchasePaymentTable />
+          </div>
+        </div>
+      </div>
     </>
   );
 }
