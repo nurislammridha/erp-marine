@@ -27,7 +27,7 @@ export async function login(email, password) {
 
   let userData = {};
   let strUserType = "";
-  const url = `http://api1.akij.net:8053/api/ADAuthorization/ADAuthorization`;
+  const url = `http://api2.akij.net:8053/api/ADAuthorization/ADAuthorization`;
   try {
     await axios
       .get(url, {

@@ -6,8 +6,11 @@ import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import LaytimeInfo1Modal from './LaytimeInfo1Modal';
 import SimpleModal from '../../../../master/components/Modal/SimpleModal';
+import { handleChangeLaytimeHeaderInput } from '../../_redux/actions/LaytimeAction';
+import { useSelector, useDispatch } from "react-redux";
 
 const LaytimeInfo1Add = () => {
+
     const selectOptions = [
         {
             label: 'Active',
@@ -22,7 +25,12 @@ const LaytimeInfo1Add = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const dispatch = useDispatch();
+    const laytimeHeaderInput = useSelector((state) => state.laytimeHeaderInfo.laytimeHeaderInput);
 
+    const handleChangeTextInput = (name, value) => {
+        dispatch(handleChangeLaytimeHeaderInput(name, value));
+    };
 
     const handleClick = () => {
         handleShow();
@@ -34,7 +42,7 @@ const LaytimeInfo1Add = () => {
             <div className="card card-custom gutter-b">
                 <div className="card-header">
                     <div className="card-title">
-                        <h3 className="card-label">Laytime Information-1</h3>
+                        <h3 className="card-label">Laytime Header</h3>
                     </div>
                 </div>
                 <div className="card-body">
@@ -59,9 +67,15 @@ const LaytimeInfo1Add = () => {
                                         <label className="form-label mt-2 formFont">Voyage No.</label>
                                         <Form.Control
                                             type="number"
-                                            name=""
+                                            name="intVoyageNumber"
                                             className="fromStyle formHeight"
-                                            value="{certificateInfoInput.strCustomeCode}"
+                                            value={laytimeHeaderInput.intVoyageNumber}
+                                            onChange={(e) =>
+                                                handleChangeTextInput(
+                                                    "intVoyageNumber",
+                                                    e.target.value
+                                                )
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -79,10 +93,16 @@ const LaytimeInfo1Add = () => {
                                     <div className="col-md-6">
                                         <label className="form-label mt-2 formFont">Commencement Date </label>
                                         <DatePicker
-                                            name=""
+                                            name="dteCommencedDate"
                                             className="form-control formHeight"
                                             placeholderText="select issue date"
-                                            selected=""
+                                            selected={laytimeHeaderInput.dteCommencedDate}
+                                            onChange={(e) =>
+                                                handleChangeTextInput(
+                                                    "dteCommencedDate",
+                                                    e
+                                                )
+                                            }
                                             ref={register({
                                                 required: true,
                                                 maxLength: 100,
@@ -105,10 +125,16 @@ const LaytimeInfo1Add = () => {
                                         <label className="form-label mt-2 formFont">Completion Date</label>
 
                                         <DatePicker
-                                            name=""
+                                            name="dteCompletionDate"
                                             className="form-control formHeight"
                                             placeholderText="select issue date"
-                                            selected=""
+                                            selected={laytimeHeaderInput.dteCompletionDate}
+                                            onChange={(e) =>
+                                                handleChangeTextInput(
+                                                    "dteCompletionDate",
+                                                    e
+                                                )
+                                            }
                                             ref={register({
                                                 required: true,
                                                 maxLength: 100,
@@ -120,10 +146,16 @@ const LaytimeInfo1Add = () => {
                                     <div className="col-md-6">
                                         <label className="form-label">C/P Date</label>
                                         <DatePicker
-                                            name=""
+                                            name="dteCPDate"
                                             className="form-control formHeight"
                                             placeholderText="select issue date"
-                                            selected=""
+                                            selected={laytimeHeaderInput.dteCPDate}
+                                            onChange={(e) =>
+                                                handleChangeTextInput(
+                                                    "dteCPDate",
+                                                    e
+                                                )
+                                            }
                                             ref={register({
                                                 required: true,
                                                 maxLength: 100,
@@ -146,14 +178,14 @@ const LaytimeInfo1Add = () => {
                             <div className="col-md-4">
                                 <div className="border rounded">
                                     <div className="row">
-                                        <div className="col-sm-6">
+                                        <div className="col-sm-5">
                                             <Form.Check
                                                 className="m-3"
                                                 type="radio"
                                                 label="REVERSIBLE"
                                             />
                                         </div>
-                                        <div className="col-sm-6">
+                                        <div className="col-sm-7">
                                             <Form.Check
                                                 className="m-3"
                                                 type="radio"
@@ -199,19 +231,7 @@ const LaytimeInfo1Add = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="form-group row">
-                            <div className="col-sm-10">
 
-                            </div>
-                            <div>
-                                {/* <a onClick={() => {
-                                    history.push("/voyage/laytime/laytimeinfo2");
-                                }}> */}
-                                <button type="submit" class="mr-4 saveButton text-white btn">Next</button>
-                                {/* </a> */}
-                            </div>
-
-                        </div>
                     </form>
                 </div>
             </div>
