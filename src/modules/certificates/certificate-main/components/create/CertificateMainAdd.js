@@ -31,7 +31,7 @@ import {
   getCertificateChildCategoryData,
   getCertificateParentCategoryData,
 } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
-import PreviewAttachment from '../../../../master/components/previews/PreviewAttachment';
+import PreviewAttachment from "../../../../master/components/previews/PreviewAttachment";
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -101,12 +101,17 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   };
 
   const getFiles = (files) => {
-    console.log('files', files[0]);
-    
+    console.log("files", files[0]);
+
     if (files.length > 0) {
-      files.forEach(file => {
-        const filesUpdated = [file, ...certificateInfoInput.multipleAttachments];
-        dispatch(handleChangeProductInputAction("multipleAttachments", filesUpdated));
+      files.forEach((file) => {
+        const filesUpdated = [
+          file,
+          ...certificateInfoInput.multipleAttachments,
+        ];
+        dispatch(
+          handleChangeProductInputAction("multipleAttachments", filesUpdated)
+        );
       });
     }
   };
@@ -452,7 +457,12 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       className="forgotPasswordText  "
                       type="checkbox"
                       label="Not on Board"
-                      onChange={(e) => certificateMainInfoChange("intNotOnBoard", certificateInfoInput.intNotOnBoard == "0" ? "1": "0")}
+                      onChange={(e) =>
+                        certificateMainInfoChange(
+                          "intNotOnBoard",
+                          certificateInfoInput.intNotOnBoard == "0" ? "1" : "0"
+                        )
+                      }
                     />
                   </Form.Group>
                 </div>
@@ -941,9 +951,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </div>
                 </div>
                 <div className="col-lg-8">
-                  {
-                    certificateInfoInput.multipleAttachments.length > 0
-                    &&
+                  {certificateInfoInput.multipleAttachments.length > 0 && (
                     <table className="table tbl-standard table-bordered tbl-survey">
                       <thead>
                         <tr>
@@ -955,37 +963,38 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {
-                        certificateInfoInput.multipleAttachments !== null &&
-                        certificateInfoInput.multipleAttachments.map(
-                          (attachment, index) => (
-                            <tr>
-                              <td>{index + 1}</td>
-                              <td>{attachment.name}</td>
-                              <td>{attachment.size}</td>
-                              <td>{" "}
-                                <PreviewAttachment
-                                  url={'/' + attachment.name}
-                                  base64={attachment.base64}
-                                  title="Preview"
-                                  height={50}
-                                  width={50}
-                                />
-                              </td>
-                              <td style={{ width: 70, textAlign: "center" }}>
-                                {/* <i className="fa fa-edit text-success mr-2"></i> */}
-                                <i
-                                  className="fa fa-trash text-danger pointer"
-                                  onClick={() => deleteMultipleAttachmentData(index)}
-                                ></i>
-                              </td>
-                            </tr>
-                          )
-                        )}
+                        {certificateInfoInput.multipleAttachments !== null &&
+                          certificateInfoInput.multipleAttachments.map(
+                            (attachment, index) => (
+                              <tr>
+                                <td>{index + 1}</td>
+                                <td>{attachment.name}</td>
+                                <td>{attachment.size}</td>
+                                <td>
+                                  {" "}
+                                  <PreviewAttachment
+                                    url={"/" + attachment.name}
+                                    base64={attachment.base64}
+                                    title="Preview"
+                                    height={50}
+                                    width={50}
+                                  />
+                                </td>
+                                <td style={{ width: 70, textAlign: "center" }}>
+                                  {/* <i className="fa fa-edit text-success mr-2"></i> */}
+                                  <i
+                                    className="fa fa-trash text-danger pointer"
+                                    onClick={() =>
+                                      deleteMultipleAttachmentData(index)
+                                    }
+                                  ></i>
+                                </td>
+                              </tr>
+                            )
+                          )}
                       </tbody>
                     </table>
-
-                  }
+                  )}
                 </div>
               </div>
               <div className="form-group row">
@@ -1058,7 +1067,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
             >
               <IssueAuthorityAdd />
             </SimpleModal>
-
           </div>
         </div>
       </div>

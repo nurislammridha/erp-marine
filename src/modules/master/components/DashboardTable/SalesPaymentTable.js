@@ -34,7 +34,6 @@ const SalesPaymentTable = () => {
               <button className="btn text-white float-right invoice-btn">
                 Print Invoice
                 <img className="ml-2" src="/media/dashboard/Frame.svg" />
-                {/* <i class="fas fa-print"></i> */}
               </button>
             </div>
             <div className="clear-fix"></div>

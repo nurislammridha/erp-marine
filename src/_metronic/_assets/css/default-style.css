@@ -798,3 +798,21 @@ button.btn.text-white.float-right.invoice-btn {
 p.show-value-text {
   color: #000000 !important;
 }
+.attachment-file input {
+  color: #b5b5c3;
+  font-size: 12px !important;
+}
+/* ::-ms-browse {
+  background: black;
+  color: red;
+  padding: 1em;
+} */
+::-webkit-file-upload-button {
+  background: #f3f6f9;
+  border: 1px solid #e5eaee;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-size: 12px !important;
+  padding: 5px;
+  color: #b5b5c3;
+}
