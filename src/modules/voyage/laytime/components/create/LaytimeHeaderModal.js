@@ -20,7 +20,7 @@ const LaytimeHeaderModal = () => {
                             <label className="form-label mt-2 formFont">Demurrage Rate</label>
                             <Form.Control
                                 type="number"
-                                name="numDemurrageRate"
+                                name=""
                                 className="fromStyle formHeight"
                             // value={laytimeDetailInput.numDemurrageRate}
                             // onChange={(e) =>
@@ -35,7 +35,7 @@ const LaytimeHeaderModal = () => {
                             <label className="form-label mt-5 formFont"></label>
                             <Form.Control
                                 type="number"
-                                name="numDespatchRate"
+                                name=""
                                 className="fromStyle formHeight"
                             // value={laytimeDetailInput.numDespatchRate}
                             // onChange={(e) =>
@@ -52,7 +52,7 @@ const LaytimeHeaderModal = () => {
                             <label className="form-label mt-2 formFont">Despatch Rate</label>
                             <Form.Control
                                 type="number"
-                                name="numDespatchRate"
+                                name=""
                                 className="fromStyle formHeight"
                             // value={laytimeDetailInput.numDespatchRate}
                             // onChange={(e) =>
@@ -67,7 +67,7 @@ const LaytimeHeaderModal = () => {
                             <label className="form-label mt-5 formFont"></label>
                             <Form.Control
                                 type="number"
-                                name="numDespatchRate"
+                                name=""
                                 className="fromStyle formHeight"
                             // value={laytimeDetailInput.numDespatchRate}
                             // onChange={(e) =>

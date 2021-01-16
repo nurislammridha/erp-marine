@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
@@ -14,7 +14,7 @@ const LaytimeRow = () => {
     const { register, handleSubmit, errors, setValue } = useForm();
     const dispatch = useDispatch();
     const laytimeDetailInput = useSelector((state) => state.laytimeDetailInfo.laytimeDetailInput);
-
+    const [show, setShow] = useState(false);
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeLaytimeDetailInput(name, value));
     };
@@ -32,7 +32,7 @@ const LaytimeRow = () => {
                         <div className="card-body">
                             <form
                                 className="form form-label-right"
-                                method="post"
+                            // method="post"
                             >
                                 <div className="form-group">
                                     <div className="row">
@@ -363,7 +363,7 @@ const LaytimeRow = () => {
                                         {/* <a onClick={() => {
                                             history.push("/voyage/laytime/laytimeinfo2");
                                         }}> */}
-                                        <button type="submit" class="saveButton text-white btn ml-6">Add</button>
+                                        <button type="button" class="saveButton text-white btn ml-6" onClick={() => setShow(!show)}>Add</button>
                                         {/* </a> */}
                                     </div>
 
@@ -376,12 +376,16 @@ const LaytimeRow = () => {
                     <LaytimeDetail />
                 </div>
             </div>
+            {
+                show && (
+                    <div className="row">
+                        <div className="col-md-9">
+                            <LaytimeMultipleAdd />
+                        </div>
+                    </div>
+                )
+            }
 
-            <div className="row">
-                <div className="col-md-9">
-                    <LaytimeMultipleAdd />
-                </div>
-            </div>
 
 
         </div>
