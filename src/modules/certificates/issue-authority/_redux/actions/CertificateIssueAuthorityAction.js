@@ -19,11 +19,9 @@ export const handleChangeCertificateIssueAuthorityInput = (name, value) => (
 
 export const getIssuingAuthorities = (
   searchText = "",
-  // isPublic = false,
   status = "",
   page
 ) => async (dispatch) => {
-  console.log("Checking page", page);
   let response = {
     issuingAuthorities: [],
     status: false,
@@ -49,7 +47,6 @@ export const getIssuingAuthorities = (
         response.issuingAuthorities = data.data;
         response.message = message;
         response.issuingAuthoritiesPaginatedData = data;
-        console.log("Issue data", data);
         response.isLoading = false;
       })
       .catch((err) => {

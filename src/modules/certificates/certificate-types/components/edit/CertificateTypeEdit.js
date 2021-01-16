@@ -13,6 +13,7 @@ import {
 
 const CertificateTypeEdit = (props) => {
   const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(15);
   const history = useHistory();
   const { register, handleSubmit, errors, setValue } = useForm();
   const certificateTypeInput = useSelector(
@@ -35,7 +36,7 @@ const CertificateTypeEdit = (props) => {
   ];
   useEffect(() => {
     if (editStatus) {
-      dispatch(getCertificateTypeList());
+      dispatch(getCertificateTypeList("", "", currentPage));
     }
   }, [editStatus]);
 

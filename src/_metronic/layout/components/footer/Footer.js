@@ -26,12 +26,12 @@ export function Footer() {
           </span>{" "}
           &copy;{" "}
           <a
-            href="https://aitl.com"
+            href="https://bluepill.com.bd/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-dark-75 text-hover-primary"
           >
-            Akij Info Tech Ltd.
+            Blue Pill Limited.
           </a>
         </div>
       </div>

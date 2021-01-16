@@ -3,11 +3,12 @@ import { Image } from "react-bootstrap";
 import { GetExtensionFromUrl } from '../../utils/StringHelper';
 
 const PreviewAttachment = (props) => {
-    const { url, title, height, width } = props;
+    const { url, title, height, width, base64 } = props;
     const [customThumbnail, setCustomThumbnail] = useState(url);
     const customTitle = (typeof title === 'undefined' || title === "") ? 'See Attachment' : title;
     const customHeight = (typeof height === 'undefined' || height === "") ? 50 : height;
     const customWidth = (typeof width === 'undefined' || width === "") ? 50 : width;
+
 
     useEffect(() => {
         // Extract the extension from the url
@@ -30,7 +31,7 @@ const PreviewAttachment = (props) => {
         <>
             {
                 customThumbnail !== null ?
-                <a target="_blank" href={url} title={customTitle}>
+                <a target="_blank" href={(typeof base64 === 'unedfined'  &&  base64 === null) ? url : base64} title={customTitle}>
                     <Image
                         src={customThumbnail}
                         style={{ 

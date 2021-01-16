@@ -1,8 +1,8 @@
 {
-    "name": "crewmanagement",
+    "name": "imarine",
     "version": "1.0.0",
     "private": true,
-    "homepage": "http://crew.akijshipping.com",
+    "homepage": "http://imarine.akijshipping.com",
     "scripts": {
         "serve": "cp-cli build _site/react/preview/react/demo1 && serve",
         "start": "react-scripts start -o",

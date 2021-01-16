@@ -392,7 +392,7 @@ img.loginpageLogo {
 h1.font-size-h1.heading {
   text-align: center;
   font-weight: 500;
-  margin-top: -20px;
+  /* margin-bottom: 20px; */
 }
 
 .heading {
@@ -700,9 +700,8 @@ input[type="file"] {
 
 i.fas.fa-calendar-alt {
   position: absolute;
-  top: 4px;
-  color: #000000;
-  left: 142px;
+  top: 25px;
+  left: 254px;
 }
 
 .page-item.active .page-link {
@@ -765,4 +764,8 @@ button#kt_login_signin_submit {
 }
 .float-left.balance {
   width: 16%;
+}
+/* table form */
+.row.mb-5.table-form {
+  align-items: center;
 }

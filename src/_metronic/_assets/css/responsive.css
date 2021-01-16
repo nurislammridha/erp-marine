@@ -70,6 +70,14 @@
   .btn.btn-icon.btn-clean.btn-dropdown.btn-lg.mr-1 {
     margin-right: 8px !important;
   }
+  h1.tableheading {
+    margin-left: 13px;
+  }
+  i.fas.fa-calendar-alt {
+    top: 26px;
+    left: 255px;
+    color: #b5b5c3 !important;
+  }
 }
 /* .login-signin {
   margin-top: -213px !important;
@@ -90,5 +98,12 @@
   }
   .empty-space  {
     width: 48% !important;
+  }
+}
+@media (max-width: 375px) {
+  i.fas.fa-calendar-alt {
+    top: 26px;
+    left: 203px;
+    color: #b5b5c3 !important;
   }
 }

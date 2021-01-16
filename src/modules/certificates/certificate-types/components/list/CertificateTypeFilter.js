@@ -9,6 +9,7 @@ import { getCertificateTypeList } from "../../_redux/actions/CertificateTypeActi
 const CertificateTypeFilter = () => {
   const [search, setSearch] = useState("");
   const [type, setType] = useState("");
+  const [currentPage, setCurrentPage] = useState(15);
   const dispatch = useDispatch();
   const certificateTypeInput = useSelector(
     (state) => state.certificateTypeInfo.certificateTypeInput
@@ -27,11 +28,11 @@ const CertificateTypeFilter = () => {
 
   const changeSearch = (value) => {
     setSearch(value);
-    dispatch(getCertificateTypeList(value, type));
+    dispatch(getCertificateTypeList(value, type, currentPage));
   };
 
   useEffect(() => {
-    dispatch(getCertificateTypeList());
+    dispatch(getCertificateTypeList("", "", currentPage));
   }, []);
 
   return (
@@ -56,7 +57,7 @@ const CertificateTypeFilter = () => {
           value={certificateTypeInput.isActive}
           onChange={(option) => {
             setType(option.value);
-            dispatch(getCertificateTypeList(search, option.value));
+            dispatch(getCertificateTypeList(search, option.value, currentPage));
           }}
           setValue={setValue}
         />
