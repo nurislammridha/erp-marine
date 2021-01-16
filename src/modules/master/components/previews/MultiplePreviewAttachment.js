@@ -35,7 +35,7 @@ const MultipplePreviewAttachment = (props) => {
         <>
             {
                 customThumbnail !== null ?
-                    <a target="_blank" href={(typeof base64 === 'unedfined' && base64 === null) ? url : base64} title={customTitle}>
+                    <a target="_blank" rel="noopener noreferrer" href={(typeof base64 === 'unedfined' && base64 === null) ? url : base64} title={customTitle}>
                         <Image
                             src={customThumbnail}
                             style={{
