@@ -24,6 +24,13 @@ const initialState = {
         numLaytimeUsed: "",
         numDemurrageDespatchAmount: "",
         numLodingOrDischargeRate: "",
+        dteLaytimeCommenced: "",
+        dteLaytimeCompleted: "",
+        dteTermArraivalTime: "",
+        dteTermSailTime: "",
+        dteNORtender: "",
+        intAdditionalDay: "",
+        numAdditionalHrs: "",
         intActionBy: 1
 
     },

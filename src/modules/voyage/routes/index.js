@@ -9,7 +9,7 @@ import VoyageListDetailContainer from "../views/VoyageListDetailContainer";
 import VoyageAddContainer from "../views/VoyageAddContainer";
 import LaytimeContainer from "../laytime/views/LaytimeContainer";
 import LaytimeInfoContainer from "../laytime/views/LaytimeInfoContainer";
-import LaytimeInfo2Add from "../laytime/components/create/LaytimeInfo2Add";
+
 
 const routeVoyage = [
   {
