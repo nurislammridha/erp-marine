@@ -9,7 +9,7 @@ import LaytimeMultipleAdd from './LaytimeMultipleAdd';
 import { useSelector, useDispatch } from "react-redux";
 import { handleChangeLaytimeDetailInput } from '../../_redux/actions/LaytimeAction';
 
-const LaytimeInfo2Add = () => {
+const LaytimeRow = () => {
 
     const { register, handleSubmit, errors, setValue } = useForm();
     const dispatch = useDispatch();
@@ -377,11 +377,15 @@ const LaytimeInfo2Add = () => {
                 </div>
             </div>
 
-            <LaytimeMultipleAdd />
+            <div className="row">
+                <div className="col-md-9">
+                    <LaytimeMultipleAdd />
+                </div>
+            </div>
 
 
         </div>
     );
 }
 
-export default LaytimeInfo2Add;
+export default LaytimeRow;
