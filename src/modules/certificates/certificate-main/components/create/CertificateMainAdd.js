@@ -31,7 +31,7 @@ import {
   getCertificateChildCategoryData,
   getCertificateParentCategoryData,
 } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
-import PreviewAttachment from '../../../../master/components/previews/PreviewAttachment';
+import MultipplePreviewAttachment from "../../../../master/components/previews/MultiplePreviewAttachment";
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -964,7 +964,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                               <td>{attachment.name}</td>
                               <td>{attachment.size}</td>
                               <td>{" "}
-                                <PreviewAttachment
+                                <MultipplePreviewAttachment
                                   url={'/' + attachment.name}
                                   base64={attachment.base64}
                                   title="Preview"
