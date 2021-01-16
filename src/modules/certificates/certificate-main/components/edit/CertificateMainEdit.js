@@ -110,7 +110,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
       files.forEach((file) => {
         const filesUpdated = [file, ...certificateEditInfo.multipleAttachments];
         dispatch(
-          handleChangeProductInputAction("multipleAttachments", filesUpdated)
+          handleChangeProductInputAction("multipleAttachments", filesUpdated, null, true)
         );
       });
     }
