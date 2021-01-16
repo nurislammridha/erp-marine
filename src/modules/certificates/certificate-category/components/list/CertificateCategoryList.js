@@ -31,7 +31,6 @@ const CertificateCategoryList = () => {
   const certificateCategoryData = useSelector(
     (state) => state.CertificateCategoryReducer.certificateCategoryList
   );
-  console.log("certificateCategoryData", certificateCategoryData);
   const modalEditStatus = useSelector(
     (state) => state.CertificateCategoryReducer.editStatus
   );
@@ -115,10 +114,17 @@ const CertificateCategoryList = () => {
                   certificateCategoryData.map((item, index) => (
                     <tr>
                       <td>{item.strCertificateCategoryName}</td>
-                      <td>{item.intParentsCategoryID != 0 ? item.parentCategoryName : ''}</td>
+                      <td>
+                        {item.intParentsCategoryID != 0
+                          ? item.parentCategoryName
+                          : ""}
+                      </td>
                       <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
                       <td>
-                          <i className="far fa-edit pointer editIcon" onClick={() => handleEdit(item)}></i>
+                        <i
+                          className="far fa-edit pointer editIcon"
+                          onClick={() => handleEdit(item)}
+                        ></i>
                       </td>
                     </tr>
                   ))}

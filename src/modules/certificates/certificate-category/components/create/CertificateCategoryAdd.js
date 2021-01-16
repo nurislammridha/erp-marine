@@ -25,8 +25,6 @@ const CertificateCategoryAdd = () => {
     (state) => state.CertificateCategoryReducer.certificateParentCategoryList
   );
 
-  // console.log('certificateParentCategoryList', certificateParentCategoryList);
-
   const status = useSelector(
     (state) => state.CertificateCategoryReducer.status
   );
@@ -34,7 +32,6 @@ const CertificateCategoryAdd = () => {
     (state) => state.CertificateCategoryReducer.isLoading
   );
 
-  console.log("getCategoryInpuData :>> ", getCategoryInpuData);
   const categoryInputChange = (name, value) => {
     dispatch(handleCertificateCategoryInput(name, value));
   };
@@ -63,7 +60,6 @@ const CertificateCategoryAdd = () => {
   // useEffect(() => {
   //   dispatch(getCertificateParentCategoryData());
   // }, []);
-
 
   const loading = false;
   return (
@@ -120,7 +116,10 @@ const CertificateCategoryAdd = () => {
           </button>
         )}
         {!isLoading && (
-          <button type="submit" className="btn btn-primary saveButton text-white mt-3">
+          <button
+            type="submit"
+            className="btn btn-primary saveButton text-white mt-3"
+          >
             <span>Submit</span>
           </button>
         )}
