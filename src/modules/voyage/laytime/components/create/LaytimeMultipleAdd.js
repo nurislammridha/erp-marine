@@ -1,3 +1,4 @@
+import { Form } from 'react-bootstrap';
 import React, { useState } from 'react';
 import { Tab, Tabs } from "react-bootstrap";
 
@@ -62,7 +63,14 @@ const LaytimeMultipleAdd = () => {
 
                                                 <td>#01</td>
                                                 <td>#01</td>
-                                                <td>#01</td>
+                                                <td>
+                                                    <Form.Control as="select">
+                                                        <option>#01</option>
+                                                        <option>#02</option>
+                                                        <option>#03</option>
+                                                        <option>#04</option>
+                                                    </Form.Control>
+                                                </td>
                                                 <td>Durres(Durazzo)</td>
                                                 <td>Akij Noor</td>
                                                 <td className="text-right pr-3 mt-3">

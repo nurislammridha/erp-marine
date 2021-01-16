@@ -32,8 +32,14 @@ const LaytimeHeader = () => {
         dispatch(handleChangeLaytimeHeaderInput(name, value));
     };
 
-    const handleClick = () => {
-        handleShow();
+    const handleClick = (e) => {
+        handleShow()
+        // if (e === true) {
+        //     handleShow();
+        // } else {
+        //     handleClose()
+        // }
+
     };
 
 
@@ -199,6 +205,7 @@ const LaytimeHeader = () => {
                                             className=""
                                             type="checkbox"
                                             label="Loading Port"
+                                            onChange={(e) => handleClick(e.target.checked)}
                                         />
                                         <a>
                                             {<i class="fas fa-file ml-10"
