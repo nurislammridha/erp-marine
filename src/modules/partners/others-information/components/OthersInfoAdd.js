@@ -1,15 +1,31 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
+import { Multiselect } from 'multiselect-react-dropdown';
 
 const OthersInfoAdd = withRouter(({ history }) => {
+
+    const selectOptions = [
+        {
+            name: 'Port of Chittagong',
+            id: "1"
+        },
+        {
+            name: 'Port of Payra',
+            id: "2"
+        },
+        {
+            name: 'Port of Mongla',
+            id: "3"
+        },
+        {
+            name: 'Port of Matarbari',
+            id: "4"
+        }
+    ]
+
     return (
         <div className="container">
-            <div className="card card-custom gutter-b">
-                <div className="card-header">
-                    <div className="card-title">
-                        <h3 className="card-label">Others Information</h3>
-                    </div>
-                </div>
+            <div className="card card-custom gutter-b mt-10">
                 <div className="card-body">
                     <form
                         className="form form-label-right"
@@ -19,39 +35,41 @@ const OthersInfoAdd = withRouter(({ history }) => {
                             <div className="row">
                                 <div className="col-md-5">
                                     <label className="form-label mt-2 formFont">Port Served</label>
-
+                                    <Multiselect
+                                        options={selectOptions}
+                                        displayValue="name"
+                                        showCheckbox={true}
+                                    />
                                 </div>
                                 <div className="col-md-2">
 
                                 </div>
+                            </div>
+                            <div className="row mt-20">
                                 <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Account No</label>
+                                    <label className="form-label mt-2 formFont">Product or Service Supplied</label>
+                                    <Multiselect
+                                        options={selectOptions}
+                                        displayValue="name"
+                                        showCheckbox={true}
+                                    />
+                                </div>
+                                <div className="col-md-2">
 
                                 </div>
                             </div>
-
-
-
-                        </div>
-
-                        <div className="form-group row mt-5">
-                            <div className="col-md-9">
-
-                            </div>
-                            <div className="col-md-3">
-                                <div className="float-right">
-                                    <a onClick={() => {
-                                        history.push("/partners/bank-info");
-                                    }}>
-                                        <button type="button" class="saveButton text-white btn">Previous</button>
-                                    </a>
-                                    {/* <a onClick={() => {
-                                            history.push("/voyage/laytime/laytimeinfo2");
-                                        }}> */}
-                                    <button type="button" class="saveButton text-white btn ml-3">Next</button>
-                                    {/* </a> */}
+                            <div className="row mt-20">
+                                <div className="col-md-5">
+                                    <label className="form-label mt-2 formFont">Service List</label>
+                                    <Multiselect
+                                        options={selectOptions}
+                                        displayValue="name"
+                                        showCheckbox={true}
+                                    />
                                 </div>
+                                <div className="col-md-2">
 
+                                </div>
                             </div>
                         </div>
                     </form>

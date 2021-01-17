@@ -30,12 +30,7 @@ const BankInfoAdd = withRouter(({ history }) => {
 
     return (
         <div className="container">
-            <div className="card card-custom gutter-b">
-                <div className="card-header">
-                    <div className="card-title">
-                        <h3 className="card-label">Bank Information</h3>
-                    </div>
-                </div>
+            <div className="card card-custom gutter-b mt-10">
                 <div className="card-body">
                     <form
                         className="form form-label-right"
@@ -77,7 +72,7 @@ const BankInfoAdd = withRouter(({ history }) => {
                                     />
                                 </div>
                             </div>
-                            <div className="row mt-5">
+                            <div className="row">
                                 <div className="col-md-5">
                                     <label className="form-label mt-2 formFont">Bank Name</label>
                                     <RHFInput
@@ -102,7 +97,7 @@ const BankInfoAdd = withRouter(({ history }) => {
                                     />
                                 </div>
                             </div>
-                            <div className="row mt-5">
+                            <div className="row">
                                 <div className="col-md-5">
                                     <label className="form-label mt-2 formFont">Routing No</label>
                                     <Form.Control
@@ -137,7 +132,7 @@ const BankInfoAdd = withRouter(({ history }) => {
                                     />
                                 </div>
                             </div>
-                            <div className="row mt-5">
+                            <div className="row">
                                 <div className="col-md-5">
                                     <label className="form-label mt-2 formFont">Swift Code</label>
                                     <Form.Control
@@ -167,7 +162,7 @@ const BankInfoAdd = withRouter(({ history }) => {
                             </div>
                         </div>
 
-                        <div className="form-group row mt-5">
+                        {/* <div className="form-group row mt-5">
                             <div className="col-md-9">
 
                             </div>
@@ -186,7 +181,7 @@ const BankInfoAdd = withRouter(({ history }) => {
                                 </div>
 
                             </div>
-                        </div>
+                        </div> */}
                     </form>
                 </div>
             </div>

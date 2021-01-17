@@ -22,12 +22,8 @@ const BasicInfoAdd = withRouter(({ history }) => {
 
     return (
         <div className="container">
-            <div className="card card-custom gutter-b">
-                <div className="card-header">
-                    <div className="card-title">
-                        <h3 className="card-label">Basic Information</h3>
-                    </div>
-                </div>
+            <div className="card card-custom gutter-b mt-10">
+
                 <div className="card-body">
                     <form
                         className="form form-label-right"
@@ -69,7 +65,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                     />
                                 </div>
                             </div>
-                            <div className="row mt-5">
+                            <div className="row">
                                 <div className="col-md-5">
                                     <label className="form-label mt-2 formFont">Partner Type</label>
                                     <RHFInput
@@ -99,7 +95,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                     />
                                 </div>
                             </div>
-                            <div className="row mt-5">
+                            <div className="row">
                                 <div className="col-md-5">
                                     <label className="form-label mt-2 formFont">Email</label>
                                     <Form.Control
@@ -129,7 +125,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                     />
                                 </div>
                             </div>
-                            <div className="row mt-5">
+                            <div className="row">
                                 <div className="col-md-5">
                                     <label className="form-label mt-2 formFont">Bil No</label>
                                     <Form.Control
@@ -164,7 +160,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                     />
                                 </div>
                             </div>
-                            <div className="row mt-5">
+                            <div className="row">
                                 <div className="col-md-5">
                                     <label className="form-label mt-2 formFont">Partner Code</label>
                                     <Form.Control
@@ -196,7 +192,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                             </div>
 
                         </div>
-                        <div className="form-group row mt-5">
+                        {/* <div className="form-group row mt-5">
                             <div className="col-md-11">
 
                             </div>
@@ -208,7 +204,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                 </a>
                             </div>
 
-                        </div>
+                        </div> */}
 
                     </form>
                 </div>
