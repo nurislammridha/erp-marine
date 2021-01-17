@@ -774,7 +774,8 @@ h1.sales-payment-heading {
   font-size: 20px;
   color: #212121;
 }
-table.table.table.dashboard-table th {
+table.table.table.dashboard-table th,
+td {
   font-weight: 600;
   color: #212121 !important;
   text-transform: capitalize;
@@ -802,11 +803,6 @@ p.show-value-text {
   color: #b5b5c3;
   font-size: 12px !important;
 }
-/* ::-ms-browse {
-  background: black;
-  color: red;
-  padding: 1em;
-} */
 ::-webkit-file-upload-button {
   background: #f3f6f9;
   border: 1px solid #e5eaee;
