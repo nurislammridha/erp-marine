@@ -44,6 +44,7 @@ import CertificateListReducer from "../modules/certificates/certificate-master/_
 import LaytimeInfoReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeInfoReducer";
 import LaytimeHeaderReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeHeaderReducer";
 import LaytimeDetailReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeDetailReducer";
+import BankInfoReducer from "../modules/partners/bank-information/_redux/reducers/BankInfoReducer";
 
 /** 
 | Domain : CCO
@@ -88,10 +89,12 @@ export const rootReducer = combineReducers({
   VoyageActivityBunkerReducer: VoyageActivityBunkerReducer,
 
 
-  /** Procurement Module Reducers */
+  /** Laytime Reducers */
   laytimeHeaderInfo: LaytimeHeaderReducer,
   laytimeDetailInfo: LaytimeDetailReducer,
 
+  /** Partners Reducers */
+  bankInfo: BankInfoReducer,
 
   /** Procurement Module Reducers */
   purchaseRequisition: PurchaseRequisitionReducer,

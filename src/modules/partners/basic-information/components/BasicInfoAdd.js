@@ -1,10 +1,11 @@
 import React from 'react'
+import { withRouter } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 
-export default function BasicInfoAdd() {
+const BasicInfoAdd = withRouter(({ history }) => {
 
     const selectOptions = [
         {
@@ -68,7 +69,7 @@ export default function BasicInfoAdd() {
                                     />
                                 </div>
                             </div>
-                            <div className="row">
+                            <div className="row mt-5">
                                 <div className="col-md-5">
                                     <label className="form-label mt-2 formFont">Partner Type</label>
                                     <RHFInput
@@ -98,7 +99,7 @@ export default function BasicInfoAdd() {
                                     />
                                 </div>
                             </div>
-                            <div className="row">
+                            <div className="row mt-5">
                                 <div className="col-md-5">
                                     <label className="form-label mt-2 formFont">Email</label>
                                     <Form.Control
@@ -128,7 +129,7 @@ export default function BasicInfoAdd() {
                                     />
                                 </div>
                             </div>
-                            <div className="row">
+                            <div className="row mt-5">
                                 <div className="col-md-5">
                                     <label className="form-label mt-2 formFont">Bil No</label>
                                     <Form.Control
@@ -163,7 +164,7 @@ export default function BasicInfoAdd() {
                                     />
                                 </div>
                             </div>
-                            <div className="row">
+                            <div className="row mt-5">
                                 <div className="col-md-5">
                                     <label className="form-label mt-2 formFont">Partner Code</label>
                                     <Form.Control
@@ -195,16 +196,16 @@ export default function BasicInfoAdd() {
                             </div>
 
                         </div>
-                        <div className="form-group row">
+                        <div className="form-group row mt-5">
                             <div className="col-md-11">
 
                             </div>
                             <div className="col-md-1">
-                                {/* <a onClick={() => {
-                                            history.push("/voyage/laytime/laytimeinfo2");
-                                        }}> */}
-                                <button type="button" class="saveButton text-white btn mt-5">Next</button>
-                                {/* </a> */}
+                                <a onClick={() => {
+                                    history.push("/partners/address");
+                                }}>
+                                    <button type="button" class="saveButton text-white btn ">Next</button>
+                                </a>
                             </div>
 
                         </div>
@@ -215,5 +216,6 @@ export default function BasicInfoAdd() {
 
         </div >
     );
-}
+});
 
+export default BasicInfoAdd;
