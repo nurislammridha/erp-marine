@@ -31,7 +31,7 @@ import {
   getCertificateChildCategoryData,
   getCertificateParentCategoryData,
 } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
-import PreviewAttachment from "../../../../master/components/previews/PreviewAttachment";
+import MultipplePreviewAttachment from "../../../../master/components/previews/MultiplePreviewAttachment";
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -963,35 +963,33 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {certificateInfoInput.multipleAttachments !== null &&
-                          certificateInfoInput.multipleAttachments.map(
-                            (attachment, index) => (
-                              <tr>
-                                <td>{index + 1}</td>
-                                <td>{attachment.name}</td>
-                                <td>{attachment.size}</td>
-                                <td>
-                                  {" "}
-                                  <PreviewAttachment
-                                    url={"/" + attachment.name}
-                                    base64={attachment.base64}
-                                    title="Preview"
-                                    height={50}
-                                    width={50}
-                                  />
-                                </td>
-                                <td style={{ width: 70, textAlign: "center" }}>
-                                  {/* <i className="fa fa-edit text-success mr-2"></i> */}
-                                  <i
-                                    className="fa fa-trash text-danger pointer"
-                                    onClick={() =>
-                                      deleteMultipleAttachmentData(index)
-                                    }
-                                  ></i>
-                                </td>
-                              </tr>
-                            )
-                          )}
+                        {
+                        certificateInfoInput.multipleAttachments !== null &&
+                        certificateInfoInput.multipleAttachments.map(
+                          (attachment, index) => (
+                            <tr>
+                              <td>{index + 1}</td>
+                              <td>{attachment.name}</td>
+                              <td>{attachment.size}</td>
+                              <td>{" "}
+                                <MultipplePreviewAttachment
+                                  url={'/' + attachment.name}
+                                  base64={attachment.base64}
+                                  title="Preview"
+                                  height={50}
+                                  width={50}
+                                />
+                              </td>
+                              <td style={{ width: 70, textAlign: "center" }}>
+                                {/* <i className="fa fa-edit text-success mr-2"></i> */}
+                                <i
+                                  className="fa fa-trash text-danger pointer"
+                                  onClick={() => deleteMultipleAttachmentData(index)}
+                                ></i>
+                              </td>
+                            </tr>
+                          )
+                        )}
                       </tbody>
                     </table>
                   )}

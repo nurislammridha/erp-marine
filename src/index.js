@@ -54,6 +54,10 @@ const { PUBLIC_URL } = process.env;
  */
 // _redux.setupAxios(axios, store);
 
+
+// Import axios.js so that it can inject token in every request
+require('./services/axios');
+
 ReactDOM.render(
   <MetronicI18nProvider>
     <MetronicLayoutProvider>

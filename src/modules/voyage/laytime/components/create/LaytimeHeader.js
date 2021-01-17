@@ -4,12 +4,12 @@ import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
-import LaytimeInfo1Modal from './LaytimeInfo1Modal';
 import SimpleModal from '../../../../master/components/Modal/SimpleModal';
 import { handleChangeLaytimeHeaderInput } from '../../_redux/actions/LaytimeAction';
 import { useSelector, useDispatch } from "react-redux";
+import LaytimeHeaderModal from './LaytimeHeaderModal';
 
-const LaytimeInfo1Add = () => {
+const LaytimeHeader = () => {
 
     const selectOptions = [
         {
@@ -32,8 +32,14 @@ const LaytimeInfo1Add = () => {
         dispatch(handleChangeLaytimeHeaderInput(name, value));
     };
 
-    const handleClick = () => {
-        handleShow();
+    const handleClick = (e) => {
+        handleShow()
+        // if (e === true) {
+        //     handleShow();
+        // } else {
+        //     handleClose()
+        // }
+
     };
 
 
@@ -183,6 +189,8 @@ const LaytimeInfo1Add = () => {
                                                 className="m-3"
                                                 type="radio"
                                                 label="REVERSIBLE"
+                                                name="formHorizontalRadios"
+                                                id="formHorizontalRadios1"
                                             />
                                         </div>
                                         <div className="col-sm-7">
@@ -190,6 +198,8 @@ const LaytimeInfo1Add = () => {
                                                 className="m-3"
                                                 type="radio"
                                                 label="NON-REVERSIBLE"
+                                                name="formHorizontalRadios"
+                                                id="formHorizontalRadios1"
                                             />
                                         </div>
                                     </div>
@@ -199,6 +209,7 @@ const LaytimeInfo1Add = () => {
                                             className=""
                                             type="checkbox"
                                             label="Loading Port"
+                                            onChange={(e) => handleClick(e.target.checked)}
                                         />
                                         <a>
                                             {<i class="fas fa-file ml-10"
@@ -240,10 +251,10 @@ const LaytimeInfo1Add = () => {
                 handleClose={() => handleClose()}
                 modalTitle={"Demurrage/Dispatch Rate"}
             >
-                <LaytimeInfo1Modal />
+                <LaytimeHeaderModal />
             </SimpleModal>
         </div >
     );
 }
 
-export default LaytimeInfo1Add;
+export default LaytimeHeader;

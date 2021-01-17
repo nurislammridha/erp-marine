@@ -33,8 +33,8 @@ import {
   getCertificateChildCategoryData,
   getCertificateParentCategoryData,
 } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
-import PreviewAttachment from "../../../../master/components/previews/PreviewAttachment";
 import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
+import MultipplePreviewAttachment from "../../../../master/components/previews/MultiplePreviewAttachment";
 
 const CertificateMainEdit = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -110,7 +110,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
       files.forEach((file) => {
         const filesUpdated = [file, ...certificateEditInfo.multipleAttachments];
         dispatch(
-          handleChangeProductInputAction("multipleAttachments", filesUpdated)
+          handleChangeProductInputAction("multipleAttachments", filesUpdated, null, true)
         );
       });
     }
@@ -961,9 +961,10 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                                   <td>{attachment.size}</td>
                                   <td>
                                     {" "}
-                                    <PreviewAttachment
-                                      // url={"files/" + attachment.name}
+                                    <MultipplePreviewAttachment
+                                      attachment={attachment.filePreviewUrl}
                                       url={attachment.filePreviewUrl ? attachment.filePreviewUrl : "files/" + attachment.name}
+                                      base64={attachment.base64}
                                       title="Preview"
                                       height={50}
                                       width={50}

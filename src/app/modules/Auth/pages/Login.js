@@ -76,8 +76,8 @@ function Login(props) {
 
       // Submit
       const response = await login(values.email, values.password);
-      console.log("response", response);
       disableLoading();
+
       if (response.status) {
         setStatus("Successfully Logged in !");
         window.location.href = "/dashboard";
