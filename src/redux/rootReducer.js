@@ -43,7 +43,7 @@ import CertificateCategoryReducer from "../modules/certificates/certificate-cate
 import CertificateListReducer from "../modules/certificates/certificate-master/_redux/reducers/CertificateListReducer";
 import LaytimeInfoReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeInfoReducer";
 import LaytimeHeaderReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeHeaderReducer";
-import LaytimeDetailReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeDetailReducer";
+import LaytimeRowReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeRowReducer";
 
 /** 
 | Domain : CCO
@@ -90,7 +90,7 @@ export const rootReducer = combineReducers({
 
   /** Procurement Module Reducers */
   laytimeHeaderInfo: LaytimeHeaderReducer,
-  laytimeDetailInfo: LaytimeDetailReducer,
+  laytimeDetailInfo: LaytimeRowReducer,
 
 
   /** Procurement Module Reducers */
