@@ -101,12 +101,17 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   };
 
   const getFiles = (files) => {
-    console.log('files', files[0]);
-    
+    console.log("files", files[0]);
+
     if (files.length > 0) {
-      files.forEach(file => {
-        const filesUpdated = [file, ...certificateInfoInput.multipleAttachments];
-        dispatch(handleChangeProductInputAction("multipleAttachments", filesUpdated));
+      files.forEach((file) => {
+        const filesUpdated = [
+          file,
+          ...certificateInfoInput.multipleAttachments,
+        ];
+        dispatch(
+          handleChangeProductInputAction("multipleAttachments", filesUpdated)
+        );
       });
     }
   };
@@ -452,7 +457,12 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       className="forgotPasswordText  "
                       type="checkbox"
                       label="Not on Board"
-                      onChange={(e) => certificateMainInfoChange("intNotOnBoard", certificateInfoInput.intNotOnBoard == "0" ? "1": "0")}
+                      onChange={(e) =>
+                        certificateMainInfoChange(
+                          "intNotOnBoard",
+                          certificateInfoInput.intNotOnBoard == "0" ? "1" : "0"
+                        )
+                      }
                     />
                   </Form.Group>
                 </div>
@@ -941,9 +951,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </div>
                 </div>
                 <div className="col-lg-8">
-                  {
-                    certificateInfoInput.multipleAttachments.length > 0
-                    &&
+                  {certificateInfoInput.multipleAttachments.length > 0 && (
                     <table className="table tbl-standard table-bordered tbl-survey">
                       <thead>
                         <tr>
@@ -984,8 +992,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         )}
                       </tbody>
                     </table>
-
-                  }
+                  )}
                 </div>
               </div>
               <div className="form-group row">
@@ -1058,7 +1065,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
             >
               <IssueAuthorityAdd />
             </SimpleModal>
-
           </div>
         </div>
       </div>

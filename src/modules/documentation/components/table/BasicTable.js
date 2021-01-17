@@ -49,6 +49,8 @@ const BasicTable = () => {
                 </Form.Control>
               </Form.Group>
             </div>
+            <div className="col-xl-3 col-lg-3 col-md-6">use RHFInput</div>
+
             <div className="col-xl-3 col-lg-3 col-md-6">
               <i className="fas fa-filter tableFilter mt-3 mr-2"></i>
               <i className="far fa-filter"></i>

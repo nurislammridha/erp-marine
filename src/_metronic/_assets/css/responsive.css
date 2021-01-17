@@ -78,6 +78,9 @@
     left: 255px;
     color: #b5b5c3 !important;
   }
+  .tbl-survey {
+    width: 100% !important;
+  }
 }
 /* .login-signin {
   margin-top: -213px !important;
