@@ -40,11 +40,15 @@ const LaytimeRow = () => {
                                             className="m-3"
                                             type="radio"
                                             label="Loading"
+                                            name="formHorizontalRadios"
+                                            id="formHorizontalRadios1"
                                         />
                                         <Form.Check
                                             className="m-3"
                                             type="radio"
                                             label="Discharging"
+                                            name="formHorizontalRadios"
+                                            id="formHorizontalRadios1"
                                         />
                                     </div>
                                     <div className="row">

@@ -189,6 +189,8 @@ const LaytimeHeader = () => {
                                                 className="m-3"
                                                 type="radio"
                                                 label="REVERSIBLE"
+                                                name="formHorizontalRadios"
+                                                id="formHorizontalRadios1"
                                             />
                                         </div>
                                         <div className="col-sm-7">
@@ -196,6 +198,8 @@ const LaytimeHeader = () => {
                                                 className="m-3"
                                                 type="radio"
                                                 label="NON-REVERSIBLE"
+                                                name="formHorizontalRadios"
+                                                id="formHorizontalRadios1"
                                             />
                                         </div>
                                     </div>
