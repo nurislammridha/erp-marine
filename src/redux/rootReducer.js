@@ -44,6 +44,7 @@ import CertificateListReducer from "../modules/certificates/certificate-master/_
 import LaytimeInfoReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeInfoReducer";
 import LaytimeHeaderReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeHeaderReducer";
 import LaytimeDetailReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeDetailReducer";
+import PartnerAddressReducer from "../modules/partners/address/_redux/reducers/PartnerAddressReducer";
 
 /** 
 | Domain : CCO
@@ -107,7 +108,8 @@ export const rootReducer = combineReducers({
   CertificateCategoryReducer: CertificateCategoryReducer,
   CertificateListReducer: CertificateListReducer,
   certificateTypeInfo: CertificateTypeReducer,
-  laytimeInfo: LaytimeInfoReducer
+  laytimeInfo: LaytimeInfoReducer,
+  partnerAddress: PartnerAddressReducer
 });
 
 export function* rootSaga() {
