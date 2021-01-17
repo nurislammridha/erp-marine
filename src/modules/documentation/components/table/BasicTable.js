@@ -27,15 +27,6 @@ const BasicTable = () => {
               </Paper>
             </div>
             <div className="col-xl-3 col-lg-3 col-md-6">
-              {/* NOTE: here use comment out select input instead of SECOND SELECT input */}
-              {/* <RHFInput
-                as={<Select options={CourseName} />}
-                rules={{ required: false }}
-                name="courseData"
-                register={register}
-                value={CourseName.label}
-                setValue={setValue}
-              /> */}
               <Form.Group controlId="exampleForm.ControlSelect1">
                 <Form.Label className="formFont pl-1">
                   Example select
@@ -49,7 +40,7 @@ const BasicTable = () => {
                 </Form.Control>
               </Form.Group>
             </div>
-            <div className="col-xl-3 col-lg-3 col-md-6">use RHFInput</div>
+            {/* <div className="col-xl-3 col-lg-3 col-md-6">use RHFInput</div> */}
 
             <div className="col-xl-3 col-lg-3 col-md-6">
               <i className="fas fa-filter tableFilter mt-3 mr-2"></i>

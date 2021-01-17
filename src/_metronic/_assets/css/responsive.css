@@ -74,17 +74,30 @@
     margin-left: 13px;
   }
   i.fas.fa-calendar-alt {
-    top: 26px;
-    left: 255px;
+    top: 25px;
+    left: 245px;
     color: #b5b5c3 !important;
   }
   .tbl-survey {
     width: 100% !important;
   }
+  .voyageTable i.fas.fa-trash-alt.editIcon.ml-4 {
+    margin-left: 0px !important;
+  }
+  .voyageTable td,
+  th {
+    font-size: 10px !important;
+  }
+  button.btn.approve {
+    font-size: 9px;
+  }
+  i.editIcon {
+    font-size: 10px;
+    padding: 6px;
+    margin-right: 4px;
+  }
 }
-/* .login-signin {
-  margin-top: -213px !important;
-} */
+
 @media (max-width: 426px) {
   .loginBg  {
     height: 200px;
