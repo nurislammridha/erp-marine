@@ -4,7 +4,7 @@ const LaytimeMultipleAdd = () => {
     return (
         <div>
             <div className="col-md-9">
-                <div className="container card card-custom gutter-b">
+                <div className="card card-custom gutter-b">
                     <div className="react-bootstrap-table table-responsive mt-3">
                         <table className="table table table-head-custom table-vertical-center">
                             <thead>
@@ -34,6 +34,7 @@ const LaytimeMultipleAdd = () => {
                                         >
                                             <i className="fa fa-times-circle"></i>
                                         </a>
+                                        <button className="ml-3 saveButton text-white btn">SOF</button>
                                     </td>
                                 </tr>
 

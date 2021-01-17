@@ -36,20 +36,12 @@ export const getCertificateMasterList = (
 
   let isActive = status == "" ? "" : parseInt(status);
   let url = `${process.env.REACT_APP_API_URL}certificate/certificateList`;
-  console.log('url', url);
 
   if (searchValue !== "" || isActive !== "") {
     url += `?search=${searchValue}&isActive=${isActive}&isPaginated=1&paginateNo=${page}`;
   } else {
     url += `?isPaginated=1&paginateNo=${page}`;
   }
-  // Axios.get(url).then((res) => {
-  //   console.log("res", res);
-  //   dispatch({
-  //     type: Types.GET_CERTIFICATE_MASTER_LIST,
-  //     payload: res.data.data,
-  //   });
-  // });
   try {
     await Axios.get(url)
       .then((res) => {
@@ -117,7 +109,6 @@ export const certificateMasterSubmitAction = (CertificateMasterInput) => (
 export const setMasterCertificateEditValue = (certificateMasterInput) => (
   dispatch
 ) => {
-  console.log("certificateMasterInput", certificateMasterInput);
   const formData = {
     strCertificateName: certificateMasterInput.strCertificateName,
     strCertificateCategoryName:
@@ -147,7 +138,6 @@ export const certificateMasterEditAction = (
 
   // let editUrl = `http://10.17.2.19:8082/iMarineAPI/public/api/v1/certificate/certificateList/${intCertificateID}`;
   let editUrl = `${process.env.REACT_APP_API_URL}certificate/certificateList/${intCertificateID}`;
-  
 
   Axios.put(editUrl, CertificateMasterInput)
     .then(function(response) {

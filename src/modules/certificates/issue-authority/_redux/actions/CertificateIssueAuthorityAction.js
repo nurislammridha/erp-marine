@@ -87,7 +87,6 @@ export const issueAuthoritySubmitAction = (CertificateIssueAuthirityInput) => (
         });
         dispatch(getCertificateIssueBy());
       } else {
-        console.log("error data", response.data);
         showToast("error", response.data.message);
       }
     })

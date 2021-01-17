@@ -4,6 +4,7 @@ const initialState = {
   certificateMasterPaginatedData: null,
   isLoading: false,
   addStatus: false,
+  editStatus: false,
   certificateMasterInput: {
     strCertificateName: "",
     strCertificateCategoryName: "",
@@ -60,6 +61,7 @@ const CertificateMasterReducer = (state = initialState, action) => {
       return {
         ...state,
         editStatus: action.payload.status,
+        isLoading: action.payload.isLoading,
       };
 
     default:

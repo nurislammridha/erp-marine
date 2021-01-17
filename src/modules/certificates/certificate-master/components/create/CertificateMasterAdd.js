@@ -52,7 +52,6 @@ const CertificateMasterAdd = () => {
   ];
 
   const certificateMainInfoChange = (name, value) => {
-    console.log("Name", name, "value", value);
     dispatch(handleChangeCertificateMasterInput(name, value));
   };
 
