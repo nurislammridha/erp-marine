@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import LaytimeHeaderModal from './LaytimeHeaderModal';
 
 const LaytimeHeader = () => {
+    const dispatch = useDispatch();
 
     const selectOptions = [
         {
@@ -25,24 +26,17 @@ const LaytimeHeader = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const dispatch = useDispatch();
+
     const laytimeHeaderInput = useSelector((state) => state.laytimeHeaderInfo.laytimeHeaderInput);
 
+    console.log('laytimeHeaderInput :>> ', laytimeHeaderInput);
+    const handleClick = (e) => {
+        handleShow()
+    };
+    //handle lay-time header input 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeLaytimeHeaderInput(name, value));
     };
-
-    const handleClick = (e) => {
-        handleShow()
-        // if (e === true) {
-        //     handleShow();
-        // } else {
-        //     handleClose()
-        // }
-
-    };
-
-
     return (
         <div className="container">
             <div className="card card-custom gutter-b">
@@ -64,21 +58,32 @@ const LaytimeHeader = () => {
                                         <RHFInput
                                             as={<Select options={selectOptions} />}
                                             rules={{ required: true }}
-                                            name=""
+                                            name="intShipID"
                                             register={register}
-                                            value=""
+                                            value={laytimeHeaderInput.intShipID}
+                                            onChange={(option) => {
+                                                handleChangeTextInput(
+                                                    "strShipName",
+                                                    option.label
+                                                );
+                                                handleChangeTextInput(
+                                                    "intShipID",
+                                                    option.value
+                                                );
+                                            }}
+                                            setValue={setValue}
                                         />
                                     </div>
                                     <div className="col-md-6">
                                         <label className="form-label mt-2 formFont">Voyage No.</label>
                                         <Form.Control
                                             type="number"
-                                            name="intVoyageNumber"
+                                            name="intCharterVoyageID"
                                             className="fromStyle formHeight"
-                                            value={laytimeHeaderInput.intVoyageNumber}
+                                            value={laytimeHeaderInput.intCharterVoyageID}
                                             onChange={(e) =>
                                                 handleChangeTextInput(
-                                                    "intVoyageNumber",
+                                                    "intCharterVoyageID",
                                                     e.target.value
                                                 )
                                             }
@@ -91,9 +96,20 @@ const LaytimeHeader = () => {
                                         <RHFInput
                                             as={<Select options={selectOptions} />}
                                             rules={{ required: true }}
-                                            name=""
+                                            name="intCommencementPortID"
                                             register={register}
-                                            value=""
+                                            value={laytimeHeaderInput.intCommencementPortID}
+                                            onChange={(option) => {
+                                                handleChangeTextInput(
+                                                    "CommencementPortName",
+                                                    option.label
+                                                );
+                                                handleChangeTextInput(
+                                                    "intCommencementPortID",
+                                                    option.value
+                                                );
+                                            }}
+                                            setValue={setValue}
                                         />
                                     </div>
                                     <div className="col-md-6">
@@ -122,9 +138,20 @@ const LaytimeHeader = () => {
                                         <RHFInput
                                             as={<Select options={selectOptions} />}
                                             rules={{ required: true }}
-                                            name=""
+                                            name="intCompletionPortID"
                                             register={register}
-                                            value=""
+                                            value={laytimeHeaderInput.intCompletionPortID}
+                                            onChange={(option) => {
+                                                handleChangeTextInput(
+                                                    "intCompletionPortName",
+                                                    option.label
+                                                );
+                                                handleChangeTextInput(
+                                                    "intCompletionPortID",
+                                                    option.value
+                                                );
+                                            }}
+                                            setValue={setValue}
                                         />
                                     </div>
                                     <div className="col-md-6">
@@ -173,9 +200,20 @@ const LaytimeHeader = () => {
                                         <RHFInput
                                             as={<Select options={selectOptions} />}
                                             rules={{ required: true }}
-                                            name=""
+                                            name="intChartererID"
                                             register={register}
-                                            value=""
+                                            value={laytimeHeaderInput.intChartererID}
+                                            onChange={(option) => {
+                                                handleChangeTextInput(
+                                                    "intChartererName",
+                                                    option.label
+                                                );
+                                                handleChangeTextInput(
+                                                    "intChartererID",
+                                                    option.value
+                                                );
+                                            }}
+                                            setValue={setValue}
                                         />
                                     </div>
                                 </div>
@@ -209,7 +247,7 @@ const LaytimeHeader = () => {
                                             className=""
                                             type="checkbox"
                                             label="Loading Port"
-                                            onChange={(e) => handleClick(e.target.checked)}
+                                        // onChange={(e) => handleClick(e.target.checked)}
                                         />
                                         <a>
                                             {<i class="fas fa-file ml-10"

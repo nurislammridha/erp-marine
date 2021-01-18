@@ -46,6 +46,7 @@ import LaytimeHeaderReducer from "../modules/voyage/laytime/_redux/reducers/Layt
 import LaytimeDetailReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeDetailReducer";
 import BankInfoReducer from "../modules/partners/bank-information/_redux/reducers/BankInfoReducer";
 import PartnerAddressReducer from "../modules/partners/address/_redux/reducers/PartnerAddressReducer";
+import LaytimeRowReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeRowReducer";
 
 /** 
 | Domain : CCO
@@ -92,7 +93,7 @@ export const rootReducer = combineReducers({
 
   /** Laytime Reducers */
   laytimeHeaderInfo: LaytimeHeaderReducer,
-  laytimeDetailInfo: LaytimeDetailReducer,
+  laytimeDetailInfo: LaytimeRowReducer,
 
   /** Partners Reducers */
   bankInfo: BankInfoReducer,
