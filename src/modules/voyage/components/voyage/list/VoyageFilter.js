@@ -35,7 +35,6 @@ const VoyageFilter = (props) => {
     setSearch(value);
     dispatch(GetVoyageList(value, type));
     console.log(value);
-
   };
 
   // const changeType = (value) => {
@@ -51,8 +50,13 @@ const VoyageFilter = (props) => {
     <form className="form form-label-right" method="post">
       <div className="form-group row ml-2">
         <div className="col-lg-3 col-md-6 col-10">
-          <Form.Control type="text" placeholder="Search" value={search}
-            onChange={(e) => changeSearch(e.target.value)} />
+          <Form.Control
+            type="text"
+            placeholder="Search"
+            value={search}
+            onChange={(e) => changeSearch(e.target.value)}
+            className="formHeight"
+          />
         </div>
         <div className="col-lg-3 col-md-6 col-10">
           <Form.Group
@@ -60,7 +64,7 @@ const VoyageFilter = (props) => {
             as={Row}
             controlId="formPlaintextPassword"
           >
-            <Form.Label className="mt-2">Type</Form.Label>
+            <Form.Label className="mt-2 voyagelist-formlabel">Type</Form.Label>
             <Col sm="9">
               <RHFInput
                 as={<Select options={cargoOptionList} />}
@@ -86,7 +90,9 @@ const VoyageFilter = (props) => {
             onChange={(e) => changeSearch(e.target.value)}
             controlId="formPlaintextPassword"
           >
-            <Form.Label className="mt-2">Vessel</Form.Label>
+            <Form.Label className="mt-2 voyagelist-formlabel">
+              Vessel
+            </Form.Label>
             <Col sm="10">
               <RHFInput
                 as={<Select options={vesselListOptions} />}
@@ -97,7 +103,13 @@ const VoyageFilter = (props) => {
                 onChange={(option) => {
                   handleChangeTextInput("strVesselName", option.label);
                   handleChangeTextInput("intVesselID", option.value);
-                  dispatch(GetVoyageList(search, voyageInput.intCargoTypeID, option.value));
+                  dispatch(
+                    GetVoyageList(
+                      search,
+                      voyageInput.intCargoTypeID,
+                      option.value
+                    )
+                  );
                 }}
                 setValue={setValue}
               />
