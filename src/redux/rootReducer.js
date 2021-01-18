@@ -43,7 +43,6 @@ import CertificateCategoryReducer from "../modules/certificates/certificate-cate
 import CertificateListReducer from "../modules/certificates/certificate-master/_redux/reducers/CertificateListReducer";
 import LaytimeInfoReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeInfoReducer";
 import LaytimeHeaderReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeHeaderReducer";
-import LaytimeDetailReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeDetailReducer";
 import BankInfoReducer from "../modules/partners/bank-information/_redux/reducers/BankInfoReducer";
 import PartnerAddressReducer from "../modules/partners/address/_redux/reducers/PartnerAddressReducer";
 import LaytimeRowReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeRowReducer";
