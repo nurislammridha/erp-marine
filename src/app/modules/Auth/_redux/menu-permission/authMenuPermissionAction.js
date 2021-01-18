@@ -155,7 +155,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
     {
       moduleName: "Partners",
       moduleRouteUrl: "/partners",
-      moduleImageIcon: "/media/svg/icons/Code/certificates.svg",
+      moduleImageIcon: "/media/svg/icons/Code/partner.svg",
       subModules: [
         {
           subModuleName: "Partners Info",
@@ -166,9 +166,9 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
               featureName: "Partners Info",
               featureRouteUrl: "/partners/info",
               featureIcon: "menu-bullet menu-bullet-dot",
-            }
+            },
           ],
-        }
+        },
       ],
     },
     // {
