@@ -33,7 +33,7 @@ const OthersInfoAdd = withRouter(({ history }) => {
                 >
                     <div className="form-group">
                         <div className="row">
-                            <div className="col-md-5">
+                            <div className="col-md-4">
                                 <label className="form-label mt-2 formFont">Port Served</label>
                                 <Multiselect
                                     options={selectOptions}
@@ -41,12 +41,7 @@ const OthersInfoAdd = withRouter(({ history }) => {
                                     showCheckbox={true}
                                 />
                             </div>
-                            <div className="col-md-2">
-
-                            </div>
-                        </div>
-                        <div className="row mt-20">
-                            <div className="col-md-5">
+                            <div className="col-md-4">
                                 <label className="form-label mt-2 formFont">Product or Service Supplied</label>
                                 <Multiselect
                                     options={selectOptions}
@@ -54,21 +49,13 @@ const OthersInfoAdd = withRouter(({ history }) => {
                                     showCheckbox={true}
                                 />
                             </div>
-                            <div className="col-md-2">
-
-                            </div>
-                        </div>
-                        <div className="row mt-20">
-                            <div className="col-md-5">
+                            <div className="col-md-4">
                                 <label className="form-label mt-2 formFont">Service List</label>
                                 <Multiselect
                                     options={selectOptions}
                                     displayValue="name"
                                     showCheckbox={true}
                                 />
-                            </div>
-                            <div className="col-md-2">
-
                             </div>
                         </div>
                     </div>

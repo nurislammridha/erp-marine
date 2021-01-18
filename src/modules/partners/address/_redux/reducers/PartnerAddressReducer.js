@@ -2,9 +2,6 @@ import * as Types from "../types/Types";
 
 const initialState = {
     partnerAddressInput: {
-        picName: "",
-        picContact: "",
-        picEmail: "",
         address: "",
         state: "",
         city: "",
