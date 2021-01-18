@@ -25,11 +25,11 @@ export async function login(email, password) {
   };
   // return loginResponse;
   let shipUser = null;
-  const url = `http://iapps.akij.net/asll/public/api/v1/auth/superuser-login`;
+  const url = `http://iapps.akij.net/iMarineAPI/public/api/v1/auth/login`;
   try {
     await axios
       .post(url, {
-        username: username,
+        email: username,
         password: password
       })
       .then(async (res) => {
@@ -53,31 +53,31 @@ export async function login(email, password) {
       // Do More..
     if (loginResponse.status) {
       let loginUserData = null;
-      await axios
-        .get(`http://iapps.akij.net/asll/public/api/v1/hr/getUserDataByUserEmail?strOfficeEmail=${username}@akij.net`)
-        .then(async function (response) {
-          let responsData = response.data.data;
-          loginUserData = responsData;
-        });
+      // await axios
+      //   .get(`http://iapps.akij.net/asll/public/api/v1/hr/getUserDataByUserEmail?strOfficeEmail=${username}@akij.net`)
+      //   .then(async function (response) {
+      //     let responsData = response.data.data;
+      //     loginUserData = responsData;
+      //   });
 
-      if (loginResponse.userData.intUserTypeID == 17) {
-        await axios.get(`http://iapps.akij.net/asll/public/api/v1/asllhr/getEmployeeDetails/${loginResponse.userData.intEnroll}`)
-          .then(res => {
-            loginResponse.userData.shipUser = res.data.data;
-            loginResponse.userData.intVesselId = res.data.data.intVesselID;
-          });
-      }
+      // if (loginResponse.userData.intUserTypeID == 17) {
+      //   await axios.get(`http://iapps.akij.net/asll/public/api/v1/asllhr/getEmployeeDetails/${loginResponse.userData.intEnroll}`)
+      //     .then(res => {
+      //       loginResponse.userData.shipUser = res.data.data;
+      //       loginResponse.userData.intVesselId = res.data.data.intVesselID;
+      //     });
+      // }
 
       // if successfull then call module list api and get modules list array and update that to userData.moduleLists
-      const moduleURL = `http://iapps.akij.net/asll/public/api/v1/roles/getModulePermissionByUser?intUserTypeID=${loginResponse.userData.intUserTypeID}&intUserID=${loginResponse.userData.intEnroll}`;
-      await axios
-        .get(`${moduleURL}`)
-        .then((res) => {
-          loginResponse.userData.moduleLists = res.data.data;
-        })
-        .catch((error) => {
-          loginResponse.isLoading = false;
-        });
+      // const moduleURL = `http://iapps.akij.net/asll/public/api/v1/roles/getModulePermissionByUser?intUserTypeID=${loginResponse.userData.intUserTypeID}&intUserID=${loginResponse.userData.intEnroll}`;
+      // await axios
+      //   .get(`${moduleURL}`)
+      //   .then((res) => {
+      //     loginResponse.userData.moduleLists = res.data.data;
+      //   })
+      //   .catch((error) => {
+      //     loginResponse.isLoading = false;
+      //   });
     }
 
     localStorage.setItem("userData", JSON.stringify(loginResponse.userData));

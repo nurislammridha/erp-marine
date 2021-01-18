@@ -34,24 +34,28 @@ const initialState = {
 
     // },
     laytimeRowInput: {
-        intLayTimeHeaderID: null,
-        intType: null,
-        intPortID: null,
-        intCargoID: null,
-        numBLQty: null,
-        intTermsID: null,
-        numTimeAllowence: null,
-        intTimeAllowedTypeID: null,
-        numDemurrageRate: null,
-        numDespatchRate: null,
-        numDespatchRatePercent: null,
-        intDemurrageCurrID: null,
-        numTimeAllowed: null,
-        intAdditionalDay: null,
-        numAdditionalHrs: null,
-        numLaytimeUsed: null,
-        strTimeRemaining: ''
-    },
+        layTimeRows: [
+            {
+                intLayTimeHeaderID: null,
+                intType: null,
+                intPortID: null,
+                intCargoID: null,
+                numBLQty: null,
+                intTermsID: null,
+                numTimeAllowence: null,
+                intTimeAllowedTypeID: null,
+                numDemurrageRate: null,
+                numDespatchRate: null,
+                numDespatchRatePercent: null,
+                intDemurrageCurrID: null,
+                numTimeAllowed: null,
+                intAdditionalDay: null,
+                numAdditionalHrs: null,
+                numLaytimeUsed: null,
+                strTimeRemaining: ''
+            }
+        ]
+    }
 }
 
 const LaytimeRowReducer = (state = initialState, action) => {
