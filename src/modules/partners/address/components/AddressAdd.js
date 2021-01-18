@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { RHFInput } from 'react-hook-form-input';
 import Select from "react-select";
 import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { handleChangePartnerAddressInput, partnerAddressInput } from '../_redux/actions/AddressAction';
+import { handleChangePartnerAddressInput, partnerAddressSubmit } from '../_redux/actions/AddressAction';
 
 const AddressAdd = withRouter(({ history }) => {
     const { register, setValue, handleSubmit } = useForm();
     const dispatch = useDispatch();
     const partnerAddress = useSelector(state => state.partnerAddress.partnerAddressInput);
-    console.log('partnerAddress :>> ', partnerAddress);
+    // console.log('partnerAddress :>> ', partnerAddress);
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangePartnerAddressInput(name, value))
     }
@@ -38,7 +38,7 @@ const AddressAdd = withRouter(({ history }) => {
         }
     ];
     const onSubmit = () => {
-        // dispatch(partnerAddressInput(partnerAddress))
+        dispatch(partnerAddressSubmit(partnerAddress))
     }
     return (
         <div className="container">
@@ -133,31 +133,59 @@ const AddressAdd = withRouter(({ history }) => {
                             <div className="mt-8"></div>
                             <button
                                 className="btn btn-sm btn-primary"
+                                type="submit"
                             >
                                 Add
                             </button>
                         </div>
                     </div>
-                    {/* <div className="form-group row">
-                            <div className="col-md-9">
-                            </div>
-                            <div className="col-md-3">
-                                <button className="saveButton text-white btn ml-3"
-                                    onClick={() => history.push('/partners/info')}
-                                >
-                                    Previous
-                                    </button>
-                                <button
-                                    className="saveButton text-white btn px-9 ml-3"
-                                    onClick={() => history.push('/partners/bank-info')}
-                                    type="submit"
-                                >
-                                    Next
-                                </button>
-                            </div>
-                        </div> */}
                 </form>
-
+                <div className="react-bootstrap-table table-responsive mt-8">
+                    <table className="table table table-head-custom table-vertical-center voyageTable">
+                        <thead>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Is Default</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Dhaka</td>
+                                <td>Jessore</td>
+                                <td>Bangladesh</td>
+                                <td>Bangladesh</td>
+                                <td>
+                                    {" "}
+                                    <i className="far fa-edit editIcon"></i>
+                                    <i className="fas fa-trash-alt editIcon ml-4"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Dhaka</td>
+                                <td>Jessore</td>
+                                <td>Bangladesh</td>
+                                <td>Bangladesh</td>
+                                <td>
+                                    {" "}
+                                    <i className="far fa-edit editIcon"></i>
+                                    <i className="fas fa-trash-alt editIcon ml-4"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Dhaka</td>
+                                <td>Jessore</td>
+                                <td>Bangladesh</td>
+                                <td>Bangladesh</td>
+                                <td>
+                                    {" "}
+                                    <i className="far fa-edit editIcon"></i>
+                                    <i className="fas fa-trash-alt editIcon ml-4"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div >
     )

@@ -15,12 +15,12 @@ const initialState = {
 const PartnerAddressReducer = (state = initialState, action) => {
     const newState = { ...state }
     switch (action.type) {
-        case Types.GET_ADDRESS_ACTION_INPUT:
-            // const partnerAddressInput = { ...state };
-            // partnerAddressInput = action.payload;
-            return {
-                // ...state, partnerAddressInput,
-            };
+        // case Types.GET_ADDRESS_ACTION_SUBMIT:
+        //     const partnerAddressSubmit = { ...state.partnerAddressInput };
+        //     partnerAddressSubmit = action.payload;
+        //     return {
+        //         ...state, partnerAddressSubmit,
+        //     };
 
         case Types.CHANGE_PARTNER_ADDRESS_INPUT:
             const partnerAddressInput = { ...state.partnerAddressInput };
