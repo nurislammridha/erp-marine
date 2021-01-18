@@ -135,7 +135,7 @@ const AddressAdd = withRouter(({ history }) => {
                                 <Form.Group>
                                     <label className="form-label mt-2 formFont">Country</label>
                                     <RHFInput
-                                        className="formSelect pt-0"
+                                        className=""
                                         as={<Select options={country} />}
                                         rules={{ required: false }}
                                         name="country"
