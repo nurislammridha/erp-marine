@@ -22,10 +22,10 @@ export const GetCurrencyData = () => async (dispatch) => {
 
 // get data for lay time header input with voyage id
 export const getHearInputData = (id) => (dispatch) => {
-    console.log('id :>> ', id);
     let LayTimeURL = `${process.env.REACT_APP_API_URL}/voyage/charterVoyage/${id}`;
     Axios.get(LayTimeURL)
         .then((response) => {
+            console.log('response :>> ', response);
             let data = response.data;
             dispatch({ type: Types.GET_HEADER_INPUT_FROM_API, payload: data })
         })
