@@ -15,8 +15,8 @@ export const handleChangePartnerInfoInput = (name, value) => (dispatch) => {
     });
 };
 
-export const partnerInfoSubmitAction = (partnerInfoInput) => {
-    console.log('object', partnerInfoInput)
+export const partnerInfoSubmitAction = (partnerInfoInput) => async (dispatch) => {
+    console.log('data', partnerInfoInput)
     let isValidated = true;
     const message = "added successfully";
     const ermessage = "fill all the field"
