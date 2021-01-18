@@ -154,9 +154,9 @@ const BankInfoAdd = withRouter(({ history }) => {
                             <div className="col-md-5">
                                 <label className="form-label mt-2 formFont">Is Default</label>
                                 <Form.Check
-                                    className=""
-                                    type="checkbox"
-
+                                    type="switch"
+                                    id="custom-switch"
+                                    label=""
                                 />
                             </div>
                         </div>

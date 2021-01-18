@@ -16,7 +16,7 @@ export const handleChangeBankInfoInput = (name, value) => (dispatch) => {
 };
 
 export const bankInfoSubmitAction = (partnerInfoInput) => {
-    let isValidated = false;
+    let isValidated = true;
     const message = "added successfully";
     const ermessage = "fill all the field"
     // Validate First

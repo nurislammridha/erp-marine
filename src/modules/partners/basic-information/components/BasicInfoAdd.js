@@ -45,9 +45,13 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                 <RHFInput
                                     as={<Select options={selectOptions} />}
                                     rules={{ required: true }}
-                                    name=""
+                                    name="intAction"
                                     register={register}
-                                    value=""
+                                    value={selectOptions.value}
+                                    onChange={(e) => {
+                                        handleChangeTextInput("intAction", e.value);
+                                    }}
+                                    setValue={setValue}
                                 />
 
                             </div>
@@ -191,7 +195,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                     placeholder="Enter PIC Name"
                                     name="picName"
                                     className="fromStyle formHeight"
-                                    value={""}
+                                    value={partnerInfoInput.picName}
                                     onChange={(e) => handleChangeTextInput("picName", e.target.value)}
                                 />
                             </div>
@@ -202,7 +206,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                     placeholder="Enter PIC Contact"
                                     name="picContact"
                                     className="fromStyle formHeight"
-                                    value={""}
+                                    value={partnerInfoInput.picContact}
                                     onChange={(e) => handleChangeTextInput("picContact", e.target.value)}
                                 />
                             </div>
@@ -215,7 +219,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                     placeholder="Enter PIC Email"
                                     name="picEmail"
                                     className="fromStyle formHeight"
-                                    value={""}
+                                    value={partnerInfoInput.picEmail}
                                     onChange={(e) => handleChangeTextInput("picEmail", e.target.value)}
                                 />
                             </div>

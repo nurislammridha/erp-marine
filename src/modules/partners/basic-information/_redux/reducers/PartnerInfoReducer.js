@@ -10,6 +10,10 @@ const initialState = {
         strBIN: "",
         strTIN: "",
         strBusinessPartnerCode: "",
+        picName: "",
+        picContact: "",
+        picEmail: "",
+        intAction: ""
     },
     status: false,
 };
