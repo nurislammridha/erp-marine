@@ -77,7 +77,7 @@ const VoyageActivityContainer = (props) => {
               </Dropdown.Menu>
             </Dropdown>
             <Link
-              className="pl-3 pr-3 text-bold btn btn-primary"
+              className="pl-3 pr-3 text-bold btn btn-primary text-white"
               to="/voyage/voyage-activity/create"
             >
               <i className="fa fa-plus-circle"></i> Add New

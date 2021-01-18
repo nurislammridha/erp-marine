@@ -22,7 +22,7 @@ const VoyageListContainer = () => {
             Export
           </Button>
           <Button
-            className="pl-3 pr-3 text-bold"
+            className="pl-3 pr-3 text-bold "
             variant="primary"
             onClick={() => {
               history.push("/voyage/add");

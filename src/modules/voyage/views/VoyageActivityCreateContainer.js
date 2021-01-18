@@ -39,12 +39,12 @@ const VoyageActivityCreateContainer = (props) => {
       <div className="card card-custom gutter-b">
         <div className="card-header">
           <div className="card-title">
-            <h3 className="card-label">Voyage Activity</h3>
+            <h3 className="card-label">Voyage Activity </h3>
           </div>
         </div>
 
-        <div className="row">
-          <div className="col-4 ml-2">
+        <div className="row ">
+          <div className="col-xl-3 col-lg-3 col-md-4 col-7 ml-4 mt-5 mb-4">
             {(vesselId === null || vesselId === "") && (
               <Select
                 options={vesselListOptions}
@@ -63,7 +63,7 @@ const VoyageActivityCreateContainer = (props) => {
           </>
         )}
         {voyageData === null && (
-          <h4 className="container text-center">Loading Data...</h4>
+          <h4 className="container text-center pb-3">Loading Data....</h4>
         )}
       </div>
     </div>

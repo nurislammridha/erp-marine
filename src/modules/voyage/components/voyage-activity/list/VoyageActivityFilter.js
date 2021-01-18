@@ -32,10 +32,11 @@ const VoyageActivityFilter = (props) => {
     <form className="form form-label-right" method="post">
       <div className="form-group row ml-2">
         <div className="col-lg-3 col-md-6 col-10">
-          <Form.Label className="mt-2">Search</Form.Label>
+          <Form.Label className="mt-2 ">Search</Form.Label>
           <Form.Control
             type="text"
             placeholder="Search"
+            className="formHeight"
             onChange={(e) => {
               setSearch(e.target.value);
               dispatch(
@@ -60,9 +61,9 @@ const VoyageActivityFilter = (props) => {
           </Form.Group>
         </div> */}
 
-        <div className="col-lg-3 col-md-6 col-10">
-          <Form.Group controlId="formPlaintextPassword">
-            <Form.Label className="mt-2">Select Vessel</Form.Label>
+        <div className="col-lg-3 col-md-6 col-10 ">
+          <Form.Group as={Row} controlId="formPlaintextPassword">
+            <Form.Label className="mt-2 ml-4">Select Vessel</Form.Label>
             <Col sm="9">
               <Select
                 options={vesselListOptions}
@@ -75,7 +76,7 @@ const VoyageActivityFilter = (props) => {
 
         <div className="col-lg-3 col-md-6 col-10">
           <Form.Group as={Row} controlId="formPlaintextPassword">
-            <Form.Label className="mt-2">Select Voyage</Form.Label>
+            <Form.Label className="mt-2 ml-4">Select Voyage</Form.Label>
             <Col sm="9">
               <Select
                 options={voyageIDList}

@@ -64,7 +64,7 @@ const VoyageFilter = (props) => {
             as={Row}
             controlId="formPlaintextPassword"
           >
-            <Form.Label className="mt-2 voyagelist-formlabel">Type</Form.Label>
+            <Form.Label className="mt-2 formHeight">Type </Form.Label>
             <Col sm="9">
               <RHFInput
                 as={<Select options={cargoOptionList} />}
