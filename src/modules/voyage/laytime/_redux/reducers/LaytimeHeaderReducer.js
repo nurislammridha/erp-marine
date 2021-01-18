@@ -31,36 +31,62 @@ const initialState = {
         intBrokerID: null,
         intLaytimeCalculationTypeID: null,
         isRevAllPorts: null,
-        isRevLoadingPorts: null,
-        isRevDischargePorts: null,
-        strOnceOnDemmurrage: '',
+        isRevLoadingPorts: false,
+        isRevDischargePorts: false,
+        strOnceOnDemmurrage: false,
         intDemurrageCurrencyID: null,
         numCommision: null,
         CommisionPercent: null,
         numDemurrageDespatchAmount: null,
         intDemurrageDespatchCurrencyID: null,
+        // load from server 
+        intCurrencyID: null,
+        numCurrencyRate: null,
+        strVoyageNo: null,
+        dteCPDate: '',
+        intCommenPortID: null,
+        intComplationPortID: null,
+        dteCommenDate: '',
+        dteComplationDate: '',
+        numTotalIDLE: null,
+        numTotalPortDays: null,
+        numTotalDistance: null,
+        numTotalDuration: null,
+        numTotalSteamingTime: null,
+        numAVGSpeed: null,
         intActionBy: null,
+        dteLastActionDateTime: '',
+        dteServerDateTime: null,
         isActive: null,
-        layTimeRows: [
+
+        demurage: [
             {
-                intLayTimeHeaderID: null,
-                intType: null,
-                intPortID: null,
-                intCargoID: null,
-                numBLQty: null,
-                intTermsID: null,
-                numTimeAllowence: null,
-                intTimeAllowedTypeID: null,
-                numDemurrageRate: null,
-                numDespatchRate: null,
-                numDespatchRatePercent: null,
-                intDemurrageCurrID: null,
-                numTimeAllowed: null,
-                intAdditionalDay: null,
-                numAdditionalHrs: null,
-                numLaytimeUsed: null,
-                strTimeRemaining: ''
+                intDemurrageRate: null,                
+                intDemurrageCurrencyID: null,                
+                intDemurrageDespatchRate: null,                
+                intDemurrageDespatchPercentageID: null,                
             }
+        ],
+        layTimeRows: [
+            // {
+            //     intLayTimeHeaderID: null,
+            //     intType: null,
+            //     intPortID: null,
+            //     intCargoID: null,
+            //     numBLQty: null,
+            //     intTermsID: null,
+            //     numTimeAllowence: null,
+            //     intTimeAllowedTypeID: null,
+            //     numDemurrageRate: null,
+            //     numDespatchRate: null,
+            //     numDespatchRatePercent: null,
+            //     intDemurrageCurrID: null,
+            //     numTimeAllowed: null,
+            //     intAdditionalDay: null,
+            //     numAdditionalHrs: null,
+            //     numLaytimeUsed: null,
+            //     strTimeRemaining: ''
+            // }
         ]
     }
 };
@@ -75,6 +101,11 @@ const LaytimeHeaderReducer = (state = initialState, action) => {
                 ...state,
                 laytimeHeaderInput,
             };
+        case Types.GET_HEADER_INPUT_FROM_API: 
+            console.log('action.payload :>> ', action.payload);
+            return {
+                
+            }
         default:
             break;
 

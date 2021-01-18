@@ -2,18 +2,18 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 
 const SimpleModal = (props) => {
-    const { show, handleClose, handleShow, size, modalTitle } = props;
+    const { show, showLoadingPortModal, handleClose, handleShow, size, modalTitle, handleCloseLoadingPortModal } = props;
 
     return (
         <Modal
-            onClose={handleClose}
+            onClose={handleClose ? handleClose : handleCloseLoadingPortModal }
             size={size}
-            show={show}
-            onHide={handleClose}
+            show={show ? show : showLoadingPortModal}
+            onHide={handleClose ? handleClose : handleCloseLoadingPortModal}
         >
             <Modal.Header closeButton>
                 <Modal.Title>{modalTitle}</Modal.Title>
-                <p className="btn-modal-close" onClick={() => handleClose()}>
+                <p className="btn-modal-close" onClick={() => handleClose ? handleClose() : handleCloseLoadingPortModal()}>
                     <i className="fa fa-times text-danger" ></i>
                 </p>
             </Modal.Header>

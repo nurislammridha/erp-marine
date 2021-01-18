@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import SimpleModal from '../../../../master/components/Modal/SimpleModal';
-import { handleChangeLaytimeHeaderInput } from '../../_redux/actions/LaytimeAction';
+import { handleChangeLaytimeHeaderInput, getHearInputData } from '../../_redux/actions/LaytimeAction';
 import { useSelector, useDispatch } from "react-redux";
-import LaytimeHeaderModal from './LaytimeHeaderModal';
+import LaytimeHeaderLoadingPortModal from './LaytimeHeaderLoadingPortModal';
+import LaytimeHeaderDischargePortModal from './LaytimeHeaderDischargePortModal';
 
 const LaytimeHeader = () => {
     const dispatch = useDispatch();
@@ -22,21 +23,34 @@ const LaytimeHeader = () => {
             value: "0"
         }
     ]
+
+
     const { register, handleSubmit, errors, setValue } = useForm();
     const [show, setShow] = useState(false);
+    const [showLoadingPortModal, setShowLoadingPortModal] = useState(false);
     const handleClose = () => setShow(false);
+    const handleCloseLoadingPortModal = () => setShowLoadingPortModal(false);
     const handleShow = () => setShow(true);
+    const handleShowLoadingPortModal = () => setShowLoadingPortModal(true);
 
     const laytimeHeaderInput = useSelector((state) => state.laytimeHeaderInfo.laytimeHeaderInput);
-
-    console.log('laytimeHeaderInput :>> ', laytimeHeaderInput);
-    const handleClick = (e) => {
+    const loadingPort = (e) => {
         handleShow()
     };
+    const dischargePort = (e) => {
+        handleShowLoadingPortModal()
+    }
     //handle lay-time header input 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeLaytimeHeaderInput(name, value));
+        dispatch(getHearInputData(laytimeHeaderInput.intCharterVoyageID))
     };
+    console.log('laytimeHeaderInput.intCharterVoyageID :>> ', laytimeHeaderInput);
+
+    // useEffect(() => {
+    //     dispatch(getHearInputData(laytimeHeaderInput.intCharterVoyageID))
+    // }, [])
+    
     return (
         <div className="container">
             <div className="card card-custom gutter-b">
@@ -53,7 +67,7 @@ const LaytimeHeader = () => {
                         <div className="form-group row">
                             <div className="col-md-8">
                                 <div className="row">
-                                    <div className="col-md-6">
+                                    {/* <div className="col-md-6">
                                         <label className="form-label">Vessel Name</label>
                                         <RHFInput
                                             as={<Select options={selectOptions} />}
@@ -73,7 +87,7 @@ const LaytimeHeader = () => {
                                             }}
                                             setValue={setValue}
                                         />
-                                    </div>
+                                    </div> */}
                                     <div className="col-md-6">
                                         <label className="form-label mt-2 formFont">Voyage No.</label>
                                         <Form.Control
@@ -96,16 +110,16 @@ const LaytimeHeader = () => {
                                         <RHFInput
                                             as={<Select options={selectOptions} />}
                                             rules={{ required: true }}
-                                            name="intCommencementPortID"
+                                            name="intCommenPortID"
                                             register={register}
-                                            value={laytimeHeaderInput.intCommencementPortID}
+                                            value={laytimeHeaderInput.intCommenPortID}
                                             onChange={(option) => {
                                                 handleChangeTextInput(
-                                                    "CommencementPortName",
+                                                    "strCommenPortName",
                                                     option.label
                                                 );
                                                 handleChangeTextInput(
-                                                    "intCommencementPortID",
+                                                    "intCommenPortID",
                                                     option.value
                                                 );
                                             }}
@@ -115,13 +129,13 @@ const LaytimeHeader = () => {
                                     <div className="col-md-6">
                                         <label className="form-label mt-2 formFont">Commencement Date </label>
                                         <DatePicker
-                                            name="dteCommencedDate"
+                                            name="dteCommenDate"
                                             className="form-control formHeight"
                                             placeholderText="select issue date"
-                                            selected={laytimeHeaderInput.dteCommencedDate}
+                                            selected={laytimeHeaderInput.dteCommenDate}
                                             onChange={(e) =>
                                                 handleChangeTextInput(
-                                                    "dteCommencedDate",
+                                                    "dteCommenDate",
                                                     e
                                                 )
                                             }
@@ -138,16 +152,16 @@ const LaytimeHeader = () => {
                                         <RHFInput
                                             as={<Select options={selectOptions} />}
                                             rules={{ required: true }}
-                                            name="intCompletionPortID"
+                                            name="intComplationPortID"
                                             register={register}
-                                            value={laytimeHeaderInput.intCompletionPortID}
+                                            value={laytimeHeaderInput.intComplationPortID}
                                             onChange={(option) => {
                                                 handleChangeTextInput(
-                                                    "intCompletionPortName",
+                                                    "strComplationPortName",
                                                     option.label
                                                 );
                                                 handleChangeTextInput(
-                                                    "intCompletionPortID",
+                                                    "intComplationPortID",
                                                     option.value
                                                 );
                                             }}
@@ -158,13 +172,13 @@ const LaytimeHeader = () => {
                                         <label className="form-label mt-2 formFont">Completion Date</label>
 
                                         <DatePicker
-                                            name="dteCompletionDate"
+                                            name="dteComplationDate"
                                             className="form-control formHeight"
                                             placeholderText="select issue date"
-                                            selected={laytimeHeaderInput.dteCompletionDate}
+                                            selected={laytimeHeaderInput.dteComplationDate}
                                             onChange={(e) =>
                                                 handleChangeTextInput(
-                                                    "dteCompletionDate",
+                                                    "dteComplationDate",
                                                     e
                                                 )
                                             }
@@ -247,11 +261,13 @@ const LaytimeHeader = () => {
                                             className=""
                                             type="checkbox"
                                             label="Loading Port"
-                                        // onChange={(e) => handleClick(e.target.checked)}
+                                            name="isRevLoadingPorts"
+                                            value={laytimeHeaderInput.isRevLoadingPorts}
+                                            onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
                                         />
                                         <a>
                                             {<i class="fas fa-file ml-10"
-                                                onClick={() => handleClick()}></i>}
+                                                onClick={() => loadingPort()}></i>}
                                         </a>
                                     </div>
                                     <div className="row m-3">
@@ -259,10 +275,13 @@ const LaytimeHeader = () => {
                                             className=""
                                             type="checkbox"
                                             label="Discharge Port"
+                                            name="isRevDischargePorts"
+                                            value={laytimeHeaderInput.isRevDischargePorts}
+                                            onChange={(e) => handleChangeTextInput('isRevDischargePorts', e.target.checked)}
                                         />
                                         <a>
                                             {<i class="fas fa-file ml-6"
-                                                onClick={() => handleClick()}></i>}
+                                                onClick={() => dischargePort()}></i>}
                                         </a>
                                     </div>
                                 </div>
@@ -271,26 +290,40 @@ const LaytimeHeader = () => {
                                         className="m-3"
                                         type="radio"
                                         label="Always On Demurrage"
+                                        name="strOnceOnDemmurrage"
+                                        id="strOnceOnDemmurrage"
+                                        value={laytimeHeaderInput.strOnceOnDemmurrage}
+                                        onChange={(e) => handleChangeTextInput('strOnceOnDemmurrage', e.target.checked === true)}
                                     />
                                     <Form.Check
                                         className="m-3"
                                         type="radio"
                                         label="Not Always On Demurrage"
+                                        name="strOnceOnDemmurrage"
+                                        id="strOnceOnDemmurrage"
+                                        value={laytimeHeaderInput.strOnceOnDemmurrage}
+                                        onChange={(e) => handleChangeTextInput('strOnceOnDemmurrage', e.target.checked === false)}
                                     />
                                 </div>
                             </div>
                         </div>
-
+                        <SimpleModal
+                            showLoadingPortModal={showLoadingPortModal}
+                            handleCloseLoadingPortModal={() => handleCloseLoadingPortModal()}
+                            modalTitle={"Demurrage/Dispatch Rate"}
+                        >
+                            <LaytimeHeaderLoadingPortModal laytimeHeaderInput={laytimeHeaderInput} handleChangeTextInput={handleChangeTextInput} />
+                        </SimpleModal>
+                        <SimpleModal
+                            show={show}
+                            handleClose={() => handleClose()}
+                            modalTitle={"Demurrage/Dispatch Rate"}
+                        >
+                            <LaytimeHeaderDischargePortModal />
+                        </SimpleModal>
                     </form>
                 </div>
             </div>
-            <SimpleModal
-                show={show}
-                handleClose={() => handleClose()}
-                modalTitle={"Demurrage/Dispatch Rate"}
-            >
-                <LaytimeHeaderModal />
-            </SimpleModal>
         </div >
     );
 }
