@@ -40,9 +40,23 @@ const BasicTable = () => {
                 </Form.Control>
               </Form.Group>
             </div>
+            <div className="col-xl-3 col-lg-3 col-md-6">
+              <Form.Group controlId="exampleForm.ControlSelect1">
+                <Form.Label className="formFont pl-1">
+                  Example select
+                </Form.Label>
+                <Form.Control className="formSelect" as="select">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </Form.Control>
+              </Form.Group>
+            </div>
             {/* <div className="col-xl-3 col-lg-3 col-md-6">use RHFInput</div> */}
 
-            <div className="col-xl-3 col-lg-3 col-md-6">
+            <div className="mt-3">
               <i className="fas fa-filter tableFilter mt-3 mr-2"></i>
               <i className="far fa-filter"></i>
               <Button className="btn-sm" variant="primary">

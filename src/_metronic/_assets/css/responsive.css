@@ -85,7 +85,8 @@
     margin-left: 0px !important;
   }
   .voyageTable td,
-  th {
+  th,
+  ._1hzhf {
     font-size: 10px !important;
   }
   button.btn.approve {
