@@ -12,7 +12,7 @@ export function AuthPage() {
   useEffect(() => {
     const userData = localStorage.getItem("userData");
 
-    if (typeof userData != "undefined" && userData != null) {
+    if (typeof userData != "undefined" && userData != null && userData != "null" && userData != "") {
       const user = JSON.parse(userData);
       if (user.intEmployeeId != null) {
         window.location.href = "/dashboard";
