@@ -104,8 +104,27 @@
     font-size: 10px !important;
     margin-left: 15px;
   }
-  .vessel-input {
-    /* margin-left: -10px; */
+  ._3uApM {
+    margin-top: -8px !important;
+    margin-left: 19px;
+  }
+  .form-group label {
+    font-size: 11px !important;
+  }
+  label.form-label.mt-2.formFont {
+    margin-top: 0px !important;
+  }
+  ._2Jtxm._35Ago ._2kL0S {
+    margin-left: 0px;
+  }
+  ._2Jtxm {
+    margin-left: 0px;
+  }
+  ._1Lo2h {
+    width: 97%;
+  }
+  ._hsN1w {
+    margin-right: 16px;
   }
 }
 

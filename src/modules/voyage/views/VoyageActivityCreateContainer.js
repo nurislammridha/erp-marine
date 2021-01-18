@@ -63,7 +63,7 @@ const VoyageActivityCreateContainer = (props) => {
           </>
         )}
         {voyageData === null && (
-          <h4 className="container text-center pb-3">Loading Data....</h4>
+          <h4 className="container text-center pb-3">Loading Data...</h4>
         )}
       </div>
     </div>
