@@ -30,139 +30,139 @@ const BankInfoAdd = withRouter(({ history }) => {
 
     return (
         <div className="container">
-            <div className="card card-custom gutter-b mt-10">
-                <div className="card-body">
-                    <form
-                        className="form form-label-right"
-                        method="post"
-                    >
-                        <div className="form-group">
-                            <div className="row">
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Beneficiary Name</label>
-                                    <Form.Control
-                                        type="text"
-                                        name="strBeneficiaryName"
-                                        className="fromStyle formHeight"
-                                        value={bankInfoInput.strBeneficiaryName}
-                                        onChange={(e) =>
-                                            handleChangeTextInput(
-                                                "strBeneficiaryName",
-                                                e.target.value
-                                            )
-                                        }
-                                    />
-                                </div>
-                                <div className="col-md-2">
+            <div className="mt-10">
 
-                                </div>
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Account No</label>
-                                    <Form.Control
-                                        type="text"
-                                        name="strBankAccountNo"
-                                        className="fromStyle formHeight"
-                                        value={bankInfoInput.strBankAccountNo}
-                                        onChange={(e) =>
-                                            handleChangeTextInput(
-                                                "strBankAccountNo",
-                                                e.target.value
-                                            )
-                                        }
-                                    />
-                                </div>
+                <form
+                    className="form form-label-right"
+                    method="post"
+                >
+                    <div className="form-group">
+                        <div className="row">
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Beneficiary Name</label>
+                                <Form.Control
+                                    type="text"
+                                    name="strBeneficiaryName"
+                                    className="fromStyle formHeight"
+                                    value={bankInfoInput.strBeneficiaryName}
+                                    onChange={(e) =>
+                                        handleChangeTextInput(
+                                            "strBeneficiaryName",
+                                            e.target.value
+                                        )
+                                    }
+                                />
                             </div>
-                            <div className="row">
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Bank Name</label>
-                                    <RHFInput
-                                        as={<Select options={selectOptions} />}
-                                        rules={{ required: true }}
-                                        name=""
-                                        register={register}
-                                        value=""
-                                    />
-                                </div>
-                                <div className="col-md-2">
+                            <div className="col-md-2">
 
-                                </div>
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Branch Name</label>
-                                    <RHFInput
-                                        as={<Select options={selectOptions} />}
-                                        rules={{ required: true }}
-                                        name=""
-                                        register={register}
-                                        value=""
-                                    />
-                                </div>
                             </div>
-                            <div className="row">
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Routing No</label>
-                                    <Form.Control
-                                        type="text"
-                                        name="strRoutingNo"
-                                        className="fromStyle formHeight"
-                                        value={bankInfoInput.strRoutingNo}
-                                        onChange={(e) =>
-                                            handleChangeTextInput(
-                                                "strRoutingNo",
-                                                e.target.value
-                                            )
-                                        }
-                                    />
-                                </div>
-                                <div className="col-md-2">
-
-                                </div>
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">IBAN</label>
-                                    <Form.Control
-                                        type="text"
-                                        name="intIBANNO"
-                                        className="fromStyle formHeight"
-                                        value={bankInfoInput.intIBANNO}
-                                        onChange={(e) =>
-                                            handleChangeTextInput(
-                                                "intIBANNO",
-                                                e.target.value
-                                            )
-                                        }
-                                    />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Swift Code</label>
-                                    <Form.Control
-                                        type="text"
-                                        name="strSWIFTCode"
-                                        className="fromStyle formHeight"
-                                        value={bankInfoInput.strSWIFTCode}
-                                        onChange={(e) =>
-                                            handleChangeTextInput(
-                                                "strSWIFTCode",
-                                                e.target.value
-                                            )
-                                        }
-                                    />
-                                </div>
-                                <div className="col-md-2">
-
-                                </div>
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Is Default</label>
-                                    <Form.Check
-                                        className=""
-                                        type="checkbox"
-
-                                    />
-                                </div>
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Account No</label>
+                                <Form.Control
+                                    type="text"
+                                    name="strBankAccountNo"
+                                    className="fromStyle formHeight"
+                                    value={bankInfoInput.strBankAccountNo}
+                                    onChange={(e) =>
+                                        handleChangeTextInput(
+                                            "strBankAccountNo",
+                                            e.target.value
+                                        )
+                                    }
+                                />
                             </div>
                         </div>
+                        <div className="row">
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Bank Name</label>
+                                <RHFInput
+                                    as={<Select options={selectOptions} />}
+                                    rules={{ required: true }}
+                                    name=""
+                                    register={register}
+                                    value=""
+                                />
+                            </div>
+                            <div className="col-md-2">
 
-                        {/* <div className="form-group row mt-5">
+                            </div>
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Branch Name</label>
+                                <RHFInput
+                                    as={<Select options={selectOptions} />}
+                                    rules={{ required: true }}
+                                    name=""
+                                    register={register}
+                                    value=""
+                                />
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Routing No</label>
+                                <Form.Control
+                                    type="text"
+                                    name="strRoutingNo"
+                                    className="fromStyle formHeight"
+                                    value={bankInfoInput.strRoutingNo}
+                                    onChange={(e) =>
+                                        handleChangeTextInput(
+                                            "strRoutingNo",
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="col-md-2">
+
+                            </div>
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">IBAN</label>
+                                <Form.Control
+                                    type="text"
+                                    name="intIBANNO"
+                                    className="fromStyle formHeight"
+                                    value={bankInfoInput.intIBANNO}
+                                    onChange={(e) =>
+                                        handleChangeTextInput(
+                                            "intIBANNO",
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Swift Code</label>
+                                <Form.Control
+                                    type="text"
+                                    name="strSWIFTCode"
+                                    className="fromStyle formHeight"
+                                    value={bankInfoInput.strSWIFTCode}
+                                    onChange={(e) =>
+                                        handleChangeTextInput(
+                                            "strSWIFTCode",
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="col-md-2">
+
+                            </div>
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Is Default</label>
+                                <Form.Check
+                                    className=""
+                                    type="checkbox"
+
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* <div className="form-group row mt-5">
                             <div className="col-md-9">
 
                             </div>
@@ -182,8 +182,8 @@ const BankInfoAdd = withRouter(({ history }) => {
 
                             </div>
                         </div> */}
-                    </form>
-                </div>
+                </form>
+
             </div>
         </div >
     );

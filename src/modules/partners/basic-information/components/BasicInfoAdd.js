@@ -4,6 +4,9 @@ import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import { handleChangePartnerInfoInput } from '../_redux/actions/BasicInfoAction';
+
 
 const BasicInfoAdd = withRouter(({ history }) => {
 
@@ -19,180 +22,186 @@ const BasicInfoAdd = withRouter(({ history }) => {
     ]
 
     const { register, handleSubmit, errors, setValue } = useForm();
+    const dispatch = useDispatch();
+    const partnerInfoInput = useSelector((state) => state.partnerInfo.partnerInfoInput);
+
+    const handleChangeTextInput = (name, value) => {
+        dispatch(handleChangePartnerInfoInput(name, value));
+    };
 
     return (
         <div className="container">
-            <div className="card card-custom gutter-b mt-10">
+            <div className="mt-10">
 
-                <div className="card-body">
-                    <form
-                        className="form form-label-right"
-                        method="post"
-                    >
-                        <div className="form-group">
-                            <div className="row">
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Partner Name</label>
-                                    <Form.Control
-                                        type="text"
-                                        name=""
-                                        className="fromStyle formHeight"
-                                    // value={}
-                                    // onChange={(e) =>
-                                    //     handleChangeTextInput(
-                                    //         "intVoyageNumber",
-                                    //         e.target.value
-                                    //     )
-                                    // }
-                                    />
-                                </div>
-                                <div className="col-md-2">
 
-                                </div>
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Contact No</label>
-                                    <Form.Control
-                                        type="number"
-                                        name=""
-                                        className="fromStyle formHeight"
-                                    // value={}
-                                    // onChange={(e) =>
-                                    //     handleChangeTextInput(
-                                    //         "intVoyageNumber",
-                                    //         e.target.value
-                                    //     )
-                                    // }
-                                    />
-                                </div>
+                <form
+                    className="form form-label-right"
+                    method="post"
+                >
+                    <div className="form-group">
+                        <div className="row">
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Partner Name</label>
+                                <Form.Control
+                                    type="text"
+                                    name="strBusinessPartnerName"
+                                    className="fromStyle formHeight"
+                                    value={partnerInfoInput.strBusinessPartnerName}
+                                    onChange={(e) =>
+                                        handleChangeTextInput(
+                                            "strBusinessPartnerName",
+                                            e.target.value
+                                        )
+                                    }
+                                />
                             </div>
-                            <div className="row">
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Partner Type</label>
-                                    <RHFInput
-                                        as={<Select options={selectOptions} />}
-                                        rules={{ required: true }}
-                                        name=""
-                                        register={register}
-                                        value=""
-                                    />
-                                </div>
-                                <div className="col-md-2">
+                            <div className="col-md-2">
 
-                                </div>
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Licence No</label>
-                                    <Form.Control
-                                        type="text"
-                                        name=""
-                                        className="fromStyle formHeight"
-                                    // value={}
-                                    // onChange={(e) =>
-                                    //     handleChangeTextInput(
-                                    //         "intVoyageNumber",
-                                    //         e.target.value
-                                    //     )
-                                    // }
-                                    />
-                                </div>
                             </div>
-                            <div className="row">
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Email</label>
-                                    <Form.Control
-                                        type="email"
-                                        name=""
-                                        className="fromStyle formHeight"
-                                    // value={}
-                                    // onChange={(e) =>
-                                    //     handleChangeTextInput(
-                                    //         "intVoyageNumber",
-                                    //         e.target.value
-                                    //     )
-                                    // }
-                                    />
-                                </div>
-                                <div className="col-md-2">
-
-                                </div>
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Business Unit</label>
-                                    <RHFInput
-                                        as={<Select options={selectOptions} />}
-                                        rules={{ required: true }}
-                                        name=""
-                                        register={register}
-                                        value=""
-                                    />
-                                </div>
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Contact No</label>
+                                <Form.Control
+                                    type="text"
+                                    name="strContactNumber"
+                                    className="fromStyle formHeight"
+                                    value={partnerInfoInput.strContactNumber}
+                                    onChange={(e) =>
+                                        handleChangeTextInput(
+                                            "strContactNumber",
+                                            e.target.value
+                                        )
+                                    }
+                                />
                             </div>
-                            <div className="row">
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Bil No</label>
-                                    <Form.Control
-                                        type="number"
-                                        name=""
-                                        className="fromStyle formHeight"
-                                    // value={}
-                                    // onChange={(e) =>
-                                    //     handleChangeTextInput(
-                                    //         "intVoyageNumber",
-                                    //         e.target.value
-                                    //     )
-                                    // }
-                                    />
-                                </div>
-                                <div className="col-md-2">
-
-                                </div>
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Tin No</label>
-                                    <Form.Control
-                                        type="number"
-                                        name=""
-                                        className="fromStyle formHeight"
-                                    // value={}
-                                    // onChange={(e) =>
-                                    //     handleChangeTextInput(
-                                    //         "intVoyageNumber",
-                                    //         e.target.value
-                                    //     )
-                                    // }
-                                    />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Partner Code</label>
-                                    <Form.Control
-                                        type="number"
-                                        name=""
-                                        className="fromStyle formHeight"
-                                    // value={}
-                                    // onChange={(e) =>
-                                    //     handleChangeTextInput(
-                                    //         "intVoyageNumber",
-                                    //         e.target.value
-                                    //     )
-                                    // }
-                                    />
-                                </div>
-                                <div className="col-md-2">
-
-                                </div>
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">TAX Type</label>
-                                    <RHFInput
-                                        as={<Select options={selectOptions} />}
-                                        rules={{ required: true }}
-                                        name=""
-                                        register={register}
-                                        value=""
-                                    />
-                                </div>
-                            </div>
-
                         </div>
-                        {/* <div className="form-group row mt-5">
+                        <div className="row">
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Partner Type</label>
+                                <RHFInput
+                                    as={<Select options={selectOptions} />}
+                                    rules={{ required: true }}
+                                    name=""
+                                    register={register}
+                                    value=""
+                                />
+                            </div>
+                            <div className="col-md-2">
+
+                            </div>
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Licence No</label>
+                                <Form.Control
+                                    type="text"
+                                    name="strLicenseNo"
+                                    className="fromStyle formHeight"
+                                    value={partnerInfoInput.strLicenseNo}
+                                    onChange={(e) =>
+                                        handleChangeTextInput(
+                                            "strLicenseNo",
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Email</label>
+                                <Form.Control
+                                    type="email"
+                                    name="strEmail"
+                                    className="fromStyle formHeight"
+                                    value={partnerInfoInput.strEmail}
+                                    onChange={(e) =>
+                                        handleChangeTextInput(
+                                            "strEmail",
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="col-md-2">
+
+                            </div>
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Business Unit</label>
+                                <RHFInput
+                                    as={<Select options={selectOptions} />}
+                                    rules={{ required: true }}
+                                    name=""
+                                    register={register}
+                                    value=""
+                                />
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">BIN No</label>
+                                <Form.Control
+                                    type="text"
+                                    name="strBIN"
+                                    className="fromStyle formHeight"
+                                    value={partnerInfoInput.strBIN}
+                                    onChange={(e) =>
+                                        handleChangeTextInput(
+                                            "strBIN",
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="col-md-2">
+
+                            </div>
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Tin No</label>
+                                <Form.Control
+                                    type="number"
+                                    name="intTINNo"
+                                    className="fromStyle formHeight"
+                                    value={partnerInfoInput.intTINNo}
+                                    onChange={(e) =>
+                                        handleChangeTextInput(
+                                            "intTINNo",
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Partner Code</label>
+                                <Form.Control
+                                    type="text"
+                                    name="strBusinessPartnerCode"
+                                    className="fromStyle formHeight"
+                                    value={partnerInfoInput.strBusinessPartnerCode}
+                                    onChange={(e) =>
+                                        handleChangeTextInput(
+                                            "strBusinessPartnerCode",
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="col-md-2">
+
+                            </div>
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">TAX Type</label>
+                                <RHFInput
+                                    as={<Select options={selectOptions} />}
+                                    rules={{ required: true }}
+                                    name=""
+                                    register={register}
+                                    value=""
+                                />
+                            </div>
+                        </div>
+
+                    </div>
+                    {/* <div className="form-group row mt-5">
                             <div className="col-md-11">
 
                             </div>
@@ -206,8 +215,8 @@ const BasicInfoAdd = withRouter(({ history }) => {
 
                         </div> */}
 
-                    </form>
-                </div>
+                </form>
+
             </div>
 
         </div >
