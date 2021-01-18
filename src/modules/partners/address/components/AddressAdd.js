@@ -50,40 +50,7 @@ const AddressAdd = withRouter(({ history }) => {
                     method="post"
                 >
                     <div className="form-group row">
-                        <div className="col-md-5">
-                            <Form.Group>
-                                <label className="form-label mt-2 formFont">PIC name</label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Enter PIC Name"
-                                    name="picName"
-                                    className="fromStyle formHeight"
-                                    value={partnerAddress.picName}
-                                    onChange={(e) => handleChangeTextInput("picName", e.target.value)}
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                <label className="form-label mt-2 formFont">PIC Contact</label>
-                                <Form.Control
-                                    type="number"
-                                    placeholder="Enter PIC Contact"
-                                    name="picContact"
-                                    className="fromStyle formHeight"
-                                    value={partnerAddress.picContact}
-                                    onChange={(e) => handleChangeTextInput("picContact", e.target.value)}
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                <label className="form-label mt-2 formFont">PIC Email</label>
-                                <Form.Control
-                                    type="email"
-                                    placeholder="Enter PIC Email"
-                                    name="picEmail"
-                                    className="fromStyle formHeight"
-                                    value={partnerAddress.picEmail}
-                                    onChange={(e) => handleChangeTextInput("picEmail", e.target.value)}
-                                />
-                            </Form.Group>
+                        <div className="col-md-4">
                             <Form.Group>
                                 <label className="form-label mt-2 formFont">Address</label>
                                 <Form.Control
@@ -95,6 +62,21 @@ const AddressAdd = withRouter(({ history }) => {
                                     onChange={(e) => handleChangeTextInput("address", e.target.value)}
                                 />
                             </Form.Group>
+                        </div>
+                        <div className="col-md-4">
+                            <Form.Group>
+                                <label className="form-label mt-2 formFont">City</label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter City Name"
+                                    name="city"
+                                    className="fromStyle formHeight"
+                                    value={partnerAddress.city}
+                                    onChange={(e) => handleChangeTextInput("city", e.target.value)}
+                                />
+                            </Form.Group>
+                        </div>
+                        <div className="col-md-4">
                             <Form.Group>
                                 <label className="form-label mt-2 formFont">State</label>
                                 <Form.Control
@@ -107,22 +89,11 @@ const AddressAdd = withRouter(({ history }) => {
                                 />
                             </Form.Group>
                         </div>
-                        <div className="col-md-2">
-                        </div>
-                        <div className="col-md-5">
+                    </div>
+                    <div className="form-group row">
+                        <div className="col-md-4">
                             <Form.Group>
-                                <label className="form-label mt-2 formFont">City</label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Enter City Name"
-                                    name="city"
-                                    className="fromStyle formHeight"
-                                    value={partnerAddress.city}
-                                    onChange={(e) => handleChangeTextInput("city", e.target.value)}
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                <label className="form-label mt-2 formFont">Code</label>
+                                <label className="form-label mt-2 formFont">Zip Code</label>
                                 <Form.Control
                                     type="number"
                                     placeholder="Enter Code"
@@ -132,6 +103,8 @@ const AddressAdd = withRouter(({ history }) => {
                                     onChange={(e) => handleChangeTextInput("code", e.target.value)}
                                 />
                             </Form.Group>
+                        </div>
+                        <div className="col-md-4">
                             <Form.Group>
                                 <label className="form-label mt-2 formFont">Country</label>
                                 <RHFInput
@@ -140,20 +113,29 @@ const AddressAdd = withRouter(({ history }) => {
                                     rules={{ required: false }}
                                     name="country"
                                     register={register}
-                                    value={partnerAddress.country}
+                                    value={country.value}
                                     setValue={setValue}
-                                    onChange={(e) => handleChangeTextInput("country", e.target.value)}
+                                    onChange={(option) => handleChangeTextInput("country", option.value)}
                                 />
                             </Form.Group>
+                        </div>
+                        <div className="col-md-3">
                             <Form.Group>
                                 <label className="form-label mt-2 formFont">Is Default</label>
                                 <Form.Check
-                                    required
-                                    feedback="You must agree before submitting."
-                                    name="isDefault"
-                                    onChange={(e) => handleChangeTextInput("isDefault", e.target.value)}
+                                    type="switch"
+                                    id="custom-switch"
+                                    label=""
                                 />
                             </Form.Group>
+                        </div>
+                        <div className="col-md-1">
+                            <div className="mt-8"></div>
+                            <button
+                                className="btn btn-sm btn-primary"
+                            >
+                                Add
+                            </button>
                         </div>
                     </div>
                     {/* <div className="form-group row">
