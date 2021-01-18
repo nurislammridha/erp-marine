@@ -76,8 +76,8 @@ export const certificatetypeSubmitAction = (CertificateTypeInput) => (
 
   let postUrl = `${process.env.REACT_APP_API_URL}certificate/types`;
   Axios.post(postUrl, CertificateTypeInput)
-    .then(function(response) {
-      responseList.data = response.data;
+    .then(function (response) {
+      responseList.data = response.data.data;
       responseList.isLoading = false;
       responseList.status = response.data.status;
       if (response.data.status) {
@@ -91,7 +91,7 @@ export const certificatetypeSubmitAction = (CertificateTypeInput) => (
         showToast("error", response.data.message);
       }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       responseList.isLoading = false;
       const message =
         "Something went wrong ! Please fill all inputs and try again !";
@@ -106,12 +106,12 @@ export const certificatetypeSubmitAction = (CertificateTypeInput) => (
 
 export const EditCertificateTypeList = (id) => (dispatch) => {
   Axios.get(`${process.env.REACT_APP_API_URL}certificate/types/${id}`)
-  .then((res) => {
-    dispatch({
-      type: Types.EDIT_CERTIFICATE_TYPE_LIST,
-      payload: res.data,
+    .then((res) => {
+      dispatch({
+        type: Types.EDIT_CERTIFICATE_TYPE_LIST,
+        payload: res.data,
+      });
     });
-  });
 };
 
 export const UpdateCertificateTypeList = (certificateEditInfoData) => async (
@@ -155,7 +155,7 @@ export const UpdateCertificateTypeList = (certificateEditInfoData) => async (
       }
     })
 
-    .catch(function(error) {
+    .catch(function (error) {
       responseList.isLoading = false;
       const message =
         "Something went wrong ! Please fill all inputs and try again !";

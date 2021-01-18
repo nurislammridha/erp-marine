@@ -4,7 +4,10 @@ import 'react-step-progress/dist/index.css';
 import AddressAdd from '../address/components/AddressAdd';
 import BankInfoAdd from '../bank-information/components/BankInfoAdd';
 import BasicInfoAdd from '../basic-information/components/BasicInfoAdd';
+import { partnerInfoSubmitAction } from '../basic-information/_redux/actions/BasicInfoAction';
 import OthersInfoAdd from '../others-information/components/OthersInfoAdd';
+import { useSelector, useDispatch } from "react-redux";
+import { bankInfoSubmitAction } from '../bank-information/_redux/actions/BankInfoAction';
 
 const StepProgress = () => {
 
@@ -13,11 +16,13 @@ const StepProgress = () => {
     const step3Content = <h1>Step 3 Content</h1>;
     const step4Content = <h1>Step 3 Content</h1>;
 
+    const partnerInfoInput = useSelector((state) => state.partnerInfo.partnerInfoInput);
+    const bankInfoInput = useSelector((state) => state.bankInfo.bankInfoInput);
+
 
     // setup step validators, will be called before proceeding to the next step
     function step1Validator() {
-
-        return true;
+        return partnerInfoSubmitAction(partnerInfoInput);
     }
     function step2Validator() {
         // return a boolean
@@ -26,7 +31,7 @@ const StepProgress = () => {
 
     function step3Validator() {
         // return a boolean
-        return true;
+        return bankInfoSubmitAction(bankInfoInput);
     }
 
     // function onFormSubmit() {

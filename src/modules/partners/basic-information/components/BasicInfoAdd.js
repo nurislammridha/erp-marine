@@ -156,13 +156,13 @@ const BasicInfoAdd = withRouter(({ history }) => {
                             <div className="col-md-5">
                                 <label className="form-label mt-2 formFont">Tin No</label>
                                 <Form.Control
-                                    type="number"
-                                    name="intTINNo"
+                                    type="text"
+                                    name="strTIN"
                                     className="fromStyle formHeight"
-                                    value={partnerInfoInput.intTINNo}
+                                    value={partnerInfoInput.strTIN}
                                     onChange={(e) =>
                                         handleChangeTextInput(
-                                            "intTINNo",
+                                            "strTIN",
                                             e.target.value
                                         )
                                     }

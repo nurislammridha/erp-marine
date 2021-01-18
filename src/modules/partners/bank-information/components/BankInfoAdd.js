@@ -161,27 +161,6 @@ const BankInfoAdd = withRouter(({ history }) => {
                             </div>
                         </div>
                     </div>
-
-                    {/* <div className="form-group row mt-5">
-                            <div className="col-md-9">
-
-                            </div>
-                            <div className="col-md-3">
-                                <div className="float-right">
-                                    <a onClick={() => {
-                                        history.push("/partners/address");
-                                    }}>
-                                        <button type="button" class="saveButton text-white btn">Previous</button>
-                                    </a>
-                                    <a onClick={() => {
-                                        history.push("/partners/others-info");
-                                    }}>
-                                        <button type="button" class="saveButton text-white btn ml-3">Next</button>
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div> */}
                 </form>
 
             </div>

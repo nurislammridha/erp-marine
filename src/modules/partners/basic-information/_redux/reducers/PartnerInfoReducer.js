@@ -8,9 +8,10 @@ const initialState = {
         strLicenseNo: "",
         strEmail: "",
         strBIN: "",
-        intTINNo: "",
+        strTIN: "",
         strBusinessPartnerCode: "",
     },
+    status: false,
 };
 
 const PartnerInfoReducer = (state = initialState, action) => {
@@ -23,6 +24,13 @@ const PartnerInfoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 partnerInfoInput,
+            };
+
+        case Types.PARTNER_INFO_SUBMIT:
+            return {
+                ...state,
+                status: action.payload.status,
+                isLoading: action.payload.isLoading,
             };
     }
 

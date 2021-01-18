@@ -15,3 +15,20 @@ export const handleChangeBankInfoInput = (name, value) => (dispatch) => {
     });
 };
 
+export const bankInfoSubmitAction = (partnerInfoInput) => {
+    let isValidated = false;
+    const message = "added successfully";
+    const ermessage = "fill all the field"
+    // Validate First
+    if (isValidated) {
+        showToast("success", message);
+
+    } else {
+        showToast("error", ermessage);
+    }
+
+    // If Not Validate, display a toaster
+
+    return isValidated;
+};
+
