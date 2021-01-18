@@ -13,6 +13,7 @@ const StepProgress = () => {
     const step3Content = <h1>Step 3 Content</h1>;
     const step4Content = <h1>Step 3 Content</h1>;
 
+
     // setup step validators, will be called before proceeding to the next step
     function step1Validator() {
 

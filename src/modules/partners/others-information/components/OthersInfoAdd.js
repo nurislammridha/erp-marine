@@ -25,55 +25,55 @@ const OthersInfoAdd = withRouter(({ history }) => {
 
     return (
         <div className="container">
-            <div className="card card-custom gutter-b mt-10">
-                <div className="card-body">
-                    <form
-                        className="form form-label-right"
-                        method="post"
-                    >
-                        <div className="form-group">
-                            <div className="row">
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Port Served</label>
-                                    <Multiselect
-                                        options={selectOptions}
-                                        displayValue="name"
-                                        showCheckbox={true}
-                                    />
-                                </div>
-                                <div className="col-md-2">
+            <div className="mt-10">
 
-                                </div>
+                <form
+                    className="form form-label-right"
+                    method="post"
+                >
+                    <div className="form-group">
+                        <div className="row">
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Port Served</label>
+                                <Multiselect
+                                    options={selectOptions}
+                                    displayValue="name"
+                                    showCheckbox={true}
+                                />
                             </div>
-                            <div className="row mt-20">
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Product or Service Supplied</label>
-                                    <Multiselect
-                                        options={selectOptions}
-                                        displayValue="name"
-                                        showCheckbox={true}
-                                    />
-                                </div>
-                                <div className="col-md-2">
+                            <div className="col-md-2">
 
-                                </div>
-                            </div>
-                            <div className="row mt-20">
-                                <div className="col-md-5">
-                                    <label className="form-label mt-2 formFont">Service List</label>
-                                    <Multiselect
-                                        options={selectOptions}
-                                        displayValue="name"
-                                        showCheckbox={true}
-                                    />
-                                </div>
-                                <div className="col-md-2">
-
-                                </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                        <div className="row mt-20">
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Product or Service Supplied</label>
+                                <Multiselect
+                                    options={selectOptions}
+                                    displayValue="name"
+                                    showCheckbox={true}
+                                />
+                            </div>
+                            <div className="col-md-2">
+
+                            </div>
+                        </div>
+                        <div className="row mt-20">
+                            <div className="col-md-5">
+                                <label className="form-label mt-2 formFont">Service List</label>
+                                <Multiselect
+                                    options={selectOptions}
+                                    displayValue="name"
+                                    showCheckbox={true}
+                                />
+                            </div>
+                            <div className="col-md-2">
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
             </div>
         </div >
     );
