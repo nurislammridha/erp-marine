@@ -126,6 +126,9 @@
   ._hsN1w {
     margin-right: 16px;
   }
+  h3 {
+    font-size: 14px !important;
+  }
 }
 
 @media (max-width: 426px) {

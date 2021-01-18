@@ -29,11 +29,11 @@ const VoyageActivityContainer = (props) => {
     <div className="container">
       <div className="card card-custom gutter-b">
         <div className="row pt-5 pl-4">
-          <div className="col-xl-9 col-lg-9 col-md-9 col-6">
+          <div className="col-xl-9 col-lg-9 col-md-9 col-5">
             <h3>Noon Report</h3>
             {/* <p className="pl-1 subHeader">Sub Header</p> */}
           </div>
-          <div className="col-xl-3 col-lg-3 col-md-3 col-6 voyageActivityListBtn">
+          <div className="col-xl-3 col-lg-3 col-md-3 col-7 voyageActivityListBtn">
             {/* <Button className="  text-bold" variant="light text-primary ">
               Export
             </Button> */}
@@ -77,7 +77,7 @@ const VoyageActivityContainer = (props) => {
               </Dropdown.Menu>
             </Dropdown>
             <Link
-              className="pl-3 pr-3 text-bold btn btn-primary text-white"
+              className="pl-3 pr-3 text-bold btn btn-primary text-white btn-sm "
               to="/voyage/voyage-activity/create"
             >
               <i className="fa fa-plus-circle"></i> Add New

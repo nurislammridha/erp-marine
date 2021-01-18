@@ -19,12 +19,8 @@ const VoyageActivityList = (props) => {
   return (
     <div className="react-bootstrap-table table-responsive p-5">
       <table className="table table table-vertical-center mt-2">
-        <thead className="">
-          <tr className="text-left">
-            {/* <th scope="col">
-              {" "}
-              <Form.Check type="checkbox" />
-            </th> */}
+        <thead className="voyageactivitylist-table">
+          <tr className="">
             <th scope="col">Date</th>
             <th scope="col">Voyage No</th>
             <th scope="col">Distance</th>
@@ -45,7 +41,7 @@ const VoyageActivityList = (props) => {
             <th scope="col"></th>
             <th scope="col"></th>
 
-            <th scope="col" className="text-center">
+            <th scope="col" className="text-center ">
               LON <span className="ml-2">LAT</span>{" "}
             </th>
             <th scope="col"></th>
