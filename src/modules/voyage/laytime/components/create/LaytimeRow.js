@@ -7,17 +7,64 @@ import DatePicker from "react-datepicker";
 import LaytimeDetail from '../detail/LaytimeDetail';
 import LaytimeMultipleAdd from './LaytimeMultipleAdd';
 import { useSelector, useDispatch } from "react-redux";
-import { handleChangeLaytimeDetailInput } from '../../_redux/actions/LaytimeAction';
+import { handleChangeLaytimeRowInput } from '../../_redux/actions/LaytimeAction';
 
 const LaytimeRow = () => {
-
-    const { register, handleSubmit, errors, setValue } = useForm();
     const dispatch = useDispatch();
-    const laytimeDetailInput = useSelector((state) => state.laytimeDetailInfo.laytimeDetailInput);
+    const { register, handleSubmit, errors, setValue } = useForm();
+    const laytimeRowInput = useSelector((state) => state.laytimeDetailInfo.laytimeRowInput);
+    console.log('laytimeRowInput :>> ', laytimeRowInput);
     const [show, setShow] = useState(false);
+    // handle change lay time row input
     const handleChangeTextInput = (name, value) => {
-        dispatch(handleChangeLaytimeDetailInput(name, value));
+        dispatch(handleChangeLaytimeRowInput(name, value));
     };
+
+    // for testing port 
+    const selectPort = [
+        {
+            label: 'Port-1',
+            value: "1"
+        },
+        {
+            label: 'Port-2',
+            value: "2"
+        },
+        {
+            label: 'Port-3',
+            value: "3"
+        }
+    ]
+    //testing for cargo type 
+    const selectCargo = [
+        {
+            label: 'Cargo-1',
+            value: "1"
+        },
+        {
+            label: 'Cargo-2',
+            value: "2"
+        },
+        {
+            label: 'Cargo-3',
+            value: "3"
+        }
+    ]
+    //testing for cargo type 
+    const selectTerms = [
+        {
+            label: 'Term-1',
+            value: "1"
+        },
+        {
+            label: 'Term-2',
+            value: "2"
+        },
+        {
+            label: 'Term-3',
+            value: "3"
+        }
+    ]
 
     return (
         <div className="container">
@@ -55,11 +102,22 @@ const LaytimeRow = () => {
                                         <div className="col-md-6 pr-11">
                                             <label className="form-label">Port Name</label>
                                             <RHFInput
-                                                as={<Select options={""} />}
+                                                as={<Select options={selectPort} />}
                                                 rules={{ required: true }}
-                                                name=""
+                                                name="intPortID"
                                                 register={register}
-                                                value=""
+                                                value={laytimeRowInput.intPortID}
+                                                onChange={(option) => {
+                                                    handleChangeTextInput(
+                                                        "strPortName",
+                                                        option.label
+                                                    );
+                                                    handleChangeTextInput(
+                                                        "intPortID",
+                                                        option.value
+                                                    );
+                                                }}
+                                                setValue={setValue}
                                             />
                                         </div>
                                         <div className="row col-md-6 p-0">
@@ -68,7 +126,7 @@ const LaytimeRow = () => {
                                                 <DatePicker
                                                     name="dteLaytimeCommenced"
                                                     className="form-control formHeight"
-                                                    selected={laytimeDetailInput.dteLaytimeCommenced}
+                                                    selected={laytimeRowInput.dteLaytimeCommenced}
                                                     onChange={(e) =>
                                                         handleChangeTextInput(
                                                             "dteLaytimeCommenced",
@@ -86,7 +144,7 @@ const LaytimeRow = () => {
                                                 <DatePicker
                                                     name="dteLaytimeCompleted"
                                                     className="form-control formHeight"
-                                                    selected={laytimeDetailInput.dteLaytimeCompleted}
+                                                    selected={laytimeRowInput.dteLaytimeCompleted}
                                                     onChange={(e) =>
                                                         handleChangeTextInput(
                                                             "dteLaytimeCompleted",
@@ -107,11 +165,22 @@ const LaytimeRow = () => {
                                             <div className="col-md-7">
                                                 <label className="form-label">Cargo Name</label>
                                                 <RHFInput
-                                                    as={<Select options={""} />}
+                                                    as={<Select options={selectCargo} />}
                                                     rules={{ required: true }}
-                                                    name=""
+                                                    name="intCargoID"
                                                     register={register}
-                                                    value=""
+                                                    value={laytimeRowInput.intCargoID}
+                                                    onChange={(option) => {
+                                                        handleChangeTextInput(
+                                                            "strCargoName",
+                                                            option.label
+                                                        );
+                                                        handleChangeTextInput(
+                                                            "intCargoID",
+                                                            option.value
+                                                        );
+                                                    }}
+                                                    setValue={setValue}
                                                 />
                                             </div>
                                             <div className="col-md-5">
@@ -120,7 +189,7 @@ const LaytimeRow = () => {
                                                     type="number"
                                                     name="numBLQty"
                                                     className="fromStyle formHeight"
-                                                    value={laytimeDetailInput.numBLQty}
+                                                    value={laytimeRowInput.numBLQty}
                                                     onChange={(e) =>
                                                         handleChangeTextInput(
                                                             "numBLQty",
@@ -133,11 +202,22 @@ const LaytimeRow = () => {
                                         <div className="col-md-6 pr-11">
                                             <label className="form-label">Terms</label>
                                             <RHFInput
-                                                as={<Select options={""} />}
+                                                as={<Select options={selectTerms} />}
                                                 rules={{ required: true }}
-                                                name=""
+                                                name="intTermsID"
                                                 register={register}
-                                                value=""
+                                                value={laytimeRowInput.intTermsID}
+                                                onChange={(option) => {
+                                                    handleChangeTextInput(
+                                                        "strTermsName",
+                                                        option.label
+                                                    );
+                                                    handleChangeTextInput(
+                                                        "intTermsID",
+                                                        option.value
+                                                    );
+                                                }}
+                                                setValue={setValue}
                                             />
                                         </div>
 
@@ -148,12 +228,12 @@ const LaytimeRow = () => {
                                                 <label className="form-label mt-2 formFont">Time Allowed</label>
                                                 <Form.Control
                                                     type="number"
-                                                    name="numTimeAllowed"
+                                                    name="numTimeAllowence"
                                                     className="fromStyle formHeight"
-                                                    value={laytimeDetailInput.numTimeAllowed}
+                                                    value={laytimeRowInput.numTimeAllowence}
                                                     onChange={(e) =>
                                                         handleChangeTextInput(
-                                                            "numTimeAllowed",
+                                                            "numTimeAllowence",
                                                             e.target.value
                                                         )
                                                     }
@@ -182,7 +262,7 @@ const LaytimeRow = () => {
                                                     type="number"
                                                     name="intAdditionalDay"
                                                     className="fromStyle formHeight"
-                                                    value={laytimeDetailInput.intAdditionalDay}
+                                                    value={laytimeRowInput.intAdditionalDay}
                                                     onChange={(e) =>
                                                         handleChangeTextInput(
                                                             "intAdditionalDay",
@@ -197,7 +277,7 @@ const LaytimeRow = () => {
                                                     type="number"
                                                     name="numAdditionalHrs"
                                                     className="fromStyle formHeight"
-                                                    value={laytimeDetailInput.numAdditionalHrs}
+                                                    value={laytimeRowInput.numAdditionalHrs}
                                                     onChange={(e) =>
                                                         handleChangeTextInput(
                                                             "numAdditionalHrs",
@@ -215,7 +295,7 @@ const LaytimeRow = () => {
                                                 <DatePicker
                                                     name="dteTermArraivalTime"
                                                     className="form-control formHeight"
-                                                    selected={laytimeDetailInput.dteTermArraivalTime}
+                                                    selected={laytimeRowInput.dteTermArraivalTime}
                                                     onChange={(e) =>
                                                         handleChangeTextInput(
                                                             "dteTermArraivalTime",
@@ -235,7 +315,7 @@ const LaytimeRow = () => {
                                                 <DatePicker
                                                     name="dteTermSailTime"
                                                     className="form-control formHeight"
-                                                    selected={laytimeDetailInput.dteTermSailTime}
+                                                    selected={laytimeRowInput.dteTermSailTime}
                                                     onChange={(e) =>
                                                         handleChangeTextInput(
                                                             "dteTermSailTime",
@@ -258,7 +338,7 @@ const LaytimeRow = () => {
                                                     type="number"
                                                     name="numDemurrageRate"
                                                     className="fromStyle formHeight"
-                                                    value={laytimeDetailInput.numDemurrageRate}
+                                                    value={laytimeRowInput.numDemurrageRate}
                                                     onChange={(e) =>
                                                         handleChangeTextInput(
                                                             "numDemurrageRate",
@@ -273,7 +353,7 @@ const LaytimeRow = () => {
                                                     type="number"
                                                     name="intDemurrageCurrID"
                                                     className="fromStyle formHeight"
-                                                    value={laytimeDetailInput.intDemurrageCurrID}
+                                                    value={laytimeRowInput.intDemurrageCurrID}
                                                     onChange={(e) =>
                                                         handleChangeTextInput(
                                                             "intDemurrageCurrID",
@@ -290,7 +370,7 @@ const LaytimeRow = () => {
                                                     type="number"
                                                     name="numDespatchRate"
                                                     className="fromStyle formHeight"
-                                                    value={laytimeDetailInput.numDespatchRate}
+                                                    value={laytimeRowInput.numDespatchRate}
                                                     onChange={(e) =>
                                                         handleChangeTextInput(
                                                             "numDespatchRate",
@@ -305,7 +385,7 @@ const LaytimeRow = () => {
                                                     type="number"
                                                     name="numDespatchRatePercent"
                                                     className="fromStyle formHeight"
-                                                    value={laytimeDetailInput.numDespatchRatePercent}
+                                                    value={laytimeRowInput.numDespatchRatePercent}
                                                     onChange={(e) =>
                                                         handleChangeTextInput(
                                                             "numDespatchRatePercent",
@@ -323,7 +403,7 @@ const LaytimeRow = () => {
                                                 <DatePicker
                                                     name="dteNORtender"
                                                     className="form-control formHeight"
-                                                    selected={laytimeDetailInput.dteNORtender}
+                                                    selected={laytimeRowInput.dteNORtender}
                                                     onChange={(e) =>
                                                         handleChangeTextInput(
                                                             "dteNORtender",
@@ -344,7 +424,7 @@ const LaytimeRow = () => {
                                                     type="number"
                                                     name="numLodingOrDischargeRate"
                                                     className="fromStyle formHeight"
-                                                    value={laytimeDetailInput.numLodingOrDischargeRate}
+                                                    value={laytimeRowInput.numLodingOrDischargeRate}
                                                     onChange={(e) =>
                                                         handleChangeTextInput(
                                                             "numLodingOrDischargeRate",

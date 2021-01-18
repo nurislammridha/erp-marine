@@ -43,7 +43,9 @@ import CertificateCategoryReducer from "../modules/certificates/certificate-cate
 import CertificateListReducer from "../modules/certificates/certificate-master/_redux/reducers/CertificateListReducer";
 import LaytimeInfoReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeInfoReducer";
 import LaytimeHeaderReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeHeaderReducer";
-import LaytimeDetailReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeDetailReducer";
+import BankInfoReducer from "../modules/partners/bank-information/_redux/reducers/BankInfoReducer";
+import PartnerAddressReducer from "../modules/partners/address/_redux/reducers/PartnerAddressReducer";
+import LaytimeRowReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeRowReducer";
 
 /** 
 | Domain : CCO
@@ -88,10 +90,12 @@ export const rootReducer = combineReducers({
   VoyageActivityBunkerReducer: VoyageActivityBunkerReducer,
 
 
-  /** Procurement Module Reducers */
+  /** Laytime Reducers */
   laytimeHeaderInfo: LaytimeHeaderReducer,
-  laytimeDetailInfo: LaytimeDetailReducer,
+  laytimeDetailInfo: LaytimeRowReducer,
 
+  /** Partners Reducers */
+  bankInfo: BankInfoReducer,
 
   /** Procurement Module Reducers */
   purchaseRequisition: PurchaseRequisitionReducer,
@@ -107,7 +111,8 @@ export const rootReducer = combineReducers({
   CertificateCategoryReducer: CertificateCategoryReducer,
   CertificateListReducer: CertificateListReducer,
   certificateTypeInfo: CertificateTypeReducer,
-  laytimeInfo: LaytimeInfoReducer
+  laytimeInfo: LaytimeInfoReducer,
+  partnerAddress: PartnerAddressReducer
 });
 
 export function* rootSaga() {

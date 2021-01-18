@@ -15,7 +15,7 @@ export const handleChangeLaytimeHeaderInput = (name, value) => (dispatch) => {
     });
 };
 
-export const handleChangeLaytimeDetailInput = (name, value) => (dispatch) => {
+export const handleChangeLaytimeRowInput = (name, value) => (dispatch) => {
     const formData = {
         name: name,
         value: value,
