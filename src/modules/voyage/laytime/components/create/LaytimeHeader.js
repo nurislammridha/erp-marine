@@ -43,14 +43,12 @@ const LaytimeHeader = () => {
     //handle lay-time header input 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeLaytimeHeaderInput(name, value));
-        dispatch(getHearInputData(laytimeHeaderInput.intCharterVoyageID))
+        if (name === 'intCharterVoyageID') {
+            dispatch(getHearInputData(value));
+        }
     };
-    console.log('laytimeHeaderInput.intCharterVoyageID :>> ', laytimeHeaderInput);
 
-    // useEffect(() => {
-    //     dispatch(getHearInputData(laytimeHeaderInput.intCharterVoyageID))
-    // }, [])
-    
+
     return (
         <div className="container">
             <div className="card card-custom gutter-b">

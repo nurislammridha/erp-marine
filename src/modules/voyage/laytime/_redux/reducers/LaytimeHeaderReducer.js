@@ -104,7 +104,7 @@ const LaytimeHeaderReducer = (state = initialState, action) => {
         case Types.GET_HEADER_INPUT_FROM_API: 
             console.log('action.payload :>> ', action.payload);
             return {
-                
+                laytimeHeaderInput: initialState.laytimeHeaderInput
             }
         default:
             break;
