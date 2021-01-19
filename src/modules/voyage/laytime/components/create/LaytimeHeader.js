@@ -37,6 +37,8 @@ const LaytimeHeader = () => {
     const laytimeHeaderInput = useSelector((state) => state.laytimeHeaderInfo.laytimeHeaderInput);
     const voyageIDList = useSelector((state) => state.currencyInfo.voyageIDList);
 
+    console.log('laytimeHeaderInput :>> ', laytimeHeaderInput);
+
     const loadingPort = (e) => {
         handleShow()
     };
@@ -50,6 +52,11 @@ const LaytimeHeader = () => {
             dispatch(getHearInputData(value));
         }
     };
+
+    //handle submit laytime header 
+    const submiteLaytimeData = () => {
+
+    }
 
     // let voyageID = [];
     // if (voyageIDList) {
@@ -104,7 +111,8 @@ const LaytimeHeader = () => {
                                     <div className="col-md-6">
                                         <label className="form-label mt-2 formFont">Voyage No.</label>
                                         <RHFInput
-                                            as={<Select options={selectOptions} />}
+                                            as={<Select options={selectOptions} className="formHeight" />}
+                                            className="formHeight"
                                             rules={{ required: true }}
                                             name="intCharterVoyageID"
                                             register={register}
@@ -121,7 +129,7 @@ const LaytimeHeader = () => {
                                     <div className="col-md-6">
                                         <label className="form-label">Commencement Port</label>
                                         <RHFInput
-                                            as={<Select options={selectOptions} isDisabled={true} />}
+                                            as={<Select options={selectOptions} isDisabled={true}  />}
                                             rules={{ required: true }}
                                             name="intCommenPortID"
                                             register={register}
@@ -227,8 +235,10 @@ const LaytimeHeader = () => {
                                                 className="m-3"
                                                 type="radio"
                                                 label="REVERSIBLE"
-                                                name="formHorizontalRadios"
+                                                name="strReversibleIType"
                                                 id="formHorizontalRadios1"
+                                                value={"REVERSIBLE"}
+                                                onChange={(e) => handleChangeTextInput('strReversibleIType', e.target.value)}
                                             />
                                         </div>
                                         <div className="col-sm-7">
@@ -236,8 +246,10 @@ const LaytimeHeader = () => {
                                                 className="m-3"
                                                 type="radio"
                                                 label="NON-REVERSIBLE"
-                                                name="formHorizontalRadios"
+                                                name="strReversibleIType"
                                                 id="formHorizontalRadios1"
+                                                value={"NON-REVERSIBLE"}
+                                                onChange={(e) => handleChangeTextInput('strReversibleIType', e.target.value)}
                                             />
                                         </div>
                                     </div>
@@ -252,7 +264,7 @@ const LaytimeHeader = () => {
                                             onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
                                         />
                                         <a>
-                                            {<i class="fas fa-file ml-10"
+                                            {<i className="fas fa-file ml-10"
                                                 onClick={() => loadingPort()}></i>}
                                         </a>
                                     </div>
@@ -266,7 +278,7 @@ const LaytimeHeader = () => {
                                             onChange={(e) => handleChangeTextInput('isRevDischargePorts', e.target.checked)}
                                         />
                                         <a>
-                                            {<i class="fas fa-file ml-6"
+                                            {<i className="fas fa-file ml-6"
                                                 onClick={() => dischargePort()}></i>}
                                         </a>
                                     </div>
@@ -305,7 +317,7 @@ const LaytimeHeader = () => {
                             handleClose={() => handleClose()}
                             modalTitle={"Demurrage/Dispatch Rate"}
                         >
-                            <LaytimeHeaderDischargePortModal />
+                            <LaytimeHeaderDischargePortModal laytimeHeaderInput={laytimeHeaderInput} handleChangeTextInput={handleChangeTextInput} />
                         </SimpleModal>
                     </form>
                 </div>

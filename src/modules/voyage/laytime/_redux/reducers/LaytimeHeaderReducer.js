@@ -40,11 +40,11 @@ const initialState = {
         numDemurrageDespatchAmount: null,
         intDemurrageDespatchCurrencyID: null,
         // load from server 
-        intCurrencyID: null,
         numCurrencyRate: null,
         strVoyageNo: null,
         dteCPDate: '',
         commmencePort: null,
+        voyage: [],
         completionPort: null,
         intCommenPortID: null,
         intComplationPortID: null,
@@ -60,14 +60,21 @@ const initialState = {
         dteLastActionDateTime: '',
         dteServerDateTime: null,
         isActive: null,
-
-        demurage: [
-            {
-                intDemurrageRate: null,                
-                intDemurrageCurrencyID: null,                
-                intDemurrageDespatchRate: null,                
-                intDemurrageDespatchPercentageID: null,                
-            }
+        //======================
+        strReversibleIType: '',
+        numDemurrageRate: null,
+        intCurrencyID: null,
+        numDespatchRate: null,
+        numDespatchPercent: null,
+        
+        demurrages: [
+            // {
+            //     strReversibleIType: 'Reversible Type',
+             //    numDemurrageRate: null
+            //     intCurrencyID: null,
+            //     numDespatchRate: null,
+            //     numDespatchPercent: null
+            // }
         ],
         layTimeRows: [
             // {
@@ -103,19 +110,27 @@ const LaytimeHeaderReducer = (state = initialState, action) => {
                 ...state,
                 laytimeHeaderInput,
             };
-        case Types.GET_HEADER_INPUT_FROM_API: 
-             const layTimeHeaderData = action.payload
-             console.log('layTimeHeaderData :>> ', layTimeHeaderData);
+        case Types.GET_HEADER_INPUT_FROM_API:
+            const layTimeHeaderData = action.payload
+            console.log('layTimeHeaderData :>> ', layTimeHeaderData);
             return {
                 laytimeHeaderInput: layTimeHeaderData
             }
-        case Types.GET_VOYAGE_ID: 
+        case Types.GET_VOYAGE_ID:
             let voyageIDList = action.payload;
             console.log('voyageIDList :>> ', voyageIDList);
             return {
-                ...state,
-                voyageIDList
+                voyage: action.payload.data
             }
+        case Types.ADD_MULTIPLE_DUMMARAGES:
+            console.log('action.payload :>> ', action.payload);
+            const demurrages = {...state.laytimeHeaderInput};
+            // demurrages.demurrages = [action.payload];
+            demurrages.demurrages.push(action.payload)
+            return {
+                ...state,
+                laytimeHeaderInput: demurrages,
+            };
         default:
             break;
 
