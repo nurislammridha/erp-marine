@@ -4,7 +4,7 @@ import 'react-step-progress/dist/index.css';
 import AddressAdd from '../address/components/AddressAdd';
 import BankInfoAdd from '../bank-information/components/BankInfoAdd';
 import BasicInfoAdd from '../basic-information/components/BasicInfoAdd';
-import { partnerInfoSubmitAction } from '../basic-information/_redux/actions/BasicInfoAction';
+import { partnerCreateSubmitAction, partnerInfoSubmitAction } from '../basic-information/_redux/actions/BasicInfoAction';
 import OthersInfoAdd from '../others-information/components/OthersInfoAdd';
 import { useSelector, useDispatch } from "react-redux";
 import { bankInfoSubmitAction } from '../bank-information/_redux/actions/BankInfoAction';
@@ -21,10 +21,8 @@ const StepProgress = () => {
 
     console.log('partnerinfo', partnerInfoInput)
     // setup step validators, will be called before proceeding to the next step
-    const step1Validator = (testData) => {
-
-        console.log('validator data', testData)
-        return partnerInfoSubmitAction(testData);
+    const step1Validator = () => {
+        return partnerInfoSubmitAction();
     }
     function step2Validator() {
         // return a boolean
@@ -33,26 +31,27 @@ const StepProgress = () => {
 
     function step3Validator() {
         // return a boolean
-        return bankInfoSubmitAction(bankInfoInput);
+        return bankInfoSubmitAction();
     }
 
-    // function onFormSubmit() {
-    //     // handle the submit logic here
-    //     // This function will be executed at the last step
-    //     // when the submit button (next button in the previous steps) is pressed
-    // }
+    function onFormSubmit() {
+        // handle the submit logic here
+        // This function will be executed at the last step
+        // when the submit button (next button in the previous steps) is pressed
+        dispatch(partnerCreateSubmitAction());
+    }
 
     return (
         <div>
             <StepProgressBar
                 startingStep={0}
-                // onSubmit={onFormSubmit}
+                onSubmit={onFormSubmit}
                 steps={[
                     {
                         label: 'Basic Information',
                         name: 'Basic Information',
                         content: <BasicInfoAdd />,
-                        validator: () => step1Validator(partnerInfoInput)
+                        validator: step1Validator
                     },
                     {
                         label: 'Address',

@@ -75,26 +75,26 @@ const BankInfoAdd = withRouter(({ history }) => {
                         <div className="row">
                             <div className="col-md-5">
                                 <label className="form-label mt-2 formFont">Bank Name</label>
-                                <RHFInput
+                                {/* <RHFInput
                                     as={<Select options={selectOptions} />}
                                     rules={{ required: true }}
                                     name=""
                                     register={register}
                                     value=""
-                                />
+                                /> */}
                             </div>
                             <div className="col-md-2">
 
                             </div>
                             <div className="col-md-5">
                                 <label className="form-label mt-2 formFont">Branch Name</label>
-                                <RHFInput
+                                {/* <RHFInput
                                     as={<Select options={selectOptions} />}
                                     rules={{ required: true }}
                                     name=""
                                     register={register}
                                     value=""
-                                />
+                                /> */}
                             </div>
                         </div>
                         <div className="row">
@@ -120,12 +120,12 @@ const BankInfoAdd = withRouter(({ history }) => {
                                 <label className="form-label mt-2 formFont">IBAN</label>
                                 <Form.Control
                                     type="text"
-                                    name="intIBANNO"
+                                    name="strIBANNo"
                                     className="fromStyle formHeight"
-                                    value={bankInfoInput.intIBANNO}
+                                    value={bankInfoInput.strIBANNo}
                                     onChange={(e) =>
                                         handleChangeTextInput(
-                                            "intIBANNO",
+                                            "strIBANNo",
                                             e.target.value
                                         )
                                     }
@@ -152,12 +152,28 @@ const BankInfoAdd = withRouter(({ history }) => {
 
                             </div>
                             <div className="col-md-5">
-                                <label className="form-label mt-2 formFont">Is Default</label>
-                                <Form.Check
+                                <label className="form-label mt-2 formFont">Is Default</label> <br />
+                                {/* <Form.Check
                                     type="switch"
                                     id="custom-switch"
                                     label=""
-                                />
+                                /> */}
+
+                                <label className="switch">
+                                    {/* <input
+                                        type="checkbox"
+                                        name="isDefaultAccount"
+                                        value={bankInfoInput.isDefaultAccount}
+                                        onChange={(e) =>
+                                            handleChangeTextInput(
+                                                "isDefaultAccount",
+                                                e.value
+                                            )
+                                        }
+                                    >
+                                    </input> */}
+                                    <span className="slider round"></span>
+                                </label>
                             </div>
                         </div>
                     </div>

@@ -4,15 +4,22 @@ const initialState = {
 
     bankInfoInput: {
         strBeneficiaryName: "",
-        strBankAccountNo: "",
-        intBankId: "",
-        intBankBranchId: "",
+        strBankAccountNo: "1",
+        intBankId: "1",
+        intBankBranchId: "1",
         strRoutingNo: "",
-        intIBANNO: "",
+        strIBANNo: "",
         strSWIFTCode: "",
-        isDefaultAccount: ""
+        isDefaultAccount: 1,
+        intSupplierId: 1,
+        strSupplierName: "Mohakhali",
+        intCurrencyID: 1,
+        isActive: 1,
+        intActionBy: 1
     },
 };
+
+
 
 const BankInfoReducer = (state = initialState, action) => {
     const newState = { ...state };
@@ -25,6 +32,8 @@ const BankInfoReducer = (state = initialState, action) => {
                 ...state,
                 bankInfoInput,
             };
+        default:
+            break;
     }
 
     return newState

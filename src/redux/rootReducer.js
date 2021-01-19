@@ -115,7 +115,7 @@ export const rootReducer = combineReducers({
   CertificateListReducer: CertificateListReducer,
   certificateTypeInfo: CertificateTypeReducer,
   laytimeInfo: LaytimeInfoReducer,
-  partnerAddress: PartnerAddressReducer
+  partnerInfo: PartnerInfoReducer,
 });
 
 export function* rootSaga() {
