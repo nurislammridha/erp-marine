@@ -127,23 +127,23 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
   return (
     <>
-      <div className="container">
+      <div className="container ">
         <div className="card card-custom gutter-b">
-          <div className="card-header">
+          <div className="card-header certificate-cardheader border-bottom-0">
             <div className="card-title">
               <h3 className="card-label">Certificate</h3>
             </div>
           </div>
-          <div className="card-body">
+          <div className="card-body certificate-card-body">
             <form
               className="form form-label-right"
               onSubmit={handleSubmit(onSubmit)}
               method="post"
               encType="multipart/form-data"
             >
-              <div className="form-group row mt-0 border pb-3 bg-light pt-3">
+              <div className="form-group row mt-0 border pb-3 bg-light pt-3 ">
                 <div className="col-lg-3">
-                  <label className="form-label">Category</label>
+                  <label className="form-label formFont">Category</label>
                   <RHFInput
                     as={<Select options={certificateParentCategoryList} />}
                     rules={{ required: true }}
@@ -166,7 +166,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
                 {/*====Sub Category=====*/}
                 <div className="col-lg-3">
-                  <label className="form-label">Sub Category</label>
+                  <label className="form-label formFont">Sub Category</label>
                   <div className="input-area-add">
                     <div className="float-left">
                       <RHFInput
@@ -204,7 +204,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 {/*====Sub Category=====*/}
 
                 <div className="col-lg-3">
-                  <label className="form-label">Certificate Name</label>
+                  <label className="form-label formFont">
+                    Certificate Name
+                  </label>
                   <div className="input-area-add">
                     <div className="float-left">
                       <RHFInput
@@ -241,7 +243,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div>
 
                 <div className="col-lg-3">
-                  <label className="form-label">Certificate Type</label>
+                  <label className="form-label formFont">
+                    Certificate Type
+                  </label>
                   <div className="input-area-add">
                     <div className="float-left">
                       <RHFInput
@@ -360,8 +364,10 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   />
                 </div> */}
 
-                <div className="col-lg-3">
-                  <label className="form-label">Issuing Authority</label>
+                <div className="col-lg-3 mt-2">
+                  <label className="form-label formFont">
+                    Issuing Authority
+                  </label>
                   <div className="input-area-add">
                     <div className="float-left">
                       <RHFInput
@@ -471,7 +477,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               {/*=====certificate details close===*/}
               <div className="form-group row mt-2 border mb-2 pb-3 bg-light">
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">
+                  <label className="form-label mt-2 formFont">
                     Certificate Issue date
                   </label>
                   <DatePicker
@@ -534,7 +540,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       </div> */}
                       </div>
                       <div className="col-lg-3">
-                        <label className="form-label mt-2">
+                        <label className="form-label formFont mt-2">
                           Certificate Valid date
                         </label>
                         {/* <Form.Control
@@ -583,7 +589,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   )}
 
                 <div className="col-lg-3">
-                  <label className="form-label">
+                  <label className="form-label formFont">
                     Extend Until {"  "}
                     <label>
                       <Form.Check
@@ -646,7 +652,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </div> */}
                 </div>
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Endorsement Date</label>
+                  <label className="form-label formFont mt-2">
+                    Endorsement Date
+                  </label>
                   {/* <Form.Control
                     type="date"
                     name="dteLastEndorsementDate"
@@ -826,7 +834,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   />
                 </div> */}
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Office Remarks</label>
+                  <label className="form-label formFont mt-2">
+                    Office Remarks
+                  </label>
                   <Form.Control
                     as="textarea"
                     type="text"
@@ -852,7 +862,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </div> */}
                 </div>
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Ship remarks</label>
+                  <label className="form-label formFont mt-2">
+                    Ship remarks
+                  </label>
                   <Form.Control
                     as="textarea"
                     type="text"
@@ -926,7 +938,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
               <div className="form-group row mt-1 border mt-2 pb-3 bg-light">
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Attachments</label>
+                  <label className="form-label formFont mt-2">
+                    Attachments
+                  </label>
                   {/* <Form.Control
                       type="file"
                       name="multipleAttachments[]"
@@ -963,33 +977,35 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {
-                        certificateInfoInput.multipleAttachments !== null &&
-                        certificateInfoInput.multipleAttachments.map(
-                          (attachment, index) => (
-                            <tr>
-                              <td>{index + 1}</td>
-                              <td>{attachment.name}</td>
-                              <td>{attachment.size}</td>
-                              <td>{" "}
-                                <MultipplePreviewAttachment
-                                  url={'/' + attachment.name}
-                                  base64={attachment.base64}
-                                  title="Preview"
-                                  height={50}
-                                  width={50}
-                                />
-                              </td>
-                              <td style={{ width: 70, textAlign: "center" }}>
-                                {/* <i className="fa fa-edit text-success mr-2"></i> */}
-                                <i
-                                  className="fa fa-trash text-danger pointer"
-                                  onClick={() => deleteMultipleAttachmentData(index)}
-                                ></i>
-                              </td>
-                            </tr>
-                          )
-                        )}
+                        {certificateInfoInput.multipleAttachments !== null &&
+                          certificateInfoInput.multipleAttachments.map(
+                            (attachment, index) => (
+                              <tr>
+                                <td>{index + 1}</td>
+                                <td>{attachment.name}</td>
+                                <td>{attachment.size}</td>
+                                <td>
+                                  {" "}
+                                  <MultipplePreviewAttachment
+                                    url={"/" + attachment.name}
+                                    base64={attachment.base64}
+                                    title="Preview"
+                                    height={50}
+                                    width={50}
+                                  />
+                                </td>
+                                <td style={{ width: 70, textAlign: "center" }}>
+                                  {/* <i className="fa fa-edit text-success mr-2"></i> */}
+                                  <i
+                                    className="fa fa-trash text-danger pointer"
+                                    onClick={() =>
+                                      deleteMultipleAttachmentData(index)
+                                    }
+                                  ></i>
+                                </td>
+                              </tr>
+                            )
+                          )}
                       </tbody>
                     </table>
                   )}
