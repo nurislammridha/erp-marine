@@ -44,6 +44,8 @@ const initialState = {
         numCurrencyRate: null,
         strVoyageNo: null,
         dteCPDate: '',
+        commmencePort: null,
+        completionPort: null,
         intCommenPortID: null,
         intComplationPortID: null,
         dteCommenDate: '',
@@ -102,9 +104,17 @@ const LaytimeHeaderReducer = (state = initialState, action) => {
                 laytimeHeaderInput,
             };
         case Types.GET_HEADER_INPUT_FROM_API: 
-            const layTimeHeaderData = action.payload
+             const layTimeHeaderData = action.payload
+             console.log('layTimeHeaderData :>> ', layTimeHeaderData);
             return {
                 laytimeHeaderInput: layTimeHeaderData
+            }
+        case Types.GET_VOYAGE_ID: 
+            let voyageIDList = action.payload;
+            console.log('voyageIDList :>> ', voyageIDList);
+            return {
+                ...state,
+                voyageIDList
             }
         default:
             break;

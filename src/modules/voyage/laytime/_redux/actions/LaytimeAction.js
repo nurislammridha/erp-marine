@@ -20,6 +20,20 @@ export const GetCurrencyData = () => async (dispatch) => {
         });
 };
 
+// get voyage id 
+export const GetVoyageID = () => async (dispatch) => {
+    let data = {};
+    const headers = {
+        "Content-Type": "application/json",
+    };
+
+    Axios.get(`${process.env.REACT_APP_API_URL}voyage/charterVoyage/`)
+        .then((res) => {
+            let data = res.data;
+            console.log('data :>> ', data);
+            dispatch({ type: Types.GET_VOYAGE_ID, payload: data });
+        });
+};
 // get data for lay time header input with voyage id
 export const getHearInputData = (id) => (dispatch) => {
     let LayTimeURL = `${process.env.REACT_APP_API_URL}voyage/charterVoyage/${id}`;
@@ -27,6 +41,18 @@ export const getHearInputData = (id) => (dispatch) => {
         .then((response) => {
             if (response.status === 200) {
                 let data = response.data.data;
+                if (data.commmence_port !== null) {
+                    data.commmencePort = {
+                        label: data.commmence_port.strPortName,
+                        value: data.commmence_port.intPortID
+                    }
+                }
+                if (data.completion_port !== null) {
+                    data.completionPort = {
+                        label: data.completion_port.strPortName,
+                        value: data.completion_port.intPortID
+                    }
+                }
                 dispatch({ type: Types.GET_HEADER_INPUT_FROM_API, payload: data })
             }
         })

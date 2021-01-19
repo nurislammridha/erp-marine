@@ -5,7 +5,7 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import SimpleModal from '../../../../master/components/Modal/SimpleModal';
-import { handleChangeLaytimeHeaderInput, getHearInputData } from '../../_redux/actions/LaytimeAction';
+import { handleChangeLaytimeHeaderInput, getHearInputData, GetVoyageID } from '../../_redux/actions/LaytimeAction';
 import { useSelector, useDispatch } from "react-redux";
 import LaytimeHeaderLoadingPortModal from './LaytimeHeaderLoadingPortModal';
 import LaytimeHeaderDischargePortModal from './LaytimeHeaderDischargePortModal';
@@ -16,12 +16,12 @@ const LaytimeHeader = () => {
 
     const selectOptions = [
         {
-            label: 'Active',
+            label: '1',
             value: "1"
         },
         {
-            label: 'In Active',
-            value: "0"
+            label: '2',
+            value: "2"
         }
     ]
 
@@ -35,6 +35,8 @@ const LaytimeHeader = () => {
     const handleShowLoadingPortModal = () => setShowLoadingPortModal(true);
 
     const laytimeHeaderInput = useSelector((state) => state.laytimeHeaderInfo.laytimeHeaderInput);
+    const voyageIDList = useSelector((state) => state.currencyInfo.voyageIDList);
+
     const loadingPort = (e) => {
         handleShow()
     };
@@ -49,6 +51,19 @@ const LaytimeHeader = () => {
         }
     };
 
+    // let voyageID = [];
+    // if (voyageIDList) {
+    //     voyageIDList.forEach((item) => {
+    //         let getVoyageID = {
+    //             value: item.intCurrencyID,
+    //             label: item.strCurrencyName,
+    //         };
+    //         voyageID.push(getVoyageID);
+    //     });
+    // }
+    useEffect(() => {
+        dispatch(GetVoyageID());
+    }, []);
     return (
         <div className="container">
             <div className="card card-custom gutter-b">
@@ -88,17 +103,17 @@ const LaytimeHeader = () => {
                                     </div> */}
                                     <div className="col-md-6">
                                         <label className="form-label mt-2 formFont">Voyage No.</label>
-                                        <Form.Control
-                                            type="number"
+                                        <RHFInput
+                                            as={<Select options={selectOptions} />}
+                                            rules={{ required: true }}
                                             name="intCharterVoyageID"
-                                            className="fromStyle formHeight"
-                                            value={laytimeHeaderInput.intCharterVoyageID}
-                                            onChange={(e) =>
-                                                handleChangeTextInput(
-                                                    "intCharterVoyageID",
-                                                    e.target.value
-                                                )
-                                            }
+                                            register={register}
+                                            value={laytimeHeaderInput.intChartererID}
+                                            onChange={(option) => {
+                                                handleChangeTextInput("strCharterVoyageName", option.label);
+                                                handleChangeTextInput("intCharterVoyageID", option.value);
+                                            }}
+                                            setValue={setValue}
                                         />
                                     </div>
                                 </div>
@@ -110,15 +125,7 @@ const LaytimeHeader = () => {
                                             rules={{ required: true }}
                                             name="intCommenPortID"
                                             register={register}
-                                            value={laytimeHeaderInput.intCommenPortID}
-                                            onChange={(option) => {
-                                                handleChangeTextInput("strCommenPortName", option.label);
-                                                handleChangeTextInput("intCommenPortID", option.value);
-                                                handleChangeTextInput('commenPort', {
-                                                    label: option.label,
-                                                    value: option.value,
-                                                })
-                                            }}
+                                            value={laytimeHeaderInput.commmencePort}
                                             setValue={setValue}
                                         />
                                     </div>
@@ -149,15 +156,7 @@ const LaytimeHeader = () => {
                                             rules={{ required: true }}
                                             name="intComplationPortID"
                                             register={register}
-                                            value={laytimeHeaderInput.intComplationPortID}
-                                            onChange={(option) => {
-                                                handleChangeTextInput("strComplationPortName", option.label);
-                                                handleChangeTextInput("intComplationPortID", option.value);
-                                                handleChangeTextInput('complationPort', {
-                                                    label: option.label,
-                                                    value: option.value,
-                                                })
-                                            }}
+                                            value={laytimeHeaderInput.completionPort}
                                             setValue={setValue}
                                         />
                                     </div>
@@ -201,7 +200,7 @@ const LaytimeHeader = () => {
                                     <div className="col-md-6">
                                         <label className="form-label mt-2 formFont">Charterer</label>
                                         <RHFInput
-                                            as={<Select options={selectOptions} isDisabled={true}/>}
+                                            as={<Select options={selectOptions} isDisabled={true} />}
                                             rules={{ required: true }}
                                             name="intChartererID"
                                             register={register}
