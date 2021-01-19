@@ -10,9 +10,18 @@ export const handleCertificateCategoryInput = (name, value) => (dispatch) => {
   dispatch({ type: Types.CERTIFICATE_CATEGORY_CREATE, payload: categoryData });
 };
 
-export const certificatecategorySubmitAction = (getCategoryInpuData) => (
+export const certificatecategorySubmitAction = (getCategoryInpuData, isSubCategory) => (
   dispatch
 ) => {
+
+  if (typeof isSubCategory !== 'undefined' || isSubCategory === true) {
+    if (getCategoryInpuData.intParentsCategoryID === null || getCategoryInpuData.intParentsCategoryID === "") {
+      showToast("error", 'Please select parent category !');
+      return false;
+    }
+  }
+
+
   let responseList = {
     isLoading: true,
     data: {},

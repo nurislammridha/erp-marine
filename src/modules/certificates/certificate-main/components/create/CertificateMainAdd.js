@@ -30,8 +30,10 @@ import CertificateTypeAdd from "../../../certificate-types/components/create/Cer
 import {
   getCertificateChildCategoryData,
   getCertificateParentCategoryData,
+  handleCertificateCategoryInput,
 } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
 import MultipplePreviewAttachment from "../../../../master/components/previews/MultiplePreviewAttachment";
+import { showToast } from "../../../../master/utils/ToastHelper";
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -48,6 +50,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const certificateInfoInput = useSelector(
     (state) => state.certificateMainInfo.certificateMainInfo
   );
+  console.log('certificateInfoInput :>> ', certificateInfoInput);
   const certificatesCategoryOption = useSelector(
     (state) => state.certificateMainInfo.certificatesCategoryOptionData
   );
@@ -159,6 +162,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       );
                       setValue("intCategoryID", "");
                       dispatch(getCertificateChildCategoryData(option.value));
+                      dispatch(handleCertificateCategoryInput('certificateCategoryParent', {
+                        label: option.label,
+                        value: option.value,
+                      }));
+                      dispatch(handleCertificateCategoryInput('intParentsCategoryID', option.value));
                     }}
                     setValue={setValue}
                   />
@@ -193,7 +201,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         className="btn btn-default"
                         type="button"
                         onClick={() => {
-                          setShowCategoryModal(true);
+                          if (certificateInfoInput.intParentCategoryID === null) {
+                            showToast('error', 'Please select parent category first !')
+                          } else {
+                            setShowCategoryModal(true);
+                          }
                         }}
                       >
                         <i className="fa fa-plus-circle"></i>
@@ -310,15 +322,15 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       )
                     }
                     ref={register({
-                      required: true,
+                      // required: true,
                       maxLength: 100,
                     })}
                   />
-                  <div className="inputError margin-minus-8">
+                  {/* <div className="inputError margin-minus-8">
                     {errors.strCustomeCode &&
                       errors.strCustomeCode.type === "required" &&
                       "Certificate Code can't be blank"}
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="col-lg-3">
@@ -402,11 +414,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     </div>
                   </div>
 
-                  <div className="inputError margin-minus-10">
+                  {/* <div className="inputError margin-minus-10">
                     {errors.intIssuingAuthorityID &&
                       errors.intIssuingAuthorityID.type === "required" &&
                       "Certificate Name Can't be blank"}
-                  </div>
+                  </div> */}
                 </div>
                 <div className="col-lg-3">
                   <label className="form-label mt-2 formFont ">
@@ -489,7 +501,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       certificateMainInfoChange("dteCertificateIssueDate", e)
                     }
                     ref={register({
-                      required: true,
+                      required: false,
                       maxLength: 100,
                     })}
                   />
@@ -528,7 +540,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                               )
                             }
                             ref={register({
-                              required: true,
+                              required: false,
                               maxLength: 100,
                             })}
                           />
@@ -632,13 +644,12 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       name="dteExtendedUntil"
                       className="form-control fromStyle formHeight custome-date"
                       placeholderText="select certificate valid date"
+                      minDate={certificateInfoInput.dteCertificateIssueDate}
                       disabled={
                         certificateInfoInput.isExtendedUntil ? false : true
                       }
                       selected={certificateInfoInput.dteExtendedUntil}
-                      onChange={(e) =>
-                        certificateMainInfoChange("dteExtendedUntil", e)
-                      }
+                      onChange={(e) => certificateMainInfoChange("dteExtendedUntil", e)}
                       ref={register({
                         required: true,
                         maxLength: 100,
@@ -649,6 +660,10 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     {errors.dteExtendedUntil &&
                       errors.dteExtendedUntil.type === "required" &&
                       "Expiry Date can't be blank"}
+                    {
+                      (certificateInfoInput.dteCertificateIssueDate < certificateInfoInput.dteExtendedUntil) && errors.dteExtendedUntil === "date can't be smaller"
+                    }
+
                   </div> */}
                 </div>
                 <div className="col-lg-3">
@@ -1070,7 +1085,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               handleShow={() => setShowCategoryModal(true)}
               modalTitle={"Certificate Sub Category"}
             >
-              <CertificateCategoryAdd />
+              <CertificateCategoryAdd isSubCategory={ true }/>
             </SimpleModal>
 
             <SimpleModal

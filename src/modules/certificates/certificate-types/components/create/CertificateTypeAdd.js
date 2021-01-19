@@ -9,7 +9,7 @@ import {
 } from "../../_redux/actions/CertificateTypeAction";
 
 const CertificateTypeAdd = () => {
-  const { handleSubmit } = useForm();
+  const { handleSubmit, register, errors, setValue } = useForm();
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(15);
   const certificateTypeInput = useSelector(
@@ -25,6 +25,7 @@ const CertificateTypeAdd = () => {
   }, [addStatus]);
 
   const handleChangeTextInput = (name, value) => {
+    setValue(name, value);
     dispatch(handleChangeCertificateTypeInput(name, value));
   };
 
@@ -47,7 +48,7 @@ const CertificateTypeAdd = () => {
                 className="formHeight"
                 type="text"
                 placeholder="Certificate Name"
-                value={certificateTypeInput.strCertificateTypeName}
+                // value={certificateTypeInput.strCertificateTypeName}
                 name="strCertificateTypeName"
                 onChange={(e) =>
                   handleChangeTextInput(
@@ -55,7 +56,17 @@ const CertificateTypeAdd = () => {
                     e.target.value
                   )
                 }
+                ref={register({
+                  required: true,
+                  maxLength: 100,
+                })}
+                setValue={setValue}
               />
+              <div className="inputError margin-minus-8">
+                {errors.strCertificateTypeName &&
+                  errors.strCertificateTypeName.type === "required" &&
+                  "Certificate name can't be blank"}
+              </div>
             </Form.Group>
           </div>
         </div>
