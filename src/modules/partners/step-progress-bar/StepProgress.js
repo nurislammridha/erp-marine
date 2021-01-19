@@ -11,18 +11,20 @@ import { bankInfoSubmitAction } from '../bank-information/_redux/actions/BankInf
 
 const StepProgress = () => {
 
-    const step1Content = <h1>Basic Information</h1>;
-    const step2Content = <h1>Step 2 Content</h1>;
-    const step3Content = <h1>Step 3 Content</h1>;
-    const step4Content = <h1>Step 3 Content</h1>;
-
     const partnerInfoInput = useSelector((state) => state.partnerInfo.partnerInfoInput);
     const bankInfoInput = useSelector((state) => state.bankInfo.bankInfoInput);
+    const dispatch = useDispatch();
+    // const partinfo = () => {
+    //     console.log('partinfo', partnerInfoInput)
+    //     dispatch(partnerInfoSubmitAction(partnerInfoInput));
+    // }
 
-
+    console.log('partnerinfo', partnerInfoInput)
     // setup step validators, will be called before proceeding to the next step
-    function step1Validator() {
-        return partnerInfoSubmitAction(partnerInfoInput);
+    const step1Validator = (testData) => {
+
+        console.log('validator data', testData)
+        return partnerInfoSubmitAction(testData);
     }
     function step2Validator() {
         // return a boolean
@@ -50,7 +52,7 @@ const StepProgress = () => {
                         label: 'Basic Information',
                         name: 'Basic Information',
                         content: <BasicInfoAdd />,
-                        validator: step1Validator
+                        validator: () => step1Validator(partnerInfoInput)
                     },
                     {
                         label: 'Address',
