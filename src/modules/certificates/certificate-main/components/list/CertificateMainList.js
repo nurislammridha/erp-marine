@@ -162,7 +162,7 @@ const CertificateMainList = () => {
             <i className="far fa-filter"></i>
             <Link
               to="/certificates-main/create"
-              className="btn btn-primary text-center text-white"
+              className="btn btn-primary text-center text-white btn-sm custome-addnew-btn"
             >
               Add New
             </Link>

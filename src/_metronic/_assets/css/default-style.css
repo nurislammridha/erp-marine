@@ -849,3 +849,20 @@ h3 {
 ._1Lo2h {
   width: 109%;
 }
+/* Certificate create */
+.card-header.certificate-cardheader {
+  min-height: 0px !important;
+}
+.certificate-card-body {
+  padding: 0rem 2.25rem !important;
+}
+.header.header-fixed {
+  height: 50px !important;
+}
+.header-fixed.subheader-fixed.subheader-enabled .wrapper {
+  padding-top: 54px !important;
+}
+.custome-addnew-btn {
+  height: 29px;
+  padding: 5px;
+}

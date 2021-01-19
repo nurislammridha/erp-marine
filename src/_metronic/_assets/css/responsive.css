@@ -129,6 +129,9 @@
   h3 {
     font-size: 14px !important;
   }
+  .header-fixed.subheader-fixed.subheader-enabled .wrapper {
+    padding-top: 6px !important;
+  }
 }
 
 @media (max-width: 426px) {
