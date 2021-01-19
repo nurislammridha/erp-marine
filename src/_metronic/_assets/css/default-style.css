@@ -862,3 +862,7 @@ h3 {
 .header-fixed.subheader-fixed.subheader-enabled .wrapper {
   padding-top: 54px !important;
 }
+.custome-addnew-btn {
+  height: 29px;
+  padding: 5px;
+}
