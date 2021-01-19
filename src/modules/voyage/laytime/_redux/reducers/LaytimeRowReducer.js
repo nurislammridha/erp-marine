@@ -33,7 +33,7 @@ const initialState = {
     //     intActionBy: 1
 
     // },
-    laytimeRowInput: {
+   
         layTimeRows: [
             {
                 intLayTimeHeaderID: null,
@@ -55,7 +55,7 @@ const initialState = {
                 strTimeRemaining: ''
             }
         ]
-    }
+    
 }
 
 const LaytimeRowReducer = (state = initialState, action) => {

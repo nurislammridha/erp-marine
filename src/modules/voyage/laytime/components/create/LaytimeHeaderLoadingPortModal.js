@@ -4,7 +4,7 @@ import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from 'react-redux';
-import { GetCurrencyData } from '../../_redux/actions/LaytimeAction';
+import { GetCurrencyData, multipleLaytimeAction } from '../../_redux/actions/LaytimeAction';
 
 const LaytimeHeaderLoadingPortModal = (props) => {
     const dispatch = useDispatch()
@@ -44,7 +44,10 @@ const LaytimeHeaderLoadingPortModal = (props) => {
     useEffect(() => {
         dispatch(GetCurrencyData());
     }, []);
-    console.log('Currency :>> ', Currency);
+
+    const addMultipleDemmurage = () => {
+        dispatch(multipleLaytimeAction(laytimeHeaderInput))
+    }
     return (
         <>
             <div className="col-md-9">
@@ -53,7 +56,7 @@ const LaytimeHeaderLoadingPortModal = (props) => {
                         <label className="form-label mt-2 formFont">Demurrage Rate</label>
                         <Form.Control
                             type="number"
-                            name=""
+                            name="numDemurrageRate"
                             className="fromStyle formHeight"
                             value={laytimeHeaderInput.numDemurrageRate}
                             onChange={(e) =>
@@ -70,27 +73,15 @@ const LaytimeHeaderLoadingPortModal = (props) => {
                             as={<Select options={currency} />}
                             className="fromStyle formHeight"
                             rules={{ required: true }}
-                            name="intChartererID"
+                            name="intCurrencyID"
                             register={register}
-                            // value={laytimeHeaderInput.intChartererID}
-                            // onChange={(option) => {
-                            //     handleChangeTextInput("intChartererName", option.label);
-                            //     handleChangeTextInput("intChartererID", option.value);
-                            // }}
+                            value={laytimeHeaderInput.intCurrencyID}
+                            onChange={(option) => {
+                                handleChangeTextInput("strCurrencyName", option.label);
+                                handleChangeTextInput("intCurrencyID", option.value);
+                            }}
                             setValue={setValue}
                         />
-                        {/* <Form.Control
-                                type="number"
-                                name=""
-                                className="fromStyle formHeight"
-                            // value={laytimeHeaderInput.numDespatchRate}
-                            // onChange={(e) =>
-                            //     handleChangeTextInput(
-                            //         "numDespatchRate",
-                            //         e.target.value
-                            //     )
-                            // }
-                            /> */}
                     </div>
                 </div>
                 <div className="row mt-3">
@@ -98,15 +89,15 @@ const LaytimeHeaderLoadingPortModal = (props) => {
                         <label className="form-label mt-2 formFont">Despatch Rate</label>
                         <Form.Control
                             type="number"
-                            name=""
+                            name="numDespatchRate"
                             className="fromStyle formHeight"
-                        // value={laytimeHeaderInput.numDespatchRate}
-                        // onChange={(e) =>
-                        //     handleChangeTextInput(
-                        //         "numDespatchRate",
-                        //         e.target.value
-                        //     )
-                        // }
+                            value={laytimeHeaderInput.numDespatchRate}
+                            onChange={(e) =>
+                                handleChangeTextInput(
+                                    "numDespatchRate",
+                                    e.target.value
+                                )
+                            }
                         />
                     </div>
                     <div className="col-md-4">
@@ -117,13 +108,9 @@ const LaytimeHeaderLoadingPortModal = (props) => {
                                 type="number"
                                 placeholder="75"
                                 aria-describedby="basic-addon2"
-                            // value={laytimeHeaderInput.numDespatchRate}
-                            // onChange={(e) =>
-                            //     handleChangeTextInput(
-                            //         "numDespatchRate",
-                            //         e.target.value
-                            //     )
-                            // }
+                                name="numDespatchPercent"
+                                value={laytimeHeaderInput.numDespatchPercent}
+                                onChange={(e) => handleChangeTextInput("numDespatchPercent", e.target.value)}
                             />
                             <InputGroup.Append className="fromStyle formHeight">
                                 <InputGroup.Text id="basic-addon2">%</InputGroup.Text>
@@ -133,7 +120,7 @@ const LaytimeHeaderLoadingPortModal = (props) => {
                 </div>
                 <div className="row ml-1 mt-3">
                     {!isLoading && (
-                        <Button variant="primary" type="submit" className="saveButton">
+                        <Button variant="primary" type="submit" className="saveButton" onClick={addMultipleDemmurage}>
                             Add
                         </Button>
                     )}
