@@ -9,6 +9,7 @@ import { handleChangeLaytimeHeaderInput, getHearInputData } from '../../_redux/a
 import { useSelector, useDispatch } from "react-redux";
 import LaytimeHeaderLoadingPortModal from './LaytimeHeaderLoadingPortModal';
 import LaytimeHeaderDischargePortModal from './LaytimeHeaderDischargePortModal';
+import moment from 'moment';
 
 const LaytimeHeader = () => {
     const dispatch = useDispatch();
@@ -41,13 +42,12 @@ const LaytimeHeader = () => {
         handleShowLoadingPortModal()
     }
     //handle lay-time header input 
-    const handleChangeTextInput = (name, value) => {
-        dispatch(handleChangeLaytimeHeaderInput(name, value));
+    const handleChangeTextInput = (name, value, e = null) => {
+        dispatch(handleChangeLaytimeHeaderInput(name, value, e));
         if (name === 'intCharterVoyageID') {
             dispatch(getHearInputData(value));
         }
     };
-
 
     return (
         <div className="container">
@@ -106,20 +106,18 @@ const LaytimeHeader = () => {
                                     <div className="col-md-6">
                                         <label className="form-label">Commencement Port</label>
                                         <RHFInput
-                                            as={<Select options={selectOptions} />}
+                                            as={<Select options={selectOptions} isDisabled={true} />}
                                             rules={{ required: true }}
                                             name="intCommenPortID"
                                             register={register}
                                             value={laytimeHeaderInput.intCommenPortID}
                                             onChange={(option) => {
-                                                handleChangeTextInput(
-                                                    "strCommenPortName",
-                                                    option.label
-                                                );
-                                                handleChangeTextInput(
-                                                    "intCommenPortID",
-                                                    option.value
-                                                );
+                                                handleChangeTextInput("strCommenPortName", option.label);
+                                                handleChangeTextInput("intCommenPortID", option.value);
+                                                handleChangeTextInput('commenPort', {
+                                                    label: option.label,
+                                                    value: option.value,
+                                                })
                                             }}
                                             setValue={setValue}
                                         />
@@ -129,39 +127,36 @@ const LaytimeHeader = () => {
                                         <DatePicker
                                             name="dteCommenDate"
                                             className="form-control formHeight"
+                                            disableClock={true}
+                                            disabled={true}
+                                            dateFormat="MM-dd-yyyy"
                                             placeholderText="select issue date"
-                                            selected={laytimeHeaderInput.dteCommenDate}
-                                            onChange={(e) =>
-                                                handleChangeTextInput(
-                                                    "dteCommenDate",
-                                                    e
-                                                )
-                                            }
+                                            selected={laytimeHeaderInput.dteCommenDate !== '' ? moment(laytimeHeaderInput.dteCommenDate).toDate() : null}
+                                            onChange={(date) => handleChangeTextInput("dteCommenDate", date)}
                                             ref={register({
                                                 required: true,
                                                 maxLength: 100,
                                             })}
                                         />
+
                                     </div>
                                 </div>
                                 <div className="row mt-5">
                                     <div className="col-md-6">
                                         <label className="form-label">Completion Port</label>
                                         <RHFInput
-                                            as={<Select options={selectOptions} />}
+                                            as={<Select options={selectOptions} isDisabled={true} />}
                                             rules={{ required: true }}
                                             name="intComplationPortID"
                                             register={register}
                                             value={laytimeHeaderInput.intComplationPortID}
                                             onChange={(option) => {
-                                                handleChangeTextInput(
-                                                    "strComplationPortName",
-                                                    option.label
-                                                );
-                                                handleChangeTextInput(
-                                                    "intComplationPortID",
-                                                    option.value
-                                                );
+                                                handleChangeTextInput("strComplationPortName", option.label);
+                                                handleChangeTextInput("intComplationPortID", option.value);
+                                                handleChangeTextInput('complationPort', {
+                                                    label: option.label,
+                                                    value: option.value,
+                                                })
                                             }}
                                             setValue={setValue}
                                         />
@@ -173,13 +168,11 @@ const LaytimeHeader = () => {
                                             name="dteComplationDate"
                                             className="form-control formHeight"
                                             placeholderText="select issue date"
-                                            selected={laytimeHeaderInput.dteComplationDate}
-                                            onChange={(e) =>
-                                                handleChangeTextInput(
-                                                    "dteComplationDate",
-                                                    e
-                                                )
-                                            }
+                                            disableClock={true}
+                                            disabled={true}
+                                            dateFormat="MM-dd-yyyy"
+                                            selected={laytimeHeaderInput.dteComplationDate !== '' ? moment(laytimeHeaderInput.dteComplationDate).toDate() : null}
+                                            onChange={(date) => handleChangeTextInput("dteComplationDate", date)}
                                             ref={register({
                                                 required: true,
                                                 maxLength: 100,
@@ -194,13 +187,11 @@ const LaytimeHeader = () => {
                                             name="dteCPDate"
                                             className="form-control formHeight"
                                             placeholderText="select issue date"
-                                            selected={laytimeHeaderInput.dteCPDate}
-                                            onChange={(e) =>
-                                                handleChangeTextInput(
-                                                    "dteCPDate",
-                                                    e
-                                                )
-                                            }
+                                            disableClock={true}
+                                            disabled={true}
+                                            dateFormat="MM-dd-yyyy"
+                                            selected={laytimeHeaderInput.dteCPDate !== '' ? moment(laytimeHeaderInput.dteCPDate).toDate() : null}
+                                            onChange={(date) => handleChangeTextInput("dteCPDate", date)}
                                             ref={register({
                                                 required: true,
                                                 maxLength: 100,
@@ -210,20 +201,18 @@ const LaytimeHeader = () => {
                                     <div className="col-md-6">
                                         <label className="form-label mt-2 formFont">Charterer</label>
                                         <RHFInput
-                                            as={<Select options={selectOptions} />}
+                                            as={<Select options={selectOptions} isDisabled={true}/>}
                                             rules={{ required: true }}
                                             name="intChartererID"
                                             register={register}
                                             value={laytimeHeaderInput.intChartererID}
                                             onChange={(option) => {
-                                                handleChangeTextInput(
-                                                    "intChartererName",
-                                                    option.label
-                                                );
-                                                handleChangeTextInput(
-                                                    "intChartererID",
-                                                    option.value
-                                                );
+                                                handleChangeTextInput("intChartererName", option.label);
+                                                handleChangeTextInput("intChartererID", option.value);
+                                                handleChangeTextInput('charterer', {
+                                                    label: option.label,
+                                                    value: option.value,
+                                                })
                                             }}
                                             setValue={setValue}
                                         />
