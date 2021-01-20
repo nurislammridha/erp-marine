@@ -11,6 +11,7 @@ const initiliazeState = {
     intParentsCategoryID: "",
     intActionBy: "1",
     isActive: "1",
+    certificateCategoryParent: null,
   },
   editStatus: false,
 };

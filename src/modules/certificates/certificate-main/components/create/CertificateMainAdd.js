@@ -30,8 +30,10 @@ import CertificateTypeAdd from "../../../certificate-types/components/create/Cer
 import {
   getCertificateChildCategoryData,
   getCertificateParentCategoryData,
+  handleCertificateCategoryInput,
 } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
 import MultipplePreviewAttachment from "../../../../master/components/previews/MultiplePreviewAttachment";
+import { showToast } from "../../../../master/utils/ToastHelper";
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -48,6 +50,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const certificateInfoInput = useSelector(
     (state) => state.certificateMainInfo.certificateMainInfo
   );
+  console.log('certificateInfoInput :>> ', certificateInfoInput);
   const certificatesCategoryOption = useSelector(
     (state) => state.certificateMainInfo.certificatesCategoryOptionData
   );
@@ -127,23 +130,23 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
   return (
     <>
-      <div className="container">
+      <div className="container ">
         <div className="card card-custom gutter-b">
-          <div className="card-header">
+          <div className="card-header certificate-cardheader border-bottom-0">
             <div className="card-title">
               <h3 className="card-label">Certificate</h3>
             </div>
           </div>
-          <div className="card-body">
+          <div className="card-body certificate-card-body">
             <form
               className="form form-label-right"
               onSubmit={handleSubmit(onSubmit)}
               method="post"
               encType="multipart/form-data"
             >
-              <div className="form-group row mt-0 border pb-3 bg-light pt-3">
+              <div className="form-group row mt-0 border pb-3 bg-light pt-3 ">
                 <div className="col-lg-3">
-                  <label className="form-label">Category</label>
+                  <label className="form-label formFont">Category</label>
                   <RHFInput
                     as={<Select options={certificateParentCategoryList} />}
                     rules={{ required: true }}
@@ -159,6 +162,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       );
                       setValue("intCategoryID", "");
                       dispatch(getCertificateChildCategoryData(option.value));
+                      dispatch(handleCertificateCategoryInput('certificateCategoryParent', {
+                        label: option.label,
+                        value: option.value,
+                      }));
+                      dispatch(handleCertificateCategoryInput('intParentsCategoryID', option.value));
                     }}
                     setValue={setValue}
                   />
@@ -166,7 +174,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
                 {/*====Sub Category=====*/}
                 <div className="col-lg-3">
-                  <label className="form-label">Sub Category</label>
+                  <label className="form-label formFont">Sub Category</label>
                   <div className="input-area-add">
                     <div className="float-left">
                       <RHFInput
@@ -193,7 +201,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         className="btn btn-default"
                         type="button"
                         onClick={() => {
-                          setShowCategoryModal(true);
+                          if (certificateInfoInput.intParentCategoryID === null) {
+                            showToast('error', 'Please select parent category first !')
+                          } else {
+                            setShowCategoryModal(true);
+                          }
                         }}
                       >
                         <i className="fa fa-plus-circle"></i>
@@ -204,7 +216,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 {/*====Sub Category=====*/}
 
                 <div className="col-lg-3">
-                  <label className="form-label">Certificate Name</label>
+                  <label className="form-label formFont">
+                    Certificate Name
+                  </label>
                   <div className="input-area-add">
                     <div className="float-left">
                       <RHFInput
@@ -241,7 +255,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div>
 
                 <div className="col-lg-3">
-                  <label className="form-label">Certificate Type</label>
+                  <label className="form-label formFont">
+                    Certificate Type
+                  </label>
                   <div className="input-area-add">
                     <div className="float-left">
                       <RHFInput
@@ -306,15 +322,15 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       )
                     }
                     ref={register({
-                      required: true,
+                      // required: true,
                       maxLength: 100,
                     })}
                   />
-                  <div className="inputError margin-minus-8">
+                  {/* <div className="inputError margin-minus-8">
                     {errors.strCustomeCode &&
                       errors.strCustomeCode.type === "required" &&
                       "Certificate Code can't be blank"}
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="col-lg-3">
@@ -360,8 +376,10 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   />
                 </div> */}
 
-                <div className="col-lg-3">
-                  <label className="form-label">Issuing Authority</label>
+                <div className="col-lg-3 mt-2">
+                  <label className="form-label formFont">
+                    Issuing Authority
+                  </label>
                   <div className="input-area-add">
                     <div className="float-left">
                       <RHFInput
@@ -396,11 +414,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     </div>
                   </div>
 
-                  <div className="inputError margin-minus-10">
+                  {/* <div className="inputError margin-minus-10">
                     {errors.intIssuingAuthorityID &&
                       errors.intIssuingAuthorityID.type === "required" &&
                       "Certificate Name Can't be blank"}
-                  </div>
+                  </div> */}
                 </div>
                 <div className="col-lg-3">
                   <label className="form-label mt-2 formFont ">
@@ -471,7 +489,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               {/*=====certificate details close===*/}
               <div className="form-group row mt-2 border mb-2 pb-3 bg-light">
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">
+                  <label className="form-label mt-2 formFont">
                     Certificate Issue date
                   </label>
                   <DatePicker
@@ -483,7 +501,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       certificateMainInfoChange("dteCertificateIssueDate", e)
                     }
                     ref={register({
-                      required: true,
+                      required: false,
                       maxLength: 100,
                     })}
                   />
@@ -522,7 +540,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                               )
                             }
                             ref={register({
-                              required: true,
+                              required: false,
                               maxLength: 100,
                             })}
                           />
@@ -534,7 +552,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       </div> */}
                       </div>
                       <div className="col-lg-3">
-                        <label className="form-label mt-2">
+                        <label className="form-label formFont mt-2">
                           Certificate Valid date
                         </label>
                         {/* <Form.Control
@@ -583,7 +601,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   )}
 
                 <div className="col-lg-3">
-                  <label className="form-label">
+                  <label className="form-label formFont">
                     Extend Until {"  "}
                     <label>
                       <Form.Check
@@ -626,13 +644,12 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       name="dteExtendedUntil"
                       className="form-control fromStyle formHeight custome-date"
                       placeholderText="select certificate valid date"
+                      minDate={certificateInfoInput.dteCertificateIssueDate}
                       disabled={
                         certificateInfoInput.isExtendedUntil ? false : true
                       }
                       selected={certificateInfoInput.dteExtendedUntil}
-                      onChange={(e) =>
-                        certificateMainInfoChange("dteExtendedUntil", e)
-                      }
+                      onChange={(e) => certificateMainInfoChange("dteExtendedUntil", e)}
                       ref={register({
                         required: true,
                         maxLength: 100,
@@ -643,10 +660,16 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     {errors.dteExtendedUntil &&
                       errors.dteExtendedUntil.type === "required" &&
                       "Expiry Date can't be blank"}
+                    {
+                      (certificateInfoInput.dteCertificateIssueDate < certificateInfoInput.dteExtendedUntil) && errors.dteExtendedUntil === "date can't be smaller"
+                    }
+
                   </div> */}
                 </div>
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Endorsement Date</label>
+                  <label className="form-label formFont mt-2">
+                    Endorsement Date
+                  </label>
                   {/* <Form.Control
                     type="date"
                     name="dteLastEndorsementDate"
@@ -826,7 +849,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   />
                 </div> */}
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Office Remarks</label>
+                  <label className="form-label formFont mt-2">
+                    Office Remarks
+                  </label>
                   <Form.Control
                     as="textarea"
                     type="text"
@@ -852,7 +877,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </div> */}
                 </div>
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Ship remarks</label>
+                  <label className="form-label formFont mt-2">
+                    Ship remarks
+                  </label>
                   <Form.Control
                     as="textarea"
                     type="text"
@@ -926,7 +953,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
               <div className="form-group row mt-1 border mt-2 pb-3 bg-light">
                 <div className="col-lg-3">
-                  <label className="form-label mt-2">Attachments</label>
+                  <label className="form-label formFont mt-2">
+                    Attachments
+                  </label>
                   {/* <Form.Control
                       type="file"
                       name="multipleAttachments[]"
@@ -963,33 +992,35 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {
-                        certificateInfoInput.multipleAttachments !== null &&
-                        certificateInfoInput.multipleAttachments.map(
-                          (attachment, index) => (
-                            <tr>
-                              <td>{index + 1}</td>
-                              <td>{attachment.name}</td>
-                              <td>{attachment.size}</td>
-                              <td>{" "}
-                                <MultipplePreviewAttachment
-                                  url={'/' + attachment.name}
-                                  base64={attachment.base64}
-                                  title="Preview"
-                                  height={50}
-                                  width={50}
-                                />
-                              </td>
-                              <td style={{ width: 70, textAlign: "center" }}>
-                                {/* <i className="fa fa-edit text-success mr-2"></i> */}
-                                <i
-                                  className="fa fa-trash text-danger pointer"
-                                  onClick={() => deleteMultipleAttachmentData(index)}
-                                ></i>
-                              </td>
-                            </tr>
-                          )
-                        )}
+                        {certificateInfoInput.multipleAttachments !== null &&
+                          certificateInfoInput.multipleAttachments.map(
+                            (attachment, index) => (
+                              <tr>
+                                <td>{index + 1}</td>
+                                <td>{attachment.name}</td>
+                                <td>{attachment.size}</td>
+                                <td>
+                                  {" "}
+                                  <MultipplePreviewAttachment
+                                    url={"/" + attachment.name}
+                                    base64={attachment.base64}
+                                    title="Preview"
+                                    height={50}
+                                    width={50}
+                                  />
+                                </td>
+                                <td style={{ width: 70, textAlign: "center" }}>
+                                  {/* <i className="fa fa-edit text-success mr-2"></i> */}
+                                  <i
+                                    className="fa fa-trash text-danger pointer"
+                                    onClick={() =>
+                                      deleteMultipleAttachmentData(index)
+                                    }
+                                  ></i>
+                                </td>
+                              </tr>
+                            )
+                          )}
                       </tbody>
                     </table>
                   )}
@@ -1054,7 +1085,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               handleShow={() => setShowCategoryModal(true)}
               modalTitle={"Certificate Sub Category"}
             >
-              <CertificateCategoryAdd />
+              <CertificateCategoryAdd isSubCategory={ true }/>
             </SimpleModal>
 
             <SimpleModal

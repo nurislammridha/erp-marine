@@ -25,7 +25,7 @@ export async function login(email, password) {
   };
   // return loginResponse;
   let shipUser = null;
-  const url = `http://iapps.akij.net/iMarineAPI/public/api/v1/auth/login`;
+  const url = `${process.env.REACT_APP_API_URL}auth/login`;
   try {
     await axios
       .post(url, {

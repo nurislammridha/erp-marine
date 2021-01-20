@@ -12,8 +12,9 @@ import {
   handleCertificateCategoryInput,
 } from "../../_redux/actions/CertificateCategoryAction";
 
-const CertificateCategoryAdd = () => {
+const CertificateCategoryAdd = (props) => {
   const history = useHistory();
+  const { isSubCategory } = props;
   const { register, handleSubmit, watch, errors, setValue } = useForm();
   const dispatch = useDispatch();
 
@@ -37,7 +38,7 @@ const CertificateCategoryAdd = () => {
   };
 
   const submiteCategory = (data) => {
-    dispatch(certificatecategorySubmitAction(getCategoryInpuData));
+    dispatch(certificatecategorySubmitAction(getCategoryInpuData, isSubCategory));
   };
   useEffect(() => {
     dispatch(getCertificateParentCategoryData());
@@ -74,28 +75,43 @@ const CertificateCategoryAdd = () => {
           <Form.Control
             type="text"
             className="formHeight"
-            ref={register}
-            value={getCategoryInpuData.strCertificateCategoryName}
+            ref={register({
+              required: true,
+              maxLength: 100,
+            })}
             placeholder="Type Category Name"
             name="strCertificateCategoryName"
-            onChange={(e) =>
-              categoryInputChange("strCertificateCategoryName", e.target.value)
-            }
+            onChange={(e) => {
+              categoryInputChange(
+                "strCertificateCategoryName",
+                e.target.value
+              );
+            }}
           />
+          <div className="inputError margin-minus-8">
+            {errors.strCertificateCategoryName &&
+              errors.strCertificateCategoryName.type === "required" &&
+              "Certificate Category name can't be blank"}
+          </div>
         </div>
         <div className="form-group mt-0 ">
           <label className="form-label formFont">
             Parent Category <span className="text-info"> (Optional)</span>
           </label>
           <RHFInput
-            as={<Select options={certificateParentCategoryList} />}
+            as={<Select options={certificateParentCategoryList}
+              isDisabled={typeof isSubCategory === 'undefined' ? false : true}
+            />}
             rules={{ required: false }}
             name="intParentsCategoryID"
             className="formSelect pt-0"
             register={register}
-            value={certificateParentCategoryList.intParentsCategoryID}
+            value={getCategoryInpuData.certificateCategoryParent}
             onChange={(option) => {
-              // categoryInputChange("strCertificateCategoryName", option.label);
+              categoryInputChange("certificateCategoryParent", {
+                label: option.label,
+                value: option.value,
+              });
               categoryInputChange("intParentsCategoryID", option.value);
             }}
             setValue={setValue}

@@ -79,24 +79,32 @@ const CertificateMasterAdd = () => {
       >
         <div className="form-group row mt-5">
           <div className="col-md-12">
-            <label className="form-label">Certificate Name</label>
+            <label className="form-label formFont">Certificate Name</label>
             <Form.Control
-              className="formFont pl-1"
               className="formHeight"
               type="text"
-              value={CertificateMasterInput.strCertificateName}
+              // value={CertificateMasterInput.strCertificateName}
               name="strCertificateName"
               onChange={(e) =>
                 certificateMainInfoChange("strCertificateName", e.target.value)
               }
+              ref={register({
+                required: true,
+                maxLength: 100,
+              })}
             />
+            <div className="inputError margin-minus-8">
+              {errors.strCertificateName &&
+                errors.strCertificateName.type === "required" &&
+                "Certificate name can't be blank"}
+            </div>
           </div>
 
           <div className="col-sm-12">
             <label className="form-label">Category Name</label>
             <RHFInput
               as={<Select options={CertificatesCategoryOptionData} />}
-              rules={{ required: false }}
+              rules={{ required: true }}
               name="intCategoryID"
               register={register}
               value={CertificatesCategoryOptionData.strCertificateCategoryName}
@@ -109,6 +117,11 @@ const CertificateMasterAdd = () => {
                 certificateMainInfoChange("intCategoryID", option.value);
               }}
             />
+            <div className="inputError margin-minus-8">
+              {errors.intCategoryID &&
+                errors.intCategoryID.type === "required" &&
+                "Certificate category can't be blank"}
+            </div>
           </div>
         </div>
 

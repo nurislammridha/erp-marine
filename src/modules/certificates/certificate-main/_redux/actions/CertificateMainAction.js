@@ -39,9 +39,8 @@ export const handleChangeProductInputAction = (
 };
 
 // submit main certificate info
-export const MainCertificateCreateAction = (certificateInfoInput) => async (
-  dispatch
-) => {
+export const MainCertificateCreateAction = (certificateInfoInput) => async (dispatch) => {
+console.log('certificateInfoInput :>> ', certificateInfoInput);
   const vesselID = getVesselId();
   if (vesselID === null) {
     certificateInfoInput.intVesselID = 1;
@@ -49,9 +48,12 @@ export const MainCertificateCreateAction = (certificateInfoInput) => async (
     certificateInfoInput.intVesselID = vesselID;
   }
   certificateInfoInput.intActionBy = getEmployeeId();
-
   if (certificateInfoInput.intCertificateID === null) {
     showToast("error", "Certificate can't be blank!");
+    return false;
+  }
+  if (certificateInfoInput.intParentCategoryID === null) {
+    showToast("error", "Certificate parent category can't be blank!");
     return false;
   }
   if (certificateInfoInput.intCategoryID === null) {
@@ -64,6 +66,16 @@ export const MainCertificateCreateAction = (certificateInfoInput) => async (
   }
   if (certificateInfoInput.intIssuingAuthorityID === null) {
     showToast("error", "Issue Autherity can't be blank!");
+    return false;
+  }
+  
+  if (certificateInfoInput.dteCertificateIssueDate === null || certificateInfoInput.dteCertificateIssueDate === "") {
+    showToast("error", "Issue date can't be blank!");
+    return false;
+  }
+
+  if (certificateInfoInput.dteCertificateIssueDate < certificateInfoInput.dteExtendedUntil) {
+    showToast('error', "Certificate extended date can't be smaller than certificate issued date");
     return false;
   }
 
@@ -116,7 +128,7 @@ export const MainCertificateUpdateAction = (certificateInfoInput, id) => async (
 ) => {
   console.log('certificateInfoInput', certificateInfoInput);
   // return false;
-  
+
   const vesselID = getVesselId();
   if (vesselID === null) {
     certificateInfoInput.intVesselID = 1;
