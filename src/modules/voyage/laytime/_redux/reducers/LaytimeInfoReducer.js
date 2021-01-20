@@ -1,7 +1,7 @@
 import * as Types from "../types/Types";
 
 const initialstate = {
-    laytimeList: []
+    laytimeList: [],
 };
 const LaytimeInfoReducer = (state = initialstate, action) => {
     const newState = { ...state };

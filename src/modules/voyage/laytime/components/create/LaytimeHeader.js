@@ -5,7 +5,7 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import SimpleModal from '../../../../master/components/Modal/SimpleModal';
-import { handleChangeLaytimeHeaderInput, getHearInputData, GetVoyageID } from '../../_redux/actions/LaytimeAction';
+import { handleChangeLaytimeHeaderInput, getHearInputData, GetVoyageID, handleLaytimeDemurrageInput } from '../../_redux/actions/LaytimeAction';
 import { useSelector, useDispatch } from "react-redux";
 import LaytimeHeaderLoadingPortModal from './LaytimeHeaderLoadingPortModal';
 import LaytimeHeaderDischargePortModal from './LaytimeHeaderDischargePortModal';
@@ -35,9 +35,9 @@ const LaytimeHeader = () => {
     const handleShowLoadingPortModal = () => setShowLoadingPortModal(true);
 
     const laytimeHeaderInput = useSelector((state) => state.laytimeHeaderInfo.laytimeHeaderInput);
+    const layTimeDemurrage = useSelector((state) => state.laytimeHeaderInfo.layTimeDemurrage);
     const voyageIDList = useSelector((state) => state.currencyInfo.voyageIDList);
 
-    console.log('laytimeHeaderInput :>> ', laytimeHeaderInput);
 
     const loadingPort = (e) => {
         handleShow()
@@ -52,11 +52,15 @@ const LaytimeHeader = () => {
             dispatch(getHearInputData(value));
         }
     };
+    const handleLayTimeDemurrageInput = (name, value) => {
+        dispatch(handleLaytimeDemurrageInput(name, value))
+    }
 
     //handle submit laytime header 
     const submiteLaytimeData = () => {
 
     }
+    
 
     // let voyageID = [];
     // if (voyageIDList) {
@@ -238,7 +242,7 @@ const LaytimeHeader = () => {
                                                 name="strReversibleIType"
                                                 id="formHorizontalRadios1"
                                                 value={"REVERSIBLE"}
-                                                onChange={(e) => handleChangeTextInput('strReversibleIType', e.target.value)}
+                                                onChange={(e) => handleLayTimeDemurrageInput('strReversibleIType', e.target.value)}
                                             />
                                         </div>
                                         <div className="col-sm-7">
@@ -249,7 +253,7 @@ const LaytimeHeader = () => {
                                                 name="strReversibleIType"
                                                 id="formHorizontalRadios1"
                                                 value={"NON-REVERSIBLE"}
-                                                onChange={(e) => handleChangeTextInput('strReversibleIType', e.target.value)}
+                                                onChange={(e) => handleLayTimeDemurrageInput('strReversibleIType', e.target.value)}
                                             />
                                         </div>
                                     </div>
@@ -310,14 +314,14 @@ const LaytimeHeader = () => {
                             handleCloseLoadingPortModal={() => handleCloseLoadingPortModal()}
                             modalTitle={"Demurrage/Dispatch Rate"}
                         >
-                            <LaytimeHeaderLoadingPortModal laytimeHeaderInput={laytimeHeaderInput} handleChangeTextInput={handleChangeTextInput} />
+                            <LaytimeHeaderLoadingPortModal handleClose={handleClose} handleCloseLoadingPortModal={handleCloseLoadingPortModal} handleLayTimeDemurrageInput={handleLayTimeDemurrageInput} layTimeDemurrage={layTimeDemurrage} />
                         </SimpleModal>
                         <SimpleModal
                             show={show}
                             handleClose={() => handleClose()}
                             modalTitle={"Demurrage/Dispatch Rate"}
                         >
-                            <LaytimeHeaderDischargePortModal laytimeHeaderInput={laytimeHeaderInput} handleChangeTextInput={handleChangeTextInput} />
+                            <LaytimeHeaderDischargePortModal handleClose={handleClose} handleCloseLoadingPortModal={handleCloseLoadingPortModal} handleLayTimeDemurrageInput={handleLayTimeDemurrageInput} layTimeDemurrage={layTimeDemurrage} />
                         </SimpleModal>
                     </form>
                 </div>

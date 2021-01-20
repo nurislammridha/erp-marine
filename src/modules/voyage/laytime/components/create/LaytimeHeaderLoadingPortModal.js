@@ -9,7 +9,7 @@ import { GetCurrencyData, multipleLaytimeAction } from '../../_redux/actions/Lay
 const LaytimeHeaderLoadingPortModal = (props) => {
     const dispatch = useDispatch()
     const { register, handleSubmit, errors, setValue } = useForm();
-    const { laytimeHeaderInput, handleChangeTextInput } = props;
+    const { layTimeDemurrage, handleLayTimeDemurrageInput, handleClose, handleCloseLoadingPortModal } = props;
     const isLoading = "";
     const currency = [
         {
@@ -46,7 +46,7 @@ const LaytimeHeaderLoadingPortModal = (props) => {
     }, []);
 
     const addMultipleDemmurage = () => {
-        dispatch(multipleLaytimeAction(laytimeHeaderInput))
+        dispatch(multipleLaytimeAction(layTimeDemurrage, handleCloseLoadingPortModal))
     }
     return (
         <>
@@ -58,9 +58,9 @@ const LaytimeHeaderLoadingPortModal = (props) => {
                             type="number"
                             name="numDemurrageRate"
                             className="fromStyle formHeight"
-                            value={laytimeHeaderInput.numDemurrageRate}
+                            value={layTimeDemurrage.numDemurrageRate}
                             onChange={(e) =>
-                                handleChangeTextInput(
+                                handleLayTimeDemurrageInput(
                                     "numDemurrageRate",
                                     e.target.value
                                 )
@@ -75,10 +75,10 @@ const LaytimeHeaderLoadingPortModal = (props) => {
                             rules={{ required: true }}
                             name="intCurrencyID"
                             register={register}
-                            value={laytimeHeaderInput.intCurrencyID}
+                            value={layTimeDemurrage.intCurrencyID}
                             onChange={(option) => {
-                                handleChangeTextInput("strCurrencyName", option.label);
-                                handleChangeTextInput("intCurrencyID", option.value);
+                                handleLayTimeDemurrageInput("strCurrencyName", option.label);
+                                handleLayTimeDemurrageInput("intCurrencyID", option.value);
                             }}
                             setValue={setValue}
                         />
@@ -91,9 +91,9 @@ const LaytimeHeaderLoadingPortModal = (props) => {
                             type="number"
                             name="numDespatchRate"
                             className="fromStyle formHeight"
-                            value={laytimeHeaderInput.numDespatchRate}
+                            value={layTimeDemurrage.numDespatchRate}
                             onChange={(e) =>
-                                handleChangeTextInput(
+                                handleLayTimeDemurrageInput(
                                     "numDespatchRate",
                                     e.target.value
                                 )
@@ -109,8 +109,8 @@ const LaytimeHeaderLoadingPortModal = (props) => {
                                 placeholder="75"
                                 aria-describedby="basic-addon2"
                                 name="numDespatchPercent"
-                                value={laytimeHeaderInput.numDespatchPercent}
-                                onChange={(e) => handleChangeTextInput("numDespatchPercent", e.target.value)}
+                                value={layTimeDemurrage.numDespatchPercent}
+                                onChange={(e) => handleLayTimeDemurrageInput("numDespatchPercent", e.target.value)}
                             />
                             <InputGroup.Append className="fromStyle formHeight">
                                 <InputGroup.Text id="basic-addon2">%</InputGroup.Text>
