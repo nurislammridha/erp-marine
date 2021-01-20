@@ -40,53 +40,8 @@ const BasicInfoAdd = withRouter(({ history }) => {
                 >
                     <div className="form-group">
                         <div className="row">
-                            <div className="col-md-4">
-                                <label className="form-label mt-2 formFont">Business Unit</label>
-                                {/* <RHFInput
-                                    as={<Select options={selectOptions} />}
-                                    rules={{ required: true }}
-                                    name="intAction"
-                                    register={register}
-                                    value={selectOptions.value}
-                                    onChange={(e) => {
-                                        handleChangeTextInput("intAction", e.value);
-                                    }}
-                                    setValue={setValue}
-                                /> */}
 
-                            </div>
-                            <div className="col-md-4">
-                                <label className="form-label mt-2 formFont">Partner Type</label>
-                                <RHFInput
-                                    as={<Select options={selectOptions} />}
-                                    rules={{ required: true }}
-                                    name="intSupplierTypeID"
-                                    register={register}
-                                    value={selectOptions.value}
-                                    onChange={(e) => {
-                                        handleChangeTextInput("intSupplierTypeID", e.value);
-                                    }}
-                                    setValue={setValue}
-                                />
-                            </div>
-                            <div className="col-md-4">
-                                <label className="form-label mt-2 formFont">TAX Type</label>
-                                <RHFInput
-                                    as={<Select options={selectOptions} />}
-                                    rules={{ required: true }}
-                                    name="intTaxTypeId"
-                                    value={selectOptions.value}
-                                    register={register}
-                                    onChange={(e) => {
-                                        handleChangeTextInput("intTaxTypeId", e.value);
-                                    }}
-                                    setValue={setValue}
-                                />
-
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-4">
+                            <div className="col-md-3">
                                 <label className="form-label mt-2 formFont">Partner Name</label>
                                 <Form.Control
                                     type="text"
@@ -101,40 +56,21 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                     }
                                 />
                             </div>
-                            <div className="col-md-4">
-                                <label className="form-label mt-2 formFont">Partner Code</label>
-                                <Form.Control
-                                    type="text"
-                                    name="strSupplierCode"
-                                    className="fromStyle formHeight"
-                                    value={partnerInfoInput.strSupplierCode}
-                                    onChange={(e) =>
-                                        handleChangeTextInput(
-                                            "strSupplierCode",
-                                            e.target.value
-                                        )
-                                    }
+                            <div className="col-md-3">
+                                <label className="form-label mt-2 formFont">Partner Type</label>
+                                <RHFInput
+                                    as={<Select options={selectOptions} />}
+                                    rules={{ required: true }}
+                                    name="intSupplierTypeID"
+                                    register={register}
+                                    value={selectOptions.value}
+                                    onChange={(e) => {
+                                        handleChangeTextInput("intSupplierTypeID", e.value);
+                                    }}
+                                    setValue={setValue}
                                 />
                             </div>
-                            <div className="col-md-4">
-                                <label className="form-label mt-2 formFont">Contact No</label>
-                                <Form.Control
-                                    type="text"
-                                    name="strContactNumber"
-                                    className="fromStyle formHeight"
-                                    value={partnerInfoInput.strContactNumber}
-                                    onChange={(e) =>
-                                        handleChangeTextInput(
-                                            "strContactNumber",
-                                            e.target.value
-                                        )
-                                    }
-                                />
-
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-4">
+                            <div className="col-md-3">
                                 <label className="form-label mt-2 formFont">Email</label>
                                 <Form.Control
                                     type="email"
@@ -149,22 +85,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                     }
                                 />
                             </div>
-                            <div className="col-md-4">
-                                <label className="form-label mt-2 formFont">Licence No</label>
-                                <Form.Control
-                                    type="text"
-                                    name="strLicenseNo"
-                                    className="fromStyle formHeight"
-                                    value={partnerInfoInput.strLicenseNo}
-                                    onChange={(e) =>
-                                        handleChangeTextInput(
-                                            "strLicenseNo",
-                                            e.target.value
-                                        )
-                                    }
-                                />
-                            </div>
-                            <div className="col-md-4">
+                            <div className="col-md-3">
                                 <label className="form-label mt-2 formFont">BIN No</label>
                                 <Form.Control
                                     type="text"
@@ -179,10 +100,73 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                     }
                                 />
                             </div>
+
                         </div>
                         <div className="row">
-                            <div className="col-md-4">
-                                <label className="form-label mt-2 formFont">Tin No</label>
+                            <div className="col-md-3">
+                                <label className="form-label mt-2 formFont">Partner Code</label>
+                                <Form.Control
+                                    type="text"
+                                    name="strSupplierCode"
+                                    className="fromStyle formHeight"
+                                    value={partnerInfoInput.strSupplierCode}
+                                    onChange={(e) =>
+                                        handleChangeTextInput(
+                                            "strSupplierCode",
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="col-md-3">
+                                <label className="form-label mt-2 formFont">Contact No</label>
+                                <Form.Control
+                                    type="text"
+                                    name="strContactNumber"
+                                    className="fromStyle formHeight"
+                                    value={partnerInfoInput.strContactNumber}
+                                    onChange={(e) =>
+                                        handleChangeTextInput(
+                                            "strContactNumber",
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="col-md-3">
+                                <label className="form-label mt-2 formFont">Licence No</label>
+                                <Form.Control
+                                    type="text"
+                                    name="strLicenseNo"
+                                    className="fromStyle formHeight"
+                                    value={partnerInfoInput.strLicenseNo}
+                                    onChange={(e) =>
+                                        handleChangeTextInput(
+                                            "strLicenseNo",
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="col-md-3">
+                                <label className="form-label mt-2 formFont">Business Unit</label>
+                                <RHFInput
+                                    as={<Select options={selectOptions} />}
+                                    rules={{ required: true }}
+                                    name="intAction"
+                                    register={register}
+                                    value={selectOptions.value}
+                                    onChange={(e) => {
+                                        handleChangeTextInput("intAction", e.value);
+                                    }}
+                                    setValue={setValue}
+                                />
+
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-3">
+                                <label className="form-label mt-2 formFont">TIN No</label>
                                 <Form.Control
                                     type="text"
                                     name="strTIN"
@@ -196,40 +180,56 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                     }
                                 />
                             </div>
-                            <div className="col-md-4">
+                            <div className="col-md-3">
+                                <label className="form-label mt-2 formFont">TAX Type</label>
+                                <RHFInput
+                                    as={<Select options={selectOptions} />}
+                                    rules={{ required: true }}
+                                    name="intTaxTypeId"
+                                    value={selectOptions.value}
+                                    register={register}
+                                    onChange={(e) => {
+                                        handleChangeTextInput("intTaxTypeId", e.value);
+                                    }}
+                                    setValue={setValue}
+                                />
+                            </div>
+                            <div className="col-md-3">
                                 <label className="form-label mt-2 formFont">PIC name</label>
-                                {/* <Form.Control
+                                <Form.Control
                                     type="text"
                                     placeholder="Enter PIC Name"
                                     name="picName"
                                     className="fromStyle formHeight"
                                     value={partnerInfoInput.picName}
                                     onChange={(e) => handleChangeTextInput("picName", e.target.value)}
-                                /> */}
+                                />
                             </div>
-                            <div className="col-md-4">
+                            <div className="col-md-3">
                                 <label className="form-label mt-2 formFont">PIC Contact</label>
-                                {/* <Form.Control
+                                <Form.Control
                                     type="number"
                                     placeholder="Enter PIC Contact"
                                     name="picContact"
                                     className="fromStyle formHeight"
                                     value={partnerInfoInput.picContact}
                                     onChange={(e) => handleChangeTextInput("picContact", e.target.value)}
-                                /> */}
+                                />
                             </div>
+
+
                         </div>
                         <div className="row">
-                            <div className="col-md-4">
+                            <div className="col-md-3">
                                 <label className="form-label mt-2 formFont">PIC Email</label>
-                                {/* <Form.Control
+                                <Form.Control
                                     type="email"
                                     placeholder="Enter PIC Email"
                                     name="picEmail"
                                     className="fromStyle formHeight"
                                     value={partnerInfoInput.picEmail}
                                     onChange={(e) => handleChangeTextInput("picEmail", e.target.value)}
-                                /> */}
+                                />
                             </div>
                         </div>
 

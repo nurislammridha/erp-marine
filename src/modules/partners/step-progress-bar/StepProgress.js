@@ -8,6 +8,7 @@ import { partnerCreateSubmitAction, partnerInfoSubmitAction } from '../basic-inf
 import OthersInfoAdd from '../others-information/components/OthersInfoAdd';
 import { useSelector, useDispatch } from "react-redux";
 import { bankInfoSubmitAction } from '../bank-information/_redux/actions/BankInfoAction';
+import { partnerAddressSubmit } from '../address/_redux/actions/AddressAction';
 
 const StepProgress = () => {
 
@@ -24,9 +25,9 @@ const StepProgress = () => {
     const step1Validator = () => {
         return partnerInfoSubmitAction();
     }
-    function step2Validator() {
+    const step2Validator = () => {
         // return a boolean
-        return true;
+        return partnerAddressSubmit();
     }
 
     function step3Validator() {

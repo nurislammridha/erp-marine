@@ -24,40 +24,40 @@ export const partnerInfoSubmitAction = () => {
     //     showToast('error', 'Please Select basic Unit');
     //     isValidated = false;
     // }
-    if (partnerInfoInput.intSupplierTypeID.length === 0) {
-        showToast('error', 'Please give partner type');
-        isValidated = false;
-    }
-    else if (partnerInfoInput.intTaxTypeId.length === 0) {
-        showToast('error', 'Please give tax type');
-        isValidated = false;
-    }
-    else if (partnerInfoInput.strSupplierName.length === 0) {
+    if (partnerInfoInput.strSupplierName === undefined || partnerInfoInput.strSupplierName === null || partnerInfoInput.strSupplierName.length === 0) {
         showToast('error', 'Please give partner name');
         isValidated = false;
     }
-    else if (partnerInfoInput.strSupplierCode.length === 0) {
-        showToast('error', 'Please give partner code');
+    else if (partnerInfoInput.strSupplierTypeName === undefined || partnerInfoInput.strSupplierTypeName === null || partnerInfoInput.strSupplierTypeName.length === 0) {
+        showToast('error', 'Please give partner type');
         isValidated = false;
     }
-    else if (partnerInfoInput.strContactNumber.length === 0) {
-        showToast('error', 'Please give contact code');
+    else if (partnerInfoInput.strEmail === undefined || partnerInfoInput.strEmail === null || partnerInfoInput.strEmail.length === 0) {
+        showToast('error', 'Please give partner email');
         isValidated = false;
     }
-    else if (partnerInfoInput.strEmail.length === 0) {
-        showToast('error', 'Please give email code');
+    else if (partnerInfoInput.strBIN === undefined || partnerInfoInput.strBIN === null || partnerInfoInput.strBIN.length === 0) {
+        showToast('error', 'Please give partner BIN No');
         isValidated = false;
     }
-    else if (partnerInfoInput.strLicenseNo.length === 0) {
-        showToast('error', 'Please give licence number');
+    else if (partnerInfoInput.strSupplierCode === undefined || partnerInfoInput.strSupplierCode === null || partnerInfoInput.strSupplierCode.length === 0) {
+        showToast('error', 'Please give partner type');
         isValidated = false;
     }
-    else if (partnerInfoInput.strBIN.length === 0) {
-        showToast('error', 'Please give Bin number');
+    else if (partnerInfoInput.strContactNumber === undefined || partnerInfoInput.strContactNumber === null || partnerInfoInput.strContactNumber.length === 0) {
+        showToast('error', 'Please give contact no');
         isValidated = false;
     }
-    else if (partnerInfoInput.strTIN.length === 0) {
-        showToast('error', 'Please give Tin number');
+    else if (partnerInfoInput.strLicenseNo === undefined || partnerInfoInput.strLicenseNo === null || partnerInfoInput.strLicenseNo.length === 0) {
+        showToast('error', 'Please give license no');
+        isValidated = false;
+    }
+    else if (partnerInfoInput.strTIN === undefined || partnerInfoInput.strTIN === null || partnerInfoInput.strTIN.length === 0) {
+        showToast('error', 'Please give TIN No');
+        isValidated = false;
+    }
+    else if (partnerInfoInput.intTaxTypeId === undefined || partnerInfoInput.intTaxTypeId === null || partnerInfoInput.intTaxTypeId.length === 0) {
+        showToast('error', 'Please give yax type');
         isValidated = false;
     }
     return isValidated;
