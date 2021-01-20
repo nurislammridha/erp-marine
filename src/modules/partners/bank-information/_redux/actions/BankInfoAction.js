@@ -1,5 +1,4 @@
 import * as Types from "../types/Types";
-import axios from "axios";
 import { showToast } from "../../../../master/utils/ToastHelper";
 import store from '../../../../../redux/store';
 
@@ -14,67 +13,58 @@ export const handleChangeBankInfoInput = (name, value) => (dispatch) => {
         payload: formData,
     });
 };
-
-// export const bankInfoSubmitAction = (partnerInfoInput) => {
-//     let isValidated = true;
-//     const message = "added successfully";
-//     const ermessage = "fill all the field"
-//     // Validate First
-//     if (isValidated) {
-//         showToast("success", message);
-
-//     } else {
-//         showToast("error", ermessage);
-//     }
-
-//     // If Not Validate, display a toaster
-
-//     return isValidated;
-// };
-
 export const bankInfoSubmitAction = () => {
-    const bankInfoInput = store.getState().bankInfo.bankInfoInput;
+    const bankInfoMultiple = store.getState().bankInfo.bankInfoMultiple;
     let isValidated = true;
 
-    // if (partnerInfoInput.intAction.length === 0) {
-    //     showToast('error', 'Please Select basic Unit');
-    //     isValidated = false;
-    // }
-    // if (partnerInfoInput.intSupplierTypeID.length === 0) {
-    //     showToast('error', 'Please give partner type');
-    //     isValidated = false;
-    // }
-    // else if (partnerInfoInput.intTaxTypeId.length === 0) {
-    //     showToast('error', 'Please give tax type');
-    //     isValidated = false;
-    // }
-    // else if (partnerInfoInput.strSupplierName.length === 0) {
-    //     showToast('error', 'Please give partner name');
-    //     isValidated = false;
-    // }
-    // else if (partnerInfoInput.strSupplierCode.length === 0) {
-    //     showToast('error', 'Please give partner code');
-    //     isValidated = false;
-    // }
-    // else if (partnerInfoInput.strContactNumber.length === 0) {
-    //     showToast('error', 'Please give contact code');
-    //     isValidated = false;
-    // }
-    // else if (partnerInfoInput.strEmail.length === 0) {
-    //     showToast('error', 'Please give email code');
-    //     isValidated = false;
-    // }
-    // else if (partnerInfoInput.strLicenseNo.length === 0) {
-    //     showToast('error', 'Please give licence number');
-    //     isValidated = false;
-    // }
-    // else if (partnerInfoInput.strBIN.length === 0) {
-    //     showToast('error', 'Please give Bin number');
-    //     isValidated = false;
-    // }
-    // else if (partnerInfoInput.strTIN.length === 0) {
-    //     showToast('error', 'Please give Tin number');
-    //     isValidated = false;
-    // }
+    if (bankInfoMultiple.length === 0) {
+        showToast('error', 'Please enter all field and press add');
+        isValidated = false;
+    }
     return isValidated;
 };
+export const bankInfoSubmitMultiple = (bankInfoInput) => (dispatch) => {
+    // Check Inputs for validation
+    if (bankInfoInput.strBeneficiaryName === undefined || bankInfoInput.strBeneficiaryName === null || bankInfoInput.strBeneficiaryName.length < 1) {
+        showToast("error", "Beneficiary Name should not be empty");
+        return false;
+    }
+    else if (bankInfoInput.strBankAccountNo === undefined || bankInfoInput.strBankAccountNo === null || bankInfoInput.strBankAccountNo.length < 1) {
+        showToast("error", "Bank Account No should not be empty");
+        return false;
+    }
+    else if (bankInfoInput.strRoutingNo === undefined || bankInfoInput.strRoutingNo === null || bankInfoInput.strRoutingNo.length < 1) {
+        showToast("error", "Routing No should not be empty");
+        return false;
+    }
+    else if (bankInfoInput.strSWIFTCode === undefined || bankInfoInput.strSWIFTCode === null || bankInfoInput.strSWIFTCode.length < 1) {
+        showToast("error", "Swift Code should not be empty");
+        return false;
+    }
+    else if (bankInfoInput.intBankId === undefined || bankInfoInput.intBankId === null || bankInfoInput.intBankId.length < 1) {
+        showToast("error", "Bank Name should be Select");
+        return false;
+    }
+    else if (bankInfoInput.intBankBranchId === undefined || bankInfoInput.intBankBranchId === null || bankInfoInput.intBankBranchId.length < 1) {
+        showToast("error", "Bank Brance Name should be Select");
+        return false;
+    }
+    else if (bankInfoInput.strIBANNo === undefined || bankInfoInput.strIBANNo === null || bankInfoInput.strIBANNo.length < 1) {
+        showToast("error", "IBAN No should not be empty");
+        return false;
+    }
+
+    // Process Data if needed
+    bankInfoInput.intSupplierId = 1;
+    bankInfoInput.strSupplierName = "Mohakhali2";
+    bankInfoInput.intCurrencyID = 1;
+    bankInfoInput.isActive = 1;
+    bankInfoInput.intActionBy = 1;
+
+    // If Validate, then add multiple dataset [] in addressInfo
+    dispatch({ type: Types.SUBMIT_BANK_INFO_MULTIPLE, payload: bankInfoInput })
+}
+
+export const deleteBankMultiple = (index) => (dispatch) => {
+    dispatch({ type: Types.DELETE_PARTNER_BANK_MULTIPLE, payload: index })
+}

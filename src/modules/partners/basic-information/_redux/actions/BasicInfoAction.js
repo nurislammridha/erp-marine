@@ -66,7 +66,7 @@ export const partnerInfoSubmitAction = () => {
 export const partnerCreateSubmitAction = () => async (dispatch) => {
     const basicInfo = store.getState().partnerInfo.partnerInfoInput;
     const addressInfo = store.getState().partnerAddress.addressInfo;
-    const bankInfo = store.getState().bankInfo.bankInfoInput;
+    const bankInfo = store.getState().bankInfo.bankInfoMultiple;
     console.log('basicInfo :>> ', basicInfo);
     console.log('addressInfo :>> ', addressInfo);
     console.log('bankInfo :>> ', bankInfo);
