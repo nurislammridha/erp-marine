@@ -3,15 +3,21 @@ import * as Types from "../types/Types";
 const initialState = {
 
     partnerInfoInput: {
-        intSupplierTypeID: "43",
-        intTaxTypeId: "33",
-        strSupplierName: "34",
-        strSupplierCode: "34",
-        strContactNumber: "34",
-        strEmail: "34",
-        strLicenseNo: "34",
-        strBIN: "34",
-        strTIN: "34"
+        strSupplierName: "22",
+        strSupplierCode: "22",
+        strEmail: "22",
+        strContactNumber: "22",
+        strBIN: "22",
+        strTIN: "22",
+        strLicenseNo: "22",
+        intSupplierTypeID: "22",
+        strSupplierTypeName: "22",
+        intCompanyID: "22",
+        intTaxTypeId: "22",
+        intActionBy: "22",
+        dteLastActionDateTime: "22",
+        dteServerDateTime: "22",
+        isActive: "1",
     },
     status: false,
 };
