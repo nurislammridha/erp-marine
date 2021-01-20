@@ -27,7 +27,8 @@ const StepProgress = () => {
     }
     const step2Validator = () => {
         // return a boolean
-        return partnerAddressSubmit();
+        // return partnerAddressSubmit();
+        return true;
     }
 
     function step3Validator() {
