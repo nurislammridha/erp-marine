@@ -27,13 +27,14 @@ const StepProgress = () => {
     }
     const step2Validator = () => {
         // return a boolean
-        // return partnerAddressSubmit();
-        return true;
+        return partnerAddressSubmit();
+        // return true;
     }
 
     function step3Validator() {
         // return a boolean
         return bankInfoSubmitAction();
+        return true;
     }
 
     function onFormSubmit() {

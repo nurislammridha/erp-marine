@@ -10,16 +10,46 @@ export const handleChangePartnerOtherInfoInput = (name, value) => (dispatch) => 
         name: name,
         value: value,
     };
+
+
+    let updatedArray = [];
+    if (name === "multiplePort") {
+        value.forEach(item => {
+            const itemNew = {
+                "intPortID": item.value,
+                "strPortName": item.label,
+                "intActionBy": item.intActionBy,
+            }
+            updatedArray.push(itemNew);
+        });
+    }
+
+    if (name === "multipleProduct") {
+        value.forEach(item => {
+            const itemNew = {
+                "intProductAndServiceTypeID": item.value,
+                "strProductOrServiceName": item.label,
+                "intActionBy": item.intActionBy,
+                "intProductOrServiceID": item.intProductOrServiceID
+            }
+            updatedArray.push(itemNew);
+        });
+    }
+
+    formData.value = updatedArray;
     dispatch({
         type: Types.CHANGE_PARTNER_OTHERINFO_INPUT,
         payload: formData,
     });
-    if (name === 'strPortName' || name === 'intPortID') {
-        console.log('value', value)
-        const selectedValue = {
-            label: value,
-            id: value
-        }
-        console.log('selectedValue', selectedValue)
-    }
+
 };
+
+export const getPortName = (data) => (dispatch) => {
+    Axios.get(`${process.env.REACT_APP_API_URL}certificate/category`).then(
+        (res) => {
+            let data = res.data.data;
+            dispatch({ type: Types.GET_PORT_NAME, payload: data });
+        }
+    );
+};
+

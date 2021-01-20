@@ -1,7 +1,8 @@
 import * as Types from "../types/Types";
 
 const initialState = {
-
+    portList: [],
+    psProviderList: [],
     partnerOtherInfoInput: {
         // intPortID: "",
         // strPortName: "",
@@ -27,6 +28,15 @@ const OthersInfoReducer = (state = initialState, action) => {
             };
 
 
+        // case Types.GET_PORT_NAME:
+        //     return {
+        //         ...state,
+        //         portOptionData: getPortName(
+        //             action.payload
+        //         ),
+        //     };
+
+
         // case Types.PARTNER_OTHERINFO_SUBMIT:
         //     return {
         //         ...state,
@@ -41,3 +51,18 @@ const OthersInfoReducer = (state = initialState, action) => {
 }
 
 export default OthersInfoReducer;
+
+
+// const getPortName = (data) => {
+//     let options = [];
+//     if (data) {
+//         data.forEach((item) => {
+//             let itemData = {
+//                 value: item.intPortID,
+//                 label: item.strPortName,
+//             };
+//             options.push(itemData);
+//         });
+//     }
+//     return options;
+// };
