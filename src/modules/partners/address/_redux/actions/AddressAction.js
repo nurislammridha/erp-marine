@@ -15,7 +15,7 @@ export const partnerAddressSubmit = () => {
     let isValidated = true;
 
     // dispatch({ type: Types.GET_ADDRESS_ACTION_SUBMIT, payload: response })
-    if (partnerAddress === undefined || partnerAddress === null || partnerAddress < 1) {
+    if (partnerAddress === undefined || partnerAddress === null || partnerAddress.length < 1) {
         showToast("error", "Add before submit");
         isValidated = false;
     }

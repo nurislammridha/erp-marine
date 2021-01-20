@@ -10,14 +10,59 @@ import { handleChangePartnerInfoInput } from '../_redux/actions/BasicInfoAction'
 
 const BasicInfoAdd = withRouter(({ history }) => {
 
-    const selectOptions = [
+    const partnerType = [
         {
-            label: 'Active',
+            label: 'Partner 1',
             value: "1"
         },
         {
-            label: 'In Active',
-            value: "0"
+            label: 'Partner 2',
+            value: "2"
+        },
+        {
+            label: 'Partner 3',
+            value: "3"
+        },
+        {
+            label: 'Partner 4',
+            value: "4"
+        }
+    ]
+
+    const businessUnit = [
+        {
+            label: 'Cement',
+            value: "1"
+        },
+        {
+            label: 'Plastic',
+            value: "2"
+        },
+        {
+            label: 'Siramic',
+            value: "3"
+        },
+        {
+            label: 'Dhew Tin',
+            value: "4"
+        }
+    ]
+    const taxType = [
+        {
+            label: 'Tax 1',
+            value: "1"
+        },
+        {
+            label: 'Tax 2',
+            value: "2"
+        },
+        {
+            label: 'Tax 3',
+            value: "3"
+        },
+        {
+            label: 'Tax 4',
+            value: "4"
         }
     ]
 
@@ -59,13 +104,14 @@ const BasicInfoAdd = withRouter(({ history }) => {
                             <div className="col-md-3">
                                 <label className="form-label mt-2 formFont">Partner Type</label>
                                 <RHFInput
-                                    as={<Select options={selectOptions} />}
+                                    as={<Select options={partnerType} />}
                                     rules={{ required: true }}
                                     name="intSupplierTypeID"
                                     register={register}
-                                    value={selectOptions.value}
+                                    value={partnerInfoInput.intSupplierTypeName}
                                     onChange={(e) => {
                                         handleChangeTextInput("intSupplierTypeID", e.value);
+                                        handleChangeTextInput("intSupplierTypeName", e.label);
                                     }}
                                     setValue={setValue}
                                 />
@@ -151,13 +197,14 @@ const BasicInfoAdd = withRouter(({ history }) => {
                             <div className="col-md-3">
                                 <label className="form-label mt-2 formFont">Business Unit</label>
                                 <RHFInput
-                                    as={<Select options={selectOptions} />}
+                                    as={<Select options={businessUnit} />}
                                     rules={{ required: true }}
                                     name="intAction"
                                     register={register}
-                                    value={selectOptions.value}
+                                    value={partnerInfoInput.businessUnitName}
                                     onChange={(e) => {
                                         handleChangeTextInput("intAction", e.value);
+                                        handleChangeTextInput("businessUnitName", e.label);
                                     }}
                                     setValue={setValue}
                                 />
@@ -183,13 +230,14 @@ const BasicInfoAdd = withRouter(({ history }) => {
                             <div className="col-md-3">
                                 <label className="form-label mt-2 formFont">TAX Type</label>
                                 <RHFInput
-                                    as={<Select options={selectOptions} />}
+                                    as={<Select options={taxType} />}
                                     rules={{ required: true }}
                                     name="intTaxTypeId"
-                                    value={selectOptions.value}
+                                    value={partnerInfoInput.intTaxTypeName}
                                     register={register}
                                     onChange={(e) => {
                                         handleChangeTextInput("intTaxTypeId", e.value);
+                                        handleChangeTextInput("intTaxTypeName", e.value);
                                     }}
                                     setValue={setValue}
                                 />

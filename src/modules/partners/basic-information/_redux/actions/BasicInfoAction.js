@@ -28,7 +28,7 @@ export const partnerInfoSubmitAction = () => {
         showToast('error', 'Please give partner name');
         isValidated = false;
     }
-    else if (partnerInfoInput.strSupplierTypeName === undefined || partnerInfoInput.strSupplierTypeName === null || partnerInfoInput.strSupplierTypeName.length === 0) {
+    else if (partnerInfoInput.intSupplierTypeID === undefined || partnerInfoInput.intSupplierTypeID === null || partnerInfoInput.intSupplierTypeID.length === 0) {
         showToast('error', 'Please give partner type');
         isValidated = false;
     }
@@ -41,7 +41,7 @@ export const partnerInfoSubmitAction = () => {
         isValidated = false;
     }
     else if (partnerInfoInput.strSupplierCode === undefined || partnerInfoInput.strSupplierCode === null || partnerInfoInput.strSupplierCode.length === 0) {
-        showToast('error', 'Please give partner type');
+        showToast('error', 'Please give Prtner Code');
         isValidated = false;
     }
     else if (partnerInfoInput.strContactNumber === undefined || partnerInfoInput.strContactNumber === null || partnerInfoInput.strContactNumber.length === 0) {
@@ -52,12 +52,28 @@ export const partnerInfoSubmitAction = () => {
         showToast('error', 'Please give license no');
         isValidated = false;
     }
+    else if (partnerInfoInput.intAction === undefined || partnerInfoInput.intAction === null || partnerInfoInput.intAction.length === 0) {
+        showToast('error', 'Please give Business Unit no');
+        isValidated = false;
+    }
     else if (partnerInfoInput.strTIN === undefined || partnerInfoInput.strTIN === null || partnerInfoInput.strTIN.length === 0) {
         showToast('error', 'Please give TIN No');
         isValidated = false;
     }
     else if (partnerInfoInput.intTaxTypeId === undefined || partnerInfoInput.intTaxTypeId === null || partnerInfoInput.intTaxTypeId.length === 0) {
-        showToast('error', 'Please give yax type');
+        showToast('error', 'Please give Tax type');
+        isValidated = false;
+    }
+    else if (partnerInfoInput.picName === undefined || partnerInfoInput.picName === null || partnerInfoInput.picName.length === 0) {
+        showToast('error', 'Please give PIC Name');
+        isValidated = false;
+    }
+    else if (partnerInfoInput.picContact === undefined || partnerInfoInput.picContact === null || partnerInfoInput.picContact.length === 0) {
+        showToast('error', 'Please give PIC Contact');
+        isValidated = false;
+    }
+    else if (partnerInfoInput.picEmail === undefined || partnerInfoInput.picEmail === null || partnerInfoInput.picEmail.length === 0) {
+        showToast('error', 'Please give PIC Email');
         isValidated = false;
     }
     return isValidated;
