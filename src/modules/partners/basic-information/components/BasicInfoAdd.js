@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { withRouter } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { handleChangePartnerInfoInput } from '../_redux/actions/BasicInfoAction';
+import { getTaxType, handleChangePartnerInfoInput } from '../_redux/actions/BasicInfoAction';
 
 
 const BasicInfoAdd = withRouter(({ history }) => {
@@ -33,6 +33,11 @@ const BasicInfoAdd = withRouter(({ history }) => {
     const { register, handleSubmit, errors, setValue } = useForm();
     const dispatch = useDispatch();
     const partnerInfoInput = useSelector((state) => state.partnerInfo.partnerInfoInput);
+    const taxTypeOptionData = useSelector((state) => state.partnerInfo.taxTypeData);
+
+    useEffect(() => {
+        dispatch(getTaxType());
+    }, []);
 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangePartnerInfoInput(name, value));

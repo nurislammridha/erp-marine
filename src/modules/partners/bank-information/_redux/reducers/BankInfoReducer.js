@@ -34,6 +34,14 @@ const BankInfoReducer = (state = initialState, action) => {
                 ...state,
                 bankInfoInput,
             };
+
+        case Types.GET_BANK_NAME:
+            return {
+                ...state,
+                bankOptionData: getBankName(action.payload),
+
+            };
+
         case Types.SUBMIT_BANK_INFO_MULTIPLE:
             console.log('action.payload reducer :>> ', action.payload);
             return {
@@ -57,3 +65,17 @@ const BankInfoReducer = (state = initialState, action) => {
 }
 
 export default BankInfoReducer;
+
+const getBankName = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intCountryID,
+                label: item.strCountryName,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+};

@@ -13,22 +13,22 @@ export const handleChangePartnerOtherInfoInput = (name, value) => (dispatch) => 
 
 
     let updatedArray = [];
-    // if (name === "multiplePort") {
-    //     value.forEach(item => {
-    //         const itemNew = {
-    //             "intPortID": item.value,
-    //             "strPortName": item.label,
-    //             "intActionBy": item.intActionBy,
-    //         }
-    //         updatedArray.push(itemNew);
-    //     });
-    // }
+    if (name === "multiplePort") {
+        value.forEach(item => {
+            const itemNew = {
+                "intPortID": item.intPortID,
+                "strPortName": item.strPortName,
+                "intActionBy": item.intActionBy,
+            }
+            updatedArray.push(itemNew);
+        });
+    }
 
     if (name === "multipleProduct") {
         value.forEach(item => {
             const itemNew = {
-                "intProductAndServiceTypeID": item.value,
-                "strProductOrServiceName": item.label,
+                "intProductAndServiceTypeID": item.intProductAndServiceTypeID,
+                "strProductOrServiceName": item.strProductOrServiceName,
                 "intActionBy": item.intActionBy,
                 "intProductOrServiceID": item.intProductOrServiceID
             }

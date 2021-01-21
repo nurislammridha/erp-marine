@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { withRouter } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { bankInfoSubmitMultiple, deleteBankMultiple, handleChangeBankInfoInput } from '../_redux/actions/BankInfoAction';
+import { bankInfoSubmitMultiple, deleteBankMultiple, getBankName, handleChangeBankInfoInput } from '../_redux/actions/BankInfoAction';
 
 
 const BankInfoAdd = withRouter(({ history }) => {
@@ -24,24 +24,10 @@ const BankInfoAdd = withRouter(({ history }) => {
             value: 3
         }
     ]
-    const branceName = [
-        {
-            label: 'Bagerhat Brance',
-            value: 1
-        },
-        {
-            label: 'Khulna Brance',
-            value: 2
-        },
-        {
-            label: 'Jeshore Brance',
-            value: 3
-        }
-    ]
-
     const { register, setValue } = useForm();
     const dispatch = useDispatch();
     const bankInfoInput = useSelector((state) => state.bankInfo.bankInfoInput);
+    const bankOptionData = useSelector((state) => state.bankInfo.bankOptionData);
     const bankInfo = useSelector(state => state.bankInfo.bankInfoMultiple);
 
     const handleChangeTextInput = (name, value) => {
@@ -50,6 +36,9 @@ const BankInfoAdd = withRouter(({ history }) => {
     const multipleAdd = () => {
         dispatch(bankInfoSubmitMultiple(bankInfoInput));
     }
+    useEffect(() => {
+        dispatch(getBankName());
+    }, []);
     console.log('bankInfo Adddd:>> ', bankInfo);
     return (
         <div className="container">

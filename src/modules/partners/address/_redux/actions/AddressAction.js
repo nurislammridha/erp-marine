@@ -39,7 +39,7 @@ export const partnerAddressSubmitMultiple = (partnerAddress) => (dispatch) => {
         showToast("error", "State should not be empty");
         return false;
     }
-    else if (partnerAddress.strCountryName === undefined || partnerAddress.strCountryName === null || partnerAddress.strCountryName.length < 1) {
+    else if (partnerAddress.strCountry === undefined || partnerAddress.strCountry === null || partnerAddress.strCountry.length < 1) {
         showToast("error", "Country should not be empty");
         return false;
     }
@@ -65,7 +65,7 @@ export const deletePartnerAddressMultiple = (index) => (dispatch) => {
 }
 
 export const getCountryName = (data) => (dispatch) => {
-    Axios.get(`${process.env.REACT_APP_API_URL}master/index`).then(
+    Axios.get(`${process.env.REACT_APP_API_URL}master/country`).then(
 
         (res) => {
             console.log('res', res)

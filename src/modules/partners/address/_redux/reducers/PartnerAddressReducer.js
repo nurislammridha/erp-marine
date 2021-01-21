@@ -6,6 +6,7 @@ const initialState = {
         strState: "",
         strCity: "",
         strZipCode: "",
+        strCountry: "",
         strCountryName: "",
         intCountryID: "",
         isDefault: 1

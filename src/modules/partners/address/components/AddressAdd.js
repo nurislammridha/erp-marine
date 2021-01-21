@@ -117,6 +117,7 @@ const AddressAdd = withRouter(({ history }) => {
                                 setValue={setValue}
                                 onChange={(option) => {
                                     handleChangeTextInput("intCountryID", option.value);
+                                    handleChangeTextInput("strCountry", option.label);
                                     handleChangeTextInput("strCountryName", option.label);
                                 }
                                 }

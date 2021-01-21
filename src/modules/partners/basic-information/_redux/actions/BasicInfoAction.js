@@ -79,8 +79,24 @@ export const partnerInfoSubmitAction = () => {
     return isValidated;
 };
 
+
+export const getTaxType = (data) => (dispatch) => {
+    Axios.get(`${process.env.REACT_APP_API_URL}master/tax`).then(
+
+        (res) => {
+            console.log('res', res)
+            let data = res.data.data;
+            dispatch({ type: Types.GET_TAX_TYPE, payload: data });
+        }
+    );
+};
+
+
+
 export const partnerCreateSubmitAction = () => async (dispatch) => {
+
     const basicInfo = store.getState().partnerInfo.partnerInfoInput;
+    const status = store.getState().partnerInfo.status;
     const addressInfo = store.getState().partnerAddress.addressInfo;
     const bankInfo = store.getState().bankInfo.bankInfoMultiple;
     const otherInfo = store.getState().partnerOthersInfo.partnerOtherInfoInput;
@@ -97,7 +113,7 @@ export const partnerCreateSubmitAction = () => async (dispatch) => {
 
         ports: otherInfo.multiplePort,
         psProvider: otherInfo.multipleProduct,
-        psType: otherInfo.multipleServiceList,
+        // psType: otherInfo.multipleServiceList,
     }
 
     // Axios.post(`url`, finalSubmitInputData)
@@ -123,6 +139,7 @@ export const partnerCreateSubmitAction = () => async (dispatch) => {
 
             } else {
                 showToast("error", response.data.message);
+                // status = true;
             }
         })
         .catch(function (error) {

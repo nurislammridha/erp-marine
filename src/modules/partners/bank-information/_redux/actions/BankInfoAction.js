@@ -1,4 +1,5 @@
 import * as Types from "../types/Types";
+import Axios from "axios";
 import { showToast } from "../../../../master/utils/ToastHelper";
 import store from '../../../../../redux/store';
 
@@ -68,3 +69,14 @@ export const bankInfoSubmitMultiple = (bankInfoInput) => (dispatch) => {
 export const deleteBankMultiple = (index) => (dispatch) => {
     dispatch({ type: Types.DELETE_PARTNER_BANK_MULTIPLE, payload: index })
 }
+
+export const getBankName = (data) => (dispatch) => {
+    Axios.get(`${process.env.REACT_APP_API_URL}master/bank`).then(
+
+        (res) => {
+            console.log('res', res)
+            let data = res.data.data;
+            dispatch({ type: Types.GET_BANK_NAME, payload: data });
+        }
+    );
+};
