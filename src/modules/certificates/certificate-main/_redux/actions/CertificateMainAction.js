@@ -74,10 +74,10 @@ console.log('certificateInfoInput :>> ', certificateInfoInput);
     return false;
   }
 
-  if (certificateInfoInput.dteCertificateIssueDate < certificateInfoInput.dteExtendedUntil) {
-    showToast('error', "Certificate extended date can't be smaller than certificate issued date");
-    return false;
-  }
+  // if (certificateInfoInput.dteCertificateIssueDate < certificateInfoInput.dteExtendedUntil) {
+  //   showToast('error', "Certificate extended date can't be smaller than certificate issued date");
+  //   return false;
+  // }
 
   let responseList = {
     isLoading: true,
