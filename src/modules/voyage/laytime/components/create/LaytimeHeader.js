@@ -273,9 +273,7 @@ const LaytimeHeader = () => {
                                             onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
                                         />
                                         <a>
-                                            {!layTimeDemurrage.strReversibleIType && (<i className="fas fa-file ml-10" onClick={() => RevLoadingPortsFalse()}></i>)
-                                            }
-                                            {layTimeDemurrage.strReversibleIType &&
+                                            {
                                                 (<i className="fas fa-file ml-10" onClick={() => loadingPort()}></i>)
                                             }
                                         </a>
@@ -291,10 +289,7 @@ const LaytimeHeader = () => {
                                         />
                                         <a>
                                             {
-                                                !layTimeDemurrage.strReversibleIType && (<i className="fas fa-file ml-6" onClick={() => RevLoadingPortsFalse()}></i>)
-                                            }
-                                            {
-                                                layTimeDemurrage.strReversibleIType && (<i className="fas fa-file ml-6" onClick={() => dischargePort()}></i>)
+                                                (<i className="fas fa-file ml-6" onClick={() => dischargePort()}></i>)
                                             }
                                         </a>
                                     </div>
