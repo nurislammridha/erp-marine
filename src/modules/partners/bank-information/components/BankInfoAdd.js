@@ -168,7 +168,7 @@ const BankInfoAdd = withRouter(({ history }) => {
                         </div>
                         <div className="col-md-3">
                             <div className="row">
-                                <div className="col-md-10">
+                                <div className="col-md-6">
                                     <label className="form-label mt-2 formFont">Is Default</label> <br />
                                     <label className="switch">
                                         <input type="checkbox" checked={bankInfoInput.isDefaultAccount ? true : false}
@@ -177,9 +177,9 @@ const BankInfoAdd = withRouter(({ history }) => {
                                         <span className="slider round"></span>
                                     </label>
                                 </div>
-                                <div className="col-md-2">
+                                <div className="col-md-6">
                                     <button
-                                        className="btn btn-primary btn-sm mt-8"
+                                        className="btn btn-primary btn-sm mt-8 float-right"
                                         onClick={() => multipleAdd()}
                                     >
                                         Add
