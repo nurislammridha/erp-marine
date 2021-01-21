@@ -45,7 +45,7 @@ export const bankInfoSubmitMultiple = (bankInfoInput) => (dispatch) => {
         showToast("error", "Bank Name should be Select");
         return false;
     }
-    else if (bankInfoInput.intBankBranchId === undefined || bankInfoInput.intBankBranchId === null || bankInfoInput.intBankBranchId.length < 1) {
+    else if (bankInfoInput.strBankBranchName === undefined || bankInfoInput.strBankBranchName === null || bankInfoInput.strBankBranchName.length < 1) {
         showToast("error", "Bank Brance Name should be Select");
         return false;
     }

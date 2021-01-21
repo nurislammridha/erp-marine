@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
     deletePartnerAddressMultiple,
+    getCountryName,
     handleChangePartnerAddressInput,
     partnerAddressSubmit,
     partnerAddressSubmitMultiple
@@ -21,7 +22,14 @@ const AddressAdd = withRouter(({ history }) => {
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangePartnerAddressInput(name, value))
     }
-    console.log('partnerAddress is:>> ', partnerAddress);
+    const countryOptionData = useSelector(
+        (state) => state.partnerAddress.countryOptionData
+    );
+    console.log('countryOptionData', countryOptionData)
+
+    useEffect(() => {
+        dispatch(getCountryName());
+    }, []);
     const country = [
         {
             label: "Bangladesh",
@@ -44,6 +52,7 @@ const AddressAdd = withRouter(({ history }) => {
             value: "0",
         }
     ];
+
     const onSubmit = () => {
         // dispatch(partnerAddressSubmit(partnerAddress));
         // setShow(true);
@@ -100,15 +109,15 @@ const AddressAdd = withRouter(({ history }) => {
                             <label className="form-label mt-2 formFont">Country</label>
                             <RHFInput
                                 className=""
-                                as={<Select options={country} />}
-                                rules={{ required: false }}
-                                name="strCountry"
+                                as={<Select options={countryOptionData} />}
+                                rules={{ required: true }}
+                                name="intCountryID"
                                 register={register}
-                                value={partnerAddress.strCountry}
+                                value={partnerAddress.intCountryID}
                                 setValue={setValue}
                                 onChange={(option) => {
                                     handleChangeTextInput("intCountryID", option.value);
-                                    handleChangeTextInput("strCountry", option.label);
+                                    handleChangeTextInput("strCountryName", option.label);
                                 }
                                 }
                             />
@@ -175,12 +184,13 @@ const AddressAdd = withRouter(({ history }) => {
                                         <td>{item.strSupplierAddress}</td>
                                         <td>{item.strCity}</td>
                                         <td>{item.strState}</td>
-                                        <td>{item.strCountry}</td>
+                                        <td>{item.strCountryName}</td>
                                         <td>{item.isDefault ? 'Yes' : 'No'}</td>
                                         <td>
-                                            <i className="fas fa-trash-alt editIcon ml-4"
+                                            <a><i className="fas fa-trash-alt editIcon ml-4"
                                                 onClick={() => dispatch(deletePartnerAddressMultiple(index))}
-                                            ></i>
+                                            ></i></a>
+
                                         </td>
                                     </tr>
                                 ))}

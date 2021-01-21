@@ -35,6 +35,19 @@ const OthersInfoReducer = (state = initialState, action) => {
         //             action.payload
         //         ),
         //     };
+        case Types.GET_PORT_NAME:
+            return {
+                ...state,
+                portOptionData: action.payload,
+
+            };
+
+        case Types.GET_PROVIDER_NAME:
+            return {
+                ...state,
+                providerOptionData: action.payload,
+
+            };
 
 
         // case Types.PARTNER_OTHERINFO_SUBMIT:
@@ -53,16 +66,16 @@ const OthersInfoReducer = (state = initialState, action) => {
 export default OthersInfoReducer;
 
 
-// const getPortName = (data) => {
-//     let options = [];
-//     if (data) {
-//         data.forEach((item) => {
-//             let itemData = {
-//                 value: item.intPortID,
-//                 label: item.strPortName,
-//             };
-//             options.push(itemData);
-//         });
-//     }
-//     return options;
-// };
+const getPortName = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intPortID,
+                label: item.strPortName,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+};

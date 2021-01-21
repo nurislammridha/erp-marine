@@ -7,7 +7,6 @@ const initialState = {
         strBankAccountNo: "",
         intBankId: "",
         strBankName: "",
-        intBankBranchId: "",
         strBankBranchName: "",
         strRoutingNo: "",
         strIBANNo: "",

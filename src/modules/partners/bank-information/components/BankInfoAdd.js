@@ -137,17 +137,16 @@ const BankInfoAdd = withRouter(({ history }) => {
                         </div>
                         <div className="col-md-3">
                             <label className="form-label mt-2 formFont">Branch Name</label>
-                            <RHFInput
-                                as={<Select options={branceName} />}
-                                rules={{ required: true }}
-                                name="intBankBranchId"
-                                register={register}
+                            <Form.Control
+                                type="text"
+                                name="strBankBranchName"
+                                className="fromStyle formHeight"
                                 value={bankInfoInput.strBankBranchName}
-                                setValue={setValue}
-                                onChange={(option) => {
-                                    handleChangeTextInput("intBankBranchId", option.value);
-                                    handleChangeTextInput("strBankBranchName", option.label);
-                                }
+                                onChange={(e) =>
+                                    handleChangeTextInput(
+                                        "strBankBranchName",
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>
@@ -215,9 +214,9 @@ const BankInfoAdd = withRouter(({ history }) => {
                                                 <td>{item.strRoutingNo}</td>
                                                 <td>{item.isDefaultAccount ? 'Yes' : 'No'}</td>
                                                 <td>
-                                                    <i className="fas fa-trash-alt editIcon ml-4"
+                                                    <a><i className="fas fa-trash-alt editIcon ml-4"
                                                         onClick={() => dispatch(deleteBankMultiple(index))}
-                                                    ></i>
+                                                    ></i></a>
                                                 </td>
                                             </tr>
                                         ))}

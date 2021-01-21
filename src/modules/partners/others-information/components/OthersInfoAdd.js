@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { withRouter } from "react-router-dom";
 import { Multiselect } from 'multiselect-react-dropdown';
-import { handleChangePartnerOtherInfoInput } from '../_redux/actions/OthersInfoAction';
+import { getPortName, handleChangePartnerOtherInfoInput, getProviderName } from '../_redux/actions/OthersInfoAction';
 
 const OthersInfoAdd = withRouter(({ history }) => {
 
@@ -41,11 +41,20 @@ const OthersInfoAdd = withRouter(({ history }) => {
     const PortOptionData = useSelector(
         (state) => state.partnerOthersInfo.portOptionData
     );
+    const providerOptionData = useSelector(
+        (state) => state.partnerOthersInfo.providerOptionData
+    );
     console.log('partnerOtherInfoInput', partnerOtherInfoInput);
 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangePartnerOtherInfoInput(name, value));
     };
+
+    useEffect(() => {
+        dispatch(getPortName());
+        dispatch(getProviderName());
+    }, []);
+
 
 
 
@@ -80,8 +89,8 @@ const OthersInfoAdd = withRouter(({ history }) => {
 
                                 /> */}
                                 <Multiselect
-                                    options={selectOptions}
-                                    displayValue="label"
+                                    options={PortOptionData}
+                                    displayValue="strPortName"
                                     showCheckbox={true}
                                     onSelect={(selectedList, selectedItem) => {
                                         handleChangeTextInput(
@@ -95,8 +104,8 @@ const OthersInfoAdd = withRouter(({ history }) => {
                             <div className="col-md-4">
                                 <label className="form-label mt-2 formFont">Product or Service Supplied</label>
                                 <Multiselect
-                                    options={selectOptions}
-                                    displayValue="label"
+                                    options={providerOptionData}
+                                    displayValue="strProductOrServiceName"
                                     showCheckbox={true}
                                     onSelect={(selectedList, selectedItem) => {
                                         handleChangeTextInput(

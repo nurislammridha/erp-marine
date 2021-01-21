@@ -1,5 +1,6 @@
 import { showToast } from "../../../../master/utils/ToastHelper";
 import * as Types from "../types/Types";
+import Axios from "axios";
 import store from '../../../../../redux/store';
 
 export const handleChangePartnerAddressInput = (name, value) => (dispatch) => {
@@ -38,7 +39,7 @@ export const partnerAddressSubmitMultiple = (partnerAddress) => (dispatch) => {
         showToast("error", "State should not be empty");
         return false;
     }
-    else if (partnerAddress.strCountry === undefined || partnerAddress.strCountry === null || partnerAddress.strCountry.length < 1) {
+    else if (partnerAddress.strCountryName === undefined || partnerAddress.strCountryName === null || partnerAddress.strCountryName.length < 1) {
         showToast("error", "Country should not be empty");
         return false;
     }
@@ -62,3 +63,14 @@ export const partnerAddressSubmitMultiple = (partnerAddress) => (dispatch) => {
 export const deletePartnerAddressMultiple = (index) => (dispatch) => {
     dispatch({ type: Types.DELETE_PARTNER_ADDRESS_MULTIPLE, payload: index })
 }
+
+export const getCountryName = (data) => (dispatch) => {
+    Axios.get(`${process.env.REACT_APP_API_URL}master/index`).then(
+
+        (res) => {
+            console.log('res', res)
+            let data = res.data.data;
+            dispatch({ type: Types.GET_COUNTRY_NAME, payload: data });
+        }
+    );
+};

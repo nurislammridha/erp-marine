@@ -34,7 +34,7 @@ const StepProgress = () => {
     function step3Validator() {
         // return a boolean
         return bankInfoSubmitAction();
-        return true;
+        // return true;
     }
 
     function onFormSubmit() {
