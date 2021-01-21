@@ -1,107 +1,70 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import LoadingSpinner from '../../../master/spinner/LoadingSpinner';
+import { getSupplierList } from '../_redux/actions/SuppliersListAction'
 
 const SuppliersList = () => {
+    const dispatch = useDispatch();
+    const supplierList = useSelector(state => state.supplierList.supplierList)
+    const isLoading = useSelector(state => state.supplierList.isLoading)
+    console.log('supplierList List:>> ', isLoading);
+    useEffect(() => {
+        dispatch(getSupplierList())
+    }, [])
     return (
-        <div className="react-bootstrap-table table-responsive pr-7">
-            <table className="table mt-2 tbl-standard" id="supplier-excel">
-                <thead>
-                    <tr>
-                        <th scope="col">SL</th>
-                        <th scope="col">Supplier Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Contact Number</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tr>
-                    <td>01</td>
-                    <td>Nurislam</td>
-                    <td>mridha851@gmail.com</td>
-                    <td>+8801753109207</td>
-                    <td>
+        <>
+            {isLoading && (
+                <div className="mt-5">
+                    <LoadingSpinner text="Loading Suplier List" />
+                </div>
+            )}
+            {!isLoading && supplierList.length === 0 && (
+                <div className="alert alert-warning mt-5">
+                    Sorry ! No Supplier Found.
+                </div>
+            )}
+            {!isLoading && supplierList.length > 0 && (
+
+
+                <div className="react-bootstrap-table table-responsive pr-7">
+                    <table className="table mt-2 tbl-standard" id="supplier-excel">
+                        <thead>
+                            <tr>
+                                <th scope="col">SL</th>
+                                <th scope="col">Supplier Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Contact Number</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {supplierList && (
+                                supplierList.map((item, index) => (
+                                    <tr type={index}>
+                                        <td>{index + 1}</td>
+                                        <td>{item.strSupplierName}</td>
+                                        <td>{item.strEmail}</td>
+                                        <td>{item.strContactNumber}</td>
+                                        <td>
+                                            <a>
+                                                <i className="fas fa-eye"></i>
+                                            </a> &nbsp;&nbsp;
                         <a>
-                            <i className="fas fa-eye"></i>
-                        </a> &nbsp;&nbsp;
+                                                <i className="fas fa-edit"></i>
+                                            </a> &nbsp;&nbsp;
                         <a>
-                            <i className="fas fa-edit"></i>
-                        </a> &nbsp;&nbsp;
-                        <a>
-                            <i className="fas fa-trash-alt"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>01</td>
-                    <td>Nurislam</td>
-                    <td>mridha851@gmail.com</td>
-                    <td>+8801753109207</td>
-                    <td>
-                        <a>
-                            <i className="fas fa-eye"></i>
-                        </a> &nbsp;&nbsp;
-                        <a>
-                            <i className="fas fa-edit"></i>
-                        </a> &nbsp;&nbsp;
-                        <a>
-                            <i className="fas fa-trash-alt"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>01</td>
-                    <td>Nurislam</td>
-                    <td>mridha851@gmail.com</td>
-                    <td>+8801753109207</td>
-                    <td>
-                        <a>
-                            <i className="fas fa-eye"></i>
-                        </a> &nbsp;&nbsp;
-                        <a>
-                            <i className="fas fa-edit"></i>
-                        </a> &nbsp;&nbsp;
-                        <a>
-                            <i className="fas fa-trash-alt"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>01</td>
-                    <td>Nurislam</td>
-                    <td>mridha851@gmail.com</td>
-                    <td>+8801753109207</td>
-                    <td>
-                        <a>
-                            <i className="fas fa-eye"></i>
-                        </a> &nbsp;&nbsp;
-                        <a>
-                            <i className="fas fa-edit"></i>
-                        </a> &nbsp;&nbsp;
-                        <a>
-                            <i className="fas fa-trash-alt"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>01</td>
-                    <td>Nurislam</td>
-                    <td>mridha851@gmail.com</td>
-                    <td>+8801753109207</td>
-                    <td>
-                        <a>
-                            <i className="fas fa-eye"></i>
-                        </a> &nbsp;&nbsp;
-                        <a>
-                            <i className="fas fa-edit"></i>
-                        </a> &nbsp;&nbsp;
-                        <a>
-                            <i className="fas fa-trash-alt"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
+                                                <i className="fas fa-trash-alt"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
+
+                        </tbody>
+                    </table>
+                </div>
+            )}
+        </>
     );
 }
 

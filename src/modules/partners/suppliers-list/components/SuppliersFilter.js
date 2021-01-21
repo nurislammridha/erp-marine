@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { RHFInput } from 'react-hook-form-input';
@@ -6,6 +6,7 @@ import Select from "react-select";
 
 const SuppliersFilter = () => {
     const { register, setValue } = useForm();
+    const [search, setSearch] = useState();
 
     const statusOptions = [
         {
@@ -32,7 +33,8 @@ const SuppliersFilter = () => {
                     className="formHeight"
                     type="text"
                     placeholder="Search"
-                    value={""}
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
                 />
             </Form.Group>
 
