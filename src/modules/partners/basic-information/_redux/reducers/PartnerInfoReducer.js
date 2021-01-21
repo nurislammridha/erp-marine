@@ -67,8 +67,8 @@ const getTaxType = (data) => {
     if (data) {
         data.forEach((item) => {
             let itemData = {
-                value: item.intCountryID,
-                label: item.strCountryName,
+                value: item.intTaxTypeID,
+                label: item.strTaxTypeName,
             };
             options.push(itemData);
         });

@@ -71,8 +71,8 @@ const getBankName = (data) => {
     if (data) {
         data.forEach((item) => {
             let itemData = {
-                value: item.intCountryID,
-                label: item.strCountryName,
+                value: item.intBankId,
+                label: item.strBankName,
             };
             options.push(itemData);
         });

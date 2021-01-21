@@ -184,10 +184,10 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                     <div className="col-md-4">
                                         <label className="form-label mt-2 formFont">TAX Type</label>
                                         <RHFInput
-                                            as={<Select options={selectOptions} />}
+                                            as={<Select options={taxTypeOptionData} />}
                                             rules={{ required: true }}
                                             name="intTaxTypeId"
-                                            value={selectOptions.value}
+                                            value={partnerInfoInput.intTaxTypeID}
                                             register={register}
                                             onChange={(e) => {
                                                 handleChangeTextInput("intTaxTypeId", e.value);

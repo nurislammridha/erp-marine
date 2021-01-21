@@ -111,7 +111,7 @@ const BankInfoAdd = withRouter(({ history }) => {
                         <div className="col-md-3">
                             <label className="form-label mt-2 formFont">Bank Name</label>
                             <RHFInput
-                                as={<Select options={bankName} />}
+                                as={<Select options={bankOptionData} />}
                                 rules={{ required: true }}
                                 name="intBankId"
                                 register={register}
