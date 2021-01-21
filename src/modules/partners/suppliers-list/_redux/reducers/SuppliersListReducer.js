@@ -13,7 +13,7 @@ const SuppliersListReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case Types.GET_SUPPLIER_LIST:
-            console.log('action.payload', action.payload)
+            // console.log('action.payload', action.payload)
             return {
                 ...state,
                 supplierList: action.payload.supplierList,

@@ -3,11 +3,17 @@ import { Form, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { RHFInput } from 'react-hook-form-input';
 import Select from "react-select";
+import { useDispatch, useSelector } from 'react-redux'
+import { getSupplierList } from '../_redux/actions/SuppliersListAction';
 
 const SuppliersFilter = () => {
+    const dispatch = useDispatch()
     const { register, setValue } = useForm();
-    const [search, setSearch] = useState();
-
+    const [search, setSearch] = useState("");
+    const changeSearch = (value) => {
+        setSearch(value);
+        dispatch(getSupplierList(value))
+    }
     const statusOptions = [
         {
             label: "Supplier Type",
@@ -34,7 +40,7 @@ const SuppliersFilter = () => {
                     type="text"
                     placeholder="Search"
                     value={search}
-                    onChange={(e) => setSearch(e.target.value)}
+                    onChange={(e) => changeSearch(e.target.value)}
                 />
             </Form.Group>
 
