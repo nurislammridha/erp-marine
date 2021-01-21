@@ -39,6 +39,13 @@ const PartnerInfoReducer = (state = initialState, action) => {
                 partnerInfoInput,
             };
 
+        case Types.GET_TAX_TYPE:
+            return {
+                ...state,
+                taxTypeData: getTaxType(action.payload),
+
+            };
+
 
         case Types.PARTNER_INFO_SUBMIT:
             return {
@@ -54,3 +61,17 @@ const PartnerInfoReducer = (state = initialState, action) => {
 }
 
 export default PartnerInfoReducer;
+
+const getTaxType = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intTaxTypeID,
+                label: item.strTaxTypeName,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+};

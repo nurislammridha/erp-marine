@@ -7,6 +7,7 @@ const initialState = {
         strCity: "",
         strZipCode: "",
         strCountry: "",
+        strCountryName: "",
         intCountryID: "",
         isDefault: 1
     },
@@ -30,6 +31,14 @@ const PartnerAddressReducer = (state = initialState, action) => {
                 ...state,
                 partnerAddressInput,
             };
+
+        case Types.GET_COUNTRY_NAME:
+            return {
+                ...state,
+                countryOptionData: getCountryName(action.payload),
+
+            };
+
         case Types.SUBMIT_PARTNER_ADDRESS:
             console.log('action.payload', action.payload)
             const partnerAddressSubmit = { ...state.partnerAddressInput };
@@ -61,3 +70,17 @@ const PartnerAddressReducer = (state = initialState, action) => {
 }
 
 export default PartnerAddressReducer;
+
+const getCountryName = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intCountryID,
+                label: item.strCountryName,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+};

@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { withRouter } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { bankInfoSubmitMultiple, deleteBankMultiple, handleChangeBankInfoInput } from '../_redux/actions/BankInfoAction';
+import { bankInfoSubmitMultiple, deleteBankMultiple, getBankName, handleChangeBankInfoInput } from '../_redux/actions/BankInfoAction';
 
 
 const BankInfoAdd = withRouter(({ history }) => {
@@ -24,24 +24,10 @@ const BankInfoAdd = withRouter(({ history }) => {
             value: 3
         }
     ]
-    const branceName = [
-        {
-            label: 'Bagerhat Brance',
-            value: 1
-        },
-        {
-            label: 'Khulna Brance',
-            value: 2
-        },
-        {
-            label: 'Jeshore Brance',
-            value: 3
-        }
-    ]
-
     const { register, setValue } = useForm();
     const dispatch = useDispatch();
     const bankInfoInput = useSelector((state) => state.bankInfo.bankInfoInput);
+    const bankOptionData = useSelector((state) => state.bankInfo.bankOptionData);
     const bankInfo = useSelector(state => state.bankInfo.bankInfoMultiple);
 
     const handleChangeTextInput = (name, value) => {
@@ -50,6 +36,9 @@ const BankInfoAdd = withRouter(({ history }) => {
     const multipleAdd = () => {
         dispatch(bankInfoSubmitMultiple(bankInfoInput));
     }
+    useEffect(() => {
+        dispatch(getBankName());
+    }, []);
     console.log('bankInfo Adddd:>> ', bankInfo);
     return (
         <div className="container">
@@ -122,7 +111,7 @@ const BankInfoAdd = withRouter(({ history }) => {
                         <div className="col-md-3">
                             <label className="form-label mt-2 formFont">Bank Name</label>
                             <RHFInput
-                                as={<Select options={bankName} />}
+                                as={<Select options={bankOptionData} />}
                                 rules={{ required: true }}
                                 name="intBankId"
                                 register={register}
@@ -137,17 +126,16 @@ const BankInfoAdd = withRouter(({ history }) => {
                         </div>
                         <div className="col-md-3">
                             <label className="form-label mt-2 formFont">Branch Name</label>
-                            <RHFInput
-                                as={<Select options={branceName} />}
-                                rules={{ required: true }}
-                                name="intBankBranchId"
-                                register={register}
+                            <Form.Control
+                                type="text"
+                                name="strBankBranchName"
+                                className="fromStyle formHeight"
                                 value={bankInfoInput.strBankBranchName}
-                                setValue={setValue}
-                                onChange={(option) => {
-                                    handleChangeTextInput("intBankBranchId", option.value);
-                                    handleChangeTextInput("strBankBranchName", option.label);
-                                }
+                                onChange={(e) =>
+                                    handleChangeTextInput(
+                                        "strBankBranchName",
+                                        e.target.value
+                                    )
                                 }
                             />
                         </div>
@@ -168,7 +156,7 @@ const BankInfoAdd = withRouter(({ history }) => {
                         </div>
                         <div className="col-md-3">
                             <div className="row">
-                                <div className="col-md-10">
+                                <div className="col-md-6">
                                     <label className="form-label mt-2 formFont">Is Default</label> <br />
                                     <label className="switch">
                                         <input type="checkbox" checked={bankInfoInput.isDefaultAccount ? true : false}
@@ -177,9 +165,9 @@ const BankInfoAdd = withRouter(({ history }) => {
                                         <span className="slider round"></span>
                                     </label>
                                 </div>
-                                <div className="col-md-2">
+                                <div className="col-md-6">
                                     <button
-                                        className="btn btn-primary btn-sm mt-8"
+                                        className="btn btn-primary btn-sm mt-8 float-right"
                                         onClick={() => multipleAdd()}
                                     >
                                         Add
@@ -215,9 +203,9 @@ const BankInfoAdd = withRouter(({ history }) => {
                                                 <td>{item.strRoutingNo}</td>
                                                 <td>{item.isDefaultAccount ? 'Yes' : 'No'}</td>
                                                 <td>
-                                                    <i className="fas fa-trash-alt editIcon ml-4"
+                                                    <a><i className="fas fa-trash-alt editIcon ml-4"
                                                         onClick={() => dispatch(deleteBankMultiple(index))}
-                                                    ></i>
+                                                    ></i></a>
                                                 </td>
                                             </tr>
                                         ))}

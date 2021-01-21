@@ -10,16 +10,59 @@ export const handleChangePartnerOtherInfoInput = (name, value) => (dispatch) => 
         name: name,
         value: value,
     };
+
+
+    let updatedArray = [];
+    if (name === "multiplePort") {
+        value.forEach(item => {
+            const itemNew = {
+                "intPortID": item.intPortID,
+                "strPortName": item.strPortName,
+                "intActionBy": item.intActionBy,
+            }
+            updatedArray.push(itemNew);
+        });
+    }
+
+    if (name === "multipleProduct") {
+        value.forEach(item => {
+            const itemNew = {
+                "intProductAndServiceTypeID": item.intProductAndServiceTypeID,
+                "strProductOrServiceName": item.strProductOrServiceName,
+                "intActionBy": item.intActionBy,
+                "intProductOrServiceID": item.intProductOrServiceID
+            }
+            updatedArray.push(itemNew);
+        });
+    }
+
+    formData.value = updatedArray;
     dispatch({
         type: Types.CHANGE_PARTNER_OTHERINFO_INPUT,
         payload: formData,
     });
-    if (name === 'strPortName' || name === 'intPortID') {
-        console.log('value', value)
-        const selectedValue = {
-            label: value,
-            id: value
-        }
-        console.log('selectedValue', selectedValue)
-    }
+
 };
+
+export const getPortName = (data) => (dispatch) => {
+    Axios.get(`${process.env.REACT_APP_API_URL}partner/port`).then(
+
+        (res) => {
+            console.log('res', res)
+            let data = res.data.data;
+            dispatch({ type: Types.GET_PORT_NAME, payload: data });
+        }
+    );
+};
+
+export const getProviderName = (data) => (dispatch) => {
+    Axios.get(`${process.env.REACT_APP_API_URL}partner/psProvider`).then(
+
+        (res) => {
+            console.log('res', res)
+            let data = res.data.data;
+            dispatch({ type: Types.GET_PROVIDER_NAME, payload: data });
+        }
+    );
+};
+

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import StepProgressBar from 'react-step-progress';
 import 'react-step-progress/dist/index.css';
 import AddressAdd from '../address/components/AddressAdd';
@@ -11,29 +12,31 @@ import { bankInfoSubmitAction } from '../bank-information/_redux/actions/BankInf
 import { partnerAddressSubmit } from '../address/_redux/actions/AddressAction';
 
 const StepProgress = () => {
-
+    const history = useHistory();
     const partnerInfoInput = useSelector((state) => state.partnerInfo.partnerInfoInput);
+    const partnerStatus = useSelector((state) => state.partnerInfo.status);
     const bankInfoInput = useSelector((state) => state.bankInfo.bankInfoInput);
     const dispatch = useDispatch();
-    // const partinfo = () => {
-    //     console.log('partinfo', partnerInfoInput)
-    //     dispatch(partnerInfoSubmitAction(partnerInfoInput));
-    // }
 
-    console.log('partnerinfo', partnerInfoInput)
+
+
+
     // setup step validators, will be called before proceeding to the next step
     const step1Validator = () => {
         return partnerInfoSubmitAction();
+        // return true;
     }
+
     const step2Validator = () => {
-        // return a boolean
-        // return partnerAddressSubmit();
+
         return partnerAddressSubmit();
+        // return true;
     }
 
     function step3Validator() {
-        // return a boolean
+
         return bankInfoSubmitAction();
+        // return true;
     }
 
     function onFormSubmit() {
@@ -41,6 +44,10 @@ const StepProgress = () => {
         // This function will be executed at the last step
         // when the submit button (next button in the previous steps) is pressed
         dispatch(partnerCreateSubmitAction());
+        if (partnerStatus) {
+            history.push('/suppliers/list')
+        }
+        // 
     }
 
     return (
@@ -71,7 +78,7 @@ const StepProgress = () => {
                         label: 'Others Information',
                         name: 'Others Information',
                         content: <OthersInfoAdd />,
-                        validator: step3Validator
+                        // validator: step3Validator
                     }
                 ]}
             />
