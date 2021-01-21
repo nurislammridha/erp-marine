@@ -1,6 +1,7 @@
 import * as Types from "../types/Types";
 import { showToast } from "../../../../master/utils/ToastHelper";
 import Axios from "axios";
+import { getEmployeeId, getVesselId } from "../../../../../app/modules/Auth/_redux/authCrud";
 
 
 // get currency 
@@ -121,7 +122,7 @@ export const handleChangeLaytimeRowInput = (name, value) => (dispatch) => {
 };
 
 //submit laytime data 
-export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setShow) => (dispatch) => {
+export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setShow) => async (dispatch) => {
     if (laytimeHeaderInput.intCharterVoyageID === null) {
         showToast('error', "Laytime header can't be blank!")
         return false;
@@ -225,6 +226,14 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
         dteNORtender: laytimeRowInput.dteNORtender,
         numLodingOrDischargeRate: laytimeRowInput.numLodingOrDischargeRate,
     }
+    laytimeHeaderInput.intActionBy = await getEmployeeId()
+    const intShipID = await getVesselId();
+    if (typeof intShipID === 'undefined' || intShipID === null || intShipID === "") {
+        laytimeHeaderInput.intShipID = 1;
+    } else {
+        laytimeHeaderInput.intShipID = intShipID;
+    }
+    laytimeHeaderInput.isActive = true;
     laytimeHeaderInput.layTimeRows = layTimeRowData;
     let responseList = {
         loading: true,
@@ -233,7 +242,7 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
     };
     dispatch({ type: Types.LAYTIME_DATA_SUBMITTING, payload: true });
 
-    Axios.post(`${process.env.REACT_APP_API_URL}voyage/laytimeHeader`, laytimeHeaderInput)
+    Axios.post(`${process.env.REACT_APP_API_URL}voyage/layTimeHeaderRow`, laytimeHeaderInput)
         .then((res) => {
             console.log('res :>> ', res);
             responseList.data = res.data;

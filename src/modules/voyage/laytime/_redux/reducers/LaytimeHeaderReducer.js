@@ -39,10 +39,8 @@ const initialState = {
         numTotalDuration: null,
         numTotalSteamingTime: null,
         numAVGSpeed: null,
-        intActionBy: 1,
         dteLastActionDateTime: '',
         dteServerDateTime: null,
-        isActive: null,
         //======================
         // strReversibleIType: '',
         // numDemurrageRate: null,
