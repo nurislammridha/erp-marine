@@ -72,7 +72,6 @@ const LaytimeRowReducer = (state = initialState, action) => {
             };
         case Types.LAYTIME_DATA_SUBMIT:
             if (action.payload.status) {
-                console.log('action.payload :>> ', action.payload);
                 return {
                     ...state,
                     laytimeRowInput: initialState.laytimeRowInput,
@@ -85,7 +84,6 @@ const LaytimeRowReducer = (state = initialState, action) => {
                 };
             }
             break;
-
         case Types.LAYTIME_DATA_SUBMITTING:
             return {
                 ...state,

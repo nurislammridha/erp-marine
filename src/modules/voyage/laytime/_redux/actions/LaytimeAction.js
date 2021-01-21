@@ -122,6 +122,18 @@ export const handleChangeLaytimeRowInput = (name, value) => (dispatch) => {
 
 //submit laytime data 
 export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setShow) => (dispatch) => {
+    if (laytimeHeaderInput.intCharterVoyageID === null) {
+        showToast('error', "Laytime header can't be blank!")
+        return false;
+    }
+    if (laytimeHeaderInput.demurrages.length === 0) {
+        showToast('error', "Please add minimum one demurrage!")
+        return false;
+    }
+    if (laytimeHeaderInput.strOnceOnDemmurrage.length === 0) {
+        showToast('error', "Please select once demmurrage!")
+        return false;
+    }
     if (laytimeRowInput.intPortID === null) {
         showToast('error', "Port can't be blank!")
         return false;

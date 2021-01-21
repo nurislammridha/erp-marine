@@ -16,7 +16,7 @@ const initialState = {
         isRevAllPorts: null,
         isRevLoadingPorts: false,
         isRevDischargePorts: false,
-        strOnceOnDemmurrage: false,
+        strOnceOnDemmurrage: '',
         intDemurrageCurrencyID: null,
         numCommision: null,
         CommisionPercent: null,
