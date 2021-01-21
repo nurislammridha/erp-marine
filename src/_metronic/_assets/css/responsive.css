@@ -132,6 +132,14 @@
   .header-fixed.subheader-fixed.subheader-enabled .wrapper {
     padding-top: 6px !important;
   }
+  table.table.table.item-add-table th,
+  tr,
+  td {
+    font-size: 10px !important;
+  }
+  .item-list-icon.ml-4 {
+    margin-left: 0px !important;
+  }
 }
 
 @media (max-width: 426px) {

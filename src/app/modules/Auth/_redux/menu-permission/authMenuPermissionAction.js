@@ -186,6 +186,11 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
               featureRouteUrl: "/items/list",
               featureIcon: "menu-bullet menu-bullet-dot",
             },
+            {
+              featureName: "Item Add",
+              featureRouteUrl: "/items/add",
+              featureIcon: "menu-bullet menu-bullet-dot",
+            },
           ],
         },
       ],

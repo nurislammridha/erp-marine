@@ -882,3 +882,22 @@ button.item-list-btn {
   border: 1px solid #789dfe !important;
   padding-left: 8px !important;
 }
+/* item add */
+button.item-add-btn {
+  border: 1px solid #afafaf !important;
+  background: #e4ebff !important;
+}
+button.item-add-save {
+  padding-left: 35px;
+  padding-right: 35px;
+  background: #1bc5bd !important;
+  border: #1bc5bd !important;
+  border-radius: 4px !important;
+}
+table.table.table.item-add-table th,
+tr,
+td {
+  border-top: none !important;
+  border-bottom: none !important;
+  font-weight: 400 !important;
+}
