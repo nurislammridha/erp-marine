@@ -171,6 +171,25 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
         },
       ],
     },
+    {
+      moduleName: "Items",
+      moduleRouteUrl: "/items",
+      moduleImageIcon: "/media/svg/icons/Code/partner.svg",
+      subModules: [
+        {
+          subModuleName: "Item Info",
+          subModuleRouteUrl: "/items/info",
+          subModuleIcon: "menu-bullet menu-bullet-dot",
+          features: [
+            {
+              featureName: "Item List",
+              featureRouteUrl: "/items/list",
+              featureIcon: "menu-bullet menu-bullet-dot",
+            },
+          ],
+        },
+      ],
+    },
     // {
     //   moduleName: "Procurement",
     //   moduleRouteUrl: "/vessels/list",

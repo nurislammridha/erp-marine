@@ -16,6 +16,7 @@ import getDemandSheetRoutes from "../modules/demand-sheet/routes";
 import getCertificateModuleRoutes from "../modules/certificates/routes";
 import getDocumentationRoutes from "../modules/documentation/routes";
 import getPartnersRoutes from "../modules/partners/routes";
+import getItemsRoutes from "../modules/item/routes";
 
 const BasePage = () => {
   return (
@@ -69,7 +70,8 @@ const BasePage = () => {
         {/* Partners Information */}
         {getPartnersRoutes()}
 
-
+        {/* Item Routes */}
+        {getItemsRoutes()}
 
         {getDocumentationRoutes()}
 
