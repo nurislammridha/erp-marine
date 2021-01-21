@@ -12,14 +12,23 @@ const BasicInfoAdd = withRouter(({ history }) => {
 
     const selectOptions = [
         {
-            label: 'Active',
+            label: 'Partner 1',
             value: "1"
         },
         {
-            label: 'In Active',
-            value: "0"
+            label: 'Partner 2',
+            value: "2"
+        },
+        {
+            label: 'Partner 3',
+            value: "3"
+        },
+        {
+            label: 'Partner 4',
+            value: "4"
         }
     ]
+
 
     const { register, handleSubmit, errors, setValue } = useForm();
     const dispatch = useDispatch();
