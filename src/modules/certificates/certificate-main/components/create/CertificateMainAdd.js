@@ -143,6 +143,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               onSubmit={handleSubmit(onSubmit)}
               method="post"
               encType="multipart/form-data"
+              autoComplete="off"
             >
               <div className="form-group row mt-0 border pb-3 bg-light pt-3 ">
                 <div className="col-lg-3">
@@ -579,6 +580,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                             selected={
                               certificateInfoInput.dteCertificateValidUntil
                             }
+                            minDate={
+                              certificateInfoInput.dteCertificateIssueDate
+                            }
                             onChange={(e) =>
                               certificateMainInfoChange(
                                 "dteCertificateValidUntil",
@@ -692,6 +696,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       className="form-control fromStyle formHeight custome-date"
                       placeholderText="select certificate valid date"
                       selected={certificateInfoInput.dteLastEndorsementDate}
+                      minDate={certificateInfoInput.dteCertificateIssueDate}
                       onChange={(e) =>
                         certificateMainInfoChange("dteLastEndorsementDate", e)
                       }
