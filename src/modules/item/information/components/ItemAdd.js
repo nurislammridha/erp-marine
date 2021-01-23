@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
-import { deleteMultipleItemInput, itemAddInput, multipleItemAddInput } from "../_redux/actions/ItemAction";
+import { deleteMultipleItemInput, itemAddInput, multipleItemAddInput, submitMultipleItem, getItemCategory } from "../_redux/actions/ItemAction";
 const ItemAdd = () => {
   const { register, setValue } = useForm();
   const dispatch = useDispatch();
@@ -16,8 +16,12 @@ const ItemAdd = () => {
   const multipleItemAdd = () => {
     dispatch(multipleItemAddInput(itemDataInput))
   }
+  useEffect(() => {
+    dispatch(getItemCategory())
+  }, [])
   console.log('itemDataInput from add:>> ', itemDataInput);
   console.log('multipleItemList :>> ', multipleItemList);
+
   const CourseName = [
     {
       id: 1,
@@ -308,9 +312,12 @@ const ItemAdd = () => {
             </div>
             <div className="col-lg-10"></div>
             <div className="col-lg-2 mt-3">
-              <button className="btn btn-primary btn-sm float-right text-center custome-addnew-btn item-add-save mb-5">
+              <button
+                className="btn btn-primary btn-sm float-right text-center custome-addnew-btn item-add-save mb-5"
+                onClick={() => dispatch(submitMultipleItem(multipleItemList))}
+              >
                 save
-     </button>
+             </button>
             </div>
             <div className="clear-fix"></div>
           </div>

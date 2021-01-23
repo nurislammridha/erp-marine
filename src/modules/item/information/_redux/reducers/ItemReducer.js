@@ -39,6 +39,11 @@ const ItemReducer = (state = initialState, action) => {
                 ...state,
                 multipleItemAdd: multipleItemAddOld
             }
+        case Types.GET_ITEM_CATEGORY:
+            return {
+                ...state,
+                itemCategoryList: getItemCategoryList()
+            }
         default:
             break;
 
@@ -48,3 +53,10 @@ const ItemReducer = (state = initialState, action) => {
 }
 
 export default ItemReducer;
+
+
+const getItemCategoryList = () => {
+    // optionItemcategory:[
+
+    // ]
+}
