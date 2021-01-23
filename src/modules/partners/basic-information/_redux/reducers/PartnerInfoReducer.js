@@ -21,9 +21,14 @@ const initialState = {
         dteServerDateTime: "",
         isActive: "",
         businessUnitName: "",
-        intAction: ""
+        intAction: "",
+        strPICName: "",
+        strPICEmail: "",
+        strPICContactNo: ""
+
     },
     status: false,
+    addStatus: false,
 };
 
 const PartnerInfoReducer = (state = initialState, action) => {
@@ -45,6 +50,18 @@ const PartnerInfoReducer = (state = initialState, action) => {
                 taxTypeData: getTaxType(action.payload),
 
             };
+        case Types.GET_PARTNER_TYPE:
+            return {
+                ...state,
+                partnerTypeData: getPartnerType(action.payload),
+
+            };
+        case Types.GET_BUSINESS_TYPE:
+            return {
+                ...state,
+                businessUnitData: getTaxType(action.payload),
+
+            };
 
 
         case Types.PARTNER_INFO_SUBMIT:
@@ -52,6 +69,8 @@ const PartnerInfoReducer = (state = initialState, action) => {
                 ...state,
                 status: action.payload.status,
                 isLoading: action.payload.isLoading,
+                addStatus: action.payload.status,
+                partnerInfoInput: initialState.partnerInfoInput,
             };
         default:
             break;
@@ -69,6 +88,19 @@ const getTaxType = (data) => {
             let itemData = {
                 value: item.intTaxTypeID,
                 label: item.strTaxTypeName,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+};
+const getPartnerType = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intSupplierTypeID,
+                label: item.strSupplierTypeName,
             };
             options.push(itemData);
         });

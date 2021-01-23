@@ -5,7 +5,7 @@ import 'react-step-progress/dist/index.css';
 import AddressAdd from '../address/components/AddressAdd';
 import BankInfoAdd from '../bank-information/components/BankInfoAdd';
 import BasicInfoAdd from '../basic-information/components/BasicInfoAdd';
-import { partnerCreateSubmitAction, partnerInfoSubmitAction } from '../basic-information/_redux/actions/BasicInfoAction';
+import { emptyStatus, partnerCreateSubmitAction, partnerInfoSubmitAction } from '../basic-information/_redux/actions/BasicInfoAction';
 import OthersInfoAdd from '../others-information/components/OthersInfoAdd';
 import { useSelector, useDispatch } from "react-redux";
 import { bankInfoSubmitAction } from '../bank-information/_redux/actions/BankInfoAction';
@@ -17,7 +17,8 @@ const StepProgress = () => {
     const partnerStatus = useSelector((state) => state.partnerInfo.status);
     const bankInfoInput = useSelector((state) => state.bankInfo.bankInfoInput);
     const dispatch = useDispatch();
-
+    const addStatus = useSelector((state) => state.partnerInfo.addStatus);
+    console.log('addStatus', addStatus);
 
 
 
@@ -44,11 +45,13 @@ const StepProgress = () => {
         // This function will be executed at the last step
         // when the submit button (next button in the previous steps) is pressed
         dispatch(partnerCreateSubmitAction());
-        if (partnerStatus) {
-            history.push('/suppliers/list')
-        }
-        // 
     }
+    if (addStatus) {
+        history.push('/suppliers/list')
+        dispatch(emptyStatus());
+    }
+
+
 
     return (
         <div>

@@ -64,15 +64,15 @@ export const partnerInfoSubmitAction = () => {
         showToast('error', 'Please give Tax type');
         isValidated = false;
     }
-    else if (partnerInfoInput.picName === undefined || partnerInfoInput.picName === null || partnerInfoInput.picName.length === 0) {
+    else if (partnerInfoInput.strPICName === undefined || partnerInfoInput.strPICName === null || partnerInfoInput.strPICName.length === 0) {
         showToast('error', 'Please give PIC Name');
         isValidated = false;
     }
-    else if (partnerInfoInput.picContact === undefined || partnerInfoInput.picContact === null || partnerInfoInput.picContact.length === 0) {
+    else if (partnerInfoInput.strPICContactNo === undefined || partnerInfoInput.strPICContactNo === null || partnerInfoInput.strPICContactNo.length === 0) {
         showToast('error', 'Please give PIC Contact');
         isValidated = false;
     }
-    else if (partnerInfoInput.picEmail === undefined || partnerInfoInput.picEmail === null || partnerInfoInput.picEmail.length === 0) {
+    else if (partnerInfoInput.strPICEmail === undefined || partnerInfoInput.strPICEmail === null || partnerInfoInput.strPICEmail.length === 0) {
         showToast('error', 'Please give PIC Email');
         isValidated = false;
     }
@@ -90,19 +90,48 @@ export const getTaxType = (data) => (dispatch) => {
         }
     );
 };
+export const getPartnerType = (data) => (dispatch) => {
+    Axios.get(`${process.env.REACT_APP_API_URL}partner/partnerType`).then(
 
+        (res) => {
+            console.log('res', res)
+            let data = res.data.data;
+            dispatch({ type: Types.GET_PARTNER_TYPE, payload: data });
+        }
+    );
+};
+export const getBusinessType = (data) => (dispatch) => {
+    Axios.get(`${process.env.REACT_APP_API_URL}master/tax`).then(
 
+        (res) => {
+            console.log('res', res)
+            let data = res.data.data;
+            dispatch({ type: Types.GET_BUSINESS_TYPE, payload: data });
+        }
+    );
+};
+
+export const emptyStatus = () => (dispatch) => {
+    let responseList = {
+        status: false,
+    };
+    dispatch({
+        type: Types.PARTNER_INFO_SUBMIT,
+        payload: responseList,
+    });
+}
 
 export const partnerCreateSubmitAction = () => async (dispatch) => {
 
     const basicInfo = store.getState().partnerInfo.partnerInfoInput;
-    const status = store.getState().partnerInfo.status;
+    // const addStatus = store.getState().partnerInfo.addStatus;
     const addressInfo = store.getState().partnerAddress.addressInfo;
     const bankInfo = store.getState().bankInfo.bankInfoMultiple;
     const otherInfo = store.getState().partnerOthersInfo.partnerOtherInfoInput;
     console.log('basicInfo :>> ', basicInfo);
     console.log('addressInfo :>> ', addressInfo);
     console.log('bankInfo :>> ', bankInfo);
+
 
     const finalSubmitInputData = {
         basicInfo: basicInfo,
@@ -116,32 +145,38 @@ export const partnerCreateSubmitAction = () => async (dispatch) => {
         // psType: otherInfo.multipleServiceList,
     }
 
-    // Axios.post(`url`, finalSubmitInputData)
-    //     .then(res => {
-    //         console.log('res :>> ', res);
-    //     })
     console.log('finalSubmitInputData :>> ', finalSubmitInputData);
     let responseList = {
         isLoading: true,
         data: {},
         status: false,
     };
-
+    dispatch({
+        type: Types.PARTNER_INFO_SUBMIT,
+        payload: responseList,
+    });
     const url = `${process.env.REACT_APP_API_URL}partner/partnerCreate`
     console.log('url :>> ', url);
-    Axios.post(url, finalSubmitInputData)
+    await Axios.post(url, finalSubmitInputData)
         .then(function (response) {
             responseList.data = response.data.data;
             responseList.isLoading = false;
             responseList.status = response.data.status;
             if (response.data.status) {
                 showToast("success", response.data.message);
-
+                dispatch({
+                    type: Types.PARTNER_INFO_SUBMIT,
+                    payload: responseList,
+                });
             } else {
                 showToast("error", response.data.message);
-                // status = true;
+                dispatch({
+                    type: Types.PARTNER_INFO_SUBMIT,
+                    payload: responseList,
+                });
             }
         })
+
         .catch(function (error) {
             responseList.isLoading = false;
             const message =
