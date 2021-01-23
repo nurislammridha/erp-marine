@@ -11,7 +11,7 @@ const initialState = {
         strRoutingNo: "",
         strIBANNo: "",
         strSWIFTCode: "",
-        isDefaultAccount: "",
+        isDefaultAccount: 1,
         intSupplierId: "",
         strSupplierName: "",
         intCurrencyID: "",

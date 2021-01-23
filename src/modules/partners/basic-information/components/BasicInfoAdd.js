@@ -65,7 +65,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                             <div className="col-md-8">
                                 <div className="row">
                                     <div className="col-md-4">
-                                        <label className="form-label mt-2 formFont">Partner Name</label>
+                                        <label className="form-label mt-2 formFont">Supplier Name</label>
                                         <Form.Control
                                             type="text"
                                             name="strSupplierName"
@@ -80,7 +80,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                         />
                                     </div>
                                     <div className="col-md-4">
-                                        <label className="form-label mt-2 formFont">Partner Type</label>
+                                        <label className="form-label mt-2 formFont">Supplier Type</label>
                                         <RHFInput
                                             as={<Select options={partnerTypeOptionData} />}
                                             rules={{ required: true }}
@@ -89,6 +89,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                             value={selectOptions.value}
                                             onChange={(e) => {
                                                 handleChangeTextInput("intSupplierTypeID", e.value);
+                                                handleChangeTextInput("strSupplierTypeName", e.label);
                                             }}
                                             setValue={setValue}
                                         />
@@ -111,7 +112,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                 </div>
                                 <div className="row">
                                     <div className="col-md-4">
-                                        <label className="form-label mt-2 formFont">Partner Code</label>
+                                        <label className="form-label mt-2 formFont">Supplier Code (optional)</label>
                                         <Form.Control
                                             type="text"
                                             name="strSupplierCode"
@@ -175,7 +176,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                     </div>
 
                                     <div className="col-md-4">
-                                        <label className="form-label mt-2 formFont">TIN No</label>
+                                        <label className="form-label mt-2 formFont">TIN No (optional)</label>
                                         <Form.Control
                                             type="text"
                                             name="strTIN"
@@ -199,6 +200,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                             register={register}
                                             onChange={(e) => {
                                                 handleChangeTextInput("intTaxTypeId", e.value);
+                                                handleChangeTextInput("intTaxTypeName", e.label);
                                             }}
                                             setValue={setValue}
                                         />
@@ -239,7 +241,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                     <div className="col-md-12">
                                         <label className="form-label mt-2 formFont">PIC Contact</label>
                                         <Form.Control
-                                            type="number"
+                                            type="text"
                                             placeholder="Enter PIC Contact"
                                             name="strPICContactNo"
                                             className="fromStyle formHeight"
@@ -251,6 +253,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                         <label className="form-label mt-2 formFont">PIC Email</label>
                                         <Form.Control
                                             type="email"
+                                            pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
                                             placeholder="Enter PIC Email"
                                             name="strPICEmail"
                                             className="fromStyle formHeight"

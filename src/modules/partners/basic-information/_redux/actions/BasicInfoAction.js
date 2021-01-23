@@ -28,25 +28,21 @@ export const partnerInfoSubmitAction = () => {
     //     isValidated = false;
     // }
     if (partnerInfoInput.strSupplierName === undefined || partnerInfoInput.strSupplierName === null || partnerInfoInput.strSupplierName.length === 0) {
-        showToast('error', 'Please give partner name');
+        showToast('error', 'Please give supplier name');
         isValidated = false;
     }
     else if (partnerInfoInput.intSupplierTypeID === undefined || partnerInfoInput.intSupplierTypeID === null || partnerInfoInput.intSupplierTypeID.length === 0) {
-        showToast('error', 'Please give partner type');
+        showToast('error', 'Please give supplier type');
         isValidated = false;
     }
     else if (partnerInfoInput.strEmail === undefined || partnerInfoInput.strEmail === null || partnerInfoInput.strEmail.length === 0) {
-        showToast('error', 'Please give partner email');
+        showToast('error', 'Please give supplier email');
         isValidated = false;
     }
-    else if (partnerInfoInput.strBIN === undefined || partnerInfoInput.strBIN === null || partnerInfoInput.strBIN.length === 0) {
-        showToast('error', 'Please give partner BIN No');
-        isValidated = false;
-    }
-    else if (partnerInfoInput.strSupplierCode === undefined || partnerInfoInput.strSupplierCode === null || partnerInfoInput.strSupplierCode.length === 0) {
-        showToast('error', 'Please give Prtner Code');
-        isValidated = false;
-    }
+    // else if (new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g)(partnerInfoInput.strEmail)) {
+    //     showToast('error', 'Please give supplier email');
+    //     isValidated = false;
+    // }
     else if (partnerInfoInput.strContactNumber === undefined || partnerInfoInput.strContactNumber === null || partnerInfoInput.strContactNumber.length === 0) {
         showToast('error', 'Please give contact no');
         isValidated = false;
@@ -59,14 +55,15 @@ export const partnerInfoSubmitAction = () => {
         showToast('error', 'Please give Business Unit no');
         isValidated = false;
     }
-    else if (partnerInfoInput.strTIN === undefined || partnerInfoInput.strTIN === null || partnerInfoInput.strTIN.length === 0) {
-        showToast('error', 'Please give TIN No');
-        isValidated = false;
-    }
     else if (partnerInfoInput.intTaxTypeId === undefined || partnerInfoInput.intTaxTypeId === null || partnerInfoInput.intTaxTypeId.length === 0) {
         showToast('error', 'Please give Tax type');
         isValidated = false;
     }
+    else if (partnerInfoInput.strBIN === undefined || partnerInfoInput.strBIN === null || partnerInfoInput.strBIN.length === 0) {
+        showToast('error', 'Please give supplier BIN No');
+        isValidated = false;
+    }
+
     else if (partnerInfoInput.strPICName === undefined || partnerInfoInput.strPICName === null || partnerInfoInput.strPICName.length === 0) {
         showToast('error', 'Please give PIC Name');
         isValidated = false;
@@ -123,6 +120,10 @@ export const emptyStatus = () => (dispatch) => {
         payload: responseList,
     });
     dispatch({
+        type: Types.EMPTY_PARTNER_INFO,
+
+    });
+    dispatch({
         type: TypesAddress.EMPTY_ADDRESS_INFO,
 
     });
@@ -152,9 +153,6 @@ export const partnerCreateSubmitAction = () => async (dispatch) => {
         basicInfo: basicInfo,
         addressInfo: addressInfo,
         bankInfo: bankInfo,
-
-        // othersInfo: otherInfo,
-
         ports: otherInfo.multiplePort,
         psProvider: otherInfo.multipleProduct,
         // psType: otherInfo.multipleServiceList,
@@ -170,8 +168,9 @@ export const partnerCreateSubmitAction = () => async (dispatch) => {
         type: Types.PARTNER_INFO_SUBMIT,
         payload: responseList,
     });
+
     const url = `${process.env.REACT_APP_API_URL}partner/partnerCreate`
-    console.log('url :>> ', url);
+
     await Axios.post(url, finalSubmitInputData)
         .then(function (response) {
             responseList.data = response.data.data;
@@ -185,10 +184,10 @@ export const partnerCreateSubmitAction = () => async (dispatch) => {
                 });
             } else {
                 showToast("error", response.data.message);
-                dispatch({
-                    type: Types.PARTNER_INFO_SUBMIT,
-                    payload: responseList,
-                });
+                // dispatch({
+                //     type: Types.PARTNER_INFO_SUBMIT,
+                //     payload: responseList,
+                // });
             }
         })
 
