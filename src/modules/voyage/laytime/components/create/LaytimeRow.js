@@ -94,19 +94,19 @@ const LaytimeRow = () => {
                                             className="m-3"
                                             type="radio"
                                             label="Loading"
-                                            name="Loading"
+                                            name="intType"
                                             id="formHorizontalRadios1"
                                             value={"Loading"}
-                                            onChange={(e) => handleChangeTextInput('Loading', e.target.value)}
+                                            onChange={(e) => handleChangeTextInput('intType', 1)}
                                         />
                                         <Form.Check
                                             className="m-3"
                                             type="radio"
                                             label="Discharging"
-                                            name="Loading"
+                                            name="intType"
                                             id="formHorizontalRadios1"
                                             value={"Discharging"}
-                                            onChange={(e) => handleChangeTextInput('Loading', e.target.value)}
+                                            onChange={(e) => handleChangeTextInput('intType', 2)}
                                         />
                                     </div>
                                     <div className="row">

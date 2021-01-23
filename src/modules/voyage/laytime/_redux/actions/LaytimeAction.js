@@ -39,7 +39,7 @@ export const getHearInputData = (id) => (dispatch) => {
         .then((response) => {
             if (response.status === 200) {
                 let data = response.data.data;
-                console.log('data :>> ', data);
+                console.log(' Header data :>> ', data);
                 if (data.commmence_port !== null) {
                     data.commmencePort = {
                         label: data.commmence_port.strPortName,
@@ -207,26 +207,30 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
         showToast('error', "Load rate can't be blank!")
         return false;
     }
-    const layTimeRowData = {
-        intPortID: laytimeRowInput.intPortID,
-        dteLaytimeCommenced: laytimeRowInput.dteLaytimeCommenced,
-        dteLaytimeCompleted: laytimeRowInput.dteLaytimeCompleted,
-        intCargoID: laytimeRowInput.intCargoID,
-        numBLQty: laytimeRowInput.numBLQty,
-        intTermsID: laytimeRowInput.intTermsID,
-        numTimeAllowence: laytimeRowInput.numTimeAllowence,
-        intAdditionalDay: laytimeRowInput.intAdditionalDay,
-        numAdditionalHrs: laytimeRowInput.numAdditionalHrs,
-        dteTermArraivalTime: laytimeRowInput.dteTermArraivalTime,
-        dteTermSailTime: laytimeRowInput.dteTermSailTime,
-        numDemurrageRate: laytimeRowInput.numDemurrageRate,
-        intDemurrageCurrID: laytimeRowInput.intDemurrageCurrID,
-        numDespatchRate: laytimeRowInput.numDespatchRate,
-        numDespatchRatePercent: laytimeRowInput.numDespatchRatePercent,
-        dteNORtender: laytimeRowInput.dteNORtender,
-        numLodingOrDischargeRate: laytimeRowInput.numLodingOrDischargeRate,
-    }
-    laytimeHeaderInput.intActionBy = await getEmployeeId()
+    const layTimeRowData = [
+        {
+            intPortID: laytimeRowInput.intPortID,
+            intType: laytimeRowInput.intType,
+            dteLaytimeCommenced: laytimeRowInput.dteLaytimeCommenced,
+            dteLaytimeCompleted: laytimeRowInput.dteLaytimeCompleted,
+            intCargoID: laytimeRowInput.intCargoID,
+            numBLQty: laytimeRowInput.numBLQty,
+            intTermsID: laytimeRowInput.intTermsID,
+            numTimeAllowence: laytimeRowInput.numTimeAllowence,
+            intAdditionalDay: laytimeRowInput.intAdditionalDay,
+            numAdditionalHrs: laytimeRowInput.numAdditionalHrs,
+            dteTermArraivalTime: laytimeRowInput.dteTermArraivalTime,
+            dteTermSailTime: laytimeRowInput.dteTermSailTime,
+            numDemurrageRate: laytimeRowInput.numDemurrageRate,
+            intDemurrageCurrID: laytimeRowInput.intDemurrageCurrID,
+            numDespatchRate: laytimeRowInput.numDespatchRate,
+            numDespatchRatePercent: laytimeRowInput.numDespatchRatePercent,
+            dteNORtender: laytimeRowInput.dteNORtender,
+            numLodingOrDischargeRate: laytimeRowInput.numLodingOrDischargeRate,
+        }
+    ];
+    
+    laytimeHeaderInput.intActionBy = 1;
     const intShipID = await getVesselId();
     if (typeof intShipID === 'undefined' || intShipID === null || intShipID === "") {
         laytimeHeaderInput.intShipID = 1;
@@ -241,6 +245,9 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
         status: false,
     };
     dispatch({ type: Types.LAYTIME_DATA_SUBMITTING, payload: true });
+
+    console.log('laytimeHeaderInput', laytimeHeaderInput);
+    // return false;
 
     Axios.post(`${process.env.REACT_APP_API_URL}voyage/layTimeHeaderRow`, laytimeHeaderInput)
         .then((res) => {
