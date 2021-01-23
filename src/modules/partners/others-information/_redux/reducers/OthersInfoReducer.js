@@ -49,6 +49,13 @@ const OthersInfoReducer = (state = initialState, action) => {
 
             };
 
+        case Types.EMPTY_OTHERS_INFO:
+            return {
+                ...state,
+                partnerOtherInfoInput: initialState.partnerOtherInfoInput,
+
+            };
+
 
         // case Types.PARTNER_OTHERINFO_SUBMIT:
         //     return {

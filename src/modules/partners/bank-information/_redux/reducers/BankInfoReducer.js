@@ -57,10 +57,18 @@ const BankInfoReducer = (state = initialState, action) => {
                 ...state,
                 bankInfoMultiple: bankOld,
             };
+
+        case Types.EMPTY_BANK_INFO:
+            return {
+                ...state,
+                bankInfoMultiple: initialState.bankInfoMultiple,
+                bankInfoInput: initialState.bankInfoInput
+
+            };
         default:
             break;
     }
-    console.log('bankInfoMultiple Reducer:>> ', initialState.bankInfoMultiple);
+
     return newState
 }
 

@@ -1,4 +1,7 @@
 import * as Types from "../types/Types";
+import * as TypesAddress from "../../../address/_redux/types/Types";
+import * as TypesBank from "../../../bank-information/_redux/types/Types";
+import * as TypesOther from "../../../others-information/_redux/types/Types";
 import Axios from "axios";
 import store from '../../../../../redux/store';
 import { showToast } from "../../../../master/utils/ToastHelper";
@@ -118,6 +121,18 @@ export const emptyStatus = () => (dispatch) => {
     dispatch({
         type: Types.PARTNER_INFO_SUBMIT,
         payload: responseList,
+    });
+    dispatch({
+        type: TypesAddress.EMPTY_ADDRESS_INFO,
+
+    });
+    dispatch({
+        type: TypesBank.EMPTY_BANK_INFO,
+
+    });
+    dispatch({
+        type: TypesOther.EMPTY_OTHERS_INFO,
+
     });
 }
 

@@ -62,6 +62,13 @@ const PartnerAddressReducer = (state = initialState, action) => {
                 ...state,
                 addressInfo: addressOld,
             };
+
+        case Types.EMPTY_ADDRESS_INFO:
+            return {
+                ...state,
+                partnerAddressInput: initialState.partnerAddressInput,
+                addressInfo: initialState.addressInfo,
+            };
         default:
             break;
     }
