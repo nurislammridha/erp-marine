@@ -145,13 +145,12 @@
   }
   i.fas.fa-calendar-alt {
     left: 145px !important;
+    top: 22px !important;
   }
-  /* .booking-entry-input.input-group {
-    width: 116% !important;
-  } */
+
   .booking-entry-input.form-group {
     margin-left: -13px;
-    width: 115% !important;
+    width: 105% !important;
   }
 }
 

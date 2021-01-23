@@ -49,7 +49,7 @@ const BookingEntry = () => {
           className="form form-label-right voyageEngineerForm"
           method="post"
         >
-          <div className="form-group row">
+          <div className="form-group row mb-1">
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Broker Name</label>
               <RHFInput
@@ -96,7 +96,7 @@ const BookingEntry = () => {
               />
             </div>
           </div>
-          <div className="form-group row">
+          <div className="form-group row mb-1">
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Load Port/ Commence Port</label>
               <RHFInput
@@ -139,7 +139,7 @@ const BookingEntry = () => {
               <i className="fas fa-calendar-alt"></i>
             </div>
           </div>
-          <div className="form-group row">
+          <div className="form-group row mb-1">
             <div className="col-lg-3 col-6">
               <label className="formFont">C/P Date</label>
               <DatePicker
@@ -180,7 +180,7 @@ const BookingEntry = () => {
               <i className="fas fa-calendar-alt"></i>
             </div>
           </div>
-          <div className="form-group row">
+          <div className="form-group row mb-1">
             <div className="col-xl-3 col-lg-3 col-6">
               <Form.Group>
                 <Form.Label className="formFont pl-1">Cargo</Form.Label>
@@ -234,7 +234,7 @@ const BookingEntry = () => {
               </Form.Group>
             </div>
           </div>
-          <div className="form-group row">
+          <div className="form-group row mb-1">
             <div className="col-lg-3 col-6">
               <Form.Group
                 as={Col}
@@ -245,7 +245,7 @@ const BookingEntry = () => {
                 <Form.Label className="formFont">
                   Brokerage Commision{" "}
                 </Form.Label>
-                <InputGroup>
+                <InputGroup className="booking-entry-input">
                   <Form.Control
                     type="text"
                     placeholder="Type"
@@ -300,11 +300,11 @@ const BookingEntry = () => {
               </Form.Group>
             </div>
           </div>
-          <div className="mt-5 float-right">
-            <Button className=" cancelButton  " variant="">
+          <div className="float-right">
+            <Button className=" cancelButton" variant="">
               Cancel
             </Button>
-            <Button className="ml-4  saveButton text-white " variant="">
+            <Button className="ml-4  text-white booking-btn " variant="primary">
               Booking
             </Button>
           </div>
