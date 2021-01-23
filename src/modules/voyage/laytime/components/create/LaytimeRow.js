@@ -7,13 +7,15 @@ import DatePicker from "react-datepicker";
 import LaytimeDetail from '../detail/LaytimeDetail';
 import LaytimeMultipleAdd from './LaytimeMultipleAdd';
 import { useSelector, useDispatch } from "react-redux";
-import { handleChangeLaytimeRowInput } from '../../_redux/actions/LaytimeAction';
+import { handleChangeLaytimeRowInput, submitLaytime } from '../../_redux/actions/LaytimeAction';
 
 const LaytimeRow = () => {
     const dispatch = useDispatch();
     const { register, handleSubmit, errors, setValue } = useForm();
+    const laytimeHeaderInput = useSelector((state) => state.laytimeHeaderInfo.laytimeHeaderInput);
     const laytimeRowInput = useSelector((state) => state.laytimeDetailInfo.laytimeRowInput);
-    console.log('laytimeRowInput :>> ', laytimeRowInput);
+    const loading = useSelector((state) => state.laytimeDetailInfo.loading);
+
     const [show, setShow] = useState(false);
     // handle change lay time row input
     const handleChangeTextInput = (name, value) => {
@@ -66,6 +68,11 @@ const LaytimeRow = () => {
         }
     ]
 
+    // laytime final submission 
+    const HandleLaytimeSubmit = (e) => {
+        dispatch(submitLaytime(laytimeHeaderInput, laytimeRowInput, e, show, setShow))
+    }
+
     return (
         <div className="container">
             <div className="row">
@@ -110,17 +117,15 @@ const LaytimeRow = () => {
                                                 rules={{ required: true }}
                                                 name="intPortID"
                                                 register={register}
-                                                // value={laytimeRowInput.intPortID}
+                                                value={laytimeRowInput.intPortID}
                                                 onChange={(option) => {
-                                                    handleChangeTextInput(
-                                                        "strPortName",
-                                                        option.label
-                                                    );
-                                                    handleChangeTextInput(
-                                                        "intPortID",
-                                                        option.value
-                                                    );
+                                                    handleChangeTextInput("strPortName", option.label);
+                                                    handleChangeTextInput("intPortID", option.value);
                                                 }}
+                                                ref={register({
+                                                    required: true,
+                                                    maxLength: 100,
+                                                })}
                                                 setValue={setValue}
                                             />
                                         </div>
@@ -130,13 +135,8 @@ const LaytimeRow = () => {
                                                 <DatePicker
                                                     name="dteLaytimeCommenced"
                                                     className="form-control formHeight"
-                                                    // selected={laytimeRowInput.dteLaytimeCommenced}
-                                                    onChange={(e) =>
-                                                        handleChangeTextInput(
-                                                            "dteLaytimeCommenced",
-                                                            e
-                                                        )
-                                                    }
+                                                    selected={laytimeRowInput.dteLaytimeCommenced}
+                                                    onChange={(e) => handleChangeTextInput("dteLaytimeCommenced", e)}
                                                     ref={register({
                                                         required: true,
                                                         maxLength: 100,
@@ -148,13 +148,8 @@ const LaytimeRow = () => {
                                                 <DatePicker
                                                     name="dteLaytimeCompleted"
                                                     className="form-control formHeight"
-                                                    // selected={laytimeRowInput.dteLaytimeCompleted}
-                                                    onChange={(e) =>
-                                                        handleChangeTextInput(
-                                                            "dteLaytimeCompleted",
-                                                            e
-                                                        )
-                                                    }
+                                                    selected={laytimeRowInput.dteLaytimeCompleted}
+                                                    onChange={(e) => handleChangeTextInput("dteLaytimeCompleted", e)}
                                                     ref={register({
                                                         required: true,
                                                         maxLength: 100,
@@ -173,17 +168,15 @@ const LaytimeRow = () => {
                                                     rules={{ required: true }}
                                                     name="intCargoID"
                                                     register={register}
-                                                    // value={laytimeRowInput.intCargoID}
+                                                    value={laytimeRowInput.intCargoID}
                                                     onChange={(option) => {
-                                                        handleChangeTextInput(
-                                                            "strCargoName",
-                                                            option.label
-                                                        );
-                                                        handleChangeTextInput(
-                                                            "intCargoID",
-                                                            option.value
-                                                        );
+                                                        handleChangeTextInput("strCargoName", option.label);
+                                                        handleChangeTextInput("intCargoID", option.value);
                                                     }}
+                                                    ref={register({
+                                                        required: true,
+                                                        maxLength: 100,
+                                                    })}
                                                     setValue={setValue}
                                                 />
                                             </div>
@@ -193,13 +186,12 @@ const LaytimeRow = () => {
                                                     type="number"
                                                     name="numBLQty"
                                                     className="fromStyle formHeight"
-                                                    // value={laytimeRowInput.numBLQty}
-                                                    onChange={(e) =>
-                                                        handleChangeTextInput(
-                                                            "numBLQty",
-                                                            e.target.value
-                                                        )
-                                                    }
+                                                    value={laytimeRowInput.numBLQty}
+                                                    onChange={(e) => handleChangeTextInput("numBLQty", e.target.value)}
+                                                    ref={register({
+                                                        required: true,
+                                                        maxLength: 100,
+                                                    })}
                                                 />
                                             </div>
                                         </div>
@@ -210,17 +202,15 @@ const LaytimeRow = () => {
                                                 rules={{ required: true }}
                                                 name="intTermsID"
                                                 register={register}
-                                                // value={laytimeRowInput.intTermsID}
+                                                value={laytimeRowInput.intTermsID}
                                                 onChange={(option) => {
-                                                    handleChangeTextInput(
-                                                        "strTermsName",
-                                                        option.label
-                                                    );
-                                                    handleChangeTextInput(
-                                                        "intTermsID",
-                                                        option.value
-                                                    );
+                                                    handleChangeTextInput("strTermsName", option.label);
+                                                    handleChangeTextInput("intTermsID", option.value);
                                                 }}
+                                                ref={register({
+                                                    required: true,
+                                                    maxLength: 100,
+                                                })}
                                                 setValue={setValue}
                                             />
                                         </div>
@@ -234,13 +224,12 @@ const LaytimeRow = () => {
                                                     type="number"
                                                     name="numTimeAllowence"
                                                     className="fromStyle formHeight"
-                                                    // value={laytimeRowInput.numTimeAllowence}
-                                                    onChange={(e) =>
-                                                        handleChangeTextInput(
-                                                            "numTimeAllowence",
-                                                            e.target.value
-                                                        )
-                                                    }
+                                                    value={laytimeRowInput.numTimeAllowence}
+                                                    onChange={(e) => handleChangeTextInput("numTimeAllowence", e.target.value)}
+                                                    ref={register({
+                                                        required: true,
+                                                        maxLength: 100,
+                                                    })}
                                                 />
                                             </div>
                                             <div className="col-md-5">
@@ -250,12 +239,11 @@ const LaytimeRow = () => {
                                                     name=""
                                                     className="fromStyle formHeight"
                                                     value=""
-                                                    onChange={(e) =>
-                                                        handleChangeTextInput(
-                                                            "intVoyageNumber",
-                                                            e.target.value
-                                                        )
-                                                    }
+                                                    onChange={(e) => handleChangeTextInput("intVoyageNumber", e.target.value)}
+                                                    ref={register({
+                                                        required: true,
+                                                        maxLength: 100,
+                                                    })}
                                                 />
                                             </div>
                                         </div>
@@ -266,13 +254,12 @@ const LaytimeRow = () => {
                                                     type="number"
                                                     name="intAdditionalDay"
                                                     className="fromStyle formHeight"
-                                                    // value={laytimeRowInput.intAdditionalDay}
-                                                    onChange={(e) =>
-                                                        handleChangeTextInput(
-                                                            "intAdditionalDay",
-                                                            e.target.value
-                                                        )
-                                                    }
+                                                    value={laytimeRowInput.intAdditionalDay}
+                                                    onChange={(e) => handleChangeTextInput("intAdditionalDay", e.target.value)}
+                                                    ref={register({
+                                                        required: true,
+                                                        maxLength: 100,
+                                                    })}
                                                 />
                                             </div>
                                             <div className="col-md-5">
@@ -281,13 +268,12 @@ const LaytimeRow = () => {
                                                     type="number"
                                                     name="numAdditionalHrs"
                                                     className="fromStyle formHeight"
-                                                    // value={laytimeRowInput.numAdditionalHrs}
-                                                    onChange={(e) =>
-                                                        handleChangeTextInput(
-                                                            "numAdditionalHrs",
-                                                            e.target.value
-                                                        )
-                                                    }
+                                                    value={laytimeRowInput.numAdditionalHrs}
+                                                    onChange={(e) => handleChangeTextInput("numAdditionalHrs", e.target.value)}
+                                                    ref={register({
+                                                        required: true,
+                                                        maxLength: 100,
+                                                    })}
                                                 />
                                             </div>
                                         </div>
@@ -299,13 +285,8 @@ const LaytimeRow = () => {
                                                 <DatePicker
                                                     name="dteTermArraivalTime"
                                                     className="form-control formHeight"
-                                                    // selected={laytimeRowInput.dteTermArraivalTime}
-                                                    onChange={(e) =>
-                                                        handleChangeTextInput(
-                                                            "dteTermArraivalTime",
-                                                            e
-                                                        )
-                                                    }
+                                                    selected={laytimeRowInput.dteTermArraivalTime}
+                                                    onChange={(e) => handleChangeTextInput("dteTermArraivalTime", e)}
                                                     ref={register({
                                                         required: true,
                                                         maxLength: 100,
@@ -319,13 +300,8 @@ const LaytimeRow = () => {
                                                 <DatePicker
                                                     name="dteTermSailTime"
                                                     className="form-control formHeight"
-                                                    // selected={laytimeRowInput.dteTermSailTime}
-                                                    onChange={(e) =>
-                                                        handleChangeTextInput(
-                                                            "dteTermSailTime",
-                                                            e
-                                                        )
-                                                    }
+                                                    selected={laytimeRowInput.dteTermSailTime}
+                                                    onChange={(e) => handleChangeTextInput("dteTermSailTime", e)}
                                                     ref={register({
                                                         required: true,
                                                         maxLength: 100,
@@ -342,13 +318,12 @@ const LaytimeRow = () => {
                                                     type="number"
                                                     name="numDemurrageRate"
                                                     className="fromStyle formHeight"
-                                                    // value={laytimeRowInput.numDemurrageRate}
-                                                    onChange={(e) =>
-                                                        handleChangeTextInput(
-                                                            "numDemurrageRate",
-                                                            e.target.value
-                                                        )
-                                                    }
+                                                    value={laytimeRowInput.numDemurrageRate}
+                                                    onChange={(e) => handleChangeTextInput("numDemurrageRate", e.target.value)}
+                                                    ref={register({
+                                                        required: true,
+                                                        maxLength: 100,
+                                                    })}
                                                 />
                                             </div>
                                             <div className="col-md-5">
@@ -357,13 +332,12 @@ const LaytimeRow = () => {
                                                     type="number"
                                                     name="intDemurrageCurrID"
                                                     className="fromStyle formHeight"
-                                                    // value={laytimeRowInput.intDemurrageCurrID}
-                                                    onChange={(e) =>
-                                                        handleChangeTextInput(
-                                                            "intDemurrageCurrID",
-                                                            e.target.value
-                                                        )
-                                                    }
+                                                    value={laytimeRowInput.intDemurrageCurrID}
+                                                    onChange={(e) => handleChangeTextInput("intDemurrageCurrID", e.target.value)}
+                                                    ref={register({
+                                                        required: true,
+                                                        maxLength: 100,
+                                                    })}
                                                 />
                                             </div>
                                         </div>
@@ -374,13 +348,12 @@ const LaytimeRow = () => {
                                                     type="number"
                                                     name="numDespatchRate"
                                                     className="fromStyle formHeight"
-                                                    // value={laytimeRowInput.numDespatchRate}
-                                                    onChange={(e) =>
-                                                        handleChangeTextInput(
-                                                            "numDespatchRate",
-                                                            e.target.value
-                                                        )
-                                                    }
+                                                    value={laytimeRowInput.numDespatchRate}
+                                                    onChange={(e) => handleChangeTextInput("numDespatchRate", e.target.value)}
+                                                    ref={register({
+                                                        required: true,
+                                                        maxLength: 100,
+                                                    })}
                                                 />
                                             </div>
                                             <div className="col-md-5">
@@ -389,13 +362,12 @@ const LaytimeRow = () => {
                                                     type="number"
                                                     name="numDespatchRatePercent"
                                                     className="fromStyle formHeight"
-                                                    // value={laytimeRowInput.numDespatchRatePercent}
-                                                    onChange={(e) =>
-                                                        handleChangeTextInput(
-                                                            "numDespatchRatePercent",
-                                                            e.target.value
-                                                        )
-                                                    }
+                                                    value={laytimeRowInput.numDespatchRatePercent}
+                                                    onChange={(e) => handleChangeTextInput("numDespatchRatePercent", e.target.value)}
+                                                    ref={register({
+                                                        required: true,
+                                                        maxLength: 100,
+                                                    })}
                                                 />
                                             </div>
                                         </div>
@@ -407,13 +379,8 @@ const LaytimeRow = () => {
                                                 <DatePicker
                                                     name="dteNORtender"
                                                     className="form-control formHeight"
-                                                    // selected={laytimeRowInput.dteNORtender}
-                                                    onChange={(e) =>
-                                                        handleChangeTextInput(
-                                                            "dteNORtender",
-                                                            e
-                                                        )
-                                                    }
+                                                    selected={laytimeRowInput.dteNORtender}
+                                                    onChange={(e) => handleChangeTextInput("dteNORtender", e)}
                                                     ref={register({
                                                         required: true,
                                                         maxLength: 100,
@@ -428,13 +395,12 @@ const LaytimeRow = () => {
                                                     type="number"
                                                     name="numLodingOrDischargeRate"
                                                     className="fromStyle formHeight"
-                                                    // value={laytimeRowInput.numLodingOrDischargeRate}
-                                                    onChange={(e) =>
-                                                        handleChangeTextInput(
-                                                            "numLodingOrDischargeRate",
-                                                            e.target.value
-                                                        )
-                                                    }
+                                                    value={laytimeRowInput.numLodingOrDischargeRate}
+                                                    onChange={(e) => handleChangeTextInput("numLodingOrDischargeRate", e.target.value)}
+                                                    ref={register({
+                                                        required: true,
+                                                        maxLength: 100,
+                                                    })}
                                                 />
                                             </div>
                                             <div className="col-md-5">
@@ -451,7 +417,20 @@ const LaytimeRow = () => {
                                         {/* <a onClick={() => {
                                             history.push("/voyage/laytime/laytimeinfo2");
                                         }}> */}
-                                        <button type="button" class="saveButton text-white btn ml-6" onClick={() => setShow(!show)}>Add</button>
+                                        {!loading && (
+                                            <button type="button" class="saveButton text-white btn ml-6" onClick={(e) => HandleLaytimeSubmit(e)}>Add</button>
+
+                                        )}
+                                        {loading && (
+                                            <button type="button" class="saveButton disabled={true} text-white btn ml-6">
+                                                <span className="p-2">
+                                                    Adding...
+                                                </span>
+                                                <span className="ml-3 spinner spinner-white "></span>
+                                            </button>
+
+                                        )}
+                                        {/* <button type="button" class="saveButton text-white btn ml-6" onClick={(e) => HandleLaytimeSubmit(e)}>Add</button> */}
                                         {/* </a> */}
                                     </div>
 
