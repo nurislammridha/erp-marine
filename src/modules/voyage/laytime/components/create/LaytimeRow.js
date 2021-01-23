@@ -15,6 +15,9 @@ const LaytimeRow = () => {
     const laytimeHeaderInput = useSelector((state) => state.laytimeHeaderInfo.laytimeHeaderInput);
     const laytimeRowInput = useSelector((state) => state.laytimeDetailInfo.laytimeRowInput);
     const loading = useSelector((state) => state.laytimeDetailInfo.loading);
+    const layTimeRowList = useSelector((state) => state.laytimeDetailInfo.layTimeRowList);
+
+    console.log("layTimeRowList data by row:",layTimeRowList);
 
     const [show, setShow] = useState(false);
     // handle change lay time row input

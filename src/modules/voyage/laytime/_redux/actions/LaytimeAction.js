@@ -229,7 +229,7 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
             numLodingOrDischargeRate: laytimeRowInput.numLodingOrDischargeRate,
         }
     ];
-    
+
     laytimeHeaderInput.intActionBy = 1;
     const intShipID = await getVesselId();
     if (typeof intShipID === 'undefined' || intShipID === null || intShipID === "") {
@@ -240,6 +240,7 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
     laytimeHeaderInput.isActive = true;
     laytimeHeaderInput.layTimeRows = layTimeRowData;
     let responseList = {
+        layTimeRowList: [],
         loading: true,
         data: {},
         status: false,
@@ -251,13 +252,15 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
 
     Axios.post(`${process.env.REACT_APP_API_URL}voyage/layTimeHeaderRow`, laytimeHeaderInput)
         .then((res) => {
-            console.log('res :>> ', res);
+            
+            console.log('response layTimeRowData :>> ', res.data.data);
+            responseList.layTimeRowList = res.data.data;
             responseList.data = res.data;
             responseList.loading = false;
             responseList.status = res.data.status;
             if (responseList.status === true) {
                 showToast("success", res.data.message);
-                dispatch({ type: Types.LAYTIME_DATA_SUBMIT, payload: false })
+                dispatch({ type: Types.LAYTIME_DATA_SUBMIT, payload: responseList })
             } else {
                 showToast("error", res.data.message);
             }
