@@ -1,35 +1,53 @@
 import React from "react";
-import { Form, Card, Button } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { Form, Button } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
+import { itemAddInput } from "../_redux/actions/ItemAction";
 const ItemAdd = () => {
   const { register, setValue } = useForm();
-  const courseData = [
+  const dispatch = useDispatch();
+  const itemDataInput = useSelector(state => state.itemList.itemDataInput)
+  const changeText = (name, value) => {
+    dispatch(itemAddInput(name, value))
+  }
+  console.log('itemDataInput from add:>> ', itemDataInput);
+  const CourseName = [
     {
       id: 1,
-      name: "cse",
+      label: "cse",
     },
     {
       id: 1,
-      name: "EEE",
+      label: "EEE",
     },
     {
       id: 1,
-      name: "MBA",
+      label: "MBA",
     },
   ];
+  const department = [
+    {
+      id: 1,
+      label: "Store",
+    },
+    {
+      id: 2,
+      label: "Engine",
+    }
+  ];
 
-  let CourseName = [];
-  if (courseData) {
-    courseData.forEach((item) => {
-      let items = {
-        value: item.id,
-        label: item.name,
-      };
-      CourseName.push(items);
-    });
-  }
+  // let CourseName = [];
+  // if (courseData) {
+  //   courseData.forEach((item) => {
+  //     let items = {
+  //       value: item.id,
+  //       label: item.name,
+  //     };
+  //     CourseName.push(items);
+  //   });
+  // }
   return (
     <>
       <div className="card card-custom gutter-b pl-5 pr-5 mb-5">
@@ -41,11 +59,19 @@ const ItemAdd = () => {
           <div className="col-xl-3 col-lg-3 col-md-6 ">
             <Form.Group>
               <Form.Label className="formFont pl-1">Department</Form.Label>
-              <Form.Control
-                className="formHeight"
-                type="text"
-                placeholder="Store"
+              <RHFInput
+                as={<Select options={department} />}
+                rules={{ required: true }}
+                name="intDepartmentID"
+                register={register}
+                value={itemDataInput.strDepartmentName}
+                setValue={setValue}
+                onChange={(option) => {
+                  changeText("intDepartmentID", option.id);
+                  changeText("strDepartmentName", option.label);
+                }}
               />
+              {/* strDepartmentName intDepartmentID */}
             </Form.Group>
           </div>
           <div className="col-xl-3 col-lg-3 col-md-6 ">
@@ -54,7 +80,10 @@ const ItemAdd = () => {
               <Form.Control
                 className="formHeight"
                 type="text"
-                placeholder="Type"
+                placeholder="Enter Item Name"
+                name="strItemName"
+                value={itemDataInput.strItemName}
+                onChange={(e) => changeText("strItemName", e.target.value)}
               />
             </Form.Group>
           </div>
@@ -64,10 +93,14 @@ const ItemAdd = () => {
             <RHFInput
               as={<Select options={CourseName} />}
               rules={{ required: false }}
-              name="courseData"
+              name="intUoMID"
               register={register}
-              value={CourseName.label}
+              value={itemDataInput.strUoM}
               setValue={setValue}
+              onChange={(option) => {
+                changeText("intUoMID", option.id);
+                changeText("strUoM", option.label);
+              }}
             />
           </div>
           <div className="col-xl-3 col-lg-3 col-md-6">
@@ -75,10 +108,14 @@ const ItemAdd = () => {
             <RHFInput
               as={<Select options={CourseName} />}
               rules={{ required: false }}
-              name="courseData"
+              name="intItemTypeID"
               register={register}
-              value={CourseName.label}
+              value={itemDataInput.StrItemTypeName}
               setValue={setValue}
+              onChange={(option) => {
+                changeText("intItemTypeID", option.id);
+                changeText("StrItemTypeName", option.label);
+              }}
             />
           </div>
         </div>
@@ -88,10 +125,14 @@ const ItemAdd = () => {
             <RHFInput
               as={<Select options={CourseName} />}
               rules={{ required: false }}
-              name="courseData"
+              name="intItemCategoryID"
               register={register}
-              value={CourseName.label}
+              value={itemDataInput.strItemCategoryName}
               setValue={setValue}
+              onChange={(option) => {
+                changeText("intItemCategoryID", option.id);
+                changeText("strItemCategoryName", option.label);
+              }}
             />
           </div>
           <div className="col-xl-3 col-lg-3 col-md-6 ">
@@ -102,17 +143,23 @@ const ItemAdd = () => {
               <Form.Control
                 className="formHeight"
                 type="text"
-                placeholder="Store"
+                placeholder="Enter Item SubCategory"
+                name="strSubCategoryName"
+                value={itemDataInput.strSubCategoryName}
+                onChange={(e) => changeText("strSubCategoryName", e.target.value)}
               />
             </Form.Group>
           </div>
           <div className="col-xl-3 col-lg-3 col-md-6 ">
             <Form.Group>
-              <Form.Label className="formFont pl-1">Port No</Form.Label>
+              <Form.Label className="formFont pl-1">Part No</Form.Label>
               <Form.Control
                 className="formHeight"
                 type="text"
-                placeholder="Type"
+                placeholder="Enter Part No"
+                name="strPartNo"
+                value={itemDataInput.strPartNo}
+                onChange={(e) => changeText("strPartNo", e.target.value)}
               />
             </Form.Group>
           </div>
@@ -123,32 +170,76 @@ const ItemAdd = () => {
               <Form.Control
                 className="formHeight"
                 type="text"
-                placeholder="Type"
+                placeholder="Enter Model No"
+                name="strModelNo"
+                value={itemDataInput.strModelNo}
+                onChange={(e) => changeText("strModelNo", e.target.value)}
               />
             </Form.Group>
           </div>
         </div>
         <div className="form-group row">
-          <div className="col-xl-3 col-lg-3 col-md-6 ">
-            <Form.Group>
-              <Form.Label className="formFont pl-1">Brand</Form.Label>
-              <Form.Control
-                className="formHeight"
-                type="text"
-                placeholder="Store"
-              />
-            </Form.Group>
-          </div>
-          <div className="col-xl-3 col-lg-3 col-md-6 ">
-            <Form.Group>
-              <Form.Label className="formFont pl-1">Catalouge</Form.Label>
-              <Form.Control
-                className="formHeight"
-                type="text"
-                placeholder="Type"
-              />
-            </Form.Group>
-          </div>
+          {(itemDataInput.strDepartmentName === "Store") && (
+            <>
+              <div className="col-xl-3 col-lg-3 col-md-6 ">
+                <Form.Group>
+                  <Form.Label className="formFont pl-1">Brand</Form.Label>
+                  <Form.Control
+                    className="formHeight"
+                    type="text"
+                    placeholder="Enter Brand"
+                    name="strBrand"
+                    value={itemDataInput.strBrand}
+                    onChange={(e) => changeText("strBrand", e.target.value)}
+                  />
+                </Form.Group>
+              </div>
+              <div className="col-xl-3 col-lg-3 col-md-6 ">
+                <Form.Group>
+                  <Form.Label className="formFont pl-1">Catalouge No</Form.Label>
+                  <Form.Control
+                    className="formHeight"
+                    type="text"
+                    placeholder="Enter Catalouge No"
+                    name="intCatalogueID"
+                    value={itemDataInput.intCatalogueID}
+                    onChange={(e) => changeText("intCatalogueID", e.target.value)}
+                  />
+                </Form.Group>
+              </div>
+            </>
+          )}
+          {(itemDataInput.strDepartmentName === "Engine") && (
+            <>
+              <div className="col-xl-3 col-lg-3 col-md-6 ">
+                <Form.Group>
+                  <Form.Label className="formFont pl-1">Engine No</Form.Label>
+                  <Form.Control
+                    className="formHeight"
+                    type="text"
+                    placeholder="Enter Engine No"
+                    name="strEngineName"
+                    value={itemDataInput.strEngineName}
+                    onChange={(e) => changeText("strEngineName", e.target.value)}
+                  />
+                </Form.Group>
+              </div>
+              <div className="col-xl-3 col-lg-3 col-md-6 ">
+                <Form.Group>
+                  <Form.Label className="formFont pl-1">Drawing No</Form.Label>
+                  <Form.Control
+                    className="formHeight"
+                    type="text"
+                    placeholder="Enter Drawing"
+                    name="strDrwingNumber"
+                    value={itemDataInput.strDrwingNumber}
+                    onChange={(e) => changeText("strDrwingNumber", e.target.value)}
+                  />
+                </Form.Group>
+              </div>
+            </>
+          )}
+
         </div>
         <div className="">
           <Button
