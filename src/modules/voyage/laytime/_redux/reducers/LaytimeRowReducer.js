@@ -2,6 +2,7 @@ import * as Types from "../types/Types";
 
 const initialState = {
     loading: false,
+    layTimeRowList: [],
     laytimeRowInput: {
         intLayTimeHeaderID: null,
         intLayTimeRowID: null,
@@ -75,7 +76,8 @@ const LaytimeRowReducer = (state = initialState, action) => {
                 return {
                     ...state,
                     laytimeRowInput: initialState.laytimeRowInput,
-                    loading: action.payload,
+                    loading: action.payload.loading,
+                    layTimeRowList:action.payload.layTimeRowList,
                 };
             } else {
                 return {
