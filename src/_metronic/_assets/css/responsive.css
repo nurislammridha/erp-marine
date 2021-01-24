@@ -152,6 +152,13 @@
     margin-left: -13px;
     width: 105% !important;
   }
+  button.booking-listadd-btn {
+    font-size: 9px;
+  }
+  i.item-list-icon {
+    font-size: 8px !important;
+    margin-left: 0px !important;
+  }
 }
 
 @media (max-width: 426px) {

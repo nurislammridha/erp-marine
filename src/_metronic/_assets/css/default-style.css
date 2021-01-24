@@ -985,3 +985,7 @@ td {
 span#inputGroupPrepend {
   height: 20px !important;
 }
+
+.MuiPaper-root.searchInput.MuiPaper-elevation1.MuiPaper-rounded {
+  box-shadow: none !important;
+}
