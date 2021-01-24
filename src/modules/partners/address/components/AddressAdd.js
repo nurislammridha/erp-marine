@@ -29,7 +29,10 @@ const AddressAdd = withRouter(({ history }) => {
 
     useEffect(() => {
         dispatch(getCountryName());
-    }, [countryOptionData, multipleAdd]);
+        if (addressInfo.length > 0) {
+            setValue("intCountryID", "");
+        }
+    }, [addressInfo]);
 
 
     const onSubmit = () => {
@@ -39,6 +42,7 @@ const AddressAdd = withRouter(({ history }) => {
 
     const multipleAdd = () => {
         dispatch(partnerAddressSubmitMultiple(partnerAddress));
+
     }
     return (
         <div className="container">

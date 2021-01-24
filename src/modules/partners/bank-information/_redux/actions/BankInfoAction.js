@@ -71,7 +71,7 @@ export const deleteBankMultiple = (index) => (dispatch) => {
     dispatch({ type: Types.DELETE_PARTNER_BANK_MULTIPLE, payload: index })
 }
 
-export const getBankName = (data) => (dispatch) => {
+export const getBankName = () => (dispatch) => {
 
     Axios.get(`${process.env.REACT_APP_API_URL}master/bank`).then(
 

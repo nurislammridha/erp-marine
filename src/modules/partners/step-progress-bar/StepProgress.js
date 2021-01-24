@@ -24,14 +24,14 @@ const StepProgress = () => {
 
     // setup step validators, will be called before proceeding to the next step
     const step1Validator = () => {
-        // return partnerInfoSubmitAction();
-        return true;
+        return partnerInfoSubmitAction();
+        // return true;
     }
 
     const step2Validator = () => {
 
-        // return partnerAddressSubmit();
-        return true;
+        return partnerAddressSubmit();
+        // return true;
     }
 
     function step3Validator() {

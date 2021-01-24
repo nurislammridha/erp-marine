@@ -22,14 +22,14 @@ const BankInfoAdd = withRouter(({ history }) => {
     };
     const multipleAdd = () => {
         dispatch(bankInfoSubmitMultiple(bankInfoInput));
+    }
+
+    useEffect(() => {
+        dispatch(getBankName());
         if (bankInfo.length > 0) {
             setValue("intBankId", "");
         }
-
-    }
-    useEffect(() => {
-        dispatch(getBankName());
-    }, []);
+    }, [bankInfo]);
     console.log('bankInfo Adddd:>> ', bankInfo);
     return (
         <div className="container">

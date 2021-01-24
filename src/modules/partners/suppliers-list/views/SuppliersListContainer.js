@@ -72,10 +72,10 @@ const SuppliersListContainer = () => {
                             variant="primary"
                             onClick={() => history.push('/partners/info')}
                         >
-                            <i className="fas fa-plus-circle"></i>Add
+                            Add New
                           </Button>
                     </div>
-                    <div id="id" ref={ref}>
+                    <div id="id" ref={ref} className="mt-5">
                         <SuppliersList />
                     </div>
                 </div>
