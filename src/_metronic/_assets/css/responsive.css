@@ -140,6 +140,18 @@
   .item-list-icon.ml-4 {
     margin-left: 0px !important;
   }
+  .completion-date {
+    margin-top: 14px;
+  }
+  i.fas.fa-calendar-alt {
+    left: 145px !important;
+    top: 22px !important;
+  }
+
+  .booking-entry-input.form-group {
+    margin-left: -13px;
+    width: 105% !important;
+  }
 }
 
 @media (max-width: 426px) {
