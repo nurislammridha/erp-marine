@@ -25,7 +25,8 @@ export const VesselBookingSubmit = (VesselBooking, e) => async (dispatch) => {
         showToast('error', "Broker can't be blank!");
         return false;
     }
-    if (VesselBooking.intCharterId === null) {;
+    if (VesselBooking.intCharterId === null) {
+        ;
         showToast('error', "Charter can't be blank!");
         return false;
     }
@@ -131,4 +132,18 @@ export const VesselBookingSubmit = (VesselBooking, e) => async (dispatch) => {
             showToast("error", message);
             dispatch({ type: Types.VESSEL_BOOKING_SUBMIT, payload: false });
         });
+}
+// Get Vessel Booking list 
+export const getVesselBookingList = () => (dispatch) => {
+    const VesselAPI = `${process.env.REACT_APP_API_URL}voyage/bookingList`;
+    Axios.get(VesselAPI)
+        .then((res) => {
+            if (res.status === 200) {
+                const listData = res.data.data;
+                if (listData.length) {
+                    dispatch({ type: Types.GET_VESSEL_BOOKING_LIST, payload: listData });
+                }
+            }
+
+        })
 }

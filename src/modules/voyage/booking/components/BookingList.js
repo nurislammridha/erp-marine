@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from "react";
-
 import { Form, Card, Button, Row, Col } from "react-bootstrap";
 import { InputBase, Paper, IconButton, Divider } from "@material-ui/core";
-
 import TableCircularProgressBar from "../../../master/components/CircularProgressBar/TableCircularProgressBar";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getVesselBookingList } from "../_redux/actions/VesselBookingAddAction";
+import moment from "moment";
+import { Link } from "react-router-dom";
 const BookingList = () => {
+  const dispatch = useDispatch();
+  const VesselBookingList = useSelector((state) => state.VesselBookingReducer.VesselBookingList);
+  console.log('VesselBookingList :>> ', VesselBookingList);
+
+  useEffect(() => {
+    dispatch(getVesselBookingList())
+  }, [])
+
   return (
     <Card>
       <Card.Body>
@@ -20,9 +29,9 @@ const BookingList = () => {
                 </IconButton>
                 <InputBase
                   placeholder="Search "
-                  // inputProps={{ "aria-label": "Search Google Maps" }}
-                  // onChange={(e) => searchEmployee(e)}
-                  // value={employeeInfo.employeeName}
+                // inputProps={{ "aria-label": "Search Google Maps" }}
+                // onChange={(e) => searchEmployee(e)}
+                // value={employeeInfo.employeeName}
                 />
               </Paper>
             </div>
@@ -30,9 +39,12 @@ const BookingList = () => {
             <div className="col-xl-3 col-lg-3 col-md-6 col-0"></div>
 
             <div>
-              <Button className="btn-sm" variant="primary">
-                Add New
+              <Link to="/voyage/booking/bookingentry">
+                <Button className="btn-sm" variant="primary">
+                  Add New
               </Button>
+              </Link>
+
             </div>
           </div>
           <div className="row">
@@ -56,7 +68,35 @@ const BookingList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  {
+                    VesselBookingList.length > 0 && VesselBookingList.map((item, index) => (
+                      <tr>
+                        <td>{index + 1}</td>
+                        <td>{item.strCargoName !== null && item.strCargoName !== '' ? item.strCargoName : ''}</td>
+                        <td>{item.strShipName !== null && item.strShipName !== '' ? item.strShipName : ''}</td>
+                        <td>{item.strVoyageNo !== null && item.strVoyageNo !== '' ? item.strVoyageNo : ''}</td>
+                        <td>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
+                        <td>{item.dteCommenceDate !== null && item.dteCommenceDate !== '' ? moment(item.dteCommenceDate).format("DD-MM-YYYY") : ''}</td>
+                        <td>{item.strCompletionPortName !== null && item.strCompletionPortName !== '' ? item.strCompletionPortName : ''}</td>
+                        <td>{item.dteCompletionDate !== null && item.dteCompletionDate !== '' ? moment(item.dteCompletionDate).format("DD-MM-YYYY") : ''}</td>
+                        <td>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
+                        <td>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
+                        <td>{item.numFreightOrHireRate !== null && item.numFreightOrHireRate !== '' ? item.numFreightOrHireRate : ''}</td>
+                        <td>
+                          <button className="btn approve booking-list-btn text-warning">
+                            Pending
+                      </button>
+                        </td>
+
+                        <td className="mt-3">
+                          {" "}
+                          <i className="far fa-edit editIcon item-list-icon cursor-pointer"></i>
+                          <i className="fas fa-trash-alt editIcon item-list-icon ml-2 cursor-pointer"></i>
+                        </td>
+                      </tr>
+                    ))
+                  }
+                  {/* <tr>
                     <td>#01</td>
                     <td>2021-01-05 00:00</td>
                     <td>Container Cargo</td>
@@ -80,7 +120,7 @@ const BookingList = () => {
                       <i className="far fa-edit editIcon item-list-icon"></i>
                       <i className="fas fa-trash-alt editIcon item-list-icon ml-2 "></i>
                     </td>
-                  </tr>
+                  </tr> */}
                 </tbody>
               </table>
             </div>
