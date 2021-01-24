@@ -3,6 +3,7 @@ import * as Types from "../types/Types";
 const initialState = {
     loading: false,
     layTimeRowList: [],
+    laytimeDatList:[],
     laytimeRowInput: {
         intLayTimeHeaderID: null,
         intLayTimeRowID: null,
@@ -72,12 +73,16 @@ const LaytimeRowReducer = (state = initialState, action) => {
                 laytimeRowInput,
             };
         case Types.LAYTIME_DATA_SUBMIT:
+            let cloneObj = state.laytimeDatList;
+           cloneObj.push(action.payload.layTimeRowList);
+
             if (action.payload.status) {
                 return {
                     ...state,
                     laytimeRowInput: initialState.laytimeRowInput,
                     loading: action.payload.loading,
                     layTimeRowList:action.payload.layTimeRowList,
+                    laytimeDatList:cloneObj,
                 };
             } else {
                 return {
@@ -87,12 +92,22 @@ const LaytimeRowReducer = (state = initialState, action) => {
             }
             break;
         case Types.LAYTIME_DATA_SUBMITTING:
+            
             return {
                 ...state,
                 loading: action.payload,
             };
             break;
 
+        case Types.DELETE_LAYTIMEROW_DATA:
+
+        let deleteData = state.laytimeDatList.filter(item=>item.intLayTimeRowID !==action.payload.intLayTimeRowID);
+        return {
+            ...state,
+            laytimeDatList:deleteData
+
+        };
+       
         default:
             break;
     }
