@@ -11,7 +11,6 @@ const initialState = {
         strTIN: "",
         strLicenseNo: "",
         intSupplierTypeID: "",
-        intSupplierTypeName: "",
         strSupplierTypeName: "",
         intCompanyID: "",
         intTaxTypeId: "",
@@ -70,6 +69,12 @@ const PartnerInfoReducer = (state = initialState, action) => {
                 status: action.payload.status,
                 isLoading: action.payload.isLoading,
                 addStatus: action.payload.status,
+
+            };
+
+        case Types.EMPTY_PARTNER_INFO:
+            return {
+                ...state,
                 partnerInfoInput: initialState.partnerInfoInput,
             };
         default:
