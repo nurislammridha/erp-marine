@@ -22,7 +22,7 @@ export const handleChangePartnerInfoInput = (name, value) => (dispatch) => {
 export const partnerInfoSubmitAction = () => {
     const partnerInfoInput = store.getState().partnerInfo.partnerInfoInput;
     let isValidated = true;
-
+    const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
     // if (partnerInfoInput.intAction.length === 0) {
     //     showToast('error', 'Please Select basic Unit');
     //     isValidated = false;
@@ -39,11 +39,23 @@ export const partnerInfoSubmitAction = () => {
         showToast('error', 'Please give supplier email');
         isValidated = false;
     }
+    // else if (partnerInfoInput.strEmail !== "undefined" || partnerInfoInput.strEmail !== null) {
+    //     var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+    //     if (!pattern.test(partnerInfoInput.strEmail)) {
+    //         showToast('error', 'Please give valid email');
+    //         isValidated = false;
+    //     }
+    // }
+
+    else if (!pattern.test(partnerInfoInput.strEmail)) {
+        showToast('error', 'Please give valid email');
+        isValidated = false;
+    }
     // else if (new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g)(partnerInfoInput.strEmail)) {
     //     showToast('error', 'Please give supplier email');
     //     isValidated = false;
     // }
-    else if (partnerInfoInput.strContactNumber === undefined || partnerInfoInput.strContactNumber === null || partnerInfoInput.strContactNumber.length === 0) {
+    else if (partnerInfoInput.strContactNumber === undefined || partnerInfoInput.strContactNumber === null || partnerInfoInput.strContactNumber.length === 0 || partnerInfoInput.strContactNumber < 0) {
         showToast('error', 'Please give contact no');
         isValidated = false;
     }
@@ -74,6 +86,10 @@ export const partnerInfoSubmitAction = () => {
     }
     else if (partnerInfoInput.strPICEmail === undefined || partnerInfoInput.strPICEmail === null || partnerInfoInput.strPICEmail.length === 0) {
         showToast('error', 'Please give PIC Email');
+        isValidated = false;
+    }
+    else if (!pattern.test(partnerInfoInput.strPICEmail)) {
+        showToast('error', 'Please give valid PIC email');
         isValidated = false;
     }
     return isValidated;

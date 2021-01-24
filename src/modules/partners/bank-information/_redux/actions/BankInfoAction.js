@@ -47,13 +47,13 @@ export const bankInfoSubmitMultiple = (bankInfoInput) => (dispatch) => {
         return false;
     }
     else if (bankInfoInput.strBankBranchName === undefined || bankInfoInput.strBankBranchName === null || bankInfoInput.strBankBranchName.length < 1) {
-        showToast("error", "Bank Brance Name should be Select");
+        showToast("error", "Bank Branch Name should be Select");
         return false;
     }
-    else if (bankInfoInput.strIBANNo === undefined || bankInfoInput.strIBANNo === null || bankInfoInput.strIBANNo.length < 1) {
-        showToast("error", "IBAN No should not be empty");
-        return false;
-    }
+    // else if (bankInfoInput.strIBANNo === undefined || bankInfoInput.strIBANNo === null || bankInfoInput.strIBANNo.length < 1) {
+    //     showToast("error", "IBAN No should not be empty");
+    //     return false;
+    // }
 
     // Process Data if needed
     bankInfoInput.intSupplierId = 1;
@@ -64,6 +64,7 @@ export const bankInfoSubmitMultiple = (bankInfoInput) => (dispatch) => {
 
     // If Validate, then add multiple dataset [] in addressInfo
     dispatch({ type: Types.SUBMIT_BANK_INFO_MULTIPLE, payload: bankInfoInput })
+
 }
 
 export const deleteBankMultiple = (index) => (dispatch) => {
@@ -71,10 +72,11 @@ export const deleteBankMultiple = (index) => (dispatch) => {
 }
 
 export const getBankName = (data) => (dispatch) => {
+
     Axios.get(`${process.env.REACT_APP_API_URL}master/bank`).then(
 
         (res) => {
-            console.log('res', res)
+            console.log('res bank check', res)
             let data = res.data.data;
             dispatch({ type: Types.GET_BANK_NAME, payload: data });
         }
