@@ -10,35 +10,26 @@ import { bankInfoSubmitMultiple, deleteBankMultiple, getBankName, handleChangeBa
 
 const BankInfoAdd = withRouter(({ history }) => {
 
-    const bankName = [
-        {
-            label: 'Islami Bank',
-            value: 1
-        },
-        {
-            label: 'Brac bank',
-            value: 2
-        },
-        {
-            label: 'Dutch bangla',
-            value: 3
-        }
-    ]
+
     const { register, setValue } = useForm();
     const dispatch = useDispatch();
     const bankInfoInput = useSelector((state) => state.bankInfo.bankInfoInput);
     const bankOptionData = useSelector((state) => state.bankInfo.bankOptionData);
     const bankInfo = useSelector(state => state.bankInfo.bankInfoMultiple);
-
+    console.log('bankOptionData', bankOptionData)
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeBankInfoInput(name, value));
     };
     const multipleAdd = () => {
         dispatch(bankInfoSubmitMultiple(bankInfoInput));
     }
+
     useEffect(() => {
         dispatch(getBankName());
-    }, []);
+        if (bankInfo.length > 0) {
+            setValue("intBankId", "");
+        }
+    }, [bankInfo]);
     console.log('bankInfo Adddd:>> ', bankInfo);
     return (
         <div className="container">
@@ -116,12 +107,14 @@ const BankInfoAdd = withRouter(({ history }) => {
                                 name="intBankId"
                                 register={register}
                                 value={bankInfoInput.strBankName}
-                                setValue={setValue}
+
                                 onChange={(option) => {
                                     handleChangeTextInput("intBankId", option.value);
                                     handleChangeTextInput("strBankName", option.label);
                                 }
                                 }
+                                setValue={setValue}
+
                             />
                         </div>
                         <div className="col-md-3">

@@ -51,6 +51,7 @@ import OthersInfoReducer from "../modules/partners/others-information/_redux/red
 import SuppliersListReducer from "../modules/partners/suppliers-list/_redux/reducers/SuppliersListReducer";
 import ItemReducer from "../modules/item/information/_redux/reducers/ItemReducer";
 import VesselBookingReducer from "../modules/voyage/booking/_redux/reducers/VesselBookingReducer";
+import ItemAddReducer from "../modules/item/information/_redux/reducers/ItemReducer";
 
 /** 
 | Domain : CCO
@@ -108,6 +109,10 @@ export const rootReducer = combineReducers({
   partnerAddress: PartnerAddressReducer,
   partnerOthersInfo: OthersInfoReducer,
 
+
+  /** Partners Reducers */
+  itemInfo: ItemAddReducer,
+
   /** Procurement Module Reducers */
   purchaseRequisition: PurchaseRequisitionReducer,
   demand: DemandReducer,
@@ -124,8 +129,7 @@ export const rootReducer = combineReducers({
   certificateTypeInfo: CertificateTypeReducer,
   laytimeInfo: LaytimeInfoReducer,
   partnerInfo: PartnerInfoReducer,
-  supplierList: SuppliersListReducer,
-  itemList: ItemReducer
+  supplierList: SuppliersListReducer
 });
 
 export function* rootSaga() {

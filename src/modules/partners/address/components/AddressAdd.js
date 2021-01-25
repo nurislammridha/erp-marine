@@ -29,29 +29,11 @@ const AddressAdd = withRouter(({ history }) => {
 
     useEffect(() => {
         dispatch(getCountryName());
-    }, []);
-    const country = [
-        {
-            label: "Bangladesh",
-            value: "1",
-        },
-        {
-            label: "Nepal",
-            value: "3",
-        },
-        {
-            label: "Pakistan",
-            value: "2",
-        },
-        {
-            label: "Usa",
-            value: "1",
-        },
-        {
-            label: "Vutan",
-            value: "0",
+        if (addressInfo.length > 0) {
+            setValue("intCountryID", "");
         }
-    ];
+    }, [addressInfo]);
+
 
     const onSubmit = () => {
         // dispatch(partnerAddressSubmit(partnerAddress));
@@ -60,6 +42,7 @@ const AddressAdd = withRouter(({ history }) => {
 
     const multipleAdd = () => {
         dispatch(partnerAddressSubmitMultiple(partnerAddress));
+
     }
     return (
         <div className="container">
@@ -118,7 +101,7 @@ const AddressAdd = withRouter(({ history }) => {
                                 onChange={(option) => {
                                     handleChangeTextInput("intCountryID", option.value);
                                     handleChangeTextInput("strCountry", option.label);
-                                    handleChangeTextInput("strCountryName", option.label);
+                                    // handleChangeTextInput("strCountryName", option.label);
                                 }
                                 }
                             />
@@ -185,7 +168,7 @@ const AddressAdd = withRouter(({ history }) => {
                                         <td>{item.strSupplierAddress}</td>
                                         <td>{item.strCity}</td>
                                         <td>{item.strState}</td>
-                                        <td>{item.strCountryName}</td>
+                                        <td>{item.strCountry}</td>
                                         <td>{item.isDefault ? 'Yes' : 'No'}</td>
                                         <td>
                                             <a><i className="fas fa-trash-alt editIcon ml-4"

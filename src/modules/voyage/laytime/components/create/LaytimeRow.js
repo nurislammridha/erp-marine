@@ -15,9 +15,6 @@ const LaytimeRow = () => {
     const laytimeHeaderInput = useSelector((state) => state.laytimeHeaderInfo.laytimeHeaderInput);
     const laytimeRowInput = useSelector((state) => state.laytimeDetailInfo.laytimeRowInput);
     const loading = useSelector((state) => state.laytimeDetailInfo.loading);
-    const layTimeRowList = useSelector((state) => state.laytimeDetailInfo.layTimeRowList);
-
-    console.log("layTimeRowList data by row:",layTimeRowList);
 
     const [show, setShow] = useState(false);
     // handle change lay time row input
@@ -97,19 +94,19 @@ const LaytimeRow = () => {
                                             className="m-3"
                                             type="radio"
                                             label="Loading"
-                                            name="intType"
+                                            name="Loading"
                                             id="formHorizontalRadios1"
                                             value={"Loading"}
-                                            onChange={(e) => handleChangeTextInput('intType', 1)}
+                                            onChange={(e) => handleChangeTextInput('Loading', e.target.value)}
                                         />
                                         <Form.Check
                                             className="m-3"
                                             type="radio"
                                             label="Discharging"
-                                            name="intType"
+                                            name="Loading"
                                             id="formHorizontalRadios1"
                                             value={"Discharging"}
-                                            onChange={(e) => handleChangeTextInput('intType', 2)}
+                                            onChange={(e) => handleChangeTextInput('Loading', e.target.value)}
                                         />
                                     </div>
                                     <div className="row">

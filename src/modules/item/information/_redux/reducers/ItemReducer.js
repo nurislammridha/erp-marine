@@ -1,62 +1,114 @@
 import * as Types from "../types/Types";
 
 const initialState = {
-    itemDataInput: {
-        intDepartmentID: "",
-        strDepartmentName: "",
+    itemAddInput: {
         strItemName: "",
+        strItemDescription: "",
         intUoMID: "",
         strUoM: "",
-        intItemTypeID: "",
-        StrItemTypeName: "",
-        intItemCategoryID: "",
-        strItemCategoryName: "",
-        strSubCategoryName: "",
         strPartNo: "",
         strModelNo: "",
-        strBrand: "",
+        intItemTypeID: "",
+        StrItemTypeNam: "",
+        intItemCategoryID: "",
+        strItemCategoryName: "",
+        intItemSubCategoryID: "",
+        strSubCategoryNam: "",
+        intDepartmentID: "",
         intCatalogueID: "",
+        strIMPACode: "",
         strEngineName: "",
-        strDrwingNumber: ""
+        strDrwingNumbe: "",
+        strItemCode: "",
+        isActive: "",
+        intActionBy: "",
     },
-    multipleItemAdd: []
+    itemInfoMultiple: []
 }
-const ItemReducer = (state = initialState, action) => {
+
+
+const ItemAddReducer = (state = initialState, action) => {
     const newState = { ...state }
-    // console.log('action.payload :>> ', action.payload);
     switch (action.type) {
-        case Types.CHANGE_ITEM_INPUT:
-            const itemDataInput = { ...state.itemDataInput };
-            itemDataInput[action.payload.name] = action.payload.value;
-            return { ...state, itemDataInput };
-        case Types.MULTIPLE_ITEM_ADD_INPUT:
-            const multipleItemAdd = [...state.multipleItemAdd, action.payload];
-            return { ...state, multipleItemAdd, itemDataInput: initialState.itemDataInput }
-        case Types.DELETE_MULTIPLE_ITEM:
-            const multipleItemAddOld = [...state.multipleItemAdd];
-            multipleItemAddOld.splice(action.payload, 1);
+
+
+        case Types.CHANGE_ITEM_ADD_INPUT:
+            const itemAddInput = { ...state.itemAddInput };
+            itemAddInput[action.payload.name] = action.payload.value;
             return {
                 ...state,
-                multipleItemAdd: multipleItemAddOld
-            }
+                itemAddInput,
+            };
+
+        case Types.GET_UOM:
+            return {
+                ...state,
+                UOMOptionData: getUom(action.payload),
+
+            };
+
+        case Types.GET_ITEM_TYPE:
+            return {
+                ...state,
+                itemTypeOptionData: getItemType(action.payload),
+
+            };
+
         case Types.GET_ITEM_CATEGORY:
             return {
                 ...state,
-                itemCategoryList: getItemCategoryList()
-            }
+                itemCategoryOptionData: getItemCategory(action.payload),
+
+            };
         default:
             break;
-
     }
 
     return newState;
 }
 
-export default ItemReducer;
+export default ItemAddReducer;
+
+const getUom = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intUoMId,
+                label: item.strUoM,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+};
 
 
-const getItemCategoryList = () => {
-    // optionItemcategory:[
+const getItemType = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intItemTypeID,
+                label: item.strItemTypeName,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+};
 
-    // ]
-}
+
+const getItemCategory = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intItemCategoryID,
+                label: item.strItemCategoryName,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+};

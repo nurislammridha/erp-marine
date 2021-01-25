@@ -9,8 +9,7 @@ import VoyageListDetailContainer from "../views/VoyageListDetailContainer";
 import VoyageAddContainer from "../views/VoyageAddContainer";
 import LaytimeContainer from "../laytime/views/LaytimeContainer";
 import LaytimeInfoContainer from "../laytime/views/LaytimeInfoContainer";
-import BookingEntryContainer from "../booking/views/BookingEntryContainer";
-import BookingListContainer from "../booking/views/BookingListContainer";
+
 
 const routeVoyage = [
   {
@@ -70,19 +69,6 @@ const routeVoyage = [
     exact: true,
   },
 
-  {
-    path: "/voyage/booking/bookinglist",
-    name: "Booking List",
-    component: BookingListContainer,
-    exact: true,
-  },
-
-  {
-    path: "/voyage/booking/bookingentry",
-    name: "Booking Entry",
-    component: BookingEntryContainer,
-    exact: true,
-  },
 ];
 
 function getVoyageRoutes() {
