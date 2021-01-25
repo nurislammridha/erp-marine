@@ -6,7 +6,7 @@ import LoadableCalculatorContainer from "../information/views/LoadableCalculator
 const routeUtility = [
   {
     path: "/utility/calculator",
-    name: "loadable calculator",
+    name: "loadablecalculator",
     component: LoadableCalculatorContainer,
     exact: true,
   },
