@@ -91,7 +91,7 @@ const BasicInfoEdit = withRouter(({ history }) => {
                                             rules={{ required: true }}
                                             name="intSupplierTypeID"
                                             register={register}
-                                            value={selectOptions.value}
+                                            value={partnerInfoInput.intSupplierTypeID}
                                             onChange={(e) => {
                                                 handleChangeTextInput("intSupplierTypeID", e.value);
                                                 handleChangeTextInput("strSupplierTypeName", e.label);
@@ -171,7 +171,7 @@ const BasicInfoEdit = withRouter(({ history }) => {
                                             rules={{ required: true }}
                                             name="intAction"
                                             register={register}
-                                            value={selectOptions.value}
+                                            value={partnerInfoInput.intAction}
                                             onChange={(e) => {
                                                 handleChangeTextInput("intAction", e.value);
                                             }}
@@ -201,7 +201,7 @@ const BasicInfoEdit = withRouter(({ history }) => {
                                             as={<Select options={taxTypeOptionData} />}
                                             rules={{ required: true }}
                                             name="intTaxTypeId"
-                                            value={partnerInfoInput.intTaxTypeID}
+                                            value={partnerInfoInput.intTaxTypeId}
                                             register={register}
                                             onChange={(e) => {
                                                 handleChangeTextInput("intTaxTypeId", e.value);

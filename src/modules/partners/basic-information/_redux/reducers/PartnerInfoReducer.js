@@ -28,6 +28,7 @@ const initialState = {
     },
     status: false,
     addStatus: false,
+    editStatus: false
 };
 
 const PartnerInfoReducer = (state = initialState, action) => {
@@ -82,6 +83,13 @@ const PartnerInfoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 partnerInfoInput: action.payload,
+            };
+
+        case Types.UPDATE_PARTNER_INFO:
+            return {
+                ...state,
+                editStatus: action.payload.status,
+                isLoading: action.payload.isLoading,
             };
 
         default:

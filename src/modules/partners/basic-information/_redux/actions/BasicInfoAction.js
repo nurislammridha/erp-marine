@@ -231,3 +231,54 @@ export const EditSupplierInfo = (id) => (dispatch) => {
             });
         });
 };
+
+export const UpdatePartnerInfo = () => async (dispatch) => {
+
+    const basicInfo = store.getState().partnerInfo.partnerInfoInput;
+    const addressInfo = store.getState().partnerAddress.addressInfo;
+    const bankInfo = store.getState().bankInfo.bankInfoMultiple;
+    const otherInfo = store.getState().partnerOthersInfo.partnerOtherInfoInput;
+
+    let responseList = {
+        isLoading: true,
+        data: {},
+        status: false,
+    };
+
+    dispatch({
+        type: Types.UPDATE_PARTNER_INFO,
+        payload: responseList,
+    });
+
+    const finalSubmitInputData = {
+        basicInfo: basicInfo,
+        addressInfo: addressInfo,
+        bankInfo: bankInfo,
+        ports: otherInfo.multiplePort,
+        psProvider: otherInfo.multipleProduct,
+        // psType: otherInfo.multipleServiceList,
+    }
+
+    Axios.put(
+        `${process.env.REACT_APP_API_URL}certificate/types/update`,
+        finalSubmitInputData
+    )
+        .then(async (response) => {
+            responseList.data = response.data;
+            responseList.isLoading = false;
+            responseList.status = response.data.status;
+
+            if (response.data.status) {
+                showToast("success", response.data.message);
+            } else {
+                showToast("error", response.data.message);
+            }
+        })
+
+        .catch(function (error) {
+            responseList.isLoading = false;
+            const message =
+                "Something went wrong ! Please fill all inputs and try again !";
+            showToast("error", message);
+        });
+};

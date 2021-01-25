@@ -11,7 +11,8 @@ const initialState = {
         intCountryID: "",
         isDefault: 1
     },
-    addressInfo: []
+    addressInfo: [],
+    isMultipleAdded: false,
 }
 
 const PartnerAddressReducer = (state = initialState, action) => {
@@ -46,8 +47,9 @@ const PartnerAddressReducer = (state = initialState, action) => {
         case Types.SUBMIT_PARTNER_ADDRESS_MULTIPLE:
             return {
                 ...state,
-                addressInfo: [...state.addressInfo, action.payload],
-                partnerAddressInput: initialState.partnerAddressInput
+                addressInfo: [...state.addressInfo, action.payload.data],
+                partnerAddressInput: initialState.partnerAddressInput,
+                isMultipleAdded: action.payload.status
             };
 
         case Types.DELETE_PARTNER_ADDRESS_MULTIPLE:

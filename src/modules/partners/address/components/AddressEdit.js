@@ -25,15 +25,20 @@ const AddressEdit = withRouter(({ history }) => {
     const countryOptionData = useSelector(
         (state) => state.partnerAddress.countryOptionData
     );
-    console.log('countryOptionData', countryOptionData)
+    const isMultipleAdded = useSelector((state) => state.partnerAddress.isMultipleAdded);
+    // console.log('isMultipleAdded', isMultipleAdded)
 
     useEffect(() => {
         dispatch(getCountryName());
-        if (addressInfo.length > 0) {
-            setValue("intCountryID", "");
-        }
-    }, [addressInfo]);
-    console.log('countryOptionData', countryOptionData)
+    }, []);
+
+
+    useEffect(() => {
+        setValue("intCountryID", "");
+
+    }, [isMultipleAdded]);
+
+
 
     const onSubmit = () => {
         // dispatch(partnerAddressSubmit(partnerAddress));

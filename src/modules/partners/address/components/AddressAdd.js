@@ -29,10 +29,7 @@ const AddressAdd = withRouter(({ history }) => {
 
     useEffect(() => {
         dispatch(getCountryName());
-        if (addressInfo.length > 0) {
-            setValue("intCountryID", "");
-        }
-    }, [addressInfo]);
+    }, []);
     console.log('countryOptionData', countryOptionData)
 
     const onSubmit = () => {

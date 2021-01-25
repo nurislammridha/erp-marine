@@ -26,6 +26,10 @@ export const partnerAddressSubmit = () => {
 
 export const partnerAddressSubmitMultiple = (partnerAddress) => (dispatch) => {
     console.log('address', partnerAddress)
+    let responseList = {
+        data: {},
+        status: false,
+    };
     // Check Inputs for validation
     if (partnerAddress.strSupplierAddress === undefined || partnerAddress.strSupplierAddress === null || partnerAddress.strSupplierAddress.length < 1) {
         showToast("error", "Address should not be empty");
@@ -54,8 +58,9 @@ export const partnerAddressSubmitMultiple = (partnerAddress) => (dispatch) => {
     partnerAddress.isActive = 1;
     partnerAddress.intCountryID = parseInt(partnerAddress.intCountryID);
     // If Validate, then add multiple dataset [] in addressInfo
-
-    dispatch({ type: Types.SUBMIT_PARTNER_ADDRESS_MULTIPLE, payload: partnerAddress })
+    responseList.data = partnerAddress
+    responseList.status = true
+    dispatch({ type: Types.SUBMIT_PARTNER_ADDRESS_MULTIPLE, payload: responseList })
     // const res = partnerAddress;
     // dispatch({ type: Types.SUBMIT_PARTNER_ADDRESS, payload: res})
 }
