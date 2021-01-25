@@ -64,6 +64,11 @@ const PartnerAddressReducer = (state = initialState, action) => {
                 partnerAddressInput: initialState.partnerAddressInput,
                 addressInfo: initialState.addressInfo,
             };
+        case Types.EDIT_ADDRESS_INFO:
+            return {
+                ...state,
+                partnerAddressInput: action.payload
+            }
         default:
             break;
     }

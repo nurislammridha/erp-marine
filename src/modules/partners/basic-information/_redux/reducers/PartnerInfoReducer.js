@@ -77,6 +77,13 @@ const PartnerInfoReducer = (state = initialState, action) => {
                 ...state,
                 partnerInfoInput: initialState.partnerInfoInput,
             };
+
+        case Types.EDIT_PARTNER_INFO:
+            return {
+                ...state,
+                partnerInfoInput: action.payload,
+            };
+
         default:
             break;
     }

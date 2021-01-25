@@ -20,7 +20,7 @@ const routePartners = [
     },
     {
         path: "/suppliers/info/edit/:id",
-        name: "partners info add",
+        name: "partners info edit",
         component: SupplierInfoEditContainer,
         exact: true,
     }

@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
-import { withRouter } from "react-router-dom";
+import { withRouter, useParams } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { getBusinessType, getPartnerType, getTaxType, handleChangePartnerInfoInput } from '../_redux/actions/BasicInfoAction';
+import { EditSupplierInfo, getBusinessType, getPartnerType, getTaxType, handleChangePartnerInfoInput } from '../_redux/actions/BasicInfoAction';
 
 
 const BasicInfoEdit = withRouter(({ history }) => {
+    const { id } = useParams();
 
     const selectOptions = [
         {
@@ -28,6 +29,10 @@ const BasicInfoEdit = withRouter(({ history }) => {
             value: "4"
         }
     ]
+
+    useEffect(() => {
+        dispatch(EditSupplierInfo(id));
+    }, []);
 
 
     const { register, handleSubmit, errors, setValue } = useForm();
