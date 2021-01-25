@@ -248,7 +248,7 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
 
     Axios.post(`${process.env.REACT_APP_API_URL}voyage/layTimeHeaderRow`, laytimeHeaderInput)
         .then((res) => {
-            console.log('res :>> ', res);
+            console.log('res row data :>> ', res);
             responseList.data = res.data;
             responseList.loading = false;
             responseList.status = res.data.status;
@@ -270,6 +270,8 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
 
 // laytime demurrage input 
 export const deleteMultipleList = (data) => (dispatch) => {
+    
+    Axios.delete(`${process.env.REACT_APP_API_URL}voyage/layTimeHeaderRow/${data.intLayTimeRowID}`);
     dispatch({
         type: Types.DELETE_LAYTIMEROW_DATA,
         payload: data,

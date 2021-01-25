@@ -26,6 +26,8 @@ const LaytimeMultipleAdd = () => {
   const laytimeDatList = useSelector(
     (state) => state.laytimeDetailInfo.laytimeDatList
   );
+  
+
   const laytimeOperationData = useSelector((state)=> state.LaytimeMultiple.laytimeOperationData);
   const laytimeDetailsData = useSelector(
     (state) => state.LaytimeMultiple.laytimeDetailsData

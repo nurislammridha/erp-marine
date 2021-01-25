@@ -74,7 +74,8 @@ const LaytimeRowReducer = (state = initialState, action) => {
             };
         case Types.LAYTIME_DATA_SUBMIT:
             let cloneObj = state.laytimeDatList;
-           cloneObj.push(action.payload.layTimeRowList);
+            console.log('action.payload laytie', action.payload);
+           cloneObj.push(action.payload.data.data);
 
             if (action.payload.status) {
                 return {
