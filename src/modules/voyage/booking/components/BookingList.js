@@ -20,9 +20,10 @@ const BookingList = () => {
       <Card.Body>
         <div className="container ">
           <div className="row mb-5 table-form ">
-            <h1 className="tableheading ">Booking List</h1>
+            <h1 className="tableheading mt-0 ">Booking List</h1>
+
             <hr></hr>
-            <div className="col-xl-4 col-lg-4 col-md-6 mb-2">
+            <div className="col-xl-4 col-lg-4 col-5 mb-2">
               <Paper className="searchInput">
                 <IconButton aria-label="Search" className="searchPlaceholder">
                   <i className="flaticon-search "></i>
@@ -35,8 +36,7 @@ const BookingList = () => {
                 />
               </Paper>
             </div>
-            <div className="col-xl-3 col-lg-3 col-md-6 col-0"></div>
-            <div className="col-xl-3 col-lg-3 col-md-6 col-0"></div>
+            {/* <div className="col-xl-6 col-lg-6 col-md-6 col-sm-0"></div> */}
 
             <div>
               <Link to="/voyage/booking/bookingentry">

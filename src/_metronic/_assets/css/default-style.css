@@ -964,3 +964,28 @@ td {
 /* height: 29px;
     padding: 5px;
 } */
+
+
+/* border-radius: 3px;
+} */
+
+.MuiPaper-elevation1 {
+    box-shadow: none 0px !important;
+}
+
+.booking-list-btn {
+    background: #fff2d8 !important;
+    border: 1px solid #fff2d8 !important;
+}
+
+.form-group label {
+    font-size: 10px !important;
+}
+
+span#inputGroupPrepend {
+    height: 20px !important;
+}
+
+.MuiPaper-root.searchInput.MuiPaper-elevation1.MuiPaper-rounded {
+    box-shadow: none !important;
+}
