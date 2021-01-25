@@ -1,6 +1,6 @@
 import { Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Select from "react-select";
 import { Tab, Tabs } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import DatePicker from "react-datepicker";
 import { deleteMultipleList } from "../../_redux/actions/LaytimeAction";
-import { handleChangeLaytimeMultiple } from "../../_redux/actions/LaytimeMultiple";
+import { getRemarkList, handleChangeLaytimeMultiple } from "../../_redux/actions/LaytimeMultiple";
 
 const LaytimeMultipleAdd = () => {
   const selectCount = [
@@ -22,11 +22,20 @@ const LaytimeMultipleAdd = () => {
     },
   ];
 
+  const remarkList = useSelector(
+    (state) => state.layTimeOperationRemark.remarkList
+  );
+  
+  console.log("layTimeOperationList : ",remarkList);
+
   const dispatch = useDispatch();
   const laytimeDatList = useSelector(
     (state) => state.laytimeDetailInfo.laytimeDatList
   );
-  
+
+  useEffect(() => {
+    dispatch(getRemarkList());
+  }, []);
 
   const laytimeOperationData = useSelector((state)=> state.LaytimeMultiple.laytimeOperationData);
   const laytimeDetailsData = useSelector(
@@ -200,22 +209,28 @@ const LaytimeMultipleAdd = () => {
                             />
                           </td>
                           <td>
-                            <Form.Control
-                              type="text"
-                              name="strRemarks"
-                              className="fromStyle formHeight"
-                              value={laytimeDetailsData.strRemarks}
-                              onChange={(e) =>
-                                handleChangeTextInput(
-                                  "strRemarks",
-                                  e.target.value
-                                )
-                              }
-                              ref={register({
-                                required: true,
-                                maxLength: 100,
-                              })}
-                            />
+                          <RHFInput
+                          as={<Select options={remarkList} />}
+                          rules={{ required: true }}
+                          name="strRemarks"
+                          register={register}
+                          value={remarkList.strOperationRemark}
+                          onChange={(option) => {
+                            handleChangeTextInput(
+                              "strOperationRemark",
+                              option.label
+                            );
+                            handleChangeTextInput(
+                              "intOperationRemarkID",
+                              option.value
+                            );
+                          }}
+                          ref={register({
+                            required: true,
+                            maxLength: 100,
+                          })}
+                          setValue={setValue}
+                        />
                           </td>
                           <td className="text-right pr-3 mt-3">
                             <a className="btn btn-icon btn-light btn-hover-danger btn-sm">
@@ -251,16 +266,28 @@ const LaytimeMultipleAdd = () => {
                             />
                           </td>
                           <td>
-                            <Form.Control
-                              type="text"
-                              name=""
-                              className="fromStyle formHeight"
-                              value={laytimeOperationData}
-                              ref={register({
-                                required: true,
-                                maxLength: 100,
-                              })}
-                            />
+                          <RHFInput
+                          as={<Select options={remarkList} />}
+                          rules={{ required: true }}
+                          name="strOperationRemark"
+                          register={register}
+                          value={remarkList.strOperationRemark}
+                          onChange={(option) => {
+                            handleChangeTextInput(
+                              "strOperationRemark",
+                              option.label
+                            );
+                            handleChangeTextInput(
+                              "intOperationRemarkID",
+                              option.value
+                            );
+                          }}
+                          ref={register({
+                            required: true,
+                            maxLength: 100,
+                          })}
+                          setValue={setValue}
+                        />
                           </td>
 
                           <td className="text-right pr-3 mt-3">

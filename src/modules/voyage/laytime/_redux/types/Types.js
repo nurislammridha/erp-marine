@@ -17,3 +17,7 @@ export const DELETE_LAYTIMEROW_DATA = "DELETE_LAYTIMEROW_DATA";
 //laytime multiple
 
 export const LAYTIME_MULTIPLE_DATA = "LAYTIME_MULTIPLE_DATA";
+
+//remark list
+
+export const GET_ROWTIME_REMARK_LIST = "GET_ROWTIME_REMARK_LIST";
