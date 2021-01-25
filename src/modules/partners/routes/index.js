@@ -2,6 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import SuppliersListContainer from "../suppliers-list/views/SuppliersListContainer";
 import partnerInfoContainer from "../view/partnerInfoContainer";
+import SupplierInfoEditContainer from "../view/SupplierInfoEditContainer";
 
 
 const routePartners = [
@@ -15,6 +16,12 @@ const routePartners = [
         path: "/partners/info",
         name: "partners info add",
         component: partnerInfoContainer,
+        exact: true,
+    },
+    {
+        path: "/suppliers/info/edit/:id",
+        name: "partners info add",
+        component: SupplierInfoEditContainer,
         exact: true,
     }
 

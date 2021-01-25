@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import LoadingSpinner from '../../../master/spinner/LoadingSpinner';
+import { Link } from "react-router-dom";
+import LoadingSpinner from '../../../master/spinner/LoadingSpinner'
 import { getSupplierList } from '../_redux/actions/SuppliersListAction'
 
 const SuppliersList = () => {
@@ -49,10 +50,12 @@ const SuppliersList = () => {
                                             <a>
                                                 <i className="fas fa-eye"></i>
                                             </a> &nbsp;&nbsp;
-                        <a>
+                                            <Link
+                                                to={`/suppliers/info/edit/${item.intSupplierId}`}
+                                            >
                                                 <i className="fas fa-edit"></i>
-                                            </a> &nbsp;&nbsp;
-                        <a>
+                                            </Link> &nbsp;&nbsp;
+                                            <a>
                                                 <i className="fas fa-trash-alt"></i>
                                             </a>
                                         </td>
