@@ -76,15 +76,15 @@
 /* custom form design */
 
 .formHeight {
-    height: 30px;
+    height: 20px !important;
     background: #fff;
-    font-size: 12px !important;
+    font-size: 10px !important;
     font-weight: 400;
 }
 
 .css-1fhf3k1-control {
-    height: 30px!important;
-    min-height: 30px!important;
+    height: 20px !important;
+    min-height: 20px !important;
 }
 
 .form-input-white {
@@ -92,7 +92,7 @@
 }
 
 .formFont {
-    font-size: 11px !important;
+    font-size: 10px !important;
     margin-bottom: 0px !important;
 }
 
@@ -106,8 +106,8 @@ button.saveButton {
 
 .cancelButton {
     background-color: #e5eaee !important;
-    height: 29px;
-    line-height: 10px;
+    /* height: 29px; */
+    line-height: 12px !important;
     color: #464e5f !important;
     font-weight: 400;
     border-radius: 3px;
@@ -504,9 +504,9 @@ i.editIcon {
 
 
 /* i.editIcon:hover {
-  border: 2px solid #8950fc;
-  padding: 8px;
-} */
+    border: 2px solid #8950fc;
+    padding: 8px;
+  } */
 
 input.form-check-input.position-static {
     background: #f3f6f9;
@@ -610,37 +610,50 @@ i.tableFilter {
 /* basic form */
 
 .css-1okebmr-indicatorSeparator {
-    margin-top: 4px !important;
+    margin-top: 2px !important;
+    margin-bottom: 20px !important;
 }
 
 .css-yk16xz-control {
     background: #fff !important;
-    height: 30px !important;
-    min-height: 30px !important;
+    height: 20px !important;
+    min-height: 20px !important;
     border: 1px solid #e5eaee !important;
 }
 
 .css-1pahdxg-control {
     background: #fff !important;
-    height: 30px !important;
-    min-height: 30px !important;
+    height: 20px !important;
+    min-height: 20px !important;
     border: 1px solid #e5eaee !important;
 }
 
 .css-g1d714-ValueContainer {
     padding: 3px !important;
+    /* margin-top: -5px !important; */
+}
+
+.css-26l3qy-menu {
+    padding: 0px !important;
+}
+
+.css-1laa021-a11yText {
+    padding: 0px !important;
 }
 
 .css-1wa3eu0-placeholder {
-    top: 44% !important;
+    top: 25% !important;
+    font-size: 10px !important;
 }
 
-.css-tlfecz-indicatorContainer {
-    padding-top: 2px !important;
+.css-tlfecz-indicatorContainer,
+.css-1gtu0rj-indicatorContainer {
+    margin-top: -17px !important;
 }
 
 .css-1uccc91-singleValue {
-    top: 44% !important;
+    top: 26% !important;
+    font-size: 10px !important;
 }
 
 .searchInput {
@@ -715,7 +728,8 @@ input[type="file"] {
 i.fas.fa-calendar-alt {
     position: absolute;
     top: 25px;
-    left: 254px;
+    right: 20px !important;
+    font-size: 10px !important;
 }
 
 .page-item.active .page-link {
@@ -732,7 +746,7 @@ input.date-picker,
 input.react-datepicker-ignore-onclickoutside {
     width: 100% !important;
     border-radius: 6px;
-    height: 30px;
+    height: 20px;
     border: 1px solid #e5eaee;
     font-size: 10px !important;
     color: #464e5f;
@@ -834,7 +848,7 @@ p.show-value-text {
     font-size: 12px !important;
 }
 
-::-webkit-file-upload-button {
+ ::-webkit-file-upload-button {
     background: #f3f6f9;
     border: 1px solid #e5eaee;
     box-sizing: border-box;
@@ -961,13 +975,22 @@ td {
 }
 
 
-/* height: 29px;
-    padding: 5px;
-} */
+/* booking entry */
 
+.booking-entry-input.form-group {
+    margin-left: -13px;
+    width: 112% !important;
+}
 
-/* border-radius: 3px;
-} */
+.input-group {
+    width: 112% !important;
+}
+
+.booking-btn {
+    background-color: #007bff !important;
+    line-height: 12px !important;
+    border-radius: 3px;
+}
 
 .MuiPaper-elevation1 {
     box-shadow: none 0px !important;
