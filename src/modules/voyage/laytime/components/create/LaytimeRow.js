@@ -15,6 +15,10 @@ const LaytimeRow = () => {
     const laytimeHeaderInput = useSelector((state) => state.laytimeHeaderInfo.laytimeHeaderInput);
     const laytimeRowInput = useSelector((state) => state.laytimeDetailInfo.laytimeRowInput);
     const loading = useSelector((state) => state.laytimeDetailInfo.loading);
+    const layTimeRowList = useSelector((state) => state.laytimeDetailInfo.layTimeRowList);
+    const laytimeDatList = useSelector((state) => state.laytimeDetailInfo.laytimeDatList);
+
+    // console.log("layTimeRowList data by row:",laytimeDatList);
 
     const [show, setShow] = useState(false);
     // handle change lay time row input
@@ -447,7 +451,7 @@ const LaytimeRow = () => {
                 show && (
                     <div className="row">
                         <div className="col-md-9">
-                            <LaytimeMultipleAdd />
+                            <LaytimeMultipleAdd laytimeDatList={laytimeDatList}/>
                         </div>
                     </div>
                 )

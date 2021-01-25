@@ -123,110 +123,114 @@ export const handleChangeLaytimeRowInput = (name, value) => (dispatch) => {
 
 //submit laytime data 
 export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setShow) => async (dispatch) => {
-    if (laytimeHeaderInput.intCharterVoyageID === null) {
-        showToast('error', "Laytime header can't be blank!")
-        return false;
-    }
-    if (laytimeHeaderInput.demurrages.length === 0) {
-        showToast('error', "Please add minimum one demurrage!")
-        return false;
-    }
-    if (laytimeHeaderInput.strOnceOnDemmurrage.length === 0) {
-        showToast('error', "Please select once demmurrage!")
-        return false;
-    }
-    if (laytimeRowInput.intPortID === null) {
-        showToast('error', "Port can't be blank!")
-        return false;
-    }
-    if (laytimeRowInput.dteLaytimeCommenced.length === 0) {
-        showToast('error', "Laytime commenced can't be blank!")
-        return false;
-    }
-    if (laytimeRowInput.dteLaytimeCompleted.length === 0) {
-        showToast('error', "Laytime completed can't be blank!")
-        return false;
-    }
-    if (laytimeRowInput.intCargoID === null) {
-        showToast('error', "Cargo can't be blank!")
-        return false;
-    }
-    if (laytimeRowInput.numBLQty === null) {
-        showToast('error', "B/L Quantity can't be blank!")
-        return false;
-    }
-    if (laytimeRowInput.intTermsID === null) {
-        showToast('error', "Terms can't be blank!")
-        return false;
-    }
-    if (laytimeRowInput.numTimeAllowence === null) {
-        showToast('error', "Time allowed can't be blank!")
-        return false;
-    }
-    // if (laytimeRowInput.numTimeAllowence.length === 0) {
+    // if (laytimeHeaderInput.intCharterVoyageID === null) {
+    //     showToast('error', "Laytime header can't be blank!")
+    //     return false;
+    // }
+    // if (laytimeHeaderInput.demurrages.length === 0) {
+    //     showToast('error', "Please add minimum one demurrage!")
+    //     return false;
+    // }
+    // if (laytimeHeaderInput.strOnceOnDemmurrage.length === 0) {
+    //     showToast('error', "Please select once demmurrage!")
+    //     return false;
+    // }
+    // if (laytimeRowInput.intPortID === null) {
+    //     showToast('error', "Port can't be blank!")
+    //     return false;
+    // }
+    // if (laytimeRowInput.dteLaytimeCommenced.length === 0) {
+    //     showToast('error', "Laytime commenced can't be blank!")
+    //     return false;
+    // }
+    // if (laytimeRowInput.dteLaytimeCompleted.length === 0) {
+    //     showToast('error', "Laytime completed can't be blank!")
+    //     return false;
+    // }
+    // if (laytimeRowInput.intCargoID === null) {
+    //     showToast('error', "Cargo can't be blank!")
+    //     return false;
+    // }
+    // if (laytimeRowInput.numBLQty === null) {
+    //     showToast('error', "B/L Quantity can't be blank!")
+    //     return false;
+    // }
+    // if (laytimeRowInput.intTermsID === null) {
+    //     showToast('error', "Terms can't be blank!")
+    //     return false;
+    // }
+    // if (laytimeRowInput.numTimeAllowence === null) {
     //     showToast('error', "Time allowed can't be blank!")
     //     return false;
     // }
-    if (laytimeRowInput.intAdditionalDay === null) {
-        showToast('error', "Additional/saved times can't be blank!")
-        return false;
-    }
-    if (laytimeRowInput.numAdditionalHrs === null) {
-        showToast('error', "Additional hrs can't be blank!")
-        return false;
-    }
-    if (laytimeRowInput.dteTermArraivalTime.length === 0) {
-        showToast('error', "Arrival time can't be blank!")
-        return false;
-    }
-    if (laytimeRowInput.dteTermSailTime.length === 0) {
-        showToast('error', "Sailing time can't be blank!")
-        return false;
-    }
-    if (laytimeRowInput.numDemurrageRate === null) {
-        showToast('error', "Demurrage rate can't be blank!")
-        return false;
-    }
-    if (laytimeRowInput.intDemurrageCurrID === null) {
-        showToast('error', "USD can't be blank!")
-        return false;
-    }
-    if (laytimeRowInput.numDespatchRate === null) {
-        showToast('error', "Despatch rate can't be blank!")
-        return false;
-    }
-    if (laytimeRowInput.numDespatchRatePercent === null) {
-        showToast('error', "Percentage can't be blank!")
-        return false;
-    }
-    if (laytimeRowInput.dteNORtender.length === 0) {
-        showToast('error', "NOR tender can't be blank!")
-        return false;
-    }
-    if (laytimeRowInput.numLodingOrDischargeRate === null) {
-        showToast('error', "Load rate can't be blank!")
-        return false;
-    }
-    const layTimeRowData = {
-        intPortID: laytimeRowInput.intPortID,
-        dteLaytimeCommenced: laytimeRowInput.dteLaytimeCommenced,
-        dteLaytimeCompleted: laytimeRowInput.dteLaytimeCompleted,
-        intCargoID: laytimeRowInput.intCargoID,
-        numBLQty: laytimeRowInput.numBLQty,
-        intTermsID: laytimeRowInput.intTermsID,
-        numTimeAllowence: laytimeRowInput.numTimeAllowence,
-        intAdditionalDay: laytimeRowInput.intAdditionalDay,
-        numAdditionalHrs: laytimeRowInput.numAdditionalHrs,
-        dteTermArraivalTime: laytimeRowInput.dteTermArraivalTime,
-        dteTermSailTime: laytimeRowInput.dteTermSailTime,
-        numDemurrageRate: laytimeRowInput.numDemurrageRate,
-        intDemurrageCurrID: laytimeRowInput.intDemurrageCurrID,
-        numDespatchRate: laytimeRowInput.numDespatchRate,
-        numDespatchRatePercent: laytimeRowInput.numDespatchRatePercent,
-        dteNORtender: laytimeRowInput.dteNORtender,
-        numLodingOrDischargeRate: laytimeRowInput.numLodingOrDischargeRate,
-    }
-    laytimeHeaderInput.intActionBy = await getEmployeeId()
+    // // if (laytimeRowInput.numTimeAllowence.length === 0) {
+    // //     showToast('error', "Time allowed can't be blank!")
+    // //     return false;
+    // // }
+    // if (laytimeRowInput.intAdditionalDay === null) {
+    //     showToast('error', "Additional/saved times can't be blank!")
+    //     return false;
+    // }
+    // if (laytimeRowInput.numAdditionalHrs === null) {
+    //     showToast('error', "Additional hrs can't be blank!")
+    //     return false;
+    // }
+    // if (laytimeRowInput.dteTermArraivalTime.length === 0) {
+    //     showToast('error', "Arrival time can't be blank!")
+    //     return false;
+    // }
+    // if (laytimeRowInput.dteTermSailTime.length === 0) {
+    //     showToast('error', "Sailing time can't be blank!")
+    //     return false;
+    // }
+    // if (laytimeRowInput.numDemurrageRate === null) {
+    //     showToast('error', "Demurrage rate can't be blank!")
+    //     return false;
+    // }
+    // if (laytimeRowInput.intDemurrageCurrID === null) {
+    //     showToast('error', "USD can't be blank!")
+    //     return false;
+    // }
+    // if (laytimeRowInput.numDespatchRate === null) {
+    //     showToast('error', "Despatch rate can't be blank!")
+    //     return false;
+    // }
+    // if (laytimeRowInput.numDespatchRatePercent === null) {
+    //     showToast('error', "Percentage can't be blank!")
+    //     return false;
+    // }
+    // if (laytimeRowInput.dteNORtender.length === 0) {
+    //     showToast('error', "NOR tender can't be blank!")
+    //     return false;
+    // }
+    // if (laytimeRowInput.numLodingOrDischargeRate === null) {
+    //     showToast('error', "Load rate can't be blank!")
+    //     return false;
+    // }
+    const layTimeRowData = [
+        {
+            intPortID: laytimeRowInput.intPortID,
+            intType: laytimeRowInput.intType,
+            dteLaytimeCommenced: laytimeRowInput.dteLaytimeCommenced,
+            dteLaytimeCompleted: laytimeRowInput.dteLaytimeCompleted,
+            intCargoID: laytimeRowInput.intCargoID,
+            numBLQty: laytimeRowInput.numBLQty,
+            intTermsID: laytimeRowInput.intTermsID,
+            numTimeAllowence: laytimeRowInput.numTimeAllowence,
+            intAdditionalDay: laytimeRowInput.intAdditionalDay,
+            numAdditionalHrs: laytimeRowInput.numAdditionalHrs,
+            dteTermArraivalTime: laytimeRowInput.dteTermArraivalTime,
+            dteTermSailTime: laytimeRowInput.dteTermSailTime,
+            numDemurrageRate: laytimeRowInput.numDemurrageRate,
+            intDemurrageCurrID: laytimeRowInput.intDemurrageCurrID,
+            numDespatchRate: laytimeRowInput.numDespatchRate,
+            numDespatchRatePercent: laytimeRowInput.numDespatchRatePercent,
+            dteNORtender: laytimeRowInput.dteNORtender,
+            numLodingOrDischargeRate: laytimeRowInput.numLodingOrDischargeRate,
+        }
+    ];
+
+    laytimeHeaderInput.intActionBy = 1;
     const intShipID = await getVesselId();
     if (typeof intShipID === 'undefined' || intShipID === null || intShipID === "") {
         laytimeHeaderInput.intShipID = 1;
@@ -250,7 +254,8 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
             responseList.status = res.data.status;
             if (responseList.status === true) {
                 showToast("success", res.data.message);
-                dispatch({ type: Types.LAYTIME_DATA_SUBMIT, payload: false })
+                dispatch({ type: Types.LAYTIME_DATA_SUBMIT, payload: responseList })
+                setShow(true)
             } else {
                 showToast("error", res.data.message);
             }
@@ -262,3 +267,11 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
             dispatch({ type: Types.LAYTIME_DATA_SUBMIT, payload: false });
         });
 }
+
+// laytime demurrage input 
+export const deleteMultipleList = (data) => (dispatch) => {
+    dispatch({
+        type: Types.DELETE_LAYTIMEROW_DATA,
+        payload: data,
+    });
+};

@@ -52,6 +52,7 @@ import SuppliersListReducer from "../modules/partners/suppliers-list/_redux/redu
 import ItemReducer from "../modules/item/information/_redux/reducers/ItemReducer";
 import VesselBookingReducer from "../modules/voyage/booking/_redux/reducers/VesselBookingReducer";
 import ItemAddReducer from "../modules/item/information/_redux/reducers/ItemReducer";
+import LaytimeMultiple from "../modules/voyage/laytime/_redux/reducers/LaytimeMultiple";
 
 /** 
 | Domain : CCO
@@ -99,6 +100,7 @@ export const rootReducer = combineReducers({
   /** Laytime Reducers */
   laytimeHeaderInfo: LaytimeHeaderReducer,
   laytimeDetailInfo: LaytimeRowReducer,
+  LaytimeMultiple: LaytimeMultiple,
 
   //Vessel Booking 
   VesselBookingReducer: VesselBookingReducer,
