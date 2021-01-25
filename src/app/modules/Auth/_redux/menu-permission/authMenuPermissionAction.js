@@ -304,6 +304,23 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
             },
           ],
         },
+        {
+          subModuleName: "Booking",
+          subModuleRouteUrl: "/voyage/booking/bookinglist",
+          subModuleIcon: "menu-bullet menu-bullet-dot",
+          features: [
+            {
+              featureName: "Booking List",
+              featureRouteUrl: "/voyage/booking/bookinglist",
+              featureIcon: "menu-bullet menu-bullet-dot",
+            },
+            {
+              featureName: "Booking Entry",
+              featureRouteUrl: "/voyage/booking/bookingentry",
+              featureIcon: "menu-bullet menu-bullet-dot",
+            },
+          ],
+        },
       ],
     },
 
