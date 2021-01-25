@@ -157,7 +157,6 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
       moduleRouteUrl: "/partners",
       moduleImageIcon: "/media/svg/icons/Code/partner.svg",
       subModules: [
-
         {
           subModuleName: "Suppliers Info",
           subModuleRouteUrl: "/partners/info",
@@ -201,6 +200,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
         },
       ],
     },
+
     // {
     //   moduleName: "Procurement",
     //   moduleRouteUrl: "/vessels/list",
@@ -400,6 +400,30 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
               featureRouteUrl: "/report/day-report",
               featureIcon: "menu-bullet menu-bullet-dot",
             },
+          ],
+        },
+      ],
+    },
+    {
+      moduleName: "Utility",
+      moduleRouteUrl: "/utility",
+      moduleImageIcon: "/media/svg/icons/Code/report.svg",
+      subModules: [
+        {
+          subModuleName: "Utility Info",
+          subModuleRouteUrl: "/utility/info",
+          subModuleIcon: "menu-bullet menu-bullet-dot",
+          features: [
+            {
+              featureName: "Loadable Calculator",
+              featureRouteUrl: "/utility/calculator",
+              featureIcon: "menu-bullet menu-bullet-dot",
+            },
+            // {
+            //   featureName: "Utility Add",
+            //   featureRouteUrl: "/Utility/add",
+            //   featureIcon: "menu-bullet menu-bullet-dot",
+            // },
           ],
         },
       ],
