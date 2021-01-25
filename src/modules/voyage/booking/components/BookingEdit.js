@@ -9,23 +9,22 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import { useDispatch, useSelector } from "react-redux";
-import { getBookingBrokerData, handleVesselBookingInput, VesselBookingSubmit } from "../_redux/actions/VesselBookingAddAction";
+import { handleVesselBookingInput, VesselBookingSubmit } from "../_redux/actions/VesselBookingAddAction";
 import moment from 'moment';
 import { useParams } from "react-router-dom";
+import { getVoyageType } from "../../../master/DropDownData/VoyageType/_redux/VoyageTypeAction/VoyageTypeAction";
 
 const BookingEdit = () => {
   const { id } = useParams()
   const { register, setValue } = useForm();
   const dispatch = useDispatch();
 
-  const brokerList = useSelector((state) => state.VesselBookingReducer.brokerList);
   const VesselBooking = useSelector((state) => state.VesselBookingReducer.VesselBooking);
   const isLoading = useSelector((state) => state.VesselBookingReducer.isLoading);
-  console.log('isLoading :>> ', isLoading);
-  console.log('VesselBooking :>> ', VesselBooking);
+  const voyageTypeList = useSelector((state) => state.VoyageTypeReducer.voyageTypeList);
 
   useEffect(() => {
-    dispatch(getBookingBrokerData());
+    dispatch(getVoyageType());
 
   }, [])
 
@@ -48,7 +47,7 @@ const BookingEdit = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Broker Name</label>
               <RHFInput
-                as={<Select options={brokerList} />}
+                as={<Select options={VesselBooking} />}
                 rules={{ required: false }}
                 name="intBrokerId"
                 register={register}
@@ -64,7 +63,7 @@ const BookingEdit = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Charter Name</label>
               <RHFInput
-                as={<Select options={brokerList} />}
+                as={<Select options={VesselBooking} />}
                 rules={{ required: false }}
                 name="intCharterId"
                 register={register}
@@ -79,7 +78,7 @@ const BookingEdit = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Ship Name</label>
               <RHFInput
-                as={<Select options={brokerList} />}
+                as={<Select options={VesselBooking} />}
                 rules={{ required: false }}
                 name="intShipId"
                 register={register}
@@ -94,7 +93,7 @@ const BookingEdit = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Voyage Type</label>
               <RHFInput
-                as={<Select options={brokerList} />}
+                as={<Select options={VesselBooking} />}
                 rules={{ required: false }}
                 name="intVoyageTypeId"
                 register={register}
@@ -111,7 +110,7 @@ const BookingEdit = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Load Port/ Commence Port</label>
               <RHFInput
-                as={<Select options={brokerList} />}
+                as={<Select options={VesselBooking} />}
                 rules={{ required: false }}
                 name="intCommencePortId"
                 register={register}
@@ -144,7 +143,7 @@ const BookingEdit = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Dischanging/ Completion Port</label>
               <RHFInput
-                as={<Select options={brokerList} />}
+                as={<Select options={VesselBooking} />}
                 rules={{ required: false }}
                 name="intCompletionPortId"
                 register={register}
@@ -195,7 +194,7 @@ const BookingEdit = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Freight/ Hire Rate</label>
               {/* <RHFInput
-                as={<Select options={brokerList} />}
+                as={<Select options={VesselBooking} />}
                 rules={{ required: false }}
                 name="numFreightOrHireRate"
                 register={register}
@@ -254,7 +253,7 @@ const BookingEdit = () => {
                 {/* <Form.Label className="formFont pl-1">Cargo</Form.Label> */}
                 <label className="formFont">Cargo</label>
                 <RHFInput
-                  as={<Select options={brokerList} />}
+                  as={<Select options={VesselBooking} />}
                   rules={{ required: false }}
                   name="intCargoId"
                   register={register}

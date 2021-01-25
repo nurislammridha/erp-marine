@@ -46,11 +46,6 @@ const VesselBookingReducer = (state = initialstate, action) => {
     const newState = { ...state };
 
     switch (action.type) {
-        case Types.GET_BROKER_LIST:
-            return {
-                ...state,
-                brokerList: getBrokerData(action.payload),
-            };
         case Types.VESSEL_BOOKING_INPUT_CHANGE:
             const VesselBooking = { ...state.VesselBooking };
             VesselBooking[action.payload.name] = action.payload.value;
@@ -89,19 +84,5 @@ const VesselBookingReducer = (state = initialstate, action) => {
             break;
     }
     return newState;
-};
-// Broker list
-const getBrokerData = (data) => {
-    let options = [];
-    if (data) {
-        data.forEach((item) => {
-            let itemData = {
-                value: item.intCategoryID,
-                label: item.strCertificateCategoryName,
-            };
-            options.push(itemData);
-        });
-    }
-    return options;
 };
 export default VesselBookingReducer;
