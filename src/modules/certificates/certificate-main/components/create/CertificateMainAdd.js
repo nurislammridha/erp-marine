@@ -89,7 +89,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
     dispatch(getCertificateCategory());
     dispatch(getCertificateType());
     dispatch(getCertificateIssueBy());
-    dispatch(getCertificateName());
     dispatch(getCertificateParentCategoryData());
     dispatch(getCertificateStatusData());
   }, []);
@@ -171,6 +170,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         value: option.value,
                       }));
                       dispatch(handleCertificateCategoryInput('intParentsCategoryID', option.value));
+                      dispatch(getCertificateName(option.value));
                     }}
                     setValue={setValue}
                   />
@@ -196,6 +196,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                             "intCategoryID",
                             option.value
                           );
+                          dispatch(getCertificateName(option.value));
                         }}
                         setValue={setValue}
                       />

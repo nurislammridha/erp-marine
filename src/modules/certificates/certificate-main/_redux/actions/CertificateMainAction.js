@@ -40,7 +40,7 @@ export const handleChangeProductInputAction = (
 
 // submit main certificate info
 export const MainCertificateCreateAction = (certificateInfoInput) => async (dispatch) => {
-console.log('certificateInfoInput :>> ', certificateInfoInput);
+  console.log('certificateInfoInput :>> ', certificateInfoInput);
   const vesselID = getVesselId();
   if (vesselID === null) {
     certificateInfoInput.intVesselID = 1;
@@ -68,7 +68,7 @@ console.log('certificateInfoInput :>> ', certificateInfoInput);
     showToast("error", "Issue Autherity can't be blank!");
     return false;
   }
-  
+
   if (certificateInfoInput.dteCertificateIssueDate === null || certificateInfoInput.dteCertificateIssueDate === "") {
     showToast("error", "Issue date can't be blank!");
     return false;
@@ -354,14 +354,23 @@ export const getCertificateCategory = (data) => (dispatch) => {
     }
   );
 };
-export const getCertificateName = (data) => (dispatch) => {
-  Axios.get(`${process.env.REACT_APP_API_URL}certificate/certificateList`).then(
-    (res) => {
-      let data = res.data.data;
-      dispatch({ type: Types.GET_CERTIFICATE_NAME, payload: data });
-    }
-  );
+export const getCertificateName = (intCategoryID = null) => (dispatch) => {
+  let url = `${process.env.REACT_APP_API_URL}certificate/certificateList`;
+  if (intCategoryID !== null) {
+    url = `${process.env.REACT_APP_API_URL}certificate/category/certificateByCategory/${intCategoryID}`;
+    Axios.get(url)
+      .then(
+        (res) => {
+          let data = res.data.data;
+          dispatch({ type: Types.GET_CERTIFICATE_NAME, payload: data });
+        }
+      );
+  }else {
+    dispatch({ type: Types.GET_CERTIFICATE_NAME, payload: [] });
+  }
+  
 };
+
 export const getCertificateType = () => (dispatch) => {
   Axios.get(`${process.env.REACT_APP_API_URL}certificate/types`).then((res) => {
     let data = res.data.data;
