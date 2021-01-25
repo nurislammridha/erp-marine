@@ -72,13 +72,13 @@ const LoadableCalculator = () => {
                 </div>
               </form>
             </div>
-            <div className="card card-custom gutter-b pl-5 pr-5 mb-5 pb-5">
+            <div className="card card-custom gutter-b pl-5 pr-5 mb-5 pb-2 pt-3">
               <form
                 className="form form-label-right voyageEngineerForm"
                 method="post"
               >
                 <div className="form-group row">
-                  <div className="col-xl-4 col-lg-4 col-6 ">
+                  <div className="col-xl-3 col-lg-3 col-6 ">
                     <Form.Group>
                       <Form.Label className="formFont pl-1">DWT</Form.Label>
                       <Form.Control
@@ -88,7 +88,7 @@ const LoadableCalculator = () => {
                       />
                     </Form.Group>
                   </div>
-                  <div className="col-xl-4 col-lg-4 col-6 ">
+                  <div className="col-xl-3 col-lg-3 col-6 ">
                     <Form.Group>
                       <Form.Label className="formFont pl-1">FW</Form.Label>
                       <Form.Control
@@ -98,7 +98,7 @@ const LoadableCalculator = () => {
                       />
                     </Form.Group>
                   </div>
-                  <div className="col-xl-4 col-lg-4 col-6 ">
+                  <div className="col-xl-3 col-lg-3 col-6 ">
                     <Form.Group>
                       <Form.Label className="formFont pl-1">TPC</Form.Label>
                       <Form.Control
@@ -108,9 +108,8 @@ const LoadableCalculator = () => {
                       />
                     </Form.Group>
                   </div>
-                </div>
-                <div className="form-group row">
-                  <div className="col-xl-4 col-lg-4 col-6 ">
+
+                  <div className="col-xl-3 col-lg-3 col-6 ">
                     <Form.Group>
                       <Form.Label className="formFont pl-1">IFO</Form.Label>
                       <Form.Control
@@ -120,7 +119,7 @@ const LoadableCalculator = () => {
                       />
                     </Form.Group>
                   </div>
-                  <div className="col-xl-4 col-lg-4 col-6 ">
+                  <div className="col-xl-3 col-lg-3 col-6 ">
                     <Form.Group>
                       <Form.Label className="formFont pl-1">MGO</Form.Label>
                       <Form.Control
@@ -130,7 +129,7 @@ const LoadableCalculator = () => {
                       />
                     </Form.Group>
                   </div>
-                  <div className="col-xl-4 col-lg-4 col-6 ">
+                  <div className="col-xl-3 col-lg-3 col-6 ">
                     <Form.Group>
                       <Form.Label className="formFont pl-1">FWA</Form.Label>
                       <Form.Control
@@ -140,9 +139,8 @@ const LoadableCalculator = () => {
                       />
                     </Form.Group>
                   </div>
-                </div>
-                <div className="form-group row">
-                  <div className="col-xl-4 col-lg-4 col-6 ">
+
+                  <div className="col-xl-3 col-lg-3 col-6 ">
                     <Form.Group>
                       <Form.Label className="formFont pl-1">
                         Summer Draft
@@ -154,7 +152,7 @@ const LoadableCalculator = () => {
                       />
                     </Form.Group>
                   </div>
-                  <div className="col-xl-4 col-lg-4 col-6 ">
+                  <div className="col-xl-3 col-lg-3 col-6 ">
                     <Form.Group>
                       <Form.Label className="formFont pl-1">
                         Unpumpable Ballast
@@ -166,7 +164,7 @@ const LoadableCalculator = () => {
                       />
                     </Form.Group>
                   </div>
-                  <div className="col-xl-4 col-lg-4 col-6 ">
+                  <div className="col-xl-3 col-lg-3 col-6 ">
                     <Form.Group>
                       <Form.Label className="formFont pl-1">
                         Constant
