@@ -13,9 +13,11 @@ import { getBookingBrokerData, handleVesselBookingInput, VesselBookingSubmit } f
 import moment from 'moment';
 import { useParams } from "react-router-dom";
 
-const BookingEntry = () => {
+const BookingEdit = () => {
+  const { id } = useParams()
   const { register, setValue } = useForm();
   const dispatch = useDispatch();
+
   const brokerList = useSelector((state) => state.VesselBookingReducer.brokerList);
   const VesselBooking = useSelector((state) => state.VesselBookingReducer.VesselBooking);
   const isLoading = useSelector((state) => state.VesselBookingReducer.isLoading);
@@ -38,7 +40,7 @@ const BookingEntry = () => {
   return (
     <Card>
       <Card.Body className="pt-5 mt-0">
-        <h1 className="tableheading mt-0 pt-0 ">Booking Entry</h1>
+        <h1 className="tableheading mt-0 pt-0 ">Booking Edit</h1>
         <hr></hr>
         <form
           className="form form-label-right voyageEngineerForm" onSubmit={(e) => submitVesselBooking(e)} autoComplete="off" >
@@ -427,4 +429,4 @@ const BookingEntry = () => {
   );
 };
 
-export default BookingEntry;
+export default BookingEdit;
