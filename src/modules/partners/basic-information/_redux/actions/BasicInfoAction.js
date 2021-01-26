@@ -156,13 +156,10 @@ export const emptyStatus = () => (dispatch) => {
 export const partnerCreateSubmitAction = () => async (dispatch) => {
 
     const basicInfo = store.getState().partnerInfo.partnerInfoInput;
-    // const addStatus = store.getState().partnerInfo.addStatus;
     const addressInfo = store.getState().partnerAddress.addressInfo;
     const bankInfo = store.getState().bankInfo.bankInfoMultiple;
     const otherInfo = store.getState().partnerOthersInfo.partnerOtherInfoInput;
-    console.log('basicInfo :>> ', basicInfo);
-    console.log('addressInfo :>> ', addressInfo);
-    console.log('bankInfo :>> ', bankInfo);
+
 
 
     const finalSubmitInputData = {
@@ -200,10 +197,81 @@ export const partnerCreateSubmitAction = () => async (dispatch) => {
                 });
             } else {
                 showToast("error", response.data.message);
-                // dispatch({
-                //     type: Types.PARTNER_INFO_SUBMIT,
-                //     payload: responseList,
-                // });
+            }
+        })
+
+        .catch(function (error) {
+            responseList.isLoading = false;
+            const message =
+                "Something went wrong ! Please fill all inputs and try again !";
+            showToast("error", message);
+        });
+};
+
+
+export const EditSupplierInfo = (id) => (dispatch) => {
+    console.log('basicAction', id)
+    Axios.get(`${process.env.REACT_APP_API_URL}certificate/types/${id}`)
+        .then((res) => {
+            dispatch({
+                type: Types.EDIT_PARTNER_INFO,
+                payload: res.data,
+            });
+            dispatch({
+                type: TypesAddress.EDIT_ADDRESS_INFO,
+                payload: res.data,
+            });
+            dispatch({
+                type: TypesBank.EDIT_BANK_INFO,
+                payload: res.data,
+            });
+            dispatch({
+                type: TypesOther.EDIT_OTHERS_INFO,
+                payload: res.data,
+            });
+        });
+};
+
+export const UpdatePartnerInfo = () => async (dispatch) => {
+
+    const basicInfo = store.getState().partnerInfo.partnerInfoInput;
+    const addressInfo = store.getState().partnerAddress.addressInfo;
+    const bankInfo = store.getState().bankInfo.bankInfoMultiple;
+    const otherInfo = store.getState().partnerOthersInfo.partnerOtherInfoInput;
+
+    let responseList = {
+        isLoading: true,
+        data: {},
+        status: false,
+    };
+
+    dispatch({
+        type: Types.UPDATE_PARTNER_INFO,
+        payload: responseList,
+    });
+
+    const finalSubmitInputData = {
+        basicInfo: basicInfo,
+        addressInfo: addressInfo,
+        bankInfo: bankInfo,
+        ports: otherInfo.multiplePort,
+        psProvider: otherInfo.multipleProduct,
+        // psType: otherInfo.multipleServiceList,
+    }
+
+    Axios.put(
+        `${process.env.REACT_APP_API_URL}certificate/types/update`,
+        finalSubmitInputData
+    )
+        .then(async (response) => {
+            responseList.data = response.data;
+            responseList.isLoading = false;
+            responseList.status = response.data.status;
+
+            if (response.data.status) {
+                showToast("success", response.data.message);
+            } else {
+                showToast("error", response.data.message);
             }
         })
 

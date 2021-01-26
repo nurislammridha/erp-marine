@@ -1,28 +1,50 @@
 import React, { useEffect, useState } from "react";
-import { Form, Card, Button, Row, Col } from "react-bootstrap";
-import { InputBase, Paper, IconButton, Divider } from "@material-ui/core";
-import TableCircularProgressBar from "../../../master/components/CircularProgressBar/TableCircularProgressBar";
+import { Card, Button } from "react-bootstrap";
+import { InputBase, Paper, IconButton } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { getVesselBookingList } from "../_redux/actions/VesselBookingAddAction";
+import { getVesselBookingList } from "../_redux/actions/VesselBookInfoAction";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import SimpleModal from "../../../master/components/Modal/SimpleModal";
 const BookingList = () => {
+
   const dispatch = useDispatch();
   const VesselBookingList = useSelector((state) => state.VesselBookingReducer.VesselBookingList);
-  console.log('VesselBookingList :>> ', VesselBookingList);
+  const [bookDetailShow, setBookDetailShow] = useState(false)
+  const [bookDetailClose, setBookDetailClose] = useState(false)
 
   useEffect(() => {
     dispatch(getVesselBookingList())
   }, [])
 
+  // delete booking list 
+  const deleteBooking = (id) => {
+    console.log('id :>> ', id);
+    confirmAlert({
+      title: "Confirm to Delete",
+      message: `Are you sure to delete? Delet ID : ${id}`,
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => alert("Click Yes")
+        },
+        {
+          label: "No"
+        }
+      ]
+    });
+  };
   return (
     <Card>
       <Card.Body>
         <div className="container ">
           <div className="row mb-5 table-form ">
-            <h1 className="tableheading ">Booking List</h1>
+            <h1 className="tableheading mt-0 ">Booking List</h1>
+
             <hr></hr>
-            <div className="col-xl-4 col-lg-4 col-md-6 mb-2">
+            <div className="col-xl-4 col-lg-4 col-5 mb-2">
               <Paper className="searchInput">
                 <IconButton aria-label="Search" className="searchPlaceholder">
                   <i className="flaticon-search "></i>
@@ -35,8 +57,7 @@ const BookingList = () => {
                 />
               </Paper>
             </div>
-            <div className="col-xl-3 col-lg-3 col-md-6 col-0"></div>
-            <div className="col-xl-3 col-lg-3 col-md-6 col-0"></div>
+            {/* <div className="col-xl-6 col-lg-6 col-md-6 col-sm-0"></div> */}
 
             <div>
               <Link to="/voyage/booking/bookingentry">
@@ -70,7 +91,7 @@ const BookingList = () => {
                 <tbody>
                   {
                     VesselBookingList.length > 0 && VesselBookingList.map((item, index) => (
-                      <tr>
+                      <tr onClick={() => setBookDetailShow(true)}>
                         <td>{index + 1}</td>
                         <td>{item.strCargoName !== null && item.strCargoName !== '' ? item.strCargoName : ''}</td>
                         <td>{item.strShipName !== null && item.strShipName !== '' ? item.strShipName : ''}</td>
@@ -90,37 +111,12 @@ const BookingList = () => {
 
                         <td className="mt-3">
                           {" "}
-                          <i className="far fa-edit editIcon item-list-icon cursor-pointer"></i>
-                          <i className="fas fa-trash-alt editIcon item-list-icon ml-2 cursor-pointer"></i>
+                          <Link to={`/voyage/booking/bookingEdit/${item.intShipBookingId}`}><i className="far fa-edit editIcon item-list-icon cursor-pointer"></i></Link>
+                          <i className="fas fa-trash-alt editIcon item-list-icon ml-2 cursor-pointer" onClick={() => deleteBooking(item.intShipBookingId)}></i>
                         </td>
                       </tr>
                     ))
                   }
-                  {/* <tr>
-                    <td>#01</td>
-                    <td>2021-01-05 00:00</td>
-                    <td>Container Cargo</td>
-                    <td>Durres(Durazzo)</td>
-                    <td>Akij Noor</td>
-                    <td>Chottogram</td>
-                    <td>Chottogram</td>
-                    <td>Chottogram</td>
-                    <td>Chottogram</td>
-                    <td>Chottogram</td>
-                    <td>Chottogram</td>
-
-                    <td>
-                      <button className="btn approve booking-list-btn text-warning">
-                        Pending
-                      </button>
-                    </td>
-
-                    <td className="mt-3">
-                      {" "}
-                      <i className="far fa-edit editIcon item-list-icon"></i>
-                      <i className="fas fa-trash-alt editIcon item-list-icon ml-2 "></i>
-                    </td>
-                  </tr> */}
                 </tbody>
               </table>
             </div>
@@ -128,6 +124,14 @@ const BookingList = () => {
         </div>
         {/*  */}
       </Card.Body>
+      <SimpleModal
+        show={bookDetailShow}
+        handleClose={() => setBookDetailClose(false)}
+        handleShow={() => setBookDetailShow(true)}
+        modalTitle={"Vessel Booking Details"}
+      >
+        {/* <CertificateMasterAdd /> */}
+      </SimpleModal>
     </Card>
   );
 };

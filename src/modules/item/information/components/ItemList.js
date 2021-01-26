@@ -1,6 +1,8 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 const ItemList = () => {
+  const history = useHistory();
   return (
     <div className="container">
       <div className=" row p-4">
@@ -8,7 +10,10 @@ const ItemList = () => {
           <h3>Item List</h3>
         </div>
         <div className="col-xl-3 col-lg-3">
-          <button className="btn btn-primary btn-sm float-right text-center custome-addnew-btn item-list-btn">
+          <button
+            className="btn btn-primary btn-sm float-right text-center custome-addnew-btn item-list-btn"
+            onClick={() => history.push("/items/add")}
+          >
             Add <i className="fas fa-plus pl-2 item-list-icon pt-1"></i>
           </button>
         </div>

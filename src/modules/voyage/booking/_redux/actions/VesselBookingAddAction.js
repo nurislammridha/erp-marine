@@ -2,14 +2,6 @@ import * as Types from "../types/Types";
 import { showToast } from "../../../../master/utils/ToastHelper";
 import Axios from "axios";
 
-// get voyage id 
-export const getBookingBrokerData = () => (dispatch) => {
-    const url = `${process.env.REACT_APP_API_URL}certificate/category/parent-categories/list`;
-    Axios.get(url).then((res) => {
-        dispatch({ type: Types.GET_BROKER_LIST, payload: res.data.data });
-    });
-};
-
 export const handleVesselBookingInput = (name, value, e) => (dispatch) => {
     const formData = {
         name: name,
@@ -17,7 +9,6 @@ export const handleVesselBookingInput = (name, value, e) => (dispatch) => {
     };
     dispatch({ type: Types.VESSEL_BOOKING_INPUT_CHANGE, payload: formData });
 };
-
 
 //submit laytime data 
 export const VesselBookingSubmit = (VesselBooking, e) => async (dispatch) => {
@@ -132,18 +123,4 @@ export const VesselBookingSubmit = (VesselBooking, e) => async (dispatch) => {
             showToast("error", message);
             dispatch({ type: Types.VESSEL_BOOKING_SUBMIT, payload: false });
         });
-}
-// Get Vessel Booking list 
-export const getVesselBookingList = () => (dispatch) => {
-    const VesselAPI = `${process.env.REACT_APP_API_URL}voyage/bookingList`;
-    Axios.get(VesselAPI)
-        .then((res) => {
-            if (res.status === 200) {
-                const listData = res.data.data;
-                if (listData.length) {
-                    dispatch({ type: Types.GET_VESSEL_BOOKING_LIST, payload: listData });
-                }
-            }
-
-        })
 }

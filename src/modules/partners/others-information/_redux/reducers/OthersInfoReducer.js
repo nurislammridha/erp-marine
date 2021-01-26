@@ -55,6 +55,12 @@ const OthersInfoReducer = (state = initialState, action) => {
                 partnerOtherInfoInput: initialState.partnerOtherInfoInput,
 
             };
+        case Types.EDIT_OTHERS_INFO:
+            return {
+                ...state,
+                partnerOtherInfoInput: action.payload,
+
+            };
 
 
         // case Types.PARTNER_OTHERINFO_SUBMIT:

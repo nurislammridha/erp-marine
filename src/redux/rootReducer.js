@@ -49,11 +49,17 @@ import LaytimeRowReducer from "../modules/voyage/laytime/_redux/reducers/Laytime
 import PartnerInfoReducer from "../modules/partners/basic-information/_redux/reducers/PartnerInfoReducer";
 import OthersInfoReducer from "../modules/partners/others-information/_redux/reducers/OthersInfoReducer";
 import SuppliersListReducer from "../modules/partners/suppliers-list/_redux/reducers/SuppliersListReducer";
-import ItemReducer from "../modules/item/information/_redux/reducers/ItemReducer";
 import VesselBookingReducer from "../modules/voyage/booking/_redux/reducers/VesselBookingReducer";
-import ItemAddReducer from "../modules/item/information/_redux/reducers/ItemReducer";
 import LaytimeMultiple from "../modules/voyage/laytime/_redux/reducers/LaytimeMultiple";
+<<<<<<< HEAD
 import LayTimeOperationRemarkReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeOperationRemark";
+=======
+import ItemReducer from "../modules/item/information/_redux/reducers/ItemReducer";
+import PortReducer from "../modules/master/DropDownData/Port/_redux/PortReducer/PortReducer";
+import VoyageTypeReducer from "../modules/master/DropDownData/VoyageType/_redux/VoyageTypeReducer/VoyageTypeReducer";
+import CargoReducer from "../modules/master/DropDownData/Cargo/_redux/CargoReducer/CargoReducer";
+import ShipReducer from "../modules/master/DropDownData/Ship/_redux/ShipReducer/ShipReducer";
+>>>>>>> origin/master
 
 /** 
 | Domain : CCO
@@ -114,9 +120,6 @@ export const rootReducer = combineReducers({
   partnerOthersInfo: OthersInfoReducer,
 
 
-  /** Partners Reducers */
-  itemInfo: ItemAddReducer,
-
   /** Procurement Module Reducers */
   purchaseRequisition: PurchaseRequisitionReducer,
   demand: DemandReducer,
@@ -124,6 +127,11 @@ export const rootReducer = combineReducers({
   /** Promotion */
   promotion: EmployeePromotionReducer,
 
+  // master module reducer // dynamic data for all dropdown menu list 
+  PortReducer: PortReducer,
+  VoyageTypeReducer: VoyageTypeReducer,
+  CargoReducer: CargoReducer,
+  ShipReducer: ShipReducer,
 
   /**Certificates */
   certificateMainInfo: CertificateMainReducer,
@@ -132,8 +140,8 @@ export const rootReducer = combineReducers({
   CertificateListReducer: CertificateListReducer,
   certificateTypeInfo: CertificateTypeReducer,
   laytimeInfo: LaytimeInfoReducer,
-  partnerInfo: PartnerInfoReducer,
-  supplierList: SuppliersListReducer
+  supplierList: SuppliersListReducer,
+  itemList: ItemReducer
 });
 
 export function* rootSaga() {
