@@ -158,11 +158,11 @@ const CertificateMainList = () => {
               />
             </Form.Group> */}
 
-            <i className="fas fa-filter tableFilter mt-3 mr-2"></i>
+            <i className="fas fa-filter tableFilter mt-1 mr-2"></i>
             <i className="far fa-filter"></i>
             <Link
               to="/certificates-main/create"
-              className="btn btn-primary text-center text-white btn-sm custome-addnew-btn"
+              className="btn btn-primary text-center text-white btn-sm custome-addnew-btn certificate-add-btn"
             >
               Add New
             </Link>

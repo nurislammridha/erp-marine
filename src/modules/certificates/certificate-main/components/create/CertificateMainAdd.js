@@ -43,7 +43,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
     dispatch(handleChangeProductInputAction(name, value, e));
   };
 
-
   const addStatus = useSelector((state) => state.vesselInfo.addStatus);
   const addMessage = useSelector((state) => state.vesselInfo.addMessage);
   const serverErrors = useSelector((state) => state.certificateMainInfo.errors);
@@ -58,8 +57,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
     (state) => state.certificateMainInfo.certificatesNameOptionData
   );
 
-  console.log('certificatesNameOption :>> ', certificatesNameOption);
-  
+  console.log("certificatesNameOption :>> ", certificatesNameOption);
+
   const certificateParentCategoryList = useSelector(
     (state) => state.CertificateCategoryReducer.certificateParentCategoryList
   );
@@ -165,11 +164,21 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       );
                       setValue("intCategoryID", "");
                       dispatch(getCertificateChildCategoryData(option.value));
-                      dispatch(handleCertificateCategoryInput('certificateCategoryParent', {
-                        label: option.label,
-                        value: option.value,
-                      }));
-                      dispatch(handleCertificateCategoryInput('intParentsCategoryID', option.value));
+                      dispatch(
+                        handleCertificateCategoryInput(
+                          "certificateCategoryParent",
+                          {
+                            label: option.label,
+                            value: option.value,
+                          }
+                        )
+                      );
+                      dispatch(
+                        handleCertificateCategoryInput(
+                          "intParentsCategoryID",
+                          option.value
+                        )
+                      );
                       dispatch(getCertificateName(option.value));
                     }}
                     setValue={setValue}
@@ -206,8 +215,13 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         className="btn btn-default"
                         type="button"
                         onClick={() => {
-                          if (certificateInfoInput.intParentCategoryID === null) {
-                            showToast('error', 'Please select parent category first !')
+                          if (
+                            certificateInfoInput.intParentCategoryID === null
+                          ) {
+                            showToast(
+                              "error",
+                              "Please select parent category first !"
+                            );
                           } else {
                             setShowCategoryModal(true);
                           }
@@ -622,7 +636,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         certificateInfoInput.isExtendedUntil ? false : true
                       }
                       selected={certificateInfoInput.dteExtendedUntil}
-                      onChange={(e) => certificateMainInfoChange("dteExtendedUntil", e)}
+                      onChange={(e) =>
+                        certificateMainInfoChange("dteExtendedUntil", e)
+                      }
                       ref={register({
                         required: true,
                         maxLength: 100,
@@ -639,23 +655,30 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
                   </div> */}
                 </div>
-                {
-                  certificateInfoInput.intCertificateTypeID !== 3 && certificateInfoInput.intCertificateTypeID !== 4 &&
+                {certificateInfoInput.intCertificateTypeID !== 3 &&
+                  certificateInfoInput.intCertificateTypeID !== 4 &&
                   certificateInfoInput.intCertificateTypeID !== null && (
                     <>
                       <div className="col-lg-3">
                         <label className="form-label formFont mt-2">
                           Endorsement Date
-                  </label>
+                        </label>
                         <div>
                           <DatePicker
                             name="dteLastEndorsementDate"
                             className="form-control fromStyle formHeight custome-date"
                             placeholderText="select certificate valid date"
-                            selected={certificateInfoInput.dteLastEndorsementDate}
-                            minDate={certificateInfoInput.dteCertificateIssueDate}
+                            selected={
+                              certificateInfoInput.dteLastEndorsementDate
+                            }
+                            minDate={
+                              certificateInfoInput.dteCertificateIssueDate
+                            }
                             onChange={(e) =>
-                              certificateMainInfoChange("dteLastEndorsementDate", e)
+                              certificateMainInfoChange(
+                                "dteLastEndorsementDate",
+                                e
+                              )
                             }
                             ref={register({
                               required: true,
