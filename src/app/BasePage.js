@@ -17,6 +17,7 @@ import getCertificateModuleRoutes from "../modules/certificates/routes";
 import getDocumentationRoutes from "../modules/documentation/routes";
 import getPartnersRoutes from "../modules/partners/routes";
 import getItemsRoutes from "../modules/item/routes";
+import getUtilityRoutes from "../modules/utility/routes";
 
 const BasePage = () => {
   return (
@@ -74,6 +75,8 @@ const BasePage = () => {
         {getItemsRoutes()}
 
         {getDocumentationRoutes()}
+
+        {getUtilityRoutes()}
 
         <Redirect to="error/error-v1" />
       </Switch>
