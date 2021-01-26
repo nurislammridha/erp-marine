@@ -146,5 +146,5 @@ export const emptyItemSubmit = () => (dispatch) => {
 }
 export const emptyMultipleItemList = () => (dispatch) => {
     const data = "";
-    dispatch({ type: Types.MULTIPLE_ITEM_ADD_INPUT, payload: data })
+    dispatch({ type: Types.EMPTY_MULTIPLE_ITEM_LIST, payload: data })
 }
