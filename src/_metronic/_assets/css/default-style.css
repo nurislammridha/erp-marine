@@ -1006,3 +1006,7 @@ span#inputGroupPrepend {
 .certificate-add-btn.btn-sm {
   line-height: 1.15 !important;
 }
+
+.row.custom-modal  {
+  width: 1063px;
+}
