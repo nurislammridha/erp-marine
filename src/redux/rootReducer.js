@@ -51,15 +51,12 @@ import OthersInfoReducer from "../modules/partners/others-information/_redux/red
 import SuppliersListReducer from "../modules/partners/suppliers-list/_redux/reducers/SuppliersListReducer";
 import VesselBookingReducer from "../modules/voyage/booking/_redux/reducers/VesselBookingReducer";
 import LaytimeMultiple from "../modules/voyage/laytime/_redux/reducers/LaytimeMultiple";
-<<<<<<< HEAD
 import LayTimeOperationRemarkReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeOperationRemark";
-=======
 import ItemReducer from "../modules/item/information/_redux/reducers/ItemReducer";
 import PortReducer from "../modules/master/DropDownData/Port/_redux/PortReducer/PortReducer";
 import VoyageTypeReducer from "../modules/master/DropDownData/VoyageType/_redux/VoyageTypeReducer/VoyageTypeReducer";
 import CargoReducer from "../modules/master/DropDownData/Cargo/_redux/CargoReducer/CargoReducer";
 import ShipReducer from "../modules/master/DropDownData/Ship/_redux/ShipReducer/ShipReducer";
->>>>>>> origin/master
 
 /** 
 | Domain : CCO
