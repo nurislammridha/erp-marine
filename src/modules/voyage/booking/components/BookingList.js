@@ -91,7 +91,7 @@ const BookingList = () => {
                 <tbody>
                   {
                     VesselBookingList.length > 0 && VesselBookingList.map((item, index) => (
-                      <tr onClick={() => setBookDetailShow(true)}>
+                      <tr>
                         <td>{index + 1}</td>
                         <td>{item.strCargoName !== null && item.strCargoName !== '' ? item.strCargoName : ''}</td>
                         <td>{item.strShipName !== null && item.strShipName !== '' ? item.strShipName : ''}</td>
