@@ -1,45 +1,49 @@
 import * as Types from "../types/Types";
 
 const initialState = {
-    itemAddInput: {
+    itemDataInput: {
+        intDepartmentID: "",
+        strDepartmentName: "",
         strItemName: "",
-        strItemDescription: "",
         intUoMID: "",
         strUoM: "",
-        strPartNo: "",
-        strModelNo: "",
         intItemTypeID: "",
-        StrItemTypeNam: "",
+        StrItemTypeName: "",
         intItemCategoryID: "",
         strItemCategoryName: "",
-        intItemSubCategoryID: "",
-        strSubCategoryNam: "",
-        intDepartmentID: "",
+        strSubCategoryName: "",
+        strPartNo: "",
+        strModelNo: "",
+        strBrand: "",
         intCatalogueID: "",
-        strIMPACode: "",
         strEngineName: "",
-        strDrwingNumbe: "",
-        strItemCode: "",
-        isActive: "",
-        intActionBy: "",
+        strDrwingNumber: "",
+        strItemDescription: "Personal",
+        intItemSubCategoryID: "1",
+        // strIMPACode: "123",
+        strItemCode: "1",
+        // isActive: "1",
+        intActionBy: "502648",
     },
-    itemInfoMultiple: []
+    multipleItemAdd: []
 }
-
-
-const ItemAddReducer = (state = initialState, action) => {
+const ItemReducer = (state = initialState, action) => {
     const newState = { ...state }
     switch (action.type) {
-
-
-        case Types.CHANGE_ITEM_ADD_INPUT:
-            const itemAddInput = { ...state.itemAddInput };
-            itemAddInput[action.payload.name] = action.payload.value;
+        case Types.CHANGE_ITEM_INPUT:
+            const itemDataInput = { ...state.itemDataInput };
+            itemDataInput[action.payload.name] = action.payload.value;
+            return { ...state, itemDataInput };
+        case Types.MULTIPLE_ITEM_ADD_INPUT:
+            const multipleItemAdd = [...state.multipleItemAdd, action.payload];
+            return { ...state, multipleItemAdd, itemDataInput: initialState.itemDataInput }
+        case Types.DELETE_MULTIPLE_ITEM:
+            const multipleItemAddOld = [...state.multipleItemAdd];
+            multipleItemAddOld.splice(action.payload, 1);
             return {
                 ...state,
-                itemAddInput,
-            };
-
+                multipleItemAdd: multipleItemAddOld
+            }
         case Types.GET_UOM:
             return {
                 ...state,
@@ -62,12 +66,14 @@ const ItemAddReducer = (state = initialState, action) => {
             };
         default:
             break;
+
     }
 
     return newState;
 }
 
-export default ItemAddReducer;
+export default ItemReducer;
+
 
 const getUom = (data) => {
     let options = [];

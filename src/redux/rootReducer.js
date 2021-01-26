@@ -49,10 +49,9 @@ import LaytimeRowReducer from "../modules/voyage/laytime/_redux/reducers/Laytime
 import PartnerInfoReducer from "../modules/partners/basic-information/_redux/reducers/PartnerInfoReducer";
 import OthersInfoReducer from "../modules/partners/others-information/_redux/reducers/OthersInfoReducer";
 import SuppliersListReducer from "../modules/partners/suppliers-list/_redux/reducers/SuppliersListReducer";
-import ItemReducer from "../modules/item/information/_redux/reducers/ItemReducer";
 import VesselBookingReducer from "../modules/voyage/booking/_redux/reducers/VesselBookingReducer";
-import ItemAddReducer from "../modules/item/information/_redux/reducers/ItemReducer";
 import LaytimeMultiple from "../modules/voyage/laytime/_redux/reducers/LaytimeMultiple";
+import ItemReducer from "../modules/item/information/_redux/reducers/ItemReducer";
 
 /** 
 | Domain : CCO
@@ -112,9 +111,6 @@ export const rootReducer = combineReducers({
   partnerOthersInfo: OthersInfoReducer,
 
 
-  /** Partners Reducers */
-  itemInfo: ItemAddReducer,
-
   /** Procurement Module Reducers */
   purchaseRequisition: PurchaseRequisitionReducer,
   demand: DemandReducer,
@@ -131,7 +127,8 @@ export const rootReducer = combineReducers({
   certificateTypeInfo: CertificateTypeReducer,
   laytimeInfo: LaytimeInfoReducer,
   partnerInfo: PartnerInfoReducer,
-  supplierList: SuppliersListReducer
+  supplierList: SuppliersListReducer,
+  itemList: ItemReducer
 });
 
 export function* rootSaga() {
