@@ -75,6 +75,10 @@ const ItemReducer = (state = initialState, action) => {
             return {
                 ...state, getItemList: action.payload
             }
+        // case Types.EMPTY_ITEM_SUBMIT:
+        //     return {
+        //         ...state, itemSUbmit: action.payload
+        //     }
         default:
             break;
 

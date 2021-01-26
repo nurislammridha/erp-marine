@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getItemList } from "../_redux/actions/ItemAction";
+import { emptyItemSubmit, emptyMultipleItemList, getItemList } from "../_redux/actions/ItemAction";
 import ItemFilter from "./ItemFilter";
 
 const ItemList = () => {
@@ -10,7 +10,10 @@ const ItemList = () => {
   // console.log('iteList :>> ', itemList);
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getItemList())
+    dispatch(emptyItemSubmit());
+    dispatch(emptyMultipleItemList());
+    dispatch(getItemList());
+
   }, [])
   return (
     <div className="container">

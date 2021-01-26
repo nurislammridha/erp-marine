@@ -13,8 +13,8 @@ const ItemAdd = () => {
   const itemDataInput = useSelector(state => state.itemList.itemDataInput);
   const multipleItemList = useSelector(state => state.itemList.multipleItemAdd);
   const itemSUbmit = useSelector(state => state.itemList.itemSUbmit);
+  // Redirect List Page after submitting data
   useEffect(() => {
-    console.log('itemSUbmit add:>> ', itemSUbmit.status);
     if (itemSUbmit.status) {
       history.push('/items/list');
     }
