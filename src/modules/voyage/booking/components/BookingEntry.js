@@ -14,8 +14,10 @@ import { getPortList } from "../../../master/DropDownData/Port/_redux/PortAction
 import { getVoyageType } from "../../../master/DropDownData/VoyageType/_redux/VoyageTypeAction/VoyageTypeAction";
 import { getCargoList } from "../../../master/DropDownData/Cargo/_redux/CargoAction/CargoAction";
 import { getShipList } from "../../../master/DropDownData/Ship/_redux/ShipAction/ShipAction";
+import { useHistory } from "react-router-dom";
 
 const BookingEntry = () => {
+  const history = useHistory()
   const { register, setValue } = useForm();
   const dispatch = useDispatch();
   const VesselBooking = useSelector((state) => state.VesselBookingReducer.VesselBooking);
@@ -413,7 +415,7 @@ const BookingEntry = () => {
             </div>
           </div>
           <div className="float-right">
-            <Button className=" cancelButton" variant="">
+            <Button className=" cancelButton" variant="" onClick={() => history.push('/voyage/booking/bookinglist')}>
               Cancel
             </Button>
             {
