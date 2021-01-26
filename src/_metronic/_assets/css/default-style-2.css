@@ -1,0 +1,142 @@
+.chart__head {
+  padding-top: 10px;
+  padding-left: 10px;
+}
+.chart__head p {
+  padding-top: 10px;
+}
+
+canvas.chart-right.chartjs-render-monitor {
+  width: 440px;
+}
+/* Circular Progress Bar Starts */
+
+.action__needed {
+  background: white;
+  padding: 15px;
+  box-shadow: 0 0 30px 0 rgba(82, 63, 105, 0.05);
+  border-radius: 10px;
+  height: 380px;
+  width: 300px;
+}
+
+.action__body {
+  text-align: left;
+}
+svg.CircularProgressbar.progress__bar {
+  width: 35% !important;
+  padding-top: 35px;
+}
+.action__head h4 {
+  font-size: 1.275rem;
+  font-weight: 600;
+}
+.three__dot {
+  cursor: pointer;
+}
+
+.action__footer a {
+  color: #fff;
+  background-color: #1bc5bd;
+  border-color: #1bc5bd;
+  text-align: center;
+}
+
+/* Circular Progress Bar Ends */
+
+/* Medium devices (landscape phones, 576px and up) */
+
+@media (max-width: 992px) and (min-width: 768px) {
+  .chart__box {
+    box-shadow: 0px 2px 6px #2c28281c;
+    border-radius: 10px;
+    padding-bottom: 10%;
+    overflow: hidden;
+    height: 550px;
+    margin-bottom: 25px;
+  }
+
+  .paid__widget {
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 767px) {
+  .chart__box {
+    box-shadow: 0px 2px 6px #2c28281c;
+    border-radius: 10px;
+    padding-bottom: 10%;
+    overflow: hidden;
+    height: 420px;
+    margin-bottom: 25px;
+  }
+  /* .doughunt__stat {
+    padding-top: 23%;
+  } */
+}
+
+/*  small devices (portrait phones, less than 576px) */
+
+@media (max-width: 425px) {
+  .paid__widget {
+    margin-bottom: 10px;
+  }
+  .row.justify-content-md-center.justify-content-sm-center {
+    padding-left: 13%;
+  }
+  .dash__board__chart {
+    margin-bottom: 35px;
+  }
+  .doug__left {
+    width: 100%;
+  }
+  .doug__right {
+    width: 100%;
+  }
+  svg.CircularProgressbar.progress__bar {
+    width: 55% !important;
+  }
+  .chart__box {
+    box-shadow: 0px 2px 6px #2c28281c;
+    border-radius: 10px;
+    padding-bottom: 10%;
+    overflow: hidden;
+    height: 550px;
+  }
+  .chart__box__custom {
+    height: 309px !important;
+  }
+  .doughunt__stat {
+    padding-left: 26%;
+  }
+}
+/* extra small */
+@media (max-width: 375px) {
+  .row.justify-content-md-center.justify-content-sm-center {
+    padding-left: 13%;
+  }
+  .dash__board__chart {
+    margin-bottom: 35px;
+  }
+  .doug__left {
+    width: 100%;
+  }
+  .doug__right {
+    width: 100%;
+  }
+  svg.CircularProgressbar.progress__bar {
+    width: 55% !important;
+  }
+  .chart__box {
+    box-shadow: 0px 2px 6px #2c28281c;
+    border-radius: 10px;
+    padding-bottom: 10%;
+    overflow: hidden;
+    height: 520px;
+  }
+  .chart__box__custom {
+    height: 245px !important;
+  }
+  .doughunt__stat {
+    padding-left: 26%;
+  }
+}

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iboswebappproject
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iboswebappproject
+  template:
+    metadata:
+      labels:
+        app: iboswebappproject
+        type: iboswebappproject
+    spec:
+      containers:
+        - name: ibosfrontend
+          image: dockerhub.akij.net:5000/iboswebappproject:#{Build.BuildId}#
+          resources:
+            limits:
+              memory: "3024Mi"
+              cpu: "900m"
+          ports:
+            - containerPort: 3000
+      imagePullSecrets:
+        - name: regcredtest
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ibosfrontend
+spec:
+  selector:
+    app: iboswebappproject
+  ports:
+    - port: 3000
+      targetPort: 3000
+  type: LoadBalancer
+  loadBalancerIP: 10.17.217.209
