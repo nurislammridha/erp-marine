@@ -24,7 +24,13 @@ const initialState = {
         strRemarks: "",
       },
     ],
-    layTimeOperations: [],
+    layTimeOperations: [
+        {
+            intShipID: null,
+            strVoyageNo: null,
+            intOperationRemarkID: null,
+        },
+    ],
   },
 };
 
@@ -74,21 +80,18 @@ const LaytimeMultiple = (state = initialState, action) => {
 
       case Types.ADD_NEW_OPERATION:
         console.log("action.payload", action.payload);
-        let softObj = {
-          dteOperationDate: "",
-          dteStartTime: "",
-          dteEndTime: "",
-          numTimeUsed: null,
-          numRatio: null,
-          strRemarks: "",
+        let operationObj = {
+            intShipID: null,
+            strVoyageNo: null,
+            intOperationRemarkID: null,
         };
   
-        let laytimedetailsDataset = { ...state.layTimeMultipleInput };
-        const newSofts = laytimedetailsDataset.layTimeDetails = [...laytimedetailsDataset.layTimeDetails, softObj];
-        laytimedetailsDataset.layTimeDetails = newSofts;
+        let layTimeOperationDataSet = { ...state.layTimeMultipleInput };
+        const newOperation = layTimeOperationDataSet.layTimeOperations = [...layTimeOperationDataSet.layTimeOperations, operationObj];
+        layTimeOperationDataSet.layTimeOperations = newOperation;
         return {
           ...state,
-          layTimeMultipleInput: laytimedetailsDataset
+          layTimeMultipleInput: layTimeOperationDataSet
         };
 
     default:
