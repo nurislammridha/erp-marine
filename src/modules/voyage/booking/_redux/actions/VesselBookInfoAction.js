@@ -1,7 +1,16 @@
 import * as Types from "../types/Types";
-import axios from "axios";
+import Axios from "axios";
 
-export const getLaytimeList = () => async (dispatch) => {
-    let url = `${process.env.REACT_APP_API_URL}voyage/laytimeHeader`;
-    axios.get(url).then((res) => { dispatch({ type: Types.GET_LAYTIME_LIST, payload: res.data }) })
+export const getVesselBookingList = () => (dispatch) => {
+    const VesselAPI = `${process.env.REACT_APP_API_URL}voyage/bookingList`;
+    Axios.get(VesselAPI)
+        .then((res) => {
+            if (res.status === 200) {
+                const listData = res.data.data;
+                if (listData.length) {
+                    dispatch({ type: Types.GET_VESSEL_BOOKING_LIST, payload: listData });
+                }
+            }
+
+        })
 }

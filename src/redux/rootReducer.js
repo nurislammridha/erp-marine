@@ -52,6 +52,10 @@ import SuppliersListReducer from "../modules/partners/suppliers-list/_redux/redu
 import VesselBookingReducer from "../modules/voyage/booking/_redux/reducers/VesselBookingReducer";
 import LaytimeMultiple from "../modules/voyage/laytime/_redux/reducers/LaytimeMultiple";
 import ItemReducer from "../modules/item/information/_redux/reducers/ItemReducer";
+import PortReducer from "../modules/master/DropDownData/Port/_redux/PortReducer/PortReducer";
+import VoyageTypeReducer from "../modules/master/DropDownData/VoyageType/_redux/VoyageTypeReducer/VoyageTypeReducer";
+import CargoReducer from "../modules/master/DropDownData/Cargo/_redux/CargoReducer/CargoReducer";
+import ShipReducer from "../modules/master/DropDownData/Ship/_redux/ShipReducer/ShipReducer";
 
 /** 
 | Domain : CCO
@@ -118,6 +122,11 @@ export const rootReducer = combineReducers({
   /** Promotion */
   promotion: EmployeePromotionReducer,
 
+  // master module reducer // dynamic data for all dropdown menu list 
+  PortReducer: PortReducer,
+  VoyageTypeReducer: VoyageTypeReducer,
+  CargoReducer: CargoReducer,
+  ShipReducer: ShipReducer,
 
   /**Certificates */
   certificateMainInfo: CertificateMainReducer,
@@ -126,7 +135,6 @@ export const rootReducer = combineReducers({
   CertificateListReducer: CertificateListReducer,
   certificateTypeInfo: CertificateTypeReducer,
   laytimeInfo: LaytimeInfoReducer,
-  partnerInfo: PartnerInfoReducer,
   supplierList: SuppliersListReducer,
   itemList: ItemReducer
 });

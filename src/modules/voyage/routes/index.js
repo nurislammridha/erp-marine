@@ -11,6 +11,7 @@ import LaytimeContainer from "../laytime/views/LaytimeContainer";
 import LaytimeInfoContainer from "../laytime/views/LaytimeInfoContainer";
 import BookingListContainer from "../booking/views/BookingListContainer";
 import BookingEntryContainer from "../booking/views/BookingEntryContainer";
+import BookingEditContainer from "../booking/views/BookingEditContainer";
 
 
 const routeVoyage = [
@@ -80,6 +81,12 @@ const routeVoyage = [
     path: "/voyage/booking/bookingentry",
     name: "Laytime Info",
     component: BookingEntryContainer,
+    exact: true,
+  },
+  {
+    path: "/voyage/booking/bookingEdit/:id",
+    name: "Vessel Booking",
+    component: BookingEditContainer,
     exact: true,
   },
 

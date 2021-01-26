@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../../_metronic/_assets/css/default-style.css";
 import "../../../../styles/global-style.css";
 import { Form, Card, Button, Col, InputGroup } from "react-bootstrap";
+import { useState } from "react";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
@@ -10,29 +11,20 @@ import DatePicker from "react-datepicker";
 import { useDispatch, useSelector } from "react-redux";
 import { handleVesselBookingInput, VesselBookingSubmit } from "../_redux/actions/VesselBookingAddAction";
 import moment from 'moment';
-import { getPortList } from "../../../master/DropDownData/Port/_redux/PortAction/PortAction";
+import { useParams } from "react-router-dom";
 import { getVoyageType } from "../../../master/DropDownData/VoyageType/_redux/VoyageTypeAction/VoyageTypeAction";
-import { getCargoList } from "../../../master/DropDownData/Cargo/_redux/CargoAction/CargoAction";
-import { getShipList } from "../../../master/DropDownData/Ship/_redux/ShipAction/ShipAction";
 
-const BookingEntry = () => {
+const BookingEdit = () => {
+  const { id } = useParams()
   const { register, setValue } = useForm();
   const dispatch = useDispatch();
+
   const VesselBooking = useSelector((state) => state.VesselBookingReducer.VesselBooking);
-
-  const voyageTypeList = useSelector((state) => state.VoyageTypeReducer.voyageTypeList);
-  const portList = useSelector((state) => state.PortReducer.portList);
-  const cargoList = useSelector((state) => state.CargoReducer.cargoList);
-  const shipList = useSelector((state) => state.ShipReducer.shipList);
-
-  console.log('portList :>> ', portList);
   const isLoading = useSelector((state) => state.VesselBookingReducer.isLoading);
+  const voyageTypeList = useSelector((state) => state.VoyageTypeReducer.voyageTypeList);
 
   useEffect(() => {
     dispatch(getVoyageType());
-    dispatch(getPortList());
-    dispatch(getCargoList());
-    dispatch(getShipList());
 
   }, [])
 
@@ -47,7 +39,7 @@ const BookingEntry = () => {
   return (
     <Card>
       <Card.Body className="pt-5 mt-0">
-        <h1 className="tableheading mt-0 pt-0 ">Booking Entry</h1>
+        <h1 className="tableheading mt-0 pt-0 ">Booking Edit</h1>
         <hr></hr>
         <form
           className="form form-label-right voyageEngineerForm" onSubmit={(e) => submitVesselBooking(e)} autoComplete="off" >
@@ -55,7 +47,7 @@ const BookingEntry = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Broker Name</label>
               <RHFInput
-                as={<Select options={shipList} />}
+                as={<Select options={VesselBooking} />}
                 rules={{ required: false }}
                 name="intBrokerId"
                 register={register}
@@ -71,7 +63,7 @@ const BookingEntry = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Charter Name</label>
               <RHFInput
-                as={<Select options={shipList} />}
+                as={<Select options={VesselBooking} />}
                 rules={{ required: false }}
                 name="intCharterId"
                 register={register}
@@ -86,7 +78,7 @@ const BookingEntry = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Ship Name</label>
               <RHFInput
-                as={<Select options={shipList} />}
+                as={<Select options={VesselBooking} />}
                 rules={{ required: false }}
                 name="intShipId"
                 register={register}
@@ -101,7 +93,7 @@ const BookingEntry = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Voyage Type</label>
               <RHFInput
-                as={<Select options={voyageTypeList} />}
+                as={<Select options={VesselBooking} />}
                 rules={{ required: false }}
                 name="intVoyageTypeId"
                 register={register}
@@ -118,7 +110,7 @@ const BookingEntry = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Load Port/ Commence Port</label>
               <RHFInput
-                as={<Select options={portList} />}
+                as={<Select options={VesselBooking} />}
                 rules={{ required: false }}
                 name="intCommencePortId"
                 register={register}
@@ -151,7 +143,7 @@ const BookingEntry = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Dischanging/ Completion Port</label>
               <RHFInput
-                as={<Select options={portList} />}
+                as={<Select options={VesselBooking} />}
                 rules={{ required: false }}
                 name="intCompletionPortId"
                 register={register}
@@ -261,7 +253,7 @@ const BookingEntry = () => {
                 {/* <Form.Label className="formFont pl-1">Cargo</Form.Label> */}
                 <label className="formFont">Cargo</label>
                 <RHFInput
-                  as={<Select options={cargoList} />}
+                  as={<Select options={VesselBooking} />}
                   rules={{ required: false }}
                   name="intCargoId"
                   register={register}
@@ -436,4 +428,4 @@ const BookingEntry = () => {
   );
 };
 
-export default BookingEntry;
+export default BookingEdit;

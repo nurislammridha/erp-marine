@@ -1,0 +1,1 @@
+export const GET_VOYAGE_TYPE = "GET_VOYAGE_TYPE";
