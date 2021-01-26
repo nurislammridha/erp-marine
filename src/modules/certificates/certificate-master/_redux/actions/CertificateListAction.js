@@ -63,7 +63,7 @@ export const getCertificateMasterList = (
   dispatch({ type: Types.GET_CERTIFICATE_MASTER_LIST, payload: response });
 };
 
-export const certificateMasterSubmitAction = (CertificateMasterInput) => (
+export const certificateMasterSubmitAction = (CertificateMasterInput, isSubCategory) => (
   dispatch
 ) => {
   let responseList = {

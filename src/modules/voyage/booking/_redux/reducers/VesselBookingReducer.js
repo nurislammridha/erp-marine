@@ -41,6 +41,7 @@ const initialstate = {
         isActive: false
     },
     VesselBookingList: [],
+    VesselBookingDetails: {},
 };
 const VesselBookingReducer = (state = initialstate, action) => {
     const newState = { ...state };
@@ -78,6 +79,13 @@ const VesselBookingReducer = (state = initialstate, action) => {
             return {
                 ...state,
                 VesselBookingList: action.payload,
+                    
+            }
+        case Types.GET_VESSEL_BOOKING_DETAILS: 
+            return {
+                ...state,
+                VesselBookingDetails: action.payload,
+                VesselBooking: action.payload
                     
             }
         default:

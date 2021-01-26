@@ -13,6 +13,7 @@ import { handleVesselBookingInput, VesselBookingSubmit } from "../_redux/actions
 import moment from 'moment';
 import { useParams } from "react-router-dom";
 import { getVoyageType } from "../../../master/DropDownData/VoyageType/_redux/VoyageTypeAction/VoyageTypeAction";
+import { getVesselBookingDetails } from "../_redux/actions/VesselBookInfoAction";
 
 const BookingEdit = () => {
   const { id } = useParams()
@@ -20,11 +21,13 @@ const BookingEdit = () => {
   const dispatch = useDispatch();
 
   const VesselBooking = useSelector((state) => state.VesselBookingReducer.VesselBooking);
+  const VesselBookingDetails = useSelector((state) => state.VesselBookingReducer.VesselBookingDetails);
   const isLoading = useSelector((state) => state.VesselBookingReducer.isLoading);
   const voyageTypeList = useSelector((state) => state.VoyageTypeReducer.voyageTypeList);
 
   useEffect(() => {
     dispatch(getVoyageType());
+    dispatch(getVesselBookingDetails(id))
 
   }, [])
 

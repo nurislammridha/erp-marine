@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import SimpleModal from "../../../master/components/Modal/SimpleModal";
+import VesselBookingDetails from "../../../utility/VesselBookingDetails";
 const BookingList = () => {
 
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const BookingList = () => {
   const [bookDetailShow, setBookDetailShow] = useState(false)
   const [bookDetailClose, setBookDetailClose] = useState(false)
 
+  console.log('VesselBookingList :>> ', VesselBookingList);
   useEffect(() => {
     dispatch(getVesselBookingList())
   }, [])
@@ -91,24 +93,23 @@ const BookingList = () => {
                 <tbody>
                   {
                     VesselBookingList.length > 0 && VesselBookingList.map((item, index) => (
-                      <tr onClick={() => setBookDetailShow(true)}>
-                        <td>{index + 1}</td>
-                        <td>{item.strCargoName !== null && item.strCargoName !== '' ? item.strCargoName : ''}</td>
-                        <td>{item.strShipName !== null && item.strShipName !== '' ? item.strShipName : ''}</td>
-                        <td>{item.strVoyageNo !== null && item.strVoyageNo !== '' ? item.strVoyageNo : ''}</td>
-                        <td>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
-                        <td>{item.dteCommenceDate !== null && item.dteCommenceDate !== '' ? moment(item.dteCommenceDate).format("DD-MM-YYYY") : ''}</td>
-                        <td>{item.strCompletionPortName !== null && item.strCompletionPortName !== '' ? item.strCompletionPortName : ''}</td>
-                        <td>{item.dteCompletionDate !== null && item.dteCompletionDate !== '' ? moment(item.dteCompletionDate).format("DD-MM-YYYY") : ''}</td>
-                        <td>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
-                        <td>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
-                        <td>{item.numFreightOrHireRate !== null && item.numFreightOrHireRate !== '' ? item.numFreightOrHireRate : ''}</td>
-                        <td>
-                          <button className="btn approve booking-list-btn text-warning">
+                      <tr>
+                        <td onClick={() => setBookDetailShow(true)}>{index + 1}</td>
+                        <td onClick={() => setBookDetailShow(true)}>{item.strCargoName !== null && item.strCargoName !== '' ? item.strCargoName : ''}</td>
+                        <td onClick={() => setBookDetailShow(true)}>{item.strShipName !== null && item.strShipName !== '' ? item.strShipName : ''}</td>
+                        <td onClick={() => setBookDetailShow(true)}>{item.strVoyageNo !== null && item.strVoyageNo !== '' ? item.strVoyageNo : ''}</td>
+                        <td onClick={() => setBookDetailShow(true)}>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
+                        <td onClick={() => setBookDetailShow(true)}>{item.dteCommenceDate !== null && item.dteCommenceDate !== '' ? moment(item.dteCommenceDate).format("DD-MM-YYYY") : ''}</td>
+                        <td onClick={() => setBookDetailShow(true)}>{item.strCompletionPortName !== null && item.strCompletionPortName !== '' ? item.strCompletionPortName : ''}</td>
+                        <td onClick={() => setBookDetailShow(true)}>{item.dteCompletionDate !== null && item.dteCompletionDate !== '' ? moment(item.dteCompletionDate).format("DD-MM-YYYY") : ''}</td>
+                        <td onClick={() => setBookDetailShow(true)}>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
+                        <td onClick={() => setBookDetailShow(true)}>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
+                        <td onClick={() => setBookDetailShow(true)}>{item.numFreightOrHireRate !== null && item.numFreightOrHireRate !== '' ? item.numFreightOrHireRate : ''}</td>
+                        <td onClick={() => setBookDetailShow(true)}>
+                      <button className="btn approve booking-list-btn text-warning">
                             Pending
                       </button>
                         </td>
-
                         <td className="mt-3">
                           {" "}
                           <Link to={`/voyage/booking/bookingEdit/${item.intShipBookingId}`}><i className="far fa-edit editIcon item-list-icon cursor-pointer"></i></Link>
@@ -125,12 +126,14 @@ const BookingList = () => {
         {/*  */}
       </Card.Body>
       <SimpleModal
+        size="xl"
+        status="Pending"
         show={bookDetailShow}
-        handleClose={() => setBookDetailClose(false)}
+        handleClose={() => setBookDetailShow(false)}
         handleShow={() => setBookDetailShow(true)}
         modalTitle={"Vessel Booking Details"}
       >
-        {/* <CertificateMasterAdd /> */}
+        <VesselBookingDetails handleClose={() => setBookDetailShow(false)} />
       </SimpleModal>
     </Card>
   );
