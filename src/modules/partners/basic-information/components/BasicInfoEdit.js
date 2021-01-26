@@ -43,7 +43,7 @@ const BasicInfoEdit = withRouter(({ history }) => {
     const businessUnitOptionData = useSelector((state) => state.partnerInfo.businessUnitData);
     const addStatus = useSelector((state) => state.partnerInfo.addStatus);
     console.log('addStatus', addStatus);
-
+    console.log('setValue', addStatus);
     useEffect(() => {
         dispatch(getTaxType());
         dispatch(getPartnerType());
