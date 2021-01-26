@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import DatePicker from "react-datepicker";
 import { deleteMultipleList } from "../../_redux/actions/LaytimeAction";
-import { getRemarkList, handleChangeLaytimeMultiple } from "../../_redux/actions/LaytimeMultiple";
+import { addNewSof, getRemarkList, handleChangeLaytimeMultiple, showSoftacton } from "../../_redux/actions/LaytimeMultiple";
 
 const LaytimeMultipleAdd = () => {
   const selectCount = [
@@ -44,13 +44,23 @@ const LaytimeMultipleAdd = () => {
   const layTimeMultipleInput = useSelector(
     (state) => state.LaytimeMultiple.layTimeMultipleInput
   );
-  console.log("laytimeDetailsData", laytimeDetailsData);
-  const handleChangeTextInput = (name, value) => {
-    dispatch(handleChangeLaytimeMultiple(name, value));
+  const layTimeDetailsList = useSelector(
+    (state) => state.LaytimeMultiple.layTimeMultipleInput.layTimeDetails
+  );
+  console.log("laytimeDetailsData page", layTimeDetailsList);
+
+  const handleChangeTextInput = (name, value,index) => {
+    console.log('index', index);
+    console.log('name', name);
+    console.log('value', value);
+    dispatch(handleChangeLaytimeMultiple(name, value,index));
   };
+  const softShow = useSelector((state)=> state.LaytimeMultiple.softShow);
+
+  console.log('softShow', softShow);
 
   const [show, setShow] = useState([]);
-  const [softShow, setSoftShow] = useState(false);
+
   const { register, handleSubmit, errors, setValue } = useForm();
 
   const deleteMultiple = (data) => {
@@ -59,6 +69,22 @@ const LaytimeMultipleAdd = () => {
       dispatch(deleteMultipleList(data))
     );
   };
+
+  const showSofsList =()=>{
+    dispatch(showSoftacton());
+  }
+
+  const addSof =(index)=>{
+  
+     dispatch(addNewSof());
+   
+  }
+
+  const addOperation = () => {
+    dispatch(addNewOperation());
+  }
+
+  
 
   console.log("layTimeRowList data by multiplerow:", laytimeDatList);
   return (
@@ -103,7 +129,7 @@ const LaytimeMultipleAdd = () => {
                       <button
                         type="submit"
                         class="saveButton text-white btn ml-3"
-                        onClick={() => setSoftShow(!softShow)}
+                        onClick={() => showSofsList()}
                       >
                         SOF
                       </button>
@@ -129,42 +155,48 @@ const LaytimeMultipleAdd = () => {
                           <th> REMARKS</th>
                           <th class="text-right pr-3">ACTION</th>
                         </tr>
-                        <tr>
+
+
+                        {
+                          layTimeDetailsList && layTimeDetailsList.map((item,index)=>(
+                            <tr>
                           <td>
-                            <DatePicker
-                              name="dteStartTime"
-                              className="date-picker"
-                              placeholderText="select issue date"
-                              dateFormat="MM-dd-yyyy"
-                              selected={
-                                laytimeDetailsData.dteStartTime !== ""
-                                  ? moment(
-                                      laytimeDetailsData.dteStartTime
-                                    ).toDate()
-                                  : null
-                              }
-                              onChange={(date) =>
-                                handleChangeTextInput("dteStartTime", date)
-                              }
-                            />
+
+                          <DatePicker
+                          className="date-picker"
+                          name="dteStartTime"
+                          dateFormat="MM-dd-yyyy"
+                          minDate={moment().toDate()}
+                          placeholderText="select commence date"
+                          selected={item.dteStartTime !== '' ? moment(item.dteStartTime).toDate() : null}
+                          onChange={(date) => handleChangeTextInput("dteStartTime", date,index)}
+                          ref={register({
+                            required: true,
+                            maxLength: 100,
+                          })}
+                          />
+
+                    
+
+                            {/*<input type ="text" value={item.dteStartTime}  onChange={(e) => handleChangeTextInput("dteStartTime", e.target.value,index)}/>*/}
+
                           </td>
+
                           <td>
-                            <DatePicker
-                              name="dteEndTime"
-                              className="date-picker"
-                              placeholderText="select issue date"
-                              dateFormat="MM-dd-yyyy"
-                              selected={
-                                laytimeDetailsData.dteEndTime !== ""
-                                  ? moment(
-                                      laytimeDetailsData.dteEndTime
-                                    ).toDate()
-                                  : null
-                              }
-                              onChange={(date) =>
-                                handleChangeTextInput("dteEndTime", date)
-                              }
-                            />
+                          <DatePicker
+                          className="date-picker"
+                          name="dteEndTime"
+                          dateFormat="MM-dd-yyyy"
+                          minDate={moment().toDate()}
+                          placeholderText="select commence date"
+                          selected={item.dteEndTime !== '' ? moment(item.dteEndTime).toDate() : null}
+                          onChange={(date) => handleChangeTextInput("dteEndTime", date,index)}
+                          ref={register({
+                            required: true,
+                            maxLength: 100,
+                          })}
+                          />
+
                           </td>
                           <td>
                             <RHFInput
@@ -172,15 +204,15 @@ const LaytimeMultipleAdd = () => {
                               rules={{ required: true }}
                               name="numTimeUsed"
                               register={register}
-                              value={laytimeDetailsData.numTimeUsed}
+                              // value={laytimeDetailsData.numTimeUsed}
                               onChange={(option) => {
                                 handleChangeTextInput(
                                   "strTimeName",
-                                  option.label
+                                  option.label,index
                                 );
                                 handleChangeTextInput(
                                   "numTimeUsed",
-                                  option.value
+                                  option.value,index
                                 );
                               }}
                               ref={register({
@@ -195,11 +227,11 @@ const LaytimeMultipleAdd = () => {
                               type="number"
                               name="numRatio"
                               className="fromStyle formHeight"
-                              value={laytimeDetailsData.numRatio}
+                              // value={laytimeDetailsData.numRatio}
                               onChange={(e) =>
                                 handleChangeTextInput(
                                   "numRatio",
-                                  e.target.value
+                                  e.target.value,index
                                 )
                               }
                               ref={register({
@@ -218,11 +250,11 @@ const LaytimeMultipleAdd = () => {
                           onChange={(option) => {
                             handleChangeTextInput(
                               "strOperationRemark",
-                              option.label
+                              option.label,index
                             );
                             handleChangeTextInput(
                               "intOperationRemarkID",
-                              option.value
+                              option.value,index
                             );
                           }}
                           ref={register({
@@ -233,7 +265,7 @@ const LaytimeMultipleAdd = () => {
                         />
                           </td>
                           <td className="text-right pr-3 mt-3">
-                            <a className="btn btn-icon btn-light btn-hover-danger btn-sm">
+                            <a className="btn btn-icon btn-light btn-hover-danger btn-sm" onClick={() => addSof(index) }>
                               <i className="fas fa-plus"></i>
                             </a>
                             <a className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm">
@@ -241,6 +273,10 @@ const LaytimeMultipleAdd = () => {
                             </a>
                           </td>
                         </tr>
+
+                          ))
+                        }
+                        
                       </thead>
                     </table>
                   </div>
@@ -291,7 +327,7 @@ const LaytimeMultipleAdd = () => {
                           </td>
 
                           <td className="text-right pr-3 mt-3">
-                            <a className="btn btn-icon btn-light btn-hover-danger btn-sm">
+                            <a className="btn btn-icon btn-light btn-hover-danger btn-sm" onClick={() => addOperation() }>
                               <i className="fas fa-plus"></i>
                             </a>
                             <a className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm">

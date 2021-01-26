@@ -100,7 +100,7 @@ console.log('laytimeRowInput', laytimeRowInput)
                                             label="Loading"
                                             name="intType"
                                             id="formHorizontalRadios1"
-                                            value={"Loding"}
+                                            value={1}
                                             onChange={(e) => handleChangeTextInput('intType', e.target.value)}
                                         />
                                         <Form.Check
@@ -109,7 +109,7 @@ console.log('laytimeRowInput', laytimeRowInput)
                                             label="Discharging"
                                             name="intType"
                                             id="formHorizontalRadios1"
-                                            value={"Discharging"}
+                                            value={2}
                                             onChange={(e) => handleChangeTextInput('intType', e.target.value)}
                                         />
                                     </div>
@@ -236,7 +236,7 @@ console.log('laytimeRowInput', laytimeRowInput)
                                                     })}
                                                 />
                                             </div>
-                                            <div className="col-md-5">
+                                           {/* <div className="col-md-5">
                                                 <label className="form-label mt-2 formFont">Day</label>
                                                 <Form.Control
                                                     type="number"
@@ -250,6 +250,7 @@ console.log('laytimeRowInput', laytimeRowInput)
                                                     })}
                                                 />
                                             </div>
+                                                */}
                                         </div>
                                         <div className="row col-md-6">
                                             <div className="col-md-7">
