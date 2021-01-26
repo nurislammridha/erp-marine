@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { emptyItemSubmit, emptyMultipleItemList, getItemList } from "../_redux/actions/ItemAction";
 import ItemFilter from "./ItemFilter";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 const ItemList = () => {
   const history = useHistory();
@@ -15,6 +17,23 @@ const ItemList = () => {
     dispatch(getItemList());
 
   }, [])
+  const submit = (index) => {
+    confirmAlert({
+      title: 'Confirm to submit',
+      message: 'Are you sure to do this.',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => alert('For testing')
+        },
+        {
+          label: 'No',
+          // onClick: () => alert('Click No')
+        }
+      ]
+    });
+  };
+
   return (
     <div className="container">
       <div className=" row p-4">
@@ -66,7 +85,11 @@ const ItemList = () => {
                     <a href>
                       <i className="far fa-edit editIcon item-list-icon"></i>
                     </a>
-                    <i className="fas fa-trash-alt editIcon item-list-icon ml-4"></i>
+                    <a href
+                      onClick={() => submit(index)}
+                    >
+                      <i className="fas fa-trash-alt editIcon item-list-icon ml-4"></i>
+                    </a>
                   </td>
                 </tr>
               ))}
