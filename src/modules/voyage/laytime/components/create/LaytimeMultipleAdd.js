@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import DatePicker from "react-datepicker";
 import { deleteMultipleList } from "../../_redux/actions/LaytimeAction";
-import { addNewSof, getRemarkList, handleChangeLaytimeMultiple, showSoftacton } from "../../_redux/actions/LaytimeMultiple";
+import { addNewOperation, addNewSof, getRemarkList, handleChangeLaytimeMultiple, showSoftacton } from "../../_redux/actions/LaytimeMultiple";
 
 const LaytimeMultipleAdd = () => {
   const selectCount = [
@@ -66,7 +66,7 @@ const LaytimeMultipleAdd = () => {
   const deleteMultiple = (data) => {
     alert(
       "Are you sure want to remove data ",
-      dispatch(deleteMultipleList(data))
+      // dispatch(deleteMultipleList(data))
     );
   };
 
