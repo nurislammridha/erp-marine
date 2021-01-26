@@ -25,15 +25,32 @@ const ItemAdd = () => {
     dispatch(itemAddInput(name, value))
   }
   const multipleItemAdd = () => {
+
     dispatch(multipleItemAddInput(itemDataInput))
-    // setValue("intDepartmentId", "")
+
+    // setValue("intUoMID", "")
+    // setValue("intItemTypeID", "")
+    // setValue("intItemCategoryID", "")
   }
+  //   useEffect(() => {
+  //     dispatch(getBankName());
+  //     if (bankInfo.length > 0) {
+  //         setValue("intBankId", "");
+  //     }
+  // }, []);
+
   useEffect(() => {
     dispatch(getUOM());
     dispatch(getItemType());
     dispatch(getItemCategory());
     dispatch(getItemCategory())
-  }, [])
+    if (multipleItemList.length > 0) {
+      setValue("intDepartmentID", "");
+      setValue("intUoMID", "");
+      setValue("intItemTypeID", "");
+      setValue("intItemCategoryID", "");
+    }
+  }, [multipleItemList])
 
   const CourseName = [
     {
@@ -93,7 +110,6 @@ const ItemAdd = () => {
                   changeText("strDepartmentName", option.label);
                 }}
               />
-              {/* strDepartmentName intDepartmentID */}
             </Form.Group>
           </div>
           <div className="col-xl-3 col-lg-3 col-md-6 ">
@@ -203,7 +219,7 @@ const ItemAdd = () => {
         <div className="form-group row">
           <div className="col-xl-3 col-lg-3 col-md-6 ">
             <Form.Group>
-              <Form.Label className="formFont pl-1">Catalouge No</Form.Label>
+              <Form.Label className="formFont pl-1">Catalogue No</Form.Label>
               <Form.Control
                 className="formHeight"
                 type="text"

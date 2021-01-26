@@ -12,6 +12,55 @@ export const itemAddInput = (name, value) => (dispatch) => {
 }
 
 export const multipleItemAddInput = (itemDataInput) => (dispatch) => {
+    if (itemDataInput.intDepartmentID.length === 0) {
+        showToast("error", "Please Select Department");
+        return false
+    }
+    else if (itemDataInput.strItemName.length === 0) {
+        showToast("error", "Item Name Should not be empty");
+        return false
+    }
+    else if (itemDataInput.intUoMID.length === 0) {
+        showToast("error", "Please Select UOM");
+        return false
+    }
+    else if (itemDataInput.intItemTypeID.length === 0) {
+        showToast("error", "Please Select Item Type");
+        return false
+    }
+    else if (itemDataInput.intItemCategoryID.length === 0) {
+        showToast("error", "Please Select Item Category");
+        return false
+    }
+    else if (itemDataInput.strSubCategoryName.length === 0) {
+        showToast("error", "Please Select Item Sub Category");
+        return false
+    }
+    else if (itemDataInput.strPartNo.length === 0) {
+        showToast("error", "Please Select Part No");
+        return false
+    }
+    else if (itemDataInput.strModelNo.length === 0) {
+        showToast("error", "Please Select Model No");
+        return false
+    }
+    else if (itemDataInput.intCatalogueID.length === 0) {
+        showToast("error", "Catalogue should not be empty");
+        return false
+    }
+    else if (itemDataInput.strBrand.length === 0) {
+        showToast("error", "Please Select Department");
+        return false
+    }
+    else if (itemDataInput.strEngineName.length === 0) {
+        showToast("error", "Please Select Department");
+        return false
+    }
+    else if (itemDataInput.strDrwingNumber.length === 0) {
+        showToast("error", "Please Select Department");
+        return false
+    }
+
     dispatch({ type: Types.MULTIPLE_ITEM_ADD_INPUT, payload: itemDataInput })
 }
 export const deleteMultipleItemInput = (index) => (dispatch) => {
@@ -85,5 +134,3 @@ export const getItemCategory = (data) => (dispatch) => {
         }
     );
 };
-
-
