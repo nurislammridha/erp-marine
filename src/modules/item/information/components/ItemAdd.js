@@ -12,6 +12,14 @@ const ItemAdd = () => {
   const history = useHistory();
   const itemDataInput = useSelector(state => state.itemList.itemDataInput);
   const multipleItemList = useSelector(state => state.itemList.multipleItemAdd);
+  const itemSUbmit = useSelector(state => state.itemList.itemSUbmit);
+  useEffect(() => {
+    console.log('itemSUbmit add:>> ', itemSUbmit.status);
+    if (itemSUbmit.status) {
+      history.push('/items/list');
+    }
+  }, [itemSUbmit])
+
   const UOMOptionData = useSelector(
     (state) => state.itemList.UOMOptionData
   );
@@ -27,45 +35,24 @@ const ItemAdd = () => {
   const multipleItemAdd = () => {
 
     dispatch(multipleItemAddInput(itemDataInput))
-
-    // setValue("intUoMID", "")
-    // setValue("intItemTypeID", "")
-    // setValue("intItemCategoryID", "")
   }
-  //   useEffect(() => {
-  //     dispatch(getBankName());
-  //     if (bankInfo.length > 0) {
-  //         setValue("intBankId", "");
-  //     }
-  // }, []);
 
   useEffect(() => {
-    dispatch(getUOM());
-    dispatch(getItemType());
-    dispatch(getItemCategory());
-    dispatch(getItemCategory())
     if (multipleItemList.length > 0) {
       setValue("intDepartmentID", "");
       setValue("intUoMID", "");
       setValue("intItemTypeID", "");
       setValue("intItemCategoryID", "");
     }
-  }, [multipleItemList])
+  }, [multipleItemList, setValue])
 
-  const CourseName = [
-    {
-      id: 1,
-      label: "cse",
-    },
-    {
-      id: 1,
-      label: "EEE",
-    },
-    {
-      id: 1,
-      label: "MBA",
-    },
-  ];
+  useEffect(() => {
+    dispatch(getUOM());
+    dispatch(getItemType());
+    dispatch(getItemCategory());
+    dispatch(getItemCategory())
+  }, [])
+
   const department = [
     {
       id: 1,
@@ -76,17 +63,6 @@ const ItemAdd = () => {
       label: "Engine",
     }
   ];
-
-  // let CourseName = [];
-  // if (courseData) {
-  //   courseData.forEach((item) => {
-  //     let items = {
-  //       value: item.id,
-  //       label: item.name,
-  //     };
-  //     CourseName.push(items);
-  //   });
-  // }
   return (
     <>
       <div className="card card-custom gutter-b pl-5 pr-5 mb-5">
@@ -331,7 +307,11 @@ const ItemAdd = () => {
                         {" "}
                         <i className="far fa-edit editIcon item-list-icon"></i>
                         <a
-                          onClick={(index) => dispatch(deleteMultipleItemInput(index))}
+
+                          onClick={(index) => {
+                            alert("Are sure, you want to delete?")
+                            dispatch(deleteMultipleItemInput(index))
+                          }}
                         >
                           <i className="fas fa-trash-alt editIcon item-list-icon ml-4"></i>
                         </a>

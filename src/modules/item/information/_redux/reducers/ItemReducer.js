@@ -20,15 +20,16 @@ const initialState = {
         strDrwingNumber: "",
         strItemDescription: "Personal",
         intItemSubCategoryID: "1",
-        // strIMPACode: "123",
         strItemCode: "1",
-        // isActive: "1",
         intActionBy: "502648",
     },
-    multipleItemAdd: []
+    multipleItemAdd: [],
+    getItemList: [],
+    itemSUbmit: []
 }
 const ItemReducer = (state = initialState, action) => {
     const newState = { ...state }
+    // console.log('action.payload status:>> ', action.payload);
     switch (action.type) {
         case Types.CHANGE_ITEM_INPUT:
             const itemDataInput = { ...state.itemDataInput };
@@ -64,12 +65,23 @@ const ItemReducer = (state = initialState, action) => {
                 itemCategoryOptionData: getItemCategory(action.payload),
 
             };
+        case Types.ITEM_SUBMIT:
+            console.log('action.payload', action.payload);
+            return {
+                ...state,
+                itemSUbmit: action.payload
+            }
+        case Types.GET_ITEM_LIST:
+            return {
+                ...state, getItemList: action.payload
+            }
         default:
             break;
 
     }
-
+    console.log('itemSUbmit Reducer:>> ', initialState.itemSUbmit);
     return newState;
+
 }
 
 export default ItemReducer;

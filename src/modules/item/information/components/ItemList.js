@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { getItemList } from "../_redux/actions/ItemAction";
+import ItemFilter from "./ItemFilter";
 
 const ItemList = () => {
   const history = useHistory();
+  const itemList = useSelector(state => state.itemList.getItemList)
+  // console.log('iteList :>> ', itemList);
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getItemList())
+  }, [])
   return (
     <div className="container">
       <div className=" row p-4">
-        <div className="col-xl-9 col-lg-9">
+        <div className="col-xl-2 col-lg-2">
           <h3>Item List</h3>
         </div>
-        <div className="col-xl-3 col-lg-3">
+        <ItemFilter />
+        <div className="col-xl-2 col-lg-2">
           <button
             className="btn btn-primary btn-sm float-right text-center custome-addnew-btn item-list-btn"
             onClick={() => history.push("/items/add")}
@@ -38,38 +48,25 @@ const ItemList = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>01</td>
-                <td>engine</td>
-                <td>Container Cargo</td>
-                <td>Durres(Durazzo)</td>
-                <td>Akij Noor</td>
-                <td>Chottogram</td>
-                <td>Chottogram</td>
-                <td>Chottogram</td>
-
-                <td>
-                  {" "}
-                  <i className="far fa-edit editIcon item-list-icon"></i>
-                  <i className="fas fa-trash-alt editIcon item-list-icon ml-4"></i>
-                </td>
-              </tr>
-              <tr>
-                <td>02</td>
-                <td>engine</td>
-                <td>Container Cargo</td>
-                <td>Durres(Durazzo)</td>
-                <td>Akij Noor</td>
-                <td>Chottogram</td>
-                <td>Chottogram</td>
-                <td>Chottogram</td>
-
-                <td className="">
-                  {" "}
-                  <i className="far fa-edit editIcon item-list-icon"></i>
-                  <i className="fas fa-trash-alt editIcon item-list-icon ml-4"></i>
-                </td>
-              </tr>
+              {itemList && itemList.map((item, index) => (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{item.strDepartmentName}</td>
+                  <td>{item.StrItemTypeName}</td>
+                  <td>{item.strUoM}</td>
+                  <td>{item.StrItemTypeName}</td>
+                  <td>{item.strItemCategoryName}</td>
+                  <td>{item.strPartNo}</td>
+                  <td>{item.strModelNo}</td>
+                  <td>
+                    {" "}
+                    <a href>
+                      <i className="far fa-edit editIcon item-list-icon"></i>
+                    </a>
+                    <i className="fas fa-trash-alt editIcon item-list-icon ml-4"></i>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
