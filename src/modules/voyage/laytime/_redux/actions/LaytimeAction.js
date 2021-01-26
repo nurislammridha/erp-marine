@@ -210,7 +210,7 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
     const layTimeRowData = [
         {
             intPortID: laytimeRowInput.intPortID,
-            intType: laytimeRowInput.intType,
+            intType: parseInt(laytimeRowInput.intType),
             dteLaytimeCommenced: laytimeRowInput.dteLaytimeCommenced,
             dteLaytimeCompleted: laytimeRowInput.dteLaytimeCompleted,
             intCargoID: laytimeRowInput.intCargoID,
@@ -230,6 +230,8 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
         }
     ];
 
+    console.log('laytimeHeaderInput data check', laytimeHeaderInput);
+
     laytimeHeaderInput.intActionBy = 1;
     const intShipID = await getVesselId();
     if (typeof intShipID === 'undefined' || intShipID === null || intShipID === "") {
@@ -246,9 +248,12 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
     };
     dispatch({ type: Types.LAYTIME_DATA_SUBMITTING, payload: true });
 
+    
+
     Axios.post(`${process.env.REACT_APP_API_URL}voyage/layTimeHeaderRow`, laytimeHeaderInput)
+
         .then((res) => {
-            console.log('res :>> ', res);
+            console.log('res row data :>> ', res);
             responseList.data = res.data;
             responseList.loading = false;
             responseList.status = res.data.status;
@@ -261,6 +266,7 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
             }
         })
         .catch((error) => {
+            console.log('error', error);
             responseList.loading = false;
             const message = "Something went wrong, Please try again !";
             showToast("error", message);
@@ -270,6 +276,8 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
 
 // laytime demurrage input 
 export const deleteMultipleList = (data) => (dispatch) => {
+    
+    Axios.delete(`${process.env.REACT_APP_API_URL}voyage/layTimeHeaderRow/${data.intLayTimeRowID}`);
     dispatch({
         type: Types.DELETE_LAYTIMEROW_DATA,
         payload: data,

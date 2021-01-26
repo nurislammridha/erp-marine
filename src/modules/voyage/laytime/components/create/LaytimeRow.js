@@ -18,14 +18,14 @@ const LaytimeRow = () => {
     const layTimeRowList = useSelector((state) => state.laytimeDetailInfo.layTimeRowList);
     const laytimeDatList = useSelector((state) => state.laytimeDetailInfo.laytimeDatList);
 
-    // console.log("layTimeRowList data by row:",laytimeDatList);
+    // console.log("laytimeRowInput data by row:",laytimeRowInput);
 
     const [show, setShow] = useState(false);
     // handle change lay time row input
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeLaytimeRowInput(name, value));
     };
-
+console.log('laytimeRowInput', laytimeRowInput)
     // for testing port 
     const selectPort = [
         {
@@ -98,19 +98,19 @@ const LaytimeRow = () => {
                                             className="m-3"
                                             type="radio"
                                             label="Loading"
-                                            name="Loading"
+                                            name="intType"
                                             id="formHorizontalRadios1"
-                                            value={"Loading"}
-                                            onChange={(e) => handleChangeTextInput('Loading', e.target.value)}
+                                            value={1}
+                                            onChange={(e) => handleChangeTextInput('intType', e.target.value)}
                                         />
                                         <Form.Check
                                             className="m-3"
                                             type="radio"
                                             label="Discharging"
-                                            name="Loading"
+                                            name="intType"
                                             id="formHorizontalRadios1"
-                                            value={"Discharging"}
-                                            onChange={(e) => handleChangeTextInput('Loading', e.target.value)}
+                                            value={2}
+                                            onChange={(e) => handleChangeTextInput('intType', e.target.value)}
                                         />
                                     </div>
                                     <div className="row">
@@ -236,7 +236,7 @@ const LaytimeRow = () => {
                                                     })}
                                                 />
                                             </div>
-                                            <div className="col-md-5">
+                                           {/* <div className="col-md-5">
                                                 <label className="form-label mt-2 formFont">Day</label>
                                                 <Form.Control
                                                     type="number"
@@ -250,6 +250,7 @@ const LaytimeRow = () => {
                                                     })}
                                                 />
                                             </div>
+                                                */}
                                         </div>
                                         <div className="row col-md-6">
                                             <div className="col-md-7">
@@ -451,7 +452,7 @@ const LaytimeRow = () => {
                 show && (
                     <div className="row">
                         <div className="col-md-9">
-                            <LaytimeMultipleAdd laytimeDatList={laytimeDatList}/>
+                            <LaytimeMultipleAdd />
                         </div>
                     </div>
                 )

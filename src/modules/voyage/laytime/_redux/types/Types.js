@@ -17,3 +17,15 @@ export const DELETE_LAYTIMEROW_DATA = "DELETE_LAYTIMEROW_DATA";
 //laytime multiple
 
 export const LAYTIME_MULTIPLE_DATA = "LAYTIME_MULTIPLE_DATA";
+
+//remark list
+
+export const GET_ROWTIME_REMARK_LIST = "GET_ROWTIME_REMARK_LIST";
+
+//SOF LIST
+
+export const LAYTIMEROW_SOF_LIST = "LAYTIMEROW_SOF_LIST";
+
+export const ADD_NEW_SOF = "ADD_NEW_SOF";
+
+export const ADD_NEW_OPERATION = "ADD_NEW_OPERATION";

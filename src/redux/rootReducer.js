@@ -51,6 +51,7 @@ import OthersInfoReducer from "../modules/partners/others-information/_redux/red
 import SuppliersListReducer from "../modules/partners/suppliers-list/_redux/reducers/SuppliersListReducer";
 import VesselBookingReducer from "../modules/voyage/booking/_redux/reducers/VesselBookingReducer";
 import LaytimeMultiple from "../modules/voyage/laytime/_redux/reducers/LaytimeMultiple";
+import LayTimeOperationRemarkReducer from "../modules/voyage/laytime/_redux/reducers/LaytimeOperationRemark";
 import ItemReducer from "../modules/item/information/_redux/reducers/ItemReducer";
 import PortReducer from "../modules/master/DropDownData/Port/_redux/PortReducer/PortReducer";
 import VoyageTypeReducer from "../modules/master/DropDownData/VoyageType/_redux/VoyageTypeReducer/VoyageTypeReducer";
@@ -104,6 +105,7 @@ export const rootReducer = combineReducers({
   laytimeHeaderInfo: LaytimeHeaderReducer,
   laytimeDetailInfo: LaytimeRowReducer,
   LaytimeMultiple: LaytimeMultiple,
+  layTimeOperationRemark: LayTimeOperationRemarkReducer,
 
   //Vessel Booking 
   VesselBookingReducer: VesselBookingReducer,
