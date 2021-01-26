@@ -12,6 +12,55 @@ export const itemAddInput = (name, value) => (dispatch) => {
 }
 
 export const multipleItemAddInput = (itemDataInput) => (dispatch) => {
+    if (itemDataInput.intDepartmentID.length === 0) {
+        showToast("error", "Please Select Department");
+        return false
+    }
+    else if (itemDataInput.strItemName.length === 0) {
+        showToast("error", "Item Name Should not be empty");
+        return false
+    }
+    else if (itemDataInput.intUoMID.length === 0) {
+        showToast("error", "Please Select UOM");
+        return false
+    }
+    else if (itemDataInput.intItemTypeID.length === 0) {
+        showToast("error", "Please Select Item Type");
+        return false
+    }
+    else if (itemDataInput.intItemCategoryID.length === 0) {
+        showToast("error", "Please Select Item Category");
+        return false
+    }
+    else if (itemDataInput.strSubCategoryName.length === 0) {
+        showToast("error", "Item Sub Category should not be empty");
+        return false
+    }
+    else if (itemDataInput.strPartNo.length === 0) {
+        showToast("error", "Part No should not be empty");
+        return false
+    }
+    else if (itemDataInput.strModelNo.length === 0) {
+        showToast("error", "Model No should not be empty");
+        return false
+    }
+    else if (itemDataInput.intCatalogueID.length === 0) {
+        showToast("error", "Catalogue should not be empty");
+        return false
+    }
+    // else if (itemDataInput.strBrand.length === 0) {
+    //     showToast("error", "Brand should not be empty");
+    //     return false
+    // }
+    // else if (itemDataInput.strEngineName.length === 0) {
+    //     showToast("error", "Engine no should not be empty");
+    //     return false
+    // }
+    // else if (itemDataInput.strDrwingNumber.length === 0) {
+    //     showToast("error", "Drawing no should not be empty");
+    //     return false
+    // }
+
     dispatch({ type: Types.MULTIPLE_ITEM_ADD_INPUT, payload: itemDataInput })
 }
 export const deleteMultipleItemInput = (index) => (dispatch) => {
@@ -35,15 +84,13 @@ export const submitMultipleItem = (multipleItemList) => (dispatch) => {
         console.log('response Action:>> ', response);
         responseList.isLoading = true;
         responseList.data = response.data.data;
-        // { (response.status) ? <Redirect to="/items/list" />:<Redirect to="/items/list" />}
-
-        if (response.status) {
+        responseList.status = response.data.data;
+        if (response.data.status) {
             showToast("success", response.data.message);
-            // history.push('/items/list');
-            // history.replace({ pathname: '/items/list' });
-
-            // <Redirect to="/items/list" />
-
+            dispatch({
+                type: Types.ITEM_SUBMIT,
+                payload: responseList,
+            })
         } else {
             showToast("error", response.data.message)
         }
@@ -86,4 +133,18 @@ export const getItemCategory = (data) => (dispatch) => {
     );
 };
 
-
+export const getItemList = () => (dispatch) => {
+    const url = `${process.env.REACT_APP_API_URL}inventory/itemList`;
+    Axios.get(url).then((res) => {
+        let data = res.data.data;
+        dispatch({ type: Types.GET_ITEM_LIST, payload: data });
+    })
+}
+export const emptyItemSubmit = () => (dispatch) => {
+    const data = "";
+    dispatch({ type: Types.ITEM_SUBMIT, payload: data })
+}
+export const emptyMultipleItemList = () => (dispatch) => {
+    const data = "";
+    dispatch({ type: Types.EMPTY_MULTIPLE_ITEM_LIST, payload: data })
+}

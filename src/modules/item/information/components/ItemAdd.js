@@ -12,6 +12,14 @@ const ItemAdd = () => {
   const history = useHistory();
   const itemDataInput = useSelector(state => state.itemList.itemDataInput);
   const multipleItemList = useSelector(state => state.itemList.multipleItemAdd);
+  const itemSUbmit = useSelector(state => state.itemList.itemSUbmit);
+  // Redirect List Page after submitting data
+  useEffect(() => {
+    if (itemSUbmit.status) {
+      history.push('/items/list');
+    }
+  }, [itemSUbmit])
+
   const UOMOptionData = useSelector(
     (state) => state.itemList.UOMOptionData
   );
@@ -25,9 +33,19 @@ const ItemAdd = () => {
     dispatch(itemAddInput(name, value))
   }
   const multipleItemAdd = () => {
+
     dispatch(multipleItemAddInput(itemDataInput))
-    // setValue("intDepartmentId", "")
   }
+
+  useEffect(() => {
+    if (multipleItemList.length > 0) {
+      setValue("intDepartmentID", "");
+      setValue("intUoMID", "");
+      setValue("intItemTypeID", "");
+      setValue("intItemCategoryID", "");
+    }
+  }, [multipleItemList, setValue])
+
   useEffect(() => {
     dispatch(getUOM());
     dispatch(getItemType());
@@ -35,20 +53,6 @@ const ItemAdd = () => {
     dispatch(getItemCategory())
   }, [])
 
-  const CourseName = [
-    {
-      id: 1,
-      label: "cse",
-    },
-    {
-      id: 1,
-      label: "EEE",
-    },
-    {
-      id: 1,
-      label: "MBA",
-    },
-  ];
   const department = [
     {
       id: 1,
@@ -59,17 +63,6 @@ const ItemAdd = () => {
       label: "Engine",
     }
   ];
-
-  // let CourseName = [];
-  // if (courseData) {
-  //   courseData.forEach((item) => {
-  //     let items = {
-  //       value: item.id,
-  //       label: item.name,
-  //     };
-  //     CourseName.push(items);
-  //   });
-  // }
   return (
     <>
       <div className="card card-custom gutter-b pl-5 pr-5 mb-5">
@@ -93,7 +86,6 @@ const ItemAdd = () => {
                   changeText("strDepartmentName", option.label);
                 }}
               />
-              {/* strDepartmentName intDepartmentID */}
             </Form.Group>
           </div>
           <div className="col-xl-3 col-lg-3 col-md-6 ">
@@ -203,7 +195,7 @@ const ItemAdd = () => {
         <div className="form-group row">
           <div className="col-xl-3 col-lg-3 col-md-6 ">
             <Form.Group>
-              <Form.Label className="formFont pl-1">Catalouge No</Form.Label>
+              <Form.Label className="formFont pl-1">Catalogue No</Form.Label>
               <Form.Control
                 className="formHeight"
                 type="text"
@@ -315,7 +307,11 @@ const ItemAdd = () => {
                         {" "}
                         <i className="far fa-edit editIcon item-list-icon"></i>
                         <a
-                          onClick={(index) => dispatch(deleteMultipleItemInput(index))}
+
+                          onClick={(index) => {
+                            alert("Are sure, you want to delete?")
+                            dispatch(deleteMultipleItemInput(index))
+                          }}
                         >
                           <i className="fas fa-trash-alt editIcon item-list-icon ml-4"></i>
                         </a>
