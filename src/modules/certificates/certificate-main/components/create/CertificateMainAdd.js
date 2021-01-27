@@ -34,6 +34,7 @@ import {
 } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
 import MultipplePreviewAttachment from "../../../../master/components/previews/MultiplePreviewAttachment";
 import { showToast } from "../../../../master/utils/ToastHelper";
+import { handleChangeCertificateMasterInput } from "../../../certificate-master/_redux/actions/CertificateListAction";
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -58,7 +59,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
     (state) => state.certificateMainInfo.certificatesNameOptionData
   );
 
-  console.log('certificatesNameOption :>> ', certificatesNameOption);
   
   const certificateParentCategoryList = useSelector(
     (state) => state.CertificateCategoryReducer.certificateParentCategoryList
@@ -171,6 +171,12 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       }));
                       dispatch(handleCertificateCategoryInput('intParentsCategoryID', option.value));
                       dispatch(getCertificateName(option.value));
+
+                      dispatch(handleChangeCertificateMasterInput('certificateCategoryParent', {
+                        label: option.label,
+                        value: option.value,
+                      }))
+                      dispatch(handleChangeCertificateMasterInput('intCategoryID', option.value))
                     }}
                     setValue={setValue}
                   />
@@ -250,7 +256,12 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         className="btn btn-default"
                         type="button"
                         onClick={() => {
-                          setShowCertificateModal(true);
+                          if (certificateInfoInput.intParentCategoryID === null) {
+                            showToast('error', 'Please select parent category first !')
+                          } else{
+                            setShowCertificateModal(true);
+                          }
+                          
                         }}
                       >
                         <i className="fa fa-plus-circle"></i>
@@ -953,7 +964,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               handleShow={() => setShowCertificateModal(true)}
               modalTitle={"Certificate Name"}
             >
-              <CertificateMasterAdd />
+              <CertificateMasterAdd isSubCategory={true} />
             </SimpleModal>
 
             <SimpleModal

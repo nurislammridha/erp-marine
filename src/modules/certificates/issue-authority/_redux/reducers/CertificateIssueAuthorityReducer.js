@@ -66,6 +66,11 @@ const CertificateIssueAuthorityReducer = (state = initialState, action) => {
         editStatus: action.payload.status,
         isLoading: action.payload.isLoading,
       };
+    case Types.DELETE_ISSUING_AUTHORITY:
+      return {
+        ...state,
+       isLoading: action.payload,
+      };
 
     default:
       break;

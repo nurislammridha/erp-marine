@@ -174,7 +174,7 @@ const CertificateMainList = () => {
                 <tr>
                   <th className="td-sl">#</th>
                   {/* <th scope="col">Folder No.</th> */}
-                  <th scope="col">Code</th>
+                  {/* <th scope="col">Code</th> */}
                   <th scope="col">Description</th>
                   <th scope="col">Type</th>
                   <th scope="col">Issued By</th>
@@ -199,7 +199,7 @@ const CertificateMainList = () => {
                   >
                     <td>{index + 1}</td>
                     {/* <td>{certificate.strShipFolderNo}</td> */}
-                    <td>{certificate.strCustomeCode}</td>
+                    {/* <td>{certificate.strCustomeCode}</td> */}
                     <td>{certificate.strShipRemarks}</td>
                     <td>{certificate.strCertificateTypeName}</td>
                     <td>{certificate.strIssuingAuthorityName}</td>
