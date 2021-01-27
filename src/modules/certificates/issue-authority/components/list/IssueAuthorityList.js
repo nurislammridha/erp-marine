@@ -68,6 +68,7 @@ const IssueAuthorityList = (props) => {
     dispatch(issueAuthorityDelete(id));
     dispatch(getIssuingAuthorities("", "", currentPage));
   }
+  
   const deleteIssuingAuthority = (id) => {
     confirmAlert({
       title: "Confirm To Delete",
@@ -83,23 +84,7 @@ const IssueAuthorityList = (props) => {
       ]
     });
   };
-  // const deleteIssuingAuthority = (id) => {
-  //   console.log('id :>> ', id);
-  //   confirmAlert({
-  //     title: "Confirm To Delete",
-  //     message: `Are you sure to delete? Delet ID : ${id}`,
-  //     buttons: [
-  //       {
-  //         label: "Yes",
-  //         onClick: () => dispatch(issueAuthorityDelete(id))
-  //       },
-  //       {
-  //         label: "No"
-  //       }
-  //     ]
-  //   });
-  // };
-  console.log('issuingAuthorities :>> ', issuingAuthorities);
+ 
   return (
     <>
       {isLoading && (

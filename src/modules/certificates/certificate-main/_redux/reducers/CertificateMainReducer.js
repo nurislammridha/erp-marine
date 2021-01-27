@@ -22,7 +22,7 @@ const initialState = {
   //     imagePreviewUrl: null,
   //   },
   certificateMainInfo: {
-    intVesselID: null,
+    intShipID: null,
     intCertificateID: null,
     intCategoryID: null,
     intParentCategoryID: null,

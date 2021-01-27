@@ -14,6 +14,7 @@ import { getCertificateCategory } from "../../../certificate-main/_redux/actions
 import { getCertificateCategoryListData, getCertificateParentCategoryData } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
 
 const CertificateMasterAdd = (props) => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const { isSubCategory } = props;
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -45,29 +46,7 @@ const CertificateMasterAdd = (props) => {
   }, [status]);
 
   //=========
-  const dispatch = useDispatch();
-  const statusOptions = [
-    {
-      label: "Active",
-      value: "1",
-    },
-    {
-      label: "Inactive",
-      value: "0",
-    },
-  ];
-
-  const vesselName = [
-    {
-      label: "Akij Noor",
-      value: "1",
-    },
-    {
-      label: "Akij Pearl",
-      value: "0",
-    },
-  ];
-
+console.log('CertificateMasterInput :>> ', CertificateMasterInput);
   const certificateMainInfoChange = (name, value) => {
     dispatch(handleChangeCertificateMasterInput(name, value));
   };
@@ -119,25 +98,9 @@ const CertificateMasterAdd = (props) => {
 
           <div className="col-sm-12">
             <label className="form-label">Category Name</label>
-            {/* <RHFInput
-              as={<Select options={certificateParentCategoryList} />}
-              rules={{ required: true }}
-              name="intCategoryID"
-              register={register}
-              value={CertificateMasterInput.strCertificateCategoryName}
-              setValue={setValue}
-              onChange={(option) => {
-                certificateMainInfoChange(
-                  "strCertificateCategoryName",
-                  option.label
-                );
-                certificateMainInfoChange("intCategoryID", option.value);
-              }}
-            /> */}
             <RHFInput
-
               as={<Select options={certificateParentCategoryList}
-              isDisabled={typeof isSubCategory === 'undefined' ? false : true}
+                isDisabled={typeof isSubCategory === 'undefined' ? false : true}
               />}
               rules={{ required: false }}
               name="intCategoryID"
@@ -149,6 +112,7 @@ const CertificateMasterAdd = (props) => {
                   label: option.label,
                   value: option.value,
                 });
+                certificateMainInfoChange("strCertificateCategoryName", option.label);
                 certificateMainInfoChange("intCategoryID", option.value);
               }}
               setValue={setValue}
