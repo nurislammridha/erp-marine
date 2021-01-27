@@ -163,10 +163,10 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
     //     showToast('error', "Time allowed can't be blank!")
     //     return false;
     // }
-    // // if (laytimeRowInput.numTimeAllowence.length === 0) {
-    // //     showToast('error', "Time allowed can't be blank!")
-    // //     return false;
-    // // }
+    // if (laytimeRowInput.numTimeAllowence.length === 0) {
+    //     showToast('error', "Time allowed can't be blank!")
+    //     return false;
+    // }
     // if (laytimeRowInput.intAdditionalDay === null) {
     //     showToast('error', "Additional/saved times can't be blank!")
     //     return false;
@@ -253,7 +253,18 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
     Axios.post(`${process.env.REACT_APP_API_URL}voyage/layTimeHeaderRow`, laytimeHeaderInput)
 
         .then((res) => {
-            console.log('res row data :>> ', res);
+            console.log('res row data :>> ', res.data);
+            const intLayTimeHeaderID = res.data.data.intLayTimeHeaderID;
+            const intLayTimeRowID = res.data.data.intLayTimeRowID;
+            dispatch({ type: Types.LAYTIME_DETAILS_ENTRY_HEADER_DATA, payload: {
+                name: 'intLayTimeHeaderID', value: intLayTimeHeaderID
+            }});
+            dispatch({ type: Types.LAYTIME_DETAILS_ENTRY_HEADER_DATA, payload: {
+                name: 'intLayTimeRowID', value: intLayTimeRowID
+            }});
+
+            // Update LaytimeMultiple>layTimeMultipleInput:  intLayTimeHeaderID, intLayTimeRowID,
+
             responseList.data = res.data;
             responseList.loading = false;
             responseList.status = res.data.status;
@@ -280,6 +291,13 @@ export const deleteMultipleList = (data) => (dispatch) => {
     Axios.delete(`${process.env.REACT_APP_API_URL}voyage/layTimeHeaderRow/${data.intLayTimeRowID}`);
     dispatch({
         type: Types.DELETE_LAYTIMEROW_DATA,
+        payload: data,
+    });
+};
+export const deleteSofList = (data) => (dispatch) => {
+
+    dispatch({
+        type: Types.REMOVE_PARENT_SOF_LIST,
         payload: data,
     });
 };
