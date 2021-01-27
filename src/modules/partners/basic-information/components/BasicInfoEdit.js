@@ -222,7 +222,7 @@ const BasicInfoEdit = withRouter(({ history }) => {
                                             placeholder="Enter PIC Name"
                                             name="strPICName"
                                             className="fromStyle formHeight"
-                                            value={partnerInfoInput.picName}
+                                            value={partnerInfoInput.strPICName}
                                             onChange={(e) => handleChangeTextInput("strPICName", e.target.value)}
                                         />
                                     </div>
@@ -233,7 +233,7 @@ const BasicInfoEdit = withRouter(({ history }) => {
                                             placeholder="Enter PIC Contact"
                                             name="strPICContactNo"
                                             className="fromStyle formHeight"
-                                            value={partnerInfoInput.picContact}
+                                            value={partnerInfoInput.strPICContactNo}
                                             onChange={(e) => handleChangeTextInput("strPICContactNo", e.target.value)}
                                         />
                                     </div>
@@ -245,7 +245,7 @@ const BasicInfoEdit = withRouter(({ history }) => {
                                             placeholder="Enter PIC Email"
                                             name="strPICEmail"
                                             className="fromStyle formHeight"
-                                            value={partnerInfoInput.picEmail}
+                                            value={partnerInfoInput.strPICEmail}
                                             onChange={(e) => handleChangeTextInput("strPICEmail", e.target.value)}
                                         />
                                     </div>

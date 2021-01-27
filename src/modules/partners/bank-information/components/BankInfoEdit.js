@@ -16,7 +16,7 @@ const BankInfoEdit = withRouter(({ history }) => {
     const bankInfoInput = useSelector((state) => state.bankInfo.bankInfoInput);
     const bankOptionData = useSelector((state) => state.bankInfo.bankOptionData);
     const bankInfo = useSelector(state => state.bankInfo.bankInfoMultiple);
-    console.log('bankOptionData', bankOptionData)
+    console.log('bankInfoInput', bankInfoInput)
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeBankInfoInput(name, value));
     };

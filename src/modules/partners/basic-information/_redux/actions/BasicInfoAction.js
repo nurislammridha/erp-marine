@@ -219,28 +219,95 @@ export const EditSupplierInfo = (id) => (dispatch) => {
                     label: data.strSupplierTypeName,
                     value: data.intSupplierTypeID
                 }
-                console.log('data', data)
+
             }
+            // if (data.intSupplierTypeID !== null) {
+            //     data.supplierTypeName = {
+            //         label: data.strSupplierTypeName,
+            //         value: data.intSupplierTypeID
+            //     }
+
+            // }
             dispatch({
                 type: Types.EDIT_PARTNER_INFO,
                 payload: data,
             });
-            dispatch({
-                type: TypesAddress.EDIT_ADDRESS_INFO,
-                payload: res.data.data.address,
-            });
+
+            if (data.address !== null) {
+                if (data.address.intCountryID !== null) {
+                    data.address.countryName = {
+                        label: data.address.strCountry,
+                        value: data.address.intCountryID
+                    }
+
+                }
+                dispatch({
+                    type: TypesAddress.EDIT_ADDRESS_INFO,
+                    payload: data.address,
+                });
+            } else {
+                data.address = [];
+                dispatch({
+                    type: TypesAddress.EDIT_ADDRESS_INFO,
+                    payload: data.address,
+                });
+            }
+            // if (data.address.intCountryID !== null) {
+            //     data.address.countryName = {
+            //         label: data.address.strCountry,
+            //         value: data.address.intCountryID
+            //     }
+
+            // }
             dispatch({
                 type: TypesBank.EDIT_BANK_INFO,
-                payload: res.data.data.bank_info,
+                payload: data.bank_info,
             });
+            // if (data.bank_info !== null) {
+            //     dispatch({
+            //         type: TypesBank.EDIT_BANK_INFO,
+            //         payload: data.bank_info,
+            //     });
+            // } else {
+            //     data.bank_info = [];
+            //     dispatch({
+            //         type: TypesBank.EDIT_BANK_INFO,
+            //         payload: data.bank_info,
+            //     });
+            // }
+
+            if (data.port_served !== null) {
+                dispatch({
+                    type: TypesOther.EDIT_OTHERS_INFO,
+                    payload: data,
+                });
+            } else {
+                data.port_served = [];
+            }
             dispatch({
                 type: TypesOther.EDIT_OTHERS_INFO,
-                payload: res.data,
+                payload: data,
             });
+
+
+
+            if (data.service_provide !== null) {
+                dispatch({
+                    type: TypesOther.EDIT_OTHERS_INFO,
+                    payload: data.service_provide,
+                });
+            } else {
+                data.service_provide = [];
+            }
+            dispatch({
+                type: TypesOther.EDIT_OTHERS_INFO,
+                payload: data.service_provide,
+            });
+
         });
 };
 
-export const UpdatePartnerInfo = () => async (dispatch) => {
+export const UpdatePartnerInfo = (id) => async (dispatch) => {
 
     const basicInfo = store.getState().partnerInfo.partnerInfoInput;
     const addressInfo = store.getState().partnerAddress.addressInfo;
@@ -266,9 +333,9 @@ export const UpdatePartnerInfo = () => async (dispatch) => {
         psProvider: otherInfo.multipleProduct,
         // psType: otherInfo.multipleServiceList,
     }
-
+    console.log('finalSubmitInputData', finalSubmitInputData)
     Axios.put(
-        `${process.env.REACT_APP_API_URL}certificate/types/update`,
+        `${process.env.REACT_APP_API_URL}partner/partnerUpdate/${id}`,
         finalSubmitInputData
     )
         .then(async (response) => {
@@ -278,6 +345,10 @@ export const UpdatePartnerInfo = () => async (dispatch) => {
 
             if (response.data.status) {
                 showToast("success", response.data.message);
+                dispatch({
+                    type: Types.UPDATE_PARTNER_INFO,
+                    payload: responseList,
+                });
             } else {
                 showToast("error", response.data.message);
             }
