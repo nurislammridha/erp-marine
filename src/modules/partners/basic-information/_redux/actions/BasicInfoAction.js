@@ -151,6 +151,10 @@ export const emptyStatus = () => (dispatch) => {
         type: TypesOther.EMPTY_OTHERS_INFO,
 
     });
+    dispatch({
+        type: Types.UPDATE_PARTNER_INFO,
+        payload: responseList,
+    });
 }
 
 export const partnerCreateSubmitAction = () => async (dispatch) => {
@@ -259,22 +263,19 @@ export const EditSupplierInfo = (id) => (dispatch) => {
             //     }
 
             // }
-            dispatch({
-                type: TypesBank.EDIT_BANK_INFO,
-                payload: data.bank_info,
-            });
-            // if (data.bank_info !== null) {
-            //     dispatch({
-            //         type: TypesBank.EDIT_BANK_INFO,
-            //         payload: data.bank_info,
-            //     });
-            // } else {
-            //     data.bank_info = [];
-            //     dispatch({
-            //         type: TypesBank.EDIT_BANK_INFO,
-            //         payload: data.bank_info,
-            //     });
-            // }
+
+            if (data.bank_info !== null) {
+                dispatch({
+                    type: TypesBank.EDIT_BANK_INFO,
+                    payload: data.bank_info,
+                });
+            } else {
+                data.bank_info = [];
+                dispatch({
+                    type: TypesBank.EDIT_BANK_INFO,
+                    payload: data.bank_info,
+                });
+            }
 
             if (data.port_served !== null) {
                 dispatch({
