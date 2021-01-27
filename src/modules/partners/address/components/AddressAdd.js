@@ -12,7 +12,7 @@ import {
     partnerAddressSubmit,
     partnerAddressSubmitMultiple
 } from '../_redux/actions/AddressAction';
-
+console.log('address')
 const AddressAdd = withRouter(({ history }) => {
     const { register, setValue, handleSubmit } = useForm();
     const dispatch = useDispatch();
