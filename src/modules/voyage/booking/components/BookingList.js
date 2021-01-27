@@ -139,6 +139,7 @@ const BookingList = () => {
         show={bookDetailShow}
         handleClose={() => setBookDetailShow(false)}
         handleShow={() => setBookDetailShow(true)}
+        vesselBookingID={vesselBookingID}
         modalTitle={"Vessel Booking Details"}
       >
         <VesselBookingDetails handleClose={() => setBookDetailShow(false)} vesselBookingID={vesselBookingID} />

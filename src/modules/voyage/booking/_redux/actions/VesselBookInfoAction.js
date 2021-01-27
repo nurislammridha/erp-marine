@@ -19,6 +19,9 @@ export const getVesselBookingList = () => (dispatch) => {
 export const getVesselBookingDetails = (bookingID) => (dispatch) => {
     Axios.get(`${process.env.REACT_APP_API_URL}voyage/bookingList/${bookingID}`)
         .then((res) => {
-        console.log('res :>> ', res);
+        if(res.status === 200){
+            const data = res.data.data;
+            dispatch({type: Types.GET_VESSEL_BOOKING_DETAILS, payload: data})
+        }
     })
 }
