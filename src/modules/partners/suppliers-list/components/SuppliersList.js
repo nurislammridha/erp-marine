@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from "react-router-dom";
 import LoadingSpinner from '../../../master/spinner/LoadingSpinner'
 import { emptyStatus } from '../../basic-information/_redux/actions/BasicInfoAction';
-import { getSupplierList } from '../_redux/actions/SuppliersListAction'
+import { getSupplierList, supplierListDelete } from '../_redux/actions/SuppliersListAction'
+import { confirmAlert } from "react-confirm-alert";
 
 const SuppliersList = () => {
     const dispatch = useDispatch();
@@ -19,7 +20,26 @@ const SuppliersList = () => {
     //     dispatch(emptyStatus());
 
     // }, [])
+    const confirmDelete = (id) => {
+        dispatch(supplierListDelete(id));
 
+    }
+
+    const deleteList = (id) => {
+        confirmAlert({
+            title: "Confirm To Delete",
+            message: `Are you sure to delete..?`,
+            buttons: [
+                {
+                    label: "Yes",
+                    onClick: () => confirmDelete(id),
+                },
+                {
+                    label: "No"
+                }
+            ]
+        });
+    };
     return (
         <>
             {isLoading && (
@@ -63,7 +83,7 @@ const SuppliersList = () => {
                                                 <i className="far fa-edit editIcon item-list-icon"></i>
                                             </Link>
 
-                                            <i className="fas fa-trash-alt editIcon item-list-icon ml-4"></i>
+                                            <i className="fas fa-trash-alt editIcon item-list-icon ml-4" onClick={(id) => deleteList(item.intSupplierId)}></i>
                                         </td>
 
                                     </tr>
