@@ -46,19 +46,18 @@ const SuppliersList = () => {
                                         <td>{item.strSupplierName}</td>
                                         <td>{item.strEmail}</td>
                                         <td>{item.strContactNumber}</td>
+
+
                                         <td>
-                                            <a>
-                                                <i className="fas fa-eye"></i>
-                                            </a> &nbsp;&nbsp;
                                             <Link
                                                 to={`/suppliers/info/edit/${item.intSupplierId}`}
                                             >
-                                                <i className="fas fa-edit"></i>
-                                            </Link> &nbsp;&nbsp;
-                                            <a>
-                                                <i className="fas fa-trash-alt"></i>
-                                            </a>
+                                                <i className="far fa-edit editIcon item-list-icon"></i>
+                                            </Link>
+
+                                            <i className="fas fa-trash-alt editIcon item-list-icon ml-4"></i>
                                         </td>
+
                                     </tr>
                                 ))
                             )}

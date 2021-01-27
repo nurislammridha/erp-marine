@@ -11,24 +11,6 @@ import { EditSupplierInfo, getBusinessType, getPartnerType, getTaxType, handleCh
 const BasicInfoEdit = withRouter(({ history }) => {
     const { id } = useParams();
 
-    const selectOptions = [
-        {
-            label: 'Partner 1',
-            value: "1"
-        },
-        {
-            label: 'Partner 2',
-            value: "2"
-        },
-        {
-            label: 'Partner 3',
-            value: "3"
-        },
-        {
-            label: 'Partner 4',
-            value: "4"
-        }
-    ]
 
     useEffect(() => {
         dispatch(EditSupplierInfo(id));
@@ -91,12 +73,13 @@ const BasicInfoEdit = withRouter(({ history }) => {
                                             rules={{ required: true }}
                                             name="intSupplierTypeID"
                                             register={register}
+                                            setValue={setValue}
                                             value={partnerInfoInput.intSupplierTypeID}
                                             onChange={(e) => {
                                                 handleChangeTextInput("intSupplierTypeID", e.value);
                                                 handleChangeTextInput("strSupplierTypeName", e.label);
                                             }}
-                                            setValue={setValue}
+
                                         />
                                     </div>
                                     <div className="col-md-4">
