@@ -32,9 +32,11 @@ import CertificateTypeAdd from "../../../certificate-types/components/create/Cer
 import {
   getCertificateChildCategoryData,
   getCertificateParentCategoryData,
+  handleCertificateCategoryInput,
 } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
 import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
 import MultipplePreviewAttachment from "../../../../master/components/previews/MultiplePreviewAttachment";
+import { handleChangeCertificateMasterInput } from "../../../certificate-master/_redux/actions/CertificateListAction";
 
 const CertificateMainEdit = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -170,10 +172,19 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                             option.value
                           );
                           setValue("intCategoryID", "");
-                          setValue("category", "");
-                          dispatch(
-                            getCertificateChildCategoryData(option.value)
-                          );
+                          dispatch(getCertificateChildCategoryData(option.value));
+                          dispatch(handleCertificateCategoryInput('certificateCategoryParent', {
+                            label: option.label,
+                            value: option.value,
+                          }));
+                          dispatch(handleCertificateCategoryInput('intParentsCategoryID', option.value));
+                          dispatch(getCertificateName(option.value));
+
+                          dispatch(handleChangeCertificateMasterInput('certificateCategoryParent', {
+                            label: option.label,
+                            value: option.value,
+                          }))
+                          dispatch(handleChangeCertificateMasterInput('intCategoryID', option.value))
                         }}
                         setValue={setValue}
                       />
@@ -222,7 +233,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                       <label className="form-label">Certificate Name</label>
                       <div className="input-area-add">
                         <div className="float-left">
-                          <RHFInput
+                          {/* <RHFInput
                             as={<Select options={certificatesNameOption} defaultValue={"Hello"} />}
                             // rules={{ required: true }}
                             name="intCertificateID"
@@ -237,6 +248,24 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                                 label: option.label,
                                 value: option.value,
                               });
+                              certificateMainInfoChange(
+                                "intCertificateID",
+                                option.value
+                              );
+                            }}
+                            setValue={setValue}
+                          /> */}
+                          <RHFInput
+                            as={<Select options={certificatesNameOption} />}
+                            // rules={{ required: true }}
+                            name="intCertificateID"
+                            register={register}
+                            value={certificateEditInfo.intCertificateID}
+                            onChange={(option) => {
+                              certificateMainInfoChange(
+                                "intCertificateName",
+                                option.label
+                              );
                               certificateMainInfoChange(
                                 "intCertificateID",
                                 option.value
@@ -319,6 +348,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                       <label className="form-label mt-2 formFont">Code</label>
                       <Form.Control
                         type="text"
+                        disabled={true}
                         name="strCustomeCode"
                         className="fromStyle formHeight"
                         value={certificateEditInfo.strCustomeCode}
@@ -458,7 +488,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                       </div>
                     </div>
 
-                    <div className="col-lg-3">
+                    {/* <div className="col-lg-3">
                       <label className="form-label mt-2 formFont">
                         Location
                       </label>
@@ -483,7 +513,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                           errors.strLocation.type === "required" &&
                           "Certificate Issue Location can't be blank"}
                       </div>
-                    </div>
+                    </div> */}
                     <div className="col-lg-3 mt-3">
                       <label htmlFor="">{""}</label>
                       <Form.Group controlId="formBasicChecbox">
@@ -557,21 +587,11 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                           "Expiry Date can't be blank"}
                       </div> */}
                           </div>
-                          <div className="col-lg-3">
+                          {/* <div className="col-lg-3">
                             <label className="form-label mt-2">
                               Certificate Valid date
                             </label>
-                            {/* <Form.Control
-                              type="date"
-                              name="dteCertificateValidUntil"
-                              className="fromStyle formHeight"
-                              value={certificateEditInfo.dteCertificateValidUntil}
-                              onChange={(e) => certificateMainInfoChange("dteCertificateValidUntil", e.target.value)}
-                              ref={register({
-                                required: false,
-                                maxLength: 100,
-                              })}
-                            /> */}
+                           
                             <div>
                               <DatePicker
                                 name="dteCertificateValidUntil"
@@ -587,12 +607,12 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                                 })}
                               />
                             </div>
-                            {/* <div className="inputError margin-minus-8">
+                            <div className="inputError margin-minus-8">
                         {errors.dteCertificateValidUntil &&
                           errors.dteCertificateValidUntil.type === "required" &&
                           "Valid Until Date can't be blank"}
-                      </div> */}
-                          </div>
+                      </div>
+                          </div> */}
                         </>
                       )}
 
@@ -604,14 +624,14 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                             id="isExtendedUntil"
                             className="forgotPasswordText  "
                             type="checkbox"
-                            checked={(certificateEditInfo.isExtendedUntil == false || certificateEditInfo.isExtendedUntil == "0" ) ? false : true}
+                            checked={(certificateEditInfo.isExtendedUntil == false || certificateEditInfo.isExtendedUntil == "0") ? false : true}
                             onChange={(e) => {
                               certificateMainInfoChange("isExtendedUntil", (certificateEditInfo.isExtendedUntil == false || certificateEditInfo.isExtendedUntil == "0") ? true : false);
                               console.log('certificateEditInfo.isExtendedUntil', certificateEditInfo.isExtendedUntil);
-                              
-                             if(!certificateEditInfo.isExtendedUntil || certificateEditInfo.isExtendedUntil == "0"){
-                              certificateMainInfoChange("dteExtendedUntil", "")
-                             }
+
+                              if (!certificateEditInfo.isExtendedUntil || certificateEditInfo.isExtendedUntil == "0") {
+                                certificateMainInfoChange("dteExtendedUntil", "")
+                              }
                             }}
                           />
                         </label>
@@ -640,31 +660,37 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                       "Expiry Date can't be blank"}
                   </div> */}
                     </div>
-                    <div className="col-lg-3">
-                      <label className="form-label mt-2">
-                        Endorsement Date
-                      </label>
-                      <div>
-                        <DatePicker
-                          name="dteLastEndorsementDate"
-                          disableClock={true}
-                          className="form-control fromStyle formHeight custome-date"
-                          placeholderText="select certificate valid date"
-                          dateFormat="MM-dd-yyyy"
-                          selected={certificateEditInfo.dteLastEndorsementDate !== "" ? moment(certificateEditInfo.dteLastEndorsementDate).toDate() : null}
-                          onChange={(date) => certificateMainInfoChange("dteLastEndorsementDate", date)}
-                          ref={register({
-                            required: true,
-                            maxLength: 100,
-                          })}
-                        />
-                      </div>
-                      <div className="inputError margin-minus-8">
-                        {errors.dteLastEndorsementDate &&
-                          errors.dteLastEndorsementDate.type === "required" &&
-                          "Endorsement Date can't be blank"}
-                      </div>
-                    </div>
+                    {
+                      certificateEditInfo.intCertificateTypeID !== 3 && certificateEditInfo.intCertificateTypeID !== 4 &&
+                      certificateEditInfo.intCertificateTypeID !== null && (
+                        <div className="col-lg-3">
+                          <label className="form-label mt-2">
+                            Endorsement Date
+                        </label>
+                          <div>
+                            <DatePicker
+                              name="dteLastEndorsementDate"
+                              disableClock={true}
+                              className="form-control fromStyle formHeight custome-date"
+                              placeholderText="select certificate valid date"
+                              dateFormat="MM-dd-yyyy"
+                              selected={certificateEditInfo.dteLastEndorsementDate !== "" ? moment(certificateEditInfo.dteLastEndorsementDate).toDate() : null}
+                              onChange={(date) => certificateMainInfoChange("dteLastEndorsementDate", date)}
+                              ref={register({
+                                required: true,
+                                maxLength: 100,
+                              })}
+                            />
+                          </div>
+                          <div className="inputError margin-minus-8">
+                            {errors.dteLastEndorsementDate &&
+                              errors.dteLastEndorsementDate.type === "required" &&
+                              "Endorsement Date can't be blank"}
+                          </div>
+                        </div>
+                      )
+                    }
+
                   </div>
                   {/*certificate create dates close*/}
                   {certificateEditInfo.intParentCategoryID == 4 && (
