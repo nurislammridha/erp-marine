@@ -211,19 +211,27 @@ export const partnerCreateSubmitAction = () => async (dispatch) => {
 
 export const EditSupplierInfo = (id) => (dispatch) => {
     console.log('basicAction', id)
-    Axios.get(`${process.env.REACT_APP_API_URL}certificate/types/${id}`)
+    Axios.get(`${process.env.REACT_APP_API_URL}partner/showPartner/${id}`)
         .then((res) => {
+            let data = res.data.data
+            if (data.intSupplierTypeID !== null) {
+                data.supplierTypeName = {
+                    label: data.strSupplierTypeName,
+                    value: data.intSupplierTypeID
+                }
+                console.log('data', data)
+            }
             dispatch({
                 type: Types.EDIT_PARTNER_INFO,
-                payload: res.data,
+                payload: data,
             });
             dispatch({
                 type: TypesAddress.EDIT_ADDRESS_INFO,
-                payload: res.data,
+                payload: res.data.data.address,
             });
             dispatch({
                 type: TypesBank.EDIT_BANK_INFO,
-                payload: res.data,
+                payload: res.data.data.bank_info,
             });
             dispatch({
                 type: TypesOther.EDIT_OTHERS_INFO,

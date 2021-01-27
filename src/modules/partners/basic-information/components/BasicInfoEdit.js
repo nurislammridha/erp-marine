@@ -74,7 +74,7 @@ const BasicInfoEdit = withRouter(({ history }) => {
                                             name="intSupplierTypeID"
                                             register={register}
                                             setValue={setValue}
-                                            value={partnerInfoInput.intSupplierTypeID}
+                                            value={partnerInfoInput.supplierTypeName}
                                             onChange={(e) => {
                                                 handleChangeTextInput("intSupplierTypeID", e.value);
                                                 handleChangeTextInput("strSupplierTypeName", e.label);

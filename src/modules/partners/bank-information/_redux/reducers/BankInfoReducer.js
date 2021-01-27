@@ -68,7 +68,7 @@ const BankInfoReducer = (state = initialState, action) => {
         case Types.EDIT_BANK_INFO:
             return {
                 ...state,
-                bankInfoMultiple: action.payload
+                bankInfoInput: action.payload
             }
         default:
             break;
