@@ -11,7 +11,7 @@ export const getSupplierList = (searchValue = "") => async (dispatch) => {
         errors: [],
     };
     // console.log('search action:>> ', search);
-
+    console.log('test')
     dispatch({ type: Types.GET_SUPPLIER_LIST, payload: response });
     let url = `${process.env.REACT_APP_API_URL}partner/basicInfo`;
     if (searchValue !== "") {
