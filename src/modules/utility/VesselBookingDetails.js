@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Button, Col, Row } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { getVesselBookingDetails } from "../voyage/booking/_redux/actions/VesselBookInfoAction";
 
-const VesselBookingDetails = ({ handleClose}) => {
+const VesselBookingDetails = ({ handleClose, vesselBookingID }) => {
+    console.log('vesselBookingID :>> ', vesselBookingID);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getVesselBookingDetails(vesselBookingID))
+    }, [])
     return (
         <>
             <Row>
