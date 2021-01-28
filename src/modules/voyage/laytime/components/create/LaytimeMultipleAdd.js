@@ -1,4 +1,4 @@
-import { Form } from "react-bootstrap";
+import { Form,Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import React, { useState,useEffect } from "react";
 import Select from "react-select";
@@ -7,8 +7,9 @@ import { RHFInput } from "react-hook-form-input";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import DatePicker from "react-datepicker";
-import { deleteMultipleList } from "../../_redux/actions/LaytimeAction";
-import { addNewOperation, addNewSof, getRemarkList, handleChangeLaytimeMultiple, showSoftacton } from "../../_redux/actions/LaytimeMultiple";
+import { deleteMultipleList,deleteSofList } from "../../_redux/actions/LaytimeAction";
+import { addNewOperation, addNewSof, getRemarkList, handleChangeLaytimeMultiple, handleChangeLaytimeMultipleOperation, multipleSubmitAction, removeOperationData, removeSofData, showSoftacton } from "../../_redux/actions/LaytimeMultipleAction";
+import { showToast } from "../../../../master/utils/ToastHelper";
 
 const LaytimeMultipleAdd = () => {
   const selectCount = [
@@ -33,6 +34,8 @@ const LaytimeMultipleAdd = () => {
     (state) => state.laytimeDetailInfo.laytimeDatList
   );
 
+console.log("Header and row id : ",laytimeDatList);
+
   useEffect(() => {
     dispatch(getRemarkList());
   }, []);
@@ -49,6 +52,12 @@ const LaytimeMultipleAdd = () => {
   );
   console.log("laytimeDetailsData page", layTimeDetailsList);
 
+  const layTimeOperationList = useSelector(
+    (state) => state.LaytimeMultiple.layTimeMultipleInput.layTimeOperations
+  );
+
+  console.log("layTimeOperationList page", layTimeOperationList);
+
   const handleChangeTextInput = (name, value,index) => {
     console.log('index', index);
     console.log('name', name);
@@ -56,6 +65,16 @@ const LaytimeMultipleAdd = () => {
     dispatch(handleChangeLaytimeMultiple(name, value,index));
   };
   const softShow = useSelector((state)=> state.LaytimeMultiple.softShow);
+
+  const loading = useSelector((state) => state.LaytimeMultiple.loading);
+
+
+  const operationhandleChangeTextInput = (name, value,index) => {
+    console.log('index', index);
+    console.log('name', name);
+    console.log('value', value);
+    dispatch(handleChangeLaytimeMultipleOperation(name, value,index));
+  };
 
   console.log('softShow', softShow);
 
@@ -66,7 +85,8 @@ const LaytimeMultipleAdd = () => {
   const deleteMultiple = (data) => {
     alert(
       "Are you sure want to remove data ",
-      // dispatch(deleteMultipleList(data))
+      dispatch(deleteMultipleList(data)),
+      dispatch(deleteSofList(data))
     );
   };
 
@@ -75,16 +95,32 @@ const LaytimeMultipleAdd = () => {
   }
 
   const addSof =(index)=>{
-  
+
      dispatch(addNewSof());
    
   }
 
-  const addOperation = () => {
+  const addOperation = (index) => {
+    
     dispatch(addNewOperation());
   }
 
+  //Delete SOF DATA 
+
+  const deleteSofData = (data) => {
+    dispatch(removeSofData(data));
+  }
+
+  const deleteOperationData = (data) => {
+    dispatch(removeOperationData(data));
+  }
   
+
+  //SOF AND OPERATION FINAL SUBMIT
+
+  const HandleMultipleSubmit = (e) => {
+    dispatch(multipleSubmitAction(layTimeMultipleInput))
+  }
 
   console.log("layTimeRowList data by multiplerow:", laytimeDatList);
   return (
@@ -265,10 +301,13 @@ const LaytimeMultipleAdd = () => {
                         />
                           </td>
                           <td className="text-right pr-3 mt-3">
+                          {index === 0 ? 
                             <a className="btn btn-icon btn-light btn-hover-danger btn-sm" onClick={() => addSof(index) }>
                               <i className="fas fa-plus"></i>
-                            </a>
-                            <a className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm">
+                            </a> : ""
+                          }
+                          
+                            <a className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm" onClick={() => deleteSofData(item)}>
                               <i className="fas fa-trash"></i>
                             </a>
                           </td>
@@ -290,16 +329,24 @@ const LaytimeMultipleAdd = () => {
                           <th> REMARKS</th>
                           <th class="text-right pr-3">ACTION</th>
                         </tr>
+
+                        {
+                          layTimeOperationList && layTimeOperationList.map((item,index)=>(
                         <tr>
                           <td>
-                            <DatePicker
-                              name=""
-                              className="form-control formHeight"
-                              ref={register({
-                                required: true,
-                                maxLength: 100,
-                              })}
-                            />
+                         {/*} <DatePicker
+                            className="date-picker"
+                            name=""
+                            dateFormat="MM-dd-yyyy"
+                            minDate={moment().toDate()}
+                            placeholderText="select commence date"
+                            selected={item.dteStartTime !== '' ? moment(item.dteStartTime).toDate() : null}
+                            onChange={(date) => handleChangeTextInput("dteStartTime", date,index)}
+                            ref={register({
+                              required: true,
+                              maxLength: 100,
+                            })}
+                          />*/}
                           </td>
                           <td>
                           <RHFInput
@@ -309,13 +356,15 @@ const LaytimeMultipleAdd = () => {
                           register={register}
                           value={remarkList.strOperationRemark}
                           onChange={(option) => {
-                            handleChangeTextInput(
+                            operationhandleChangeTextInput(
                               "strOperationRemark",
-                              option.label
+                              option.label,
+                              index
                             );
-                            handleChangeTextInput(
+                            operationhandleChangeTextInput(
                               "intOperationRemarkID",
-                              option.value
+                              option.value,
+                              index
                             );
                           }}
                           ref={register({
@@ -327,14 +376,19 @@ const LaytimeMultipleAdd = () => {
                           </td>
 
                           <td className="text-right pr-3 mt-3">
-                            <a className="btn btn-icon btn-light btn-hover-danger btn-sm" onClick={() => addOperation() }>
+
+                          {index === 0 ? 
+                            <a className="btn btn-icon btn-light btn-hover-danger btn-sm" onClick={() => addOperation(index) }>
                               <i className="fas fa-plus"></i>
-                            </a>
-                            <a className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm">
+                            </a> : ""
+                          }
+                            <a className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm" onClick={() => deleteOperationData(item)}>
                               <i className="fas fa-trash"></i>
                             </a>
                           </td>
                         </tr>
+                        ))
+                        }
                       </thead>
                     </table>
                   </div>
@@ -343,9 +397,22 @@ const LaytimeMultipleAdd = () => {
               <div className="row mt-5 mb-5">
                 <div className="col-sm-10"></div>
                 <div className="col-sm-2 ">
-                  <button type="submit" class="saveButton text-white btn ml-13">
+                  {/*<button type="submit" class="saveButton text-white btn ml-13">
                     Save
-                  </button>
+                      </button>*/}
+                      {!loading && (
+                        <button type="button" class="saveButton text-white btn ml-6" onClick={(e) => HandleMultipleSubmit(e)}>Save</button>
+
+                      )}
+                      {loading && (
+                        <button type="button" class="saveButton disabled={true} text-white btn ml-6">
+                            <span className="p-2">
+                                Saving...
+                            </span>
+                            <span className="ml-3 spinner spinner-white "></span>
+                        </button>
+
+                      )}
                 </div>
               </div>
             </form>
