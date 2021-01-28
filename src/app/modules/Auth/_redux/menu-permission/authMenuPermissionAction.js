@@ -179,7 +179,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
     {
       moduleName: "Items",
       moduleRouteUrl: "/items",
-      moduleImageIcon: "/media/svg/icons/Code/partner.svg",
+      moduleImageIcon: "/media/svg/icons/Code/item.svg",
       subModules: [
         {
           subModuleName: "Item Info",
@@ -407,7 +407,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
     {
       moduleName: "Utility",
       moduleRouteUrl: "/utility",
-      moduleImageIcon: "/media/svg/icons/Code/report.svg",
+      moduleImageIcon: "/media/svg/icons/Code/utility.svg",
       subModules: [
         {
           subModuleName: "Utility Info",
