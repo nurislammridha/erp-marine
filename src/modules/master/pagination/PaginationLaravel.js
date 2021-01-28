@@ -5,9 +5,11 @@ const PaginationLaravel = (props) => {
   const { data, changePage, isDescription } = props;
   const limit = 10;
 
+  console.log('data', data);
+
   return (
     <>
-      {typeof data !== "undefined" && data !== null && data.total > 20 && (
+      {typeof data !== "undefined" && data !== null && data.total > 10 && (
         <>
           {typeof data !== "undefined" &&
             data != null &&

@@ -9,13 +9,19 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import SimpleModal from "../../../master/components/Modal/SimpleModal";
 import VesselBookingDetails from "../../../utility/VesselBookingDetails";
+import LoadingSpinner from "../../../master/spinner/LoadingSpinner";
+import PaginationLaravel from "../../../master/pagination/PaginationLaravel";
 const BookingList = () => {
 
   const dispatch = useDispatch();
   const VesselBookingList = useSelector((state) => state.VesselBookingReducer.VesselBookingList);
+  const vesselPaginateData = useSelector((state) => state.VesselBookingReducer.vesselPaginateData);
+  const isLoading = useSelector((state) => state.VesselBookingReducer.isLoading);
   const [bookDetailShow, setBookDetailShow] = useState(false)
   const [bookDetailClose, setBookDetailClose] = useState(false)
   const [status, setStatus] = useState()
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchText, setSearchText] = useState("");
   // get vessel booking id
   const [vesselBookingID, setVesselBookingID] = useState(null);
   const getVesselBookingID = (item) => {
@@ -25,32 +31,55 @@ const BookingList = () => {
 
   }
   console.log('VesselBookingList :>> ', VesselBookingList);
+  // useEffect(() => {
+  //   dispatch(getVesselBookingList())
+  // }, [])
+  //===========
+
   useEffect(() => {
-    dispatch(getVesselBookingList())
-  }, [])
+    dispatch(getVesselBookingList(currentPage));
+  }, [dispatch, currentPage]);
 
+  const changePage = (data) => {
+    setCurrentPage(data.page);
+    dispatch(getVesselBookingList(data.page));
+  };
 
- // delete issuing authority list 
- const confirmDelete = (id) => {
-  dispatch(vesselBookingDelete(id));
-  // dispatch(getIssuingAuthorities("", "", currentPage));
-}
+  const certificateSelect = (category) => {
+    dispatch(
+      getVesselBookingList(currentPage, searchText, 1, category)
+    );
+  };
 
-const deleteVesselBookDetails = (id) => {
-  confirmAlert({
-    title: "Confirm To Delete",
-    message: `Are you sure to delete..?`,
-    buttons: [
-      {
-        label: "Yes",
-        onClick: () => confirmDelete(id),
-      },
-      {
-        label: "No"
-      }
-    ]
-  });
-};
+  const searchProduct = (e) => {
+    const searchText = e.target.value;
+    setSearchText(searchText);
+    if (searchText.length === 0) {
+      dispatch(getVesselBookingList(currentPage));
+    } else {
+      dispatch(getVesselBookingList(currentPage, searchText));
+    }
+  };
+
+  // delete issuing authority list 
+  const confirmDelete = (id) => {
+    dispatch(vesselBookingDelete(id));
+  }
+  const deleteVesselBookDetails = (id) => {
+    confirmAlert({
+      title: "Confirm To Delete",
+      message: `Are you sure to delete..?`,
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => confirmDelete(id),
+        },
+        {
+          label: "No"
+        }
+      ]
+    });
+  };
 
   return (
     <Card>
@@ -67,6 +96,8 @@ const deleteVesselBookDetails = (id) => {
                 </IconButton>
                 <InputBase
                   placeholder="Search "
+                  value={searchText}
+                  onChange={searchProduct}
                 // inputProps={{ "aria-label": "Search Google Maps" }}
                 // onChange={(e) => searchEmployee(e)}
                 // value={employeeInfo.employeeName}
@@ -84,6 +115,7 @@ const deleteVesselBookDetails = (id) => {
 
             </div>
           </div>
+          {isLoading && <LoadingSpinner text="Loading Vessel Booking List..." />}
           <div className="row">
             <div className="react-bootstrap-table table-responsive">
               <table className="table table table-head-custom table-vertical-center  voyageTable">
@@ -135,6 +167,15 @@ const deleteVesselBookDetails = (id) => {
                   }
                 </tbody>
               </table>
+              {!isLoading && VesselBookingList.length === 0 && (
+                <div className="alert alert-warning mt-5">
+                  Sorry ! Vessel Booking List Not Found.
+                </div>
+              )}
+              <PaginationLaravel
+                changePage={changePage}
+                data={vesselPaginateData}
+              />
             </div>
           </div>
         </div>

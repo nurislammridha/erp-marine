@@ -16,6 +16,7 @@ import { getCargoList } from "../../../master/DropDownData/Cargo/_redux/CargoAct
 import { getShipList } from "../../../master/DropDownData/Ship/_redux/ShipAction/ShipAction";
 import { useHistory } from "react-router-dom";
 import { getVesselBookingDetails } from "../_redux/actions/VesselBookInfoAction";
+import { getCharterList } from "../../../master/DropDownData/Charter/_redux/CharterAction/CharterAction";
 
 const BookingEntry = () => {
   const history = useHistory()
@@ -27,6 +28,8 @@ const BookingEntry = () => {
   const portList = useSelector((state) => state.PortReducer.portList);
   const cargoList = useSelector((state) => state.CargoReducer.cargoList);
   const shipList = useSelector((state) => state.ShipReducer.shipList);
+  const charterList = useSelector((state) => state.CharterReducer.charterList);
+  const brokerList = useSelector((state) => state.CharterReducer.brokerList);
   const isLoading = useSelector((state) => state.VesselBookingReducer.isLoading);
 
   useEffect(() => {
@@ -34,6 +37,7 @@ const BookingEntry = () => {
     dispatch(getVoyageType());
     dispatch(getPortList());
     dispatch(getCargoList());
+    dispatch(getCharterList());
     dispatch(getShipList());
 
   }, [])
@@ -81,7 +85,7 @@ const BookingEntry = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Broker Name</label>
               <RHFInput
-                as={<Select options={shipList} />}
+                as={<Select options={brokerList} />}
                 rules={{ required: false }}
                 name="intBrokerId"
                 register={register}
@@ -97,7 +101,7 @@ const BookingEntry = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Charter Name</label>
               <RHFInput
-                as={<Select options={shipList} />}
+                as={<Select options={charterList} />}
                 rules={{ required: false }}
                 name="intCharterId"
                 register={register}

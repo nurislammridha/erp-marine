@@ -5,10 +5,11 @@ const CharterReducer = (state = initialstate, action) => {
     const newState = { ...state };
 
     switch (action.type) {
-        case Types.GET_PORT:
+        case Types.GET_CHARTER:
             return {
                 ...state,
-                portList: getCharterList(action.payload),
+                charterList: getCharterList(action.payload),
+                brokerList: getBroker(action.payload),
             };
         default:
             break;
@@ -22,8 +23,22 @@ const getCharterList = (data) => {
     if (data) {
         data.forEach((item) => {
             let itemData = {
-                value: item.intPortID,
-                label: item.strPortName,
+                value: item.intChartererId,
+                label: item.strChartererName,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+};
+//broker list
+const getBroker = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intChartererId,
+                label: item.strChartererName,
             };
             options.push(itemData);
         });

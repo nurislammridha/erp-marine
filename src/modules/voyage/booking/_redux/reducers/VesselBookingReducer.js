@@ -42,6 +42,7 @@ const initialstate = {
     },
     VesselBookingList: [],
     VesselBookingDetails: {},
+    vesselPaginateData: null,
 };
 const VesselBookingReducer = (state = initialstate, action) => {
     const newState = { ...state };
@@ -102,10 +103,20 @@ const VesselBookingReducer = (state = initialstate, action) => {
             break;
 
         case Types.GET_VESSEL_BOOKING_LIST:
-            return {
-                ...state,
-                VesselBookingList: action.payload,
+            console.log('action.payload :>> ', action.payload);
+            if (action.payload.status) {
+                return {
+                    ...state,
+                    VesselBookingList: action.payload.VesselBookingList,
+                    vesselPaginateData: action.payload.vesselPaginateData,
 
+                    isLoading: false,
+                };
+            } else {
+                return {
+                    ...state,
+                    isLoading: true,
+                };
             }
         case Types.GET_VESSEL_BOOKING_DETAILS:
             return {
@@ -113,11 +124,11 @@ const VesselBookingReducer = (state = initialstate, action) => {
                 VesselBookingDetails: action.payload === null ? initialstate.VesselBookingDetails : action.payload,
                 VesselBooking: action.payload === null ? initialstate.VesselBooking : action.payload,
             }
-            case Types.DELETE_VESSEL_BOOKING:
-                return {
-                  ...state,
-                 isLoading: action.payload,
-                };
+        case Types.DELETE_VESSEL_BOOKING:
+            return {
+                ...state,
+                isLoading: action.payload,
+            };
         default:
             break;
     }
