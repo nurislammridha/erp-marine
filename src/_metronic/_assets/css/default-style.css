@@ -679,10 +679,13 @@ input.MuiInputBase-input {
 .table.table-head-custom thead tr {
   font-size: 1rem;
   letter-spacing: 0.1rem;
-  border-bottom: 1px solid #ecf0f3;
+  border-bottom: 1px solid #ecf0f3 !important;
   padding: 8px;
 }
-
+.user-list-table td,
+th {
+  border-bottom: 1px solid #ecf0f3 !important;
+}
 .table {
   margin-bottom: 2px !important;
 }
