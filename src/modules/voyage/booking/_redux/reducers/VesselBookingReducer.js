@@ -4,38 +4,38 @@ const initialstate = {
     isLoading: false,
     VesselBooking: {
         strBookingRefNo: '',
-        intShipId: '',
+        intShipId: null,
         strShipName: '',
         strVoyageNo: '',
-        intVoyageTypeId: '',
-        intBrokerId: '',
+        intVoyageTypeId: null,
+        intBrokerId: null,
         strBrokerName: '',
-        intCharterId: '',
+        intCharterId: null,
         strCharterName: '',
-        intCommencePortId: '',
+        intCommencePortId: null,
         strCommencePortName: '',
         dteCommenceDate: '',
-        intCompletionPortId: '',
+        intCompletionPortId: null,
         strCompletionPortName: '',
         dteCompletionDate: '',
-        numFreightOrHireRate: '',
-        numLoadRate: '',
-        numDischargeRate: '',
-        numVesselDWT: '',
-        numAddCommission: '',
-        numBrockCommission: '',
-        intCargoId: '',
+        numFreightOrHireRate: null,
+        numLoadRate: null,
+        numDischargeRate: null,
+        numVesselDWT: null,
+        numAddCommission: null,
+        numBrockCommission: null,
+        intCargoId: null,
         strCargoName: '',
-        intTotalCargoQty: '',
+        intTotalCargoQty: null,
         dteLaycanStart: '',
         dteLaycanEnd: '',
         dteOnHireDate: '',
         dteRedeliveryDate: '',
         dteCPDate: '',
-        intBookingStatusId: '',
+        intBookingStatusId: 1,
         strBookingStatus: '',
         strRemarks: '',
-        intActionBy: '',
+        intActionBy: null,
         dteLastActionDateTime: '',
         dteServerDateTime: '',
         isActive: false
@@ -54,9 +54,10 @@ const VesselBookingReducer = (state = initialstate, action) => {
                 ...state,
                 VesselBooking
             }
+        //vessel booking submit
         case Types.VESSEL_BOOKING_SUBMIT:
             if (action.payload.status) {
-               
+
                 return {
                     ...state,
                     ...initialstate,
@@ -69,24 +70,54 @@ const VesselBookingReducer = (state = initialstate, action) => {
                 };
             }
             break;
+        //vessel booking submitting
         case Types.VESSEL_BOOKING_SUBMITTING:
             return {
                 ...state,
                 isLoading: action.payload,
             };
             break;
-        case Types.GET_VESSEL_BOOKING_LIST: 
+        //vessel booking edit
+        case Types.VESSEL_BOOKING_EDIT:
+            if (action.payload.status) {
+
+                return {
+                    ...state,
+                    ...initialstate,
+                    isLoading: action.payload.isLoading,
+                };
+            } else {
+                return {
+                    ...state,
+                    isLoading: false,
+                };
+            }
+            break;
+        //vessel booking editting
+        case Types.VESSEL_BOOKING_EDITTING:
+            return {
+                ...state,
+                isLoading: action.payload,
+            };
+            break;
+
+        case Types.GET_VESSEL_BOOKING_LIST:
             return {
                 ...state,
                 VesselBookingList: action.payload,
-                    
+
             }
-        case Types.GET_VESSEL_BOOKING_DETAILS: 
+        case Types.GET_VESSEL_BOOKING_DETAILS:
             return {
                 ...state,
-                VesselBookingDetails: action.payload,
-                VesselBooking: action.payload      
+                VesselBookingDetails: action.payload === null ? initialstate.VesselBookingDetails : action.payload,
+                VesselBooking: action.payload === null ? initialstate.VesselBooking : action.payload,
             }
+            case Types.DELETE_VESSEL_BOOKING:
+                return {
+                  ...state,
+                 isLoading: action.payload,
+                };
         default:
             break;
     }

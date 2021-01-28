@@ -274,5 +274,32 @@ i {
   font-size: 16px;
 }
 .custom-modal {
-  width: 302%;
+  width: 418%;
+}
+button.btn.approve-status {
+  background: #1bc5bd2b!important;
+  color: #8950fc;
+  border-color: #1bc5bd2b!important;
+  font-weight: 500;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 2;
+}
+button.btn.pending-status {
+  background: #ffa80030!important;
+  color: #8950fc;
+  border-color: #ffa80030!important;
+  font-weight: 500;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 2;
+}
+button.btn.rejected-status {
+  background: #f64e602e!important;
+  color: #8950fc;
+  border-color: #f64e602e!important;
+  font-weight: 500;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 2;
 }

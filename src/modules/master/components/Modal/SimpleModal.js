@@ -11,16 +11,20 @@ const SimpleModal = (props) => {
             size={size}
             show={show ? show : showLoadingPortModal}
             onHide={handleClose ? handleClose : handleCloseLoadingPortModal} >
+
             <Modal.Header closeButton>
                 <Modal.Title>
                     {
                         status && (
                             <div className="row custom-modal">
                                 <div className="col-6">{modalTitle}
-                                <Badge className="ml-2" variant="success">Booking ID : #{vesselBookingID}</Badge>
+                                    <Badge className="ml-2" variant="success">Booking ID : #{vesselBookingID}</Badge>
                                 </div>
-                                <div className="col-6">
-                                    <Button className="btn approve booking-list-btn text-warning float-right">Penging</Button>
+                                <div className="col-6 float-right">
+                                    <button className={status === "Rejected" ? "btn rejected-status booking-list-btn text-danger" : (status === "Pending" ? "btn pending-status booking-list-btn text-warning" : "btn approve-status booking-list-btn text-success")}>
+                                        {status !== null && status !== '' ? status : 'Status Not Found'}
+                                    </button>
+                                    {/* <Button className="btn approve booking-list-btn text-warning status-button">Penging</Button> */}
                                 </div>
                             </div>
                         )}

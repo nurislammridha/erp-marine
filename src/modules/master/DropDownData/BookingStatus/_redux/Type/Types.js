@@ -1,0 +1,1 @@
+export const GET_BOOKING_STATUS = "GET_BOOKING_STATUS";

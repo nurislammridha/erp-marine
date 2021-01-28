@@ -11,7 +11,7 @@ export const handleVesselBookingInput = (name, value, e) => (dispatch) => {
 };
 
 //submit laytime data 
-export const VesselBookingSubmit = (VesselBooking, e) => async (dispatch) => {
+export const VesselBookingEdit = (VesselBooking, e, EditID) => async (dispatch) => {
     if (VesselBooking.intShipId === null) {
         showToast('error', "Ship can't be blank!");
         return false;
@@ -105,16 +105,17 @@ export const VesselBookingSubmit = (VesselBooking, e) => async (dispatch) => {
         status: false,
     };
 
-    dispatch({ type: Types.VESSEL_BOOKING_SUBMITTING, payload: true });
+    dispatch({ type: Types.VESSEL_BOOKING_EDITTING, payload: true });
 
-    Axios.post(`${process.env.REACT_APP_API_URL}voyage/bookingList`, VesselBooking)
+    Axios.put(`${process.env.REACT_APP_API_URL}voyage/bookingList/${EditID}`, VesselBooking)
         .then((res) => {
+            console.log('vessel booking response:>> ', res);
             responseList.data = res.data;
             responseList.isLoading = false;
             responseList.status = res.data.status;
             if (responseList.status === true) {
                 showToast("success", res.data.message);
-                dispatch({ type: Types.VESSEL_BOOKING_SUBMIT, payload: responseList })
+                dispatch({ type: Types.VESSEL_BOOKING_EDIT, payload: responseList })
             } else {
                 showToast("error", res.data.message);
             }
