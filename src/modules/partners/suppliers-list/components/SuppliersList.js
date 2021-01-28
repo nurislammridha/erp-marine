@@ -13,7 +13,6 @@ const SuppliersList = () => {
     // console.log('supplierList List:>> ', isLoading);
     useEffect(() => {
         dispatch(getSupplierList());
-
     }, [])
 
     // useEffect(() => {
@@ -22,7 +21,6 @@ const SuppliersList = () => {
     // }, [])
     const confirmDelete = (id) => {
         dispatch(supplierListDelete(id));
-
     }
 
     const deleteList = (id) => {
@@ -83,7 +81,12 @@ const SuppliersList = () => {
                                                 <i className="far fa-edit editIcon item-list-icon"></i>
                                             </Link>
 
-                                            <i className="fas fa-trash-alt editIcon item-list-icon ml-4" onClick={(id) => deleteList(item.intSupplierId)}></i>
+                                            <a>
+                                                <i className="fas fa-trash-alt editIcon item-list-icon ml-4"
+                                                    onClick={(id) => deleteList(item.intSupplierId)}
+                                                >
+                                                </i>
+                                            </a>
                                         </td>
 
                                     </tr>

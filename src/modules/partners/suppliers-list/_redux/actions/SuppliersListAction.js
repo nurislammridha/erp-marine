@@ -1,6 +1,7 @@
 import * as Types from "../types/Types";
 import Axios from "axios";
 import { toast } from "react-toastify";
+import { showToast } from "../../../../master/utils/ToastHelper";
 
 export const getSupplierList = (searchValue = "") => async (dispatch) => {
     let response = {
@@ -10,12 +11,11 @@ export const getSupplierList = (searchValue = "") => async (dispatch) => {
         isLoading: true,
         errors: [],
     };
-    // console.log('search action:>> ', search);
-    console.log('test')
+
     dispatch({ type: Types.GET_SUPPLIER_LIST, payload: response });
     let url = `${process.env.REACT_APP_API_URL}partner/basicInfo`;
     if (searchValue !== "") {
-        url = url + `?search=${searchValue}`
+        url += `?search=${searchValue}`
     }
     try {
         await Axios.get(url).then((res) => {
@@ -41,14 +41,15 @@ export const getSupplierList = (searchValue = "") => async (dispatch) => {
 export const supplierListDelete = (id) => (dispatch) => {
     console.log('id', id)
     let isLoading = true;
-    // dispatch({ type: Types.DELETE_ISSUING_AUTHORITY, payload: isLoading })
+    dispatch({ type: Types.DELETE_SUPPLIER_LIST, payload: isLoading })
 
-    // Axios.delete(`${process.env.REACT_APP_API_URL}certificate/issuingAuthority/${id}`)
-    //     .then((res) => {
-    //         if (res.status === 200) {
-    //             const data = res.data;
-    //             showToast('success', data.message);
-    //             dispatch({ type: Types.DELETE_ISSUING_AUTHORITY, payload: false })
-    //         }
-    //     })
+    Axios.delete(`${process.env.REACT_APP_API_URL}partner/partnerDelete/${id}`)
+        .then((res) => {
+            if (res.status === 200) {
+                const data = res.data;
+                showToast('success', "Supplier deleted successfully");
+                dispatch({ type: Types.DELETE_SUPPLIER_LIST, payload: false })
+                dispatch(getSupplierList());
+            }
+        })
 } 
