@@ -8,7 +8,7 @@ const NewUser = () => {
         <div className="row">
           <div className="col-12">
             <div className="card card-custom gutter-b p-5">
-              <h1>Create New User </h1>
+              <h5>Create New User </h5>
               <form
                 className="form form-label-right voyageEngineerForm"
                 method="post"
