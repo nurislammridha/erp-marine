@@ -1,9 +1,9 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Badge, Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 
 const SimpleModal = (props) => {
-    const { show, showLoadingPortModal, handleClose, handleShow, size, modalTitle, handleCloseLoadingPortModal, status } = props;
+    const { show, showLoadingPortModal, handleClose, handleShow, size, modalTitle, handleCloseLoadingPortModal, status, vesselBookingID } = props;
 
     return (
         <Modal
@@ -16,7 +16,9 @@ const SimpleModal = (props) => {
                     {
                         status && (
                             <div className="row custom-modal">
-                                <div className="col-6">{modalTitle}</div>
+                                <div className="col-6">{modalTitle}
+                                <Badge className="ml-2" variant="success">Booking ID : #{vesselBookingID}</Badge>
+                                </div>
                                 <div className="col-6">
                                     <Button className="btn approve booking-list-btn text-warning float-right">Penging</Button>
                                 </div>

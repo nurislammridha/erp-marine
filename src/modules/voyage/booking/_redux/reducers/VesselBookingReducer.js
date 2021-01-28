@@ -85,8 +85,7 @@ const VesselBookingReducer = (state = initialstate, action) => {
             return {
                 ...state,
                 VesselBookingDetails: action.payload,
-                VesselBooking: action.payload
-                    
+                VesselBooking: action.payload      
             }
         default:
             break;

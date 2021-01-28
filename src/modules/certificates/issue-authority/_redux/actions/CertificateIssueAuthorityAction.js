@@ -75,7 +75,7 @@ export const issueAuthoritySubmitAction = (CertificateIssueAuthirityInput) => (
 
   let postUrl = `${process.env.REACT_APP_API_URL}certificate/issuingAuthority`;
   Axios.post(postUrl, CertificateIssueAuthirityInput)
-    .then(function(response) {
+    .then(function (response) {
       responseList.data = response.data;
       responseList.isLoading = false;
       responseList.status = response.data.status;
@@ -90,7 +90,7 @@ export const issueAuthoritySubmitAction = (CertificateIssueAuthirityInput) => (
         showToast("error", response.data.message);
       }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       responseList.isLoading = false;
       const message =
         "Something went wrong ! Please fill all inputs and try again !";
@@ -131,7 +131,7 @@ export const issueAuthorityEditAction = (
 
   let editUrl = `${process.env.REACT_APP_API_URL}certificate/issuingAuthority/${intIssuingAuthorityID}`;
   Axios.put(editUrl, CertificateIssueAuthirityInput)
-    .then(function(response) {
+    .then(function (response) {
       responseList.data = response.data;
       responseList.isLoading = false;
       responseList.status = response.data.status;
@@ -145,7 +145,7 @@ export const issueAuthorityEditAction = (
         showToast("error", response.data.message);
       }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       responseList.isLoading = false;
       const message =
         "Something went wrong ! Please fill all inputs and try again !";
@@ -157,3 +157,17 @@ export const issueAuthorityEditAction = (
       });
     });
 };
+
+export const issueAuthorityDelete = (id) => (dispatch) => {
+  let isLoading = true;
+  dispatch({type: Types.DELETE_ISSUING_AUTHORITY, payload: isLoading})
+  
+  Axios.delete(`${process.env.REACT_APP_API_URL}certificate/issuingAuthority/${id}`)
+  .then((res)=>{
+    if(res.status === 200){
+      const data = res.data;
+      showToast('success', data.message);
+      dispatch({type: Types.DELETE_ISSUING_AUTHORITY, payload: false})
+    }
+  })
+}

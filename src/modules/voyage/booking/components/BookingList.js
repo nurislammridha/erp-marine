@@ -16,10 +16,17 @@ const BookingList = () => {
   const [bookDetailShow, setBookDetailShow] = useState(false)
   const [bookDetailClose, setBookDetailClose] = useState(false)
 
-  console.log('VesselBookingList :>> ', VesselBookingList);
+  // get vessel booking id
+  const [vesselBookingID, setVesselBookingID] = useState(null);
+  const getVesselBookingID =(item)=>{
+    setVesselBookingID(item.intShipBookingId)
+    setBookDetailShow(true)
+
+  }
   useEffect(() => {
     dispatch(getVesselBookingList())
   }, [])
+
 
   // delete booking list 
   const deleteBooking = (id) => {
@@ -38,6 +45,7 @@ const BookingList = () => {
       ]
     });
   };
+  
   return (
     <Card>
       <Card.Body>
@@ -94,18 +102,18 @@ const BookingList = () => {
                   {
                     VesselBookingList.length > 0 && VesselBookingList.map((item, index) => (
                       <tr>
-                        <td onClick={() => setBookDetailShow(true)}>{index + 1}</td>
-                        <td onClick={() => setBookDetailShow(true)}>{item.strCargoName !== null && item.strCargoName !== '' ? item.strCargoName : ''}</td>
-                        <td onClick={() => setBookDetailShow(true)}>{item.strShipName !== null && item.strShipName !== '' ? item.strShipName : ''}</td>
-                        <td onClick={() => setBookDetailShow(true)}>{item.strVoyageNo !== null && item.strVoyageNo !== '' ? item.strVoyageNo : ''}</td>
-                        <td onClick={() => setBookDetailShow(true)}>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
-                        <td onClick={() => setBookDetailShow(true)}>{item.dteCommenceDate !== null && item.dteCommenceDate !== '' ? moment(item.dteCommenceDate).format("DD-MM-YYYY") : ''}</td>
-                        <td onClick={() => setBookDetailShow(true)}>{item.strCompletionPortName !== null && item.strCompletionPortName !== '' ? item.strCompletionPortName : ''}</td>
-                        <td onClick={() => setBookDetailShow(true)}>{item.dteCompletionDate !== null && item.dteCompletionDate !== '' ? moment(item.dteCompletionDate).format("DD-MM-YYYY") : ''}</td>
-                        <td onClick={() => setBookDetailShow(true)}>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
-                        <td onClick={() => setBookDetailShow(true)}>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
-                        <td onClick={() => setBookDetailShow(true)}>{item.numFreightOrHireRate !== null && item.numFreightOrHireRate !== '' ? item.numFreightOrHireRate : ''}</td>
-                        <td onClick={() => setBookDetailShow(true)}>
+                        <td onClick={(id) =>getVesselBookingID(item)}>{index + 1}</td>
+                        <td onClick={(id) =>getVesselBookingID(item)}>{item.strCargoName !== null && item.strCargoName !== '' ? item.strCargoName : ''}</td>
+                        <td onClick={(id) =>getVesselBookingID(item)}>{item.strShipName !== null && item.strShipName !== '' ? item.strShipName : ''}</td>
+                        <td onClick={(id) =>getVesselBookingID(item)}>{item.strVoyageNo !== null && item.strVoyageNo !== '' ? item.strVoyageNo : ''}</td>
+                        <td onClick={(id) =>getVesselBookingID(item)}>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
+                        <td onClick={(id) =>getVesselBookingID(item)}>{item.dteCommenceDate !== null && item.dteCommenceDate !== '' ? moment(item.dteCommenceDate).format("DD-MM-YYYY") : ''}</td>
+                        <td onClick={(id) =>getVesselBookingID(item)}>{item.strCompletionPortName !== null && item.strCompletionPortName !== '' ? item.strCompletionPortName : ''}</td>
+                        <td onClick={(id) =>getVesselBookingID(item)}>{item.dteCompletionDate !== null && item.dteCompletionDate !== '' ? moment(item.dteCompletionDate).format("DD-MM-YYYY") : ''}</td>
+                        <td onClick={(id) =>getVesselBookingID(item)}>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
+                        <td onClick={(id) =>getVesselBookingID(item)}>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
+                        <td onClick={(id) =>getVesselBookingID(item)}>{item.numFreightOrHireRate !== null && item.numFreightOrHireRate !== '' ? item.numFreightOrHireRate : ''}</td>
+                        <td onClick={(id) =>getVesselBookingID(item)}>
                       <button className="btn approve booking-list-btn text-warning">
                             Pending
                       </button>
@@ -131,9 +139,10 @@ const BookingList = () => {
         show={bookDetailShow}
         handleClose={() => setBookDetailShow(false)}
         handleShow={() => setBookDetailShow(true)}
+        vesselBookingID={vesselBookingID}
         modalTitle={"Vessel Booking Details"}
       >
-        <VesselBookingDetails handleClose={() => setBookDetailShow(false)} />
+        <VesselBookingDetails handleClose={() => setBookDetailShow(false)} vesselBookingID={vesselBookingID} />
       </SimpleModal>
     </Card>
   );

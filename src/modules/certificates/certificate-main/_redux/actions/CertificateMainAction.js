@@ -41,11 +41,11 @@ export const handleChangeProductInputAction = (
 // submit main certificate info
 export const MainCertificateCreateAction = (certificateInfoInput) => async (dispatch) => {
   console.log('certificateInfoInput :>> ', certificateInfoInput);
-  const vesselID = getVesselId();
-  if (vesselID === null) {
-    certificateInfoInput.intVesselID = 1;
+  const shipID = getVesselId();
+  if (shipID === null) {
+    certificateInfoInput.intShipID = 1;
   } else {
-    certificateInfoInput.intVesselID = vesselID;
+    certificateInfoInput.intShipID = shipID;
   }
   certificateInfoInput.intActionBy = getEmployeeId();
   if (certificateInfoInput.intCertificateID === null) {
@@ -131,9 +131,9 @@ export const MainCertificateUpdateAction = (certificateInfoInput, id) => async (
 
   const vesselID = getVesselId();
   if (vesselID === null) {
-    certificateInfoInput.intVesselID = 1;
+    certificateInfoInput.intShipID = 1;
   } else {
-    certificateInfoInput.intVesselID = vesselID;
+    certificateInfoInput.intShipID = vesselID;
   }
   certificateInfoInput.intActionBy = getEmployeeId();
 

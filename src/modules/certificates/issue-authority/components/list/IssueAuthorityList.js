@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getIssuingAuthorities } from "../../_redux/actions/CertificateIssueAuthorityAction";
-import { Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { getIssuingAuthorities, issueAuthorityDelete } from "../../_redux/actions/CertificateIssueAuthorityAction";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 import IssueAuthorityEdit from "../edit/IssueAuthorityEdit";
 import CertificateTypeEdit from "../../../certificate-types/components/edit/CertificateTypeEdit";
 import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
 import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
+import { confirmAlert } from "react-confirm-alert";
 
 const IssueAuthorityList = (props) => {
   const [show, setShow] = useState(false);
@@ -64,6 +63,28 @@ const IssueAuthorityList = (props) => {
     setShow(true);
   };
 
+  // delete issuing authority list 
+  const confirmDelete = (id) => {
+    dispatch(issueAuthorityDelete(id));
+    dispatch(getIssuingAuthorities("", "", currentPage));
+  }
+  
+  const deleteIssuingAuthority = (id) => {
+    confirmAlert({
+      title: "Confirm To Delete",
+      message: `Are you sure to delete..?`,
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => confirmDelete(id),
+        },
+        {
+          label: "No"
+        }
+      ]
+    });
+  };
+ 
   return (
     <>
       {isLoading && (
@@ -100,6 +121,7 @@ const IssueAuthorityList = (props) => {
                           className="far fa-edit pointer editIcon"
                           onClick={() => handleEdit(item)}
                         ></i>
+                        <i className="fas fa-trash-alt editIcon ml-2 pointer" onClick={(id) => deleteIssuingAuthority(item.intIssuingAuthorityID)}></i>
                       </td>
                     </tr>
                   ))}

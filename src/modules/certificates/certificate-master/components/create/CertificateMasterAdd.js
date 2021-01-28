@@ -11,9 +11,12 @@ import {
   getCertificateMasterList,
 } from "../../_redux/actions/CertificateListAction";
 import { getCertificateCategory } from "../../../certificate-main/_redux/actions/CertificateMainAction";
+import { getCertificateCategoryListData, getCertificateParentCategoryData } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
 
-const CertificateMasterAdd = () => {
+const CertificateMasterAdd = (props) => {
+  const dispatch = useDispatch();
   const history = useHistory();
+  const { isSubCategory } = props;
   const { register, handleSubmit, errors, setValue } = useForm();
   const [currentPage, setCurrentPage] = useState(15);
   const isLoading = useSelector(
@@ -28,29 +31,22 @@ const CertificateMasterAdd = () => {
   const CertificatesCategoryOptionData = useSelector(
     (state) => state.certificateMainInfo.certificatesCategoryOptionData
   );
-  const dispatch = useDispatch();
-  const statusOptions = [
-    {
-      label: "Active",
-      value: "1",
-    },
-    {
-      label: "Inactive",
-      value: "0",
-    },
-  ];
+  //=============
+  const status = useSelector(
+    (state) => state.CertificateCategoryReducer.status
+  );
+  const certificateParentCategoryList = useSelector(
+    (state) => state.CertificateCategoryReducer.certificateParentCategoryList
+  );
+  useEffect(() => {
+    dispatch(getCertificateParentCategoryData());
+    if (status) {
+      dispatch(getCertificateCategoryListData());
+    }
+  }, [status]);
 
-  const vesselName = [
-    {
-      label: "Akij Noor",
-      value: "1",
-    },
-    {
-      label: "Akij Pearl",
-      value: "0",
-    },
-  ];
-
+  //=========
+console.log('CertificateMasterInput :>> ', CertificateMasterInput);
   const certificateMainInfoChange = (name, value) => {
     dispatch(handleChangeCertificateMasterInput(name, value));
   };
@@ -103,19 +99,23 @@ const CertificateMasterAdd = () => {
           <div className="col-sm-12">
             <label className="form-label">Category Name</label>
             <RHFInput
-              as={<Select options={CertificatesCategoryOptionData} />}
-              rules={{ required: true }}
+              as={<Select options={certificateParentCategoryList}
+                isDisabled={typeof isSubCategory === 'undefined' ? false : true}
+              />}
+              rules={{ required: false }}
               name="intCategoryID"
+              className="formSelect pt-0"
               register={register}
-              value={CertificatesCategoryOptionData.strCertificateCategoryName}
-              setValue={setValue}
+              value={CertificateMasterInput.certificateCategoryParent}
               onChange={(option) => {
-                certificateMainInfoChange(
-                  "strCertificateCategoryName",
-                  option.label
-                );
+                certificateMainInfoChange("certificateCategoryParent", {
+                  label: option.label,
+                  value: option.value,
+                });
+                certificateMainInfoChange("strCertificateCategoryName", option.label);
                 certificateMainInfoChange("intCategoryID", option.value);
               }}
+              setValue={setValue}
             />
             <div className="inputError margin-minus-8">
               {errors.intCategoryID &&

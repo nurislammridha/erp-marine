@@ -11,11 +11,12 @@ import DatePicker from "react-datepicker";
 import { useDispatch, useSelector } from "react-redux";
 import { handleVesselBookingInput, VesselBookingSubmit } from "../_redux/actions/VesselBookingAddAction";
 import moment from 'moment';
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { getVoyageType } from "../../../master/DropDownData/VoyageType/_redux/VoyageTypeAction/VoyageTypeAction";
 import { getVesselBookingDetails } from "../_redux/actions/VesselBookInfoAction";
 
 const BookingEdit = () => {
+  const history = useHistory();
   const { id } = useParams()
   const { register, setValue } = useForm();
   const dispatch = useDispatch();
@@ -408,7 +409,7 @@ const BookingEdit = () => {
             </div>
           </div>
           <div className="float-right">
-            <Button className=" cancelButton" variant="">
+            <Button className=" cancelButton" variant="" onClick={() => history.push('/voyage/booking/bookinglist')}>
               Cancel
             </Button>
             {

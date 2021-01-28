@@ -63,9 +63,7 @@ export const getCertificateMasterList = (
   dispatch({ type: Types.GET_CERTIFICATE_MASTER_LIST, payload: response });
 };
 
-export const certificateMasterSubmitAction = (CertificateMasterInput, isSubCategory) => (
-  dispatch
-) => {
+export const certificateMasterSubmitAction = (CertificateMasterInput, isSubCategory) => (dispatch) => {
   let responseList = {
     isLoading: true,
     data: {},
@@ -78,22 +76,18 @@ export const certificateMasterSubmitAction = (CertificateMasterInput, isSubCateg
 
   let postUrl = `${process.env.REACT_APP_API_URL}certificate/certificateList`;
   Axios.post(postUrl, CertificateMasterInput)
-    .then(function(response) {
+    .then(function (response) {
       responseList.data = response.data;
       responseList.isLoading = false;
       responseList.status = response.data.status;
-      if (response.data.status) {
-        showToast("successs", response.data.message);
-        dispatch({
-          type: Types.CERTIFICATE_MASTER_SUBMIT,
-          payload: responseList,
-        });
-        dispatch(getCertificateName());
-      } else {
-        showToast("error", response.data.message);
-      }
+      showToast("success", response.data.message);
+      dispatch({
+        type: Types.CERTIFICATE_MASTER_SUBMIT,
+        payload: responseList,
+      });
+      dispatch(getCertificateName());
     })
-    .catch(function(error) {
+    .catch(function (error) {
       responseList.isLoading = false;
       const message =
         "Something went wrong ! Please fill all inputs and try again !";
@@ -140,7 +134,7 @@ export const certificateMasterEditAction = (
   let editUrl = `${process.env.REACT_APP_API_URL}certificate/certificateList/${intCertificateID}`;
 
   Axios.put(editUrl, CertificateMasterInput)
-    .then(function(response) {
+    .then(function (response) {
       responseList.data = response.data;
       responseList.isLoading = false;
       responseList.status = response.data.status;
@@ -154,7 +148,7 @@ export const certificateMasterEditAction = (
         showToast("error", response.data.message);
       }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       responseList.isLoading = false;
       const message =
         "Something went wrong ! Please fill all inputs and try again !";
