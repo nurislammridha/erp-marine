@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 
 import UserModal from "./UserModal";
 const UserList = () => {
+  const [show, setShow] = useState(false);
+
   return (
     <>
       <div className="container">
@@ -16,8 +18,8 @@ const UserList = () => {
                       <th scope="col">SI</th>
                       <th scope="col">Name</th>
                       <th scope="col">Email</th>
-                      <th scope="col"></th>
                       <th scope="col">Roles</th>
+                      <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -25,46 +27,16 @@ const UserList = () => {
                       <td>#01</td>
                       <td>Super Admin</td>
                       <td>superadmin@example.com</td>
-                      <td></td>
                       <td className=" text-white">
                         <span className="badge badge-primary">superadmin</span>
                       </td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
                       <td>
-                        Action{" "}
-                        <button className="btn btn-success ml-2 btn-sm">
-                          Edit
-                        </button>
-                        <button className="btn btn-danger  btn-sm ml-2">
-                          Delete
-                        </button>{" "}
-                        <button className="modal-button">
-                          {" "}
-                          <UserModal />
-                        </button>
-                      </td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>#01</td>
-                      <td>Super Admin</td>
-                      <td>superadmin@example.com</td>
-                      <td></td>
-                      <td className=" text-white">
-                        <span className="badge badge-primary">superadmin</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#01</td>
-                      <td>Super Admin</td>
-                      <td>superadmin@example.com</td>
-                      <td></td>
-                      <td className=" text-white">
-                        <span className="badge badge-primary">superadmin</span>
+                        <i className="fa fa-edit text-success pointer ml-2"></i>
+                        <i className="fa fa-trash text-danger pointer ml-2"></i>
+                        <i
+                          className="fa fa-check text-info pointer ml-2"
+                          onClick={setShow}
+                        ></i>
                       </td>
                     </tr>
                   </tbody>
@@ -74,6 +46,8 @@ const UserList = () => {
           </div>
         </div>
       </div>
+
+      <UserModal show={show} setShow={setShow} />
     </>
   );
 };
