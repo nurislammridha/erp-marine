@@ -16,7 +16,9 @@ const BankInfoAdd = withRouter(({ history }) => {
     const bankInfoInput = useSelector((state) => state.bankInfo.bankInfoInput);
     const bankOptionData = useSelector((state) => state.bankInfo.bankOptionData);
     const bankInfo = useSelector(state => state.bankInfo.bankInfoMultiple);
-    console.log('bankOptionData', bankOptionData)
+    const isMultipleAdded = useSelector((state) => state.bankInfo.isMultipleAdded);
+
+
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeBankInfoInput(name, value));
     };
@@ -26,11 +28,15 @@ const BankInfoAdd = withRouter(({ history }) => {
 
     useEffect(() => {
         dispatch(getBankName());
-        if (bankInfo.length > 0) {
+    }, []);
+
+    useEffect(() => {
+        if (isMultipleAdded) {
             setValue("intBankId", "");
         }
-    }, [bankInfo]);
-    console.log('bankInfo Adddd:>> ', multipleAdd);
+    }, [isMultipleAdded]);
+
+
     return (
         <div className="container">
             <div className="mt-10">
@@ -106,7 +112,7 @@ const BankInfoAdd = withRouter(({ history }) => {
                                 rules={{ required: true }}
                                 name="intBankId"
                                 register={register}
-                                value={bankInfoInput.strBankName}
+                                value={bankInfoInput.intBankId}
 
                                 onChange={(option) => {
                                     handleChangeTextInput("intBankId", option.value);

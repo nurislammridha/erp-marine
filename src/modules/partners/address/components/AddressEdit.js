@@ -26,7 +26,6 @@ const AddressEdit = withRouter(({ history }) => {
         (state) => state.partnerAddress.countryOptionData
     );
     const isMultipleAdded = useSelector((state) => state.partnerAddress.isMultipleAdded);
-    // console.log('isMultipleAdded', isMultipleAdded)
 
     useEffect(() => {
         dispatch(getCountryName());
@@ -34,19 +33,11 @@ const AddressEdit = withRouter(({ history }) => {
 
 
     useEffect(() => {
-        // if (isMultipleAdded) {
-        //     setValue("intCountryID", "");
-        // }
-        setValue("intCountryID", "");
-
+        if (isMultipleAdded) {
+            setValue("intCountryID", "");
+        }
     }, [isMultipleAdded]);
 
-
-
-    const onSubmit = () => {
-        // dispatch(partnerAddressSubmit(partnerAddress));
-        // setShow(true);
-    }
 
     const multipleAdd = () => {
         dispatch(partnerAddressSubmitMultiple(partnerAddress));

@@ -25,6 +25,12 @@ export const bankInfoSubmitAction = () => {
     return isValidated;
 };
 export const bankInfoSubmitMultiple = (bankInfoInput) => (dispatch) => {
+
+    let responseList = {
+        data: {},
+        status: false,
+    };
+
     // Check Inputs for validation
     if (bankInfoInput.strBeneficiaryName === undefined || bankInfoInput.strBeneficiaryName === null || bankInfoInput.strBeneficiaryName.length < 1) {
         showToast("error", "Beneficiary Name should not be empty");
@@ -61,9 +67,10 @@ export const bankInfoSubmitMultiple = (bankInfoInput) => (dispatch) => {
     bankInfoInput.intCurrencyID = 1;
     bankInfoInput.isActive = 1;
     bankInfoInput.intActionBy = 1;
-
+    responseList.data = bankInfoInput
+    responseList.status = true
     // If Validate, then add multiple dataset [] in addressInfo
-    dispatch({ type: Types.SUBMIT_BANK_INFO_MULTIPLE, payload: bankInfoInput })
+    dispatch({ type: Types.SUBMIT_BANK_INFO_MULTIPLE, payload: responseList })
 
 }
 

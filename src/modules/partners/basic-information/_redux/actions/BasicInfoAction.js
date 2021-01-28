@@ -345,7 +345,8 @@ export const UpdatePartnerInfo = (id) => async (dispatch) => {
             responseList.status = response.data.status;
 
             if (response.data.status) {
-                showToast("success", response.data.message);
+
+                showToast("success", "Supplier Info updated Successfully");
                 dispatch({
                     type: Types.UPDATE_PARTNER_INFO,
                     payload: responseList,

@@ -20,7 +20,6 @@ export const getSupplierList = (searchValue = "") => async (dispatch) => {
     try {
         await Axios.get(url).then((res) => {
             const { status, message, errors, data } = res.data;
-            // console.log('data from ac:>> ', data);
             response.supplierList = data;
             response.status = status;
             response.message = message;
@@ -36,7 +35,7 @@ export const getSupplierList = (searchValue = "") => async (dispatch) => {
     }
     response.isLoading = false;
     dispatch({ type: Types.GET_SUPPLIER_LIST, payload: response })
-    // console.log('response.supplierList :>> ', response.supplierList);
+
 }
 
 export const supplierListDelete = (id) => (dispatch) => {

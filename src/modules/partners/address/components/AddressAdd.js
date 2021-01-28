@@ -18,29 +18,31 @@ const AddressAdd = withRouter(({ history }) => {
     const dispatch = useDispatch();
     const partnerAddress = useSelector(state => state.partnerAddress.partnerAddressInput);
     const addressInfo = useSelector(state => state.partnerAddress.addressInfo);
-    // console.log('partnerAddress :>> ', partnerAddress);
-    const handleChangeTextInput = (name, value) => {
-        dispatch(handleChangePartnerAddressInput(name, value))
-    }
     const countryOptionData = useSelector(
         (state) => state.partnerAddress.countryOptionData
     );
-    console.log('countryOptionData', countryOptionData)
+    const isMultipleAdded = useSelector((state) => state.partnerAddress.isMultipleAdded);
+
+    const handleChangeTextInput = (name, value) => {
+        dispatch(handleChangePartnerAddressInput(name, value))
+    }
 
     useEffect(() => {
         dispatch(getCountryName());
     }, []);
-    console.log('countryOptionData', countryOptionData)
 
-    const onSubmit = () => {
-        // dispatch(partnerAddressSubmit(partnerAddress));
-        // setShow(true);
-    }
+    useEffect(() => {
+        if (isMultipleAdded) {
+            setValue("intCountryID", "");
+        }
+    }, [isMultipleAdded]);
+
 
     const multipleAdd = () => {
         dispatch(partnerAddressSubmitMultiple(partnerAddress));
 
     }
+
     return (
         <div className="container">
             <div className="mt-10">
@@ -98,7 +100,6 @@ const AddressAdd = withRouter(({ history }) => {
                                 onChange={(option) => {
                                     handleChangeTextInput("intCountryID", option.value);
                                     handleChangeTextInput("strCountry", option.label);
-                                    // handleChangeTextInput("strCountryName", option.label);
                                 }
                                 }
                             />

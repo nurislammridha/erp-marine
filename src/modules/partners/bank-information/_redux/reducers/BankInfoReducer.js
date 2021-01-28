@@ -18,7 +18,8 @@ const initialState = {
         isActive: "",
         intActionBy: ""
     },
-    bankInfoMultiple: []
+    bankInfoMultiple: [],
+    isMultipleAdded: false
 };
 
 
@@ -46,9 +47,9 @@ const BankInfoReducer = (state = initialState, action) => {
             console.log('action.payload reducer :>> ', action.payload);
             return {
                 ...state,
-                bankInfoMultiple: [...state.bankInfoMultiple, action.payload],
-                bankInfoInput: initialState.bankInfoInput
-
+                bankInfoMultiple: [...state.bankInfoMultiple, action.payload.data],
+                bankInfoInput: initialState.bankInfoInput,
+                isMultipleAdded: action.payload.status
             };
         case Types.DELETE_PARTNER_BANK_MULTIPLE:
             const bankOld = [...state.bankInfoMultiple];
