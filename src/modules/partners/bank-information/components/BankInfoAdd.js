@@ -30,7 +30,7 @@ const BankInfoAdd = withRouter(({ history }) => {
             setValue("intBankId", "");
         }
     }, [bankInfo]);
-    console.log('bankInfo Adddd:>> ', bankInfo);
+    console.log('bankInfo Adddd:>> ', multipleAdd);
     return (
         <div className="container">
             <div className="mt-10">
