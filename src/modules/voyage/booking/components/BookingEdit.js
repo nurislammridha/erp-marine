@@ -18,6 +18,7 @@ import { getPortList } from "../../../master/DropDownData/Port/_redux/PortAction
 import { getCargoList } from "../../../master/DropDownData/Cargo/_redux/CargoAction/CargoAction";
 import { getShipList } from "../../../master/DropDownData/Ship/_redux/ShipAction/ShipAction";
 import { getBookingStatusList } from './../../../master/DropDownData/BookingStatus/_redux/BookingStatusAction/BookingStatusAction';
+import { getCharterList } from "../../../master/DropDownData/Charter/_redux/CharterAction/CharterAction";
 
 const BookingEdit = () => {
   const history = useHistory();
@@ -33,11 +34,13 @@ const BookingEdit = () => {
   const isLoading = useSelector((state) => state.VesselBookingReducer.isLoading);
   const VesselBookingDetails = useSelector((state) => state.VesselBookingReducer.VesselBookingDetails);
   const bookingStatusList = useSelector((state) => state.BookingStatusReducer.bookingStatusList);
-
+  const charterList = useSelector((state) => state.CharterReducer.charterList);
+  const brokerList = useSelector((state) => state.CharterReducer.brokerList);
   useEffect(() => {
     dispatch(getVoyageType());
     dispatch(getPortList());
     dispatch(getCargoList());
+    dispatch(getCharterList());
     dispatch(getShipList());
     dispatch(getBookingStatusList())
     dispatch(getVesselBookingDetails(id))
@@ -90,7 +93,7 @@ return (
           <div className="col-xl-3 col-lg-3 col-6">
             <label className="formFont">Broker Name</label>
             <RHFInput
-              as={<Select options={shipList} />}
+              as={<Select options={brokerList} />}
               rules={{ required: false }}
               name="intBrokerId"
               register={register}
@@ -106,7 +109,7 @@ return (
           <div className="col-xl-3 col-lg-3 col-6">
             <label className="formFont">Charter Name</label>
             <RHFInput
-              as={<Select options={shipList} />}
+              as={<Select options={charterList} />}
               rules={{ required: false }}
               name="intCharterId"
               register={register}

@@ -3,19 +3,48 @@ import Axios from "axios";
 import { showToast } from "../../../../master/utils/ToastHelper";
 
 //get vessel booking list 
-export const getVesselBookingList = () => (dispatch) => {
-    const VesselAPI = `${process.env.REACT_APP_API_URL}voyage/bookingList`;
-    Axios.get(VesselAPI)
-        .then((res) => {
-            if (res.status === 200) {
-                const listData = res.data.data;
-                if (listData.length) {
-                    dispatch({ type: Types.GET_VESSEL_BOOKING_LIST, payload: listData });
-                }
-            }
+export const getVesselBookingList = (page, searchText = null) => async (dispatch) => {
+    let responseList = {
+        isLoading: true,
+        data: {},
+        status: false,
+    };
+    dispatch({ type: Types.GET_VESSEL_BOOKING_LIST, payload: responseList });
+    let VesselAPI = "";
+    VesselAPI = `${process.env.REACT_APP_API_URL}voyage/bookingList?isPaginated=1&paginateNo=10`;
+    if (page !== null || page === "") {
+        VesselAPI += `&page=${page}`;
+    }
 
-        })
+    if (searchText !== null) {
+        VesselAPI += `&search=${searchText}`;
+    } else {
+        // url += `&certificate/details?search=${searchText}`
+    }
+
+    try {
+        await Axios.get(VesselAPI)
+            .then((res) => {
+                const { data, message, status } = res.data;
+                responseList.status = status;
+                responseList.VesselBookingList = data.data;
+                responseList.message = message;
+                responseList.vesselPaginateData = data;
+                responseList.isLoading = false;
+              
+            }).catch((err) => {
+                console.log("ErrorCertificate1");
+            });
+    } catch (error) {
+        console.log("ErrorCertificate2");
+        responseList.message = "Something Went Wrong !";
+        showToast('error', responseList.message);
+    }
+
+    responseList.isLoading = false;
+    dispatch({ type: Types.GET_VESSEL_BOOKING_LIST, payload: responseList });
 }
+
 // get single vessel booking list by matching intShipBookingID
 export const getVesselBookingDetails = (bookingID = null) => (dispatch) => {
     if (bookingID === null) {
@@ -101,18 +130,20 @@ export const getVesselBookingDetails = (bookingID = null) => (dispatch) => {
             })
     }
 }
+
 // delete vesselBooking
 export const vesselBookingDelete = (id) => (dispatch) => {
     let isLoading = true;
-    dispatch({type: Types.DELETE_VESSEL_BOOKING, payload: isLoading})
-    
-    Axios.delete(`${process.env.REACT_APP_API_URL}certificate/issuingAuthority/${id}`)
-    .then((res)=>{
-      if(res.status === 200){
-        const data = res.data;
-        showToast('success', data.message);
-        dispatch({type: Types.DELETE_VESSEL_BOOKING, payload: false});
-        dispatch(getVesselBookingList())
-      }
-    })
-  }
+    dispatch({ type: Types.DELETE_VESSEL_BOOKING, payload: isLoading })
+
+    Axios.delete(`${process.env.REACT_APP_API_URL}voyage/bookingList/${id}`)
+        .then((res) => {
+            if (res.data.status) {
+                console.log('res :>> ', res);
+                const data = res.data;
+                showToast('success', data.message);
+                dispatch({ type: Types.DELETE_VESSEL_BOOKING, payload: false });
+                dispatch(getVesselBookingList())
+            }
+        })
+}

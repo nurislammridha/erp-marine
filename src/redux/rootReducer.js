@@ -58,6 +58,7 @@ import VoyageTypeReducer from "../modules/master/DropDownData/VoyageType/_redux/
 import CargoReducer from "../modules/master/DropDownData/Cargo/_redux/CargoReducer/CargoReducer";
 import ShipReducer from "../modules/master/DropDownData/Ship/_redux/ShipReducer/ShipReducer";
 import BookingStatusReducer from "../modules/master/DropDownData/BookingStatus/_redux/BookingStatusReducer/BookingStatusReducer";
+import CharterReducer from "../modules/master/DropDownData/Charter/_redux/CharterReducer/CharterReducer";
 
 /** 
 | Domain : CCO
@@ -129,6 +130,7 @@ export const rootReducer = combineReducers({
   PortReducer: PortReducer,
   VoyageTypeReducer: VoyageTypeReducer,
   CargoReducer: CargoReducer,
+  CharterReducer: CharterReducer,
   ShipReducer: ShipReducer,
   BookingStatusReducer: BookingStatusReducer,
 
