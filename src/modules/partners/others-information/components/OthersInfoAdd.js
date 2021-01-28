@@ -7,33 +7,6 @@ import { getPortName, handleChangePartnerOtherInfoInput, getProviderName } from 
 
 const OthersInfoAdd = withRouter(({ history }) => {
 
-    const selectOptions = [
-        {
-            label: ' Port of Chittagong',
-            value: "1",
-            intActionBy: "3",
-            intProductOrServiceID: "4"
-        },
-        {
-            label: ' Port of Payra',
-            value: "2",
-            intActionBy: "34",
-            intProductOrServiceID: "4"
-        },
-        {
-            label: ' Port of Mongla',
-            value: "3",
-            intActionBy: "5",
-            intProductOrServiceID: "4"
-        },
-        {
-            label: ' Port of Matarbari',
-            value: "4",
-            intActionBy: "3",
-            intProductOrServiceID: "4"
-
-        }
-    ]
     const ref = React.createRef();
     const { register, handleSubmit, errors, setValue } = useForm();
     const dispatch = useDispatch();
@@ -56,8 +29,6 @@ const OthersInfoAdd = withRouter(({ history }) => {
     }, []);
 
 
-
-
     return (
         <div className="container">
             <div className="mt-10">
@@ -70,24 +41,7 @@ const OthersInfoAdd = withRouter(({ history }) => {
                         <div className="row">
                             <div className="col-md-4">
                                 <label className="form-label mt-2 formFont">Port Served</label>
-                                {/* <Multiselect
-                                    options={selectOptions}
-                                    displayValue="label"
-                                    showCheckbox={true}
-                                    onSelect={(selectedList, selectedItem) => {
-                                        handleChangeTextInput(
-                                            "strPortName",
-                                            selectedItem.label
-                                        );
-                                        handleChangeTextInput("intPortID", selectedItem.value);
-                                        console.log('selectedList', selectedList)
-                                    }}
-                                    onRemove={(selectedList, selectedItem) => {
 
-                                    }}
-
-
-                                /> */}
                                 <Multiselect
                                     options={PortOptionData}
                                     displayValue="strPortName"
@@ -98,6 +52,12 @@ const OthersInfoAdd = withRouter(({ history }) => {
                                             selectedList
                                         );
 
+                                    }}
+                                    onRemove={(selectedList, selectedItem) => {
+                                        handleChangeTextInput(
+                                            "multiplePort",
+                                            selectedList
+                                        );
                                     }}
                                 />
                             </div>
@@ -112,11 +72,16 @@ const OthersInfoAdd = withRouter(({ history }) => {
                                             "multipleProduct",
                                             selectedList
                                         );
-
+                                    }}
+                                    onRemove={(selectedList, selectedItem) => {
+                                        handleChangeTextInput(
+                                            "multipleProduct",
+                                            selectedList
+                                        );
                                     }}
                                 />
                             </div>
-                            <div className="col-md-4">
+                            {/* <div className="col-md-4">
                                 <label className="form-label mt-2 formFont">Service List</label>
                                 <Multiselect
                                     options={selectOptions}
@@ -129,8 +94,15 @@ const OthersInfoAdd = withRouter(({ history }) => {
                                         );
 
                                     }}
+                                    onSelect={(selectedList, selectedItem) => {
+                                        handleChangeTextInput(
+                                            "multipleServiceList",
+                                            selectedList
+                                        );
+
+                                    }}
                                 />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </form>

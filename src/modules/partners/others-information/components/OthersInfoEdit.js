@@ -54,7 +54,12 @@ const OthersInfoEdit = withRouter(({ history }) => {
                                             "multiplePort",
                                             selectedList
                                         );
-
+                                    }}
+                                    onRemove={(selectedList, selectedItem) => {
+                                        handleChangeTextInput(
+                                            "multiplePort",
+                                            selectedList
+                                        );
                                     }}
                                 />
                             </div>
@@ -70,7 +75,12 @@ const OthersInfoEdit = withRouter(({ history }) => {
                                             "multipleProduct",
                                             selectedList
                                         );
-
+                                    }}
+                                    onRemove={(selectedList, selectedItem) => {
+                                        handleChangeTextInput(
+                                            "multipleProduct",
+                                            selectedList
+                                        );
                                     }}
                                 />
                             </div>
