@@ -133,7 +133,7 @@ const BankInfoAdd = withRouter(({ history }) => {
                             />
                         </div>
                         <div className="col-md-3">
-                            <label className="form-label mt-2 formFont">IBAN</label>
+                            <label className="form-label mt-2 formFont">IBAN(optional)</label>
                             <Form.Control
                                 type="text"
                                 name="strIBANNo"

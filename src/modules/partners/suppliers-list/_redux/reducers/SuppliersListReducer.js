@@ -20,6 +20,12 @@ const SuppliersListReducer = (state = initialState, action) => {
                 isLoading: action.payload.isLoading
             };
 
+        case Types.DELETE_SUPPLIER_LIST:
+            return {
+                ...state,
+                isLoading: action.payload,
+            };
+
         default:
             break;
     }

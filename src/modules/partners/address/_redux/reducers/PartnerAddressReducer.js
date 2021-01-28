@@ -69,7 +69,7 @@ const PartnerAddressReducer = (state = initialState, action) => {
         case Types.EDIT_ADDRESS_INFO:
             return {
                 ...state,
-                partnerAddressInput: action.payload
+                addressInfo: action.payload
             }
         default:
             break;

@@ -6,9 +6,11 @@ const initialState = {
     partnerOtherInfoInput: {
         // intPortID: "",
         // strPortName: "",
+
         multiplePort: [],
         multipleProduct: [],
-        multipleServiceList: []
+
+        // multipleServiceList: []
     },
 
     status: false,
@@ -56,9 +58,19 @@ const OthersInfoReducer = (state = initialState, action) => {
 
             };
         case Types.EDIT_OTHERS_INFO:
+
+
+            console.log('action.payload', action.payload);
+            let portServed = { ...partnerOtherInfoInput };
+            portServed.multiplePort = action.payload.port_served;
+            portServed.multipleProduct = action.payload.service_provide;
+            // portServed.service_provide = action.payload.service_provide;
+
+            console.log('portServed', portServed)
             return {
                 ...state,
-                partnerOtherInfoInput: action.payload,
+                partnerOtherInfoInput: portServed,
+
 
             };
 

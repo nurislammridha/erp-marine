@@ -34,6 +34,9 @@ const AddressEdit = withRouter(({ history }) => {
 
 
     useEffect(() => {
+        // if (isMultipleAdded) {
+        //     setValue("intCountryID", "");
+        // }
         setValue("intCountryID", "");
 
     }, [isMultipleAdded]);
@@ -101,7 +104,7 @@ const AddressEdit = withRouter(({ history }) => {
                                 rules={{ required: true }}
                                 name="intCountryID"
                                 register={register}
-                                value={partnerAddress.intCountryID}
+                                value={partnerAddress.countryName}
                                 setValue={setValue}
                                 onChange={(option) => {
                                     handleChangeTextInput("intCountryID", option.value);

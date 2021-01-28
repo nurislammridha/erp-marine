@@ -16,7 +16,7 @@ const BankInfoEdit = withRouter(({ history }) => {
     const bankInfoInput = useSelector((state) => state.bankInfo.bankInfoInput);
     const bankOptionData = useSelector((state) => state.bankInfo.bankOptionData);
     const bankInfo = useSelector(state => state.bankInfo.bankInfoMultiple);
-    console.log('bankOptionData', bankOptionData)
+    console.log('bankInfoInput', bankInfoInput)
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeBankInfoInput(name, value));
     };
@@ -133,7 +133,7 @@ const BankInfoEdit = withRouter(({ history }) => {
                             />
                         </div>
                         <div className="col-md-3">
-                            <label className="form-label mt-2 formFont">IBAN</label>
+                            <label className="form-label mt-2 formFont">IBAN(optional)</label>
                             <Form.Control
                                 type="text"
                                 name="strIBANNo"

@@ -2,7 +2,9 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from "react-router-dom";
 import LoadingSpinner from '../../../master/spinner/LoadingSpinner'
-import { getSupplierList } from '../_redux/actions/SuppliersListAction'
+import { emptyStatus } from '../../basic-information/_redux/actions/BasicInfoAction';
+import { getSupplierList, supplierListDelete } from '../_redux/actions/SuppliersListAction'
+import { confirmAlert } from "react-confirm-alert";
 
 const SuppliersList = () => {
     const dispatch = useDispatch();
@@ -10,8 +12,34 @@ const SuppliersList = () => {
     const isLoading = useSelector(state => state.supplierList.isLoading)
     // console.log('supplierList List:>> ', isLoading);
     useEffect(() => {
-        dispatch(getSupplierList())
+        dispatch(getSupplierList());
+
     }, [])
+
+    // useEffect(() => {
+    //     dispatch(emptyStatus());
+
+    // }, [])
+    const confirmDelete = (id) => {
+        dispatch(supplierListDelete(id));
+
+    }
+
+    const deleteList = (id) => {
+        confirmAlert({
+            title: "Confirm To Delete",
+            message: `Are you sure to delete..?`,
+            buttons: [
+                {
+                    label: "Yes",
+                    onClick: () => confirmDelete(id),
+                },
+                {
+                    label: "No"
+                }
+            ]
+        });
+    };
     return (
         <>
             {isLoading && (
@@ -46,19 +74,18 @@ const SuppliersList = () => {
                                         <td>{item.strSupplierName}</td>
                                         <td>{item.strEmail}</td>
                                         <td>{item.strContactNumber}</td>
+
+
                                         <td>
-                                            <a>
-                                                <i className="fas fa-eye"></i>
-                                            </a> &nbsp;&nbsp;
                                             <Link
                                                 to={`/suppliers/info/edit/${item.intSupplierId}`}
                                             >
-                                                <i className="fas fa-edit"></i>
-                                            </Link> &nbsp;&nbsp;
-                                            <a>
-                                                <i className="fas fa-trash-alt"></i>
-                                            </a>
+                                                <i className="far fa-edit editIcon item-list-icon"></i>
+                                            </Link>
+
+                                            <i className="fas fa-trash-alt editIcon item-list-icon ml-4" onClick={(id) => deleteList(item.intSupplierId)}></i>
                                         </td>
+
                                     </tr>
                                 ))
                             )}

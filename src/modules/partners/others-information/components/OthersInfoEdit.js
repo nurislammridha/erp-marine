@@ -72,7 +72,7 @@ const OthersInfoEdit = withRouter(({ history }) => {
                                     }}
                                 />
                             </div>
-                            <div className="col-md-4">
+                            {/* <div className="col-md-4">
                                 <label className="form-label mt-2 formFont">Service List</label>
                                 <Multiselect
                                     options={providerOptionData}
@@ -86,7 +86,7 @@ const OthersInfoEdit = withRouter(({ history }) => {
 
                                     }}
                                 />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </form>
