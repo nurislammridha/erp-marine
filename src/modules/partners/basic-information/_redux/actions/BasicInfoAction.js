@@ -23,10 +23,7 @@ export const partnerInfoSubmitAction = () => {
     const partnerInfoInput = store.getState().partnerInfo.partnerInfoInput;
     let isValidated = true;
     const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-    // if (partnerInfoInput.intAction.length === 0) {
-    //     showToast('error', 'Please Select basic Unit');
-    //     isValidated = false;
-    // }
+
     if (partnerInfoInput.strSupplierName === undefined || partnerInfoInput.strSupplierName === null || partnerInfoInput.strSupplierName.length === 0) {
         showToast('error', 'Please give supplier name');
         isValidated = false;
@@ -39,22 +36,12 @@ export const partnerInfoSubmitAction = () => {
         showToast('error', 'Please give supplier email');
         isValidated = false;
     }
-    // else if (partnerInfoInput.strEmail !== "undefined" || partnerInfoInput.strEmail !== null) {
-    //     var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-    //     if (!pattern.test(partnerInfoInput.strEmail)) {
-    //         showToast('error', 'Please give valid email');
-    //         isValidated = false;
-    //     }
-    // }
 
     else if (!pattern.test(partnerInfoInput.strEmail)) {
         showToast('error', 'Please give valid email');
         isValidated = false;
     }
-    // else if (new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g)(partnerInfoInput.strEmail)) {
-    //     showToast('error', 'Please give supplier email');
-    //     isValidated = false;
-    // }
+
     else if (partnerInfoInput.strContactNumber === undefined || partnerInfoInput.strContactNumber === null || partnerInfoInput.strContactNumber.length === 0 || partnerInfoInput.strContactNumber < 0) {
         showToast('error', 'Please give contact no');
         isValidated = false;
@@ -63,10 +50,10 @@ export const partnerInfoSubmitAction = () => {
         showToast('error', 'Please give license no');
         isValidated = false;
     }
-    else if (partnerInfoInput.intAction === undefined || partnerInfoInput.intAction === null || partnerInfoInput.intAction.length === 0) {
-        showToast('error', 'Please give Business Unit no');
-        isValidated = false;
-    }
+    // else if (partnerInfoInput.intAction === undefined || partnerInfoInput.intAction === null || partnerInfoInput.intAction.length === 0) {
+    //     showToast('error', 'Please give Business Unit no');
+    //     isValidated = false;
+    // }
     else if (partnerInfoInput.intTaxTypeId === undefined || partnerInfoInput.intTaxTypeId === null || partnerInfoInput.intTaxTypeId.length === 0) {
         showToast('error', 'Please give Tax type');
         isValidated = false;
@@ -243,17 +230,15 @@ export const EditSupplierInfo = (id) => (dispatch) => {
                         label: data.address.strCountry,
                         value: data.address.intCountryID
                     }
-
                 }
                 dispatch({
                     type: TypesAddress.EDIT_ADDRESS_INFO,
                     payload: data.address,
                 });
             } else {
-                data.address = [];
                 dispatch({
                     type: TypesAddress.EDIT_ADDRESS_INFO,
-                    payload: data.address,
+                    payload: [],
                 });
             }
             // if (data.address.intCountryID !== null) {
@@ -270,39 +255,22 @@ export const EditSupplierInfo = (id) => (dispatch) => {
                     payload: data.bank_info,
                 });
             } else {
-                data.bank_info = [];
                 dispatch({
                     type: TypesBank.EDIT_BANK_INFO,
-                    payload: data.bank_info,
+                    payload: [],
                 });
             }
 
-            if (data.port_served !== null) {
-                dispatch({
-                    type: TypesOther.EDIT_OTHERS_INFO,
-                    payload: data,
-                });
-            } else {
+            if (data.port_served === null) {
                 data.port_served = [];
             }
+            if (data.service_provide === null) {
+                data.service_provide = [];
+            }
+
             dispatch({
                 type: TypesOther.EDIT_OTHERS_INFO,
                 payload: data,
-            });
-
-
-
-            if (data.service_provide !== null) {
-                dispatch({
-                    type: TypesOther.EDIT_OTHERS_INFO,
-                    payload: data.service_provide,
-                });
-            } else {
-                data.service_provide = [];
-            }
-            dispatch({
-                type: TypesOther.EDIT_OTHERS_INFO,
-                payload: data.service_provide,
             });
 
         });

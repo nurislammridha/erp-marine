@@ -10,15 +10,15 @@ const SuppliersList = () => {
     const dispatch = useDispatch();
     const supplierList = useSelector(state => state.supplierList.supplierList)
     const isLoading = useSelector(state => state.supplierList.isLoading)
-    // console.log('supplierList List:>> ', isLoading);
+
     useEffect(() => {
         dispatch(getSupplierList());
     }, [])
 
-    // useEffect(() => {
-    //     dispatch(emptyStatus());
+    useEffect(() => {
+        dispatch(emptyStatus());
 
-    // }, [])
+    }, [])
     const confirmDelete = (id) => {
         dispatch(supplierListDelete(id));
     }

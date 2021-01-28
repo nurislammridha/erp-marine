@@ -183,7 +183,7 @@ const BankInfoEdit = withRouter(({ history }) => {
                                         <th>SL</th>
                                         <th>ACCOUNT NAME</th>
                                         <th>ACCOUNT NO</th>
-                                        <th>BRANCE NAME</th>
+                                        <th>BRANCH NAME</th>
                                         <th>BANK NAME</th>
                                         <th>ROUTING NO</th>
                                         <th>IS DEFAULT</th>

@@ -62,11 +62,7 @@ export const bankInfoSubmitMultiple = (bankInfoInput) => (dispatch) => {
     // }
 
     // Process Data if needed
-    bankInfoInput.intSupplierId = 1;
-    bankInfoInput.strSupplierName = "Mohakhali2";
-    bankInfoInput.intCurrencyID = 1;
-    bankInfoInput.isActive = 1;
-    bankInfoInput.intActionBy = 1;
+
     responseList.data = bankInfoInput
     responseList.status = true
     // If Validate, then add multiple dataset [] in addressInfo

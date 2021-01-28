@@ -60,7 +60,8 @@ const OthersInfoReducer = (state = initialState, action) => {
         case Types.EDIT_OTHERS_INFO:
 
 
-            console.log('action.payload', action.payload);
+            console.log('action.payload for other', action.payload);
+            console.log('action.payload.port_served', action.payload.port_served);
             let portServed = { ...partnerOtherInfoInput };
             portServed.multiplePort = action.payload.port_served;
             portServed.multipleProduct = action.payload.service_provide;
@@ -70,7 +71,6 @@ const OthersInfoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 partnerOtherInfoInput: portServed,
-
 
             };
 

@@ -48,6 +48,7 @@ const OthersInfoEdit = withRouter(({ history }) => {
                                     options={PortOptionData}
                                     displayValue="strPortName"
                                     showCheckbox={true}
+                                    selectedValues={partnerOtherInfoInput.multiplePort}
                                     onSelect={(selectedList, selectedItem) => {
                                         handleChangeTextInput(
                                             "multiplePort",
@@ -63,6 +64,7 @@ const OthersInfoEdit = withRouter(({ history }) => {
                                     options={providerOptionData}
                                     displayValue="strProductOrServiceName"
                                     showCheckbox={true}
+                                    selectedValues={partnerOtherInfoInput.multipleProduct}
                                     onSelect={(selectedList, selectedItem) => {
                                         handleChangeTextInput(
                                             "multipleProduct",

@@ -52,17 +52,10 @@ export const partnerAddressSubmitMultiple = (partnerAddress) => (dispatch) => {
         return false;
     }
 
-
-    // Process Data if needed
-    partnerAddress.intActionBy = 1;
-    partnerAddress.isActive = 1;
-    partnerAddress.intCountryID = parseInt(partnerAddress.intCountryID);
     // If Validate, then add multiple dataset [] in addressInfo
     responseList.data = partnerAddress
     responseList.status = true
     dispatch({ type: Types.SUBMIT_PARTNER_ADDRESS_MULTIPLE, payload: responseList })
-    // const res = partnerAddress;
-    // dispatch({ type: Types.SUBMIT_PARTNER_ADDRESS, payload: res})
 }
 
 export const deletePartnerAddressMultiple = (index) => (dispatch) => {
