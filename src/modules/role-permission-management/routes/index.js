@@ -2,6 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 
 import RolePermissionListContainer from "../information/views/RolePermissionListContainer";
+import UserListContainer from "../information/views/UserListContainer";
 
 const routeRolePermissionManagement = [
   {
@@ -10,12 +11,12 @@ const routeRolePermissionManagement = [
     component: RolePermissionListContainer,
     exact: true,
   },
-  // {
-  //   path: "/items/add",
-  //   name: "item add",
-  //   component: ItemAddContainer,
-  //   exact: true,
-  // },
+  {
+    path: "/user/list",
+    name: "userlist",
+    component: UserListContainer,
+    exact: true,
+  },
 ];
 
 function getRolePermissionManagementRoutes() {

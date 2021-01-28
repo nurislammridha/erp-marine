@@ -29,17 +29,17 @@ const RolePermissionList = () => {
                 </div>
 
                 <div className="form-group row mt-3">
-                  <div className="col-6 ">
+                  <div className="col-3 ">
                     <p>Permission</p>
                   </div>
-                  <div className="col-6 ">
+                  <div className="col-9">
                     <Form.Group controlId="all">
                       <Form.Check type="checkbox" label="All" for="all" />
                     </Form.Group>
                   </div>
                 </div>
                 <div className="form-group row mt-5">
-                  <div className="col-6 ">
+                  <div className="col-3 ">
                     <Form.Group controlId="supplier">
                       <Form.Check
                         type="checkbox"
@@ -48,20 +48,37 @@ const RolePermissionList = () => {
                       />
                     </Form.Group>
                   </div>
-                  <div className="col-6 ">
-                    <Form.Group controlId="Create">
-                      <Form.Check type="checkbox" label="Create" for="Create" />
-                    </Form.Group>
-                    <Form.Group controlId="list">
-                      <Form.Check type="checkbox" label="List" for="list" />
-                    </Form.Group>
-                    <Form.Group controlId="edit">
-                      <Form.Check type="checkbox" label="Edit" for="Approve" />
-                    </Form.Group>
+                  <div className="col-9 ">
+                    <div className="row ">
+                      <Form.Group controlId="Create">
+                        <Form.Check
+                          type="checkbox"
+                          label="Create"
+                          for="Create"
+                          className="mr-3"
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="list">
+                        <Form.Check
+                          type="checkbox"
+                          label="List"
+                          for="list"
+                          className="mr-3"
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="edit">
+                        <Form.Check
+                          type="checkbox"
+                          label="Edit"
+                          for="Approve"
+                          className="mr-3"
+                        />
+                      </Form.Group>
+                    </div>
                   </div>
                 </div>
                 <div className="form-group row mt-5">
-                  <div className="col-6 ">
+                  <div className="col-3 ">
                     <Form.Group controlId="purchase">
                       <Form.Check
                         type="checkbox"
@@ -70,24 +87,39 @@ const RolePermissionList = () => {
                       />
                     </Form.Group>
                   </div>
-                  <div className="col-6 ">
-                    <Form.Group controlId="Create">
-                      <Form.Check type="checkbox" label="Create" for="Create" />
-                    </Form.Group>
-                    <Form.Group controlId="list">
-                      <Form.Check type="checkbox" label="List" for="list" />
-                    </Form.Group>
-                    <Form.Group controlId="Approve">
-                      <Form.Check
-                        type="checkbox"
-                        label="Approve"
-                        for="Approve"
-                      />
-                    </Form.Group>
+
+                  <div className="col-9 ">
+                    <div className="row ">
+                      <Form.Group controlId="Create">
+                        <Form.Check
+                          type="checkbox"
+                          label="Create"
+                          for="Create"
+                          className="mr-3"
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="list">
+                        <Form.Check
+                          type="checkbox"
+                          label="List"
+                          for="list"
+                          className="mr-3"
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="edit">
+                        <Form.Check
+                          type="checkbox"
+                          label="Edit"
+                          for="Approve"
+                          className="mr-3"
+                        />
+                      </Form.Group>
+                    </div>
                   </div>
                 </div>
+
                 <div className="form-group row mt-5">
-                  <div className="col-6 ">
+                  <div className="col-3 ">
                     <Form.Group controlId="customer">
                       <Form.Check
                         type="checkbox"
@@ -96,34 +128,68 @@ const RolePermissionList = () => {
                       />
                     </Form.Group>
                   </div>
-                  <div className="col-6 ">
-                    <Form.Group controlId="Create">
-                      <Form.Check type="checkbox" label="Create" for="Create" />
-                    </Form.Group>
-                    <Form.Group controlId="list">
-                      <Form.Check type="checkbox" label="List" for="list" />
-                    </Form.Group>
-                    <Form.Group controlId="edit">
-                      <Form.Check type="checkbox" label="Edit" for="edit" />
-                    </Form.Group>
+                  <div className="col-9 ">
+                    <div className="row ">
+                      <Form.Group controlId="Create">
+                        <Form.Check
+                          type="checkbox"
+                          label="Create"
+                          for="Create"
+                          className="mr-3"
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="list">
+                        <Form.Check
+                          type="checkbox"
+                          label="List"
+                          for="list"
+                          className="mr-3"
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="edit">
+                        <Form.Check
+                          type="checkbox"
+                          label="Edit"
+                          for="Approve"
+                          className="mr-3"
+                        />
+                      </Form.Group>
+                    </div>
                   </div>
                 </div>
                 <div className="form-group row mt-5">
-                  <div className="col-6 ">
+                  <div className="col-3 ">
                     <Form.Group controlId="user">
                       <Form.Check type="checkbox" label="User" for="user" />
                     </Form.Group>
                   </div>
-                  <div className="col-6 ">
-                    <Form.Group controlId="Create">
-                      <Form.Check type="checkbox" label="Create" for="Create" />
-                    </Form.Group>
-                    <Form.Group controlId="list">
-                      <Form.Check type="checkbox" label="List" for="list" />
-                    </Form.Group>
-                    <Form.Group controlId="edit">
-                      <Form.Check type="checkbox" label="Edit" for="edit" />
-                    </Form.Group>
+                  <div className="col-9 ">
+                    <div className="row ">
+                      <Form.Group controlId="Create">
+                        <Form.Check
+                          type="checkbox"
+                          label="Create"
+                          for="Create"
+                          className="mr-3"
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="list">
+                        <Form.Check
+                          type="checkbox"
+                          label="List"
+                          for="list"
+                          className="mr-3"
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="edit">
+                        <Form.Check
+                          type="checkbox"
+                          label="Edit"
+                          for="Approve"
+                          className="mr-3"
+                        />
+                      </Form.Group>
+                    </div>
                   </div>
                 </div>
                 <button className="btn btn-primary">Save</button>

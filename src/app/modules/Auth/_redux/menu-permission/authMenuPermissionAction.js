@@ -448,17 +448,17 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
 
         {
           subModuleName: "User",
-          subModuleRouteUrl: "/User/user",
+          subModuleRouteUrl: "/user/user",
           subModuleIcon: "menu-bullet menu-bullet-dot",
           features: [
             {
               featureName: "User List",
-              featureRouteUrl: "/User/user list",
+              featureRouteUrl: "/user/list",
               featureIcon: "menu-bullet menu-bullet-dot",
             },
             {
               featureName: "User New",
-              featureRouteUrl: "/User/new user",
+              featureRouteUrl: "/user/new user",
               featureIcon: "menu-bullet menu-bullet-dot",
             },
           ],
