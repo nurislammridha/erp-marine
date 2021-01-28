@@ -15,6 +15,7 @@ import { getVoyageType } from "../../../master/DropDownData/VoyageType/_redux/Vo
 import { getCargoList } from "../../../master/DropDownData/Cargo/_redux/CargoAction/CargoAction";
 import { getShipList } from "../../../master/DropDownData/Ship/_redux/ShipAction/ShipAction";
 import { useHistory } from "react-router-dom";
+import { getVesselBookingDetails } from "../_redux/actions/VesselBookInfoAction";
 
 const BookingEntry = () => {
   const history = useHistory()
@@ -26,11 +27,10 @@ const BookingEntry = () => {
   const portList = useSelector((state) => state.PortReducer.portList);
   const cargoList = useSelector((state) => state.CargoReducer.cargoList);
   const shipList = useSelector((state) => state.ShipReducer.shipList);
-
-  console.log('portList :>> ', portList);
   const isLoading = useSelector((state) => state.VesselBookingReducer.isLoading);
 
   useEffect(() => {
+    dispatch(getVesselBookingDetails());
     dispatch(getVoyageType());
     dispatch(getPortList());
     dispatch(getCargoList());
@@ -53,16 +53,31 @@ const BookingEntry = () => {
         <hr></hr>
         <div className="row">
           <div className="col-lg-1">
-            <h6 className="ml-1 text-bold">BASIC INFO</h6>
+            <h6 className="text-bold">BASIC INFO</h6>
           </div>
           <div className="col-lg-11">
             <hr className="hr-margin"></hr>
           </div>
-
         </div>
+
         <form
           className="form form-label-right voyageEngineerForm" onSubmit={(e) => submitVesselBooking(e)} autoComplete="off" >
           <div className="form-group row mb-1">
+            <div className="col-xl-3 col-lg-3 col-6">
+              <label className="formFont">Ship Name</label>
+              <RHFInput
+                as={<Select options={shipList} />}
+                rules={{ required: false }}
+                name="intShipId"
+                register={register}
+                value={VesselBooking.intShipId}
+                onChange={(option) => {
+                  handleChangeTextInput('strShipName', option.label);
+                  handleChangeTextInput('intShipId', option.value)
+                }}
+                setValue={setValue}
+              />
+            </div>
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Broker Name</label>
               <RHFInput
@@ -90,21 +105,6 @@ const BookingEntry = () => {
                 onChange={(option) => {
                   handleChangeTextInput('strCharterName', option.label);
                   handleChangeTextInput('intCharterId', option.value)
-                }}
-                setValue={setValue}
-              />
-            </div>
-            <div className="col-xl-3 col-lg-3 col-6">
-              <label className="formFont">Ship Name</label>
-              <RHFInput
-                as={<Select options={shipList} />}
-                rules={{ required: false }}
-                name="intShipId"
-                register={register}
-                value={VesselBooking.intShipId}
-                onChange={(option) => {
-                  handleChangeTextInput('strShipName', option.label);
-                  handleChangeTextInput('intShipId', option.value)
                 }}
                 setValue={setValue}
               />
@@ -192,23 +192,19 @@ const BookingEntry = () => {
               <i className="fas fa-calendar-alt"></i>
             </div>
           </div>
-          <div className="form-group row mb-1">
-            <div className="col-lg-3 col-6">
-              <label className="formFont">C/P Date</label>
-              <DatePicker
-                className="date-picker"
-                name="dteCPDate"
-                dateFormat="MM-dd-yyyy"
-                placeholderText="select C/P date"
-                selected={VesselBooking.dteCPDate !== '' ? moment(VesselBooking.dteCPDate).toDate() : null}
-                onChange={(date) => handleChangeTextInput("dteCPDate", date)}
-                ref={register({
-                  required: true,
-                  maxLength: 100,
-                })}
-              />
-              <i className="fas fa-calendar-alt"></i>
+          <div className="mt-5">
+            <div className="row">
+              <div className="col-lg-2">
+                <h6 className="text-bold">RATE AND COMMISION</h6>
+              </div>
+              <div className="col-lg-10">
+                <hr className="hr-margin"></hr>
+              </div>
             </div>
+          </div>
+
+          <div className="form-group row mb-1">
+
 
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Freight/ Hire Rate</label>
@@ -234,67 +230,30 @@ const BookingEntry = () => {
               />
             </div>
             <div className="col-lg-3 col-6">
-              <label className="formFont">On Hire Date</label>
-              <DatePicker
-                className="date-picker"
-                name="dteOnHireDate"
-                dateFormat="MM-dd-yyyy"
-                placeholderText="select on hire date"
-                selected={VesselBooking.dteOnHireDate !== '' ? moment(VesselBooking.dteOnHireDate).toDate() : null}
-                onChange={(date) => handleChangeTextInput("dteOnHireDate", date)}
-                ref={register({
-                  required: true,
-                  maxLength: 100,
-                })}
-              />
-              <i className="fas fa-calendar-alt"></i>
-            </div>
-            <div className="col-lg-3 col-6">
-              <label className="formFont">Redelivery Date</label>
-              <DatePicker
-                className="date-picker"
-                name="dteRedeliveryDate"
-                dateFormat="MM-dd-yyyy"
-                placeholderText="select redelivery date"
-                selected={VesselBooking.dteRedeliveryDate !== '' ? moment(VesselBooking.dteRedeliveryDate).toDate() : null}
-                onChange={(date) => handleChangeTextInput("dteRedeliveryDate", date)}
-                ref={register({
-                  required: true,
-                  maxLength: 100,
-                })}
-              />
-              <i className="fas fa-calendar-alt"></i>
-            </div>
-          </div>
-          <div className="form-group row mb-1">
-            <div className="col-xl-3 col-lg-3 col-6">
               <Form.Group>
-                {/* <Form.Label className="formFont pl-1">Cargo</Form.Label> */}
-                <label className="formFont">Cargo</label>
-                <RHFInput
-                  as={<Select options={cargoList} />}
-                  rules={{ required: false }}
-                  name="intCargoId"
-                  register={register}
-                  value={VesselBooking.intCargoId}
-                  onChange={(option) => {
-                    handleChangeTextInput('strCargoName', option.label);
-                    handleChangeTextInput('intCargoId', option.value)
-                  }}
-                  setValue={setValue}
+                <Form.Label className="formFont pl-1">Load Rate</Form.Label>
+                <Form.Control
+                  className="formHeight"
+                  type="number"
+                  placeholder="Load Rate"
+                  name="numLoadRate"
+                  value={VesselBooking.numLoadRate}
+                  onChange={(e) => handleChangeTextInput('numLoadRate', e.target.value)}
                 />
               </Form.Group>
             </div>
             <div className="col-lg-3 col-6">
               <Form.Group>
-                <Form.Label className="formFont pl-1">Cargo Qty</Form.Label>
+                <Form.Label className="formFont pl-1">
+                  Discharge Rate
+                </Form.Label>
                 <Form.Control
                   className="formHeight"
-                  name="intTotalCargoQty"
+                  name="numDischargeRate"
                   type="number"
-                  value={VesselBooking.intTotalCargoQty}
-                  onChange={(e) => handleChangeTextInput('intTotalCargoQty', e.target.value)}
-                  placeholder="Qty"
+                  placeholder="Discharge rate"
+                  value={VesselBooking.numDischargeRate}
+                  onChange={(e) => handleChangeTextInput('numDischargeRate', e.target.value)}
                 />
               </Form.Group>
             </div>
@@ -334,8 +293,6 @@ const BookingEntry = () => {
                 </InputGroup>
               </Form.Group>
             </div>
-          </div>
-          <div className="form-group row mb-1">
             <div className="col-lg-3 col-6">
               <Form.Group
                 as={Col}
@@ -362,19 +319,49 @@ const BookingEntry = () => {
                 </InputGroup>
               </Form.Group>
             </div>
-            <div className="col-lg-3 col-6">
+            <div className="col-xl-3 col-lg-3 col-6">
               <Form.Group>
-                <Form.Label className="formFont pl-1">Load Rate</Form.Label>
-                <Form.Control
-                  className="formHeight"
-                  type="number"
-                  placeholder="Load Rate"
-                  name="numLoadRate"
-                  value={VesselBooking.numLoadRate}
-                  onChange={(e) => handleChangeTextInput('numLoadRate', e.target.value)}
+                {/* <Form.Label className="formFont pl-1">Cargo</Form.Label> */}
+                <label className="formFont">Cargo</label>
+                <RHFInput
+                  as={<Select options={cargoList} />}
+                  rules={{ required: false }}
+                  name="intCargoId"
+                  register={register}
+                  value={VesselBooking.intCargoId}
+                  onChange={(option) => {
+                    handleChangeTextInput('strCargoName', option.label);
+                    handleChangeTextInput('intCargoId', option.value)
+                  }}
+                  setValue={setValue}
                 />
               </Form.Group>
             </div>
+            <div className="col-lg-3 col-6">
+              <Form.Group>
+                <Form.Label className="formFont pl-1">Cargo Qty</Form.Label>
+                <Form.Control
+                  className="formHeight"
+                  name="intTotalCargoQty"
+                  type="number"
+                  value={VesselBooking.intTotalCargoQty}
+                  onChange={(e) => handleChangeTextInput('intTotalCargoQty', e.target.value)}
+                  placeholder="Qty"
+                />
+              </Form.Group>
+            </div>
+          </div>
+          <div className="mt-5">
+            <div className="row">
+              <div className="col-lg-2">
+                <h6 className="text-bold">DATE DETAILS</h6>
+              </div>
+              <div className="col-lg-10">
+                <hr className="hr-margin"></hr>
+              </div>
+            </div>
+          </div>
+          <div className="form-group row mb-1">
             <div className="col-lg-3 col-6">
               <label className="formFont">Laycan start </label>
               <DatePicker
@@ -408,20 +395,54 @@ const BookingEntry = () => {
               <i className="fas fa-calendar-alt"></i>
             </div>
             <div className="col-lg-3 col-6">
-              <Form.Group>
-                <Form.Label className="formFont pl-1">
-                  Discharge Rate
-                </Form.Label>
-                <Form.Control
-                  className="formHeight"
-                  name="numDischargeRate"
-                  type="number"
-                  placeholder="Discharge rate"
-                  value={VesselBooking.numDischargeRate}
-                  onChange={(e) => handleChangeTextInput('numDischargeRate', e.target.value)}
-                />
-              </Form.Group>
+              <label className="formFont">On Hire Date</label>
+              <DatePicker
+                className="date-picker"
+                name="dteOnHireDate"
+                dateFormat="MM-dd-yyyy"
+                placeholderText="select on hire date"
+                selected={VesselBooking.dteOnHireDate !== '' ? moment(VesselBooking.dteOnHireDate).toDate() : null}
+                onChange={(date) => handleChangeTextInput("dteOnHireDate", date)}
+                ref={register({
+                  required: true,
+                  maxLength: 100,
+                })}
+              />
+              <i className="fas fa-calendar-alt"></i>
             </div>
+            <div className="col-lg-3 col-6">
+              <label className="formFont">Redelivery Date</label>
+              <DatePicker
+                className="date-picker"
+                name="dteRedeliveryDate"
+                dateFormat="MM-dd-yyyy"
+                placeholderText="select redelivery date"
+                selected={VesselBooking.dteRedeliveryDate !== '' ? moment(VesselBooking.dteRedeliveryDate).toDate() : null}
+                onChange={(date) => handleChangeTextInput("dteRedeliveryDate", date)}
+                ref={register({
+                  required: true,
+                  maxLength: 100,
+                })}
+              />
+              <i className="fas fa-calendar-alt"></i>
+            </div>
+            <div className="col-lg-3 col-6">
+              <label className="formFont">C/P Date</label>
+              <DatePicker
+                className="date-picker"
+                name="dteCPDate"
+                dateFormat="MM-dd-yyyy"
+                placeholderText="select C/P date"
+                selected={VesselBooking.dteCPDate !== '' ? moment(VesselBooking.dteCPDate).toDate() : null}
+                onChange={(date) => handleChangeTextInput("dteCPDate", date)}
+                ref={register({
+                  required: true,
+                  maxLength: 100,
+                })}
+              />
+              <i className="fas fa-calendar-alt"></i>
+            </div>
+
           </div>
           <div className="float-right">
             <Button className=" cancelButton" variant="" onClick={() => history.push('/voyage/booking/bookinglist')}>
