@@ -51,6 +51,15 @@ const BookingEntry = () => {
       <Card.Body className="pt-5 mt-0">
         <h1 className="tableheading mt-0 pt-0 ">Booking Entry</h1>
         <hr></hr>
+        <div className="row">
+          <div className="col-lg-1">
+            <h6 className="ml-1 text-bold">BASIC INFO</h6>
+          </div>
+          <div className="col-lg-11">
+            <hr className="hr-margin"></hr>
+          </div>
+
+        </div>
         <form
           className="form form-label-right voyageEngineerForm" onSubmit={(e) => submitVesselBooking(e)} autoComplete="off" >
           <div className="form-group row mb-1">

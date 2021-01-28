@@ -1010,3 +1010,6 @@ span#inputGroupPrepend {
 .row.custom-modal  {
   width: 1063px;
 }
+hr.hr-margin {
+  margin-top: 8px !important;
+}
