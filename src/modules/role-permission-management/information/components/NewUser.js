@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Form } from "react-bootstrap";
 
-import UserModal from "./UserModal";
-const UserList = () => {
+const NewUser = () => {
   return (
     <>
       <div className="container">
         <div className="row">
           <div className="col-12">
             <div className="card card-custom gutter-b p-5">
-              <h1>User List</h1>
+              <h1>Create New User </h1>
               <div className="react-bootstrap-table table-responsive">
                 <table className="table table table-head-custom table-vertical-center user-list-table ">
                   <thead>
@@ -41,10 +41,6 @@ const UserList = () => {
                         </button>
                         <button className="btn btn-danger  btn-sm ml-2">
                           Delete
-                        </button>{" "}
-                        <button className="modal-button">
-                          {" "}
-                          <UserModal />
                         </button>
                       </td>
                       <td></td>
@@ -78,4 +74,4 @@ const UserList = () => {
   );
 };
 
-export default UserList;
+export default NewUser;

@@ -457,7 +457,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
               featureIcon: "menu-bullet menu-bullet-dot",
             },
             {
-              featureName: "User New",
+              featureName: " New User ",
               featureRouteUrl: "/user/new user",
               featureIcon: "menu-bullet menu-bullet-dot",
             },

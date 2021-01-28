@@ -1,5 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import NewUserContainer from "../information/views/NewUserContainer";
 
 import RolePermissionListContainer from "../information/views/RolePermissionListContainer";
 import UserListContainer from "../information/views/UserListContainer";
@@ -15,6 +16,12 @@ const routeRolePermissionManagement = [
     path: "/user/list",
     name: "userlist",
     component: UserListContainer,
+    exact: true,
+  },
+  {
+    path: "/user/new user",
+    name: "newuser",
+    component: NewUserContainer,
     exact: true,
   },
 ];

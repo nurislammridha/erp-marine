@@ -1016,3 +1016,8 @@ span#inputGroupPrepend {
 hr.hr-margin {
   margin-top: 8px !important;
 }
+/* userlist modal */
+button.modal-button {
+  border: none !important;
+  background: none !important;
+}
