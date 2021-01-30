@@ -58,7 +58,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
     (state) => state.certificateMainInfo.certificatesNameOptionData
   );
 
-  
+
   const certificateParentCategoryList = useSelector(
     (state) => state.CertificateCategoryReducer.certificateParentCategoryList
   );
@@ -164,21 +164,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       );
                       setValue("intCategoryID", "");
                       dispatch(getCertificateChildCategoryData(option.value));
-                      dispatch(
-                        handleCertificateCategoryInput(
-                          "certificateCategoryParent",
-                          {
-                            label: option.label,
-                            value: option.value,
-                          }
-                        )
-                      );
-                      dispatch(
-                        handleCertificateCategoryInput(
-                          "intParentsCategoryID",
-                          option.value
-                        )
-                      );
+                      dispatch(handleCertificateCategoryInput("certificateCategoryParent", { label: option.label, value: option.value }));
+                      dispatch(handleCertificateCategoryInput("intParentsCategoryID", option.value));
                       dispatch(getCertificateName(option.value));
 
                       dispatch(handleChangeCertificateMasterInput('certificateCategoryParent', {
@@ -272,10 +259,10 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         onClick={() => {
                           if (certificateInfoInput.intParentCategoryID === null) {
                             showToast('error', 'Please select parent category first !')
-                          } else{
+                          } else {
                             setShowCertificateModal(true);
                           }
-                          
+
                         }}
                       >
                         <i className="fa fa-plus-circle"></i>

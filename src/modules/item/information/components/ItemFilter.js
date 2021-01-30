@@ -3,7 +3,7 @@ import { Form, Col } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
-const ItemFilter = () => {
+const ItemFilter = ({searchItems, searchText}) => {
     const { register, setValue } = useForm();
     const statusOptions = [
         {
@@ -32,7 +32,8 @@ const ItemFilter = () => {
                         className="formHeight"
                         type="text"
                         placeholder="Search"
-                        value={""}
+                        value={searchText}
+                        onChange={searchItems}
                     // onChange={(e) => changeSearch(e.target.value)}
                     />
                 </Form.Group>
@@ -45,7 +46,7 @@ const ItemFilter = () => {
                         rules={{ required: false }}
                         name="isActive"
                         register={register}
-                        value={""}
+                        // value={""}
                         setValue={setValue}
                     />
                 </Form.Group>

@@ -28,13 +28,7 @@ const BookingList = () => {
     setVesselBookingID(item.intShipBookingId);
     setStatus(item.strBookingStatus)
     setBookDetailShow(true)
-
   }
-  console.log('VesselBookingList :>> ', VesselBookingList);
-  // useEffect(() => {
-  //   dispatch(getVesselBookingList())
-  // }, [])
-  //===========
 
   useEffect(() => {
     dispatch(getVesselBookingList(currentPage));
@@ -45,11 +39,11 @@ const BookingList = () => {
     dispatch(getVesselBookingList(data.page));
   };
 
-  const certificateSelect = (category) => {
-    dispatch(
-      getVesselBookingList(currentPage, searchText, 1, category)
-    );
-  };
+  // const certificateSelect = (category) => {
+  //   dispatch(
+  //     getVesselBookingList(currentPage, searchText, 1, category)
+  //   );
+  // };
 
   const searchProduct = (e) => {
     const searchText = e.target.value;
