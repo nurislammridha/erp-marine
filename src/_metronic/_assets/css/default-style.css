@@ -73,15 +73,15 @@
 /* custom form design */
 
 .formHeight {
-  height: 20px !important;
+  height: 30px !important;
   background: #fff;
   font-size: 10px !important;
   font-weight: 400;
 }
 
 .css-1fhf3k1-control {
-  height: 20px !important;
-  min-height: 20px !important;
+  height: 30px !important;
+  min-height: 30px !important;
 }
 
 .form-input-white {
@@ -562,7 +562,7 @@ i.tableFilter {
   height: 9px;
   position: absolute;
   right: 45px;
-  bottom: 3px;
+  bottom: 7px;
   font-size: 14px !important;
 }
 button.btn.btn-default {
@@ -586,8 +586,8 @@ button.btn.btn-default {
   /* border-left: 0px !important; */
   margin-left: -3px;
   background: #fff;
-  border: 2px solid #e5eaee !important;
-  /* height: 30px; */
+  border: 1px solid #e5eaee !important;
+  height: 30px;
   background: #fff !important;
 }
 i.fa.fa-plus-circle {
@@ -609,21 +609,21 @@ i.fa.fa-plus-circle {
 /* basic form */
 
 .css-1okebmr-indicatorSeparator {
-  margin-top: 2px !important;
-  margin-bottom: 20px !important;
+  margin-top: 5px !important;
+  margin-bottom: 10px !important;
 }
 
 .css-yk16xz-control {
   background: #fff !important;
-  height: 20px !important;
-  min-height: 20px !important;
+  height: 30px !important;
+  min-height: 30px !important;
   border: 1px solid #e5eaee !important;
 }
 
 .css-1pahdxg-control {
   background: #fff !important;
-  height: 20px !important;
-  min-height: 20px !important;
+  height: 30px !important;
+  min-height: 30px !important;
   border: 1px solid #e5eaee !important;
 }
 
@@ -641,13 +641,13 @@ i.fa.fa-plus-circle {
 }
 
 .css-1wa3eu0-placeholder {
-  top: 25% !important;
+  top: 42% !important;
   font-size: 10px !important;
 }
 
 .css-tlfecz-indicatorContainer,
 .css-1gtu0rj-indicatorContainer {
-  margin-top: -17px !important;
+  margin-top: -5px !important;
 }
 
 .css-1uccc91-singleValue {
@@ -997,6 +997,7 @@ td {
 
 .form-group label {
   font-size: 10px !important;
+  margin-bottom: 0px!important;
 }
 
 span#inputGroupPrepend {
@@ -1020,4 +1021,74 @@ hr.hr-margin {
 button.modal-button {
   border: none !important;
   background: none !important;
+}
+/* cerificate list */
+button.certificate-done {
+  background: #8ec7ff !important;
+  border: #8ec7ff !important;
+}
+.certificate-due {
+  background: #678db2 !important;
+  border: #678db2 !important;
+}
+.certificate-lis-btn {
+  padding: 3px 15px !important;
+  border-radius: 2px !important;
+  width: 67px !important;
+  border: none !important
+}
+.certificate-edit-icon {
+  background: #e7f3fe !important ;
+  padding: 5px;
+  border-radius: 2px;
+  color: #3699ff;
+  font-size: 11px;
+}
+.due-days h6 {
+  position: relative;
+  font-size: 11px !important;
+  text-transform: uppercase;
+}
+.due-days h6:before {
+  position: absolute;
+  content: "";
+  top: -6px;
+  height: 25px;
+  width: 25px;
+  border-radius: 4px;
+}
+
+.between-thirty h6::before {
+  background: #8ec7ff;
+
+  left: -13px;
+}
+.More-than-sixty h6::before {
+  background: #8af2c0 !important;
+  left: 27px;
+}
+.between-sixty h6::before {
+  background: #678db2 !important;
+  left: -30px;
+}
+.expired h6::before {
+  background: #ea673e !important;
+  left: -13px;
+}
+p.certificate-list-text {
+  width: 101px;
+  font-size: 12px !important;
+  font-weight: bold;
+}
+.certificate-due-0 {
+  background: #ea673e !important;
+}
+.certificate-due-l-30 {
+  background: #8ec7ff !important;
+}
+.certificate-due-30-60 {
+  background: #678db2 !important;
+}
+.certificate-due-g-60 {
+  background: #8af2c0 !important;
 }

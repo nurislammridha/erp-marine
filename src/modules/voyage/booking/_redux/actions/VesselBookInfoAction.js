@@ -11,7 +11,7 @@ export const getVesselBookingList = (page, searchText = null) => async (dispatch
     };
     dispatch({ type: Types.GET_VESSEL_BOOKING_LIST, payload: responseList });
     let VesselAPI = "";
-    VesselAPI = `${process.env.REACT_APP_API_URL}voyage/bookingList?isPaginated=1&paginateNo=10`;
+    VesselAPI = `${process.env.REACT_APP_API_URL}voyage/bookingList?isPaginated=1&isActive=1&paginateNo=10`;
     if (page !== null || page === "") {
         VesselAPI += `&page=${page}`;
     }
