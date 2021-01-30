@@ -663,6 +663,11 @@ i.fa.fa-plus-circle {
     padding: 0px !important;
 }
 
+.aside-menu .menu-nav>.menu-item>.menu-heading,
+.aside-menu .menu-nav>.menu-item>.menu-link {
+    min-height: 36px!important;
+}
+
 .css-1laa021-a11yText {
     padding: 0px !important;
 }

@@ -95,7 +95,7 @@ export function AsideMenuList({ layoutProps }) {
                       >
                         <NavLink
                           className="menu-link menu-toggle"
-                          to="/google-material/inputs"
+                          to={subMenu.subModuleRouteUrl}
                         >
                           <i className={subMenu.subModuleIcon}>
                             <span />
