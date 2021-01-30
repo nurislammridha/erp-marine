@@ -1,6 +1,7 @@
 import * as Types from "../types/Types";
 
 const initialState = {
+    isLoading: false,
     itemDataInput: {
         intDepartmentID: "",
         strDepartmentName: "",
@@ -19,12 +20,13 @@ const initialState = {
         strEngineName: "",
         strDrwingNumber: "",
         strItemDescription: "Personal",
-        intItemSubCategoryID: "1",
+        intItemSubCategoryID: null,
         strItemCode: "1",
         intActionBy: "502648",
     },
     multipleItemAdd: [],
-    getItemList: [],
+    itemList: [],
+    itemListPaginated: null,
     itemSUbmit: []
 }
 const ItemReducer = (state = initialState, action) => {
@@ -63,17 +65,31 @@ const ItemReducer = (state = initialState, action) => {
             return {
                 ...state,
                 itemCategoryOptionData: getItemCategory(action.payload),
-
+            };
+        case Types.GET_ITEM_SUB_CATEGORY:
+            return {
+                ...state,
+                itemSubCategoryOptionData: getItemSubCategory(action.payload),
             };
         case Types.ITEM_SUBMIT:
-            console.log('action.payload', action.payload);
             return {
                 ...state,
                 itemSUbmit: action.payload
             }
+
         case Types.GET_ITEM_LIST:
-            return {
-                ...state, getItemList: action.payload
+            if (action.payload.status) {
+                return {
+                    ...state,
+                    itemList: action.payload.itemList,
+                    itemListPaginated: action.payload.itemListPaginated,
+                    isLoading: false,
+                };
+            } else {
+                return {
+                    ...state,
+                    isLoading: true,
+                };
             }
         case Types.EMPTY_MULTIPLE_ITEM_LIST:
             return {
@@ -83,11 +99,15 @@ const ItemReducer = (state = initialState, action) => {
         //     return {
         //         ...state, itemSUbmit: action.payload
         //     }
+        case Types.DELETE_TITEM:
+            return {
+                ...state,
+                isLoading: action.payload,
+            };
         default:
             break;
 
     }
-    console.log('itemSUbmit Reducer:>> ', initialState.itemSUbmit);
     return newState;
 
 }
@@ -132,6 +152,19 @@ const getItemCategory = (data) => {
             let itemData = {
                 value: item.intItemCategoryID,
                 label: item.strItemCategoryName,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+};
+const getItemSubCategory = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intItemSubCategoryID,
+                label: item.strtemSubCategoryName,
             };
             options.push(itemData);
         });

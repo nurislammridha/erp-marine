@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
-import { deleteMultipleItemInput, itemAddInput, multipleItemAddInput, submitMultipleItem, getItemCategory, getUOM, getItemType } from "../_redux/actions/ItemAction";
+import { deleteMultipleItemInput, itemAddInput, multipleItemAddInput, submitMultipleItem, getItemCategory, getUOM, getItemType, getItemSubCategory } from "../_redux/actions/ItemAction";
 import { useHistory } from "react-router-dom";
 const ItemAdd = () => {
   const { register, setValue } = useForm();
@@ -20,15 +20,10 @@ const ItemAdd = () => {
     }
   }, [itemSUbmit])
 
-  const UOMOptionData = useSelector(
-    (state) => state.itemList.UOMOptionData
-  );
-  const itemTypeOptionData = useSelector(
-    (state) => state.itemList.itemTypeOptionData
-  );
-  const itemCategoryOptionData = useSelector(
-    (state) => state.itemList.itemCategoryOptionData
-  );
+  const UOMOptionData = useSelector((state) => state.itemList.UOMOptionData);
+  const itemTypeOptionData = useSelector((state) => state.itemList.itemTypeOptionData);
+  const itemCategoryOptionData = useSelector((state) => state.itemList.itemCategoryOptionData);
+  const itemSubCategoryOptionData = useSelector((state) => state.itemList.itemSubCategoryOptionData);
   const changeText = (name, value) => {
     dispatch(itemAddInput(name, value))
   }
@@ -50,7 +45,8 @@ const ItemAdd = () => {
     dispatch(getUOM());
     dispatch(getItemType());
     dispatch(getItemCategory());
-    dispatch(getItemCategory())
+    dispatch(getItemSubCategory());
+    // dispatch(getItemCategory())
   }, [])
 
   const department = [
@@ -134,6 +130,7 @@ const ItemAdd = () => {
           </div>
         </div>
         <div className="form-group row">
+     
           <div className="col-xl-3 col-lg-3 col-md-6">
             <label className="formFont">Item Category</label>
             <RHFInput
@@ -146,23 +143,25 @@ const ItemAdd = () => {
               onChange={(option) => {
                 changeText("intItemCategoryID", option.value);
                 changeText("strItemCategoryName", option.label);
+                dispatch(getItemSubCategory(option.value));
               }}
             />
           </div>
           <div className="col-xl-3 col-lg-3 col-md-6 ">
-            <Form.Group>
-              <Form.Label className="formFont pl-1">
-                Item SubCategory
-              </Form.Label>
-              <Form.Control
-                className="formHeight"
-                type="text"
-                placeholder="Enter Item SubCategory"
-                name="strSubCategoryName"
-                value={itemDataInput.strSubCategoryName}
-                onChange={(e) => changeText("strSubCategoryName", e.target.value)}
-              />
-            </Form.Group>
+            <label className="formFont">Item SubCategory</label>
+            <RHFInput
+              as={<Select options={itemSubCategoryOptionData} />}
+              rules={{ required: false }}
+              name="intItemSubCategoryID"
+              register={register}
+              value={itemDataInput.intItemSubCategoryID}
+              setValue={setValue}
+              onChange={(option) => {
+                changeText("intItemSubCategoryID", option.value);
+                changeText("strtemSubCategoryName", option.label);
+              }}
+              setValue={setValue}
+            />
           </div>
           <div className="col-xl-3 col-lg-3 col-md-6 ">
             <Form.Group>

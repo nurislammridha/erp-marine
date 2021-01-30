@@ -81,7 +81,6 @@ export const submitMultipleItem = (multipleItemList) => (dispatch) => {
     const url = `${process.env.REACT_APP_API_URL}inventory/itemList`;
 
     Axios.post(url, postData).then(function (response) {
-        console.log('response Action:>> ', response);
         responseList.isLoading = true;
         responseList.data = response.data.data;
         responseList.status = response.data.data;
@@ -123,7 +122,7 @@ export const getItemType = (data) => (dispatch) => {
         }
     );
 };
-export const getItemCategory = (data) => (dispatch) => {
+export const getItemCategory = () => (dispatch) => {
     Axios.get(`${process.env.REACT_APP_API_URL}inventory/itemCategory`).then(
 
         (res) => {
@@ -133,12 +132,73 @@ export const getItemCategory = (data) => (dispatch) => {
     );
 };
 
-export const getItemList = () => (dispatch) => {
-    const url = `${process.env.REACT_APP_API_URL}inventory/itemList`;
-    Axios.get(url).then((res) => {
-        let data = res.data.data;
-        dispatch({ type: Types.GET_ITEM_LIST, payload: data });
-    })
+export const getItemSubCategory = (intItemCategoryID = null) => (dispatch) => {
+    console.log('intItemCategoryID :>> ', intItemCategoryID);
+    let url = `${process.env.REACT_APP_API_URL}inventory/itemSubCategory`;
+    if (intItemCategoryID !== null) {
+        let url = `${process.env.REACT_APP_API_URL}inventory/itemSubCategory/${intItemCategoryID}`;
+        Axios.get(url).then(
+            (res) => {
+                console.log('res :>> ', res);
+                let data = res.data.data;
+                dispatch({ type: Types.GET_ITEM_SUB_CATEGORY, payload: data });
+            }
+        );
+    }else{
+        dispatch({ type: Types.GET_ITEM_SUB_CATEGORY, payload: [] });
+    }
+
+};
+
+
+// export const getItemSubCategory = (data) => (dispatch) => {
+//     Axios.get(`${process.env.REACT_APP_API_URL}inventory/itemSubCategory `)
+//         .then((res) => {
+//             let data = res.data.data;
+//             dispatch({ type: Types.GET_ITEM_SUB_CATEGORY, payload: data });
+//         }
+//         );
+// };
+
+export const getItemList = (page, searchText = null) => async (dispatch) => {
+    let responseList = {
+        isLoading: true,
+        data: {},
+        status: false,
+    };
+    dispatch({ type: Types.GET_ITEM_LIST, payload: responseList });
+    let itemListAPI = "";
+    // itemListAPI = `${process.env.REACT_APP_API_URL}inventory/itemList`;
+    itemListAPI = `${process.env.REACT_APP_API_URL}inventory/itemList?isPaginated=1&paginateNo=10`;
+    if (page !== null || page === "") {
+        itemListAPI += `&page=${page}`;
+    }
+    if (searchText !== null) {
+        itemListAPI += `&search=${searchText}`;
+    } else {
+        // url += `&certificate/details?search=${searchText}`
+    }
+    try {
+        await Axios.get(itemListAPI)
+            .then((res) => {
+                const { data, message, status } = res.data;
+                responseList.status = status;
+                responseList.itemList = data.data;
+                responseList.message = message;
+                responseList.itemListPaginated = data;
+                responseList.isLoading = false;
+
+            }).catch((err) => {
+                console.log("ErrorCertificate1");
+            });
+    } catch (error) {
+        console.log("ErrorCertificate2");
+        responseList.message = "Something Went Wrong !";
+        showToast('error', responseList.message);
+    }
+
+    responseList.isLoading = false;
+    dispatch({ type: Types.GET_ITEM_LIST, payload: responseList });
 }
 export const emptyItemSubmit = () => (dispatch) => {
     const data = "";
@@ -147,4 +207,19 @@ export const emptyItemSubmit = () => (dispatch) => {
 export const emptyMultipleItemList = () => (dispatch) => {
     const data = "";
     dispatch({ type: Types.EMPTY_MULTIPLE_ITEM_LIST, payload: data })
+}
+
+// delete data from item list
+export const DeleteItem = (id) => (dispatch) => {
+    let isLoading = true;
+    dispatch({ type: Types.DELETE_TITEM, payload: isLoading })
+    Axios.delete(`${process.env.REACT_APP_API_URL}inventory/itemList/${id}`)
+        .then((res) => {
+            if (res.data.status) {
+                const data = res.data;
+                showToast('success', data.message);
+                dispatch({ type: Types.DELETE_TITEM, payload: false });
+                dispatch(getItemList())
+            }
+        })
 }
