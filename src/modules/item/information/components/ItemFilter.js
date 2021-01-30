@@ -3,117 +3,88 @@ import { Form, Col } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
-import { getCertificateChildCategoryData } from '../../../certificates/certificate-category/_redux/actions/CertificateCategoryAction';
+import { getCertificateChildCategoryData, getCertificateParentCategoryData } from '../../../certificates/certificate-category/_redux/actions/CertificateCategoryAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getItemCategory } from '../_redux/actions/ItemAction';
+import { getItemCategory, getItemSubCategory } from '../_redux/actions/ItemAction';
 import { getCertificateCategory, getCertificateMainListAction } from '../../../certificates/certificate-main/_redux/actions/CertificateMainAction';
-const ItemFilter = ({ searchItems, searchText, categorySelecte }) => {
+const ItemFilter = ({ searchItems, searchText, categorySelecte, changeText }) => {
     const { register, setValue } = useForm();
     const dispatch = useDispatch()
     const itemCategoryOptionData = useSelector((state) => state.itemList.itemCategoryOptionData);
+    const itemSubCategoryOptionData = useSelector((state) => state.itemList.itemSubCategoryOptionData);
     useEffect(() => {
         dispatch(getItemCategory());
         dispatch(getCertificateCategory());
+        dispatch(getCertificateParentCategoryData());
 
-      }, [])
-    //   useEffect(() => {
-    //     dispatch(getCertificateMainListAction(currentPage));
-    //     dispatch(getCertificateCategory());
-    //     dispatch(getCertificateParentCategoryData());
-    //   }, [dispatch, currentPage]);
-    const statusOptions = [
+        dispatch(getItemCategory());
+        dispatch(getItemSubCategory());
+
+    }, [])
+    const department = [
         {
-            label: "Supplier Type",
-            value: "3",
+            id: 1,
+            label: "Store",
         },
         {
-            label: "Supplier 2",
-            value: "2",
-        },
-        {
-            label: "Supplier 3",
-            value: "1",
-        },
-        {
-            label: "Supplier 4",
-            value: "0",
-        },
-    ]
-    const certificateChildCategoryList = useSelector(
-        (state) => state.CertificateCategoryReducer.certificateChildCategoryList
-      );
-      const certificateParentCategoryList = useSelector(
-        (state) => state.CertificateCategoryReducer.certificateParentCategoryList
-      );
+            id: 2,
+            label: "Engine",
+        }
+    ];
     return (
         <>
-{/*             
-            <div className="col-xl-4 col-lg-4">
-                <Form.Group as={Col} controlId="formGridState">
-                    <Form.Control
-                        className="formHeight"
-                        type="text"
-                        placeholder="Search"
-                        value={searchText}
-                        onChange={searchItems}
-                    // onChange={(e) => changeSearch(e.target.value)}
-                    />
-                </Form.Group>
-            </div>
-            <div className="col-xl-4 col-lg-4">
-                <Form.Group as={Col} controlId="formGridState">
-                    <RHFInput
-                        className="formSelect pt-0"
-                        as={<Select options={statusOptions} />}
-                        rules={{ required: false }}
-                        name="isActive"
-                        register={register}
-                        // value={""}
-                        setValue={setValue}
-                    />
-                </Form.Group>
-            </div> */}
             <div className="row m-4">
                 <h1 className="tableheading">Items</h1>
-
                 <Form.Group as={Col} controlId="formGridState">
                     <input
                         type="search"
                         value={searchText}
                         className="form-control product-search-input formHeight"
-                        placeholder="Search"
+                        placeholder="Search Item"
                         onChange={searchItems}
                     />
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridState">
                     <RHFInput
                         as={<Select options={itemCategoryOptionData} />}
-                        rules={{ required: true }}
-                        name="intCategoryID"
-                        placeholder="Category"
+                        rules={{ required: false }}
+                        placeholder="Item Category"
+                        name="intItemCategoryID"
                         register={register}
-                        value={certificateParentCategoryList.intParentCategoryID}
-                        onChange={(option) => {
-                            categorySelecte(option.value);
-                            setValue("intCategoryID", "");
-                            dispatch(getCertificateChildCategoryData(option.value));
-                        }}
+                        // value={itemDataInput.intItemCategoryID}
                         setValue={setValue}
+                        onChange={(option) => {
+                          categorySelecte("intItemCategoryID", option.value);
+                          setValue("intItemSubCategoryID", "")
+                          dispatch(getItemSubCategory(option.value));
+                        }}
                     />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridState">
                     <RHFInput
-                        as={<Select options={statusOptions} />}
+                        as={<Select options={itemSubCategoryOptionData} />}
                         rules={{ required: true }}
-                        placeholder="Sub Category"
+                        placeholder="Item SubCategory"
                         name="intCategoryID"
                         register={register}
-                        value={certificateChildCategoryList.intCategoryID}
+                        // value={itemSubCategoryOptionData.intCategoryID}
                         onChange={(option) => {
                             categorySelecte(option.value);
                         }}
+                        setValue={setValue}
+                    />
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridState">
+                    <RHFInput
+                        as={<Select options={department} />}
+                        rules={{ required: true }}
+                        placeholder="Department"
+                        name="intDepartment"
+                        register={register}
+                        // value={certificateChildCategoryList.intCategoryID}
+                        onChange={(option) => option.value}
                         setValue={setValue}
                     />
                 </Form.Group>

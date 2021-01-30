@@ -130,7 +130,7 @@ const ItemAdd = () => {
           </div>
         </div>
         <div className="form-group row">
-     
+
           <div className="col-xl-3 col-lg-3 col-md-6">
             <label className="formFont">Item Category</label>
             <RHFInput
@@ -138,10 +138,11 @@ const ItemAdd = () => {
               rules={{ required: false }}
               name="intItemCategoryID"
               register={register}
-              value={itemDataInput.strItemCategoryName}
+              value={itemDataInput.intItemCategoryID}
               setValue={setValue}
               onChange={(option) => {
                 changeText("intItemCategoryID", option.value);
+                setValue("intItemSubCategoryID", "")
                 changeText("strItemCategoryName", option.label);
                 dispatch(getItemSubCategory(option.value));
               }}

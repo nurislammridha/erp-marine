@@ -20,7 +20,7 @@ const initialState = {
         strEngineName: "",
         strDrwingNumber: "",
         strItemDescription: "Personal",
-        intItemSubCategoryID: null,
+        intItemSubCategoryID: "",
         strItemCode: "1",
         intActionBy: "502648",
     },
@@ -58,7 +58,6 @@ const ItemReducer = (state = initialState, action) => {
             return {
                 ...state,
                 itemTypeOptionData: getItemType(action.payload),
-
             };
 
         case Types.GET_ITEM_CATEGORY:
@@ -67,6 +66,7 @@ const ItemReducer = (state = initialState, action) => {
                 itemCategoryOptionData: getItemCategory(action.payload),
             };
         case Types.GET_ITEM_SUB_CATEGORY:
+            console.log('action.payload :>> ', action.payload);
             return {
                 ...state,
                 itemSubCategoryOptionData: getItemSubCategory(action.payload),
@@ -164,7 +164,7 @@ const getItemSubCategory = (data) => {
         data.forEach((item) => {
             let itemData = {
                 value: item.intItemSubCategoryID,
-                label: item.strtemSubCategoryName,
+                label: item.strItemSubCategoryName,
             };
             options.push(itemData);
         });

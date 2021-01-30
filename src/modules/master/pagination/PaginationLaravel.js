@@ -29,8 +29,8 @@ const PaginationLaravel = (props) => {
                 <div className="mx-auto">
                   <div className="row col-12">
                     <div className="col-12">
-                      Data - {data.from} to {data.per_page} | Total{" "}
-                      {data.total < data.per_page ? data.total : data.per_page}{" "}
+                      Data - {data.from} to {data.to} | Total{" "}
+                      {parseInt(data.to) - parseInt(data.from) + 1}{" "}
                       | Out of {data.total}
                     </div>
 

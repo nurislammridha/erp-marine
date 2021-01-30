@@ -38,7 +38,7 @@ const initialstate = {
         intActionBy: null,
         dteLastActionDateTime: '',
         dteServerDateTime: '',
-        isActive: false
+        isActive: true,
     },
     VesselBookingList: [],
     VesselBookingDetails: {},

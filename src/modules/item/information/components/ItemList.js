@@ -87,7 +87,7 @@ const handleDeleteItem = (id) => {
         </div>
         <div className="clear-fix"></div>
       </div> */}
-              <ItemFilter searchItems={searchItems} searchText={searchText} categorySelecte={categorySelecte} />
+              <ItemFilter searchItems={searchItems} searchText={searchText} categorySelecte={categorySelecte}s />
 
       <div className="row">
         {/* <table className="table mt-5 voyageTable table-responsive"> */}
@@ -111,7 +111,7 @@ const handleDeleteItem = (id) => {
             <tbody>
               {itemList && itemList.map((item, index) => (
                 <tr>
-                  <td>{index + 1}</td>
+                  <td>{itemListPaginated.from+index}</td>
                   <td>{item.strDepartmentName}</td>
                   <td>{item.StrItemTypeName}</td>
                   <td>{item.strUoM}</td>
