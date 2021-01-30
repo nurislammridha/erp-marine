@@ -85,6 +85,7 @@ const CertificateMainList = () => {
     }
     return rowClassName;
   };
+  console.log('certificateParentCategoryList :>> ', certificateParentCategoryList);
 
   return (
     <>

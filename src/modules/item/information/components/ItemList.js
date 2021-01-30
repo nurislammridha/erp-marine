@@ -7,6 +7,7 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import PaginationLaravel from "../../../master/pagination/PaginationLaravel";
 import LoadingSpinner from "../../../master/spinner/LoadingSpinner";
+import { getVesselBookingList } from "../../../voyage/booking/_redux/actions/VesselBookInfoAction";
 
 const ItemList = () => {
   const history = useHistory();
@@ -33,11 +34,11 @@ const ItemList = () => {
     dispatch(getItemList(data.page));
   };
 
-  // const certificateSelect = (category) => {
-  //   dispatch(
-  //     getVesselBookingList(currentPage, searchText, 1, category)
-  //   );
-  // };
+  const categorySelecte = (category) => {
+    dispatch(
+      getVesselBookingList(currentPage, searchText, 1, category)
+    );
+  };
 
   const searchItems = (e) => {
     const searchText = e.target.value;
@@ -71,7 +72,7 @@ const handleDeleteItem = (id) => {
 
   return (
     <div className="container">
-      <div className=" row p-4">
+      {/* <div className=" row p-4">
         <div className="col-xl-2 col-lg-2">
           <h3>Item List</h3>
         </div>
@@ -85,7 +86,9 @@ const handleDeleteItem = (id) => {
           </button>
         </div>
         <div className="clear-fix"></div>
-      </div>
+      </div> */}
+              <ItemFilter searchItems={searchItems} searchText={searchText} categorySelecte={categorySelecte} />
+
       <div className="row">
         {/* <table className="table mt-5 voyageTable table-responsive"> */}
         <div className="react-bootstrap-table table-responsive pl-5">
