@@ -66,7 +66,6 @@ const ItemReducer = (state = initialState, action) => {
                 itemCategoryOptionData: getItemCategory(action.payload),
             };
         case Types.GET_ITEM_SUB_CATEGORY:
-            console.log('action.payload :>> ', action.payload);
             return {
                 ...state,
                 itemSubCategoryOptionData: getItemSubCategory(action.payload),
@@ -104,17 +103,44 @@ const ItemReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: action.payload,
             };
+        //get item details 
+        case Types.GET_ITEMS_DETAILS:
+            return {
+                ...state,
+                ItemDetails: action.payload === null ? initialState.ItemDetails : action.payload,
+                itemDataInput: action.payload === null ? initialState.itemDataInput : action.payload,
+            }
+        //items edit
+        case Types.ITEM_EDIT:
+            if (action.payload.status) {
+
+                return {
+                    ...state,
+                    ...initialState,
+                    isLoading: action.payload.isLoading,
+                };
+            } else {
+                return {
+                    ...state,
+                    isLoading: false,
+                };
+            }
+            break;
+        //items editting
+        case Types.ITEM_EDITTING:
+            return {
+                ...state,
+                isLoading: action.payload,
+            };
+            break;
         default:
             break;
-
     }
     return newState;
 
 }
 
 export default ItemReducer;
-
-
 const getUom = (data) => {
     let options = [];
     if (data) {

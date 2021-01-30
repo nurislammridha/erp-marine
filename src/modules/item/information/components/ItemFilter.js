@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Col } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
@@ -6,29 +6,57 @@ import { useForm } from "react-hook-form";
 import { getCertificateChildCategoryData, getCertificateParentCategoryData } from '../../../certificates/certificate-category/_redux/actions/CertificateCategoryAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getItemCategory, getItemSubCategory } from '../_redux/actions/ItemAction';
+import { getItemCategory, getItemList, getItemSubCategory } from '../_redux/actions/ItemAction';
 import { getCertificateCategory, getCertificateMainListAction } from '../../../certificates/certificate-main/_redux/actions/CertificateMainAction';
-const ItemFilter = ({ searchItems, searchText, categorySelecte, changeText }) => {
+
+const ItemFilter = ({currentPage, setCurrentPage}) => {
     const { register, setValue } = useForm();
     const dispatch = useDispatch()
     const itemCategoryOptionData = useSelector((state) => state.itemList.itemCategoryOptionData);
     const itemSubCategoryOptionData = useSelector((state) => state.itemList.itemSubCategoryOptionData);
+    const [searchText, setSearchText] = useState("");
+
     useEffect(() => {
         dispatch(getItemCategory());
-        dispatch(getCertificateCategory());
-        dispatch(getCertificateParentCategoryData());
-
-        dispatch(getItemCategory());
         dispatch(getItemSubCategory());
-
+        dispatch(getItemList(currentPage));
     }, [])
+    useEffect(() => {
+        dispatch(getItemList(currentPage));
+    }, [dispatch, currentPage]);
+
+    const categorySelecte = (itemCategory) => {
+        dispatch(
+            getItemList(currentPage, searchText, itemCategory, null, null)
+        );
+    };
+    const subCategorySelecte = (itemSubCategory) => {
+        dispatch(
+            getItemList(currentPage, searchText, null, itemSubCategory, null)
+        );
+    };
+    const itemDepartment = (department) => {
+        dispatch(
+            getItemList(currentPage, searchText, null, null, department)
+        );
+    };
+
+    const searchItems = (e) => {
+        const searchText = e.target.value;
+        setSearchText(searchText);
+        if (searchText.length === 0) {
+            dispatch(getItemList(currentPage));
+        } else {
+            dispatch(getItemList(currentPage, searchText));
+        }
+    };
     const department = [
         {
-            id: 1,
+            value: 1,
             label: "Store",
         },
         {
-            id: 2,
+            value: 2,
             label: "Engine",
         }
     ];
@@ -41,7 +69,7 @@ const ItemFilter = ({ searchItems, searchText, categorySelecte, changeText }) =>
                         type="search"
                         value={searchText}
                         className="form-control product-search-input formHeight"
-                        placeholder="Search Item"
+                        placeholder="Search by item name"
                         onChange={searchItems}
                     />
                 </Form.Group>
@@ -52,16 +80,15 @@ const ItemFilter = ({ searchItems, searchText, categorySelecte, changeText }) =>
                         placeholder="Item Category"
                         name="intItemCategoryID"
                         register={register}
-                        // value={itemDataInput.intItemCategoryID}
                         setValue={setValue}
                         onChange={(option) => {
-                          categorySelecte("intItemCategoryID", option.value);
-                          setValue("intItemSubCategoryID", "")
-                          dispatch(getItemSubCategory(option.value));
+                            categorySelecte(option.value);
+                            setValue("intItemSubCategoryID", "")
+                            dispatch(getItemSubCategory(option.value));
+                            // dispatch(getItemSubCategory(option.value));
                         }}
                     />
                 </Form.Group>
-
                 <Form.Group as={Col} controlId="formGridState">
                     <RHFInput
                         as={<Select options={itemSubCategoryOptionData} />}
@@ -69,9 +96,11 @@ const ItemFilter = ({ searchItems, searchText, categorySelecte, changeText }) =>
                         placeholder="Item SubCategory"
                         name="intCategoryID"
                         register={register}
+                        setValue={setValue}
                         // value={itemSubCategoryOptionData.intCategoryID}
                         onChange={(option) => {
-                            categorySelecte(option.value);
+                            // categorySelecte(option.label);
+                            subCategorySelecte(option.value)
                         }}
                         setValue={setValue}
                     />
@@ -79,12 +108,14 @@ const ItemFilter = ({ searchItems, searchText, categorySelecte, changeText }) =>
                 <Form.Group as={Col} controlId="formGridState">
                     <RHFInput
                         as={<Select options={department} />}
-                        rules={{ required: true }}
+                        rules={{ required: false }}
                         placeholder="Department"
                         name="intDepartment"
                         register={register}
                         // value={certificateChildCategoryList.intCategoryID}
-                        onChange={(option) => option.value}
+                        onChange={(option) => 
+                            itemDepartment(option.value)
+                        }
                         setValue={setValue}
                     />
                 </Form.Group>

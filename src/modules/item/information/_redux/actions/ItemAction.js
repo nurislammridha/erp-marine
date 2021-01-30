@@ -125,7 +125,6 @@ export const getItemType = (data) => (dispatch) => {
 export const getItemCategory = () => (dispatch) => {
     Axios.get(`${process.env.REACT_APP_API_URL}inventory/itemCategory`).then(
         (res) => {
-           console.log('res for category :>> ', res);
             let data = res.data.data;
             dispatch({ type: Types.GET_ITEM_CATEGORY, payload: data });
         }
@@ -133,13 +132,11 @@ export const getItemCategory = () => (dispatch) => {
 };
 
 export const getItemSubCategory = (intItemCategoryID = null) => (dispatch) => {
-    console.log('intItemCategoryID :>> ', intItemCategoryID);
     // let url = `${process.env.REACT_APP_API_URL}inventory/itemCategory/child-categories/list/`;  
     if (intItemCategoryID !== null) {
         let url = `${process.env.REACT_APP_API_URL}inventory/itemCategory/child-categories/list/${intItemCategoryID}`;
         Axios.get(url).then(
             (res) => {
-                console.log('res for sub category :>> ', res);
                 let data = res.data.data;
                 dispatch({ type: Types.GET_ITEM_SUB_CATEGORY, payload: data });
             }
@@ -160,7 +157,7 @@ export const getItemSubCategory = (intItemCategoryID = null) => (dispatch) => {
 //         );
 // };
 
-export const getItemList = (page, searchText = null, category = null,) => async (dispatch) => {
+export const getItemList = (page, searchText = null, itemCategory = null, itemSubCategory = null, department = null) => async (dispatch) => {
     let responseList = {
         isLoading: true,
         data: {},
@@ -178,9 +175,18 @@ export const getItemList = (page, searchText = null, category = null,) => async 
     } else {
         // url += `&certificate/details?search=${searchText}`
     }
-    if (category !== null) {
-        itemListAPI += `&category=${category}`;
-      }
+    //item filter by category
+    if (itemCategory !== null) {
+        itemListAPI += `&intItemCategoryID=${itemCategory}`;
+    }
+    //item filter by sub category
+    if (itemSubCategory !== null) {
+        itemListAPI += `&intItemSubcategoryID=${itemSubCategory}`;
+    }
+    // item filter by department
+    if (department !== null) {
+        itemListAPI += `&intDepartmentID=${department}`;
+    }
     try {
         await Axios.get(itemListAPI)
             .then((res) => {

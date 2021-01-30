@@ -350,6 +350,7 @@ export const getCertificateCategory = (data) => (dispatch) => {
   Axios.get(`${process.env.REACT_APP_API_URL}certificate/category`).then(
     (res) => {
       let data = res.data.data;
+      console.log('data certificate category :>> ', data);
       dispatch({ type: Types.GET_CERTIFICATE_CATEGORY, payload: data });
     }
   );

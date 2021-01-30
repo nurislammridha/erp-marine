@@ -123,7 +123,6 @@ export const getCertificateCategoryListData = (
 export const getCertificateParentCategoryData = () => (dispatch) => {
   const url = `${process.env.REACT_APP_API_URL}certificate/category/parent-categories/list`;
   axios.get(url).then((res) => {
-    console.log('res for int apa :>> ', res);
     dispatch({
       type: Types.GET_CERTIFICATE_PARENT_CATEGORY_LIST,
       payload: res.data.data,
