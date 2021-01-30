@@ -10,20 +10,20 @@ export const getVesselBookingList = (page, searchText = null) => async (dispatch
         status: false,
     };
     dispatch({ type: Types.GET_VESSEL_BOOKING_LIST, payload: responseList });
-    let VesselAPI = "";
-    VesselAPI = `${process.env.REACT_APP_API_URL}voyage/bookingList?isPaginated=1&isActive=1&paginateNo=10`;
+    let VesselBookingAPI = "";
+    VesselBookingAPI = `${process.env.REACT_APP_API_URL}voyage/bookingList?isPaginated=1&isActive=1&paginateNo=10`;
     if (page !== null || page === "") {
-        VesselAPI += `&page=${page}`;
+        VesselBookingAPI += `&page=${page}`;
     }
 
     if (searchText !== null) {
-        VesselAPI += `&search=${searchText}`;
+        VesselBookingAPI += `&search=${searchText}&isActive=1`;
     } else {
         // url += `&certificate/details?search=${searchText}`
     }
 
     try {
-        await Axios.get(VesselAPI)
+        await Axios.get(VesselBookingAPI)
             .then((res) => {
                 const { data, message, status } = res.data;
                 responseList.status = status;

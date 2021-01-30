@@ -38,7 +38,7 @@ const initialstate = {
         intActionBy: null,
         dteLastActionDateTime: '',
         dteServerDateTime: '',
-        isActive: false
+        isActive: true,
     },
     VesselBookingList: [],
     VesselBookingDetails: {},
@@ -103,7 +103,6 @@ const VesselBookingReducer = (state = initialstate, action) => {
             break;
 
         case Types.GET_VESSEL_BOOKING_LIST:
-            console.log('action.payload :>> ', action.payload);
             if (action.payload.status) {
                 return {
                     ...state,
