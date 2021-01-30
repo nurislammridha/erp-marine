@@ -562,7 +562,7 @@ i.tableFilter {
   height: 9px;
   position: absolute;
   right: 45px;
-  bottom: 3px;
+  bottom: 7px;
   font-size: 14px !important;
 }
 button.btn.btn-default {
@@ -586,8 +586,8 @@ button.btn.btn-default {
   /* border-left: 0px !important; */
   margin-left: -3px;
   background: #fff;
-  border: 2px solid #e5eaee !important;
-  /* height: 30px; */
+  border: 1px solid #e5eaee !important;
+  height: 30px;
   background: #fff !important;
 }
 i.fa.fa-plus-circle {
@@ -997,6 +997,7 @@ td {
 
 .form-group label {
   font-size: 10px !important;
+  margin-bottom: 0px!important;
 }
 
 span#inputGroupPrepend {
@@ -1034,6 +1035,7 @@ button.certificate-done {
   padding: 3px 15px !important;
   border-radius: 2px !important;
   width: 67px !important;
+  border: none !important
 }
 .certificate-edit-icon {
   background: #e7f3fe !important ;
@@ -1077,4 +1079,16 @@ p.certificate-list-text {
   width: 101px;
   font-size: 12px !important;
   font-weight: bold;
+}
+.certificate-due-0 {
+  background: #ea673e !important;
+}
+.certificate-due-l-30 {
+  background: #8ec7ff !important;
+}
+.certificate-due-30-60 {
+  background: #678db2 !important;
+}
+.certificate-due-g-60 {
+  background: #8af2c0 !important;
 }

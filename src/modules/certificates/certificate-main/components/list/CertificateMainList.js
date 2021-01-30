@@ -75,13 +75,13 @@ const CertificateMainList = () => {
   const getCertificateColorClass = (difference) => {
     let rowClassName = "";
     if (difference === 0) {
-      rowClassName = "bg-row-0-days";
+      rowClassName = "due-0";
     } else if (difference > 0 && difference <= 30) {
-      rowClassName = "bg-row-30-between";
-    } else if (difference > 30 && difference <= 60) {
-      rowClassName = "bg-row-60-days";
-    } else if (difference > 60) {
-      rowClassName = "bg-row-60-more";
+      rowClassName = "due-l-30";
+    } else if (difference > 30 && difference < 60) {
+      rowClassName = "due-30-60";
+    } else if (difference >= 60) {
+      rowClassName = "due-g-60";
     }
     return rowClassName;
   };
@@ -169,7 +169,7 @@ const CertificateMainList = () => {
           </div>
           {isLoading && <LoadingSpinner text="Loading Certificates..." />}
           {!isLoading && certificates.length > 0 && (
-            <table className="table mt-5 certificate-list tbl-standard table-responsive">
+            <table className="table table table-head-custom table-vertical-center user-list-table ">
               <thead>
                 <tr>
                   <th className="td-sl">#</th>
@@ -186,17 +186,13 @@ const CertificateMainList = () => {
                   <th scope="col">Last Endorsement</th>
                   <th scope="col">Not On Board</th>
                   <th scope="col">Due Date</th>
+                  <th scope="col">Status</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 {certificates.map((certificate, index) => (
-                  <tr
-                    key={index + 1}
-                    className={getCertificateColorClass(
-                      certificate.differenceDays
-                    )}
-                  >
+                  <tr key={index + 1}>
                     <td>{index + 1}</td>
                     {/* <td>{certificate.strShipFolderNo}</td> */}
                     {/* <td>{certificate.strCustomeCode}</td> */}
@@ -235,6 +231,13 @@ const CertificateMainList = () => {
                     </td>
                     <td>{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
                     <td>{certificate.differenceDays}</td>
+                    <td>
+                      <button className={`btn btn-primary btn-sm text-white certificate-lis-btn certificate-${getCertificateColorClass(certificate.differenceDays)}`}>
+                      {
+                        certificate.differenceDays === 0 ? 'Expired' : 'Due'
+                      }
+                    </button>
+                    </td>
                     <td className="">
                       <Link
                         to={`/certificates-main/edit/${certificate.intCertificateDetailsID}`}
@@ -272,23 +275,35 @@ const CertificateMainList = () => {
             changePage={changePage}
             data={certificatesPaginatedData}
           />
-
-          {!isLoading && certificates.length > 0 && (
-            <div className="status-list">
-              <div className="custome-dots">
-                <span className="dot bg-row-0-days ml-5 "></span>
-                <span className="status-text ml-5">Expired</span>
-                <span className="dot bg-row-30-between ml-5"></span>
-                <span className="status-text ml-5">Due Between 30 Days</span>
-                <span className="dot bg-row-60-days ml-5"></span>
-                <span className="status-text ml-5">Due Between 60 Days</span>
-                <span className="dot bg-row-more-60-days ml-5"></span>
-                <span className="status-text ml-5">Due More Than 60 Days</span>
-              </div>
-            </div>
-          )}
         </Card.Body>
       </Card>
+
+      {!isLoading && certificates.length > 0 && (
+        <Card className="p-5" sticky="bottom">
+          <div className="row justify-content-center">
+            <div className="col-3 ml-5">
+              <div className="between-thirty due-days">
+                <h6 className="pl-5">Due between 30 days </h6>
+              </div>
+            </div>
+            <div className="col-2">
+              <div className="between-sixty due-days">
+                <h6 className=" ">Due between 60 days </h6>
+              </div>
+            </div>
+            <div className="col-3">
+              <div className="between-thirty More-than-sixty due-days ">
+                <h6 className="pl-5 text-center">Due more than 60 days </h6>
+              </div>
+            </div>
+            <div className="col-2 mr-5">
+              <div className="expired due-days">
+                <h6 className="pl-5 ">Expired </h6>
+              </div>
+            </div>
+          </div>
+        </Card>
+      )}
     </>
   );
 };

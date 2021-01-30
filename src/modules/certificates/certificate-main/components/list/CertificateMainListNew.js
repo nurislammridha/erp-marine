@@ -144,6 +144,53 @@ const CertificateMainList = () => {
                     <i className="far fa-edit  mt-1 certificate-edit-icon ml-2"></i>
                   </td>
                 </tr>
+                <p className="certificate-list-text"> FLAG(4 Items)</p>
+                <tr>
+                  <td>#01</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>
+                    <button className="btn btn-primary btn-sm text-white certificate-lis-btn certificate-due-two">
+                      Due
+                    </button>
+                  </td>
+
+                  <td>
+                    <i className="far fa-edit certificate-edit-icon mt-1 ml-2"></i>
+                  </td>
+                </tr>
+                <tr>
+                  <td>#01</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>Super Admin</td>
+                  <td>
+                    <button className="btn btn-primary btn-sm text-white certificate-lis-btn certificate-expired">
+                      Expired
+                    </button>
+                  </td>
+
+                  <td>
+                    <i className="far fa-edit  mt-1 certificate-edit-icon ml-2"></i>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
