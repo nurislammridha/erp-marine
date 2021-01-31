@@ -32,6 +32,21 @@ export const GetVoyageID = () => async (dispatch) => {
             dispatch({ type: Types.GET_VOYAGE_ID, payload: data });
         });
 };
+
+//get voyage list
+
+export const getVoyageList = ()=>(dispatch)=>{
+    // const url = `${process.env.REACT_APP_API_URL}voyage/charterList`;
+    const url = `${process.env.REACT_APP_API_URL}voyage/charterVoyage`; 
+    Axios.get(url).then((res) => {
+      dispatch({
+        type: Types.GET_VOYAGE_LIST,
+        payload: res.data.data,
+      });
+    
+    });
+  }
+
 // get data for lay time header input with voyage id
 export const getHearInputData = (id) => (dispatch) => {
     let LayTimeURL = `${process.env.REACT_APP_API_URL}voyage/charterVoyage/${id}`;

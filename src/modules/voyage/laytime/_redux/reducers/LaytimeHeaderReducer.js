@@ -1,6 +1,7 @@
 import * as Types from "../types/Types";
 
 const initialState = {
+    voyageList: [],
     layTimeDemurrage: {
         strReversibleIType: '',
         numDemurrageRate: null,
@@ -86,6 +87,24 @@ const LaytimeHeaderReducer = (state = initialState, action) => {
             return {
                 voyage: action.payload.data
             }
+            
+        case Types.GET_VOYAGE_LIST:
+            let VoyageData = [];
+            if (action.payload) {
+                action.payload.forEach((item) => {
+                let items = {
+                 value: item.intCharterVoyageID,
+                 label: item.strShipName,
+                 };
+                VoyageData.push(items);
+                });
+            }
+
+            console.log("VoyageData  : ",VoyageData);
+            return {
+                ...state,
+                voyageList: VoyageData,
+            };
         case Types.ADD_MULTIPLE_DUMMARAGES:
             let demurrages = { ...state.laytimeHeaderInput };
             // demurrages.demurrages = [action.payload];

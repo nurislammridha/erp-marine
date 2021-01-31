@@ -2,34 +2,34 @@ import * as Types from "../types/Types";
 const initialState = {
   loading: false,
   softShow: false,
-
   laytimeOperationData: {
     intShipID: null,
     strVoyageNo: null,
     intOperationRemarkID: null,
   },
-
-  layTimeDetailsSofs: [],
-
-  layTimeSof: [],
-  layTimeOperation: [],
+  
+  intLayTimeHeaderID: null,
+  intLayTimeRowID: null,
 
   // final submit
   layTimeMultipleInput: {
     intLayTimeHeaderID: null,
     intLayTimeRowID: null,
+    // isEmptyData:null,
     layTimeDetails: [
       {
+        // intLayTimeDetailsID:null,
         dteOperationDate: "",
         dteStartTime: "",
         dteEndTime: "",
         numTimeUsed: null,
         numRatio: null,
-        strRemarks: "",
+        strRemarks: ""
       },
     ],
     layTimeOperations: [
       {
+        // intLaytimeOperationID:null,
         intShipID: null,
         strVoyageNo: null,
         intOperationRemarkID: null,
@@ -99,8 +99,6 @@ const LaytimeMultiple = (state = initialState, action) => {
         ...state,
         softShow: !state.softShow,
         layTimeMultipleInput: headerData,
-        // layTimeSof:sof,
-        // layTimeOperation:operation,
       };
 
     case Types.REMOVE_PARENT_SOF_LIST:
@@ -114,13 +112,17 @@ const LaytimeMultiple = (state = initialState, action) => {
     case Types.LAYTIME_DETAILS_ENTRY_HEADER_DATA:
       const layTimeMultipleInputData = { ...state.layTimeMultipleInput };
       layTimeMultipleInputData[action.payload.name] = action.payload.value;
+      console.log(" layTimeMultipleInputData rowId and HeaderId : >>>>> ",layTimeMultipleInputData);
       return {
         ...state,
+        intLayTimeHeaderID: action.payload.name === "intLayTimeHeaderID" ? action.payload.value : state.intLayTimeHeaderID,
+        intLayTimeRowID: action.payload.name === "intLayTimeRowID" ? action.payload.value : state.intLayTimeRowID,
         layTimeMultipleInput: layTimeMultipleInputData,
       };
 
     case Types.ADD_NEW_SOF:
-      console.log("action.payload ADD_NEW_SOF >>>>>>>> ", action.payload);
+      
+      console.log("action.payload >>>>>>>> ", action.payload);
       let softObj = null;
       if (action.payload === null) {
         softObj = {
@@ -131,19 +133,24 @@ const LaytimeMultiple = (state = initialState, action) => {
           numRatio: null,
           strRemarks: "",
         };
+        
       } else {
         softObj = action.payload;
       }
 
+      console.log("softObj >>>>>>>> ", softObj);
+
+
       if (softObj !== null) {
         let laytimedetailsDataset = { ...state.layTimeMultipleInput };
+        
         laytimedetailsDataset.intLayTimeRowID = softObj.intLayTimeRowID;
         laytimedetailsDataset.intLayTimeHeaderID = softObj.intLayTimeHeaderID;
 
-        const newSofts = (laytimedetailsDataset.layTimeDetails = [
+        const newSofts = [
           ...laytimedetailsDataset.layTimeDetails,
           softObj,
-        ]);
+        ];
         laytimedetailsDataset.layTimeDetails = newSofts;
 
         return {
@@ -165,15 +172,14 @@ const LaytimeMultiple = (state = initialState, action) => {
           strVoyageNo: null,
           intOperationRemarkID: null,
         };
-
       }
 
       if (operationObj !== null) {
         let layTimeOperationDataSet = { ...state.layTimeMultipleInput };  
-        const newOperation = (layTimeOperationDataSet.layTimeOperations = [
+        const newOperation  = [
           ...layTimeOperationDataSet.layTimeOperations,
           operationObj,
-        ]);
+        ];
         layTimeOperationDataSet.layTimeOperations = newOperation;
 
         return {
