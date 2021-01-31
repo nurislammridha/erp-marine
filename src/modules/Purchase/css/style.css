@@ -1,0 +1,151 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-bottom: 4px !important;
+}
+
+p {
+  font-size: 12px !important;
+}
+
+h6 {
+  font-size: 13px !important;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.text-medium {
+  font-weight: 600;
+}
+
+.form-group label {
+  font-size: 13px !important;
+}
+
+.validation-symbol {
+  color: red !important;
+  font-size: 15px !important;
+}
+
+.form-valid {
+  color: red;
+  font-size: 15px;
+  margin-left: 3px;
+}
+
+img.float-left.akijShip {
+  width: 29px;
+  margin-top: -5px;
+}
+
+img.metroShip {
+  width: 12px;
+}
+
+.voyageActivityCreate {
+  padding-bottom: 8px;
+  padding-top: 14px;
+}
+.akijNoor2 {
+  margin-top: -17px;
+  margin-left: 15px;
+}
+p.pl-1.subHeader {
+  color: #b1b1b1;
+}
+
+span.latborder {
+  border-left: 2px solid !important;
+}
+
+.noonReport th,
+td {
+  font-size: 13px !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.noonReport td.pl-5 {
+  padding-top: 0px !important;
+}
+
+span.noonTablePaddingLeft.border-left.ml-3 {
+  padding-left: 21px;
+}
+
+span.noonTablePaddingLeftOne.border-left.ml-5 {
+  padding-left: 17px;
+}
+
+/* voyageEngineerTab */
+
+.voyageEngineerTab {
+  margin-left: -40px;
+}
+
+.form-group {
+  margin-bottom: 5px !important;
+}
+
+.minInput {
+  width: 49%;
+  float: left !important;
+}
+
+.maxInput {
+  float: right !important;
+  width: 49%;
+}
+
+.AuxEngineBackBtn.btn.btn-secondary {
+  background-color: #aeaeae !important;
+}
+
+.boilerTypeBg {
+  background: #eff3f6;
+}
+
+.boilerTypeBg {
+  margin-left: -29px;
+  width: 106%;
+  height: 182px;
+}
+
+.boilerTable th {
+  font-size: 12 !important;
+}
+
+th {
+  font-size: 12px !important;
+}
+
+.boilerTable i.far.fa-trash-alt {
+  border-radius: 3px;
+  color: #2a71e5;
+  background: #f3f6f9;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.noonReportTab {
+  margin-left: -15px;
+}
+
+/*voyage activity tabs custome css*/
+
+.voyage-tab {
+  margin-left: 15px;
+}
+
+.voyage-details-tab.Mui-selected {
+  background-color: #497acf !important;
+  color: white !important;
+  border-bottom: none !important;
+  border-radius: 5px;
+}

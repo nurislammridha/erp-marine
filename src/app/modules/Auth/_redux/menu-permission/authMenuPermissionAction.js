@@ -324,6 +324,63 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
       ],
     },
 
+    //==========Purhchase===========
+    {
+      moduleName: "Purchase",
+      moduleRouteUrl: "/purchase",
+      moduleImageIcon: "/media/svg/icons/Code/purchase.svg",
+      subModules: [
+        {
+          subModuleName: "Purchase Request",
+          subModuleRouteUrl: "/purchase/request/list",
+          subModuleIcon: "menu-bullet menu-bullet-dot",
+          features: [
+            {
+              featureName: "Purchase Request List",
+              featureRouteUrl: "/purchase/request/list",
+              featureIcon: "menu-bullet menu-bullet-dot",
+            }
+          ],
+        },
+        {
+          subModuleName: "Purchase Approval",
+          subModuleRouteUrl: "/purchase/approval/list",
+          subModuleIcon: "menu-bullet menu-bullet-dot",
+          features: [
+            {
+              featureName: "Purchase Approval List",
+              featureRouteUrl: "/purchase/approval/list",
+              featureIcon: "menu-bullet menu-bullet-dot",
+            }
+          ],
+        },
+        {
+          subModuleName: "Purchase Order",
+          subModuleRouteUrl: "/purchase/order/list",
+          subModuleIcon: "menu-bullet menu-bullet-dot",
+          features: [
+            {
+              featureName: "Purchase Order List",
+              featureRouteUrl: "/purchase/order/list",
+              featureIcon: "menu-bullet menu-bullet-dot",
+            }
+          ],
+        },
+        {
+          subModuleName: "PO Approval",
+          subModuleRouteUrl: "/purchase/po/list",
+          subModuleIcon: "menu-bullet menu-bullet-dot",
+          features: [
+            {
+              featureName: "PO Approval List",
+              featureRouteUrl: "/purchase/po/list",
+              featureIcon: "menu-bullet menu-bullet-dot",
+            }
+          ],
+        },
+      ],
+    },
+
     /**
          | Module :Report
          */

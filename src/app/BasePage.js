@@ -19,6 +19,7 @@ import getPartnersRoutes from "../modules/partners/routes";
 import getItemsRoutes from "../modules/item/routes";
 import getUtilityRoutes from "../modules/utility/routes";
 import getRolePermissionManagementRoutes from "../modules/role-permission-management/routes";
+import purchaseRoute from "../modules/Purchase/routes";
 
 const BasePage = () => {
   return (
@@ -79,6 +80,7 @@ const BasePage = () => {
 
         {getUtilityRoutes()}
         {getRolePermissionManagementRoutes()}
+        {purchaseRoute()}
 
         <Redirect to="error/error-v1" />
       </Switch>
