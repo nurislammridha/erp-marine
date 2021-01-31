@@ -1,11 +1,21 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Card, Button } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
+import { changeTextInput } from "../_redux/actions/UtilityAction";
 
 const LoadableCalculator = () => {
   const { register, setValue } = useForm();
+  const dispatch = useDispatch();
+  const LoadableCalculatorInput = useSelector(state => state.utitlityInfo.LoadableCalculatorInput);
+
+  const changeText = (name, value) => {
+    dispatch(changeTextInput(name, value))
+  }
+
+  // console.log('LoadableCalculatorInput :>> ', LoadableCalculatorInput);
   const courseData = [
     {
       id: 1,
@@ -52,7 +62,7 @@ const LoadableCalculator = () => {
                     <RHFInput
                       as={<Select options={CourseName} />}
                       rules={{ required: false }}
-                      name="courseData"
+                      name="strVesselName"
                       register={register}
                       value={CourseName.label}
                       setValue={setValue}
@@ -65,7 +75,8 @@ const LoadableCalculator = () => {
                         className="formHeight"
                         type="text"
                         placeholder="500"
-                        name="strSupplierAddress"
+                        name="intDraft"
+                        onChange={(e) => changeText("intDraft", e.target.value)}
                       />
                     </Form.Group>
                   </div>
@@ -73,111 +84,129 @@ const LoadableCalculator = () => {
               </form>
             </div>
             <div className="card card-custom gutter-b pl-5 pr-5 mb-5 pb-2 pt-3">
-              <form
+              {/* <form
                 className="form form-label-right voyageEngineerForm"
                 method="post"
-              >
-                <div className="form-group row">
-                  <div className="col-xl-3 col-lg-3 col-6 ">
-                    <Form.Group>
-                      <Form.Label className="formFont pl-1">DWT</Form.Label>
-                      <Form.Control
-                        className="formHeight"
-                        type="text"
-                        placeholder="100.1"
-                      />
-                    </Form.Group>
-                  </div>
-                  <div className="col-xl-3 col-lg-3 col-6 ">
-                    <Form.Group>
-                      <Form.Label className="formFont pl-1">FW</Form.Label>
-                      <Form.Control
-                        className="formHeight"
-                        type="text"
-                        placeholder="150.02"
-                      />
-                    </Form.Group>
-                  </div>
-                  <div className="col-xl-3 col-lg-3 col-6 ">
-                    <Form.Group>
-                      <Form.Label className="formFont pl-1">TPC</Form.Label>
-                      <Form.Control
-                        className="formHeight"
-                        type="text"
-                        placeholder="256.3"
-                      />
-                    </Form.Group>
-                  </div>
-
-                  <div className="col-xl-3 col-lg-3 col-6 ">
-                    <Form.Group>
-                      <Form.Label className="formFont pl-1">IFO</Form.Label>
-                      <Form.Control
-                        className="formHeight"
-                        type="text"
-                        placeholder="100.1"
-                      />
-                    </Form.Group>
-                  </div>
-                  <div className="col-xl-3 col-lg-3 col-6 ">
-                    <Form.Group>
-                      <Form.Label className="formFont pl-1">MGO</Form.Label>
-                      <Form.Control
-                        className="formHeight"
-                        type="text"
-                        placeholder="150.02"
-                      />
-                    </Form.Group>
-                  </div>
-                  <div className="col-xl-3 col-lg-3 col-6 ">
-                    <Form.Group>
-                      <Form.Label className="formFont pl-1">FWA</Form.Label>
-                      <Form.Control
-                        className="formHeight"
-                        type="text"
-                        placeholder="256.3"
-                      />
-                    </Form.Group>
-                  </div>
-
-                  <div className="col-xl-3 col-lg-3 col-6 ">
-                    <Form.Group>
-                      <Form.Label className="formFont pl-1">
-                        Summer Draft
-                      </Form.Label>
-                      <Form.Control
-                        className="formHeight"
-                        type="text"
-                        placeholder="100.1"
-                      />
-                    </Form.Group>
-                  </div>
-                  <div className="col-xl-3 col-lg-3 col-6 ">
-                    <Form.Group>
-                      <Form.Label className="formFont pl-1">
-                        Unpumpable Ballast
-                      </Form.Label>
-                      <Form.Control
-                        className="formHeight"
-                        type="text"
-                        placeholder="150.02"
-                      />
-                    </Form.Group>
-                  </div>
-                  <div className="col-xl-3 col-lg-3 col-6 ">
-                    <Form.Group>
-                      <Form.Label className="formFont pl-1">
-                        Constant
-                      </Form.Label>
-                      <Form.Control
-                        className="formHeight"
-                        type="text"
-                        placeholder="256.3"
-                      />
-                    </Form.Group>
-                  </div>
+              > */}
+              <div className="form-group row">
+                <div className="col-xl-3 col-lg-3 col-6 ">
+                  <Form.Group>
+                    <Form.Label className="formFont pl-1">DWT</Form.Label>
+                    <Form.Control
+                      className="formHeight"
+                      type="text"
+                      placeholder="100.1"
+                      name="intDWT"
+                      onChange={(e) => changeText("intDWT", e.target.value)}
+                    />
+                  </Form.Group>
                 </div>
-              </form>
+                <div className="col-xl-3 col-lg-3 col-6 ">
+                  <Form.Group>
+                    <Form.Label className="formFont pl-1">FW</Form.Label>
+                    <Form.Control
+                      className="formHeight"
+                      type="text"
+                      placeholder="150.02"
+                      name="intFW"
+                      onChange={(e) => changeText("intFW", e.target.value)}
+                    />
+                  </Form.Group>
+                </div>
+                <div className="col-xl-3 col-lg-3 col-6 ">
+                  <Form.Group>
+                    <Form.Label className="formFont pl-1">TPC</Form.Label>
+                    <Form.Control
+                      className="formHeight"
+                      type="text"
+                      placeholder="256.3"
+                      name="intTPC"
+                      onChange={(e) => changeText("intTPC", e.target.value)}
+                    />
+                  </Form.Group>
+                </div>
+
+                <div className="col-xl-3 col-lg-3 col-6 ">
+                  <Form.Group>
+                    <Form.Label className="formFont pl-1">IFO</Form.Label>
+                    <Form.Control
+                      className="formHeight"
+                      type="text"
+                      placeholder="100.1"
+                      name="intIFO"
+                      onChange={(e) => changeText("intIFO", e.target.value)}
+                    />
+                  </Form.Group>
+                </div>
+                <div className="col-xl-3 col-lg-3 col-6 ">
+                  <Form.Group>
+                    <Form.Label className="formFont pl-1">MGO</Form.Label>
+                    <Form.Control
+                      className="formHeight"
+                      type="text"
+                      placeholder="150.02"
+                      name="intMGO"
+                      onChange={(e) => changeText("intMGO", e.target.value)}
+                    />
+                  </Form.Group>
+                </div>
+                <div className="col-xl-3 col-lg-3 col-6 ">
+                  <Form.Group>
+                    <Form.Label className="formFont pl-1">FWA</Form.Label>
+                    <Form.Control
+                      className="formHeight"
+                      type="text"
+                      placeholder="256.3"
+                      name="intFWA"
+                      onChange={(e) => changeText("intFWA", e.target.value)}
+                    />
+                  </Form.Group>
+                </div>
+
+                <div className="col-xl-3 col-lg-3 col-6 ">
+                  <Form.Group>
+                    <Form.Label className="formFont pl-1">
+                      Summer Draft
+                      </Form.Label>
+                    <Form.Control
+                      className="formHeight"
+                      type="text"
+                      placeholder="100.1"
+                      name="intSummerDraft"
+                      onChange={(e) => changeText("intSummerDraft", e.target.value)}
+                    />
+                  </Form.Group>
+                </div>
+                <div className="col-xl-3 col-lg-3 col-6 ">
+                  <Form.Group>
+                    <Form.Label className="formFont pl-1">
+                      Unpumpable Ballast
+                      </Form.Label>
+                    <Form.Control
+                      className="formHeight"
+                      type="text"
+                      placeholder="150.02"
+                      name="intUnpumpableBallast"
+                      onChange={(e) => changeText("intUnpumpableBallast", e.target.value)}
+                    />
+                  </Form.Group>
+                </div>
+                <div className="col-xl-3 col-lg-3 col-6 ">
+                  <Form.Group>
+                    <Form.Label className="formFont pl-1">
+                      Constant
+                      </Form.Label>
+                    <Form.Control
+                      className="formHeight"
+                      type="text"
+                      placeholder="256.3"
+                      name="intConstant"
+                      onChange={(e) => changeText("intConstant", e.target.value)}
+                    />
+                  </Form.Group>
+                </div>
+              </div>
+              {/* </form> */}
             </div>
           </div>
           <div className="col-xl-4 col-lg-4 col-12">
@@ -192,39 +221,39 @@ const LoadableCalculator = () => {
               <div className="row">
                 <div className="col-xl-7 col-lg-7 col-6">Differ</div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">1359.78</div>
+                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.differ}</div>
                 <div className="col-xl-7 col-lg-7 col-6">Differincm</div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">1359.78</div>
+                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.differincm}</div>
                 <div className="col-xl-7 col-lg-7 col-6">Deductable</div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">1359.78</div>
+                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.deductable}</div>
                 <div className="col-xl-7 col-lg-7 col-6 text-bold mt-3">
                   Actual Load
                 </div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">1359.78</div>
+                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.actualLoad}</div>
                 <div className="col-xl-7 col-lg-7 col-6">Deductable Load</div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">1359.78</div>
-                <div className="col-xl-7 col-lg-7 col-6">Deductablefor FWA</div>
+                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.deductableLoad}</div>
+                <div className="col-xl-7 col-lg-7 col-6">Deductable for FWA</div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">1359.78</div>
+                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.deductableForFWA}</div>
                 <div className="col-xl-7 col-lg-7 col-6 text-bold">
                   Total Deductable
                 </div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">1359.78</div>
+                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.totalDeductable}</div>
                 <div className="col-xl-7 col-lg-7 col-6 text-bold mt-3">
                   Loadable Qty for Freshwater
                 </div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">1359.78</div>
+                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.freshwater}</div>
                 <div className="col-xl-7 col-lg-7 col-6 text-bold mt-1">
-                  Loadable Qty forSeawater
+                  Loadable Qty for Seawater
                 </div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">135389472</div>
+                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.seawater}</div>
               </div>
             </div>
           </div>
