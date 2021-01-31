@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Form } from "react-bootstrap";
-import {dispacth} from 'react-redux'
+import { dispacth } from 'react-redux'
 import { useSelector, useDispatch } from "react-redux";
-import { allCheckboxSelected, getRoleList, roleCheckboxSelect } from "../_redux/actions/RolePermissionManagementAction";
+import { allCheckboxSelected, getRoleList, roleCheckboxSelect, checkPermissionGroupAction } from "../_redux/actions/RolePermissionManagementAction";
 
 const RolePermissionList = () => {
 
@@ -16,22 +16,27 @@ const RolePermissionList = () => {
     dispatch(getRoleList());
   }, [])
 
-  const roleCheck =(
-    e, 
+  const roleCheck = (
+    e,
     parentRole,
     item,
     indexChild,
     indexparentRole
-)=>{
-   console.log('e.target.checked', e.target.checked);
-   let checkboxStatus=e.target.checked
-   dispatch(roleCheckboxSelect(checkboxStatus,parentRole,item,indexChild,indexparentRole));
+  ) => {
+    console.log('e.target.checked', e.target.checked);
+    let checkboxStatus = e.target.checked
+    dispatch(roleCheckboxSelect(checkboxStatus, parentRole, item, indexChild, indexparentRole));
   }
 
-  const allChecked=(e)=>{
+  const checkPermissionGroup = (e, index, checkboxStatus) => {
+    dispatch(checkPermissionGroupAction(index, checkboxStatus));
+  }
+
+  const allChecked = (e) => {
     let checkStausCheck = e.target.checked;
     dispatch(allCheckboxSelected(checkStausCheck));
   }
+
   return (
     <>
       <div className="container">
@@ -64,52 +69,54 @@ const RolePermissionList = () => {
                   </div>
                   <div className="col-9">
                     <Form.Group controlId="all">
-                      <Form.Check type="checkbox" label="All" for="all"  onClick={(e) => allChecked(e) } />      
+                      <Form.Check type="checkbox" label="All" for="all" onClick={(e) => allChecked(e)} />
                     </Form.Group>
                   </div>
                 </div>
-                {roleList && roleList.map((parentRole, indexparentRole)=>(
+                {roleList && roleList.map((parentRole, indexparentRole) => (
                   <div className="form-group row mt-5">
-                  <div className="col-3 ">
-                    <Form.Group controlId="supplier">
-                      <Form.Check
-                        type="checkbox"
-                        label={parentRole.name}
-                        for="supplier"
-                        // checked={parentRole.isChecked}  
-                      />
-                    </Form.Group>
-                  </div>
-                  {parentRole && parentRole.permissions.map((item, indexChild)=>(
-                    <div className="col-9 ">
-                    <div className="row ">
-                      <Form.Group controlId="Create">
+                    <div className="col-3 ">
+                      <Form.Group controlId="supplier">
                         <Form.Check
                           type="checkbox"
-                          label={item.name}
-                          for="Create"
-                          className="mr-3"
-                          // checked={item.isChecked}
-                          onClick={(e) =>
-                            roleCheck(
-                             e,
-                             parentRole,
-                             item,
-                             indexChild,
-                             indexparentRole
-
-                            )
-                          }
+                          label={parentRole.name}
+                          for="supplier"
+                          checked={parentRole.isChecked}
+                          onClick={(e) => checkPermissionGroup(e, indexparentRole, parentRole.isChecked ? false: true)}
                         />
+
                       </Form.Group>
                     </div>
+                    {parentRole && parentRole.permissions.map((item, indexChild) => (
+                      <div className="col-9 ">
+                        <div className="row ">
+                          <Form.Group controlId="Create">
+                            <Form.Check
+                              type="checkbox"
+                              label={item.name}
+                              for="Create"
+                              className="mr-3"
+                              checked={item.isChecked}
+                              onClick={(e) =>
+                                roleCheck(
+                                  e,
+                                  parentRole,
+                                  item,
+                                  indexChild,
+                                  indexparentRole
+
+                                )
+                              }
+                            />
+                          </Form.Group>
+                        </div>
+                      </div>
+                    ))}
+
                   </div>
-                  ))}
-                  
-                </div>
                 ))}
-                
-              
+
+
                 <button className="btn btn-primary">Save</button>
               </form>
             </div>

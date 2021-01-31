@@ -3,61 +3,103 @@ import moment from "moment";
 
 // Initial state
 const initialState = {
-  roleList:[],
-  inputData:{
-  }
+    roleList: [],
+    inputData: {
+
+    }
 
 };
 
 const RolePermissionManagementReducer = (state = initialState, action) => {
-  const newState = { ...state };
+    const newState = { ...state };
 
-  switch (action.type) {
+    switch (action.type) {
 
-    case Types.GET_USER_ROLE_LIST:
-        return {
-          ...state,
-          roleList: action.payload,
-    };
-    case Types.USER_ROLE_CHECKED:
-    let roleList = state.roleList.slice();
-    let indexParentCriteria = action.payload.indexparentRole;
-    let indexChild = action.payload.indexChild;
-    let checkstatus= action.payload.checkboxStatus
-    for (let i = 0; i < roleList.length; i++) {
-        if (i == indexParentCriteria) {
-            for (let c = 0; c < roleList[i].permissions.length; c++) {
-                const element = roleList[i].permissions[c];
-                
-                // roleList[i].permissions[c].isChecked =
+        case Types.GET_USER_ROLE_LIST:
+            return {
+                ...state,
+                roleList: action.payload,
+            };
 
-                // check already an entry for this parentCriteria.intID, if entry, then remove those data / or update that data
-                if (indexChild == c) {
-                    roleList[i].permissions[c].isChecked = !roleList[i].permissions[c].isChecked;
+        case Types.USER_ROLE_CHECKED:
+            const { indexparentRole, indexChild, checkboxStatus  } = action.payload;
+            let roleList = state.roleList.slice();
+            roleList[indexparentRole].permissions[indexChild].isChecked = checkboxStatus;
+            roleList[indexparentRole].isChecked = checkAllPermissionIsChecked(roleList, indexparentRole);
 
+            return {
+                ...state,
+                roleList: roleList,
+            };
+
+        case Types.USER_ROLE_CHECKED_GROUP:
+            console.log(action.payload);
+
+            const groupIndex = action.payload.index
+            const isGroupChecked = action.payload.isGroupChecked
+            const roles = state.roleList.slice();
+
+            // get all the permissions in this group 
+            // and make it checked or unchecked
+            for (let i = 0; i < roles.length; i++) {
+                if (i == groupIndex) {
+                    roles[i].isChecked = isGroupChecked;
+                    for (let j = 0; j < roles[i].permissions.length; j++) {
+                        const permissionItem = roles[i].permissions[j];
+                        permissionItem.isChecked = isGroupChecked;
+                        roles[i].permissions[j] = permissionItem;
+                    }
                 }
             }
-        }
-        
+
+            return {
+                ...state,
+                roleList: roles
+            };
+
+
+        case Types.USER_ROLE_ALL_CHECKED:
+            let CheckroleList = state.roleList.slice();
+            for (let i = 0; i < CheckroleList.length; i++) {
+                if (action.payload == true) {
+                    CheckroleList[i].isChecked = true;
+                } else {
+                    CheckroleList[i].isChecked = false;
+                }
+                for (let c = 0; c < CheckroleList[i].permissions.length; c++) {
+                    const element = CheckroleList[i].permissions[c];
+                    if (action.payload == true) {
+                        CheckroleList[i].permissions[c].isChecked = true;
+                    } else {
+                        CheckroleList[i].permissions[c].isChecked = false;
+                    }
+                }
+            }
+
+            return {
+                ...state,
+                roleList: CheckroleList,
+            };
+
+
+        default:
+            break;
     }
-    case Types.USER_ROLE_ALL_CHECKED:
-      if(action.payload ==true){
-
-      }
-        return {
-          ...state,
-        //   roleList: action.payload,
-        };
-
-     
-    default:
-      break;
-  }
-  return newState;
+    return newState;
 };
 
-
-
-
+/**
+ * checkAllPermissionIsChecked
+ * 
+ * Check if total checked permission length in this group = total permissions in this group ? isChecked = true : isChecked = false
+ * 
+ * @param {array} roles Roles List
+ * @param {permissionGroupIndex} permissionGroupIndex 
+ */
+const checkAllPermissionIsChecked = (roles, permissionGroupIndex) => {
+    const getTotalPermissions = roles[permissionGroupIndex].permissions;
+    const getTotalCheckedPermissions = getTotalPermissions.filter(x=> x.isChecked);
+    return getTotalPermissions.length === getTotalCheckedPermissions.length ? true : false;
+}
 
 export default RolePermissionManagementReducer;
