@@ -287,7 +287,7 @@ const CertificateMainList = () => {
       {!isLoading && certificates.length > 0 && (
         <Card className="p-5" sticky="bottom">
           <div className="row justify-content-center">
-            <div className="col-2 ml-5">
+            <div className="col-2">
               <div className="between-thirty due-days">
                 <input type="color" value="#8ec7ff" className="color-picker float-left mr-2"/>
                 <h6>Due between 30 days </h6>
@@ -296,17 +296,17 @@ const CertificateMainList = () => {
             </div>
             <div className="col-2">
               <div className="between-sixty due-days">
-              <input type="color" value="#678db2" className="color-picker between-sixty float-left mr-2"/>
+              <input type="color" value="#678db2" className="color-picker between-sixty float-left"/>
                 <h6 >Due between 60 days </h6>
               </div>
             </div>
-            <div className="col-3">
+            <div className="col-2">
               <div className="between-thirty More-than-sixty due-days ">
-              <input type="color" value="#8af2c0" className="color-picker more-than-sixty float-left mr-2"/>
+              <input type="color" value="#8af2c0" className="color-picker more-than-sixty float-left "/>
                 <h6 className=" ">Due more than 60 days </h6>
               </div>
             </div>
-            <div className="col-2 mr-5">
+            <div className="col-2 ">
               <div className="expired due-days">
               <input type="color" value="#ea673e" className="color-picker float-left mr-2"/>
                 <h6>Expired </h6>
