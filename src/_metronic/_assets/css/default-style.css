@@ -1192,5 +1192,20 @@ input.color-picker.more-than-sixty {
 
 .card-top-border {
     border-top: 3px solid #1bc5bd!important;
-    border-radius: 0px;
+    border-radius: 0px!important;
+}
+
+.card-top-border-success {
+    border-top: 3px solid #1bc5bd!important;
+    border-radius: 0px!important;
+}
+
+.card-top-border-info {
+    border-top: 3px solid #3699ff!important;
+    border-radius: 0px!important;
+}
+
+.card-top-border-error {
+    border-top: 3px solid #ff9da7!important;
+    border-radius: 0px!important;
 }
