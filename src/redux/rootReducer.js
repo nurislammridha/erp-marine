@@ -59,6 +59,7 @@ import CargoReducer from "../modules/master/DropDownData/Cargo/_redux/CargoReduc
 import ShipReducer from "../modules/master/DropDownData/Ship/_redux/ShipReducer/ShipReducer";
 import BookingStatusReducer from "../modules/master/DropDownData/BookingStatus/_redux/BookingStatusReducer/BookingStatusReducer";
 import CharterReducer from "../modules/master/DropDownData/Charter/_redux/CharterReducer/CharterReducer";
+import PurhasesRequestReducer from "../modules/Purchase/purhasesRequest/_redux/reducers/PurhasesRequestReducer";
 
 /** 
 | Domain : CCO
@@ -142,7 +143,10 @@ export const rootReducer = combineReducers({
   certificateTypeInfo: CertificateTypeReducer,
   laytimeInfo: LaytimeInfoReducer,
   supplierList: SuppliersListReducer,
-  itemList: ItemReducer
+  itemList: ItemReducer,
+
+  //purchase 
+  purchaseRequest: PurhasesRequestReducer,
 });
 
 export function* rootSaga() {

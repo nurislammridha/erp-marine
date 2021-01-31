@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import { RHFInput } from 'react-hook-form-input';
 import { useForm } from "react-hook-form";
@@ -7,21 +7,33 @@ import Select from "react-select";
 import DatePicker from "react-datepicker";
 import moment from 'moment';
 import PurchaseRequestCreateTable from './PurchaseRequestCreateTable';
+import { useDispatch, useSelector } from 'react-redux';
+import { getShipList } from '../../../master/DropDownData/Ship/_redux/ShipAction/ShipAction';
+import { getItemCategory, getItemSubCategory, getItemType } from '../../../item/information/_redux/actions/ItemAction';
+import { handlePurchaseInputChage } from '../_redux/actions/PurhasesRequestAddAction';
 
 const PurchaseRequestCreate = () => {
   const { register, setValue } = useForm();
   const history = useHistory()
+  const dispatch = useDispatch();
+  const shipList = useSelector((state) => state.ShipReducer.shipList);
+  const itemTypeOptionData = useSelector((state) => state.itemList.itemTypeOptionData);
+  const itemCategoryOptionData = useSelector((state) => state.itemList.itemCategoryOptionData);
+  const itemSubCategoryOptionData = useSelector((state) => state.itemList.itemSubCategoryOptionData);
+  const purchaseRequestData = useSelector((state) => state.purchaseRequest.purchaseRequestData);
 
-  const shipList = [
-    {
-      value: 1,
-      label: "Akij"
-    },
-    {
-      value: 2,
-      label: "Akij Noor"
-    },
-  ]
+  //get data 
+  useEffect(() => {
+    dispatch(getShipList())
+    dispatch(getItemType());
+    dispatch(getItemCategory());
+    dispatch(getItemSubCategory());
+  }, [])
+
+  const handleChangeTextInput = (name, value) => {
+    dispatch(handlePurchaseInputChage(name, value))
+  }
+
   return (
     <Card>
       <Card.Body className="pt-5 mt-0">
@@ -43,12 +55,13 @@ const PurchaseRequestCreate = () => {
               <RHFInput
                 as={<Select options={shipList} />}
                 rules={{ required: false }}
-                name="intShipId"
+                name="intSBUId"
                 register={register}
-                // onChange={(option) => {
-                //   handleChangeTextInput('strShipName', option.label);
-                //   handleChangeTextInput('intShipId', option.value)
-                // }}
+                value={purchaseRequestData.intSBUId}
+                onChange={(option) => {
+                  handleChangeTextInput('strSBUName', option.label);
+                  handleChangeTextInput('intSBUId', option.value)
+                }}
                 setValue={setValue}
               />
             </div>
@@ -57,12 +70,13 @@ const PurchaseRequestCreate = () => {
               <RHFInput
                 as={<Select options={shipList} />}
                 rules={{ required: false }}
-                name="intShipId"
+                name="intBusinessUnitId"
                 register={register}
-                // onChange={(option) => {
-                //   handleChangeTextInput('strShipName', option.label);
-                //   handleChangeTextInput('intShipId', option.value)
-                // }}
+                value={purchaseRequestData.intBusinessUnitId}
+                onChange={(option) => {
+                  handleChangeTextInput('strBusinessUnitName', option.label);
+                  handleChangeTextInput('intBusinessUnitId', option.value)
+                }}
                 setValue={setValue}
               />
             </div>
@@ -71,12 +85,13 @@ const PurchaseRequestCreate = () => {
               <RHFInput
                 as={<Select options={shipList} />}
                 rules={{ required: false }}
-                name="intShipId"
+                name="intShipID"
                 register={register}
-                // onChange={(option) => {
-                //   handleChangeTextInput('strShipName', option.label);
-                //   handleChangeTextInput('intShipId', option.value)
-                // }}
+                value={purchaseRequestData.intShipID}
+                onChange={(option) => {
+                  handleChangeTextInput('strShipName', option.label);
+                  handleChangeTextInput('intShipID', option.value)
+                }}
                 setValue={setValue}
               />
             </div>
@@ -85,12 +100,13 @@ const PurchaseRequestCreate = () => {
               <RHFInput
                 as={<Select options={shipList} />}
                 rules={{ required: false }}
-                name="intShipId"
+                name="intDepartmentId"
                 register={register}
-                // onChange={(option) => {
-                //   handleChangeTextInput('strShipName', option.label);
-                //   handleChangeTextInput('intShipId', option.value)
-                // }}
+                value={purchaseRequestData.intDepartmentId}
+                onChange={(option) => {
+                  handleChangeTextInput('strDepartmentName', option.label);
+                  handleChangeTextInput('intDepartmentId', option.value)
+                }}
                 setValue={setValue}
               />
             </div>
@@ -102,8 +118,8 @@ const PurchaseRequestCreate = () => {
                 dateFormat="MM-dd-yyyy"
                 minDate={moment().toDate()}
                 placeholderText="select commence date"
-                // selected={VesselBooking.dteCommenceDate !== '' ? moment(VesselBooking.dteCommenceDate).toDate() : null}
-                // onChange={(date) => handleChangeTextInput("dteCommenceDate", date)}
+                selected={purchaseRequestData.dteCommenceDate !== '' ? moment(purchaseRequestData.dteCommenceDate).toDate() : null}
+                onChange={(date) => handleChangeTextInput("dteCommenceDate", date)}
                 ref={register({
                   required: true,
                   maxLength: 100,
@@ -116,12 +132,13 @@ const PurchaseRequestCreate = () => {
               <RHFInput
                 as={<Select options={shipList} />}
                 rules={{ required: false }}
-                name="intShipId"
+                name="intItemCategoryID"
                 register={register}
-                // onChange={(option) => {
-                //   handleChangeTextInput('strShipName', option.label);
-                //   handleChangeTextInput('intShipId', option.value)
-                // }}
+                value={purchaseRequestData.intItemCategoryID}
+                onChange={(option) => {
+                  handleChangeTextInput('strItemCategoryName', option.label);
+                  handleChangeTextInput('intItemCategoryID', option.value)
+                }}
                 setValue={setValue}
               />
             </div>
@@ -140,10 +157,10 @@ const PurchaseRequestCreate = () => {
               <label className="formFont">Remarks</label>
               <Form.Control
                 className="formHeight"
-                name="numFreightOrHireRate"
+                name="strRemarks"
                 type="text"
-                // value={VesselBooking.numFreightOrHireRate}
-                // onChange={(e) => handleChangeTextInput('numFreightOrHireRate', e.target.value)}
+                value={purchaseRequestData.strRemarks}
+                onChange={(e) => handleChangeTextInput('strRemarks', e.target.value)}
                 placeholder="Remarks"
               />
             </div>
@@ -194,7 +211,7 @@ const PurchaseRequestCreate = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Item Type</label>
               <RHFInput
-                as={<Select options={shipList} />}
+                as={<Select options={itemTypeOptionData} />}
                 rules={{ required: false }}
                 name="intShipId"
                 register={register}
@@ -208,28 +225,29 @@ const PurchaseRequestCreate = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Item Category</label>
               <RHFInput
-                as={<Select options={shipList} />}
+                as={<Select options={itemCategoryOptionData} />}
                 rules={{ required: false }}
-                name="intShipId"
+                name="intItemCategoryID"
                 register={register}
-                // onChange={(option) => {
-                //   handleChangeTextInput('strShipName', option.label);
-                //   handleChangeTextInput('intShipId', option.value)
-                // }}
+                value={purchaseRequestData.intItemCategoryID}
+                onChange={(option) => {
+                  handleChangeTextInput('strItemCategoryName', option.label);
+                  handleChangeTextInput('intItemCategoryID', option.value)
+                }}
                 setValue={setValue}
               />
             </div>
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Item Sub Category</label>
               <RHFInput
-                as={<Select options={shipList} />}
+                as={<Select options={itemSubCategoryOptionData} />}
                 rules={{ required: false }}
-                name="intShipId"
+                name="intItemSubCategoryID"
                 register={register}
-                // onChange={(option) => {
-                //   handleChangeTextInput('strShipName', option.label);
-                //   handleChangeTextInput('intShipId', option.value)
-                // }}
+                onChange={(option) => {
+                  handleChangeTextInput('strShipName', option.label);
+                  handleChangeTextInput('intItemSubCategoryID', option.value)
+                }}
                 setValue={setValue}
               />
             </div>
@@ -240,12 +258,13 @@ const PurchaseRequestCreate = () => {
               <RHFInput
                 as={<Select options={shipList} />}
                 rules={{ required: false }}
-                name="intShipId"
+                name="intitemid"
                 register={register}
-                // onChange={(option) => {
-                //   handleChangeTextInput('strShipName', option.label);
-                //   handleChangeTextInput('intShipId', option.value)
-                // }}
+                value={purchaseRequestData.intitemid}
+                onChange={(option) => {
+                  handleChangeTextInput('strItemName', option.label);
+                  handleChangeTextInput('intitemid', option.value)
+                }}
                 setValue={setValue}
               />
             </div>
@@ -253,10 +272,10 @@ const PurchaseRequestCreate = () => {
               <label className="formFont">Qty</label>
               <Form.Control
                 className="formHeight"
-                name="numFreightOrHireRate"
+                name="numPurchaseRequestQty"
                 type="text"
-                // value={VesselBooking.numFreightOrHireRate}
-                // onChange={(e) => handleChangeTextInput('numFreightOrHireRate', e.target.value)}
+                value={purchaseRequestData.numPurchaseRequestQty}
+                onChange={(e) => handleChangeTextInput('numPurchaseRequestQty', e.target.value)}
                 placeholder="Qty"
               />
             </div>
@@ -266,7 +285,7 @@ const PurchaseRequestCreate = () => {
                   Book
                 </Button>
                 <Link >
-                  <i class="far fa-file-alt editIcon booking-btn bg-primary text-light ml-3"></i>
+                  <i class="far fa-file-alt editIcon booking-btn bg-primary text-light ml-3" title="Bult upload"></i>
                 </Link>
               </div>
             </div>
