@@ -430,38 +430,16 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
       subModules: [
         {
           subModuleName: "Role",
-          subModuleRouteUrl: "/role/role",
+          subModuleRouteUrl: "/role-permission/list",
           subModuleIcon: "menu-bullet menu-bullet-dot",
-          features: [
-            {
-              featureName: " New Role",
-              featureRouteUrl: "/role-permission/new role",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-            {
-              featureName: "Role Permission List",
-              featureRouteUrl: "/role-permission/list",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-          ],
+          features: [],
         },
 
         {
           subModuleName: "User",
-          subModuleRouteUrl: "/user/user",
+          subModuleRouteUrl: "/user/list",
           subModuleIcon: "menu-bullet menu-bullet-dot",
-          features: [
-            {
-              featureName: "User List",
-              featureRouteUrl: "/user/list",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-            {
-              featureName: " New User ",
-              featureRouteUrl: "/user/new user",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-          ],
+          features: [],
         },
       ],
     },
