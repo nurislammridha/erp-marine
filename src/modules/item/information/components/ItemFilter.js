@@ -3,11 +3,9 @@ import { Form, Col } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
-import { getCertificateChildCategoryData, getCertificateParentCategoryData } from '../../../certificates/certificate-category/_redux/actions/CertificateCategoryAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getItemCategory, getItemList, getItemSubCategory } from '../_redux/actions/ItemAction';
-import { getCertificateCategory, getCertificateMainListAction } from '../../../certificates/certificate-main/_redux/actions/CertificateMainAction';
 
 const ItemFilter = ({currentPage, setCurrentPage}) => {
     const { register, setValue } = useForm();
@@ -94,12 +92,10 @@ const ItemFilter = ({currentPage, setCurrentPage}) => {
                         as={<Select options={itemSubCategoryOptionData} />}
                         rules={{ required: true }}
                         placeholder="Item SubCategory"
-                        name="intCategoryID"
+                        name="intItemSubCategoryID"
                         register={register}
                         setValue={setValue}
-                        // value={itemSubCategoryOptionData.intCategoryID}
                         onChange={(option) => {
-                            // categorySelecte(option.label);
                             subCategorySelecte(option.value)
                         }}
                         setValue={setValue}
@@ -112,7 +108,6 @@ const ItemFilter = ({currentPage, setCurrentPage}) => {
                         placeholder="Department"
                         name="intDepartment"
                         register={register}
-                        // value={certificateChildCategoryList.intCategoryID}
                         onChange={(option) => 
                             itemDepartment(option.value)
                         }

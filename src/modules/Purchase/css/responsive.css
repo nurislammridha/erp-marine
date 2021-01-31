@@ -1,0 +1,17 @@
+@media screen and (min-width: 768px) {
+  .noonReportInput.form-group {
+    margin-left: 1px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .referenceText {
+    margin-top: 10px;
+    padding-left: 10px;
+  }
+  .boilerTypeBg {
+    margin-left: 0px !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+}

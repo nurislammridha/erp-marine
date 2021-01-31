@@ -1,7 +1,7 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { NavLink } from "react-router-dom";
 import SVG from "react-inlinesvg";
 import { toAbsoluteUrl, checkIsActive } from "../../../../_helpers";
@@ -10,6 +10,7 @@ import { GetMenuListsByPermission } from "../../../../../app/modules/Auth/_redux
 export function AsideMenuList({ layoutProps }) {
   const dispatch = useDispatch();
   const location = useLocation();
+  const history = useHistory();
 
   const getMenuItemActive = (url) => {
     return checkIsActive(location, url)
@@ -93,44 +94,76 @@ export function AsideMenuList({ layoutProps }) {
                         aria-haspopup="true"
                         data-menu-toggle="hover"
                       >
-                        <NavLink
-                          className="menu-link menu-toggle"
-                          to={subMenu.subModuleRouteUrl}
-                        >
-                          <i className={subMenu.subModuleIcon}>
-                            <span />
-                          </i>
-                          <span className="menu-text">
-                            {subMenu.subModuleName}
-                          </span>
-                          <i className="menu-arrow" />
-                        </NavLink>
+                        {
+                          subMenu.features.length === 0 && (
+                            <NavLink
+                              className="menu-link menu-toggle"
+                              to={
+                                subMenu.features.length === 0
+                                  ? subMenu.subModuleRouteUrl
+                                  : ""
+                              }
+                              onClick={() =>
+                                history.push(
+                                  subMenu.features.length === 0
+                                    ? subMenu.subModuleRouteUrl
+                                    : ""
+                                )
+                              }
+                            >
+                              <i className={subMenu.subModuleIcon}>
+                                <span />
+                              </i>
+                              <span className="menu-text">
+                                {subMenu.subModuleName}
+                              </span>
+                              <i className="menu-arrow" />
+                            </NavLink>
+                          )}
+
+                        {
+                          subMenu.features.length > 0 && (
+                            <NavLink
+                              className="menu-link menu-toggle"
+                              to={subMenu.subModuleRouteUrl}
+                            >
+                              <i className={subMenu.subModuleIcon}>
+                                <span />
+                              </i>
+                              <span className="menu-text">
+                                {subMenu.subModuleName}
+                              </span>
+                              <i className="menu-arrow" />
+                            </NavLink>
+                          )}
+
                         <div className="menu-submenu ">
                           <i className="menu-arrow" />
                           <ul className="menu-subnav">
-                            {subMenu.features.map(
-                              (featureMenu, featureIndex) => (
-                                <li
-                                  className={`menu-item  ${getMenuItemActive(
-                                    featureMenu.featureRouteUrl
-                                  )}`}
-                                  aria-haspopup="true"
-                                  key={featureIndex}
-                                >
-                                  <NavLink
-                                    className="menu-link"
-                                    to={featureMenu.featureRouteUrl}
+                            {subMenu.features.length > 0 &&
+                              subMenu.features.map(
+                                (featureMenu, featureIndex) => (
+                                  <li
+                                    className={`menu-item  ${getMenuItemActive(
+                                      featureMenu.featureRouteUrl
+                                    )}`}
+                                    aria-haspopup="true"
+                                    key={featureIndex}
                                   >
-                                    <i className={featureMenu.featureIcon}>
-                                      <span />
-                                    </i>
-                                    <span className="menu-text">
-                                      {featureMenu.featureName}
-                                    </span>
-                                  </NavLink>
-                                </li>
-                              )
-                            )}
+                                    <NavLink
+                                      className="menu-link"
+                                      to={featureMenu.featureRouteUrl}
+                                    >
+                                      <i className={featureMenu.featureIcon}>
+                                        <span />
+                                      </i>
+                                      <span className="menu-text">
+                                        {featureMenu.featureName}
+                                      </span>
+                                    </NavLink>
+                                  </li>
+                                )
+                              )}
                           </ul>
                         </div>
                       </li>
