@@ -1,12 +1,19 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import PurchaseRequestList from "../purhasesRequest/components/PurchaseRequestList";
+import PurchaseRequestCreateContainer from "../purhasesRequest/views/PurchaseRequestCreateContainer";
+import PurchaseRequestListContainer from "../purhasesRequest/views/PurchaseRequestListContainer";
 
 const routePurchase = [
   {
     path: "/purchase/request/list",
     name: "Purchase Request List",
-    component: PurchaseRequestList,
+    component: PurchaseRequestListContainer,
+    exact: true,
+  },
+  {
+    path: "/purchase/request/create",
+    name: "Purchase Request Create",
+    component: PurchaseRequestCreateContainer,
     exact: true,
   },
   

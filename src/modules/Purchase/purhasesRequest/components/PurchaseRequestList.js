@@ -9,14 +9,14 @@ const PurchaseRequestList = () => {
     <Card>
       <Card.Body>
         <div className="container ">
-          <div className="row mb-5 table-form ">
+          <div className="row mb-5 table-form">
             <h1 className="tableheading mt-0 ">Purchase Request</h1>
 
             <hr></hr>
-            <div className="col-xl-4 col-lg-4 col-5 mb-2">
+            <div className="col-xl-4 col-lg-4 col-5">
               <Paper className="searchInput">
-
                 <InputBase
+                  className="custome-purchase-search"
                   placeholder="Search "
                 // value={searchText}
                 // onChange={searchProduct}
@@ -29,9 +29,9 @@ const PurchaseRequestList = () => {
             {/* <div className="col-xl-6 col-lg-6 col-md-6 col-sm-0"></div> */}
 
             <div>
-              <Link to="/voyage/booking/bookingentry">
+              <Link to="/purchase/request/create">
                 <Button className="btn-sm" variant="primary">
-                  Add New
+                  New Requisition
             </Button>
               </Link>
 
@@ -59,13 +59,6 @@ const PurchaseRequestList = () => {
                         <td onClick={(id) => getVesselBookingID(item)}>{item.strCargoName !== null && item.strCargoName !== '' ? item.strCargoName : ''}</td>
                         <td onClick={(id) => getVesselBookingID(item)}>{item.strShipName !== null && item.strShipName !== '' ? item.strShipName : ''}</td>
                         <td onClick={(id) => getVesselBookingID(item)}>{item.strVoyageNo !== null && item.strVoyageNo !== '' ? item.strVoyageNo : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.dteCommenceDate !== null && item.dteCommenceDate !== '' ? moment(item.dteCommenceDate).format("DD-MM-YYYY") : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strCompletionPortName !== null && item.strCompletionPortName !== '' ? item.strCompletionPortName : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.dteCompletionDate !== null && item.dteCompletionDate !== '' ? moment(item.dteCompletionDate).format("DD-MM-YYYY") : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.numFreightOrHireRate !== null && item.numFreightOrHireRate !== '' ? item.numFreightOrHireRate : ''}</td>
                         <td onClick={(id) => getVesselBookingID(item)}>
                           <button className={item.strBookingStatus === "Rejected" ? "btn rejected-status booking-list-btn text-danger" : (item.strBookingStatus === "Pending" ? "btn pending-status booking-list-btn text-warning" : "btn approve-status booking-list-btn text-success")}>
                             {item.strBookingStatus !== null && item.strBookingStatus !== '' ? item.strBookingStatus : ''}

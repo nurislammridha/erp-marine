@@ -1209,3 +1209,22 @@ input.color-picker.more-than-sixty {
     border-top: 3px solid #ff9da7!important;
     border-radius: 0px!important;
 }
+
+.MuiInputBase-root.custome-purchase-search {
+    width: 85%;
+}
+
+.purchaseSearch {
+    margin-left: 20px!important;
+}
+
+.custome-border-left {
+    min-width: 13%;
+}
+
+.custome-border-design {
+    width: 100%;
+    border-bottom: 2px solid lightgray;
+    margin-left: 13px;
+    margin-bottom: 10px;
+}
