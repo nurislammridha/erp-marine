@@ -5,7 +5,7 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import SimpleModal from '../../../../master/components/Modal/SimpleModal';
-import { handleChangeLaytimeHeaderInput, getHearInputData, GetVoyageID, handleLaytimeDemurrageInput, getRowList } from '../../_redux/actions/LaytimeAction';
+import { handleChangeLaytimeHeaderInput, getHearInputData, GetVoyageID, handleLaytimeDemurrageInput, getRowList, getVoyageList} from '../../_redux/actions/LaytimeAction';
 import { useSelector, useDispatch } from "react-redux";
 import LaytimeHeaderLoadingPortModal from './LaytimeHeaderLoadingPortModal';
 import LaytimeHeaderDischargePortModal from './LaytimeHeaderDischargePortModal';
@@ -37,6 +37,9 @@ const LaytimeHeader = () => {
     const laytimeHeaderInput = useSelector((state) => state.laytimeHeaderInfo.laytimeHeaderInput);
     const layTimeDemurrage = useSelector((state) => state.laytimeHeaderInfo.layTimeDemurrage);
     const voyageIDList = useSelector((state) => state.currencyInfo.voyageIDList);
+    const voyageDataList = useSelector((state) => state.laytimeHeaderInfo.voyageList);
+
+    console.log("voyageDataList : >>>>>>> ",voyageDataList);
 
 
     const loadingPort = (e) => {
@@ -73,6 +76,10 @@ const LaytimeHeader = () => {
     //         voyageID.push(getVoyageID);
     //     });
     // }
+    useEffect(() => {
+        dispatch(getVoyageList());
+      }, []);
+
     useEffect(() => {
         dispatch(GetVoyageID());
     }, []);
@@ -120,14 +127,14 @@ const LaytimeHeader = () => {
                                     <div className="col-md-6">
                                         <label className="form-label mt-2 formFont">Voyage No.</label>
                                         <RHFInput
-                                            as={<Select options={selectOptions} className="formHeight" />}
+                                            as={<Select options={voyageDataList} className="formHeight" />}
                                             className="formHeight"
                                             rules={{ required: true }}
                                             name="intCharterVoyageID"
                                             register={register}
-                                            value={laytimeHeaderInput.intChartererID}
+                                            value={laytimeHeaderInput.intCharterVoyageID}
                                             onChange={(option) => {
-                                                handleChangeTextInput("strCharterVoyageName", option.label);
+                                                handleChangeTextInput("strShipName", option.label);
                                                 handleChangeTextInput("intCharterVoyageID", option.value);
                                             }}
                                             setValue={setValue}
