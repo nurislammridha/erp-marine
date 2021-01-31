@@ -1155,3 +1155,19 @@ p.certificate-list-text {
 .certificate-due-g-60 {
     background: #8af2c0 !important;
 }
+
+.MuiInputBase-root.custome-purchase-search {
+    width: 85%;
+}
+.purchaseSearch {
+    margin-left: 20px!important;
+}
+.custome-border-left {
+    min-width: 13%;
+}
+.custome-border-design {
+    width: 100%;
+    border-bottom: 2px solid lightgray;
+    margin-left: 13px;
+    margin-bottom: 10px;
+}
