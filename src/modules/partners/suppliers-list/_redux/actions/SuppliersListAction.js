@@ -52,4 +52,13 @@ export const supplierListDelete = (id) => (dispatch) => {
                 dispatch(getSupplierList());
             }
         })
-} 
+}
+export const getSupplierDetails = (id) => (dispatch) => {
+    let url = `${process.env.REACT_APP_API_URL}partner/basicInfo/${id}`;
+    Axios.get(url).then(
+        (res) => {
+            const data = res.data.data;
+            dispatch({ type: Types.SUPPLIER_DETAILS, payload: data })
+        }
+    )
+}

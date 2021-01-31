@@ -4,13 +4,14 @@ import { Form, Card, Button } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
-import { changeTextInput } from "../_redux/actions/UtilityAction";
+import { changeTextInput, getShipList } from "../_redux/actions/UtilityAction";
 
 const LoadableCalculator = () => {
   const { register, setValue } = useForm();
   const dispatch = useDispatch();
   const LoadableCalculatorInput = useSelector(state => state.utitlityInfo.LoadableCalculatorInput);
-
+  const shipList = useSelector(state => state.utitlityInfo.shipList);
+  dispatch(getShipList())
   const changeText = (name, value) => {
     dispatch(changeTextInput(name, value))
   }
@@ -64,7 +65,7 @@ const LoadableCalculator = () => {
                   <div className="col-6">
                     <label className="formFont">Vessel Name</label>
                     <RHFInput
-                      as={<Select options={CourseName} />}
+                      as={<Select options={shipList} />}
                       rules={{ required: false }}
                       name="strVesselName"
                       register={register}
@@ -77,7 +78,7 @@ const LoadableCalculator = () => {
                       <Form.Label className="formFont pl-1">Draft</Form.Label>
                       <Form.Control
                         className="formHeight"
-                        type="text"
+                        type="number"
                         placeholder="500"
                         name="intDraft"
                         onChange={(e) => changeText("intDraft", e.target.value)}
@@ -98,7 +99,7 @@ const LoadableCalculator = () => {
                     <Form.Label className="formFont pl-1">DWT</Form.Label>
                     <Form.Control
                       className="formHeight"
-                      type="text"
+                      type="number"
                       placeholder="100.1"
                       name="intDWT"
                       onChange={(e) => changeText("intDWT", e.target.value)}
@@ -110,7 +111,7 @@ const LoadableCalculator = () => {
                     <Form.Label className="formFont pl-1">FW</Form.Label>
                     <Form.Control
                       className="formHeight"
-                      type="text"
+                      type="number"
                       placeholder="150.02"
                       name="intFW"
                       onChange={(e) => changeText("intFW", e.target.value)}
@@ -122,7 +123,7 @@ const LoadableCalculator = () => {
                     <Form.Label className="formFont pl-1">TPC</Form.Label>
                     <Form.Control
                       className="formHeight"
-                      type="text"
+                      type="number"
                       placeholder="256.3"
                       name="intTPC"
                       onChange={(e) => changeText("intTPC", e.target.value)}
@@ -135,7 +136,7 @@ const LoadableCalculator = () => {
                     <Form.Label className="formFont pl-1">IFO</Form.Label>
                     <Form.Control
                       className="formHeight"
-                      type="text"
+                      type="number"
                       placeholder="100.1"
                       name="intIFO"
                       onChange={(e) => changeText("intIFO", e.target.value)}
@@ -147,7 +148,7 @@ const LoadableCalculator = () => {
                     <Form.Label className="formFont pl-1">MGO</Form.Label>
                     <Form.Control
                       className="formHeight"
-                      type="text"
+                      type="number"
                       placeholder="150.02"
                       name="intMGO"
                       onChange={(e) => changeText("intMGO", e.target.value)}
@@ -159,7 +160,7 @@ const LoadableCalculator = () => {
                     <Form.Label className="formFont pl-1">FWA</Form.Label>
                     <Form.Control
                       className="formHeight"
-                      type="text"
+                      type="number"
                       placeholder="256.3"
                       name="intFWA"
                       onChange={(e) => changeText("intFWA", e.target.value)}
@@ -174,7 +175,7 @@ const LoadableCalculator = () => {
                       </Form.Label>
                     <Form.Control
                       className="formHeight"
-                      type="text"
+                      type="number"
                       placeholder="100.1"
                       name="intSummerDraft"
                       onChange={(e) => changeText("intSummerDraft", e.target.value)}
@@ -188,7 +189,7 @@ const LoadableCalculator = () => {
                       </Form.Label>
                     <Form.Control
                       className="formHeight"
-                      type="text"
+                      type="number"
                       placeholder="150.02"
                       name="intUnpumpableBallast"
                       onChange={(e) => changeText("intUnpumpableBallast", e.target.value)}
@@ -202,7 +203,7 @@ const LoadableCalculator = () => {
                       </Form.Label>
                     <Form.Control
                       className="formHeight"
-                      type="text"
+                      type="number"
                       placeholder="256.3"
                       name="intConstant"
                       onChange={(e) => changeText("intConstant", e.target.value)}

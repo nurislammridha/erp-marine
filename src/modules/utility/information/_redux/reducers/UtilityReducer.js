@@ -1,4 +1,5 @@
 import * as Types from '../types/Types'
+import { showToast } from "../../../../master/utils/ToastHelper";
 
 const initialState = {
     LoadableCalculatorInput: {
@@ -39,6 +40,7 @@ const UtilityReducer = (state = initialState, action) => {
                     LoadableCalculatorInput
                 }
             } else {
+                showToast("error", "You should enter number");
                 return {
                     ...state
                 }
@@ -61,6 +63,8 @@ const UtilityReducer = (state = initialState, action) => {
                 ...state,
                 LoadableCalculatorInput: calcData
             }
+        case Types.GET_SHIP_LIST:
+            return { ...state, shipList: shiplist(action.payload) }
 
         default:
             break;
@@ -103,3 +107,17 @@ const formatValue = (value) => {
     return parseFloat(value).toFixed(4)
 }
 export default UtilityReducer;
+
+const shiplist = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intShipID,
+                label: item.strShipName
+            }
+            options.push(itemData);
+        });
+    }
+    return options;
+}
