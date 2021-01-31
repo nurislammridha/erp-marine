@@ -5,7 +5,7 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import SimpleModal from '../../../../master/components/Modal/SimpleModal';
-import { handleChangeLaytimeHeaderInput, getHearInputData, GetVoyageID, handleLaytimeDemurrageInput } from '../../_redux/actions/LaytimeAction';
+import { handleChangeLaytimeHeaderInput, getHearInputData, GetVoyageID, handleLaytimeDemurrageInput, getRowList } from '../../_redux/actions/LaytimeAction';
 import { useSelector, useDispatch } from "react-redux";
 import LaytimeHeaderLoadingPortModal from './LaytimeHeaderLoadingPortModal';
 import LaytimeHeaderDischargePortModal from './LaytimeHeaderDischargePortModal';
@@ -25,7 +25,6 @@ const LaytimeHeader = () => {
             value: "2"
         }
     ]
-
 
     const { register, handleSubmit, errors, setValue } = useForm();
     const [show, setShow] = useState(false);
@@ -51,6 +50,7 @@ const LaytimeHeader = () => {
         dispatch(handleChangeLaytimeHeaderInput(name, value, e));
         if (name === 'intCharterVoyageID') {
             dispatch(getHearInputData(value));
+            dispatch(getRowList(value));
         }
     };
     const handleLayTimeDemurrageInput = (name, value) => {

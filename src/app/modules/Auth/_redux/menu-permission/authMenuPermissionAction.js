@@ -424,9 +424,9 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
       ],
     },
     {
-      moduleName: "Role Permission Management",
+      moduleName: "Role & Permission",
       moduleRouteUrl: "/role-permission",
-      moduleImageIcon: "/media/svg/icons/Code/report.svg",
+      moduleImageIcon: "/media/svg/icons/Code/hr.svg",
       subModules: [
         {
           subModuleName: "Role",

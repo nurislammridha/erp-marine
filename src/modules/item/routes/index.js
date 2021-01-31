@@ -2,6 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import ItemListContainer from "../view/ItemListContainer";
 import ItemAddContainer from "../view/ItemAddContainer";
+import ItemEdit from "../information/components/ItemEdit";
 
 const routeItems = [
   {
@@ -14,6 +15,12 @@ const routeItems = [
     path: "/items/add",
     name: "item add",
     component: ItemAddContainer,
+    exact: true,
+  },
+  {
+    path: "/items/edit/:id",
+    name: "item add",
+    component: ItemEdit,
     exact: true,
   },
 ];

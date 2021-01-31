@@ -32,10 +32,10 @@ export const multipleItemAddInput = (itemDataInput) => (dispatch) => {
         showToast("error", "Please Select Item Category");
         return false
     }
-    else if (itemDataInput.strSubCategoryName.length === 0) {
-        showToast("error", "Item Sub Category should not be empty");
-        return false
-    }
+    // else if (itemDataInput.intItemSubCategoryID.length === 0) {
+    //     showToast("error", "Item Sub Category should not be empty");
+    //     return false
+    // }
     else if (itemDataInput.strPartNo.length === 0) {
         showToast("error", "Part No should not be empty");
         return false
@@ -124,7 +124,6 @@ export const getItemType = (data) => (dispatch) => {
 };
 export const getItemCategory = () => (dispatch) => {
     Axios.get(`${process.env.REACT_APP_API_URL}inventory/itemCategory`).then(
-
         (res) => {
             let data = res.data.data;
             dispatch({ type: Types.GET_ITEM_CATEGORY, payload: data });
@@ -133,13 +132,11 @@ export const getItemCategory = () => (dispatch) => {
 };
 
 export const getItemSubCategory = (intItemCategoryID = null) => (dispatch) => {
-    console.log('intItemCategoryID :>> ', intItemCategoryID);
-    let url = `${process.env.REACT_APP_API_URL}inventory/itemSubCategory`;
+    // let url = `${process.env.REACT_APP_API_URL}inventory/itemCategory/child-categories/list/`;  
     if (intItemCategoryID !== null) {
-        let url = `${process.env.REACT_APP_API_URL}inventory/itemSubCategory/${intItemCategoryID}`;
+        let url = `${process.env.REACT_APP_API_URL}inventory/itemCategory/child-categories/list/${intItemCategoryID}`;
         Axios.get(url).then(
             (res) => {
-                console.log('res :>> ', res);
                 let data = res.data.data;
                 dispatch({ type: Types.GET_ITEM_SUB_CATEGORY, payload: data });
             }
@@ -160,7 +157,7 @@ export const getItemSubCategory = (intItemCategoryID = null) => (dispatch) => {
 //         );
 // };
 
-export const getItemList = (page, searchText = null) => async (dispatch) => {
+export const getItemList = (page, searchText = null, itemCategory = null, itemSubCategory = null, department = null) => async (dispatch) => {
     let responseList = {
         isLoading: true,
         data: {},
@@ -177,6 +174,18 @@ export const getItemList = (page, searchText = null) => async (dispatch) => {
         itemListAPI += `&search=${searchText}`;
     } else {
         // url += `&certificate/details?search=${searchText}`
+    }
+    //item filter by category
+    if (itemCategory !== null) {
+        itemListAPI += `&intItemCategoryID=${itemCategory}`;
+    }
+    //item filter by sub category
+    if (itemSubCategory !== null) {
+        itemListAPI += `&intItemSubcategoryID=${itemSubCategory}`;
+    }
+    // item filter by department
+    if (department !== null) {
+        itemListAPI += `&intDepartmentID=${department}`;
     }
     try {
         await Axios.get(itemListAPI)

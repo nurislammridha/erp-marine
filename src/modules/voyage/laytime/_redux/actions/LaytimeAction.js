@@ -56,6 +56,17 @@ export const getHearInputData = (id) => (dispatch) => {
             }
         })
 }
+
+//get data for laytime rowlist with header id
+export const getRowList = (id) => (dispatch) => {
+    let LayTimeRowListURL = `${process.env.REACT_APP_API_URL}voyage/layTimeRowList/${id}`;
+    Axios.get(LayTimeRowListURL)
+    .then((response) => {
+        let data = response.data.data;
+        dispatch({ type: Types.GET_LAYTIMEROW_LIST_FROM_API, payload: data })
+    })
+}
+
 export const handleChangeLaytimeHeaderInput = (name, value, e) => (dispatch) => {
     const formData = {
         name: name,
@@ -256,6 +267,10 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
             console.log('res row data :>> ', res.data);
             const intLayTimeHeaderID = res.data.data.intLayTimeHeaderID;
             const intLayTimeRowID = res.data.data.intLayTimeRowID;
+
+            console.log('intLayTimeHeaderID from action :>> ', intLayTimeHeaderID);
+            console.log('intLayTimeRowID from action :>> ', intLayTimeRowID);
+            
             dispatch({ type: Types.LAYTIME_DETAILS_ENTRY_HEADER_DATA, payload: {
                 name: 'intLayTimeHeaderID', value: intLayTimeHeaderID
             }});

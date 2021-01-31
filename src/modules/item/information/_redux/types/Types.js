@@ -10,3 +10,11 @@ export const ITEM_SUBMIT = "ITEM_SUBMIT";
 export const EMPTY_MULTIPLE_ITEM_LIST = "EMPTY_MULTIPLE_ITEM_LIST";
 export const DELETE_TITEM = "DELETE_TITEM";
 // export const AFTER_SUCCESSFULLY_INSERT = "AFTER_SUCCESSFULLY_INSERT";
+
+//get item details
+export const GET_ITEMS_DETAILS = "GET_ITEMS_DETAILS";
+
+//edit items 
+export const ITEM_EDIT = "ITEM_EDIT";
+export const ITEM_EDITTING = "ITEM_EDITTING";
+

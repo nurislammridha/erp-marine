@@ -1,119 +1,121 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Col } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
-import { getCertificateChildCategoryData } from '../../../certificates/certificate-category/_redux/actions/CertificateCategoryAction';
+import { getCertificateChildCategoryData, getCertificateParentCategoryData } from '../../../certificates/certificate-category/_redux/actions/CertificateCategoryAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getItemCategory } from '../_redux/actions/ItemAction';
+import { getItemCategory, getItemList, getItemSubCategory } from '../_redux/actions/ItemAction';
 import { getCertificateCategory, getCertificateMainListAction } from '../../../certificates/certificate-main/_redux/actions/CertificateMainAction';
-const ItemFilter = ({ searchItems, searchText, categorySelecte }) => {
+
+const ItemFilter = ({currentPage, setCurrentPage}) => {
     const { register, setValue } = useForm();
     const dispatch = useDispatch()
     const itemCategoryOptionData = useSelector((state) => state.itemList.itemCategoryOptionData);
+    const itemSubCategoryOptionData = useSelector((state) => state.itemList.itemSubCategoryOptionData);
+    const [searchText, setSearchText] = useState("");
+
     useEffect(() => {
         dispatch(getItemCategory());
-        dispatch(getCertificateCategory());
+        dispatch(getItemSubCategory());
+        dispatch(getItemList(currentPage));
+    }, [])
+    useEffect(() => {
+        dispatch(getItemList(currentPage));
+    }, [dispatch, currentPage]);
 
-      }, [])
-    //   useEffect(() => {
-    //     dispatch(getCertificateMainListAction(currentPage));
-    //     dispatch(getCertificateCategory());
-    //     dispatch(getCertificateParentCategoryData());
-    //   }, [dispatch, currentPage]);
-    const statusOptions = [
+    const categorySelecte = (itemCategory) => {
+        dispatch(
+            getItemList(currentPage, searchText, itemCategory, null, null)
+        );
+    };
+    const subCategorySelecte = (itemSubCategory) => {
+        dispatch(
+            getItemList(currentPage, searchText, null, itemSubCategory, null)
+        );
+    };
+    const itemDepartment = (department) => {
+        dispatch(
+            getItemList(currentPage, searchText, null, null, department)
+        );
+    };
+
+    const searchItems = (e) => {
+        const searchText = e.target.value;
+        setSearchText(searchText);
+        if (searchText.length === 0) {
+            dispatch(getItemList(currentPage));
+        } else {
+            dispatch(getItemList(currentPage, searchText));
+        }
+    };
+    const department = [
         {
-            label: "Supplier Type",
-            value: "3",
+            value: 1,
+            label: "Store",
         },
         {
-            label: "Supplier 2",
-            value: "2",
-        },
-        {
-            label: "Supplier 3",
-            value: "1",
-        },
-        {
-            label: "Supplier 4",
-            value: "0",
-        },
-    ]
-    const certificateChildCategoryList = useSelector(
-        (state) => state.CertificateCategoryReducer.certificateChildCategoryList
-      );
-      const certificateParentCategoryList = useSelector(
-        (state) => state.CertificateCategoryReducer.certificateParentCategoryList
-      );
+            value: 2,
+            label: "Engine",
+        }
+    ];
     return (
         <>
-{/*             
-            <div className="col-xl-4 col-lg-4">
-                <Form.Group as={Col} controlId="formGridState">
-                    <Form.Control
-                        className="formHeight"
-                        type="text"
-                        placeholder="Search"
-                        value={searchText}
-                        onChange={searchItems}
-                    // onChange={(e) => changeSearch(e.target.value)}
-                    />
-                </Form.Group>
-            </div>
-            <div className="col-xl-4 col-lg-4">
-                <Form.Group as={Col} controlId="formGridState">
-                    <RHFInput
-                        className="formSelect pt-0"
-                        as={<Select options={statusOptions} />}
-                        rules={{ required: false }}
-                        name="isActive"
-                        register={register}
-                        // value={""}
-                        setValue={setValue}
-                    />
-                </Form.Group>
-            </div> */}
             <div className="row m-4">
                 <h1 className="tableheading">Items</h1>
-
                 <Form.Group as={Col} controlId="formGridState">
                     <input
                         type="search"
                         value={searchText}
                         className="form-control product-search-input formHeight"
-                        placeholder="Search"
+                        placeholder="Search by item name"
                         onChange={searchItems}
                     />
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridState">
                     <RHFInput
                         as={<Select options={itemCategoryOptionData} />}
-                        rules={{ required: true }}
-                        name="intCategoryID"
-                        placeholder="Category"
+                        rules={{ required: false }}
+                        placeholder="Item Category"
+                        name="intItemCategoryID"
                         register={register}
-                        value={certificateParentCategoryList.intParentCategoryID}
+                        setValue={setValue}
                         onChange={(option) => {
                             categorySelecte(option.value);
-                            setValue("intCategoryID", "");
-                            dispatch(getCertificateChildCategoryData(option.value));
+                            setValue("intItemSubCategoryID", "")
+                            dispatch(getItemSubCategory(option.value));
+                            // dispatch(getItemSubCategory(option.value));
+                        }}
+                    />
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridState">
+                    <RHFInput
+                        as={<Select options={itemSubCategoryOptionData} />}
+                        rules={{ required: true }}
+                        placeholder="Item SubCategory"
+                        name="intCategoryID"
+                        register={register}
+                        setValue={setValue}
+                        // value={itemSubCategoryOptionData.intCategoryID}
+                        onChange={(option) => {
+                            // categorySelecte(option.label);
+                            subCategorySelecte(option.value)
                         }}
                         setValue={setValue}
                     />
                 </Form.Group>
-
                 <Form.Group as={Col} controlId="formGridState">
                     <RHFInput
-                        as={<Select options={statusOptions} />}
-                        rules={{ required: true }}
-                        placeholder="Sub Category"
-                        name="intCategoryID"
+                        as={<Select options={department} />}
+                        rules={{ required: false }}
+                        placeholder="Department"
+                        name="intDepartment"
                         register={register}
-                        value={certificateChildCategoryList.intCategoryID}
-                        onChange={(option) => {
-                            categorySelecte(option.value);
-                        }}
+                        // value={certificateChildCategoryList.intCategoryID}
+                        onChange={(option) => 
+                            itemDepartment(option.value)
+                        }
                         setValue={setValue}
                     />
                 </Form.Group>

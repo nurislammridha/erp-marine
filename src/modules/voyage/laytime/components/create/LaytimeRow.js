@@ -17,6 +17,9 @@ const LaytimeRow = () => {
     const loading = useSelector((state) => state.laytimeDetailInfo.loading);
     const layTimeRowList = useSelector((state) => state.laytimeDetailInfo.layTimeRowList);
     const laytimeDatList = useSelector((state) => state.laytimeDetailInfo.laytimeDatList);
+    const laytimeDataList = useSelector(
+        (state) => state.laytimeDetailInfo.laytimeDataList
+      );
 
     // console.log("laytimeRowInput data by row:",laytimeRowInput);
 
@@ -448,8 +451,9 @@ console.log('laytimeRowInput', laytimeRowInput)
                     <LaytimeDetail />
                 </div>
             </div>
+
             {
-                show && (
+                laytimeDataList.length > 0 && (
                     <div className="row">
                         <div className="col-md-9">
                             <LaytimeMultipleAdd />
@@ -457,9 +461,6 @@ console.log('laytimeRowInput', laytimeRowInput)
                     </div>
                 )
             }
-
-
-
         </div>
     );
 }

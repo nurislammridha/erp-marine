@@ -1,9 +1,11 @@
+import { concat } from "lodash";
 import * as Types from "../types/Types";
 
 const initialState = {
     loading: false,
+    laytimeRowData:[],
     layTimeRowList: [],
-    laytimeDatList:[],
+    laytimeDataList:[],
     laytimeRowInput: {
         intLayTimeHeaderID: null,
         intLayTimeRowID: null,
@@ -72,9 +74,51 @@ const LaytimeRowReducer = (state = initialState, action) => {
                 ...state,
                 laytimeRowInput,
             };
+
+        case Types.GET_LAYTIMEROW_LIST_FROM_API:
+           
+
+            if(action.payload){
+                const rowPayload = action.payload;
+                let newRowList = state.laytimeDataList;
+                   
+                // for(let i=0;i<rowPayload.length;i++){
+                //     // console.log('getLayTimeRowDataFromAPI', getLayTimeRowDataFromAPI[i]);
+                //     let data ={
+                //         intType : rowPayload[i].intType,
+                //         intPortID : rowPayload[i].intPortID,
+                //         intCargoID : rowPayload[i].intCargoID,
+                //         numBLQty : rowPayload[i].numBLQty,
+                //         dteLaytimeCommenced : rowPayload[i].dteLaytimeCommenced,
+                //         dteLaytimeCompleted : rowPayload[i].dteLaytimeCompleted
+                //     }
+                //     console.log('data reducer', data);
+                //  newRowList.push(data);
+                //     newRowList = data;
+                   
+                    
+                   
+
+                // }
+
+                // console.log('newDataList', newDataList);
+           
+              
+                return {
+                    ...state,
+                  laytimeDataList: concat(state.laytimeDataList, rowPayload),
+                    //  laytimeDataList:newRowList,
+                    };
+                }
+
+            // const getLayTimeRowDataFromAPI = action.payload;
+            // const laytimeRowInputData = { ...state.laytimeRowInput };
+            
+
+            
             
         case Types.LAYTIME_DATA_SUBMIT:
-            let cloneObj = state.laytimeDatList;
+            let cloneObj = state.laytimeDataList;
             console.log('action.payload laytime', action.payload);
             cloneObj.push(action.payload.data.data);
 
@@ -84,7 +128,7 @@ const LaytimeRowReducer = (state = initialState, action) => {
                     laytimeRowInput: initialState.laytimeRowInput,
                     loading: action.payload.loading,
                     layTimeRowList:action.payload.layTimeRowList,
-                    laytimeDatList:cloneObj,
+                    laytimeDataList:cloneObj,
                 };
             } else {
                 return {
@@ -103,10 +147,10 @@ const LaytimeRowReducer = (state = initialState, action) => {
 
         case Types.DELETE_LAYTIMEROW_DATA:
 
-        let deleteData = state.laytimeDatList.filter(item=>item.intLayTimeRowID !==action.payload.intLayTimeRowID);
+        let deleteData = state.laytimeDataList.filter(item=>item.intLayTimeRowID !==action.payload.intLayTimeRowID);
         return {
             ...state,
-            laytimeDatList:deleteData
+            laytimeDataList:deleteData
 
         };
        
