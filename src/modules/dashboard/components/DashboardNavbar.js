@@ -3,11 +3,12 @@ import  { Form, Navbar,Nav,FormControl, Button } from "react-bootstrap";
 const DashboardNavbar = () => {
     return ( 
        <>
-       <div className="container-fluid">
+       <div className="header-fixed subheader-fixed subheader aside-enabled subheader-fixed subheader  mb-5">
+       <div className="container-fluid  mb-5">
        <div className="row">
        <div className="col-12">
 
-       <Navbar bg="white" expand="lg" sticky="top">
+       <Navbar  expand="lg" sticky="top">
   <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
@@ -32,7 +33,7 @@ const DashboardNavbar = () => {
          </div>
 
        </div>
-           
+       </div>
        </>
      );
 }
