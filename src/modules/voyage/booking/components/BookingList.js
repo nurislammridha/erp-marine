@@ -22,7 +22,7 @@ const BookingList = () => {
   const [status, setStatus] = useState()
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
-  const [ active, setActive] = useState(false)
+  const [active, setActive] = useState(false)
   // get vessel booking id
   const [vesselBookingID, setVesselBookingID] = useState(null);
   const getVesselBookingID = (item) => {
@@ -135,7 +135,7 @@ const BookingList = () => {
                   {
                     VesselBookingList.length > 0 && VesselBookingList.map((item, index) => (
                       <tr>
-                        <td onClick={(id) => getVesselBookingID(item)}>{vesselPaginateData.from+index}</td>
+                        <td onClick={(id) => getVesselBookingID(item)}>{vesselPaginateData.from + index}</td>
                         <td onClick={(id) => getVesselBookingID(item)}>{item.strCargoName !== null && item.strCargoName !== '' ? item.strCargoName : ''}</td>
                         <td onClick={(id) => getVesselBookingID(item)}>{item.strShipName !== null && item.strShipName !== '' ? item.strShipName : ''}</td>
                         <td onClick={(id) => getVesselBookingID(item)}>{item.strVoyageNo !== null && item.strVoyageNo !== '' ? item.strVoyageNo : ''}</td>
@@ -152,10 +152,19 @@ const BookingList = () => {
                           </button>
                         </td>
                         {/* intBookingStatusId */}
-                        <td className="mt-3">
-                          {" "}
-                          <Link to={`/voyage/booking/bookingEdit/${item.intShipBookingId}`}><i className="far fa-edit editIcon item-list-icon cursor-pointer"></i></Link>
-                          <i className="fas fa-trash-alt editIcon item-list-icon ml-2 cursor-pointer" onClick={() => deleteVesselBookDetails(item.intShipBookingId)}></i>
+                        <td>
+                          {/* {""} */}
+                          <div className="d-flex">
+                            <Link onClick={(id) => getVesselBookingID(item)}>
+                              <i className="far fa-eye editIcon item-list-icon"></i>
+                            </Link>
+                            <Link to={`/voyage/booking/bookingEdit/${item.intShipBookingId}`}>
+                              <i className="far fa-edit editIcon item-list-icon ml-2"></i>
+                            </Link>
+                            <a href onClick={() => deleteVesselBookDetails(item.intShipBookingId)} >
+                              <i className="fas fa-trash-alt editIcon item-list-icon ml-2"></i>
+                            </a>
+                          </div>
                         </td>
                       </tr>
                     ))
