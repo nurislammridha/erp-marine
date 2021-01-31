@@ -667,8 +667,8 @@ i.fa.fa-plus-circle {
 .aside-menu .menu-nav>.menu-item>.menu-link {
     min-height: 36px!important;
 }
+
 .aside .aside-menu .menu-nav {
-   
     width: auto!important;
     /* width: 1800px; */
 }
@@ -1110,6 +1110,7 @@ button.certificate-done {
     text-transform: uppercase;
 }
 
+
 /* .due-days h6:before {
     position: absolute;
     content: "";
@@ -1160,13 +1161,19 @@ p.certificate-list-text {
 .certificate-due-g-60 {
     background: #8af2c0 !important;
 }
+
+
 /* expense addition-deduction */
+
 .MuiPaper-root.makeStyles-root-1.MuiPaper-elevation1.MuiPaper-rounded {
     height: 30px!important;
     box-shadow: none!important;
     border: 1px solid #ccc!important;
 }
+
+
 /* certificate color picker */
+
 input.color-picker {
     /* margin-bottom: 7px; */
     height: 24px;
@@ -1174,9 +1181,16 @@ input.color-picker {
     border-radius: 3px;
     /* margin-left: 12px; */
 }
+
+
 /* input.color-picker.between-sixty {
     margin-left:-4px;
 }
 input.color-picker.more-than-sixty {
     margin-left: 52px;
 } */
+
+.card-top-border {
+    border-top: 3px solid #1bc5bd!important;
+    border-radius: 0px;
+}
