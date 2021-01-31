@@ -1,7 +1,42 @@
 import React, { useEffect } from "react";
 import { Form } from "react-bootstrap";
+import { dispacth } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
+import { allCheckboxSelected, getRoleList, roleCheckboxSelect, checkPermissionGroupAction } from "../_redux/actions/RolePermissionManagementAction";
 
 const RolePermissionList = () => {
+
+
+  const dispatch = useDispatch();
+  const roleList = useSelector((state) => state.roleReducer.roleList);
+
+  console.log('roleList', roleList);
+
+  useEffect(() => {
+    dispatch(getRoleList());
+  }, [])
+
+  const roleCheck = (
+    e,
+    parentRole,
+    item,
+    indexChild,
+    indexparentRole
+  ) => {
+    console.log('e.target.checked', e.target.checked);
+    let checkboxStatus = e.target.checked
+    dispatch(roleCheckboxSelect(checkboxStatus, parentRole, item, indexChild, indexparentRole));
+  }
+
+  const checkPermissionGroup = (e, index, checkboxStatus) => {
+    dispatch(checkPermissionGroupAction(index, checkboxStatus));
+  }
+
+  const allChecked = (e) => {
+    let checkStausCheck = e.target.checked;
+    dispatch(allCheckboxSelected(checkStausCheck));
+  }
+
   return (
     <>
       <div className="container">
@@ -34,164 +69,54 @@ const RolePermissionList = () => {
                   </div>
                   <div className="col-9">
                     <Form.Group controlId="all">
-                      <Form.Check type="checkbox" label="All" for="all" />
+                      <Form.Check type="checkbox" label="All" for="all" onClick={(e) => allChecked(e)} />
                     </Form.Group>
                   </div>
                 </div>
-                <div className="form-group row mt-5">
-                  <div className="col-3 ">
-                    <Form.Group controlId="supplier">
-                      <Form.Check
-                        type="checkbox"
-                        label="Supplier"
-                        for="supplier"
-                      />
-                    </Form.Group>
-                  </div>
-                  <div className="col-9 ">
-                    <div className="row ">
-                      <Form.Group controlId="Create">
+                {roleList && roleList.map((parentRole, indexparentRole) => (
+                  <div className="form-group row mt-5">
+                    <div className="col-3 ">
+                      <Form.Group controlId="supplier">
                         <Form.Check
                           type="checkbox"
-                          label="Create"
-                          for="Create"
-                          className="mr-3"
+                          label={parentRole.name}
+                          for="supplier"
+                          checked={parentRole.isChecked}
+                          onClick={(e) => checkPermissionGroup(e, indexparentRole, parentRole.isChecked ? false: true)}
                         />
-                      </Form.Group>
-                      <Form.Group controlId="list">
-                        <Form.Check
-                          type="checkbox"
-                          label="List"
-                          for="list"
-                          className="mr-3"
-                        />
-                      </Form.Group>
-                      <Form.Group controlId="edit">
-                        <Form.Check
-                          type="checkbox"
-                          label="Edit"
-                          for="Approve"
-                          className="mr-3"
-                        />
-                      </Form.Group>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-group row mt-5">
-                  <div className="col-3 ">
-                    <Form.Group controlId="purchase">
-                      <Form.Check
-                        type="checkbox"
-                        label="Purchase"
-                        for="purchase"
-                      />
-                    </Form.Group>
-                  </div>
 
-                  <div className="col-9 ">
-                    <div className="row ">
-                      <Form.Group controlId="Create">
-                        <Form.Check
-                          type="checkbox"
-                          label="Create"
-                          for="Create"
-                          className="mr-3"
-                        />
-                      </Form.Group>
-                      <Form.Group controlId="list">
-                        <Form.Check
-                          type="checkbox"
-                          label="List"
-                          for="list"
-                          className="mr-3"
-                        />
-                      </Form.Group>
-                      <Form.Group controlId="edit">
-                        <Form.Check
-                          type="checkbox"
-                          label="Edit"
-                          for="Approve"
-                          className="mr-3"
-                        />
                       </Form.Group>
                     </div>
-                  </div>
-                </div>
+                    {parentRole && parentRole.permissions.map((item, indexChild) => (
+                      <div className="col-9 ">
+                        <div className="row ">
+                          <Form.Group controlId="Create">
+                            <Form.Check
+                              type="checkbox"
+                              label={item.name}
+                              for="Create"
+                              className="mr-3"
+                              checked={item.isChecked}
+                              onClick={(e) =>
+                                roleCheck(
+                                  e,
+                                  parentRole,
+                                  item,
+                                  indexChild,
+                                  indexparentRole
 
-                <div className="form-group row mt-5">
-                  <div className="col-3 ">
-                    <Form.Group controlId="customer">
-                      <Form.Check
-                        type="checkbox"
-                        label="Customer"
-                        for="customer"
-                      />
-                    </Form.Group>
+                                )
+                              }
+                            />
+                          </Form.Group>
+                        </div>
+                      </div>
+                    ))}
+
                   </div>
-                  <div className="col-9 ">
-                    <div className="row ">
-                      <Form.Group controlId="Create">
-                        <Form.Check
-                          type="checkbox"
-                          label="Create"
-                          for="Create"
-                          className="mr-3"
-                        />
-                      </Form.Group>
-                      <Form.Group controlId="list">
-                        <Form.Check
-                          type="checkbox"
-                          label="List"
-                          for="list"
-                          className="mr-3"
-                        />
-                      </Form.Group>
-                      <Form.Group controlId="edit">
-                        <Form.Check
-                          type="checkbox"
-                          label="Edit"
-                          for="Approve"
-                          className="mr-3"
-                        />
-                      </Form.Group>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-group row mt-5">
-                  <div className="col-3 ">
-                    <Form.Group controlId="user">
-                      <Form.Check type="checkbox" label="User" for="user" />
-                    </Form.Group>
-                  </div>
-                  <div className="col-9 ">
-                    <div className="row ">
-                      <Form.Group controlId="Create">
-                        <Form.Check
-                          type="checkbox"
-                          label="Create"
-                          for="Create"
-                          className="mr-3"
-                        />
-                      </Form.Group>
-                      <Form.Group controlId="list">
-                        <Form.Check
-                          type="checkbox"
-                          label="List"
-                          for="list"
-                          className="mr-3"
-                        />
-                      </Form.Group>
-                      <Form.Group controlId="edit">
-                        <Form.Check
-                          type="checkbox"
-                          label="Edit"
-                          for="Approve"
-                          className="mr-3"
-                        />
-                      </Form.Group>
-                    </div>
-                  </div>
-                </div>
+                ))}
+
+
                 <button className="btn btn-primary">Save</button>
               </form>
             </div>
