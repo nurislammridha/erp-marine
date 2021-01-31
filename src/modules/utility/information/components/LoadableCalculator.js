@@ -15,6 +15,10 @@ const LoadableCalculator = () => {
     dispatch(changeTextInput(name, value))
   }
 
+  const printValue = (value) => {
+    return new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 4 }).format(value)
+  }
+
   // console.log('LoadableCalculatorInput :>> ', LoadableCalculatorInput);
   const courseData = [
     {
@@ -221,39 +225,39 @@ const LoadableCalculator = () => {
               <div className="row">
                 <div className="col-xl-7 col-lg-7 col-6">Differ</div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.differ}</div>
+                <div className="col-xl-4 col-lg-4 col-5">{printValue(LoadableCalculatorInput.differ)}</div>
                 <div className="col-xl-7 col-lg-7 col-6">Differincm</div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.differincm}</div>
+                <div className="col-xl-4 col-lg-4 col-5">{printValue(LoadableCalculatorInput.differincm)}</div>
                 <div className="col-xl-7 col-lg-7 col-6">Deductable</div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.deductable}</div>
+                <div className="col-xl-4 col-lg-4 col-5">{printValue(LoadableCalculatorInput.deductable)}</div>
                 <div className="col-xl-7 col-lg-7 col-6 text-bold mt-3">
                   Actual Load
                 </div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.actualLoad}</div>
+                <div className="col-xl-4 col-lg-4 col-5">{printValue(LoadableCalculatorInput.actualLoad)}</div>
                 <div className="col-xl-7 col-lg-7 col-6">Deductable Load</div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.deductableLoad}</div>
+                <div className="col-xl-4 col-lg-4 col-5">{printValue(LoadableCalculatorInput.deductableLoad)}</div>
                 <div className="col-xl-7 col-lg-7 col-6">Deductable for FWA</div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.deductableForFWA}</div>
+                <div className="col-xl-4 col-lg-4 col-5">{printValue(LoadableCalculatorInput.deductableForFWA)}</div>
                 <div className="col-xl-7 col-lg-7 col-6 text-bold">
                   Total Deductable
                 </div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.totalDeductable}</div>
+                <div className="col-xl-4 col-lg-4 col-5">{printValue(LoadableCalculatorInput.totalDeductable)}</div>
                 <div className="col-xl-7 col-lg-7 col-6 text-bold mt-3">
                   Loadable Qty for Freshwater
                 </div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.freshwater}</div>
+                <div className="col-xl-4 col-lg-4 col-5">{printValue(LoadableCalculatorInput.freshwater)}</div>
                 <div className="col-xl-7 col-lg-7 col-6 text-bold mt-1">
                   Loadable Qty for Seawater
                 </div>
                 <div className="col-1">:</div>
-                <div className="col-xl-4 col-lg-4 col-5">{LoadableCalculatorInput.seawater}</div>
+                <div className="col-xl-4 col-lg-4 col-5">{printValue(LoadableCalculatorInput.seawater)}</div>
               </div>
             </div>
           </div>
