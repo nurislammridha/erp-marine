@@ -11,6 +11,7 @@ import TableCircularProgressBar from "../../../modules/master/components/Circula
 import PolarChart from "../../../modules/master/components/Chart/PolarChart";
 import SalesPaymentTable from "../../../modules/master/components/DashboardTable/SalesPaymentTable";
 import PurchasePaymentTable from "../../../modules/master/components/DashboardTable/PurchasePaymentTable";
+import DashboardNavbar from "../../../modules/dashboard/components/DashboardNavbar";
 
 export function Dashboard() {
   const uiService = useHtmlClassService();
@@ -24,8 +25,9 @@ export function Dashboard() {
       {/* <DashboardMain /> */}
 
       {/* DashBoard design Starts 11:00   */}
-
+      <DashboardNavbar/>
       <DashBoardCard />
+
       <div className="container  dashboard__pb ">
         <div className="row">
           <div className="col-lg-6  col-12">
@@ -54,7 +56,9 @@ export function Dashboard() {
           <div className="col-lg-6  col-12">
             <PurchasePaymentTable />
           </div>
+         
         </div>
+      
       </div>
     </>
   );
