@@ -61,7 +61,7 @@ const ItemAdd = () => {
   ];
   return (
     <>
-      <div className="card card-custom gutter-b pl-5 pr-5 mb-5">
+      <div className="card card-custom gutter-b pl-5 pr-5 mb-5 card-top-border">
         <div className="mt-5">
           <h3 className="mb-0 pb-0">Item Add</h3>
         </div>
