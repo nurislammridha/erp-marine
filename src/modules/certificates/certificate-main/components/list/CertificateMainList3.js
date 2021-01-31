@@ -196,7 +196,7 @@ const CertificateMainList = () => {
           </div>
         </Card.Body>
       </Card>
-      <Card className="p-5">
+      <Card className="p-5"  sticky="bottom">
         <div className="row justify-content-center">
           <div className="col-3 ml-5">
             <div className="between-thirty due-days">
