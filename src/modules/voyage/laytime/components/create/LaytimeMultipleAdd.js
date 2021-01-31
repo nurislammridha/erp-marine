@@ -1,14 +1,27 @@
-import { Form,Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { Tab, Tabs } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import DatePicker from "react-datepicker";
-import { deleteMultipleList,deleteSofList } from "../../_redux/actions/LaytimeAction";
-import { addNewOperation, addNewSof, getRemarkList, handleChangeLaytimeMultiple, handleChangeLaytimeMultipleOperation, multipleSubmitAction, removeOperationData, removeSofData, showSoftacton } from "../../_redux/actions/LaytimeMultipleAction";
+import {
+  deleteMultipleList,
+  deleteSofList,
+} from "../../_redux/actions/LaytimeAction";
+import {
+  addNewOperation,
+  addNewSof,
+  getRemarkList,
+  handleChangeLaytimeMultiple,
+  handleChangeLaytimeMultipleOperation,
+  multipleSubmitAction,
+  removeOperationData,
+  removeSofData,
+  showSoftacton,
+} from "../../_redux/actions/LaytimeMultipleAction";
 import { showToast } from "../../../../master/utils/ToastHelper";
 
 const LaytimeMultipleAdd = () => {
@@ -26,21 +39,27 @@ const LaytimeMultipleAdd = () => {
   const remarkList = useSelector(
     (state) => state.layTimeOperationRemark.remarkList
   );
-  
-  console.log("layTimeOperationList : ",remarkList);
+
+  console.log("layTimeOperationList : ", remarkList);
 
   const dispatch = useDispatch();
-  const laytimeDatList = useSelector(
-    (state) => state.laytimeDetailInfo.laytimeDatList
+  const laytimeDataList = useSelector(
+    (state) => state.laytimeDetailInfo.laytimeDataList
   );
 
-console.log("Header and row id : ",laytimeDatList);
+  // const layTImeRowData = useSelector(
+  //   (state) => state.laytimeDetailInfo.laytimeRowData
+  // );
+
+  console.log("laytimeDataList list >>>>>>>>>> : ", laytimeDataList);
 
   useEffect(() => {
     dispatch(getRemarkList());
   }, []);
 
-  const laytimeOperationData = useSelector((state)=> state.LaytimeMultiple.laytimeOperationData);
+  const laytimeOperationData = useSelector(
+    (state) => state.LaytimeMultiple.laytimeOperationData
+  );
   const laytimeDetailsData = useSelector(
     (state) => state.LaytimeMultiple.laytimeDetailsData
   );
@@ -56,27 +75,30 @@ console.log("Header and row id : ",laytimeDatList);
     (state) => state.LaytimeMultiple.layTimeMultipleInput.layTimeOperations
   );
 
-  console.log("layTimeOperationList page", layTimeOperationList);
+  console.log("layTimeMultipleInput from reducer", layTimeMultipleInput);
 
-  const handleChangeTextInput = (name, value,index) => {
-    console.log('index', index);
-    console.log('name', name);
-    console.log('value', value);
-    dispatch(handleChangeLaytimeMultiple(name, value,index));
+  const laytimeopData = useSelector(
+    (state) => state.LaytimeMultiple.layTimeOperation
+  );
+  const laytimeSofData = useSelector(
+    (state) => state.LaytimeMultiple.layTimeSof
+  );
+
+  const handleChangeTextInput = (name, value, index) => {
+    dispatch(handleChangeLaytimeMultiple(name, value, index));
   };
-  const softShow = useSelector((state)=> state.LaytimeMultiple.softShow);
+  const softShow = useSelector((state) => state.LaytimeMultiple.softShow);
 
   const loading = useSelector((state) => state.LaytimeMultiple.loading);
 
-
-  const operationhandleChangeTextInput = (name, value,index) => {
-    console.log('index', index);
-    console.log('name', name);
-    console.log('value', value);
-    dispatch(handleChangeLaytimeMultipleOperation(name, value,index));
+  const operationhandleChangeTextInput = (name, value, index) => {
+    console.log("index", index);
+    console.log("name", name);
+    console.log("value", value);
+    dispatch(handleChangeLaytimeMultipleOperation(name, value, index));
   };
 
-  console.log('softShow', softShow);
+  console.log("softShow", softShow);
 
   const [show, setShow] = useState([]);
 
@@ -90,39 +112,35 @@ console.log("Header and row id : ",laytimeDatList);
     );
   };
 
-  const showSofsList =()=>{
-    dispatch(showSoftacton());
-  }
+  const showSofsList = (data) => {
+    dispatch(showSoftacton(data));
+  };
 
-  const addSof =(index)=>{
-
-     dispatch(addNewSof());
-   
-  }
+  const addSof = (index) => {
+    dispatch(addNewSof(index));
+  };
 
   const addOperation = (index) => {
-    
     dispatch(addNewOperation());
-  }
+  };
 
-  //Delete SOF DATA 
+  //Delete SOF DATA
 
   const deleteSofData = (data) => {
     dispatch(removeSofData(data));
-  }
+  };
 
   const deleteOperationData = (data) => {
     dispatch(removeOperationData(data));
-  }
-  
+  };
 
   //SOF AND OPERATION FINAL SUBMIT
 
   const HandleMultipleSubmit = (e) => {
-    dispatch(multipleSubmitAction(layTimeMultipleInput))
-  }
+    dispatch(multipleSubmitAction(layTimeMultipleInput));
+  };
 
-  console.log("layTimeRowList data by multiplerow:", laytimeDatList);
+  console.log("layTimeRowList data by multiplerow:", laytimeDataList);
   return (
     <div className="">
       <div className="card card-custom gutter-b">
@@ -138,8 +156,8 @@ console.log("Header and row id : ",laytimeDatList);
                 <th> COMPLETED</th>
                 <th class="text-right pr-3">ACTION</th>
               </tr>
-              {laytimeDatList &&
-                laytimeDatList.map((item, index) => (
+              {laytimeDataList &&
+                laytimeDataList.map((item, index) => (
                   <tr>
                     <td>{item.intType}</td>
                     <td>{item.intPortID !== null ? item.intPortID : "#00"}</td>
@@ -159,13 +177,11 @@ console.log("Header and row id : ",laytimeDatList);
                       >
                         <i className="fas fa-trash"></i>
                       </button>
-                      {/*<a className="btn btn-icon btn-light btn-hover-danger btn-sm">
-                      <i className="fas fa-trash"></i>
-              </a>*/}
+                      
                       <button
                         type="submit"
                         class="saveButton text-white btn ml-3"
-                        onClick={() => showSofsList()}
+                        onClick={() => showSofsList({ item })}
                       >
                         SOF
                       </button>
@@ -192,130 +208,155 @@ console.log("Header and row id : ",laytimeDatList);
                           <th class="text-right pr-3">ACTION</th>
                         </tr>
 
-
-                        {
-                          layTimeDetailsList && layTimeDetailsList.map((item,index)=>(
+                        {layTimeDetailsList &&
+                          layTimeDetailsList.map((item, index) => (
                             <tr>
-                          <td>
+                              <td>
+                                <DatePicker
+                                  className="date-picker"
+                                  name="dteStartTime"
+                                  dateFormat="MM-dd-yyyy"
+                                  minDate={moment().toDate()}
+                                  placeholderText="select commence date"
+                                  selected={
+                                    item.dteStartTime !== ""
+                                      ? moment(item.dteStartTime).toDate()
+                                      : null
+                                  }
+                                  onChange={(date) =>
+                                    handleChangeTextInput(
+                                      "dteStartTime",
+                                      date,
+                                      index
+                                    )
+                                  }
+                                  ref={register({
+                                    required: true,
+                                    maxLength: 100,
+                                  })}
+                                />
 
-                          <DatePicker
-                          className="date-picker"
-                          name="dteStartTime"
-                          dateFormat="MM-dd-yyyy"
-                          minDate={moment().toDate()}
-                          placeholderText="select commence date"
-                          selected={item.dteStartTime !== '' ? moment(item.dteStartTime).toDate() : null}
-                          onChange={(date) => handleChangeTextInput("dteStartTime", date,index)}
-                          ref={register({
-                            required: true,
-                            maxLength: 100,
-                          })}
-                          />
+                                {/*<input type ="text" value={item.dteStartTime}  onChange={(e) => handleChangeTextInput("dteStartTime", e.target.value,index)}/>*/}
+                              </td>
 
-                    
+                              <td>
+                                <DatePicker
+                                  className="date-picker"
+                                  name="dteEndTime"
+                                  dateFormat="MM-dd-yyyy"
+                                  minDate={moment().toDate()}
+                                  placeholderText="select commence date"
+                                  selected={
+                                    item.dteEndTime !== ""
+                                      ? moment(item.dteEndTime).toDate()
+                                      : null
+                                  }
+                                  onChange={(date) =>
+                                    handleChangeTextInput(
+                                      "dteEndTime",
+                                      date,
+                                      index
+                                    )
+                                  }
+                                  ref={register({
+                                    required: true,
+                                    maxLength: 100,
+                                  })}
+                                />
+                              </td>
+                              <td>
+                                <RHFInput
+                                  as={<Select options={selectCount} />}
+                                  rules={{ required: true }}
+                                  name="numTimeUsed"
+                                  register={register}
+                                  value={item.numTimeUsed}
+                                  onChange={(option) => {
+                                    handleChangeTextInput(
+                                      "strTimeName",
+                                      option.label,
+                                      index
+                                    );
+                                    handleChangeTextInput(
+                                      "numTimeUsed",
+                                      option.value,
+                                      index
+                                    );
+                                  }}
+                                  ref={register({
+                                    required: true,
+                                    maxLength: 100,
+                                  })}
+                                  setValue={setValue}
+                                />
+                              </td>
+                              <td>
+                                <Form.Control
+                                  type="number"
+                                  name="numRatio"
+                                  className="fromStyle formHeight"
+                                  value={item.numRatio}
+                                  onChange={(e) =>
+                                    handleChangeTextInput(
+                                      "numRatio",
+                                      e.target.value,
+                                      index
+                                    )
+                                  }
+                                  ref={register({
+                                    required: true,
+                                    maxLength: 100,
+                                  })}
+                                  setValue={setValue}
+                                />
+                              </td>
+                              <td>
+                                <RHFInput
+                                  as={<Select options={remarkList} />}
+                                  rules={{ required: true }}
+                                  name="strRemarks"
+                                  register={register}
+                                  value={item.strOperationRemark}
+                                  onChange={(option) => {
+                                    handleChangeTextInput(
+                                      "strOperationRemark",
+                                      option.label,
+                                      index
+                                    );
+                                    handleChangeTextInput(
+                                      "intOperationRemarkID",
+                                      option.value,
+                                      index
+                                    );
+                                  }}
+                                  ref={register({
+                                    required: true,
+                                    maxLength: 100,
+                                  })}
+                                  setValue={setValue}
+                                />
+                              </td>
+                              <td className="text-right pr-3 mt-3">
+                                {index === 0 ? (
+                                  <a
+                                    className="btn btn-icon btn-light btn-hover-danger btn-sm"
+                                    onClick={() => addSof(index)}
+                                  >
+                                    <i className="fas fa-plus"></i>
+                                  </a>
+                                ) : (
+                                  ""
+                                )}
 
-                            {/*<input type ="text" value={item.dteStartTime}  onChange={(e) => handleChangeTextInput("dteStartTime", e.target.value,index)}/>*/}
-
-                          </td>
-
-                          <td>
-                          <DatePicker
-                          className="date-picker"
-                          name="dteEndTime"
-                          dateFormat="MM-dd-yyyy"
-                          minDate={moment().toDate()}
-                          placeholderText="select commence date"
-                          selected={item.dteEndTime !== '' ? moment(item.dteEndTime).toDate() : null}
-                          onChange={(date) => handleChangeTextInput("dteEndTime", date,index)}
-                          ref={register({
-                            required: true,
-                            maxLength: 100,
-                          })}
-                          />
-
-                          </td>
-                          <td>
-                            <RHFInput
-                              as={<Select options={selectCount} />}
-                              rules={{ required: true }}
-                              name="numTimeUsed"
-                              register={register}
-                              // value={laytimeDetailsData.numTimeUsed}
-                              onChange={(option) => {
-                                handleChangeTextInput(
-                                  "strTimeName",
-                                  option.label,index
-                                );
-                                handleChangeTextInput(
-                                  "numTimeUsed",
-                                  option.value,index
-                                );
-                              }}
-                              ref={register({
-                                required: true,
-                                maxLength: 100,
-                              })}
-                              setValue={setValue}
-                            />
-                          </td>
-                          <td>
-                            <Form.Control
-                              type="number"
-                              name="numRatio"
-                              className="fromStyle formHeight"
-                              // value={laytimeDetailsData.numRatio}
-                              onChange={(e) =>
-                                handleChangeTextInput(
-                                  "numRatio",
-                                  e.target.value,index
-                                )
-                              }
-                              ref={register({
-                                required: true,
-                                maxLength: 100,
-                              })}
-                            />
-                          </td>
-                          <td>
-                          <RHFInput
-                          as={<Select options={remarkList} />}
-                          rules={{ required: true }}
-                          name="strRemarks"
-                          register={register}
-                          value={remarkList.strOperationRemark}
-                          onChange={(option) => {
-                            handleChangeTextInput(
-                              "strOperationRemark",
-                              option.label,index
-                            );
-                            handleChangeTextInput(
-                              "intOperationRemarkID",
-                              option.value,index
-                            );
-                          }}
-                          ref={register({
-                            required: true,
-                            maxLength: 100,
-                          })}
-                          setValue={setValue}
-                        />
-                          </td>
-                          <td className="text-right pr-3 mt-3">
-                          {index === 0 ? 
-                            <a className="btn btn-icon btn-light btn-hover-danger btn-sm" onClick={() => addSof(index) }>
-                              <i className="fas fa-plus"></i>
-                            </a> : ""
-                          }
-                          
-                            <a className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm" onClick={() => deleteSofData(item)}>
-                              <i className="fas fa-trash"></i>
-                            </a>
-                          </td>
-                        </tr>
-
-                          ))
-                        }
-                        
+                                <a
+                                  className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm"
+                                  onClick={() => deleteSofData(item)}
+                                >
+                                  <i className="fas fa-trash"></i>
+                                </a>
+                              </td>
+                            </tr>
+                          ))}
                       </thead>
                     </table>
                   </div>
@@ -330,11 +371,11 @@ console.log("Header and row id : ",laytimeDatList);
                           <th class="text-right pr-3">ACTION</th>
                         </tr>
 
-                        {
-                          layTimeOperationList && layTimeOperationList.map((item,index)=>(
-                        <tr>
-                          <td>
-                         {/*} <DatePicker
+                        {layTimeOperationList &&
+                          layTimeOperationList.map((item, index) => (
+                            <tr>
+                              <td>
+                                {/*} <DatePicker
                             className="date-picker"
                             name=""
                             dateFormat="MM-dd-yyyy"
@@ -347,48 +388,54 @@ console.log("Header and row id : ",laytimeDatList);
                               maxLength: 100,
                             })}
                           />*/}
-                          </td>
-                          <td>
-                          <RHFInput
-                          as={<Select options={remarkList} />}
-                          rules={{ required: true }}
-                          name="strOperationRemark"
-                          register={register}
-                          value={remarkList.strOperationRemark}
-                          onChange={(option) => {
-                            operationhandleChangeTextInput(
-                              "strOperationRemark",
-                              option.label,
-                              index
-                            );
-                            operationhandleChangeTextInput(
-                              "intOperationRemarkID",
-                              option.value,
-                              index
-                            );
-                          }}
-                          ref={register({
-                            required: true,
-                            maxLength: 100,
-                          })}
-                          setValue={setValue}
-                        />
-                          </td>
+                              </td>
+                              <td>
+                                <RHFInput
+                                  as={<Select options={remarkList} />}
+                                  rules={{ required: true }}
+                                  name="strOperationRemark"
+                                  register={register}
+                                  value={item.strOperationRemark}
+                                  onChange={(option) => {
+                                    operationhandleChangeTextInput(
+                                      "strOperationRemark",
+                                      option.label,
+                                      index
+                                    );
+                                    operationhandleChangeTextInput(
+                                      "intOperationRemarkID",
+                                      option.value,
+                                      index
+                                    );
+                                  }}
+                                  ref={register({
+                                    required: true,
+                                    maxLength: 100,
+                                  })}
+                                  setValue={setValue}
+                                />
+                              </td>
 
-                          <td className="text-right pr-3 mt-3">
-
-                          {index === 0 ? 
-                            <a className="btn btn-icon btn-light btn-hover-danger btn-sm" onClick={() => addOperation(index) }>
-                              <i className="fas fa-plus"></i>
-                            </a> : ""
-                          }
-                            <a className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm" onClick={() => deleteOperationData(item)}>
-                              <i className="fas fa-trash"></i>
-                            </a>
-                          </td>
-                        </tr>
-                        ))
-                        }
+                              <td className="text-right pr-3 mt-3">
+                                {index === 0 ? (
+                                  <a
+                                    className="btn btn-icon btn-light btn-hover-danger btn-sm"
+                                    onClick={() => addOperation(index)}
+                                  >
+                                    <i className="fas fa-plus"></i>
+                                  </a>
+                                ) : (
+                                  ""
+                                )}
+                                <a
+                                  className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm"
+                                  onClick={() => deleteOperationData(item)}
+                                >
+                                  <i className="fas fa-trash"></i>
+                                </a>
+                              </td>
+                            </tr>
+                          ))}
                       </thead>
                     </table>
                   </div>
@@ -400,19 +447,24 @@ console.log("Header and row id : ",laytimeDatList);
                   {/*<button type="submit" class="saveButton text-white btn ml-13">
                     Save
                       </button>*/}
-                      {!loading && (
-                        <button type="button" class="saveButton text-white btn ml-6" onClick={(e) => HandleMultipleSubmit(e)}>Save</button>
-
-                      )}
-                      {loading && (
-                        <button type="button" class="saveButton disabled={true} text-white btn ml-6">
-                            <span className="p-2">
-                                Saving...
-                            </span>
-                            <span className="ml-3 spinner spinner-white "></span>
-                        </button>
-
-                      )}
+                  {!loading && (
+                    <button
+                      type="button"
+                      class="saveButton text-white btn ml-6"
+                      onClick={(e) => HandleMultipleSubmit(e)}
+                    >
+                      Save
+                    </button>
+                  )}
+                  {loading && (
+                    <button
+                      type="button"
+                      class="saveButton disabled={true} text-white btn ml-6"
+                    >
+                      <span className="p-2">Saving...</span>
+                      <span className="ml-3 spinner spinner-white "></span>
+                    </button>
+                  )}
                 </div>
               </div>
             </form>

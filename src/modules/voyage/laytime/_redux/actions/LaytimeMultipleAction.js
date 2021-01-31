@@ -34,15 +34,26 @@ export const handleChangeLaytimeMultiple = (name, value,index) => (dispatch) => 
 
  
   
-  export const showSoftacton = (laytimeDatList)=>(dispatch)=>{
+  export const showSoftacton = (data)=>(dispatch)=>{
+    let id = data.item.intLayTimeRowID;
+    let LayTimeSofOperationListURL = `${process.env.REACT_APP_API_URL}voyage/layTimeSofOperationList/${id}`;
 
-    dispatch({ type: Types.LAYTIMEROW_SOF_LIST, payload: null });
+    Axios.get(LayTimeSofOperationListURL)
+    .then((response) => {
+         
+        let data = response.data.data;
+        console.log('data', data);
+        data['sof'].forEach(sof => {
+          dispatch({ type: Types.ADD_NEW_SOF, payload: sof });
+        });
+        data['operation'].forEach(operation => {
+          dispatch({ type: Types.ADD_NEW_OPERATION, payload: operation });
+        });
+    })
   }
 
   export const addNewSof = () => (dispatch)=>{
-
     dispatch({ type: Types.ADD_NEW_SOF, payload: null });
-
   }
 
   export const addNewOperation = () => (dispatch) => {
@@ -52,8 +63,9 @@ export const handleChangeLaytimeMultiple = (name, value,index) => (dispatch) => 
   //submit sof and operation 
 export const multipleSubmitAction = (layTimeMultipleInput) => async (dispatch) => {
 
-  const sofAndOperationData = layTimeMultipleInput;
+  console.log("layTimeMultipleInput from action : >>>> ",layTimeMultipleInput);
 
+  const sofAndOperationData = layTimeMultipleInput;
   let responseList = {
       loading: true,
       data: {},
