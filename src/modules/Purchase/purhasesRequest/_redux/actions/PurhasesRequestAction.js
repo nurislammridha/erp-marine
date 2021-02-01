@@ -2,7 +2,7 @@ import * as Types from "../types/Types";
 import { showToast } from "../../../../master/utils/ToastHelper";
 import Axios from "axios";
 
-export const getPQListData = (page, searchText = null) => async (dispatch) => {
+export const getPRListData = (page, searchText = null) => async (dispatch) => {
     let responseList = {
         isLoading: true,
         data: {},
@@ -26,9 +26,9 @@ export const getPQListData = (page, searchText = null) => async (dispatch) => {
             .then((res) => {
                 const { data, message, status } = res.data;
                 responseList.status = status;
-                responseList.PQListData = data.data;
+                responseList.PRListData = data.data;
                 responseList.message = message;
-                responseList.PQPaginateData = data;
+                responseList.PRPaginateData = data;
                 responseList.isLoading = false;
 
             }).catch((err) => {

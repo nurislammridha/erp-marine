@@ -4,7 +4,7 @@ import { Button, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SimpleModal from '../../../master/components/Modal/SimpleModal';
-import { getPQListData } from '../_redux/actions/PurhasesRequestAction';
+import { getPRListData } from '../_redux/actions/PurhasesRequestAction';
 import PaginationLaravel from '../../../master/pagination/PaginationLaravel';
 import LoadingSpinner from "../../../master/spinner/LoadingSpinner";
 
@@ -12,27 +12,27 @@ import moment from "moment"
 const PurchaseRequestList = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.purchaseRequest.isLoading);
-  const PQListData = useSelector((state) => state.purchaseRequest.PQListData);
-  const PQPaginateData = useSelector((state) => state.purchaseRequest.PQPaginateData);
+  const PRListData = useSelector((state) => state.purchaseRequest.PRListData);
+  const PRPaginateData = useSelector((state) => state.purchaseRequest.PRPaginateData);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
-    dispatch(getPQListData(currentPage));
+    dispatch(getPRListData(currentPage));
   }, [dispatch, currentPage]);
 
   const changePage = (data) => {
     setCurrentPage(data.page);
-    dispatch(getPQListData(data.page));
+    dispatch(getPRListData(data.page));
   };
 
   const searchProduct = (e) => {
     const searchText = e.target.value;
     setSearchText(searchText);
     if (searchText.length === 0) {
-      dispatch(getPQListData(currentPage));
+      dispatch(getPRListData(currentPage));
     } else {
-      dispatch(getPQListData(currentPage, searchText));
+      dispatch(getPRListData(currentPage, searchText));
     }
   };
   return (
@@ -83,7 +83,7 @@ const PurchaseRequestList = () => {
                 </thead>
                 <tbody>
                   {
-                    PQListData.length > 0 && PQListData.map((item, index) => (
+                    PRListData.length > 0 && PRListData.map((item, index) => (
                       <tr>
                         <td>{item.intPurchaseRequestID !== null && item.intPurchaseRequestID !== '' ? item.intPurchaseRequestID : ''}</td>
                         <td>{item.dtePurchaseRequestDate !== null && item.dtePurchaseRequestDate !== '' ? moment(item.dtePurchaseRequestDate).format("DD-MM-YYYY") : ''}</td>
@@ -113,14 +113,14 @@ const PurchaseRequestList = () => {
                   }
                 </tbody>
               </table>
-              {!isLoading && PQListData.length === 0 && (
+              {!isLoading && PRListData.length === 0 && (
                 <div className="alert alert-warning mt-5">
                   Sorry ! Purchase Request List Not Found.
                 </div>
               )}
               <PaginationLaravel
                 changePage={changePage}
-                data={PQPaginateData}
+                data={PRPaginateData}
               />
             </div>
           </div>

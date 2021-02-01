@@ -37,8 +37,8 @@ const initialstate = {
         intActionBy: ""
     },
     multiplePQData: [],
-    PQListData: [],
-    PQPaginateData: [],
+    PRListData: [],
+    PRPaginateData: [],
 };
 const PurhasesRequestReducer = (state = initialstate, action) => {
     const newState = { ...state };
@@ -87,8 +87,8 @@ const PurhasesRequestReducer = (state = initialstate, action) => {
             if (action.payload.status) {
                 return {
                     ...state,
-                    PQListData: action.payload.PQListData,
-                    PQPaginateData: action.payload.PQPaginateData,
+                    PRListData: action.payload.PRListData,
+                    PRPaginateData: action.payload.PRPaginateData,
                     isLoading: false,
                 };
             } else {
