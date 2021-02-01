@@ -120,7 +120,7 @@ const EmployeeList = withRouter(({ history, props }) => {
         <div className="card card-custom gutter-b">
           <div className="card-header">
             <div className="card-title">
-              <h3 className="card-label">Employee List</h3>
+              <h3 className="card-label">Employee List </h3>
             </div>
             <PermissionWiseDisplay permission_name={'crew_create'} display={false}>
             <div className="card-toolbar">

@@ -313,7 +313,7 @@ const CertificateMainList = () => {
               </div>
             </div>
           </div>
-          {/* <SketchPicker onChange={(e)=>handleClick(e)}/> */}
+         
         </Card>
       )}
     </>
