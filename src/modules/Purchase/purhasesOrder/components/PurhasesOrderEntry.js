@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from 'moment';
 import { useHistory } from "react-router-dom";
 import { getCharterList } from "../../../master/DropDownData/Charter/_redux/CharterAction/CharterAction";
+import PurchaseOrderMultiple from "./PurchaseOrderMultiple";
 
 const PurhasesOrderEntry = () => {
   const { register, setValue } = useForm();
@@ -136,52 +137,9 @@ const PurhasesOrderEntry = () => {
           </Card>
           <Card className="ml-0 pl-0">
             <Card.Body className="pt-5 mt-0">
-              <div className="row">
-                <div className="col-md-4 col-12">
-                  <label className="formFont">Refference No</label>
-                  <RHFInput
-                    as={<Select options={shipList} />}
-                    rules={{ required: false }}
-                    name="intShipId"
-                    register={register}
-                    value={""}
-                    setValue={setValue}
-                  />
-                </div>
-                <div className="col-md-4 col-12">
-                  <label className="formFont">Item</label>
-                  <RHFInput
-                    as={<Select options={shipList} />}
-                    rules={{ required: false }}
-                    name="intShipId"
-                    register={register}
-                    value={""}
-                    setValue={setValue}
-                  />
-                </div>
-                <div className="col-md-3">
-                  <label htmlFor="">All Item</label>
-                  <Form.Group controlId="formBasicChecbox">
-                    <Form.Check
-                      className="forgotPasswordText  "
-                      type="checkbox"
-                    // onChange={(e) =>
-                    //   certificateMainInfoChange(
-                    //     "intNotOnBoard",
-                    //     certificateInfoInput.intNotOnBoard == "0" ? "1" : "0"
-                    //   )
-                    // }
-                    />
-                  </Form.Group>
-                </div>
-                <div className="col-md-1">
-                  <button
-                    className="btn btn-primary btn-sm mt-5"
-                  >
-                    Add
-              </button>
-                </div>
-              </div>
+
+              <PurchaseOrderMultiple />
+
             </Card.Body>
           </Card>
         </div>

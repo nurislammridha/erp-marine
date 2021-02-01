@@ -61,6 +61,7 @@ import BookingStatusReducer from "../modules/master/DropDownData/BookingStatus/_
 import CharterReducer from "../modules/master/DropDownData/Charter/_redux/CharterReducer/CharterReducer";
 import UtilityReducer from "../modules/utility/information/_redux/reducers/UtilityReducer";
 import RolePermissionManagementReducer from "../modules/role-permission-management/information/_redux/reducers/RolePermissionManagementReducer";
+import PurchasesOrderReducer from "../modules/Purchase/purhasesOrder/_redux/reducers/PurhasesOrderReducer";
 
 /** 
 | Domain : CCO
@@ -146,7 +147,10 @@ export const rootReducer = combineReducers({
   supplierList: SuppliersListReducer,
   itemList: ItemReducer,
   utitlityInfo: UtilityReducer,
-  roleReducer:RolePermissionManagementReducer,
+  roleReducer: RolePermissionManagementReducer,
+
+  /**Purchase Order */
+  purchasesOrderInfo: PurchasesOrderReducer
 });
 
 export function* rootSaga() {
