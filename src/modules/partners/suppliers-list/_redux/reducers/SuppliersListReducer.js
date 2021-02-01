@@ -25,7 +25,11 @@ const SuppliersListReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: action.payload,
             };
-
+        case Types.SUPPLIER_DETAILS:
+            return {
+                ...state,
+                supplierDetails: action.payload,
+            };
         default:
             break;
     }

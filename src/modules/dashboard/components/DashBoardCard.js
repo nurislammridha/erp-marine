@@ -23,7 +23,7 @@ const DashBoardCard = () => {
   }, []);
   return (
     <>
-      <div className="container dashboard__pb dashboard-cardsection mb-5">
+      <div className="container dashboard__pb dashboard-cardsection mb-5 mt-5">
         <div className="row">
           <div className="col-xl-3 col-lg-3 col-md-6">
             <div className="paid__widget">

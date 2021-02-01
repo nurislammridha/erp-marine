@@ -66,6 +66,12 @@ const LaytimeMultipleAdd = () => {
   const layTimeMultipleInput = useSelector(
     (state) => state.LaytimeMultiple.layTimeMultipleInput
   );
+  const intLayTimeHeaderID = useSelector(
+    (state) => state.LaytimeMultiple.intLayTimeHeaderID
+  );
+  const intLayTimeRowID = useSelector(
+    (state) => state.LaytimeMultiple.intLayTimeRowID
+  );
   const layTimeDetailsList = useSelector(
     (state) => state.LaytimeMultiple.layTimeMultipleInput.layTimeDetails
   );
@@ -113,6 +119,9 @@ const LaytimeMultipleAdd = () => {
   };
 
   const showSofsList = (data) => {
+    // normal insert, payload data set getted insert,
+    // const isEmptyData = false;
+    // isEmptyData)
     dispatch(showSoftacton(data));
   };
 
@@ -137,7 +146,13 @@ const LaytimeMultipleAdd = () => {
   //SOF AND OPERATION FINAL SUBMIT
 
   const HandleMultipleSubmit = (e) => {
-    dispatch(multipleSubmitAction(layTimeMultipleInput));
+    dispatch(
+      multipleSubmitAction(
+        layTimeMultipleInput,
+        intLayTimeHeaderID,
+        intLayTimeRowID
+      )
+    );
   };
 
   console.log("layTimeRowList data by multiplerow:", laytimeDataList);
@@ -177,7 +192,7 @@ const LaytimeMultipleAdd = () => {
                       >
                         <i className="fas fa-trash"></i>
                       </button>
-                      
+
                       <button
                         type="submit"
                         class="saveButton text-white btn ml-3"
@@ -345,15 +360,13 @@ const LaytimeMultipleAdd = () => {
                                     <i className="fas fa-plus"></i>
                                   </a>
                                 ) : (
-                                  ""
+                                  <a
+                                    className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm"
+                                    onClick={() => deleteSofData(item)}
+                                  >
+                                    <i className="fas fa-trash"></i>
+                                  </a>
                                 )}
-
-                                <a
-                                  className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm"
-                                  onClick={() => deleteSofData(item)}
-                                >
-                                  <i className="fas fa-trash"></i>
-                                </a>
                               </td>
                             </tr>
                           ))}
@@ -375,19 +388,19 @@ const LaytimeMultipleAdd = () => {
                           layTimeOperationList.map((item, index) => (
                             <tr>
                               <td>
-                                {/*} <DatePicker
-                            className="date-picker"
-                            name=""
-                            dateFormat="MM-dd-yyyy"
-                            minDate={moment().toDate()}
-                            placeholderText="select commence date"
-                            selected={item.dteStartTime !== '' ? moment(item.dteStartTime).toDate() : null}
-                            onChange={(date) => handleChangeTextInput("dteStartTime", date,index)}
-                            ref={register({
-                              required: true,
-                              maxLength: 100,
-                            })}
-                          />*/}
+                                <DatePicker
+                                  className="date-picker"
+                                  name=""
+                                  dateFormat="MM-dd-yyyy"
+                                  minDate={moment().toDate()}
+                                  placeholderText="select commence date"
+                                  //  selected={item.dteStartTime !== '' ? moment(item.dteStartTime).toDate() : null}
+                                  //   onChange={(date) => handleChangeTextInput("dteStartTime", date,index)}
+                                  ref={register({
+                                    required: true,
+                                    maxLength: 100,
+                                  })}
+                                />
                               </td>
                               <td>
                                 <RHFInput
@@ -425,14 +438,13 @@ const LaytimeMultipleAdd = () => {
                                     <i className="fas fa-plus"></i>
                                   </a>
                                 ) : (
-                                  ""
+                                  <a
+                                    className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm"
+                                    onClick={() => deleteOperationData(item)}
+                                  >
+                                    <i className="fas fa-trash"></i>
+                                  </a>
                                 )}
-                                <a
-                                  className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm"
-                                  onClick={() => deleteOperationData(item)}
-                                >
-                                  <i className="fas fa-trash"></i>
-                                </a>
                               </td>
                             </tr>
                           ))}

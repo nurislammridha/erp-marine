@@ -1,0 +1,3 @@
+export const CHANGE_TEXT_INPUT = "CHANGE_TEXT_INPUT";
+export const CALCULATE_ALL = "CALCULATE_ALL";
+export const GET_SHIP_LIST = "GET_SHIP_LIST";

@@ -668,6 +668,11 @@ i.fa.fa-plus-circle {
     min-height: 36px!important;
 }
 
+.aside .aside-menu .menu-nav {
+    width: auto!important;
+    /* width: 1800px; */
+}
+
 .css-1laa021-a11yText {
     padding: 0px !important;
 }
@@ -1087,7 +1092,7 @@ button.certificate-done {
 .certificate-lis-btn {
     padding: 3px 15px !important;
     border-radius: 2px !important;
-    width: 67px !important;
+    width: 75px !important;
     border: none !important
 }
 
@@ -1100,39 +1105,19 @@ button.certificate-done {
 }
 
 .due-days h6 {
-    position: relative;
+   
     font-size: 11px !important;
     text-transform: uppercase;
-}
-
-.due-days h6:before {
     position: absolute;
-    content: "";
-    top: -6px;
-    height: 25px;
-    width: 25px;
-    border-radius: 4px;
+    top: 6px;
+    left: 29px;
+}
+.due-days {
+    position: relative;
 }
 
-.between-thirty h6::before {
-    background: #8ec7ff;
-    left: -13px;
-}
 
-.More-than-sixty h6::before {
-    background: #8af2c0 !important;
-    left: 27px;
-}
 
-.between-sixty h6::before {
-    background: #678db2 !important;
-    left: -30px;
-}
-
-.expired h6::before {
-    background: #ea673e !important;
-    left: -13px;
-}
 
 p.certificate-list-text {
     width: 101px;
@@ -1156,18 +1141,88 @@ p.certificate-list-text {
     background: #8af2c0 !important;
 }
 
+
+/* expense addition-deduction */
+
+.MuiPaper-root.makeStyles-root-1.MuiPaper-elevation1.MuiPaper-rounded {
+    height: 30px!important;
+    box-shadow: none!important;
+    border: 1px solid #ccc!important;
+}
+
+
+/* certificate color picker */
+
+input.color-picker {
+    /* margin-bottom: 7px; */
+    height: 24px;
+    width: 24px;
+    border-radius: 3px;
+    /* margin-left: 12px; */
+}
+
+
+
+.card-top-border {
+    border-top: 3px solid #1bc5bd!important;
+    border-radius: 0px!important;
+}
+
+.card-top-border-success {
+    border-top: 3px solid #1bc5bd!important;
+    border-radius: 0px!important;
+}
+
+.card-top-border-info {
+    border-top: 3px solid #3699ff!important;
+    border-radius: 0px!important;
+}
+
+.card-top-border-error {
+    border-top: 3px solid #ff9da7!important;
+    border-radius: 0px!important;
+}
+
 .MuiInputBase-root.custome-purchase-search {
     width: 85%;
 }
+
 .purchaseSearch {
     margin-left: 20px!important;
 }
+
 .custome-border-left {
     min-width: 13%;
 }
+
 .custome-border-design {
     width: 100%;
     border-bottom: 2px solid lightgray;
     margin-left: 13px;
     margin-bottom: 10px;
+   
+}
+ /* navbar */
+ .aside-enabled.subheader-fixed .subheader {
+    left: 255px;
+}
+ .header-fixed.subheader-fixed .subheader {
+    position: fixed;
+    height: 54px;
+    top: 50px!important;
+    left: 0;
+    right: 0;
+    transition: top .3s ease;
+    z-index: 95;
+    box-shadow: 0 10px 30px 0 rgb(82 63 105 / 8%);
+    background-color: #fff;
+    border-top: 1px solid #ebedf3;
+    margin: 0;
+}
+.subheader {
+    display: flex;
+    align-items: center;
+}
+.container.dashboard__pb.dashboard-cardsection.mb-5.mt-5 {
+    padding-top: 43px;
 }
