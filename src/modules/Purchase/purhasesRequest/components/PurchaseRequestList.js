@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import SimpleModal from '../../../master/components/Modal/SimpleModal';
 import { getPQListData } from '../_redux/actions/PurhasesRequestAction';
 import PaginationLaravel from '../../../master/pagination/PaginationLaravel';
+import LoadingSpinner from "../../../master/spinner/LoadingSpinner";
+
 import moment from "moment"
 const PurchaseRequestList = () => {
   const dispatch = useDispatch();
@@ -65,7 +67,7 @@ const PurchaseRequestList = () => {
 
             </div>
           </div>
-          {/* {isLoading && <LoadingSpinner text="Loading Vessel Booking List..." />} */}
+          {isLoading && <LoadingSpinner text="Loading Purchase Request List..." />}
           <div className="row">
             <div className="react-bootstrap-table table-responsive">
               <table className="table table table-head-custom table-vertical-center  voyageTable">
@@ -92,18 +94,18 @@ const PurchaseRequestList = () => {
                             {item.isApprovedAll !== null && item.isApprovedAll !== '' ? item.isApprovedAll : 'Pending'}
                           </button>
                         </td>
-                        <td>
+                        <td className="text-center">
 
                           <div className="d-flex">
                             <Link>
                               <i className="far fa-eye editIcon item-list-icon"></i>
                             </Link>
-                            <Link>
+                            {/* <Link>
                               <i className="far fa-edit editIcon item-list-icon ml-2"></i>
                             </Link>
                             <a href >
                               <i className="fas fa-trash-alt editIcon item-list-icon ml-2"></i>
-                            </a>
+                            </a> */}
                           </div>
                         </td>
                       </tr>
@@ -113,7 +115,7 @@ const PurchaseRequestList = () => {
               </table>
               {!isLoading && PQListData.length === 0 && (
                 <div className="alert alert-warning mt-5">
-                  Sorry ! Vessel Booking List Not Found.
+                  Sorry ! Purchase Request List Not Found.
                 </div>
               )}
               <PaginationLaravel
