@@ -288,16 +288,10 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
           ],
         },
         {
-          subModuleName: "Laytime",
-          subModuleRouteUrl: "/voyage/laytime/laytimelist",
+          subModuleName: "Laytime Calculation",
+          subModuleRouteUrl: "/voyage/laytime/laytimeinfo",
           subModuleIcon: "menu-bullet menu-bullet-dot",
-          features: [
-            {
-              featureName: "Laytime Calculation",
-              featureRouteUrl: "/voyage/laytime/laytimeinfo",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-          ],
+          features: []
         },
         {
           subModuleName: "Booking",
