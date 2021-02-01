@@ -1276,3 +1276,10 @@ padding: 0.5rem 2rem;
    position: absolute!important;
     right: 8px!important;
    }
+   .viewIcon{
+    background: #E7F3FE;
+    padding: 5px;
+    border-radius: 5px;
+    color: #3699ff;
+    font-size: 10px;
+   }
