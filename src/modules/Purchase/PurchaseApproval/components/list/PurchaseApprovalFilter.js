@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { RHFInput } from 'react-hook-form-input';
 import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import Select from "react-select";
 import DatePicker from "react-datepicker";
-
 import moment from "moment"
+import { getSBUName, getShipName, handleChangePurchaseApprovalFilterInput } from '../../_redux/actions/PurchaseApprovalAction';
+import { getBranchName } from '../../../POApproval/_redux/actions/POApprovalAction';
+
 const PurchaseApprovalFilter = () => {
     const { register, setValue } = useForm();
-    const history = useHistory()
+    const dispatch = useDispatch();
+    const PurchaseApprovalFilterInput = useSelector((state) => state.purchaseApprovalFilter.PurchaseApprovalFilterInput);
+    const shipOptionData = useSelector((state) => state.purchaseApprovalFilter.shipNameData);
+    const SBUOptionData = useSelector((state) => state.purchaseApprovalFilter.SBUNameData);
+    const branchOptionData = useSelector((state) => state.POApprovalFilter.branchNameData);
+
+    const handleChangeTextInput = (name, value) => {
+        dispatch(handleChangePurchaseApprovalFilterInput(name, value));
+    };
+
 
     const shipList = [
         {
@@ -20,66 +32,73 @@ const PurchaseApprovalFilter = () => {
             label: "Akij Noor"
         },
     ]
+
+    useEffect(() => {
+        dispatch(getShipName());
+        dispatch(getBranchName());
+        dispatch(getSBUName());
+    }, []);
+
+
     return (
         <form className="form form-label-right voyageEngineerForm" autoComplete="off" >
             {/*****************Basic information ***************/}
             <div className="form-group mb-1">
                 <div className="row">
-                    <div className="col-lg-4 col-6">
+                    <div className="col-md-4 col-6">
                         <label className="formFont">SBU</label>
                         <RHFInput
-                            as={<Select options={shipList} />}
+                            as={<Select options={SBUOptionData} />}
                             rules={{ required: false }}
-                            name="intShipId"
+                            name="intBusinessUnitId"
                             register={register}
-                            // onChange={(option) => {
-                            //   handleChangeTextInput('strShipName', option.label);
-                            //   handleChangeTextInput('intShipId', option.value)
-                            // }}
+                            onChange={(option) => {
+                                handleChangeTextInput('strBusinessUnitName', option.label);
+                                handleChangeTextInput('intBusinessUnitId', option.value)
+                            }}
                             setValue={setValue}
                         />
                     </div>
-                    <div className="col-lg-4 col-6">
-                        <label className="formFont">Type</label>
+                    <div className="col-md-4 col-6">
+                        <label className="formFont">Branch</label>
                         <RHFInput
-                            as={<Select options={shipList} />}
+                            as={<Select options={branchOptionData} />}
                             rules={{ required: false }}
-                            name="intShipId"
+                            name="strType"
                             register={register}
-                            // onChange={(option) => {
-                            //   handleChangeTextInput('strShipName', option.label);
-                            //   handleChangeTextInput('intShipId', option.value)
-                            // }}
+                            onChange={(option) => {
+                                handleChangeTextInput('strType', option.label);
+                                handleChangeTextInput('intTypeId', option.value)
+                            }}
                             setValue={setValue}
                         />
                     </div>
 
-                    <div className="col-lg-4 col-6">
+                    <div className="col-md-4 col-6">
                         <label className="formFont">Ship Name</label>
                         <RHFInput
-                            as={<Select options={shipList} />}
+                            as={<Select options={shipOptionData} />}
                             rules={{ required: false }}
-                            name="intShipId"
+                            name="intShipID"
                             register={register}
-                            // onChange={(option) => {
-                            //   handleChangeTextInput('strShipName', option.label);
-                            //   handleChangeTextInput('intShipId', option.value)
-                            // }}
+                            onChange={(option) => {
+                                handleChangeTextInput('strShipName', option.label);
+                                handleChangeTextInput('intShipID', option.value)
+                            }}
                             setValue={setValue}
                         />
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-lg-4 col-6">
+                    <div className="col-md-4 col-6">
                         <label className="formFont"> From Date</label>
                         <DatePicker
                             className="date-picker"
-                            name="dteCommenceDate"
+                            name="dteFromDate"
                             dateFormat="MM-dd-yyyy"
                             minDate={moment().toDate()}
-                            placeholderText="select commence date"
-                            // selected={VesselBooking.dteCommenceDate !== '' ? moment(VesselBooking.dteCommenceDate).toDate() : null}
-                            // onChange={(date) => handleChangeTextInput("dteCommenceDate", date)}
+                            selected={PurchaseApprovalFilterInput.dteFromDate}
+                            onChange={(date) => handleChangeTextInput("dteFromDate", date)}
                             ref={register({
                                 required: true,
                                 maxLength: 100,
@@ -87,16 +106,15 @@ const PurchaseApprovalFilter = () => {
                         />
                         <i className="fas fa-calendar-alt"></i>
                     </div>
-                    <div className="col-lg-4 col-6">
+                    <div className="col-md-4 col-6">
                         <label className="formFont"> To Date</label>
                         <DatePicker
                             className="date-picker"
-                            name="dteCommenceDate"
+                            name="dteToDate"
                             dateFormat="MM-dd-yyyy"
-                            minDate={moment().toDate()}
-                            placeholderText="select commence date"
-                            // selected={VesselBooking.dteCommenceDate !== '' ? moment(VesselBooking.dteCommenceDate).toDate() : null}
-                            // onChange={(date) => handleChangeTextInput("dteCommenceDate", date)}
+                            minDate={PurchaseApprovalFilterInput.dteFromDate}
+                            selected={PurchaseApprovalFilterInput.dteToDate}
+                            onChange={(date) => handleChangeTextInput("dteToDate", date)}
                             ref={register({
                                 required: true,
                                 maxLength: 100,

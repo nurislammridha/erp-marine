@@ -2,7 +2,7 @@ import React from 'react';
 import * as Types from "../types/Types";
 
 const initialState = {
-    PurchaseApprovalFilterInput: {
+    POApprovalFilterInput: {
         strSBUName: "",
         intSBUId: "",
         strBusinessUnitName: "",
@@ -14,16 +14,16 @@ const initialState = {
     }
 }
 
-const PurchaseApprovalReducer = (state = initialState, action) => {
+const POApprovalReducer = (state = initialState, action) => {
     const newState = { ...state };
 
     switch (action.type) {
-        case Types.CHANGE_PURCHASE_APPROVAL_FILTER_INPUT:
-            const PurchaseApprovalFilterInput = { ...state.PurchaseApprovalFilterInput };
-            PurchaseApprovalFilterInput[action.payload.name] = action.payload.value;
+        case Types.CHANGE_PO_APPROVAL_FILTER_INPUT:
+            const POApprovalFilterInput = { ...state.POApprovalFilterInput };
+            POApprovalFilterInput[action.payload.name] = action.payload.value;
             return {
                 ...state,
-                PurchaseApprovalFilterInput,
+                POApprovalFilterInput,
 
             };
 
@@ -31,6 +31,12 @@ const PurchaseApprovalReducer = (state = initialState, action) => {
             return {
                 ...state,
                 SBUNameData: getSBUName(action.payload),
+            };
+
+        case Types.GET_BRANCH_NAME:
+            return {
+                ...state,
+                branchNameData: getBranchName(action.payload),
             };
 
         case Types.GET_SHIP_NAME:
@@ -45,8 +51,7 @@ const PurchaseApprovalReducer = (state = initialState, action) => {
     return newState
 }
 
-export default PurchaseApprovalReducer;
-
+export default POApprovalReducer;
 
 
 const getSBUName = (data) => {
@@ -56,6 +61,20 @@ const getSBUName = (data) => {
             let itemData = {
                 value: item.intSBUId,
                 label: item.strSBUName,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+};
+
+const getBranchName = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intBusinessUnitId,
+                label: item.strBusinessUnitName,
             };
             options.push(itemData);
         });

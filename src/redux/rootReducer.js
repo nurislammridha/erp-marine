@@ -61,6 +61,8 @@ import BookingStatusReducer from "../modules/master/DropDownData/BookingStatus/_
 import CharterReducer from "../modules/master/DropDownData/Charter/_redux/CharterReducer/CharterReducer";
 import UtilityReducer from "../modules/utility/information/_redux/reducers/UtilityReducer";
 import RolePermissionManagementReducer from "../modules/role-permission-management/information/_redux/reducers/RolePermissionManagementReducer";
+import PurchaseApprovalReducer from "../modules/Purchase/PurchaseApproval/_redux/reducers/PurchaseApprovalReducer";
+import POApprovalReducer from "../modules/Purchase/POApproval/_redux/reducers/POApprovalReducer";
 
 /** 
 | Domain : CCO
@@ -128,6 +130,11 @@ export const rootReducer = combineReducers({
   /** Promotion */
   promotion: EmployeePromotionReducer,
 
+  /** Purchase */
+  purchaseApprovalFilter: PurchaseApprovalReducer,
+  POApprovalFilter: POApprovalReducer,
+
+
   // master module reducer // dynamic data for all dropdown menu list 
   PortReducer: PortReducer,
   VoyageTypeReducer: VoyageTypeReducer,
@@ -146,7 +153,7 @@ export const rootReducer = combineReducers({
   supplierList: SuppliersListReducer,
   itemList: ItemReducer,
   utitlityInfo: UtilityReducer,
-  roleReducer:RolePermissionManagementReducer,
+  roleReducer: RolePermissionManagementReducer,
 });
 
 export function* rootSaga() {
