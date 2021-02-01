@@ -16,27 +16,27 @@ const SupplierDetails = ({ handleClose, supplierID }) => {
                 supplierDetails && (
                     <Row>
                         <Col lg={3} md={4} sm={4} xs={6} className="mb-5">
-                            <p>Supplier Name</p>
-                            <h5>{supplierDetails.strSupplierName}</h5>
-                        </Col>
-                        <Col lg={4} md={4} sm={4} xs={6} className="mb-5">
-                            <p>Supplier Email</p>
-                            <h5>{supplierDetails.strEmail}</h5>                </Col>
-                        <Col lg={3} md={4} sm={4} xs={6} className="mb-5">
-                            <p>Contact Number</p>
-                            <h5>{supplierDetails.strContactNumber}</h5>
+                            <h5>Supplier Name</h5>
+                            <p>{supplierDetails.strSupplierName}</p>
                         </Col>
                         <Col lg={3} md={4} sm={4} xs={6} className="mb-5">
-                            <p>Supplier Type Name</p>
-                            <h5>{supplierDetails.strSupplierTypeName}</h5>
+                            <h5>Supplier Email</h5>
+                            <p>{supplierDetails.strEmail}</p>                </Col>
+                        <Col lg={3} md={4} sm={4} xs={6} className="mb-5">
+                            <h5>Contact Number</h5>
+                            <p>{supplierDetails.strContactNumber}</p>
                         </Col>
                         <Col lg={3} md={4} sm={4} xs={6} className="mb-5">
-                            <p>PIC Name</p>
-                            <h5>{supplierDetails.strPICName}</h5>
+                            <h5>Supplier Type Name</h5>
+                            <p>{supplierDetails.strSupplierTypeName}</p>
                         </Col>
                         <Col lg={3} md={4} sm={4} xs={6} className="mb-5">
-                            <p>PIC Email</p>
-                            <h5>{supplierDetails.strPICEmail}</h5>
+                            <h5>PIC Name</h5>
+                            <p>{supplierDetails.strPICName}</p>
+                        </Col>
+                        <Col lg={3} md={4} sm={4} xs={6} className="mb-5">
+                            <h5>PIC Email</h5>
+                            <p>{supplierDetails.strPICEmail}</p>
                         </Col>
                     </Row>
                 )
