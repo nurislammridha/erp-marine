@@ -4,27 +4,30 @@ import * as Types from "../types/Types";
 
 
 
-export const getRoleList = (id) => (dispatch) => {
+export const getRoleList = () => (dispatch) => {
   Axios
-    .get(
-      `http://10.17.2.222:8080/iMarineAPI/public/api/v1/roles/getAllPermission`
-    )
+    .get(`${process.env.REACT_APP_API_URL}roles/getAllPermission`)
     .then((res) => {
-      let data = res.data.data;
-      console.log('res.data roles', res.data.data);
-      dispatch({ type: Types.GET_USER_ROLE_LIST, payload: data });
+      dispatch({ type: Types.GET_USER_ROLE_LIST, payload: res.data.data });
     });
-
 };
+
+export const getPermissionGroups = () => (dispatch) => {
+  Axios
+    .get(`${process.env.REACT_APP_API_URL}roles/getAllPermission`)
+    .then((res) => {
+      dispatch({ type: Types.GET_USER_PERMISSION_GROUPS, payload: res.data.data });
+    });
+};
+
 export const roleCheckboxSelect = (checkboxStatus, parentRole, item, indexChild, indexparentRole) => (dispatch) => {
-  let data = {
+  dispatch({ type: Types.USER_ROLE_CHECKED, payload: {
     checkboxStatus: checkboxStatus,
     parentRole: parentRole,
     item: item,
     indexChild: indexChild,
     indexparentRole: indexparentRole,
-  }
-  dispatch({ type: Types.USER_ROLE_CHECKED, payload: data });
+  }});
 
 };
 
@@ -33,9 +36,8 @@ export const allCheckboxSelected = (status) => (dispatch) => {
 };
 
 export const checkPermissionGroupAction = (index, isGroupChecked) => (dispatch) => {
-  const data = {
+  dispatch({ type: Types.USER_ROLE_CHECKED_GROUP, payload: {
     index: index,
     isGroupChecked: isGroupChecked
-  }
-  dispatch({ type: Types.USER_ROLE_CHECKED_GROUP, payload: data });
+  }});
 };

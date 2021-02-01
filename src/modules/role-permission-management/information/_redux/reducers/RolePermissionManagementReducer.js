@@ -4,8 +4,11 @@ import moment from "moment";
 // Initial state
 const initialState = {
     roleList: [],
-    inputData: {
 
+    inputData: {
+        id: '',
+        roleName: '',
+        groupList: []
     }
 
 };
@@ -19,6 +22,16 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
             return {
                 ...state,
                 roleList: action.payload,
+            };
+
+        case Types.GET_USER_PERMISSION_GROUPS:
+            const updatedInputData = {
+                ...state.inputData,
+                groupList: action.payload
+            }
+            return {
+                ...state,
+                inputData: updatedInputData
             };
 
         case Types.USER_ROLE_CHECKED:
