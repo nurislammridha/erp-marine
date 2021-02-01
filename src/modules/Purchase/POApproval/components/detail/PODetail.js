@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Button } from "react-bootstrap";
 
-const RequisitionApprovalDetail = () => {
+const PODetail = () => {
     return (
         <div>
             <div>
@@ -144,4 +144,4 @@ const RequisitionApprovalDetail = () => {
     );
 }
 
-export default RequisitionApprovalDetail;
+export default PODetail;
