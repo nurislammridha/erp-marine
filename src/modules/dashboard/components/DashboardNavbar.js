@@ -4,36 +4,42 @@ const DashboardNavbar = () => {
     return ( 
        <>
        <div className="header-fixed subheader-fixed subheader aside-enabled subheader-fixed subheader  mb-5">
-       <div className="container-fluid  mb-5">
+     <div class="container-fluid ">
        <div className="row">
-       <div className="col-12">
+    
 
-       <Navbar  expand="lg" sticky="top">
-  <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-  <Navbar.Toggle aria-controls="basic-navbar-nav" />
-  <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="mr-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#link">Link</Nav.Link>
-      {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-      </NavDropdown> */}
-    </Nav>
-    {/* <Form inline>
-      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-      <Button variant="outline-success">Search</Button>
-    </Form> */}
-  </Navbar.Collapse>
-</Navbar>
-       </div>
+      
+  
+
+    <div class="d-flex align-items-center flex-wrap mr-1 dashboard-navbar-left">
+    <div class="d-flex align-items-baseline mr-5"><h5 class="text-dark font-weight-bold my-2 mr-5 ml-5">Dashboard</h5></div>
+    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2  dashboard-nav">
+        <li class="breadcrumb-item">
+            <a href="/metronic/react/demo1/dashboard"><i class="flaticon2-shelter text-muted icon-1x"></i></a>
+        </li>
+        <li class="breadcrumb-item"><a class="text-muted" href="/metronic/react/demo1/dashboard">Dashboard</a></li>
+    </ul>
+</div>
+<div class="d-flex  float-right dashboard-navbar-right">
+    <a href="#" class="btn btn-light btn-sm font-weight-bold" id="kt_dashboard_daterangepicker" data-toggle="tooltip" title="Select dashboard daterange" data-placement="left">
+        <span class="text-muted font-weight-bold mr-2" id="kt_dashboard_daterangepicker_title">Today</span><span class="text-primary font-weight-bold" id="kt_dashboard_daterangepicker_date">Aug 16</span>
+    </a>
+   
+</div>
+<div className="clear-fix"></div>
+ 
+ 
+
+
+      
+    
+
+      
          </div>
 
        </div>
        </div>
+     
        </>
      );
 }
