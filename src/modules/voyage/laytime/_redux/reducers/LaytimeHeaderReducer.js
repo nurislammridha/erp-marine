@@ -99,8 +99,6 @@ const LaytimeHeaderReducer = (state = initialState, action) => {
                 VoyageData.push(items);
                 });
             }
-
-            console.log("VoyageData  : ",VoyageData);
             return {
                 ...state,
                 voyageList: VoyageData,

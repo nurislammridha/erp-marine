@@ -1,0 +1,43 @@
+import * as Types from "../types/Types";
+import { showToast } from "../../../../master/utils/ToastHelper";
+import Axios from "axios";
+
+export const getPQListData = (page, searchText = null) => async (dispatch) => {
+    let responseList = {
+        isLoading: true,
+        data: {},
+        status: false,
+    };
+    dispatch({ type: Types.GET_PQ_LIST_DATA, payload: responseList });
+    let PQURL = "";
+    PQURL = `${process.env.REACT_APP_API_URL}purchase/reqList?isPaginated=1&isActive=1&paginateNo=10`;
+
+    if (page !== null || page === "") {
+        PQURL += `&page=${page}`;
+    }
+
+    if (searchText !== null) {
+        PQURL += `&search=${searchText}&isActive=1`;
+    } else {
+        // url += `&certificate/details?search=${searchText}`
+    }
+    try {
+        await Axios.get(PQURL)
+            .then((res) => {
+                const { data, message, status } = res.data;
+                responseList.status = status;
+                responseList.PQListData = data.data;
+                responseList.message = message;
+                responseList.PQPaginateData = data;
+                responseList.isLoading = false;
+
+            }).catch((err) => {
+                console.log("something went wrong");
+            });
+    } catch (error) {
+        responseList.message = "Something Went Wrong !";
+        showToast('error', responseList.message);
+    }
+    responseList.isLoading = false;
+    dispatch({ type: Types.GET_PQ_LIST_DATA, payload: responseList });
+}

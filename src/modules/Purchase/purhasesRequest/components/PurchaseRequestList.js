@@ -1,10 +1,38 @@
+import React, { useEffect, useState } from 'react';
 import { IconButton, InputBase, Paper } from '@material-ui/core';
-import React from 'react';
 import { Button, Card } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SimpleModal from '../../../master/components/Modal/SimpleModal';
-
+import { getPQListData } from '../_redux/actions/PurhasesRequestAction';
+import PaginationLaravel from '../../../master/pagination/PaginationLaravel';
+import moment from "moment"
 const PurchaseRequestList = () => {
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.purchaseRequest.isLoading);
+  const PQListData = useSelector((state) => state.purchaseRequest.PQListData);
+  const PQPaginateData = useSelector((state) => state.purchaseRequest.PQPaginateData);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchText, setSearchText] = useState("");
+
+  useEffect(() => {
+    dispatch(getPQListData(currentPage));
+  }, [dispatch, currentPage]);
+
+  const changePage = (data) => {
+    setCurrentPage(data.page);
+    dispatch(getPQListData(data.page));
+  };
+
+  const searchProduct = (e) => {
+    const searchText = e.target.value;
+    setSearchText(searchText);
+    if (searchText.length === 0) {
+      dispatch(getPQListData(currentPage));
+    } else {
+      dispatch(getPQListData(currentPage, searchText));
+    }
+  };
   return (
     <Card>
       <Card.Body>
@@ -18,8 +46,8 @@ const PurchaseRequestList = () => {
                 <InputBase
                   className="custome-purchase-search"
                   placeholder="Search "
-                // value={searchText}
-                // onChange={searchProduct}
+                  value={searchText}
+                  onChange={searchProduct}
                 />
                 <IconButton aria-label="Search" className="searchPlaceholder purchaseSearch">
                   <i className="flaticon-search "></i>
@@ -51,52 +79,51 @@ const PurchaseRequestList = () => {
                     <th scope="col">ACTION</th>
                   </tr>
                 </thead>
-                {/* <tbody>
+                <tbody>
                   {
-                    VesselBookingList.length > 0 && VesselBookingList.map((item, index) => (
+                    PQListData.length > 0 && PQListData.map((item, index) => (
                       <tr>
-                        <td onClick={(id) => getVesselBookingID(item)}>{vesselPaginateData.from + index}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strCargoName !== null && item.strCargoName !== '' ? item.strCargoName : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strShipName !== null && item.strShipName !== '' ? item.strShipName : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strVoyageNo !== null && item.strVoyageNo !== '' ? item.strVoyageNo : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>
-                          <button className={item.strBookingStatus === "Rejected" ? "btn rejected-status booking-list-btn text-danger" : (item.strBookingStatus === "Pending" ? "btn pending-status booking-list-btn text-warning" : "btn approve-status booking-list-btn text-success")}>
-                            {item.strBookingStatus !== null && item.strBookingStatus !== '' ? item.strBookingStatus : ''}
+                        <td>{item.intPurchaseRequestID !== null && item.intPurchaseRequestID !== '' ? item.intPurchaseRequestID : ''}</td>
+                        <td>{item.dtePurchaseRequestDate !== null && item.dtePurchaseRequestDate !== '' ? moment(item.dtePurchaseRequestDate).format("DD-MM-YYYY") : ''}</td>
+                        <td>{item.strCategoryName !== null && item.strCategoryName !== '' ? item.strCategoryName : ''}</td>
+                        <td>{item.strRemarks !== null && item.strRemarks !== '' ? item.strRemarks : ''}</td>
+                        <td>
+                          <button className={item.isApprovedAll === "Rejected" ? "btn rejected-status booking-list-btn text-danger" : (item.isApprovedAll === "Pending" ? "btn pending-status booking-list-btn text-warning" : "btn approve-status booking-list-btn text-success")}>
+                            {item.isApprovedAll !== null && item.isApprovedAll !== '' ? item.isApprovedAll : 'Pending'}
                           </button>
                         </td>
-                        {/* intBookingStatusId */}
-                {/* <td>
-                  {/* {""} */}
-                {/*}  <div className="d-flex">
-                    <Link onClick={(id) => getVesselBookingID(item)}>
-                      <i className="far fa-eye editIcon item-list-icon"></i>
-                    </Link>
-                    <Link to={`/voyage/booking/bookingEdit/${item.intShipBookingId}`}>
-                      <i className="far fa-edit editIcon item-list-icon ml-2"></i>
-                    </Link>
-                    <a href onClick={() => deleteVesselBookDetails(item.intShipBookingId)} >
-                      <i className="fas fa-trash-alt editIcon item-list-icon ml-2"></i>
-                    </a>
-                  </div>
-                </td>
+                        <td>
+
+                          <div className="d-flex">
+                            <Link>
+                              <i className="far fa-eye editIcon item-list-icon"></i>
+                            </Link>
+                            <Link>
+                              <i className="far fa-edit editIcon item-list-icon ml-2"></i>
+                            </Link>
+                            <a href >
+                              <i className="fas fa-trash-alt editIcon item-list-icon ml-2"></i>
+                            </a>
+                          </div>
+                        </td>
                       </tr>
                     ))
                   }
-                </tbody>  */}
+                </tbody>
               </table>
-              {/* {!isLoading && VesselBookingList.length === 0 && (
+              {!isLoading && PQListData.length === 0 && (
                 <div className="alert alert-warning mt-5">
                   Sorry ! Vessel Booking List Not Found.
                 </div>
-              )} */}
-              {/* <PaginationLaravel
+              )}
+              <PaginationLaravel
                 changePage={changePage}
-                data={vesselPaginateData}
-              /> */}
+                data={PQPaginateData}
+              />
             </div>
           </div>
         </div>
-        {/*  */}
+
       </Card.Body >
       <SimpleModal
         size="xl"
