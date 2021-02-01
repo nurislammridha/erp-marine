@@ -56,8 +56,8 @@ const BasicTable = () => {
             </div>
             {/* <div className="col-xl-3 col-lg-3 col-md-6">use RHFInput</div> */}
 
-            <div className="mt-3">
-              <i className="fas fa-filter tableFilter mt-3 mr-2"></i>
+            <div className="">
+              <i className="fas fa-filter tableFilter  mr-2"></i>
               <i className="far fa-filter"></i>
               <Button className="btn-sm" variant="primary">
                 Add New
