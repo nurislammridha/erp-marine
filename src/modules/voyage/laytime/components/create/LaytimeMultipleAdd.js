@@ -39,9 +39,6 @@ const LaytimeMultipleAdd = () => {
   const remarkList = useSelector(
     (state) => state.layTimeOperationRemark.remarkList
   );
-
-  console.log("layTimeOperationList : ", remarkList);
-
   const dispatch = useDispatch();
   const laytimeDataList = useSelector(
     (state) => state.laytimeDetailInfo.laytimeDataList
@@ -50,9 +47,6 @@ const LaytimeMultipleAdd = () => {
   // const layTImeRowData = useSelector(
   //   (state) => state.laytimeDetailInfo.laytimeRowData
   // );
-
-  console.log("laytimeDataList list >>>>>>>>>> : ", laytimeDataList);
-
   useEffect(() => {
     dispatch(getRemarkList());
   }, []);
@@ -75,13 +69,10 @@ const LaytimeMultipleAdd = () => {
   const layTimeDetailsList = useSelector(
     (state) => state.LaytimeMultiple.layTimeMultipleInput.layTimeDetails
   );
-  console.log("laytimeDetailsData page", layTimeDetailsList);
 
   const layTimeOperationList = useSelector(
     (state) => state.LaytimeMultiple.layTimeMultipleInput.layTimeOperations
   );
-
-  console.log("layTimeMultipleInput from reducer", layTimeMultipleInput);
 
   const laytimeopData = useSelector(
     (state) => state.LaytimeMultiple.layTimeOperation
@@ -98,13 +89,8 @@ const LaytimeMultipleAdd = () => {
   const loading = useSelector((state) => state.LaytimeMultiple.loading);
 
   const operationhandleChangeTextInput = (name, value, index) => {
-    console.log("index", index);
-    console.log("name", name);
-    console.log("value", value);
     dispatch(handleChangeLaytimeMultipleOperation(name, value, index));
   };
-
-  console.log("softShow", softShow);
 
   const [show, setShow] = useState([]);
 
@@ -126,6 +112,28 @@ const LaytimeMultipleAdd = () => {
   };
 
   const addSof = (index) => {
+   
+    if (layTimeMultipleInput.layTimeDetails.dteStartTime === "undefined") {
+      showToast('error', "Start date can't be blank!")
+      return false;
+    }
+    if (layTimeMultipleInput.layTimeDetails.dteEndTime === "undefined") {
+      showToast('error', "End date can't be blank!")
+      return false;
+    }
+    if (layTimeMultipleInput.layTimeDetails.numTimeUsed === null) {
+      showToast('error', "Time Used can't be blank!")
+      return false;
+    }
+    if (layTimeMultipleInput.layTimeDetails.numRatio === null) {
+      showToast('error', "Ratio can't be blank!")
+      return false;
+    }
+    if (layTimeMultipleInput.layTimeDetails.strRemarks === "undefined") {
+      showToast('error', "Remarks can't be blank!")
+      return false;
+    }
+
     dispatch(addNewSof(index));
   };
 
@@ -154,8 +162,6 @@ const LaytimeMultipleAdd = () => {
       )
     );
   };
-
-  console.log("layTimeRowList data by multiplerow:", laytimeDataList);
   return (
     <div className="">
       <div className="card card-custom gutter-b">
