@@ -37,7 +37,7 @@ export function Dashboard() {
             <BarChart />
           </div>
         </div>
-        <div className="row">
+        <div className="row linechart">
           <div className="col-lg-6  col-12">
             <LineChart />
           </div>
@@ -53,7 +53,7 @@ export function Dashboard() {
             <SalesPaymentTable />
           </div>
 
-          <div className="col-lg-6  col-12">
+          <div className="col-lg-6  col-12 purchase-table ">
             <PurchasePaymentTable />
           </div>
          

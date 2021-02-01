@@ -1223,8 +1223,8 @@ input.color-picker {
     display: flex;
     align-items: center;
 }
-.container.dashboard__pb.dashboard-cardsection.mb-5.mt-5 {
-    padding-top: 43px;
+.dashboard-cardsection {
+    padding-top: 43px!important;
 }
 .dashboard-navbar-left {
     width: 50%!important;
@@ -1234,7 +1234,7 @@ input.color-picker {
 .dashboard-navbar-right {
     float: right!important;
     width: 47%!important;
-    align-items: flex-end!important;
+ align-items: center!important;
     justify-content: flex-end!important;
 }
 .card.card-custom >.card-header{
@@ -1259,4 +1259,11 @@ padding: 0.5rem 2rem;
     .top-search-bar:hover{
       background: #007bff!important;
     }
-    
+    @media (min-width: 992px){
+        .aside-minimize:not(.aside-minimize-hover) .brand {
+            display: none!important;
+            
+        }
+    }
+  
+   

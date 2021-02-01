@@ -349,6 +349,12 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
           subModuleIcon: "menu-bullet menu-bullet-dot",
           features: [],
         },
+        // {
+        //   subModuleName: "Supplier CS",
+        //   subModuleRouteUrl: "/purchase/order/approval/list",
+        //   subModuleIcon: "menu-bullet menu-bullet-dot",
+        //   features: [],
+        // },
       ],
     },
 
