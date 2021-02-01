@@ -254,15 +254,15 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
       moduleImageIcon: "/media/svg/icons/Code/voyage.svg",
       subModules: [
         {
-          subModuleName: "Voyage",
+          subModuleName: "Voyage List",
           subModuleRouteUrl: "/voyage/list",
           subModuleIcon: "menu-bullet menu-bullet-dot",
           features: [
-            {
-              featureName: "Voyage List",
-              featureRouteUrl: "/voyage/list",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
+            // {
+            //   featureName: "Voyage List",
+            //   featureRouteUrl: "/voyage/list",
+            //   featureIcon: "menu-bullet menu-bullet-dot",
+            // },
             // {
             //   featureName: "Voyage Create",
             //   featureRouteUrl: "/voyage/create",
@@ -275,11 +275,11 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
           subModuleRouteUrl: "/voyage/voyage-activity",
           subModuleIcon: "menu-bullet menu-bullet-dot",
           features: [
-            {
-              featureName: "Noon Report List",
-              featureRouteUrl: "/voyage/voyage-activity",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
+            // {
+            //   featureName: "Noon Report List",
+            //   featureRouteUrl: "/voyage/voyage-activity",
+            //   featureIcon: "menu-bullet menu-bullet-dot",
+            // },
             // {
             //   featureName: "Voyage Activity Create",
             //   featureRouteUrl: "/voyage/voyage-activity/create",
@@ -298,16 +298,16 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
           subModuleRouteUrl: "/voyage/booking/bookinglist",
           subModuleIcon: "menu-bullet menu-bullet-dot",
           features: [
-            {
-              featureName: "Booking List",
-              featureRouteUrl: "/voyage/booking/bookinglist",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-            {
-              featureName: "Booking Entry",
-              featureRouteUrl: "/voyage/booking/bookingentry",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
+            // {
+            //   featureName: "Booking List",
+            //   featureRouteUrl: "/voyage/booking/bookinglist",
+            //   featureIcon: "menu-bullet menu-bullet-dot",
+            // },
+            // {
+            //   featureName: "Booking Entry",
+            //   featureRouteUrl: "/voyage/booking/bookingentry",
+            //   featureIcon: "menu-bullet menu-bullet-dot",
+            // },
           ],
         },
       ],
@@ -432,15 +432,15 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
       moduleImageIcon: "/media/svg/icons/Code/utility.svg",
       subModules: [
         {
-          subModuleName: "Utility Info",
-          subModuleRouteUrl: "/utility/info",
+          subModuleName: "Loadable Calculator",
+          subModuleRouteUrl: "/utility/calculator",
           subModuleIcon: "menu-bullet menu-bullet-dot",
           features: [
-            {
-              featureName: "Loadable Calculator",
-              featureRouteUrl: "/utility/calculator",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
+            // {
+            //   featureName: "Loadable Calculator",
+            //   featureRouteUrl: "/utility/calculator",
+            //   featureIcon: "menu-bullet menu-bullet-dot",
+            // },
           ],
         },
       ],
