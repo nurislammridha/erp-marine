@@ -37,8 +37,6 @@ export const handleChangeLaytimeMultiple = (name, value,index) => (dispatch) => 
   export const showSoftacton = (data)=>(dispatch)=>{
     let id = data.item.intLayTimeRowID;
     let LayTimeSofOperationListURL = `${process.env.REACT_APP_API_URL}voyage/layTimeSofOperationList/${id}`;
-
-    console.log("LayTimeSofOperationListURL >>>",LayTimeSofOperationListURL);
     // if(isEmptyData){
     //   dispatch({ type: Types.ADD_NEW_SOF, payload: null });
     //   dispatch({ type: Types.ADD_NEW_OPERATION, payload: null });
@@ -47,7 +45,6 @@ export const handleChangeLaytimeMultiple = (name, value,index) => (dispatch) => 
       .then((response) => {
            
           let data = response.data.data;
-          console.log('data', data);
           data['sof'].forEach(sof => {
             dispatch({ type: Types.ADD_NEW_SOF, payload: sof });
           });
@@ -77,8 +74,6 @@ export const handleChangeLaytimeMultiple = (name, value,index) => (dispatch) => 
 
   //submit sof and operation 
 export const multipleSubmitAction = (layTimeMultipleInput, intLayTimeHeaderID, intLayTimeRowID) => async (dispatch) => {
-
-  console.log("layTimeMultipleInput from action : >>>> ",layTimeMultipleInput);
   layTimeMultipleInput.intLayTimeHeaderID = intLayTimeHeaderID;
   layTimeMultipleInput.intLayTimeRowID = intLayTimeRowID;
   let responseList = {
@@ -92,7 +87,6 @@ export const multipleSubmitAction = (layTimeMultipleInput, intLayTimeHeaderID, i
   Axios.post(`${process.env.REACT_APP_API_URL}voyage/layTimeDetail`, layTimeMultipleInput)
 
       .then((res) => {
-          console.log('res layTimeMultipleInput row data :>> ', res);
           responseList.data = res.data;
           responseList.loading = false;
           responseList.status = res.data.status;
@@ -105,7 +99,6 @@ export const multipleSubmitAction = (layTimeMultipleInput, intLayTimeHeaderID, i
           }
       })
       .catch((error) => {
-          console.log('error', error);
           responseList.loading = false;
           const message = "Something went wrong, Please try again !";
           showToast("error", message);
