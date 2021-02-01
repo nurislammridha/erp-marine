@@ -18,7 +18,7 @@ const initialState = {
     // isEmptyData:null,
     layTimeDetails: [
       {
-        intLayTimeDetailsID:null,
+        // intLayTimeDetailsID:null,
         dteOperationDate: "",
         dteStartTime: "",
         dteEndTime: "",
@@ -29,7 +29,7 @@ const initialState = {
     ],
     layTimeOperations: [
       {
-        intLaytimeOperationID:null,
+        // intLaytimeOperationID:null,
         intShipID: null,
         strVoyageNo: null,
         intOperationRemarkID: null,

@@ -168,7 +168,7 @@ const LaytimeHeader = () => {
                     </span>
 
                     {/** main body */}
-                    <div className="row mt-5">
+                    <div className="row">
                       <div className="col-md-6">
                         <label className="form-label">Commencement Port</label>
                         <RHFInput
@@ -210,7 +210,7 @@ const LaytimeHeader = () => {
                         />
                       </div>
                     </div>
-                    <div className="row mt-5">
+                    <div className="row">
                       <div className="col-md-6">
                         <label className="form-label">Completion Port</label>
                         <RHFInput
@@ -253,7 +253,7 @@ const LaytimeHeader = () => {
                         />
                       </div>
                     </div>
-                    <div className="row mt-5">
+                    <div className="row">
                       <div className="col-md-6">
                         <label className="form-label">C/P Date</label>
                         <DatePicker
@@ -311,7 +311,7 @@ const LaytimeHeader = () => {
                 )}
                 {!isLoading && (
                   <>
-                    <div className="row mt-5">
+                    <div className="row">
                       <div className="col-md-6">
                         <label className="form-label">Commencement Port</label>
                         <RHFInput
@@ -353,7 +353,7 @@ const LaytimeHeader = () => {
                         />
                       </div>
                     </div>
-                    <div className="row mt-5">
+                    <div className="row">
                       <div className="col-md-6">
                         <label className="form-label">Completion Port</label>
                         <RHFInput
@@ -396,7 +396,7 @@ const LaytimeHeader = () => {
                         />
                       </div>
                     </div>
-                    <div className="row mt-5">
+                    <div className="row">
                       <div className="col-md-6">
                         <label className="form-label">C/P Date</label>
                         <DatePicker
