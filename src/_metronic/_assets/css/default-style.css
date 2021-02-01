@@ -1265,5 +1265,14 @@ padding: 0.5rem 2rem;
             
         }
     }
-  
-   
+    .searchPlaceholder:hover {
+        background: none!important;
+        
+    }
+   .supplier-search{
+       position: relative!important;
+   }
+   button.searchPlaceholder{
+   position: absolute!important;
+    right: 8px!important;
+   }
