@@ -6,7 +6,6 @@ import {toAbsoluteUrl} from "../../../../_helpers";
 
 export function QuickUser() {
   const history = useHistory();
-
   const logoutClick = () => {
       const toggle = document.getElementById("kt_quick_user_toggle");
       if (toggle) {

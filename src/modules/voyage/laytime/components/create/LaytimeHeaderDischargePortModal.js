@@ -10,8 +10,6 @@ const LaytimeHeaderDischargePortModal = (props) => {
     const dispatch = useDispatch()
     const { register, handleSubmit, errors, setValue } = useForm();
     const { layTimeDemurrage, handleLayTimeDemurrageInput, handleClose, handleCloseLoadingPortModal } = props;
-    console.log('layTimeDemurrage :>> ', layTimeDemurrage);
-
     const isLoading = "";
     const currency = [
         {
