@@ -1243,3 +1243,20 @@ input.color-picker {
 .card.card-custom > .card-body {
 padding: 0.5rem 2rem;
     } 
+    .aside {
+        width: 230px;
+     } 
+     .header-fixed.subheader-fixed .header {
+        
+        background: #3699FF;
+    }
+    .login-bg:hover{
+       color: #000000!important;
+    }
+    .top-search-bar{
+      background: #0000001A;  
+    }
+    .top-search-bar:hover{
+      background: #007bff!important;
+    }
+    

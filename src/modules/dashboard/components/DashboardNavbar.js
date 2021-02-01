@@ -24,13 +24,13 @@ const DashboardNavbar = () => {
     <a href="#" class="btn btn-light btn-sm font-weight-bold" id="kt_dashboard_daterangepicker" data-toggle="tooltip" title="Select dashboard daterange" data-placement="left">
         <span class="text-primary font-weight-bold " id="kt_dashboard_daterangepicker_title">Today</span>
     </a>
-    <a href="#" class="btn  btn-sm font-weight-bold" id="kt_dashboard_daterangepicker" data-toggle="tooltip" title="Select dashboard daterange" data-placement="left">
+    <a href="#" class="btn  btn-sm font-weight-bold ml-5" id="kt_dashboard_daterangepicker" data-toggle="tooltip" title="Select dashboard daterange" data-placement="left">
         <span class="text-muted font-weight-bold " id="kt_dashboard_daterangepicker_title">This Week</span>
     </a>
-    <a href="#" class="btn  btn-sm font-weight-bold" id="kt_dashboard_daterangepicker" data-toggle="tooltip" title="Select dashboard daterange" data-placement="left">
+    <a href="#" class="btn  btn-sm font-weight-bold  ml-5" id="kt_dashboard_daterangepicker" data-toggle="tooltip" title="Select dashboard daterange" data-placement="left">
         <span class="text-muted font-weight-bold" id="kt_dashboard_daterangepicker_title">This Month</span>
     </a>
-    <a href="#" class="btn  btn-sm font-weight-bold" id="kt_dashboard_daterangepicker" data-toggle="tooltip" title="Select dashboard daterange" data-placement="left">
+    <a href="#" class="btn  btn-sm font-weight-bold  ml-5" id="kt_dashboard_daterangepicker" data-toggle="tooltip" title="Select dashboard daterange" data-placement="left">
         <span class="text-muted font-weight-bold" id="kt_dashboard_daterangepicker_title">This Financial Year</span>
     </a>
    

@@ -34,10 +34,10 @@ export function UserProfileDropdown(props) {
       >
         <div
           className={
-            "btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2"
+            "btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2 login-bg"
           }
         >
-          <span className="text-muted font-weight-bold font-size-base d-md-inline mr-1">
+          <span className="text-white font-weight-bold font-size-base d-md-inline login-bg mr-1">
             {/* Hi,  */}
             Hi, {props.user.first_name}
           </span>{" "}
