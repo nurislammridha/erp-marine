@@ -40,12 +40,21 @@ const UtilityReducer = (state = initialState, action) => {
                     LoadableCalculatorInput
                 }
             } else {
-                showToast("error", "You should enter number");
-                return {
-                    ...state
+                console.log('inputValue', inputValue);
+                if (inputValue === "" || inputValue === null || isNaN(inputValue)) {
+                    const LoadableCalculatorInput = { ...state.LoadableCalculatorInput };
+                    LoadableCalculatorInput[action.payload.name] = '';
+                    return {
+                        ...state,
+                        LoadableCalculatorInput
+                    }
+                } else {
+                    showToast("error", "You should enter number");
+                    return {
+                        ...state
+                    }
                 }
             }
-
 
         case Types.CALCULATE_ALL:
             const calcData = { ...state.LoadableCalculatorInput };
@@ -65,6 +74,25 @@ const UtilityReducer = (state = initialState, action) => {
             }
         case Types.GET_SHIP_LIST:
             return { ...state, shipList: shiplist(action.payload) }
+
+        case Types.GET_DATA_BY_SHIP:
+
+            const { numDWT, numFW, numTPC, numIFO, numMGO, numFWA, numSummerDraft, numUnpumpableBallast, numConstant } = action.payload;
+            const LoadableCalculatorInputAll = { ...state.LoadableCalculatorInput };
+            // LoadableCalculatorInputAll.intDraft = intDraft;
+            LoadableCalculatorInputAll.intDWT = numDWT;
+            LoadableCalculatorInputAll.intFW = numFW;
+            LoadableCalculatorInputAll.intTPC = numTPC;
+            LoadableCalculatorInputAll.intIFO = numIFO;
+            LoadableCalculatorInputAll.intMGO = numMGO;
+            LoadableCalculatorInputAll.intFWA = numFWA;
+            LoadableCalculatorInputAll.intSummerDraft = numSummerDraft;
+            LoadableCalculatorInputAll.intUnpumpableBallast = numUnpumpableBallast;
+            LoadableCalculatorInputAll.intConstant = numConstant;
+            return {
+                ...state,
+                LoadableCalculatorInput: LoadableCalculatorInputAll
+            }
 
         default:
             break;
