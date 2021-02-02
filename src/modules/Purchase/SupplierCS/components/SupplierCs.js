@@ -1,8 +1,7 @@
 import * as React from "react";
-import { Form, Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { useState } from "react";
-
-import Checkbox from "react-custom-checkbox";
+import { Link } from 'react-router-dom'
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
@@ -126,19 +125,20 @@ const SupplierCs = () => {
                 <i className="fas fa-calendar-alt"></i>
               </div>
               </div>
-              <div className="border-bottom mt-5 "></div>
+             
             </form>
+            <div className="custom-border mt-5 "></div>
             
         
         <div className="react-bootstrap-table table-responsive mt-5">
-          <table className="table table table-head-custom table-vertical-center voyageTable">
+          <table className="table table table-head-custom table-vertical-center voyageTable supplier-table">
             <thead>
               <tr>
                 
               <th scope="col">SL NO</th>
                     <th scope="col">LOCATION</th>
                     <th scope="col">INDENT NO</th>
-                    <th scope="col">INDENT DATE</th>
+                    <th scope="col">INDENT DATE</th> 
                     <th scope="col">APPROVE DATE</th>
                     <th scope="col">APPROVE BY</th>
                     <th scope="col">DUE DATE</th>
@@ -158,8 +158,11 @@ const SupplierCs = () => {
                  
 
                    <td className="mt-3">
+                   <Link to ="/supplier/details">
+                   <i className="far fa-eye viewIcon"></i>
+                   </Link>
                      {" "}
-                     <i className="far fa-eye viewIcon"></i>
+                    
                      
                    </td>
               </tr>
