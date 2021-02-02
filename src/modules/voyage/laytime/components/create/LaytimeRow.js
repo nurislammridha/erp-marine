@@ -84,7 +84,7 @@ const LaytimeRow = () => {
                     <div className="card card-custom gutter-b">
                         <div className="card-header">
                             <div className="card-title">
-                                <h3 className="card-label">Laytime Row</h3>
+                                <h3 className="card-label">Port Details</h3>
                             </div>
                         </div>
                         <div className="card-body">

@@ -99,7 +99,7 @@ const LaytimeHeader = () => {
       <div className="card card-custom gutter-b">
         <div className="card-header">
           <div className="card-title">
-            <h3 className="card-label">Laytime Header</h3>
+            <h3 className="card-label">Laytime</h3>
           </div>
         </div>
         <div className="card-body">
