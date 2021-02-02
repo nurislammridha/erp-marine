@@ -1,50 +1,29 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Form, Card, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
-import { changeTextInput, getShipList } from "../_redux/actions/UtilityAction";
+import { changeTextInput, getShipList, getShipId } from "../_redux/actions/UtilityAction";
 
 const LoadableCalculator = () => {
   const { register, setValue } = useForm();
   const dispatch = useDispatch();
   const LoadableCalculatorInput = useSelector(state => state.utitlityInfo.LoadableCalculatorInput);
   const shipList = useSelector(state => state.utitlityInfo.shipList);
-  dispatch(getShipList())
+
+  useEffect(() => {
+    dispatch(getShipList());
+  }, []);
+
   const changeText = (name, value) => {
     dispatch(changeTextInput(name, value))
   }
-
+  const changeShipListInput = (id) => {
+    dispatch(getShipId(id))
+  }
   const printValue = (value) => {
     return new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 4 }).format(value)
-  }
-
-  // console.log('LoadableCalculatorInput :>> ', LoadableCalculatorInput);
-  const courseData = [
-    {
-      id: 1,
-      name: "cse",
-    },
-    {
-      id: 1,
-      name: "EEE",
-    },
-    {
-      id: 1,
-      name: "MBA",
-    },
-  ];
-
-  let CourseName = [];
-  if (courseData) {
-    courseData.forEach((item) => {
-      let items = {
-        value: item.id,
-        label: item.name,
-      };
-      CourseName.push(items);
-    });
   }
 
   return (
@@ -69,8 +48,8 @@ const LoadableCalculator = () => {
                       rules={{ required: false }}
                       name="strVesselName"
                       register={register}
-                      value={CourseName.label}
                       setValue={setValue}
+                      onChange={(option) => changeShipListInput(option.value)}
                     />
                   </div>
                   <div className="col-6 ">
@@ -81,6 +60,7 @@ const LoadableCalculator = () => {
                         type="number"
                         placeholder="500"
                         name="intDraft"
+                        value={LoadableCalculatorInput.intDraft}
                         onChange={(e) => changeText("intDraft", e.target.value)}
                       />
                     </Form.Group>
@@ -102,6 +82,7 @@ const LoadableCalculator = () => {
                       type="number"
                       placeholder="100.1"
                       name="intDWT"
+                      value={LoadableCalculatorInput.intDWT}
                       onChange={(e) => changeText("intDWT", e.target.value)}
                     />
                   </Form.Group>
@@ -114,6 +95,7 @@ const LoadableCalculator = () => {
                       type="number"
                       placeholder="150.02"
                       name="intFW"
+                      value={LoadableCalculatorInput.intFW}
                       onChange={(e) => changeText("intFW", e.target.value)}
                     />
                   </Form.Group>
@@ -126,6 +108,7 @@ const LoadableCalculator = () => {
                       type="number"
                       placeholder="256.3"
                       name="intTPC"
+                      value={LoadableCalculatorInput.intTPC}
                       onChange={(e) => changeText("intTPC", e.target.value)}
                     />
                   </Form.Group>
@@ -139,6 +122,7 @@ const LoadableCalculator = () => {
                       type="number"
                       placeholder="100.1"
                       name="intIFO"
+                      value={LoadableCalculatorInput.intIFO}
                       onChange={(e) => changeText("intIFO", e.target.value)}
                     />
                   </Form.Group>
@@ -151,6 +135,7 @@ const LoadableCalculator = () => {
                       type="number"
                       placeholder="150.02"
                       name="intMGO"
+                      value={LoadableCalculatorInput.intMGO}
                       onChange={(e) => changeText("intMGO", e.target.value)}
                     />
                   </Form.Group>
@@ -163,6 +148,7 @@ const LoadableCalculator = () => {
                       type="number"
                       placeholder="256.3"
                       name="intFWA"
+                      value={LoadableCalculatorInput.intFWA}
                       onChange={(e) => changeText("intFWA", e.target.value)}
                     />
                   </Form.Group>
@@ -178,6 +164,7 @@ const LoadableCalculator = () => {
                       type="number"
                       placeholder="100.1"
                       name="intSummerDraft"
+                      value={LoadableCalculatorInput.intSummerDraft}
                       onChange={(e) => changeText("intSummerDraft", e.target.value)}
                     />
                   </Form.Group>
@@ -192,6 +179,7 @@ const LoadableCalculator = () => {
                       type="number"
                       placeholder="150.02"
                       name="intUnpumpableBallast"
+                      value={LoadableCalculatorInput.intUnpumpableBallast}
                       onChange={(e) => changeText("intUnpumpableBallast", e.target.value)}
                     />
                   </Form.Group>
@@ -206,6 +194,7 @@ const LoadableCalculator = () => {
                       type="number"
                       placeholder="256.3"
                       name="intConstant"
+                      value={LoadableCalculatorInput.intConstant}
                       onChange={(e) => changeText("intConstant", e.target.value)}
                     />
                   </Form.Group>

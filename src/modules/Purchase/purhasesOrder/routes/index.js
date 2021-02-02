@@ -1,6 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import PurhasesOrderListContainer from "../views/PurhasesOrderListContainer";
+import PurchasesOrderCreateContainer from "../views/PurhasesOrderCreateContainer.js"
 
 
 const purchaseOrder = [
@@ -10,13 +11,13 @@ const purchaseOrder = [
     component: PurhasesOrderListContainer,
     exact: true,
   },
-//   {
-//     path: "/purchase/request/create",
-//     name: "Purchase Request Create",
-//     component: PurchaseRequestCreateContainer,
-//     exact: true,
-//   },
-  
+  {
+    path: "/purchase/order/create",
+    name: "Purchase Request Create",
+    component: PurchasesOrderCreateContainer,
+    exact: true,
+  },
+
 ];
 
 function purchaseOrderRoute() {

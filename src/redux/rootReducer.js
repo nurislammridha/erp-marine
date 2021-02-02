@@ -64,6 +64,7 @@ import UtilityReducer from "../modules/utility/information/_redux/reducers/Utili
 import RolePermissionManagementReducer from "../modules/role-permission-management/information/_redux/reducers/RolePermissionManagementReducer";
 import DepartmentReducer from "../modules/master/DropDownData/Department/_redux/DepartmentReducer/DepartmentReducer";
 import PurchaseReuestCategoryReducer from "../modules/master/DropDownData/PurchaseReuestCategory/_redux/PurchaseReuestCategoryReducer/PurchaseReuestCategoryReducer";
+import PurchasesOrderReducer from "../modules/Purchase/purhasesOrder/_redux/reducers/PurhasesOrderReducer";
 
 /** 
 | Domain : CCO
@@ -154,7 +155,10 @@ export const rootReducer = combineReducers({
   //purchase 
   purchaseRequest: PurhasesRequestReducer,
   utitlityInfo: UtilityReducer,
-  roleReducer:RolePermissionManagementReducer,
+  roleReducer: RolePermissionManagementReducer,
+
+  /**Purchase Order */
+  purchasesOrderInfo: PurchasesOrderReducer
 });
 
 export function* rootSaga() {

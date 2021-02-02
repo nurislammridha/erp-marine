@@ -1,12 +1,14 @@
 import React from "react";
-import BookingEntry from "../components/BookingEntry";
+import PurhasesOrderEntry from "../components/PurhasesOrderEntry";
+import PurhasesOrderFilter from "../components/PurhasesOrderFilter";
 
-const BookingEntryContainer = () => {
+const PurchasesOrderCreateContainer = () => {
   return (
     <div className="container">
-      <BookingEntry />
+      <PurhasesOrderFilter />
+      <PurhasesOrderEntry />
     </div>
   );
 };
 
-export default BookingEntryContainer;
+export default PurchasesOrderCreateContainer;
