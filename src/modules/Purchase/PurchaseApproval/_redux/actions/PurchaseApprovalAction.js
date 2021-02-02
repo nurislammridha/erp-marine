@@ -38,7 +38,7 @@ export const getShipName = (data) => (dispatch) => {
 };
 
 
-export const getPurchaseApprovalList = (searchValue = "") => async (dispatch) => {
+export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBusinessUnitId = null, intShipID = null, dteFromDate = null, dteToDate = null) => async (dispatch) => {
     let response = {
         purchaseApprovalList: [],
         status: false,
@@ -48,27 +48,40 @@ export const getPurchaseApprovalList = (searchValue = "") => async (dispatch) =>
     };
 
     dispatch({ type: Types.GET_PURCHASE_APPROVAL_LIST, payload: response });
-    let url = `${process.env.REACT_APP_API_URL}purchase/reqList`;
-    if (searchValue !== "") {
-        url += `?search=${searchValue}`
-    }
+
+
     try {
-        await Axios.get(url).then((res) => {
-            const { status, message, errors, data } = res.data;
-            response.supplierList = data;
-            response.status = status;
-            response.message = message;
-            response.errors = errors;
-            response.isLoading = false;
-        })
-            .catch((err) => {
-                toast.error(err)
+        let url = `${process.env.REACT_APP_API_URL}purchase/getApproval?`;
+
+        if (searchValue !== "") {
+            url += `search=${searchValue}&`
+        }
+
+        url += intSBUId !== null ? `intSBUId=${intSBUId}&` : '';
+        url += intBusinessUnitId !== null ? `intBusinessUnitId=${intBusinessUnitId}&` : '';
+        url += intShipID !== null ? `intShipID=${intShipID}&` : '';
+        url += dteFromDate !== null ? `dteFromDate=${dteFromDate}&` : '';
+
+        if (searchValue === "" && intSBUId === null && intBusinessUnitId === null && intShipID === null) {
+            dispatch({ type: Types.GET_PURCHASE_APPROVAL_LIST, payload: response })
+        } else {
+            await Axios.get(url).then((res) => {
+                console.log('res', res)
+                const { status, message, errors, data } = res.data;
+                response.purchaseApprovalList = data;
+                response.status = status;
+                response.message = message;
+                response.errors = errors;
+                response.isLoading = false;
             })
+                .catch((err) => {
+                    toast.error(err)
+                })
+        }
+        response.isLoading = false;
+        dispatch({ type: Types.GET_PURCHASE_APPROVAL_LIST, payload: response })
     } catch (error) {
         response.message = "Something wrong!";
         toast.error(error);
     }
-    response.isLoading = false;
-    dispatch({ type: Types.GET_PURCHASE_APPROVAL_LIST, payload: response })
-
 }

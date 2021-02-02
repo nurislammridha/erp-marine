@@ -3,6 +3,7 @@ import * as Types from "../types/Types";
 
 const initialState = {
     PurchaseApprovalFilterInput: {
+        search: '',
         strSBUName: "",
         intSBUId: "",
         strBusinessUnitName: "",
