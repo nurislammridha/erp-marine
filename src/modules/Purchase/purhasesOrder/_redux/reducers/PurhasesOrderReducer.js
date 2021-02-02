@@ -48,7 +48,13 @@ const PurchasesOrderReducer = (state = initialstate, action) => {
             const orderFilter = { ...state.orderFilter };
             orderFilter[action.payload.name] = action.payload.value;
             return { ...state, orderFilter }
-
+        case Types.DELETE_MULTIPLE:
+            const multipleOrderOld = [...state.multipleOrder]
+            multipleOrderOld.splice(action.payload, 1);
+            return { ...state, multipleOrder: multipleOrderOld }
+        case Types.EDIT_MULTIPLE:
+            const editData = { ...state.multipleOrder[action.payload] }
+            return { ...state, orderInput: editData }
         default:
             break;
     }

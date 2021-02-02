@@ -51,3 +51,9 @@ export const purchaseOrderFilter = (name, value) => (dispatch) => {
     }
     dispatch({ type: Types.PURCHASE_ORDER_FILTER, payload: formData })
 }
+export const deleteMultipleItem = (index) => (dispatch) => {
+    dispatch({ type: Types.DELETE_MULTIPLE, payload: index })
+}
+export const editOrderMultiple = (index) => (dispatch) => {
+    dispatch({ type: Types.EDIT_MULTIPLE, payload: index })
+}
