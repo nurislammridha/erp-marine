@@ -19,8 +19,9 @@ const PurchaseRequestList = () => {
   const [searchText, setSearchText] = useState("");
   const [PRDetailsShow, setPRDetailsShow] = useState(false)
   const [PRDetailsID, setPRDetailsID] = useState(null)
-  const [status, setStatus] = useState("Pending")
+  const [status, setStatus] = useState()
 
+  console.log('PRListData :>> ', PRListData);
   useEffect(() => {
     dispatch(getPRListData(currentPage));
   }, [dispatch, currentPage]);
@@ -42,7 +43,7 @@ const PurchaseRequestList = () => {
   const handleShowPQDetails = (item) => {
     setPRDetailsID(item.intPurchaseRequestID);
     setPRDetailsShow(true);
-    setStatus(item.status)
+    setStatus(item.strStatus)
   }
   return (
     <Card>
@@ -99,8 +100,8 @@ const PurchaseRequestList = () => {
                         <td>{item.strCategoryName !== null && item.strCategoryName !== '' ? item.strCategoryName : ''}</td>
                         <td>{item.strRemarks !== null && item.strRemarks !== '' ? item.strRemarks : ''}</td>
                         <td>
-                          <button className={item.isApprovedAll === "Rejected" ? "btn rejected-status booking-list-btn text-danger" : (item.isApprovedAll === "Pending" ? "btn pending-status booking-list-btn text-warning" : "btn approve-status booking-list-btn text-success")}>
-                            {item.isApprovedAll !== null && item.isApprovedAll !== '' ? item.isApprovedAll : 'Pending'}
+                          <button className={item.strStatus === "Rejected" ? "btn rejected-status booking-list-btn text-danger" : (item.strStatus === "Pending" ? "btn pending-status booking-list-btn text-warning" : (item.strStatus === "Approve" ? "btn approve-status booking-list-btn text-success" : ''))}>
+                            {item.strStatus !== null && item.strStatus !== '' ? item.strStatus : ''}
                           </button>
                         </td>
                         <td className="text-center">
@@ -138,7 +139,7 @@ const PurchaseRequestList = () => {
       </Card.Body >
       <SimpleModal
         size="xl"
-        status="Pending"
+        status={status}
         show={PRDetailsShow}
         handleClose={() => setPRDetailsShow(false)}
         handleShow={() => setPRDetailsShow(true)}

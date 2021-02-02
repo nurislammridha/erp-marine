@@ -7,7 +7,6 @@ const PurchaseRequestDetails = ({ PRDetailsID, handleClose }) => {
     const dispatch = useDispatch()
     const PRDetails = useSelector((state) => state.purchaseRequest.PRDetails);
 
-    console.log('PRDetails :>> ', PRDetails);
     useEffect(() => {
         dispatch(getPRDetailsData(PRDetailsID))
     }, [])
