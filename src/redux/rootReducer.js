@@ -65,6 +65,8 @@ import RolePermissionManagementReducer from "../modules/role-permission-manageme
 import DepartmentReducer from "../modules/master/DropDownData/Department/_redux/DepartmentReducer/DepartmentReducer";
 import PurchaseReuestCategoryReducer from "../modules/master/DropDownData/PurchaseReuestCategory/_redux/PurchaseReuestCategoryReducer/PurchaseReuestCategoryReducer";
 import PurchasesOrderReducer from "../modules/Purchase/purhasesOrder/_redux/reducers/PurhasesOrderReducer";
+import PurchaseApprovalReducer from "../modules/Purchase/PurchaseApproval/_redux/reducers/PurchaseApprovalReducer";
+import POApprovalReducer from "../modules/Purchase/POApproval/_redux/reducers/POApprovalReducer";
 
 /** 
 | Domain : CCO
@@ -132,6 +134,11 @@ export const rootReducer = combineReducers({
   /** Promotion */
   promotion: EmployeePromotionReducer,
 
+  /** Purchase */
+  purchaseApprovalFilter: PurchaseApprovalReducer,
+  POApprovalFilter: POApprovalReducer,
+
+
   // master module reducer // dynamic data for all dropdown menu list 
   PortReducer: PortReducer,
   VoyageTypeReducer: VoyageTypeReducer,
@@ -156,9 +163,12 @@ export const rootReducer = combineReducers({
   purchaseRequest: PurhasesRequestReducer,
   utitlityInfo: UtilityReducer,
   roleReducer: RolePermissionManagementReducer,
+<<<<<<< HEAD
 
   /**Purchase Order */
   purchasesOrderInfo: PurchasesOrderReducer
+=======
+>>>>>>> origin/nafee
 });
 
 export function* rootSaga() {
