@@ -163,12 +163,9 @@ export const rootReducer = combineReducers({
   purchaseRequest: PurhasesRequestReducer,
   utitlityInfo: UtilityReducer,
   roleReducer: RolePermissionManagementReducer,
-<<<<<<< HEAD
 
   /**Purchase Order */
   purchasesOrderInfo: PurchasesOrderReducer
-=======
->>>>>>> origin/nafee
 });
 
 export function* rootSaga() {
