@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import { RHFInput } from 'react-hook-form-input';
 import { useForm } from "react-hook-form";
@@ -7,21 +7,53 @@ import Select from "react-select";
 import DatePicker from "react-datepicker";
 import moment from 'moment';
 import PurchaseRequestCreateTable from './PurchaseRequestCreateTable';
+import { useDispatch, useSelector } from 'react-redux';
+import { getShipList } from '../../../master/DropDownData/Ship/_redux/ShipAction/ShipAction';
+import { getItemCategory, getItemSubCategory, getItemType } from '../../../item/information/_redux/actions/ItemAction';
+import { addMultiplePQ, handlePurchaseInputChage, handlePurchaseRowInputChage } from '../_redux/actions/PurhasesRequestAddAction';
+import { getDepartmentData } from '../../../master/DropDownData/Department/_redux/VoyageTypeAction/DepartmentAction';
+import { getPRCategoryData } from '../../../master/DropDownData/PurchaseReuestCategory/_redux/PurchaseReuestCategoryAction/PurchaseReuestCategoryAction';
 
 const PurchaseRequestCreate = () => {
   const { register, setValue } = useForm();
   const history = useHistory()
+  const dispatch = useDispatch();
+  const shipList = useSelector((state) => state.ShipReducer.shipList);
+  const itemTypeOptionData = useSelector((state) => state.itemList.itemTypeOptionData);
+  const itemCategoryOptionData = useSelector((state) => state.itemList.itemCategoryOptionData);
+  const itemSubCategoryOptionData = useSelector((state) => state.itemList.itemSubCategoryOptionData);
+  const departmentList = useSelector((state) => state.DepartmentReducer.departmentList);
+  const PRCategoryList = useSelector((state) => state.PurchaseReuestCategoryReducer.PRCategoryList);
+  //purchase request input data 
+  const purchaseRequestData = useSelector((state) => state.purchaseRequest.purchaseRequestData);
+  const PQRowData = useSelector((state) => state.purchaseRequest.PQRowData);
 
-  const shipList = [
-    {
-      value: 1,
-      label: "Akij"
-    },
-    {
-      value: 2,
-      label: "Akij Noor"
-    },
-  ]
+  const [searchTeam, setSearchTeam] = useState(true);
+
+  //get data 
+  useEffect(() => {
+    dispatch(getShipList())
+    dispatch(getItemType());
+    dispatch(getItemCategory());
+    dispatch(getItemSubCategory());
+    dispatch(getDepartmentData());
+    dispatch(getPRCategoryData());
+  }, [])
+
+  const handleChangeTextInput = (name, value) => {
+    dispatch(handlePurchaseInputChage(name, value))
+    // dispatch(handlePurchaseRowInputChage(name, value))
+  }
+  const handleChangeRowTextInput = (name, value) => {
+    dispatch(handlePurchaseRowInputChage(name, value))
+  }
+
+  //add multiple purchase request data 
+  const addMultiplePRData = (e) => {
+    dispatch(addMultiplePQ(purchaseRequestData, PQRowData))
+    e.preventDefault()
+  }
+
   return (
     <Card>
       <Card.Body className="pt-5 mt-0">
@@ -43,12 +75,13 @@ const PurchaseRequestCreate = () => {
               <RHFInput
                 as={<Select options={shipList} />}
                 rules={{ required: false }}
-                name="intShipId"
+                name="intSBUId"
                 register={register}
-                // onChange={(option) => {
-                //   handleChangeTextInput('strShipName', option.label);
-                //   handleChangeTextInput('intShipId', option.value)
-                // }}
+                value={purchaseRequestData.intSBUId}
+                onChange={(option) => {
+                  handleChangeTextInput('strSBUName', option.label);
+                  handleChangeTextInput('intSBUId', option.value)
+                }}
                 setValue={setValue}
               />
             </div>
@@ -57,12 +90,13 @@ const PurchaseRequestCreate = () => {
               <RHFInput
                 as={<Select options={shipList} />}
                 rules={{ required: false }}
-                name="intShipId"
+                name="intBusinessUnitId"
                 register={register}
-                // onChange={(option) => {
-                //   handleChangeTextInput('strShipName', option.label);
-                //   handleChangeTextInput('intShipId', option.value)
-                // }}
+                value={purchaseRequestData.intBusinessUnitId}
+                onChange={(option) => {
+                  handleChangeTextInput('strBusinessUnitName', option.label);
+                  handleChangeTextInput('intBusinessUnitId', option.value)
+                }}
                 setValue={setValue}
               />
             </div>
@@ -71,26 +105,28 @@ const PurchaseRequestCreate = () => {
               <RHFInput
                 as={<Select options={shipList} />}
                 rules={{ required: false }}
-                name="intShipId"
+                name="intShipID"
                 register={register}
-                // onChange={(option) => {
-                //   handleChangeTextInput('strShipName', option.label);
-                //   handleChangeTextInput('intShipId', option.value)
-                // }}
+                value={purchaseRequestData.intShipID}
+                onChange={(option) => {
+                  handleChangeTextInput('strShipName', option.label);
+                  handleChangeTextInput('intShipID', option.value)
+                }}
                 setValue={setValue}
               />
             </div>
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Department</label>
               <RHFInput
-                as={<Select options={shipList} />}
+                as={<Select options={departmentList} />}
                 rules={{ required: false }}
-                name="intShipId"
+                name="intDepartmentId"
                 register={register}
-                // onChange={(option) => {
-                //   handleChangeTextInput('strShipName', option.label);
-                //   handleChangeTextInput('intShipId', option.value)
-                // }}
+                value={purchaseRequestData.intDepartmentId}
+                onChange={(option) => {
+                  handleChangeTextInput('strDepartmentName', option.label);
+                  handleChangeTextInput('intDepartmentId', option.value)
+                }}
                 setValue={setValue}
               />
             </div>
@@ -98,12 +134,12 @@ const PurchaseRequestCreate = () => {
               <label className="formFont"> Due Date</label>
               <DatePicker
                 className="date-picker"
-                name="dteCommenceDate"
+                name="dteDueDate"
                 dateFormat="MM-dd-yyyy"
-                minDate={moment().toDate()}
-                placeholderText="select commence date"
-                // selected={VesselBooking.dteCommenceDate !== '' ? moment(VesselBooking.dteCommenceDate).toDate() : null}
-                // onChange={(date) => handleChangeTextInput("dteCommenceDate", date)}
+                // minDate={moment().toDate()}
+                placeholderText="select due date"
+                selected={purchaseRequestData.dteDueDate}
+                onChange={(date) => handleChangeTextInput("dteDueDate", date)}
                 ref={register({
                   required: true,
                   maxLength: 100,
@@ -114,14 +150,15 @@ const PurchaseRequestCreate = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Category</label>
               <RHFInput
-                as={<Select options={shipList} />}
+                as={<Select options={PRCategoryList} />}
                 rules={{ required: false }}
-                name="intShipId"
+                name="intCategoryId"
                 register={register}
-                // onChange={(option) => {
-                //   handleChangeTextInput('strShipName', option.label);
-                //   handleChangeTextInput('intShipId', option.value)
-                // }}
+                value={purchaseRequestData.intCategoryId}
+                onChange={(option) => {
+                  handleChangeTextInput('strCategoryName', option.label);
+                  handleChangeTextInput('intCategoryId', option.value)
+                }}
                 setValue={setValue}
               />
             </div>
@@ -129,10 +166,10 @@ const PurchaseRequestCreate = () => {
               <label className="formFont">Reference</label>
               <Form.Control
                 className="formHeight"
-                name="numFreightOrHireRate"
+                name="strPurchaseReferanceNo"
                 type="text"
-                // value={VesselBooking.numFreightOrHireRate}
-                // onChange={(e) => handleChangeTextInput('numFreightOrHireRate', e.target.value)}
+                value={purchaseRequestData.strPurchaseReferanceNo}
+                onChange={(e) => handleChangeTextInput('strPurchaseReferanceNo', e.target.value)}
                 placeholder="Reference"
               />
             </div>
@@ -140,10 +177,10 @@ const PurchaseRequestCreate = () => {
               <label className="formFont">Remarks</label>
               <Form.Control
                 className="formHeight"
-                name="numFreightOrHireRate"
+                name="strRemarks"
                 type="text"
-                // value={VesselBooking.numFreightOrHireRate}
-                // onChange={(e) => handleChangeTextInput('numFreightOrHireRate', e.target.value)}
+                value={purchaseRequestData.strRemarks}
+                onChange={(e) => handleChangeTextInput('strRemarks', e.target.value)}
                 placeholder="Remarks"
               />
             </div>
@@ -153,12 +190,11 @@ const PurchaseRequestCreate = () => {
                 <Form.Check
                   className="forgotPasswordText  "
                   type="checkbox"
-                // onChange={(e) =>
-                //   certificateMainInfoChange(
-                //     "intNotOnBoard",
-                //     certificateInfoInput.intNotOnBoard == "0" ? "1" : "0"
-                //   )
-                // }
+                  name="isQCComplete"
+                  onChange={(e) =>
+                    handleChangeTextInput("isQCComplete", purchaseRequestData.isQCComplete == "0" ? "1" : "0"
+                    )
+                  }
                 />
               </Form.Group>
             </div>
@@ -177,75 +213,82 @@ const PurchaseRequestCreate = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <Form.Group>
                 <label className="formFont">Search by team</label> <br />
-                <label className="switch">
-                  <input type="checkbox"
-                    onChange={(e) => console.log('e :>> ', e)}
-                    className="formHeight"
-                  // <input type="checkbox" checked={partnerAddress.isDefault ? true : false}
-                  // onChange={(option) => handleChangeTextInput("isDefault", partnerAddress.isDefault ? 0 : 1)}
-                  ></input>
-                  <span className="slider round"></span>
-                </label>
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" className="formHeight" checked={searchTeam} onChange={(e) => setSearchTeam(!searchTeam)} class="custom-control-input" id="customSwitch1" />
+                  <label class="custom-control-label bg-secondary custom-switch-design" for="customSwitch1"></label>
+                </div>
               </Form.Group>
+
             </div>
           </div>
 
           <div className="form-group row mb-1">
-            <div className="col-xl-3 col-lg-3 col-6">
-              <label className="formFont">Item Type</label>
-              <RHFInput
-                as={<Select options={shipList} />}
-                rules={{ required: false }}
-                name="intShipId"
-                register={register}
-                // onChange={(option) => {
-                //   handleChangeTextInput('strShipName', option.label);
-                //   handleChangeTextInput('intShipId', option.value)
-                // }}
-                setValue={setValue}
-              />
-            </div>
-            <div className="col-xl-3 col-lg-3 col-6">
-              <label className="formFont">Item Category</label>
-              <RHFInput
-                as={<Select options={shipList} />}
-                rules={{ required: false }}
-                name="intShipId"
-                register={register}
-                // onChange={(option) => {
-                //   handleChangeTextInput('strShipName', option.label);
-                //   handleChangeTextInput('intShipId', option.value)
-                // }}
-                setValue={setValue}
-              />
-            </div>
-            <div className="col-xl-3 col-lg-3 col-6">
-              <label className="formFont">Item Sub Category</label>
-              <RHFInput
-                as={<Select options={shipList} />}
-                rules={{ required: false }}
-                name="intShipId"
-                register={register}
-                // onChange={(option) => {
-                //   handleChangeTextInput('strShipName', option.label);
-                //   handleChangeTextInput('intShipId', option.value)
-                // }}
-                setValue={setValue}
-              />
-            </div>
-            <div className="col-xl-3 col-lg-3 col-6">
-            </div>
+            {
+              searchTeam === false && (
+                <>
+                  <div className="col-xl-3 col-lg-3 col-6">
+                    <label className="formFont">Item Type</label>
+                    <RHFInput
+                      as={<Select options={itemTypeOptionData} />}
+                      rules={{ required: false }}
+                      name="intShipId"
+                      register={register}
+                      // onChange={(option) => {
+                      //   handleChangeRowTextInput('strShipName', option.label);
+                      //   handleChangeRowTextInput('intShipId', option.value)
+                      // }}
+                      setValue={setValue}
+                    />
+                  </div>
+                  <div className="col-xl-3 col-lg-3 col-6">
+                    <label className="formFont">Item Category</label>
+                    <RHFInput
+                      as={<Select options={itemCategoryOptionData} />}
+                      rules={{ required: false }}
+                      // name="intItemCategoryID"
+                      register={register}
+                      // value={purchaseRequestData.intItemCategoryID}
+                      // onChange={(option) => {
+                      //   handleChangeRowTextInput('strItemCategoryName', option.label);
+                      //   handleChangeRowTextInput('intItemCategoryID', option.value)
+                      // }}
+                      setValue={setValue}
+                    />
+                  </div>
+                  <div className="col-xl-3 col-lg-3 col-6">
+                    <label className="formFont">Item Sub Category</label>
+                    <RHFInput
+                      as={<Select options={itemSubCategoryOptionData} />}
+                      rules={{ required: false }}
+                      name="intItemSubCategoryID"
+                      register={register}
+                      // onChange={(option) => {
+                      //   handleChangeRowTextInput('strShipName', option.label);
+                      //   handleChangeRowTextInput('intItemSubCategoryID', option.value)
+                      // }}
+                      setValue={setValue}
+                    />
+                  </div>
+
+                  <div className="col-xl-3 col-lg-3 col-6">
+                  </div>
+                </>
+              )
+            }
+            {/**================== */}
+
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Item</label>
               <RHFInput
                 as={<Select options={shipList} />}
                 rules={{ required: false }}
-                name="intShipId"
+                name="intitemid"
                 register={register}
-                // onChange={(option) => {
-                //   handleChangeTextInput('strShipName', option.label);
-                //   handleChangeTextInput('intShipId', option.value)
-                // }}
+                value={PQRowData.intitemid}
+                onChange={(option) => {
+                  handleChangeRowTextInput('strItemName', option.label);
+                  handleChangeRowTextInput('intitemid', option.value)
+                }}
                 setValue={setValue}
               />
             </div>
@@ -253,20 +296,31 @@ const PurchaseRequestCreate = () => {
               <label className="formFont">Qty</label>
               <Form.Control
                 className="formHeight"
-                name="numFreightOrHireRate"
+                name="numPurchaseRequestQty"
                 type="text"
-                // value={VesselBooking.numFreightOrHireRate}
-                // onChange={(e) => handleChangeTextInput('numFreightOrHireRate', e.target.value)}
+                value={PQRowData.numPurchaseRequestQty}
+                onChange={(e) => handleChangeRowTextInput('numPurchaseRequestQty', e.target.value)}
                 placeholder="Qty"
               />
             </div>
             <div className="col-xl-3 col-lg-3 col-6">
+              <label className="formFont">Remarks</label>
+              <Form.Control
+                className="formHeight"
+                name="strPurchaseRequestPurpose"
+                type="text"
+                value={PQRowData.strPurchaseRequestPurpose}
+                onChange={(e) => handleChangeRowTextInput('strPurchaseRequestPurpose', e.target.value)}
+                placeholder="Remarks"
+              />
+            </div>
+            <div className="col-xl-3 col-lg-3 col-6">
               <div className="mt-5">
-                <Button className="text-white booking-btn" variant="primary">
-                  Book
+                <Button className="text-white booking-btn" variant="primary" onClick={(e) => addMultiplePRData(e)}>
+                  Add
                 </Button>
                 <Link >
-                  <i class="far fa-file-alt editIcon booking-btn bg-primary text-light ml-3"></i>
+                  <i class="far fa-file-alt editIcon booking-btn bg-primary text-light ml-3" title="Bulk upload"></i>
                 </Link>
               </div>
             </div>

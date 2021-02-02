@@ -59,8 +59,11 @@ import CargoReducer from "../modules/master/DropDownData/Cargo/_redux/CargoReduc
 import ShipReducer from "../modules/master/DropDownData/Ship/_redux/ShipReducer/ShipReducer";
 import BookingStatusReducer from "../modules/master/DropDownData/BookingStatus/_redux/BookingStatusReducer/BookingStatusReducer";
 import CharterReducer from "../modules/master/DropDownData/Charter/_redux/CharterReducer/CharterReducer";
+import PurhasesRequestReducer from "../modules/Purchase/purhasesRequest/_redux/reducers/PurhasesRequestReducer";
 import UtilityReducer from "../modules/utility/information/_redux/reducers/UtilityReducer";
 import RolePermissionManagementReducer from "../modules/role-permission-management/information/_redux/reducers/RolePermissionManagementReducer";
+import DepartmentReducer from "../modules/master/DropDownData/Department/_redux/DepartmentReducer/DepartmentReducer";
+import PurchaseReuestCategoryReducer from "../modules/master/DropDownData/PurchaseReuestCategory/_redux/PurchaseReuestCategoryReducer/PurchaseReuestCategoryReducer";
 
 /** 
 | Domain : CCO
@@ -135,6 +138,8 @@ export const rootReducer = combineReducers({
   CharterReducer: CharterReducer,
   ShipReducer: ShipReducer,
   BookingStatusReducer: BookingStatusReducer,
+  DepartmentReducer: DepartmentReducer,
+  PurchaseReuestCategoryReducer: PurchaseReuestCategoryReducer,
 
   /**Certificates */
   certificateMainInfo: CertificateMainReducer,
@@ -145,6 +150,9 @@ export const rootReducer = combineReducers({
   laytimeInfo: LaytimeInfoReducer,
   supplierList: SuppliersListReducer,
   itemList: ItemReducer,
+
+  //purchase 
+  purchaseRequest: PurhasesRequestReducer,
   utitlityInfo: UtilityReducer,
   roleReducer:RolePermissionManagementReducer,
 });
