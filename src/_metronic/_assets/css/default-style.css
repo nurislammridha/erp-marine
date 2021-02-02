@@ -1313,3 +1313,6 @@ h6.supplier-modal-header {
     line-height: 1.5!important;
 
 }
+.quotation-table td{
+    padding: 10px 0px!important;
+}
