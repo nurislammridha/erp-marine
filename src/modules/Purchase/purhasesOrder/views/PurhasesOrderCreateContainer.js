@@ -1,11 +1,11 @@
 import React from "react";
 import PurhasesOrderEntry from "../components/PurhasesOrderEntry";
-import PurhasesOrderFilter from "../components/PurhasesOrderFilter";
+import PurhasesOrderEntryHeader from "../components/PurhasesOrderEntryHeader";
 
 const PurchasesOrderCreateContainer = () => {
   return (
     <div className="container">
-      <PurhasesOrderFilter />
+      <PurhasesOrderEntryHeader />
       <PurhasesOrderEntry />
     </div>
   );
