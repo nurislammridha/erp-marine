@@ -8,7 +8,7 @@ import moment from "moment"
 import PurchaseApprovalFilter from './PurchaseApprovalFilter';
 import SimpleModal from '../../../../master/components/Modal/SimpleModal';
 import RequisitionApprovalDetail from '../detail/RequisitionApprovalDetail';
-import { getPurchaseApprovalList } from '../../_redux/actions/PurchaseApprovalAction';
+import { GetPurchaseApprovalDetail, getPurchaseApprovalList } from '../../_redux/actions/PurchaseApprovalAction';
 
 
 
@@ -16,8 +16,10 @@ const PurchaseApprovalList = () => {
   const dispatch = useDispatch();
   const purchaseApprovalListData = useSelector((state) => state.purchaseApprovalFilter.purchaseApprovalList);
   const [requisitionDetailsShow, setRequisitionDetailsShow] = useState(false)
-  const showModal = () => {
-    setRequisitionDetailsShow(true)
+
+  const handleClick = (id) => {
+    setRequisitionDetailsShow(true);
+    dispatch(GetPurchaseApprovalDetail(id));
   }
 
 
@@ -81,7 +83,9 @@ const PurchaseApprovalList = () => {
                         <td className="text-center">
 
                           <div className="d-flex">
-                            <a onClick={() => showModal()}>
+                            <a onClick={() =>
+                              handleClick(item.intPurchaseRequestID)
+                            }>
                               <i className="far fa-eye editIcon item-list-icon"></i>
                             </a>
                           </div>
@@ -111,7 +115,6 @@ const PurchaseApprovalList = () => {
         show={requisitionDetailsShow}
         handleClose={() => setRequisitionDetailsShow(false)}
         handleShow={() => setRequisitionDetailsShow(true)}
-        // vesselBookingID={vesselBookingID}
         modalTitle={"Requisition Approval Details"}
       >
         <RequisitionApprovalDetail />

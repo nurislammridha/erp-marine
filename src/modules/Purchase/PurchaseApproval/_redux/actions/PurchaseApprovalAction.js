@@ -80,3 +80,16 @@ export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBu
         toast.error(error);
     }
 }
+
+
+export const GetPurchaseApprovalDetail = (id) => (dispatch) => {
+
+    Axios.get(`${process.env.REACT_APP_API_URL}purchase/reqList/${id}`)
+        .then((res) => {
+            console.log('resdetail', res)
+            dispatch({
+                type: Types.GET_PURCHASE_APPROVAL_DETAIL,
+                payload: res.data,
+            });
+        });
+};

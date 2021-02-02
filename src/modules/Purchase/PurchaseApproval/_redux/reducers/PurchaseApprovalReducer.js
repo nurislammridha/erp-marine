@@ -14,6 +14,7 @@ const initialState = {
         dteToDate: ""
     },
 
+
     listPaginatedData: null,
     purchaseApprovalList: [],
     status: false,
@@ -51,6 +52,12 @@ const PurchaseApprovalReducer = (state = initialState, action) => {
                 ...state,
                 purchaseApprovalList: action.payload.purchaseApprovalList,
                 isLoading: action.payload.isLoading
+            };
+
+        case Types.GET_PURCHASE_APPROVAL_DETAIL:
+            return {
+                ...state,
+                purchaseApprovalDetail: action.payload.data,
             };
 
         default:
