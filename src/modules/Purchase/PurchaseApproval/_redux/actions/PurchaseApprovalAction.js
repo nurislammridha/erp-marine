@@ -19,7 +19,6 @@ export const getSBUName = (data) => (dispatch) => {
 
     Axios.get(`${process.env.REACT_APP_API_URL}purchase/sbuList`).then(
         (res) => {
-            console.log('res', res)
             let data = res.data.data;
             dispatch({ type: Types.GET_SBU_NAME, payload: data });
         }
@@ -30,7 +29,6 @@ export const getShipName = (data) => (dispatch) => {
 
     Axios.get(`${process.env.REACT_APP_API_URL}voyage/shipList`).then(
         (res) => {
-            console.log('res', res)
             let data = res.data.data;
             dispatch({ type: Types.GET_SHIP_NAME, payload: data });
         }
@@ -53,10 +51,7 @@ export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBu
     try {
         let url = `${process.env.REACT_APP_API_URL}purchase/getApproval?`;
 
-        if (searchValue !== "") {
-            url += `search=${searchValue}&`
-        }
-
+        url += searchValue !== "" ? `search=${searchValue}&` : '';
         url += intSBUId !== null ? `intSBUId=${intSBUId}&` : '';
         url += intBusinessUnitId !== null ? `intBusinessUnitId=${intBusinessUnitId}&` : '';
         url += intShipID !== null ? `intShipID=${intShipID}&` : '';
@@ -66,7 +61,6 @@ export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBu
             dispatch({ type: Types.GET_PURCHASE_APPROVAL_LIST, payload: response })
         } else {
             await Axios.get(url).then((res) => {
-                console.log('res', res)
                 const { status, message, errors, data } = res.data;
                 response.purchaseApprovalList = data;
                 response.status = status;
@@ -80,7 +74,8 @@ export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBu
         }
         response.isLoading = false;
         dispatch({ type: Types.GET_PURCHASE_APPROVAL_LIST, payload: response })
-    } catch (error) {
+    }
+    catch (error) {
         response.message = "Something wrong!";
         toast.error(error);
     }
