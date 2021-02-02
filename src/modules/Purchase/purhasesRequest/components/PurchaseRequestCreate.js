@@ -13,11 +13,14 @@ import { getItemCategory, getItemSubCategory, getItemType } from '../../../item/
 import { addMultiplePQ, handlePurchaseInputChage, handlePurchaseRowInputChage } from '../_redux/actions/PurhasesRequestAddAction';
 import { getDepartmentData } from '../../../master/DropDownData/Department/_redux/VoyageTypeAction/DepartmentAction';
 import { getPRCategoryData } from '../../../master/DropDownData/PurchaseReuestCategory/_redux/PurchaseReuestCategoryAction/PurchaseReuestCategoryAction';
+import { getBranchName, getSBUName } from '../../POApproval/_redux/actions/POApprovalAction';
 
 const PurchaseRequestCreate = () => {
   const { register, setValue } = useForm();
   const history = useHistory()
   const dispatch = useDispatch();
+  const SBUOptionData = useSelector((state) => state.POApprovalFilter.SBUNameData);
+  const branchOptionData = useSelector((state) => state.POApprovalFilter.branchNameData);
   const shipList = useSelector((state) => state.ShipReducer.shipList);
   const itemTypeOptionData = useSelector((state) => state.itemList.itemTypeOptionData);
   const itemCategoryOptionData = useSelector((state) => state.itemList.itemCategoryOptionData);
@@ -32,6 +35,8 @@ const PurchaseRequestCreate = () => {
 
   //get data 
   useEffect(() => {
+    dispatch(getSBUName());
+    dispatch(getBranchName());
     dispatch(getShipList())
     dispatch(getItemType());
     dispatch(getItemCategory());
@@ -73,7 +78,7 @@ const PurchaseRequestCreate = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">SBU</label>
               <RHFInput
-                as={<Select options={shipList} />}
+                as={<Select options={SBUOptionData} />}
                 rules={{ required: false }}
                 name="intSBUId"
                 register={register}
@@ -88,7 +93,7 @@ const PurchaseRequestCreate = () => {
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Branch</label>
               <RHFInput
-                as={<Select options={shipList} />}
+                as={<Select options={branchOptionData} />}
                 rules={{ required: false }}
                 name="intBusinessUnitId"
                 register={register}
