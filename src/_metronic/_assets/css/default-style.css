@@ -1186,6 +1186,9 @@ input.color-picker {
 .MuiInputBase-root.custome-purchase-search {
     width: 85%;
 }
+button.searchPlaceholder.purchaseSearch {
+    right: 21px!important;
+}
 
 .purchaseSearch {
     margin-left: 20px!important;
