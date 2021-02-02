@@ -1302,3 +1302,14 @@ h5.supplier-detail-date{
 h6.supplier-detail-text{
     font-size: 11px!important;
 }
+h6.supplier-modal-header {
+    font-weight: 900!important;
+    color: #212529!important;
+    font-size: 16px!important;
+}
+.supplier-info p{
+    font-weight: 500!important;
+    color: #212529!important;
+    line-height: 1.5!important;
+
+}
