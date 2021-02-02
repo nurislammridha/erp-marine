@@ -356,6 +356,12 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
           subModuleIcon: "menu-bullet menu-bullet-dot",
           features: [],
         },
+        {
+          subModuleName:"Comparative Statement",
+          subModuleRouteUrl: "/comparativestatement/list",
+          subModuleIcon: "menu-bullet menu-bullet-dot",
+          features: [],
+        },
       ],
     },
 
