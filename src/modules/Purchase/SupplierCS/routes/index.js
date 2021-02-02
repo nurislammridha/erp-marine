@@ -1,0 +1,33 @@
+import React from "react";
+import { Route } from "react-router-dom";
+
+
+import SupplierCsContainer from "../views/SupplierCsContainer";
+
+const routeSupplier = [
+  {
+    path: "/supplier/info",
+    name: "suppliercs",
+    component:SupplierCsContainer,
+    exact: true,
+  },
+  // {
+  //   path: "/items/add",
+  //   name: "item add",
+  //   component: ItemAddContainer,
+  //   exact: true,
+  // },
+];
+
+function getSupplierRoutes() {
+  {
+    return routeSupplier.map((route, index) => (
+      <Route
+        path={route.path}
+        component={route.component}
+        exact={route.exact}
+      />
+    ));
+  }
+}
+export default getSupplierRoutes;

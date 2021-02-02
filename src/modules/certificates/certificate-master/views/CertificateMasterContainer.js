@@ -42,7 +42,7 @@ const CertificateMasterContainer = () => {
         <Card.Body>
           <div className="container">
             <div className="row">
-              <h1 className="tableheading">Certificate Master List</h1>
+              <h1 className="tableheading">Certificate Master List </h1>
               <CertificateMasterFilter />
               <Dropdown className="d-inline mr-2">
                 <Dropdown.Toggle

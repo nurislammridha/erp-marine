@@ -23,6 +23,7 @@ import purchaseRoute from "../modules/Purchase/routes";
 import purchaseOrderRoute from "../modules/Purchase/purhasesOrder/routes";
 import purchaseOrderApproval from "../modules/Purchase/POApproval/routes";
 import PurchaseApproval from "../modules/Purchase/PurchaseApproval/routes";
+import getSupplierRoutes from "../modules/Purchase/SupplierCS/routes";
 
 const BasePage = () => {
   return (
@@ -87,6 +88,7 @@ const BasePage = () => {
         {purchaseOrderRoute()}
         {purchaseOrderApproval()}
         {PurchaseApproval()}
+        {getSupplierRoutes()}
 
         <Redirect to="error/error-v1" />
       </Switch>

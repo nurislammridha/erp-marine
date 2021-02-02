@@ -246,6 +246,21 @@ const BasicForm = () => {
               </Button>
             </div>
             <div className="clearfix"></div>
+            <div className="col-xl-4 col-lg-4 col-md-6 mt-2">
+              
+              <Paper className="searchInput supplier-search">
+               
+                <InputBase
+                  placeholder="Search"
+                  // inputProps={{ "aria-label": "Search Google Maps" }}
+                  // onChange={(e) => searchEmployee(e)}
+                  // value={employeeInfo.employeeName}
+                />
+                 <IconButton aria-label="Search" className="searchPlaceholder supplier-search-placeholder">
+                  <i className="flaticon-search "></i>
+                </IconButton>
+              </Paper>
+            </div>
            
           </form>
         </Card.Body>
