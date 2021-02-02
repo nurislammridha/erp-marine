@@ -64,11 +64,11 @@ const PurchaseApprovalFilter = () => {
                         <RHFInput
                             as={<Select options={branchOptionData} />}
                             rules={{ required: false }}
-                            name="strType"
+                            name="intBusinessUnitId"
                             register={register}
                             onChange={(option) => {
-                                handleChangeTextInput('strType', option.label);
-                                handleChangeTextInput('intTypeId', option.value)
+                                handleChangeTextInput('strBusinessUnitName', option.label);
+                                handleChangeTextInput('intBusinessUnitId', option.value)
                             }}
                             setValue={setValue}
                         />

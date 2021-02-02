@@ -1,5 +1,7 @@
 import * as Types from "../types/Types";
 import Axios from "axios";
+import { toast } from "react-toastify";
+import { showToast } from "../../../../master/utils/ToastHelper";
 
 
 export const handleChangePurchaseApprovalFilterInput = (name, value) => (dispatch) => {
@@ -34,3 +36,39 @@ export const getShipName = (data) => (dispatch) => {
         }
     );
 };
+
+
+export const getPurchaseApprovalList = (searchValue = "") => async (dispatch) => {
+    let response = {
+        purchaseApprovalList: [],
+        status: false,
+        message: "",
+        isLoading: true,
+        errors: [],
+    };
+
+    dispatch({ type: Types.GET_PURCHASE_APPROVAL_LIST, payload: response });
+    let url = `${process.env.REACT_APP_API_URL}purchase/reqList`;
+    if (searchValue !== "") {
+        url += `?search=${searchValue}`
+    }
+    try {
+        await Axios.get(url).then((res) => {
+            const { status, message, errors, data } = res.data;
+            response.supplierList = data;
+            response.status = status;
+            response.message = message;
+            response.errors = errors;
+            response.isLoading = false;
+        })
+            .catch((err) => {
+                toast.error(err)
+            })
+    } catch (error) {
+        response.message = "Something wrong!";
+        toast.error(error);
+    }
+    response.isLoading = false;
+    dispatch({ type: Types.GET_PURCHASE_APPROVAL_LIST, payload: response })
+
+}

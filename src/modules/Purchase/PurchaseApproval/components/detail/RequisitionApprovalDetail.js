@@ -133,7 +133,7 @@ const RequisitionApprovalDetail = () => {
                             Reject
                         </button>
                         <button
-                            className="btn btn-primary btn-sm ml-3 mr-5"
+                            className="btn btn-primary btn-sm ml-3 mr-3"
                         >
                             Approve
                         </button>

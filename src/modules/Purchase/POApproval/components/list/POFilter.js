@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import Select from "react-select";
-import { getShipName, getSBUName, handleChangePOApprovalFilterInput, getBranchName } from '../../_redux/actions/POApprovalAction';
+import { getShipName, getSBUName, handleChangePOApprovalFilterInput, getBranchName, getReferenceType } from '../../_redux/actions/POApprovalAction';
 
 
 const POFilter = () => {
@@ -15,6 +15,7 @@ const POFilter = () => {
     const shipOptionData = useSelector((state) => state.POApprovalFilter.shipNameData);
     const SBUOptionData = useSelector((state) => state.POApprovalFilter.SBUNameData);
     const branchOptionData = useSelector((state) => state.POApprovalFilter.branchNameData);
+    const referenceTypeOptionData = useSelector((state) => state.POApprovalFilter.referenceTypeData);
 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangePOApprovalFilterInput(name, value));
@@ -26,6 +27,7 @@ const POFilter = () => {
         dispatch(getShipName());
         dispatch(getBranchName());
         dispatch(getSBUName());
+        dispatch(getReferenceType());
     }, []);
 
     return (
@@ -77,14 +79,14 @@ const POFilter = () => {
                 <div className="col-xl-3 col-lg-3 col-6">
                     <label className="formFont">Refference Type</label>
                     <RHFInput
-                        as={<Select options={shipOptionData} />}
+                        as={<Select options={referenceTypeOptionData} />}
                         rules={{ required: false }}
-                        name=""
+                        name="intPOReferenceTypeId"
                         register={register}
-                        // onChange={(option) => {
-                        //   handleChangeTextInput('strShipName', option.label);
-                        //   handleChangeTextInput('intShipId', option.value)
-                        // }}
+                        onChange={(option) => {
+                            handleChangeTextInput('strPOReferenceType', option.label);
+                            handleChangeTextInput('intPOReferenceTypeId', option.value)
+                        }}
                         setValue={setValue}
                     />
                 </div>

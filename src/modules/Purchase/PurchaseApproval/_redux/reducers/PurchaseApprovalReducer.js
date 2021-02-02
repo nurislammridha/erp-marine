@@ -11,7 +11,13 @@ const initialState = {
         intShipID: "",
         dteFromDate: "",
         dteToDate: ""
-    }
+    },
+
+    listPaginatedData: null,
+    purchaseApprovalList: [],
+    status: false,
+    isLoading: false,
+    editStatus: false
 }
 
 const PurchaseApprovalReducer = (state = initialState, action) => {
@@ -37,6 +43,13 @@ const PurchaseApprovalReducer = (state = initialState, action) => {
             return {
                 ...state,
                 shipNameData: getShipName(action.payload),
+            };
+
+        case Types.GET_PURCHASE_APPROVAL_LIST:
+            return {
+                ...state,
+                purchaseApprovalList: action.payload.purchaseApprovalList,
+                isLoading: action.payload.isLoading
             };
 
         default:
