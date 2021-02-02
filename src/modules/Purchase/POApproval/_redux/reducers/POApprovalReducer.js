@@ -9,9 +9,16 @@ const initialState = {
         intBusinessUnitId: "",
         strShipName: "",
         intShipID: "",
+        strPOReferenceType: "",
+        intPOReferenceTypeId: "",
         dteFromDate: "",
         dteToDate: ""
-    }
+    },
+    listPaginatedData: null,
+    POApprovalList: [],
+    status: false,
+    isLoading: false,
+    editStatus: false
 }
 
 const POApprovalReducer = (state = initialState, action) => {
@@ -43,6 +50,19 @@ const POApprovalReducer = (state = initialState, action) => {
             return {
                 ...state,
                 shipNameData: getShipName(action.payload),
+            };
+
+        case Types.GET_REFERENCE_TYPE:
+            return {
+                ...state,
+                referenceTypeData: getRferenceType(action.payload),
+            };
+
+        case Types.GET_PO_APPROVAL_LIST:
+            return {
+                ...state,
+                POApprovalList: action.payload.POApprovalList,
+                isLoading: action.payload.isLoading
             };
 
         default:
@@ -89,6 +109,20 @@ const getShipName = (data) => {
             let itemData = {
                 value: item.intShipID,
                 label: item.strShipName,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+};
+
+const getRferenceType = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intPOReferenceTypeId,
+                label: item.strPOReferenceType,
             };
             options.push(itemData);
         });

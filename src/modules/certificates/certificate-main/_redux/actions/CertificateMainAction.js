@@ -30,7 +30,7 @@ export const handleChangeProductInputAction = (
     let reader = new FileReader();
     const file = e.target.files[0];
     reader.onloadend = () => {
-      data.name = "imagePreviewUrl";
+      // data.name = "imagePreviewUrl";
       data.value = reader.result;
       dispatch({ type: type, payload: data });
     };

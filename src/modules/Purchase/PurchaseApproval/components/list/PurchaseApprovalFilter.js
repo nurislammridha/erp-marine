@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import moment from "moment"
-import { getSBUName, getShipName, handleChangePurchaseApprovalFilterInput } from '../../_redux/actions/PurchaseApprovalAction';
+import { getPurchaseApprovalList, getSBUName, getShipName, handleChangePurchaseApprovalFilterInput } from '../../_redux/actions/PurchaseApprovalAction';
 import { getBranchName } from '../../../POApproval/_redux/actions/POApprovalAction';
 
 const PurchaseApprovalFilter = () => {
@@ -19,8 +19,13 @@ const PurchaseApprovalFilter = () => {
 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangePurchaseApprovalFilterInput(name, value));
+        changeFilter();
     };
 
+    const changeFilter = () => {
+        const { search, intSBUId, intBusinessUnitId, intShipID, dteFromDate, dteToDate } = PurchaseApprovalFilterInput;
+        dispatch(getPurchaseApprovalList(search, intSBUId, intBusinessUnitId, intShipID, dteFromDate, dteToDate));
+    }
 
     const shipList = [
         {
@@ -50,11 +55,11 @@ const PurchaseApprovalFilter = () => {
                         <RHFInput
                             as={<Select options={SBUOptionData} />}
                             rules={{ required: false }}
-                            name="intBusinessUnitId"
+                            name="intSBUId"
                             register={register}
                             onChange={(option) => {
                                 handleChangeTextInput('strBusinessUnitName', option.label);
-                                handleChangeTextInput('intBusinessUnitId', option.value)
+                                handleChangeTextInput('intSBUId', option.value)
                             }}
                             setValue={setValue}
                         />
@@ -64,11 +69,11 @@ const PurchaseApprovalFilter = () => {
                         <RHFInput
                             as={<Select options={branchOptionData} />}
                             rules={{ required: false }}
-                            name="strType"
+                            name="intBusinessUnitId"
                             register={register}
                             onChange={(option) => {
-                                handleChangeTextInput('strType', option.label);
-                                handleChangeTextInput('intTypeId', option.value)
+                                handleChangeTextInput('strBusinessUnitName', option.label);
+                                handleChangeTextInput('intBusinessUnitId', option.value)
                             }}
                             setValue={setValue}
                         />
