@@ -92,6 +92,16 @@ const CertificateMainList = () => {
   };
   console.log('certificateParentCategoryList :>> ', certificateParentCategoryList);
 
+  const stickyFooter = {
+    padding: "20px",
+    position: "fixed",
+    left: 40,
+    bottom: 0,
+    height: 60,
+    width: "100%",
+    textAlign: 'center'
+  };
+
   return (
     <>
       <Card>
@@ -285,7 +295,7 @@ const CertificateMainList = () => {
       </Card>
 
       {!isLoading && certificates.length > 0 && (
-        <Card className="p-5" sticky="bottom">
+        <Card className="p-5" sticky="bottom" style={stickyFooter}>
           <div className="row justify-content-center">
             <div className="col-2">
               <div className="between-thirty due-days">
