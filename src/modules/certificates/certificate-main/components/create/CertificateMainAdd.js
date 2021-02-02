@@ -35,6 +35,7 @@ import {
 import MultipplePreviewAttachment from "../../../../master/components/previews/MultiplePreviewAttachment";
 import { showToast } from "../../../../master/utils/ToastHelper";
 import { handleChangeCertificateMasterInput } from "../../../certificate-master/_redux/actions/CertificateListAction";
+import AttachmentPreviewModel from "../../../../master/components/previews/AttachmentPreviewModel";
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -128,7 +129,12 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const [showTypeModal, setShowTypeModal] = useState(false);
   const [showCertificateModal, setShowCertificateModal] = useState(false);
   const [showIssuedByModal, setShowIssuedByModal] = useState(false);
-
+  const [attachmentPreviewModel, setAttachmentPreviewModel] = useState(false);
+  const [previewAttachment, setPreviewAttachment] = useState(false);
+  const PreviewAttachment = (attachment) => {
+    setAttachmentPreviewModel(true);
+    setPreviewAttachment(attachment)
+  }
   return (
     <>
       <div className="container ">
@@ -883,6 +889,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       <thead>
                         <tr>
                           <th>#</th>
+                          <th>#</th>
                           <th>Image Name</th>
                           <th>Image Size</th>
                           <th>Image View</th>
@@ -899,13 +906,16 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                                 <td>{attachment.size}</td>
                                 <td>
                                   {" "}
-                                  <MultipplePreviewAttachment
-                                    url={"/" + attachment.name}
-                                    base64={attachment.base64}
-                                    title="Preview"
-                                    height={50}
-                                    width={50}
-                                  />
+                                  <button className="btn border-none" onClick={() => PreviewAttachment(attachment)}>
+                                    <MultipplePreviewAttachment
+                                      url={`/${attachment.name}`}
+                                      // url={"/" + attachment.name}
+                                      base64={attachment.base64}
+                                      title="Preview"
+                                      height={50}
+                                      width={50}
+                                    />
+                                  </button>
                                 </td>
                                 <td style={{ width: 70, textAlign: "center" }}>
                                   {/* <i className="fa fa-edit text-success mr-2"></i> */}
@@ -993,6 +1003,18 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               modalTitle={"Issueing Authority"}
             >
               <IssueAuthorityAdd />
+            </SimpleModal>
+
+            {/**for image preview url */}
+            <SimpleModal
+              size="lg"
+              previewAttachment={previewAttachment}
+              show={attachmentPreviewModel}
+              handleClose={() => setAttachmentPreviewModel(false)}
+              handleShow={() => setAttachmentPreviewModel(true)}
+              modalTitle={"Attachment Preview"}
+            >
+              <AttachmentPreviewModel handleClose={() => setAttachmentPreviewModel(false)} previewAttachment={previewAttachment} />
             </SimpleModal>
           </div>
         </div>

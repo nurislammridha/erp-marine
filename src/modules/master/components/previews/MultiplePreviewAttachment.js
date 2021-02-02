@@ -9,7 +9,6 @@ const MultipplePreviewAttachment = (props) => {
     const customHeight = (typeof height === 'undefined' || height === "") ? 50 : height;
     const customWidth = (typeof width === 'undefined' || width === "") ? 50 : width;
 
-
     useEffect(() => {
         // Extract the extension from the url
         const extension = GetExtensionFromUrl(url);
@@ -23,7 +22,11 @@ const MultipplePreviewAttachment = (props) => {
             } else if (url === attachment) {
                 thumbnail = attachment
             }
-             else {
+            //  else if (extension === 'png') {
+            //     thumbnail = url.base64;
+            //     console.log('url :>> ', url);
+            // }
+            else {
                 // thumbnail = url;
                 thumbnail = '/media/default/icons/image.png';
             }
