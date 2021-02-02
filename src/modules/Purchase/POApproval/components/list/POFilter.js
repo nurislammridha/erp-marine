@@ -20,24 +20,12 @@ const POFilter = () => {
         dispatch(handleChangePOApprovalFilterInput(name, value));
     };
 
-    const shipList = [
-        {
-            value: 1,
-            label: "Akij"
-        },
-        {
-            value: 2,
-            label: "Akij Noor"
-        },
-    ]
-
+    console.log('POApprovalFilterInput', POApprovalFilterInput)
 
     useEffect(() => {
         dispatch(getShipName());
         dispatch(getBranchName());
         dispatch(getSBUName());
-
-
     }, []);
 
     return (
@@ -89,7 +77,7 @@ const POFilter = () => {
                 <div className="col-xl-3 col-lg-3 col-6">
                     <label className="formFont">Refference Type</label>
                     <RHFInput
-                        as={<Select options={shipList} />}
+                        as={<Select options={shipOptionData} />}
                         rules={{ required: false }}
                         name=""
                         register={register}
