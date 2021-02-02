@@ -60,7 +60,7 @@ const PurchaseRequestCreate = () => {
   }
 
   return (
-    <Card>
+    <Card  className="card-top-border">
       <Card.Body className="pt-5 mt-0">
         <h1 className="tableheading mt-0 pt-0 ">Purchase Request Entry</h1>
         <hr></hr>

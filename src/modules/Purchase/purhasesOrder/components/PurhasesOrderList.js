@@ -1,12 +1,12 @@
 import React from 'react';
-import { IconButton, InputBase, Paper } from '@material-ui/core';
-import { Button, Card } from 'react-bootstrap';
+
+import {  Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import SimpleModal from '../../../master/components/Modal/SimpleModal';
+
 const PurhasesOrderList = () => {
   return (
     <>
-      <Card>
+      <Card >
         <Card.Body>
           <div className="react-bootstrap-table table-responsive mt-0">
             <table className="table table table-head-custom table-vertical-center  voyageTable">

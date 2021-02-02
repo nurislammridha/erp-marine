@@ -40,7 +40,7 @@ const PurchaseRequestList = () => {
       <Card.Body>
         <div className="container ">
           <div className="row mb-5 table-form">
-            <h1 className="tableheading mt-0 ">Purchase Request  vd</h1>
+            <h1 className="tableheading mt-0 ">Purchase Request</h1>
 
             <hr></hr>
             <div className="col-xl-4 col-lg-4 col-5">
