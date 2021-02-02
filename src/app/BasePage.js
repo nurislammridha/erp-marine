@@ -24,6 +24,7 @@ import purchaseOrderRoute from "../modules/Purchase/purhasesOrder/routes";
 import purchaseOrderApproval from "../modules/Purchase/POApproval/routes";
 import PurchaseApproval from "../modules/Purchase/PurchaseApproval/routes";
 import getSupplierRoutes from "../modules/Purchase/SupplierCS/routes";
+import getQuotationRoutes from "../modules/Purchase/Quotation/routes";
 
 const BasePage = () => {
   return (
@@ -89,6 +90,7 @@ const BasePage = () => {
         {purchaseOrderApproval()}
         {PurchaseApproval()}
         {getSupplierRoutes()}
+        {getQuotationRoutes()}
 
         <Redirect to="error/error-v1" />
       </Switch>

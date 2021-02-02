@@ -1283,3 +1283,36 @@ padding: 0.5rem 2rem;
     color: #3699ff;
     font-size: 10px;
    }
+   .custom-border {
+    border-bottom: 2px solid #ECF0F3 !important;
+    width: 107%;
+    margin-left: -47px;
+}
+.supplier-table td{
+    padding:5px 0px!important;
+    
+}
+i.fas.fa-trash-alt.viewIcon{
+    margin-left: 15px;
+}
+h5.supplier-detail-date{
+    font-size: 13px!important;
+}
+
+h6.supplier-detail-text{
+    font-size: 11px!important;
+}
+h6.supplier-modal-header {
+    font-weight: 900!important;
+    color: #212529!important;
+    font-size: 16px!important;
+}
+.supplier-info p{
+    font-weight: 500!important;
+    color: #212529!important;
+    line-height: 1.5!important;
+
+}
+.quotation-table td{
+    padding: 10px 0px!important;
+}

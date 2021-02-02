@@ -1,5 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import SupplierCsDetails from "../components/SupplierCsDetails";
 
 
 import SupplierCsContainer from "../views/SupplierCsContainer";
@@ -11,12 +12,12 @@ const routeSupplier = [
     component:SupplierCsContainer,
     exact: true,
   },
-  // {
-  //   path: "/items/add",
-  //   name: "item add",
-  //   component: ItemAddContainer,
-  //   exact: true,
-  // },
+  {
+    path: "/supplier/details",
+    name: "suppliercs",
+    component:SupplierCsDetails,
+    exact: true,
+  },
 ];
 
 function getSupplierRoutes() {

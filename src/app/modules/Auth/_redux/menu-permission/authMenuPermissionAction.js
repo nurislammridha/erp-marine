@@ -176,6 +176,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
         },
       ],
     },
+    
     {
       moduleName: "Items",
       moduleRouteUrl: "/items",
@@ -346,6 +347,12 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
         {
           subModuleName: "Supplier CS",
           subModuleRouteUrl: "/supplier/info",
+          subModuleIcon: "menu-bullet menu-bullet-dot",
+          features: [],
+        },
+        {
+          subModuleName: "Quotation",
+          subModuleRouteUrl: "/quotation/details",
           subModuleIcon: "menu-bullet menu-bullet-dot",
           features: [],
         },
