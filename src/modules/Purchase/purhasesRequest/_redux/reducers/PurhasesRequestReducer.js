@@ -39,6 +39,7 @@ const initialstate = {
     multiplePQData: [],
     PRListData: [],
     PRPaginateData: [],
+    PRDetails: null,
 };
 const PurhasesRequestReducer = (state = initialstate, action) => {
     const newState = { ...state };
@@ -97,6 +98,11 @@ const PurhasesRequestReducer = (state = initialstate, action) => {
                     isLoading: true,
                 };
             }
+        case Types.GET_PR_DETAILS_DATA:
+                return {
+                    ...state,
+                    PRDetails: action.payload,
+                };
         default:
             break;
     }

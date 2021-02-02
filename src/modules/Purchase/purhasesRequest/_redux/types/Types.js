@@ -7,3 +7,4 @@ export const PQ_DATA_SUBMIT = "PQ_DATA_SUBMIT"
 
 //get 
 export const GET_PQ_LIST_DATA = "GET_PQ_LIST_DATA"
+export const GET_PR_DETAILS_DATA = "GET_PR_DETAILS_DATA"

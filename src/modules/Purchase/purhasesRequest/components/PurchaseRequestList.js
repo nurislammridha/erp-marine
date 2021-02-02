@@ -9,6 +9,7 @@ import PaginationLaravel from '../../../master/pagination/PaginationLaravel';
 import LoadingSpinner from "../../../master/spinner/LoadingSpinner";
 
 import moment from "moment"
+import PurchaseRequestDetails from './PurchaseRequestDetails';
 const PurchaseRequestList = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.purchaseRequest.isLoading);
@@ -16,6 +17,9 @@ const PurchaseRequestList = () => {
   const PRPaginateData = useSelector((state) => state.purchaseRequest.PRPaginateData);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
+  const [PRDetailsShow, setPRDetailsShow] = useState(false)
+  const [PRDetailsID, setPRDetailsID] = useState(null)
+  const [status, setStatus] = useState("Pending")
 
   useEffect(() => {
     dispatch(getPRListData(currentPage));
@@ -35,6 +39,11 @@ const PurchaseRequestList = () => {
       dispatch(getPRListData(currentPage, searchText));
     }
   };
+  const handleShowPQDetails = (item) => {
+    setPRDetailsID(item.intPurchaseRequestID);
+    setPRDetailsShow(true);
+    setStatus(item.status)
+  }
   return (
     <Card>
       <Card.Body>
@@ -97,7 +106,7 @@ const PurchaseRequestList = () => {
                         <td className="text-center">
 
                           <div className="d-flex">
-                            <Link>
+                            <Link onClick={() => handleShowPQDetails(item)}>
                               <i className="far fa-eye editIcon item-list-icon"></i>
                             </Link>
                             {/* <Link>
@@ -129,14 +138,14 @@ const PurchaseRequestList = () => {
       </Card.Body >
       <SimpleModal
         size="xl"
-        // status={status}
-        // show={bookDetailShow}
-        // handleClose={() => setBookDetailShow(false)}
-        // handleShow={() => setBookDetailShow(true)}
-        // vesselBookingID={vesselBookingID}
-        modalTitle={"Vessel Booking Details"}
+        status="Pending"
+        show={PRDetailsShow}
+        handleClose={() => setPRDetailsShow(false)}
+        handleShow={() => setPRDetailsShow(true)}
+        PRDetailsID={PRDetailsID}
+        modalTitle={"Purchase Request Details"}
       >
-        {/* <VesselBookingDetails handleClose={() => setBookDetailShow(false)} vesselBookingID={vesselBookingID} /> */}
+        <PurchaseRequestDetails handleClose={() => setPRDetailsShow(false)} PRDetailsID={PRDetailsID} />
       </SimpleModal>
     </Card >
   );

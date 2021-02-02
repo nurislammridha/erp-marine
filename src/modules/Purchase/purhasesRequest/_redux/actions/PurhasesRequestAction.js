@@ -41,3 +41,17 @@ export const getPRListData = (page, searchText = null) => async (dispatch) => {
     responseList.isLoading = false;
     dispatch({ type: Types.GET_PQ_LIST_DATA, payload: responseList });
 }
+
+//get purchase request details 
+export const getPRDetailsData = (id) => (dispatch) => {
+    if (id === null) {
+        dispatch({ type: Types.GET_PR_DETAILS_DATA, payload: null });
+    } else {
+        Axios.get(`${process.env.REACT_APP_API_URL}purchase/reqList/${id}`)
+            .then((res) => {
+                if (res.data.status) {
+                    dispatch({ type: Types.GET_PR_DETAILS_DATA, payload: res.data.data })
+                }
+            })
+    }
+}
