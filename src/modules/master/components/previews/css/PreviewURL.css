@@ -29,7 +29,7 @@
     position: fixed;
     background-color: #39aba0;
     z-index: 9999;
-    bottom: 28px;
+    bottom: 38px;
     max-height: 48px;
     width: 416px;
     padding: 12px 20px;
@@ -39,14 +39,16 @@
     color: white;
     border-radius: 3px;
 }
-
+.pdf-thumbnail-bar.hide {
+    margin-left: -88px;
+    z-index: 999;
+}
 .pdf-thumbnail-bar {
     position: fixed;
-    top: 0;
-    display: none;
-    height: 100vh;
+    top: 88px;
+    height: 81vh;
     overflow: hidden;
-    width: 140px;
+    width: 100px;
     overflow: auto;
     background-color: #F1F3F7;
     border-right: #DCE0E3 1px solid;

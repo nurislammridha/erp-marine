@@ -1014,7 +1014,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               handleShow={() => setAttachmentPreviewModel(true)}
               modalTitle={"Attachment Preview"}
             >
-              <AttachmentPreviewModel previewAttachment={previewAttachment} />
+              <AttachmentPreviewModel handleClose={() => setAttachmentPreviewModel(false)} previewAttachment={previewAttachment} />
             </SimpleModal>
           </div>
         </div>
