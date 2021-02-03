@@ -5,7 +5,7 @@ import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
-import { addMultipleOrder, purchasesOrderInput } from '../_redux/actions/PurhasesOrderAction';
+import { addMultipleOrder, deleteMultipleItem, editOrderMultiple, purchasesOrderInput } from '../_redux/actions/PurhasesOrderAction';
 const PurchaseOrderMultiple = () => {
     const { register, setValue } = useForm();
     const dispatch = useDispatch();
@@ -16,6 +16,12 @@ const PurchaseOrderMultiple = () => {
     }
     const addMultiple = () => {
         dispatch(addMultipleOrder(orderInput))
+    }
+    const deleteMultiple = (index) => {
+        dispatch(deleteMultipleItem(index))
+    }
+    const handleEdit = (index) => {
+        dispatch(editOrderMultiple(index))
     }
     const shipList = [
         {
@@ -129,22 +135,72 @@ const PurchaseOrderMultiple = () => {
                             <tbody>
                                 {multipleOrder.length > 0 && multipleOrder.map((item, index) => (
                                     <tr>
-                                        <td>{index + 1}</td>
-                                        <td>{item.intItemId}</td>
-                                        <td>{item.strItemName}</td>
-                                        <td>123</td>
-                                        <td>{item.numQTY}</td>
-                                        <td>{item.strRemarks}</td>
+                                        <td>
+                                            <a href
+                                                onClick={() => {
+                                                    handleEdit(index);
+                                                    deleteMultiple(index);
+                                                }}
+                                            >
+                                                {index + 1}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href
+                                                onClick={() => {
+                                                    handleEdit(index);
+                                                    deleteMultiple(index);
+                                                }}
+                                            >
+                                                {item.intItemId}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href
+                                                onClick={() => {
+                                                    handleEdit(index);
+                                                    deleteMultiple(index);
+                                                }}
+                                            >
+                                                {item.strItemName}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href
+                                                onClick={() => {
+                                                    handleEdit(index);
+                                                    deleteMultiple(index);
+                                                }}
+                                            >
+                                                123
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href
+                                                onClick={() => {
+                                                    handleEdit(index);
+                                                    deleteMultiple(index);
+                                                }}
+                                            >
+                                                {item.numQTY}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href
+                                                onClick={() => {
+                                                    handleEdit(index);
+                                                    deleteMultiple(index);
+                                                }}
+                                            >
+                                                {item.strRemarks}
+                                            </a>
+                                        </td>
                                         <td>
                                             {""}
                                             <div className="d-flex">
-                                                <Link>
-                                                    <i className="far fa-eye editIcon item-list-icon"></i>
-                                                </Link>
-                                                <Link>
-                                                    <i className="far fa-edit editIcon item-list-icon ml-2"></i>
-                                                </Link>
-                                                <a href>
+                                                <a href
+                                                    onClick={() => deleteMultiple(index)}
+                                                >
                                                     <i className="fas fa-trash-alt editIcon item-list-icon ml-2"></i>
                                                 </a>
                                             </div>
