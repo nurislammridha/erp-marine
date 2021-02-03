@@ -4,15 +4,13 @@ import * as Types from "../types/Types";
 const initialState = {
     POApprovalFilterInput: {
         strSBUName: "",
-        intSBUId: "",
+        intBusinessLineId: "",
         strBusinessUnitName: "",
         intBusinessUnitId: "",
-        strShipName: "",
-        intShipID: "",
+        strPurchaseOrganizationName: "",
+        intPurchaseOrganizationId: "",
         strPOReferenceType: "",
         intPOReferenceTypeId: "",
-        dteFromDate: "",
-        dteToDate: ""
     },
     listPaginatedData: null,
     POApprovalList: [],
@@ -46,10 +44,10 @@ const POApprovalReducer = (state = initialState, action) => {
                 branchNameData: getBranchName(action.payload),
             };
 
-        case Types.GET_SHIP_NAME:
+        case Types.GET_PURCHASE_ORGANISATION_NAME:
             return {
                 ...state,
-                shipNameData: getShipName(action.payload),
+                purchaseOrganisationNameData: getPurchaseOrganisationName(action.payload),
             };
 
         case Types.GET_REFERENCE_TYPE:
@@ -102,13 +100,13 @@ const getBranchName = (data) => {
     return options;
 };
 
-const getShipName = (data) => {
+const getPurchaseOrganisationName = (data) => {
     let options = [];
     if (data) {
         data.forEach((item) => {
             let itemData = {
-                value: item.intShipID,
-                label: item.strShipName,
+                label: item.strPurchaseOrganizationName,
+                value: item.intPurchaseOrganizationId
             };
             options.push(itemData);
         });

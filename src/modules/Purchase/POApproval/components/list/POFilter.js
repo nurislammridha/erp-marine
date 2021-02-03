@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import Select from "react-select";
-import { getShipName, getSBUName, handleChangePOApprovalFilterInput, getBranchName, getReferenceType } from '../../_redux/actions/POApprovalAction';
+import { getSBUName, handleChangePOApprovalFilterInput, getBranchName, getReferenceType, getPOApprovalList, getPurchaseOrganisationName } from '../../_redux/actions/POApprovalAction';
 
 
 const POFilter = () => {
@@ -12,19 +12,23 @@ const POFilter = () => {
     const dispatch = useDispatch();
 
     const POApprovalFilterInput = useSelector((state) => state.POApprovalFilter.POApprovalFilterInput);
-    const shipOptionData = useSelector((state) => state.POApprovalFilter.shipNameData);
+    const purchaseOrganisationOptionData = useSelector((state) => state.POApprovalFilter.purchaseOrganisationNameData);
     const SBUOptionData = useSelector((state) => state.POApprovalFilter.SBUNameData);
     const branchOptionData = useSelector((state) => state.POApprovalFilter.branchNameData);
     const referenceTypeOptionData = useSelector((state) => state.POApprovalFilter.referenceTypeData);
 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangePOApprovalFilterInput(name, value));
+        changeFilter();
     };
 
-    console.log('POApprovalFilterInput', POApprovalFilterInput)
+    const changeFilter = () => {
+        const { search, intSBUId, intBusinessUnitId, intShipID, intPOReferenceTypeId } = POApprovalFilterInput;
+        dispatch(getPOApprovalList(search, intSBUId, intBusinessUnitId, intShipID, intPOReferenceTypeId));
+    }
 
     useEffect(() => {
-        dispatch(getShipName());
+        dispatch(getPurchaseOrganisationName());
         dispatch(getBranchName());
         dispatch(getSBUName());
         dispatch(getReferenceType());
@@ -39,11 +43,11 @@ const POFilter = () => {
                     <RHFInput
                         as={<Select options={SBUOptionData} />}
                         rules={{ required: false }}
-                        name="intSBUId"
+                        name="intBusinessLineId"
                         register={register}
                         onChange={(option) => {
                             handleChangeTextInput('strSBUName', option.label);
-                            handleChangeTextInput('intSBUId', option.value)
+                            handleChangeTextInput('intBusinessLineId', option.value)
                         }}
                         setValue={setValue}
                     />
@@ -63,15 +67,15 @@ const POFilter = () => {
                     />
                 </div>
                 <div className="col-xl-3 col-lg-3 col-6">
-                    <label className="formFont">Ship Name</label>
+                    <label className="formFont">Purchase Organisation</label>
                     <RHFInput
-                        as={<Select options={shipOptionData} />}
+                        as={<Select options={purchaseOrganisationOptionData} />}
                         rules={{ required: false }}
-                        name="intShipId"
+                        name="intPurchaseOrganizationId"
                         register={register}
                         onChange={(option) => {
-                            handleChangeTextInput('strShipName', option.label);
-                            handleChangeTextInput('intShipId', option.value)
+                            handleChangeTextInput('strPurchaseOrganizationName', option.label);
+                            handleChangeTextInput('intPurchaseOrganizationId', option.value)
                         }}
                         setValue={setValue}
                     />

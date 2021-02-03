@@ -1,20 +1,30 @@
 import React from 'react';
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
+import { useDispatch, useSelector } from 'react-redux';
 import { IconButton, InputBase, Paper } from '@material-ui/core';
 import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import POFilter from './POFilter';
+import moment from "moment"
 import SimpleModal from '../../../../master/components/Modal/SimpleModal';
 import PODetail from '../detail/PODetail';
+import { getPOApprovalList } from '../../_redux/actions/POApprovalAction';
 
 
 const POList = () => {
 
+  const dispatch = useDispatch();
   const [PODetailsShow, setPODetailsShow] = useState(false)
+  const POApprovalListData = useSelector((state) => state.POApprovalFilter.POApprovalList);
+  console.log('POApprovalListData', POApprovalListData)
   const showModal = () => {
     setPODetailsShow(true)
   }
+
+  useEffect(() => {
+    dispatch(getPOApprovalList());
+  }, []);
 
   return (
     <Card>
@@ -66,45 +76,40 @@ const POList = () => {
                   </tr>
                 </thead>
                 <tbody>
-
-
-                  <tr>
-                    {/* <td onClick={(id) => getVesselBookingID(item)}>{vesselPaginateData.from + index}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strCargoName !== null && item.strCargoName !== '' ? item.strCargoName : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strShipName !== null && item.strShipName !== '' ? item.strShipName : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strVoyageNo !== null && item.strVoyageNo !== '' ? item.strVoyageNo : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>
-                          <button className={item.strBookingStatus === "Rejected" ? "btn rejected-status booking-list-btn text-danger" : (item.strBookingStatus === "Pending" ? "btn pending-status booking-list-btn text-warning" : "btn approve-status booking-list-btn text-success")}>
-                            {item.strBookingStatus !== null && item.strBookingStatus !== '' ? item.strBookingStatus : ''}
+                  {
+                    POApprovalListData.length > 0 && POApprovalListData.map((item, index) => (
+                      <tr>
+                        <td>
+                          <Form.Check
+                            className=""
+                            type="checkbox"
+                            name="isRevLoadingPorts"
+                          // onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
+                          />
+                        </td>
+                        <td>{index}</td>
+                        <td>{item.strPONo !== null && item.strPONo !== '' ? item.strPONo : ''}</td>
+                        <td>{item.dtePODate !== null && item.dtePODate !== '' ? moment(item.dtePODate).format("DD-MM-YYYY") : ''}</td>
+                        <td>{item.strSupplierName !== null && item.strSupplierName !== '' ? item.strSupplierName : ''}</td>
+                        <td>{item.strRemarks !== null && item.strRemarks !== '' ? item.strRemarks : ''}</td>
+                        <td>{item.strCurrencyCode !== null && item.strCurrencyCode !== '' ? item.strCurrencyCode : ''}</td>
+                        <td>{item.strCurrencyCode !== null && item.strCurrencyCode !== '' ? item.strCurrencyCode : ''}</td>
+                        <td>
+                          <button className={item.isApprovedAll === "Rejected" ? "btn rejected-status booking-list-btn text-danger" : (item.isApprovedAll === "Pending" ? "btn pending-status booking-list-btn text-warning" : "btn approve-status booking-list-btn text-success")}>
+                            {item.isApprovedAll !== null && item.isApprovedAll !== '' ? item.isApprovedAll : 'Pending'}
                           </button>
-                        </td> */}
-                    <td>
-                      <Form.Check
-                        className=""
-                        type="checkbox"
-                        name="isRevLoadingPorts"
-                      // onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
-                      />
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    {/* intBookingStatusId */}
-                    <td>
-                      <div className="d-flex">
-                        <a onClick={() => showModal()}>
-                          <i className="far fa-eye editIcon item-list-icon"></i>
-                        </a>
-                      </div>
-                    </td>
-                  </tr>
-
-
+                        </td>
+                        {/* intBookingStatusId */}
+                        <td>
+                          <div className="d-flex">
+                            <a onClick={() => showModal()}>
+                              <i className="far fa-eye editIcon item-list-icon"></i>
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  }
                 </tbody>
               </table>
               {/* {!isLoading && VesselBookingList.length === 0 && (
