@@ -53,9 +53,9 @@ const VoyageAdd = () => {
         onSubmit={handleSubmit(onSubmit)}
         method="post"
       >
-        <div className="form-group row mt-5">
+        <div className="form-group row ">
           <div className="col-lg-4">
-            <label className="form-label">Select Vessel c</label>
+            <label className="form-label">Select Vessel</label>
             <RHFInput
               as={<Select options={vesselListOptions} />}
               rules={{ required: false }}

@@ -43,15 +43,17 @@ const UserList = () => {
             <div className="col-xl-3 col-lg-3 col-md-6 mb-2 mt-2">
             
               <Paper className="searchInput">
-                <IconButton aria-label="Search" className="searchPlaceholder">
-                  <i className="flaticon-search "></i>
-                </IconButton>
+              
                 <InputBase
-                  placeholder="Search Employee Here"
+                  placeholder="Search "
+                  className="custome-purchase-search"
                   // inputProps={{ "aria-label": "Search Google Maps" }}
                   // onChange={(e) => searchEmployee(e)}
                   // value={employeeInfo.employeeName}
                 />
+                  <IconButton aria-label="Search" className="searchPlaceholder purchaseSearch">
+                  <i className="flaticon-search "></i>
+                </IconButton>
               </Paper>
             </div>
             <div className="col-xl-3 col-lg-3 col-md-6">
