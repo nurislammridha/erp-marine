@@ -14,12 +14,17 @@ const initialState = {
         dteToDate: ""
     },
 
+    PurchaseApprovalDetailInput: {
+        numApprovedQty: "",
+        remarks: ""
+    },
 
     listPaginatedData: null,
     purchaseApprovalList: [],
     status: false,
     isLoading: false,
-    editStatus: false
+    editStatus: false,
+    purchaseApprovalMultiple: []
 }
 
 const PurchaseApprovalReducer = (state = initialState, action) => {
@@ -32,7 +37,27 @@ const PurchaseApprovalReducer = (state = initialState, action) => {
             return {
                 ...state,
                 PurchaseApprovalFilterInput,
+            };
 
+        case Types.CHANGE_PURCHASE_APPROVAL_DETAIL_INPUT:
+            // const PurchaseApprovalDetailInput = { ...state.PurchaseApprovalDetailInput };
+            // console.log('object', object)
+            // PurchaseApprovalDetailInput[action.payload.name] = action.payload.value;
+
+
+            const purchaseDetails = state.purchaseApprovalMultiple;
+            console.log('purchaseDetails', purchaseDetails);
+
+
+            for (let i = 0; i < purchaseDetails.length; i++) {
+                if (purchaseDetails[i].intId == action.payload.item.intId) {
+                    purchaseDetails[i][action.payload.name] = action.payload.value
+                }
+            }
+
+            return {
+                ...state,
+                purchaseApprovalMultiple: purchaseDetails,
             };
 
         case Types.GET_SBU_NAME:
@@ -58,6 +83,7 @@ const PurchaseApprovalReducer = (state = initialState, action) => {
             return {
                 ...state,
                 purchaseApprovalDetail: action.payload.data,
+                purchaseApprovalMultiple: action.payload.data.purchase_row,
             };
 
         default:

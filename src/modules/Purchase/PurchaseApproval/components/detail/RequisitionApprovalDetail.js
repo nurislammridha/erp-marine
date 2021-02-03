@@ -3,14 +3,27 @@ import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment"
 import { useForm } from "react-hook-form";
+import { handleChangePurchaseApprovalDetailInput } from '../../_redux/actions/PurchaseApprovalAction';
+import { round } from 'lodash';
 
 
 const RequisitionApprovalDetail = () => {
     const dispatch = useDispatch();
+    const PurchaseApprovalDetailInput = useSelector((state) => state.purchaseApprovalFilter.PurchaseApprovalDetailInput);
     const purchaseApprovalDetail = useSelector(
         (state) => state.purchaseApprovalFilter.purchaseApprovalDetail
     );
-    console.log('purchaseApprovalDetail', purchaseApprovalDetail)
+
+    const purchaseApprovalMultiple = useSelector(
+        (state) => state.purchaseApprovalFilter.purchaseApprovalMultiple
+    );
+
+    console.log('purchaseApprovalMultiple', purchaseApprovalMultiple);
+
+
+    const handleChangeTextInput = (name, value, item) => {
+        dispatch(handleChangePurchaseApprovalDetailInput(name, value, item));
+    };
 
     return (
         <div>
@@ -56,7 +69,7 @@ const RequisitionApprovalDetail = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="mt-5">
+                        <div className="mt-5 form-group">
                             <div className="react-bootstrap-table table-responsive">
                                 <table className="table table table-head-custom table-vertical-center  voyageTable">
                                     <thead>
@@ -82,49 +95,66 @@ const RequisitionApprovalDetail = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {purchaseApprovalMultiple.map((item, index) => (
 
-
-                                        <tr>
-                                            <td>
-                                                <Form.Check
-                                                    className=""
-                                                    type="checkbox"
-                                                    name="isRevLoadingPorts"
-                                                // onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
-                                                />
-                                            </td>
-                                            <td>VALUE</td>
-                                            <td>VALUE</td>
-                                            <td>VALUE</td>
-                                            <td>VALUE</td>
-                                            <td>VALUE</td>
-                                            <td>VALUE</td>
-                                            <td>VALUE</td>
-                                            <td>
-                                                <Form.Control
-                                                    type="number"
-                                                    name="approvedQty"
-                                                    className="fromStyle formHeight"
-                                                />
-                                            </td>
-                                            <td>
-                                                <Form.Control
-                                                    type="text"
-                                                    name="remarks"
-                                                    className="fromStyle formHeight"
-                                                />
-                                            </td>
-                                            <td>
-                                                <div className="d-flex">
-                                                    <a href>
-                                                        <i className="fas fa-trash-alt editIcon item-list-icon ml-4"
-                                                        // onClick={(id) => deleteList(item.intSupplierId)}
-                                                        >
-                                                        </i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>
+                                                    <Form.Check
+                                                        className=""
+                                                        type="checkbox"
+                                                        name="isRevLoadingPorts"
+                                                    // onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
+                                                    />
+                                                </td>
+                                                <td>{item.intId}</td>
+                                                <td>{item.strItemName}</td>
+                                                <td>{item.strBeneficiaryName}</td>
+                                                <td>{item.strBeneficiaryName}</td>
+                                                <td>{item.strBeneficiaryName}</td>
+                                                <td>{item.strBeneficiaryName}</td>
+                                                <td>{round(item.numPurchaseRequestQty)}</td>
+                                                <td>
+                                                    <Form.Control
+                                                        type="text"
+                                                        name="numApprovedQty"
+                                                        value={item.numApprovedQty}
+                                                        className="fromStyle formHeight"
+                                                        onChange={(e) =>
+                                                            handleChangeTextInput(
+                                                                "numApprovedQty",
+                                                                e.target.value,
+                                                                item
+                                                            )
+                                                        }
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <Form.Control
+                                                        type="text"
+                                                        name="remarks"
+                                                        value={item.remarks}
+                                                        className="fromStyle formHeight"
+                                                        onChange={(e) =>
+                                                            handleChangeTextInput(
+                                                                "remarks",
+                                                                e.target.value,
+                                                                item
+                                                            )
+                                                        }
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <div className="d-flex">
+                                                        <a href>
+                                                            <i className="fas fa-trash-alt editIcon item-list-icon ml-4"
+                                                            // onClick={(id) => deleteList(item.intSupplierId)}
+                                                            >
+                                                            </i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </table>
                             </div>
