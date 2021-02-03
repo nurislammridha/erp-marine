@@ -269,22 +269,22 @@ const AdditionDeductionBulkUpload = withRouter(({ history, props }) => {
   return (
     <>
       <div className="container">
-        <div className="card card-custom gutter-b">
+        <div className="card card-custom gutter-b card-top-border">
           <div>
-            <div className="card-header">
-              <div className="card-title">
+            <div className="card-header py-4">
+              <div className="card-title mb-0">
                 <h3 class="card-label">Addition Deduction File Upload</h3>
               </div>
             </div>
           </div>
-          <div className="card-body">
+          <div className="card-body pt-0">
             <form
               className="form form-label-right"
               onSubmit={handleSubmit(onSubmit)}
               method="post"
               formEncType="multipart/form-data"
             >
-              <div className="form-group row"></div>
+           
 
               <div className="form-group row">
               <div className="col-md-2">
@@ -313,15 +313,16 @@ const AdditionDeductionBulkUpload = withRouter(({ history, props }) => {
                       />
                     </div>
                 <div className="col-lg-4">
-                  <label className="form-label mt-2">
+                  <label className="form-label ">
                     Upload Excel/CSV File
                   </label>
 
                   <input
-                    className="form-control"
+                    className="bulk-file-input"
                     type="file"
                     onChange={onChange}
                     required={true}
+                   
                   />
                   <div className="inputError margin-minus-8">
                     {errors.uploadFile &&
@@ -340,11 +341,11 @@ const AdditionDeductionBulkUpload = withRouter(({ history, props }) => {
                 {/* <div className="col-lg-4">
                   <DemoAdditionDeductionFile />
                 </div> */}
-                <div className="col-lg-4 mt-5">
-                  <p className="mt-4">
+                <div className="col-lg-4 ">
+                  <p className="mt-5">
                     <a
                       target="_blank"
-                      className="btn btn-info"
+                      className="btn btn-light"
                       onClick={() => {
                         history.push("/addition-deduction/report");
                       }}
@@ -360,7 +361,7 @@ const AdditionDeductionBulkUpload = withRouter(({ history, props }) => {
                   {loading && (
                     <button
                       type="submit"
-                      class="btn btn-primary btn-lg"
+                      class="btn btn-primary btn-sm"
                       disabled={true}
                     >
                       <span>Upload Now</span>
@@ -369,7 +370,7 @@ const AdditionDeductionBulkUpload = withRouter(({ history, props }) => {
                   )}
 
                   {!loading && (
-                    <button type="submit" class="btn btn-primary btn-lg">
+                    <button type="submit" class="btn btn-primary btn-sm">
                       <span>Upload Now</span>
                     </button>
                   )}

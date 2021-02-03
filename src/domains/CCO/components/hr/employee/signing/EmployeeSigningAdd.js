@@ -153,7 +153,7 @@ const EmployeeSigningAdd = withRouter(({ history, props }) => {
   return (
     <>
       <div className="container">
-        <div className="card card-custom gutter-b">
+        <div className="card card-custom gutter-b card-top-border">
           <div className="card-header">
             <div className="card-title">
               <h3 class="card-label">Employee Signing</h3>
@@ -176,7 +176,7 @@ const EmployeeSigningAdd = withRouter(({ history, props }) => {
                 />
               </div> */}
 
-                <div className="col-lg-4">
+                <div className="col-lg-4 employee-signin">
                   <label className="form-label">Sign In/Out</label>
                   <RHFInput
                     as={<Select options={status} />}
@@ -234,11 +234,11 @@ const EmployeeSigningAdd = withRouter(({ history, props }) => {
                 </div>
 
                 <div className="col-lg-4">
-                  <label className="form-label mt-2">Action Date</label>
+                  <label className="form-label ">Action Date</label>
                   <Form.Control
                     type="date"
                     name="dteActionDate"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -258,7 +258,7 @@ const EmployeeSigningAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter Remarks"
                     name="strRemarks"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -275,17 +275,17 @@ const EmployeeSigningAdd = withRouter(({ history, props }) => {
                       history.push("/vessels/list");
                     }}
                   >
-                    <button type="button" class="btn btn-secondary btn-lg mr-2">
+                    <button type="button" class="btn btn-secondary btn-sm mr-2">
                       Back
                     </button>
                   </a>
-                  {/* <button type="submit" class="btn btn-primary btn-lg">
+                  {/* <button type="submit" class="btn btn-primary btn-sm">
                     Next
                     </button> */}
                   {loading && (
                     <button
                       type="submit"
-                      class="btn btn-primary btn-lg"
+                      class="btn btn-primary btn-sm"
                       disabled={true}
                     >
                       <span>Submit</span>
@@ -294,7 +294,7 @@ const EmployeeSigningAdd = withRouter(({ history, props }) => {
                   )}
 
                   {!loading && (
-                    <button type="submit" class="btn btn-primary btn-lg">
+                    <button type="submit" class="btn btn-primary btn-sm">
                       <span>Submit</span>
                     </button>
                   )}

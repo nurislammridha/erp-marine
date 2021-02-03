@@ -200,7 +200,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
   return (
     <>
       <div className="container">
-        <div className="card card-custom gutter-b">
+        <div className="card card-custom gutter-b card-top-border">
           <div className="card-header">
             <div className="card-title">
               <h3 className="card-label">Create New Employee</h3>
@@ -225,7 +225,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter Employee Full Name "
                     name="strName"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -245,7 +245,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                   <Form.Control
                     type="date"
                     name="strBirthdate"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -266,7 +266,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter Telepone No. "
                     name="strHomeTelephone"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -286,7 +286,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                                         type="text"
                                         placeholder="Enter Rank"
                                         name="strRank"
-                                        className="fromStyle"
+                                        className="formHeight"
                                         onChange={handleChange}
                                         ref={register({
                                             required: true,
@@ -319,7 +319,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                   <Form.Control
                     type="date"
                     name="strAvailabilityDate"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -333,7 +333,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="email"
                     placeholder="Enter Email"
                     name="strEmail"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -353,7 +353,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter Height eg:5'6"
                     name="strHeight"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -368,7 +368,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="number"
                     placeholder="Enter Weight eg:70"
                     name="strWeight"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -382,7 +382,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter Nationality"
                     name="strNationality"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     value="Bangladeshi"
                     disabled={true}
@@ -401,7 +401,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter Emergency Person Name"
                     name="strEmgrPersonName"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -417,7 +417,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter Emergency Telephone"
                     name="strEmgrPersonalTel"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -433,7 +433,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter Emergency Person Relation"
                     name="strEmgrPersonRelation"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -450,7 +450,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter Emergency Person Address"
                     name="strEmgrPersonAddress"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -464,7 +464,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter Trading Area"
                     name="strTradingArea"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -479,7 +479,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Cargo Carried"
                     name="strCargoCarried"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -507,7 +507,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter CDC No."
                     name="strCDCNo"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -516,7 +516,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                   />
                 </div>
                 <div className="col-lg-4 mt-8">
-                  <label className="form-label mt-2">Profile Pic</label>
+                  <label className="form-label mt-2 mr-3">Profile Pic</label>
                   <FileBase64
                     name="image"
                     multiple={true}
@@ -550,7 +550,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="0.00"
                     name="strAmount"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -582,7 +582,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter Boiler Suit"
                     name="strBoilersuit"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -597,7 +597,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Safety Shoes"
                     name="strSafetyShoes"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -612,7 +612,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Uniform Shirt"
                     name="strUniformShirt"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -627,7 +627,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Uniform Trouser"
                     name="strUniformTrouser"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -642,7 +642,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Winter Jacket"
                     name="strWinterJacket"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -659,7 +659,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                       history.push("/employee/employee-list");
                     }}
                   >
-                    <button type="button" class="btn btn-secondary btn-lg">
+                    <button type="button" class="btn btn-secondary btn-sm">
                       Back
                     </button>
                   </a>
@@ -670,12 +670,12 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                                         history.push("/employee/employee-education-add");
                                     }}> */}
                   {/* {isLoading &&
-                                        <button type="submit" class="btn btn-primary btn-lg" disabled>Next...</button>
+                                        <button type="submit" class="btn btn-primary btn-sm" disabled>Next...</button>
                                     } */}
                   {loading && (
                     <button
                       type="submit"
-                      class="btn btn-primary btn-lg"
+                      class="btn btn-primary btn-sm"
                       disabled={true}
                     >
                       <span>Next</span>
@@ -684,7 +684,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                   )}
 
                   {!loading && (
-                    <button type="submit" class="btn btn-primary btn-lg">
+                    <button type="submit" class="btn btn-primary btn-sm">
                       <span>Next</span>
                     </button>
                   )}
