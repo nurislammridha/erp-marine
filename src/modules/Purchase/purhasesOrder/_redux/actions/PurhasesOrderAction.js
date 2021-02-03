@@ -88,3 +88,11 @@ export const getPurchaseOrder = (orderFilter) => (dispatch) => {
         )
     }
 }
+
+
+export const submitMultipleOrderList = (multipleOrder) => (dispatch) => {
+    const url = `${process.env.REACT_APP_API_URL}purchase/purchaseOrderHeaderRow`;
+    Axios.post(url, multipleOrder).then(function (response) {
+        console.log("Nur", response);
+    })
+}

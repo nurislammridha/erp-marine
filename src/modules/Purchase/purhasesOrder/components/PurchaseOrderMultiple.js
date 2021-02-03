@@ -4,7 +4,7 @@ import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
-import { addMultipleOrder, deleteMultipleItem, editOrderMultiple, purchasesOrderInput } from '../_redux/actions/PurhasesOrderAction';
+import { addMultipleOrder, deleteMultipleItem, editOrderMultiple, purchasesOrderInput, submitMultipleOrderList } from '../_redux/actions/PurhasesOrderAction';
 const PurchaseOrderMultiple = () => {
     const { register, setValue } = useForm();
     const dispatch = useDispatch();
@@ -22,7 +22,9 @@ const PurchaseOrderMultiple = () => {
         dispatch(deleteMultipleItem(index))
 
     }
-    console.log('orderInput :>> ', orderInput);
+    const submitMultipleOrder = (multipleOrder) => {
+        dispatch(submitMultipleOrderList(multipleOrder))
+    }
     useEffect(() => {
         setValue("intRefferenceId", "");
         setValue("intItemId", "");
@@ -30,6 +32,7 @@ const PurchaseOrderMultiple = () => {
     const handleEdit = (index) => {
         dispatch(editOrderMultiple(index))
     }
+
     const shipList = [
         {
             value: 1,
@@ -222,7 +225,7 @@ const PurchaseOrderMultiple = () => {
                         <div className="col-md-2 mt-3">
                             <button
                                 className="btn btn-primary btn-sm float-right text-center custome-addnew-btn item-add-save mb-5"
-                            // onClick={() => dispatch(submitMultipleItem(multipleItemList))}
+                                onClick={() => submitMultipleOrder(multipleOrder)}
                             >
                                 save
                              </button>
