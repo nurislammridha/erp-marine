@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import Select from "react-select";
 import { IconButton, InputBase, Paper } from '@material-ui/core';
 import { Card } from 'react-bootstrap';
-import { getBranchList, getPurchaseOrganization, getReferenceType, getSBUlist, purchaseOrderFilter } from '../_redux/actions/PurhasesOrderAction';
+import { getBranchList, getPurchaseOrder, getPurchaseOrganization, getReferenceType, getSBUlist, purchaseOrderFilter } from '../_redux/actions/PurhasesOrderAction';
 
 const PurhasesOrderFilter = () => {
     const { register, setValue } = useForm();
@@ -21,7 +21,7 @@ const PurhasesOrderFilter = () => {
     // const handleChangeSBU =(value)=>{
     //     dispatch()
     // }
-    console.log('orderFIlter :>> ', orderFilter);
+
     useEffect(() => {
         dispatch(getSBUlist())
         dispatch(getBranchList())
@@ -30,7 +30,11 @@ const PurhasesOrderFilter = () => {
     }, [])
     const handleChangeInput = (name, value) => {
         dispatch(purchaseOrderFilter(name, value))
+
     }
+    useEffect(() => {
+        dispatch(getPurchaseOrder(orderFilter))
+    }, [orderFilter])
     return (
         <>
             <Card>

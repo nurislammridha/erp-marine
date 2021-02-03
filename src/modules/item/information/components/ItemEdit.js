@@ -15,8 +15,8 @@ const ItemEdit = () => {
     const itemDataInput = useSelector(state => state.itemList.itemDataInput);
     const multipleItemList = useSelector(state => state.itemList.multipleItemAdd);
     const itemSUbmit = useSelector(state => state.itemList.itemSUbmit);
-    const ItemDetails = useSelector((state)=> state.itemList.ItemDetails);
-   
+    const ItemDetails = useSelector((state) => state.itemList.ItemDetails);
+
     useEffect(() => {
         dispatch(getItemDetails(id));
     }, [])
@@ -66,6 +66,7 @@ const ItemEdit = () => {
             label: "Engine",
         }
     ];
+    console.log('itemDataInput.UOM :>> ', itemDataInput.UOM);
     return (
         <>
             <div className="card card-custom gutter-b pl-5 pr-5 mb-5">

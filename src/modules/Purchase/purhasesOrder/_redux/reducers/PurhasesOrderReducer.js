@@ -1,4 +1,3 @@
-import { isFragment } from "react-is";
 import * as Types from "../types/Types";
 const initialstate = {
     orderInput: {
@@ -19,7 +18,7 @@ const initialstate = {
         strPurchaseOrganizationName: "",
         intPOReferenceTypeId: "",
         strPOReferenceType: ""
-    }
+    },
 };
 const PurchasesOrderReducer = (state = initialstate, action) => {
     const newState = { ...state };
@@ -35,7 +34,7 @@ const PurchasesOrderReducer = (state = initialstate, action) => {
             };
         case Types.ADD_MULTIPLE_ORDER:
             const multipleOrderInput = [...state.multipleOrder, action.payload]
-            return { ...state, multipleOrder: multipleOrderInput, orderInput: initialstate.orderInput }
+            return { ...state, multipleOrder: multipleOrderInput, orderInput: initialstate.orderInput, editOptionReference: "", editOptionItem: "" }
         case Types.GET_SBU_LIST:
             return { ...state, sbuList: SBUList(action.payload) }
         case Types.GET_BRANCH_LIST:
@@ -54,7 +53,11 @@ const PurchasesOrderReducer = (state = initialstate, action) => {
             return { ...state, multipleOrder: multipleOrderOld }
         case Types.EDIT_MULTIPLE:
             const editData = { ...state.multipleOrder[action.payload] }
-            return { ...state, orderInput: editData }
+            const editOptionItem = optionItem(editData);
+            const editOptionReference = optionReference(editData);
+            return { ...state, orderInput: editData, editOptionReference: editOptionReference, editOptionItem: editOptionItem }
+        case Types.GET_PURCHASE_ORDER:
+            return { ...state, purchaseOrderList: action.payload }
         default:
             break;
     }
@@ -114,4 +117,18 @@ const ReferenceType = (data) => {
         })
     }
     return options;
+}
+const optionReference = (data) => {
+    const dataOption = {
+        value: data.intRefferenceId,
+        label: data.strRefferenceName
+    }
+    return dataOption;
+}
+const optionItem = (data) => {
+    const dataOption = {
+        value: data.intItemId,
+        label: data.strItemName
+    }
+    return dataOption;
 }

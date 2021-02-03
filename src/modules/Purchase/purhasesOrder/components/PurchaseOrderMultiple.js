@@ -1,16 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
 import { addMultipleOrder, deleteMultipleItem, editOrderMultiple, purchasesOrderInput } from '../_redux/actions/PurhasesOrderAction';
 const PurchaseOrderMultiple = () => {
     const { register, setValue } = useForm();
     const dispatch = useDispatch();
     const orderInput = useSelector(state => state.purchasesOrderInfo.orderInput);
     const multipleOrder = useSelector(state => state.purchasesOrderInfo.multipleOrder);
+    const editOptionReference = useSelector(state => state.purchasesOrderInfo.editOptionReference);
+    const editOptionItem = useSelector(state => state.purchasesOrderInfo.editOptionItem);
     const changeTextValue = (name, value) => {
         dispatch(purchasesOrderInput(name, value))
     }
@@ -19,7 +20,13 @@ const PurchaseOrderMultiple = () => {
     }
     const deleteMultiple = (index) => {
         dispatch(deleteMultipleItem(index))
+
     }
+    console.log('orderInput :>> ', orderInput);
+    useEffect(() => {
+        setValue("intRefferenceId", "");
+        setValue("intItemId", "");
+    }, [multipleOrder, setValue])
     const handleEdit = (index) => {
         dispatch(editOrderMultiple(index))
     }
@@ -43,7 +50,7 @@ const PurchaseOrderMultiple = () => {
                         rules={{ required: false }}
                         name="intRefferenceId"
                         register={register}
-                        value={orderInput.intRefferenceId}
+                        value={editOptionReference}
                         setValue={setValue}
                         onChange={(option) => {
                             changeTextValue("intRefferenceId", option.value);
@@ -58,7 +65,7 @@ const PurchaseOrderMultiple = () => {
                         rules={{ required: false }}
                         name="intItemId"
                         register={register}
-                        value={orderInput.intItemId}
+                        value={editOptionItem}
                         setValue={setValue}
                         onChange={(option) => {
                             changeTextValue("intItemId", option.value);
