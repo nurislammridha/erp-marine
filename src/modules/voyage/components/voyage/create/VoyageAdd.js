@@ -55,7 +55,7 @@ const VoyageAdd = () => {
       >
         <div className="form-group row mt-5">
           <div className="col-lg-4">
-            <label className="form-label">Select Vessel</label>
+            <label className="form-label">Select Vessel c</label>
             <RHFInput
               as={<Select options={vesselListOptions} />}
               rules={{ required: false }}
@@ -74,6 +74,7 @@ const VoyageAdd = () => {
             <label className="form-label">Voyage No.</label>
             <Form.Control
               type="number"
+              className="formHeight"
               placeholder="Enter Voyage No"
               value={voyageInput.intVoyageNo}
               name="intVoyageNo"
@@ -110,7 +111,7 @@ const VoyageAdd = () => {
               placeholder="Enter Cargo Quantity"
               value={voyageInput.intCargoQty}
               name="intCargoQty"
-              className="fromStyle"
+              className="formHeight"
               ref={register({
                 required: false,
                 maxLength: 100,
@@ -128,7 +129,7 @@ const VoyageAdd = () => {
               placeholder="Voyage date"
               value={voyageInput.dteVoyageDate}
               name="dteVoyageDate"
-              className="fromStyle"
+              className="formHeight"
               ref={register({
                 required: false,
                 maxLength: 100,
@@ -178,7 +179,7 @@ const VoyageAdd = () => {
               name="strPlaceOfVoyageCommencement"
               placeholder="Voyage Commencement"
               value={voyageInput.strPlaceOfVoyageCommencement}
-              className="fromStyle"
+              className="formHeight"
               ref={register({
                 required: false,
                 maxLength: 100,
@@ -199,7 +200,7 @@ const VoyageAdd = () => {
               type="number"
               name="strEngineName"
               placeholder="Bunker Qty At Voyage Commencement"
-              className="fromStyle"
+              className="formHeight"
               value={voyageInput.decBunkerQty}
               ref={register({
                 required: false,
@@ -216,7 +217,7 @@ const VoyageAdd = () => {
               type="number"
               name="decDistance"
               placeholder="Type Distance"
-              className="fromStyle"
+              className="formHeight"
               value={voyageInput.decDistance}
               ref={register({
                 required: false,
@@ -233,7 +234,7 @@ const VoyageAdd = () => {
               type="number"
               name="intVlsfoRob"
               placeholder="VlsfoRob"
-              className="fromStyle"
+              className="formHeight"
               value={voyageInput.intVlsfoRob}
               ref={register({
                 required: false,
@@ -250,7 +251,7 @@ const VoyageAdd = () => {
               type="number"
               name="intLsmgRob"
               placeholder="LsmgRob"
-              className="fromStyle"
+              className="formHeight"
               value={voyageInput.intLsmgRob}
               ref={register({
                 required: false,
@@ -267,7 +268,7 @@ const VoyageAdd = () => {
               type="number"
               name="intLubOilRob"
               placeholder="Type LubOilRob"
-              className="fromStyle"
+              className="formHeight"
               value={voyageInput.intLubOilRob}
               ref={register({
                 required: false,
@@ -284,7 +285,7 @@ const VoyageAdd = () => {
               type="number"
               name="intMeccRob"
               placeholder="Type MeccRob"
-              className="fromStyle"
+              className="formHeight"
               value={voyageInput.intMeccRob}
               ref={register({
                 required: false,
@@ -301,7 +302,7 @@ const VoyageAdd = () => {
               type="number"
               name="intTotalCrew"
               placeholder="Type AeccRob"
-              className="fromStyle"
+              className="formHeight"
               value={voyageInput.intAeccRob}
               ref={register({
                 required: false,
@@ -318,20 +319,20 @@ const VoyageAdd = () => {
           <div className="col-sm-10"></div>
         </div>
         <Link to="/voyage/list">
-          <button type="button" class="btn btn-secondary btn-lg mr-2">
+          <button type="button" class="btn btn-secondary btn-sm mr-2">
             Back
           </button>
         </Link>
 
         {loading && (
-          <button type="submit" class="btn btn-primary btn-lg" disabled={true}>
+          <button type="submit" class="btn btn-primary btn-sm" disabled={true}>
             <span>Submitting...</span>
             <span className="ml-3 spinner spinner-white"></span>
           </button>
         )}
 
         {!loading && (
-          <button type="submit" class="btn btn-primary btn-lg">
+          <button type="submit" class="btn btn-primary btn-sm">
             <span>Submit</span>
           </button>
         )}

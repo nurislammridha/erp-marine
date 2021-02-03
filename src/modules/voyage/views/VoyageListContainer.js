@@ -15,14 +15,14 @@ const VoyageListContainer = () => {
     <div className="card card-custom gutter-b">
       <div className="row pt-5 pl-4 pb-3">
         <div className="col-xl-9 col-lg-9 col-md-9 col-6">
-          <h3>Voyage List</h3>
+          <h3>Voyage List </h3>
         </div>
         <div className="col-xl-3 col-lg-3 col-md-3 col-6 VoyageListBtn">
-          <Button className="mr-2 text-bold" variant="light text-primary ">
+          <Button className="mr-2 text-bold btn-sm" variant="light text-primary ">
             Export
           </Button>
           <Button
-            className="pl-3 pr-3 text-bold "
+            className="pl-3 pr-3 text-bold btn-sm "
             variant="primary"
             onClick={() => {
               history.push("/voyage/add");

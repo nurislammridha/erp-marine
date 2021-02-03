@@ -28,7 +28,7 @@ const PurchaseApprovalList = () => {
   }, []);
 
   return (
-    <Card>
+    <Card  >
       <Card.Body>
         <div className="container ">
           <div className="row mb-5 table-form">

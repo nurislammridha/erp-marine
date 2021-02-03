@@ -31,7 +31,7 @@ const LoadableCalculator = () => {
       <div className="container">
         <div className="row">
           <div className="col-xl-8 col-lg-8 col-12">
-            <div className="card card-custom gutter-b pl-5 pr-5 mb-1">
+            <div className="card card-custom gutter-b pl-5 pr-5 mb-1 card-top-border">
               <div className="mt-5">
                 <h3 className="mb-0 pb-0">Loadable Calculator</h3>
               </div>
