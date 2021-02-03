@@ -87,7 +87,7 @@ const POList = () => {
                           // onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
                           />
                         </td>
-                        <td>{index}</td>
+                        <td>{item.intBusinessLineId}</td>
                         <td>{item.strPONo !== null && item.strPONo !== '' ? item.strPONo : ''}</td>
                         <td>{item.dtePODate !== null && item.dtePODate !== '' ? moment(item.dtePODate).format("DD-MM-YYYY") : ''}</td>
                         <td>{item.strSupplierName !== null && item.strSupplierName !== '' ? item.strSupplierName : ''}</td>

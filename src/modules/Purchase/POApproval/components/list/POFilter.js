@@ -23,8 +23,8 @@ const POFilter = () => {
     };
 
     const changeFilter = () => {
-        const { search, intSBUId, intBusinessUnitId, intShipID, intPOReferenceTypeId } = POApprovalFilterInput;
-        dispatch(getPOApprovalList(search, intSBUId, intBusinessUnitId, intShipID, intPOReferenceTypeId));
+        const { search, intBusinessLineId, intBusinessUnitId, intPurchaseOrganizationId, intPOReferenceTypeId } = POApprovalFilterInput;
+        dispatch(getPOApprovalList(search, intBusinessLineId, intBusinessUnitId, intPurchaseOrganizationId, intPOReferenceTypeId));
     }
 
     useEffect(() => {
