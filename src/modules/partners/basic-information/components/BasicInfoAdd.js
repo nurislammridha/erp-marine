@@ -55,7 +55,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
 
     return (
         <div className="container">
-            <div className="mt-10">
+            <div className="mt-3">
                 <form
                     className="form form-label-right"
                     method="post"

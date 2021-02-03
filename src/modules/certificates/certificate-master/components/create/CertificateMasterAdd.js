@@ -73,7 +73,7 @@ console.log('CertificateMasterInput :>> ', CertificateMasterInput);
         onSubmit={handleSubmit(onSubmit)}
         method="post"
       >
-        <div className="form-group row mt-5">
+        <div className="form-group row ">
           <div className="col-md-12">
             <label className="form-label formFont">Certificate Name</label>
             <Form.Control
