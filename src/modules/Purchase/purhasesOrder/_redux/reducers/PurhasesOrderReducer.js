@@ -114,7 +114,6 @@ const PurchasesOrderReducer = (state = initialstate, action) => {
             return { ...state, finalOrderInput }
         case Types.CREATE_FIANL_INPUT:
             const data = action.payload;
-            console.log('data reducer:>> ', data);
             const finalOrderList = { ...state.finalOrderInput, orderRow: data }
             return { ...state, finalOrderInput: finalOrderList }
         default:

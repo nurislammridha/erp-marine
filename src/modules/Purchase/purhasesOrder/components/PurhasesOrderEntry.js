@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../../_metronic/_assets/css/default-style.css";
 import "../../../../styles/global-style.css";
@@ -18,7 +18,6 @@ const PurhasesOrderEntry = () => {
   const handleChangeTextInput = (name, value) => {
     dispatch(FinalOrderInput(name, value));
   }
-  // console.log('finalOrderInput :>> ', finalOrderInput);
   const shipList = [
     {
       value: 1,

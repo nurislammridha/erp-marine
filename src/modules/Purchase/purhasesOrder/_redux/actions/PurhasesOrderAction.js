@@ -92,10 +92,6 @@ export const getPurchaseOrder = (orderFilter) => (dispatch) => {
 
 export const submitMultipleOrderList = (multipleOrder) => (dispatch) => {
     dispatch({ type: Types.CREATE_FIANL_INPUT, payload: multipleOrder })
-    // const url = `${process.env.REACT_APP_API_URL}purchase/purchaseOrderHeaderRow`;
-    // Axios.post(url, multipleOrder).then(function (response) {
-    //     console.log("Nur", response);
-    // })
 }
 export const FinalOrderInput = (name, value) => (dispatch) => {
     const formData = {
@@ -105,7 +101,6 @@ export const FinalOrderInput = (name, value) => (dispatch) => {
     dispatch({ type: Types.FINAL_ORDER_INPUT, payload: formData })
 }
 export const SubmitFinalOrder = (finalOrderInput) => (dispatch) => {
-    console.log('finalOrderInput action:>> ', finalOrderInput);
     const url = `${process.env.REACT_APP_API_URL}purchase/purchaseOrderHeaderRow`;
     Axios.post(url, finalOrderInput).then(function (response) {
         if (response.data.status) {
