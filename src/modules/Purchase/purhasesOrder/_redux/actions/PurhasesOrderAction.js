@@ -108,6 +108,14 @@ export const SubmitFinalOrder = (finalOrderInput) => (dispatch) => {
     console.log('finalOrderInput action:>> ', finalOrderInput);
     const url = `${process.env.REACT_APP_API_URL}purchase/purchaseOrderHeaderRow`;
     Axios.post(url, finalOrderInput).then(function (response) {
-        console.log("Nur", response);
+        if (response.data.status) {
+            showToast("success", response.data.message);
+
+        } else {
+            showToast("error", response.data.message)
+        }
+    }).catch(function (error) {
+        const message = "Something Wrong, Fill Up all fields";
+        showToast("error", message);
     })
 }
