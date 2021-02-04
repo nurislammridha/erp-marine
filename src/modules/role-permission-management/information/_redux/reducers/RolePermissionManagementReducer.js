@@ -65,6 +65,10 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                 roleDetailsData.role = action.payload.role.name;
                 roleDetailsData.groupList = action.payload.groups;
             }
+            roleDetailsData.groupList.map((role, indexparentRole) => {
+                roleDetailsData.groupList[indexparentRole].isChecked = checkAllPermissionIsChecked(roleDetailsData.groupList, indexparentRole);
+            });
+
             return {
                 ...state,
                 inputData: roleDetailsData
