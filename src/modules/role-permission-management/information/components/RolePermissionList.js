@@ -54,7 +54,7 @@ const RolePermissionList = () => {
               </div>
             </div>
           </div>
-          <div className="row">
+          <div className="">
             {/* <table className="table mt-5 voyageTable table-responsive"> */}
             <div className="react-bootstrap-table table-responsive pl-5">
               {isLoading && <LoadingSpinner text="Loading Roles List..." />}
@@ -80,9 +80,9 @@ const RolePermissionList = () => {
                             <div>
                               {
                                 item.permissions.map((permission, index2) => (
-                                <span className="badge badge-primary mt-2 ml-2">
-                                  { permission.name }
-                                </span>
+                                  <span className="badge badge-primary mt-2 ml-2">
+                                    { permission.name}
+                                  </span>
                                 ))
                               }
                             </div>
@@ -93,11 +93,11 @@ const RolePermissionList = () => {
                       <td>
                         <span className="badge badge-success">
                           Active
-                        </span>
+                          </span>
                       </td>
                       <td>
                         {" "}
-                        <Link to={`/items/edit/${item.intItemID}`}>
+                        <Link to={`/role-permission/edit/${item.id}`}>
                           <i className="far fa-edit editIcon item-list-icon ml-4"></i>
                         </Link>
                       </td>
@@ -105,6 +105,7 @@ const RolePermissionList = () => {
                   ))}
                 </tbody>
               </table>
+
               {!isLoading && rolesList.length === 0 && (
                 <div className="alert alert-warning mt-5">
                   Sorry ! No Role Found

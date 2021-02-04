@@ -31,6 +31,21 @@ export const getRoleListByPagination = () => (dispatch) => {
     });
 };
 
+export const getRoleDetailsData = (id) => (dispatch) => {
+  const responseList = {
+    isLoading: true,
+    data: []
+  };
+
+  dispatch({ type: Types.GET_ROLE_DETAILS_DATA, payload: responseList });
+
+  Axios
+    .get(`${process.env.REACT_APP_API_URL}roles/getAllPermissionByRole/${id}`)
+    .then((res) => {
+      dispatch({ type: Types.GET_ROLE_DETAILS_DATA, payload: res.data.data });
+    });
+};
+
 
 export const emptyRoleStatusMessage = () => (dispatch) => {
   dispatch({ type: Types.EMPTY_ROLE_STATUS, payload: null });

@@ -56,6 +56,20 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                 inputData: updatedInputData
             };
 
+        case Types.GET_ROLE_DETAILS_DATA:
+            const roleDetailsData = {
+                ...state.inputData,
+            }
+            if(action.payload != null && typeof action.payload.role !== 'undefined'){
+                roleDetailsData.id = action.payload.role.id;
+                roleDetailsData.role = action.payload.role.name;
+                roleDetailsData.groupList = action.payload.groups;
+            }
+            return {
+                ...state,
+                inputData: roleDetailsData
+            };
+
         case Types.EMPTY_ROLE_STATUS:
             return {
                 ...state,
