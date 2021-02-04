@@ -27,8 +27,8 @@ const MultipplePreviewAttachment = (props) => {
             //     console.log('url :>> ', url);
             // }
             else {
-                // thumbnail = url;
-                thumbnail = '/media/default/icons/image.png';
+                thumbnail = base64;
+                // thumbnail = '/media/default/icons/image.png';
             }
         }
         setCustomThumbnail(thumbnail);
