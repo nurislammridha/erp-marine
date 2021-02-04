@@ -909,7 +909,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                                 <td>{attachment.size}</td>
                                 <td>
                                   {" "}
-                                  <button className="btn border-none" onClick={() => PreviewAttachment(attachment)}>
+                                  <span className="btn border-none" onClick={() => PreviewAttachment(attachment)}>
                                     <MultipplePreviewAttachment
                                       url={`/${attachment.name}`}
                                       // url={"/" + attachment.name}
@@ -918,7 +918,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                                       height={50}
                                       width={50}
                                     />
-                                  </button>
+                                  </span>
                                 </td>
                                 <td style={{ width: 70, textAlign: "center" }}>
                                   {/* <i className="fa fa-edit text-success mr-2"></i> */}
