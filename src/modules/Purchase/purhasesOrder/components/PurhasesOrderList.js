@@ -1,11 +1,18 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Card } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import PurchaseOrderDetail from './PurchaseOrderDetail';
+import SimpleModal from '../../../master/components/Modal/SimpleModal';
+import { PurchaseOrderView } from '../_redux/actions/PurhasesOrderAction';
 
 const PurhasesOrderList = () => {
+  const dispatch = useDispatch()
+  const [orderDetailsShow, setOrderDetailsShow] = useState(false)
   const purchaseOrderList = useSelector(state => state.purchasesOrderInfo.purchaseOrderList);
-  console.log('purchaseOrderList :>> ', purchaseOrderList);
+  const handleClickView = (id) => {
+    setOrderDetailsShow(true);
+    dispatch(PurchaseOrderView(id))
+  }
   return (
     <>
       <Card >
@@ -44,14 +51,10 @@ const PurhasesOrderList = () => {
                       <td>
                         {""}
                         <div className="d-flex">
-                          <Link>
+                          <a href
+                            onClick={() => handleClickView(item.intPOId)}
+                          >
                             <i className="far fa-eye editIcon item-list-icon"></i>
-                          </Link>
-                          <Link>
-                            <i className="far fa-edit editIcon item-list-icon ml-2"></i>
-                          </Link>
-                          <a href>
-                            <i className="fas fa-trash-alt editIcon item-list-icon ml-2"></i>
                           </a>
                         </div>
                       </td>
@@ -64,6 +67,16 @@ const PurhasesOrderList = () => {
           )}
 
         </Card.Body >
+        <SimpleModal
+          size="xl"
+          // status={status}
+          show={orderDetailsShow}
+          handleClose={() => setOrderDetailsShow(false)}
+          handleShow={() => setOrderDetailsShow(true)}
+          modalTitle={"Purchase Order Details"}
+        >
+          <PurchaseOrderDetail />
+        </SimpleModal>
       </Card >
     </>
   );
