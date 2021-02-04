@@ -30,7 +30,7 @@ const RolePermissionList = () => {
           <div className="container ">
             <div className="row mb-5 table-form ">
               <h1 className="tableheading mt-0">Roles List</h1>
-              <div className="col-xl-7 col-lg-7 col-md-7 mb-2 mt-2"></div>
+              <div className="col-xl-6 col-lg-6 col-md-6 mb-2 mt-2"></div>
               <div className="col-xl-3 col-lg-3 col-md-6 mb-2 mt-2">
                 <Paper className="searchInput">
                   <InputBase
@@ -63,7 +63,7 @@ const RolePermissionList = () => {
                   <tr>
                     <th scope="col">SL</th>
                     <th scope="col">Role</th>
-                    <th scope="col">Total Permissions</th>
+                    <th scope="col" width={600}>Total Permissions</th>
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
                   </tr>
@@ -74,10 +74,24 @@ const RolePermissionList = () => {
                       <td>{rolesListPaginated.from + index}</td>
                       <td>{item.name}</td>
                       <td>
+                        {
+                          item.permissions && item.permissions != null &&
+                          (
+                            <div>
+                              {
+                                item.permissions.map((permission, index2) => (
+                                <span className="badge badge-primary mt-2 ml-2">
+                                  { permission.name }
+                                </span>
+                                ))
+                              }
+                            </div>
+                          )
+                        }
                         {/* {item.permissions ? item.permissions != null ? item.permissions.length() : '' : ''} */}
                       </td>
                       <td>
-                        <span className="badge badge-info">
+                        <span className="badge badge-success">
                           Active
                         </span>
                       </td>

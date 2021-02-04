@@ -1,18 +1,22 @@
 import React, { useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import { allCheckboxSelected, roleCheckboxSelect, checkPermissionGroupAction, getPermissionGroups, AddRolePermissionInput, storeRoleAction } from "../_redux/actions/RolePermissionManagementAction";
+import { allCheckboxSelected, roleCheckboxSelect, checkPermissionGroupAction, getPermissionGroups, AddRolePermissionInput, storeRoleAction, emptyRoleStatusMessage } from "../_redux/actions/RolePermissionManagementAction";
 import './style.css';
 
 const RolePermissionCreate = () => {
-
+  const history = useHistory();
   const dispatch = useDispatch();
   const inputData = useSelector((state) => state.roleReducer.inputData);
+  const isLoading = useSelector((state) => state.roleReducer.isLoading);
+  const isRoleCreated = useSelector((state) => state.roleReducer.isRoleCreated);
+  const roleCreateMessage = useSelector((state) => state.roleReducer.roleCreateMessage);
   const { register, handleSubmit, errors, setValue } = useForm();
 
   useEffect(() => {
+    dispatch(emptyRoleStatusMessage());
     dispatch(getPermissionGroups());
   }, [])
 
@@ -23,7 +27,6 @@ const RolePermissionCreate = () => {
     indexChild,
     indexparentRole
   ) => {
-    console.log('e.target.checked', e.target.checked);
     let checkboxStatus = e.target.checked
     dispatch(roleCheckboxSelect(checkboxStatus, parentRole, item, indexChild, indexparentRole));
   }
@@ -43,6 +46,13 @@ const RolePermissionCreate = () => {
   const onSubmit = () => {
     dispatch(storeRoleAction(roleInput));
   }
+
+  useEffect(() => {
+    if(isRoleCreated){
+      dispatch(emptyRoleStatusMessage());
+      history.push('/role-permission/list');
+    }
+  }, [isRoleCreated, roleCreateMessage]);
 
   return (
     <>
@@ -103,7 +113,7 @@ const RolePermissionCreate = () => {
                             <Form.Group controlId="Create">
                               <Form.Check
                                 type="checkbox"
-                                label={item.name}
+                                label={item.printName}
                                 className="mr-3"
                                 checked={item.isChecked}
                                 onClick={(e) =>
@@ -125,8 +135,9 @@ const RolePermissionCreate = () => {
                     </div>
                   </div>
                 ))}
-                <button className="btn btn-primary booking-btn">
-                  Save
+
+                <button type="submit" className="btn btn-primary booking-btn" disabled={isLoading}>
+                  {!isLoading ? 'Save' : 'Saving...'}
                 </button>
                 <Link to="/role-permission/list">
                 <button className="btn cancelButton ml-2">

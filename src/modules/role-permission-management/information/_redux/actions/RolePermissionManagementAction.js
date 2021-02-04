@@ -7,8 +7,6 @@ export const AddRolePermissionInput = (name, value) => (dispatch) => {
       name: name,
       value: value
   }
-  console.log(value);
-  
   dispatch({ type: Types.CHANGE_ROLE_INPUT, payload: formData })
 }
 
@@ -33,6 +31,11 @@ export const getRoleListByPagination = () => (dispatch) => {
     });
 };
 
+
+export const emptyRoleStatusMessage = () => (dispatch) => {
+  dispatch({ type: Types.EMPTY_ROLE_STATUS, payload: null });
+}
+
 export const storeRoleAction = (roleInputData) => (dispatch) => {
   const responseList = {
     isLoading: true,
@@ -40,25 +43,25 @@ export const storeRoleAction = (roleInputData) => (dispatch) => {
     message: '',
     data: null
   };
-
   dispatch({ type: Types.CREATE_ROLE, payload: responseList });
 
   Axios
     .post(`${process.env.REACT_APP_API_URL}roles/storePermission`, roleInputData)
     .then((res) => {
-      console.log('res.data', res.data);
       const { data, status, message } = res.data;
       responseList.status = status;
       responseList.message = message;
+      responseList.isLoading = false;
       responseList.data = data;
       showToast('success', message);
+      dispatch({ type: Types.CREATE_ROLE, payload: responseList });
     }).catch(err => {
       responseList.status = false;
+      responseList.isLoading = false;
       responseList.message = 'Somethting went wrong, Please check inputs !';
       showToast('error', responseList.message);
+      dispatch({ type: Types.CREATE_ROLE, payload: responseList });
     });
-    
-    dispatch({ type: Types.CREATE_ROLE, payload: responseList });
 };
 
 export const getRoleList = () => (dispatch) => {

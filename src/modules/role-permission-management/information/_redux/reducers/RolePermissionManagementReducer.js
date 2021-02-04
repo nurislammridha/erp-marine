@@ -56,6 +56,14 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                 inputData: updatedInputData
             };
 
+        case Types.EMPTY_ROLE_STATUS:
+            return {
+                ...state,
+                isRoleCreated: false,
+                isLoading: false,
+                inputData: initialState.inputData
+            };
+
         case Types.USER_ROLE_CHECKED:
             const { indexparentRole, indexChild, checkboxStatus  } = action.payload;
             let roleList = state.inputData.groupList.slice();
