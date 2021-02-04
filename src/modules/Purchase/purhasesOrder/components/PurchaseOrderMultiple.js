@@ -4,7 +4,7 @@ import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
-import { addMultipleOrder, deleteMultipleItem, editOrderMultiple, purchasesOrderInput, submitMultipleOrderList } from '../_redux/actions/PurhasesOrderAction';
+import { addMultipleOrder, deleteMultipleItem, editOrderMultiple, purchasesOrderInput, SubmitFinalOrder, submitMultipleOrderList } from '../_redux/actions/PurhasesOrderAction';
 const PurchaseOrderMultiple = () => {
     const { register, setValue } = useForm();
     const dispatch = useDispatch();
@@ -12,10 +12,16 @@ const PurchaseOrderMultiple = () => {
     const multipleOrder = useSelector(state => state.purchasesOrderInfo.multipleOrder);
     const editOptionReference = useSelector(state => state.purchasesOrderInfo.editOptionReference);
     const editOptionItem = useSelector(state => state.purchasesOrderInfo.editOptionItem);
+    const finalOrderInput = useSelector(state => state.purchasesOrderInfo.finalOrderInput);
+
+    useEffect(() => {
+        dispatch(SubmitFinalOrder(finalOrderInput))
+    }, [finalOrderInput])
     const changeTextValue = (name, value) => {
         dispatch(purchasesOrderInput(name, value))
     }
     const addMultiple = () => {
+        console.log('orderInput :>> ', orderInput);
         dispatch(addMultipleOrder(orderInput))
     }
     const deleteMultiple = (index) => {
@@ -51,13 +57,13 @@ const PurchaseOrderMultiple = () => {
                     <RHFInput
                         as={<Select options={shipList} />}
                         rules={{ required: false }}
-                        name="intRefferenceId"
+                        name="intReferenceId"
                         register={register}
                         value={editOptionReference}
                         setValue={setValue}
                         onChange={(option) => {
-                            changeTextValue("intRefferenceId", option.value);
-                            changeTextValue("strRefferenceName", option.label);
+                            changeTextValue("intReferenceId", option.value);
+                            changeTextValue("strReferenceCode", option.label);
                         }}
                     />
                 </div>
@@ -78,14 +84,14 @@ const PurchaseOrderMultiple = () => {
                 </div>
                 <div className="col-md-4">
                     <Form.Group>
-                        <Form.Label className="formFont pl-1">Remarks</Form.Label>
+                        <Form.Label className="formFont pl-1">Purchase Description</Form.Label>
                         <Form.Control
                             className="formHeight"
-                            name="strRemarks"
+                            name="strPurchaseDescription"
                             type="text"
-                            value={orderInput.strRemarks}
+                            value={orderInput.strPurchaseDescription}
                             placeholder="Enter Remarks"
-                            onChange={(e) => changeTextValue("strRemarks", e.target.value)}
+                            onChange={(e) => changeTextValue("strPurchaseDescription", e.target.value)}
                         />
                     </Form.Group>
                 </div>
@@ -94,11 +100,11 @@ const PurchaseOrderMultiple = () => {
                         <Form.Label className="formFont pl-1">QTY</Form.Label>
                         <Form.Control
                             className="formHeight"
-                            name="numQTY"
+                            name="numOrderQty"
                             type="number"
-                            value={orderInput.numQTY}
+                            value={orderInput.numOrderQty}
                             placeholder="Enter QTY"
-                            onChange={(e) => changeTextValue("numQTY", e.target.value)}
+                            onChange={(e) => changeTextValue("numOrderQty", e.target.value)}
                         />
                     </Form.Group>
                 </div>
@@ -192,7 +198,7 @@ const PurchaseOrderMultiple = () => {
                                                     deleteMultiple(index);
                                                 }}
                                             >
-                                                {item.numQTY}
+                                                {item.numOrderQty}
                                             </a>
                                         </td>
                                         <td>
@@ -202,7 +208,7 @@ const PurchaseOrderMultiple = () => {
                                                     deleteMultiple(index);
                                                 }}
                                             >
-                                                {item.strRemarks}
+                                                {item.strPurchaseDescription}
                                             </a>
                                         </td>
                                         <td>

@@ -10,8 +10,8 @@ export const purchasesOrderInput = (name, value) => (dispatch) => {
     dispatch({ type: Types.GET_ORDER_INPUT, payload: formData });
 }
 export const addMultipleOrder = (orderInput) => (dispatch) => {
-    const { intRefferenceId, intItemId, strRemarks, numQTY } = orderInput;
-    if (intRefferenceId.length === 0) {
+    const { intReferenceId, intItemId, strPurchaseDescription, numOrderQty } = orderInput;
+    if (intReferenceId.length === 0) {
         showToast("error", "Please Select Reference No");
         return false;
     }
@@ -19,11 +19,11 @@ export const addMultipleOrder = (orderInput) => (dispatch) => {
         showToast("error", "Please Select Item");
         return false;
     }
-    else if (strRemarks.length === 0) {
+    else if (strPurchaseDescription.length === 0) {
         showToast("error", "Remarks should not be empty");
         return false;
     }
-    else if (numQTY.length === 0) {
+    else if (numOrderQty.length === 0) {
         showToast("error", "QTY should not be empty");
         return false;
     }
@@ -91,8 +91,26 @@ export const getPurchaseOrder = (orderFilter) => (dispatch) => {
 
 
 export const submitMultipleOrderList = (multipleOrder) => (dispatch) => {
+    dispatch({ type: Types.CREATE_FIANL_INPUT, payload: multipleOrder })
+}
+export const FinalOrderInput = (name, value) => (dispatch) => {
+    const formData = {
+        name: name,
+        value: value
+    }
+    dispatch({ type: Types.FINAL_ORDER_INPUT, payload: formData })
+}
+export const SubmitFinalOrder = (finalOrderInput) => (dispatch) => {
     const url = `${process.env.REACT_APP_API_URL}purchase/purchaseOrderHeaderRow`;
-    Axios.post(url, multipleOrder).then(function (response) {
-        console.log("Nur", response);
+    Axios.post(url, finalOrderInput).then(function (response) {
+        if (response.data.status) {
+            showToast("success", response.data.message);
+
+        } else {
+            showToast("error", response.data.message)
+        }
+    }).catch(function (error) {
+        const message = "Something Wrong, Fill Up all fields";
+        showToast("error", message);
     })
 }
