@@ -5,7 +5,7 @@ import { InputBase, Paper, IconButton } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import PaginationLaravel from "../../../master/pagination/PaginationLaravel";
 import { getRoleListByPagination } from "../_redux/actions/RolePermissionManagementAction";
-
+import LoadingSpinner from '../../../master/spinner/LoadingSpinner'
 const RolePermissionList = () => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
@@ -57,7 +57,7 @@ const RolePermissionList = () => {
           <div className="row">
             {/* <table className="table mt-5 voyageTable table-responsive"> */}
             <div className="react-bootstrap-table table-responsive pl-5">
-              {/* {isLoading && <LoadingSpinner text="Loading Items List..." />} */}
+              {isLoading && <LoadingSpinner text="Loading Roles List..." />}
               <table className="table table table-head-custom table-vertical-center  voyageTable itemtable ">
                 <thead>
                   <tr>

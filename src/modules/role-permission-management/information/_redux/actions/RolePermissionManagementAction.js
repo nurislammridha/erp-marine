@@ -33,6 +33,34 @@ export const getRoleListByPagination = () => (dispatch) => {
     });
 };
 
+export const storeRoleAction = (roleInputData) => (dispatch) => {
+  const responseList = {
+    isLoading: true,
+    status: false,
+    message: '',
+    data: null
+  };
+
+  dispatch({ type: Types.CREATE_ROLE, payload: responseList });
+
+  Axios
+    .post(`${process.env.REACT_APP_API_URL}roles/storePermission`, roleInputData)
+    .then((res) => {
+      console.log('res.data', res.data);
+      const { data, status, message } = res.data;
+      responseList.status = status;
+      responseList.message = message;
+      responseList.data = data;
+      showToast('success', message);
+    }).catch(err => {
+      responseList.status = false;
+      responseList.message = 'Somethting went wrong, Please check inputs !';
+      showToast('error', responseList.message);
+    });
+    
+    dispatch({ type: Types.CREATE_ROLE, payload: responseList });
+};
+
 export const getRoleList = () => (dispatch) => {
   Axios
     .get(`${process.env.REACT_APP_API_URL}roles/getAllPermission`)

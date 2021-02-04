@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
 import { Form } from "react-bootstrap";
-import { dispacth } from 'react-redux'
+import { useForm } from "react-hook-form";
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import { allCheckboxSelected, roleCheckboxSelect, checkPermissionGroupAction, getPermissionGroups, AddRolePermissionInput } from "../_redux/actions/RolePermissionManagementAction";
+import { allCheckboxSelected, roleCheckboxSelect, checkPermissionGroupAction, getPermissionGroups, AddRolePermissionInput, storeRoleAction } from "../_redux/actions/RolePermissionManagementAction";
 import './style.css';
 
 const RolePermissionCreate = () => {
 
   const dispatch = useDispatch();
   const inputData = useSelector((state) => state.roleReducer.inputData);
+  const { register, handleSubmit, errors, setValue } = useForm();
 
   useEffect(() => {
     dispatch(getPermissionGroups());
@@ -38,6 +40,10 @@ const RolePermissionCreate = () => {
     (state) => state.roleReducer.inputData
   );
 
+  const onSubmit = () => {
+    dispatch(storeRoleAction(roleInput));
+  }
+
   return (
     <>
       <div className="container role-create-page">
@@ -47,6 +53,7 @@ const RolePermissionCreate = () => {
               <form
                 className="form form-label-right voyageEngineerForm"
                 method="post"
+                onSubmit={handleSubmit(onSubmit)}
               >
                 <div className="form-group row mt-2">
                   <div className="col-2">
@@ -118,9 +125,14 @@ const RolePermissionCreate = () => {
                     </div>
                   </div>
                 ))}
-                <button className="btn btn-primary">
+                <button className="btn btn-primary booking-btn">
                   Save
                 </button>
+                <Link to="/role-permission/list">
+                <button className="btn cancelButton ml-2">
+                  Cancel
+                </button>
+                </Link>
               </form>
             </div>
           </div>

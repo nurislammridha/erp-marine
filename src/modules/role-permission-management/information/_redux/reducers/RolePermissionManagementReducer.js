@@ -12,7 +12,9 @@ const initialState = {
         id: '',
         role: '',
         groupList: []
-    }
+    },
+    isRoleCreated: false,
+    roleCreateMessage: '',
 };
 
 const RolePermissionManagementReducer = (state = initialState, action) => {
@@ -28,9 +30,18 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                 inputData: roleInputData 
             };
 
+        case Types.CREATE_ROLE:
+            return {
+                ...state,
+                isLoading: action.payload.isLoading,
+                isRoleCreated: action.payload.status,
+                roleCreateMessage: action.payload.message,
+            };
+
         case Types.GET_USER_ROLE_LIST_PAGINATED:
             return {
                 ...state,
+                isLoading: action.payload.isLoading,
                 rolesListPaginated: action.payload.rolesListPaginated,
                 rolesListAll: action.payload.rolesList
             };
