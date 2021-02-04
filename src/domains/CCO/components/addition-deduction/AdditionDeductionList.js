@@ -606,7 +606,7 @@ const AdditionDeductionList = withRouter(({ history, props }) => {
               <h3 className="card-label">Expense Entry</h3>
             </div>
             <small className="form-text text-muted">
-              <p>Salary addition/deduction</p>
+              <p className="pt-3">Salary addition/deduction</p>
             </small>
           </div>
           <div className="card-body">
@@ -616,7 +616,7 @@ const AdditionDeductionList = withRouter(({ history, props }) => {
               method="post"
             >
               <div className="form-group row">
-                <div className="col-lg-2 mt-6">
+                <div className="col-lg-2">
                   <Form.Check
                     type="checkbox"
                     label="Owner"
@@ -628,7 +628,7 @@ const AdditionDeductionList = withRouter(({ history, props }) => {
                 </div>
                 {!employeeInfo.ysnOwner && (
                   <div className="col-lg-8 row">
-                    <div>
+                    <div >
                       <Paper className={classes8.root}>
                         <IconButton
                           className={classes8.iconButton}
@@ -642,6 +642,7 @@ const AdditionDeductionList = withRouter(({ history, props }) => {
                           inputProps={{ "aria-label": "Search Google Maps" }}
                           onChange={(e) => searchEmployee(e)}
                           value={employeeInfo.employeeName}
+                          className="searchPlaceholder"
                         />
                       </Paper>
                     </div>
@@ -984,8 +985,8 @@ const AdditionDeductionList = withRouter(({ history, props }) => {
             <div className="card-title">
               <h3 className="card-label">Addition/Deduction Data</h3>
             </div>
-            <small className="form-text text-muted">
-              <p>Salary addition/deduction</p>
+            <small className="form-text text-muted ">
+              <p className="pt-3">Salary addition/deduction</p>
             </small>
           </div>
           <div className="card-body">

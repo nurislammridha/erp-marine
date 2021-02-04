@@ -74,7 +74,7 @@ const RolePermissionList = () => {
                   </div>
                 </div>
                 {roleList && roleList.map((parentRole, indexparentRole) => (
-                  <div className="form-group row mt-5">
+                  <div className="form-group row mt-5 pl-5">
                     <div className="col-3 ">
                       <Form.Group controlId="supplier">
                         <Form.Check

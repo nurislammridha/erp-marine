@@ -138,13 +138,13 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   return (
     <>
       <div className="container ">
-        <div className="card card-custom gutter-b">
+        <div className="card card-custom gutter-b card-top-border">
           <div className="card-header certificate-cardheader border-bottom-0">
             <div className="card-title">
               <h3 className="card-label">Certificate</h3>
             </div>
           </div>
-          <div className="card-body certificate-card-body">
+          <div className="card-body certificate-card-body pt-0">
             <form
               className="form form-label-right"
               onSubmit={handleSubmit(onSubmit)}
@@ -207,7 +207,10 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                           dispatch(getCertificateName(option.value));
                         }}
                         setValue={setValue}
+                        
                       />
+                       
+
                     </div>
                     <div className="float-right">
                       <button

@@ -564,12 +564,14 @@ i.tableFilter {
     padding: 12px;
     box-shadow: 1px 2px 30px grey;
 }
-
+.btn-default{
+    position: relative!important;
+}
 .btn-default i {
     width: 9px;
     height: 9px;
     position: absolute;
-    right: 45px;
+    right:10px;
     bottom: 7px;
     font-size: 14px !important;
 }
@@ -751,6 +753,7 @@ th {
 
 .modal-body {
     padding: 0.75rem;
+    padding-top: 0px!important;
 }
 
 input[type="file"] {
@@ -885,18 +888,18 @@ p.show-value-text {
 }
 
 .attachment-file input {
-    color: #b5b5c3;
+    /* color: #b5b5c3; */
     font-size: 12px !important;
 }
 
 ::-webkit-file-upload-button {
-    background: #f3f6f9;
+    background: #fff;
     border: 1px solid #e5eaee;
     box-sizing: border-box;
     border-radius: 4px;
     font-size: 12px !important;
     padding: 5px;
-    color: #b5b5c3;
+    /* color: #b5b5c3; */
 }
 
 
@@ -985,10 +988,11 @@ i.editIcon.item-list-icon {
 }
 
 button.item-list-btn {
+   
+    height: 33px;
     border-radius: 4px;
     background: #789dfe !important;
     border: 1px solid #789dfe !important;
-    padding-left: 8px !important;
 }
 
 
@@ -1141,11 +1145,11 @@ p.certificate-list-text {
 
 /* expense addition-deduction */
 
-.MuiPaper-root.makeStyles-root-1.MuiPaper-elevation1.MuiPaper-rounded {
-    height: 30px !important;
+/* .MuiPaper-root.makeStyles-root-1.MuiPaper-elevation1.MuiPaper-rounded {
+  
     box-shadow: none !important;
     border: 1px solid #ccc !important;
-}
+} */
 
 
 /* certificate color picker */
@@ -1252,7 +1256,7 @@ button.searchPlaceholder.purchaseSearch {
 }
 
 .aside {
-    width: 230px !important;
+    /* width: 230px !important; */
 }
 
 .header-fixed.subheader-fixed .header {
@@ -1277,10 +1281,22 @@ button.searchPlaceholder.purchaseSearch {
     }
 }
 
+input.bulk-file-input {
+    display: block;
+}
+.MuiPaper-elevation1 {
+    box-shadow:none!important;
+    border: 1px solid #ccc!important;
+}
 .searchPlaceholder:hover {
     background: none !important;
 }
-
+.MuiIconButton-root:hover {
+    background-color:transparent!important;
+}
+i.flaticon-search{
+    margin-bottom: 0px!important;
+}
 .supplier-search {
     position: relative !important;
 }
@@ -1334,4 +1350,12 @@ h6.supplier-modal-header {
 
 .quotation-table td {
     padding: 10px 0px !important;
+}
+/* employee-list page */
+.employee-list-input{
+    height: 30px!important;
+    padding: 0px!important;
+}
+.employee-signin {
+    margin-left: -11px;
 }

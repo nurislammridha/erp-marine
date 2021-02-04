@@ -14,7 +14,7 @@ const PurchaseRequestDetails = ({ PRDetailsID, handleClose }) => {
         <>
             {
                 PRDetails && (
-                    <Row>
+                    <Row className="mt-3">
                         <Col lg={3} md={4} sm={4} xs={6} className="mb-5">
                             <p>SBU</p>
                             <h5>{PRDetails.strSBUName !== null && PRDetails.strSBUName !== "" ? PRDetails.strSBUName : "---"}</h5>

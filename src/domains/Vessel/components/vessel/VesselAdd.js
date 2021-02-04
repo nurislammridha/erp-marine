@@ -144,7 +144,7 @@ const VesselAdd = withRouter(({ history, props }) => {
   return (
     <>
       <div className="container">
-        <div className="card card-custom gutter-b">
+        <div className="card card-custom gutter-b card-top-border">
           <div className="card-header">
             <div className="card-title">
               <h3 class="card-label">Vessel Entry</h3>
@@ -166,14 +166,14 @@ const VesselAdd = withRouter(({ history, props }) => {
                     onChange={handleChecked}
                   />
                 </div>
-              <div className="form-group row mt-5">
+              <div className="form-group row mt-2">
                 <div className="col-lg-4">
                   <label className="form-label">Vessel Name</label>
                   <Form.Control
                     type="text"
                     placeholder="Enter Vessel Name"
                     name="strVesselName"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -194,7 +194,7 @@ const VesselAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter IMO Number"
                     name="strIMONumber"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -234,7 +234,7 @@ const VesselAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter Flag"
                     name="strVesselFlag"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -249,7 +249,7 @@ const VesselAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter Deadweight"
                     name="numDeadWeight"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -269,7 +269,7 @@ const VesselAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter GRT"
                     name="numGrossWeight"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -289,7 +289,7 @@ const VesselAdd = withRouter(({ history, props }) => {
                     type="text"
                     placeholder="Enter NRT"
                     name="numNetWeight"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -320,7 +320,7 @@ const VesselAdd = withRouter(({ history, props }) => {
                     type="text"
                     name="strBuildYear"
                     placeholder="Select Build Year, eg;2018"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -334,7 +334,7 @@ const VesselAdd = withRouter(({ history, props }) => {
                     type="text"
                     name="strEngineName"
                     placeholder="Type Engine Name/KW"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -348,7 +348,7 @@ const VesselAdd = withRouter(({ history, props }) => {
                     type="text"
                     name="intTotalCrew"
                     placeholder="Type Total Crew, eg; 20"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: false,
@@ -365,17 +365,17 @@ const VesselAdd = withRouter(({ history, props }) => {
                       history.push("/vessels/list");
                     }}
                   >
-                    <button type="button" class="btn btn-secondary btn-lg mr-2">
+                    <button type="button" class="btn btn-secondary btn-sm mr-2">
                       Back
                     </button>
                   </a>
-                  {/* <button type="submit" class="btn btn-primary btn-lg">
+                  {/* <button type="submit" class="btn btn-primary btn-sm">
                     Next
                     </button> */}
                   {loading && (
                     <button
                       type="submit"
-                      class="btn btn-primary btn-lg"
+                      class="btn btn-primary btn-sm"
                       disabled={true}
                     >
                       <span>Submit</span>
@@ -384,7 +384,7 @@ const VesselAdd = withRouter(({ history, props }) => {
                   )}
 
                   {!loading && (
-                    <button type="submit" class="btn btn-primary btn-lg">
+                    <button type="submit" class="btn btn-primary btn-sm">
                       <span>Submit</span>
                     </button>
                   )}
