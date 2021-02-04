@@ -39,7 +39,6 @@ const PurchaseApprovalReducer = (state = initialState, action) => {
             // console.log('object', object)
             // PurchaseApprovalDetailInput[action.payload.name] = action.payload.value;
             const purchaseDetails = state.purchaseApprovalMultiple;
-            console.log('purchaseDetails', purchaseDetails);
             for (let i = 0; i < purchaseDetails.length; i++) {
                 if (purchaseDetails[i].intId == action.payload.item.intId) {
                     purchaseDetails[i][action.payload.name] = action.payload.value
@@ -75,6 +74,14 @@ const PurchaseApprovalReducer = (state = initialState, action) => {
                 ...state,
                 purchaseApprovalDetail: action.payload.data,
                 purchaseApprovalMultiple: action.payload.data.purchase_row,
+            };
+
+        case Types.SUBMIT_PURCHASE_APPROVE:
+            console.log('approvedetail action.payload', action.payload);
+            return {
+                ...state,
+                status: action.payload.status,
+                isLoading: action.payload.isLoading,
             };
 
         default:
