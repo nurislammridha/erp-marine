@@ -4,13 +4,15 @@ import './css/PreviewURL.css'
 import { Button } from 'react-bootstrap';
 import { GetExtensionFromUrl } from '../../utils/StringHelper';
 const AttachmentPreviewModel = ({ previewAttachment, handleClose }) => {
-    const extension = GetExtensionFromUrl(previewAttachment.name);
-    const fileName = GetExtensionFromUrl(previewAttachment.name, '/');
+
+    const extension = GetExtensionFromUrl(previewAttachment.filePreviewUrl ? previewAttachment.filePreviewUrl : previewAttachment.name);
+    const fileName = GetExtensionFromUrl(previewAttachment.filePreviewUrl ? previewAttachment.filePreviewUrl : previewAttachment.name, '/');
+
     console.log('previewAttachment :>> ', previewAttachment);
     return (
         <div className="custome-preview">
             {
-                fileName !== null && fileName !== "null" && (
+                (fileName !== null && fileName !== "null") && (
                     extension === "pdf" ? (
                         <div className="row justify-content-center">
                             <div className="col-md-10">

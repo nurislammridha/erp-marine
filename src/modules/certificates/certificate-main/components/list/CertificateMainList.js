@@ -193,10 +193,10 @@ const CertificateMainList = () => {
                   {/* <th scope="col">Code</th> */}
                   <th scope="col">Description</th>
                   <th scope="col">Type</th>
-                  <th scope="col">Issued By</th>
+                  {/* <th scope="col">Issued By</th> */}
                   <th scope="col">Issued Place</th>
                   <th scope="col">Location</th>
-                  <th scope="col">Issued Date</th>
+                  {/* <th scope="col">Issued Date</th> */}
                   <th scope="col">Valid Until</th>
                   <th scope="col">Entended Until</th>
                   <th scope="col">Last Endorsement</th>
@@ -214,16 +214,16 @@ const CertificateMainList = () => {
                     {/* <td>{certificate.strCustomeCode}</td> */}
                     <td>{certificate.strShipRemarks}</td>
                     <td>{certificate.strCertificateTypeName}</td>
-                    <td>{certificate.strIssuingAuthorityName}</td>
+                    {/* <td>{certificate.strIssuingAuthorityName}</td> */}
                     <td>{certificate.strIssuedPlace}</td>
                     <td>{certificate.strLocation}</td>
-                    <td>
+                    {/* <td>
                       {certificate.dteCertificateIssueDate !== null
                         ? generateStringDateFromDate(
                             certificate.dteCertificateIssueDate
                           )
                         : ""}
-                    </td>
+                    </td> */}
                     <td>
                       {certificate.dteCertificateValidUntil !== null
                         ? generateStringDateFromDate(
