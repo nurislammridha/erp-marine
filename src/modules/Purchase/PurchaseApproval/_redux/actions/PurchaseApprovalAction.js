@@ -105,3 +105,67 @@ export const GetPurchaseApprovalDetail = (id) => (dispatch) => {
             });
         });
 };
+
+export const SubmitPurchaseApprove = (purchaseApprovalDetail) => (
+    dispatch
+) => {
+    let responseList = {
+        isLoading: true,
+        data: {},
+        status: false,
+    };
+    console.log('detail data', purchaseApprovalDetail);
+
+    dispatch({
+        type: Types.SUBMIT_PURCHASE_APPROVE,
+        payload: responseList,
+    });
+    let multiple = []
+    for (let i = 0; i < purchaseApprovalDetail.purchase_row.length; i++) {
+        if (purchaseApprovalDetail.purchase_row[i].isChecked == true) {
+            multiple.push(purchaseApprovalDetail.purchase_row[i])
+        }
+    }
+    purchaseApprovalDetail.purchase_row = multiple;
+
+    let postData = purchaseApprovalDetail
+
+    // let postData = {
+    //     intCertificateTypeID: certificateEditInfoData.intCertificateTypeID,
+    //     strCertificateTypeName: certificateEditInfoData.strCertificateTypeName,
+    //     intActionBy: 1,
+    //     isActive: certificateEditInfoData.isActive,
+    // };
+
+    Axios.put(
+        `${process.env.REACT_APP_API_URL}certificate/types/updat`,
+        postData
+    )
+        .then(async (response) => {
+            responseList.data = response.data;
+            responseList.isLoading = false;
+            responseList.status = response.data.status;
+
+            if (response.data.status) {
+                showToast("success", response.data.message);
+                dispatch({
+                    type: Types.SUBMIT_PURCHASE_APPROVE,
+                    payload: responseList,
+                });
+            } else {
+                showToast("error", response.data.message);
+            }
+        })
+
+        .catch(function (error) {
+            responseList.isLoading = false;
+            const message =
+                "Something went wrong ! Please fill all inputs and try again !";
+            showToast("error", message);
+
+            dispatch({
+                type: Types.SUBMIT_PURCHASE_APPROVE,
+                payload: responseList,
+            });
+        });
+};
