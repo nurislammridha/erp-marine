@@ -2,7 +2,36 @@ import Axios from "axios";
 import { showToast } from "../../../../master/utils/ToastHelper";
 import * as Types from "../types/Types";
 
+export const AddRolePermissionInput = (name, value) => (dispatch) => {
+  const formData = {
+      name: name,
+      value: value
+  }
+  console.log(value);
+  
+  dispatch({ type: Types.CHANGE_ROLE_INPUT, payload: formData })
+}
 
+export const getRoleListByPagination = () => (dispatch) => {
+  const responseList = {
+    isLoading: true,
+    rolesList: [],
+    rolesListPaginated: null,
+  };
+
+  dispatch({ type: Types.GET_USER_ROLE_LIST_PAGINATED, payload: responseList });
+
+  Axios
+    .get(`${process.env.REACT_APP_API_URL}roles/getAllRoles`)
+    .then((res) => {
+      const { data, message } = res.data;
+      responseList.rolesList = data.data;
+      responseList.message = message;
+      responseList.rolesListPaginated = data;
+      responseList.isLoading = false;
+      dispatch({ type: Types.GET_USER_ROLE_LIST_PAGINATED, payload: responseList });
+    });
+};
 
 export const getRoleList = () => (dispatch) => {
   Axios

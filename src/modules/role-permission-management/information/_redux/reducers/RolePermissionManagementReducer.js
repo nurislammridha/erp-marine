@@ -3,14 +3,16 @@ import moment from "moment";
 
 // Initial state
 const initialState = {
-    roleList: [],
+    isLoading: false,
+    roleList: [], // For Insert/Edit Page
+    rolesListPaginated: [],
+    rolesListAll: [],
 
     inputData: {
         id: '',
-        roleName: '',
+        role: '',
         groupList: []
     }
-
 };
 
 const RolePermissionManagementReducer = (state = initialState, action) => {
@@ -18,10 +20,19 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case Types.GET_USER_ROLE_LIST:
+        case Types.CHANGE_ROLE_INPUT:
+            const roleInputData = { ...state.inputData };
+            roleInputData[action.payload.name] = action.payload.value;
+            return { 
+                ...state, 
+                inputData: roleInputData 
+            };
+
+        case Types.GET_USER_ROLE_LIST_PAGINATED:
             return {
                 ...state,
-                roleList: action.payload,
+                rolesListPaginated: action.payload.rolesListPaginated,
+                rolesListAll: action.payload.rolesList
             };
 
         case Types.GET_USER_PERMISSION_GROUPS:
@@ -36,21 +47,21 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
 
         case Types.USER_ROLE_CHECKED:
             const { indexparentRole, indexChild, checkboxStatus  } = action.payload;
-            let roleList = state.roleList.slice();
+            let roleList = state.inputData.groupList.slice();
             roleList[indexparentRole].permissions[indexChild].isChecked = checkboxStatus;
             roleList[indexparentRole].isChecked = checkAllPermissionIsChecked(roleList, indexparentRole);
-
             return {
                 ...state,
-                roleList: roleList,
+                inputData: {
+                    ...state.inputData,
+                    roleList
+                }
             };
 
         case Types.USER_ROLE_CHECKED_GROUP:
-            console.log(action.payload);
-
             const groupIndex = action.payload.index
             const isGroupChecked = action.payload.isGroupChecked
-            const roles = state.roleList.slice();
+            const roles = state.inputData.groupList.slice();
 
             // get all the permissions in this group 
             // and make it checked or unchecked
@@ -67,12 +78,14 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                roleList: roles
+                inputData: {
+                    ...state.inputData,
+                    roleList
+                }
             };
 
-
         case Types.USER_ROLE_ALL_CHECKED:
-            let CheckroleList = state.roleList.slice();
+            let CheckroleList = state.inputData.groupList.slice();
             for (let i = 0; i < CheckroleList.length; i++) {
                 if (action.payload == true) {
                     CheckroleList[i].isChecked = true;
@@ -91,7 +104,10 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                roleList: CheckroleList,
+                inputData: {
+                    ...state.inputData,
+                    roleList
+                }
             };
 
 
