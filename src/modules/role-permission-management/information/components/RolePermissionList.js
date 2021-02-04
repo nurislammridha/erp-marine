@@ -73,7 +73,9 @@ const RolePermissionList = () => {
                     <tr>
                       <td>{rolesListPaginated.from + index}</td>
                       <td>{item.name}</td>
-                      <td>{item.permissions ? item.permissions.length() : ''}</td>
+                      <td>
+                        {/* {item.permissions ? item.permissions != null ? item.permissions.length() : '' : ''} */}
+                      </td>
                       <td>
                         <span className="badge badge-info">
                           Active
