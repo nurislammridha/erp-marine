@@ -4,7 +4,7 @@ import './css/PreviewURL.css'
 import { Button } from 'react-bootstrap';
 import { GetExtensionFromUrl } from '../../utils/StringHelper';
 const AttachmentPreviewModel = ({ previewAttachment, handleClose }) => {
-
+    
     const extension = GetExtensionFromUrl(previewAttachment.filePreviewUrl ? previewAttachment.filePreviewUrl : previewAttachment.name);
     const fileName = GetExtensionFromUrl(previewAttachment.filePreviewUrl ? previewAttachment.filePreviewUrl : previewAttachment.name, '/');
 
@@ -38,7 +38,7 @@ const AttachmentPreviewModel = ({ previewAttachment, handleClose }) => {
                         )
                 )
             }
-            <Button variant="success" className="float-right text-light mt-1" href={previewAttachment.base64} rel="noopener noreferrer" download>Download</Button>
+            <Button variant="success" className="float-right text-light mt-1" href={previewAttachment.base64} rel="noopener noreferrer" download={`${previewAttachment.name}.${extension}`}>Download</Button>
         </div>
     )
 };
