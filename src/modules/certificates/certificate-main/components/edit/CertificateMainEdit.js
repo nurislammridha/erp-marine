@@ -969,20 +969,9 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                                   <td>{attachment.size}</td>
                                   <td>
                                     {" "}
-                                    {/* <MultipplePreviewAttachment
-                                      attachment={attachment.filePreviewUrl}
-                                      url={attachment.filePreviewUrl ? attachment.filePreviewUrl : "files/" + attachment.name}
-                                      base64={attachment.base64}
-                                      title="Preview"
-                                      height={50}
-                                      width={50}
-                                    /> */}
                                     <span className="btn border-none" onClick={() => PreviewAttachment(attachment)}>
                                       <MultipplePreviewAttachment
-                                        // url={`/${attachment.name}`}
                                         url={attachment.filePreviewUrl ? attachment.filePreviewUrl : `/${attachment.name}`}
-                                        // url={attachment.filePreviewUrl}
-                                        // url={"/" + attachment.name}
                                         base64={attachment.base64}
                                         title="Preview"
                                         height={50}
