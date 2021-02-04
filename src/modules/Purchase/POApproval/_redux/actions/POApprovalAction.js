@@ -20,7 +20,6 @@ export const getSBUName = () => (dispatch) => {
 
     Axios.get(`${process.env.REACT_APP_API_URL}purchase/sbuList`).then(
         (res) => {
-            console.log('res', res)
             let data = res.data.data;
             dispatch({ type: Types.GET_SBU_NAME, payload: data });
         }
@@ -31,20 +30,18 @@ export const getBranchName = () => (dispatch) => {
 
     Axios.get(`${process.env.REACT_APP_API_URL}purchase/branchList`).then(
         (res) => {
-            console.log('res', res)
             let data = res.data.data;
             dispatch({ type: Types.GET_BRANCH_NAME, payload: data });
         }
     );
 };
 
-export const getShipName = () => (dispatch) => {
+export const getPurchaseOrganisationName = () => (dispatch) => {
 
-    Axios.get(`${process.env.REACT_APP_API_URL}voyage/shipList`).then(
+    Axios.get(`${process.env.REACT_APP_API_URL}purchase/purchaseOrganisation`).then(
         (res) => {
-            console.log('res', res)
             let data = res.data.data;
-            dispatch({ type: Types.GET_SHIP_NAME, payload: data });
+            dispatch({ type: Types.GET_PURCHASE_ORGANISATION_NAME, payload: data });
         }
     );
 };
@@ -53,7 +50,6 @@ export const getReferenceType = () => (dispatch) => {
 
     Axios.get(`${process.env.REACT_APP_API_URL}purchase/poReferenceType`).then(
         (res) => {
-            console.log('res', res)
             let data = res.data.data;
             dispatch({ type: Types.GET_REFERENCE_TYPE, payload: data });
         }
@@ -62,7 +58,8 @@ export const getReferenceType = () => (dispatch) => {
 
 
 
-export const getPOApprovalList = (searchValue = "") => async (dispatch) => {
+export const getPOApprovalList = (searchValue = "", intBusinessLineId = null, intBusinessUnitId = null, intPurchaseOrganizationId = null, intPOReferenceTypeId = null) => async (dispatch) => {
+
     let response = {
         POApprovalList: [],
         status: false,
@@ -72,27 +69,39 @@ export const getPOApprovalList = (searchValue = "") => async (dispatch) => {
     };
 
     dispatch({ type: Types.GET_PO_APPROVAL_LIST, payload: response });
-    let url = `${process.env.REACT_APP_API_URL}partner/basicInfo`;
-    if (searchValue !== "") {
-        url += `?search=${searchValue}`
-    }
+
     try {
-        await Axios.get(url).then((res) => {
-            const { status, message, errors, data } = res.data;
-            response.supplierList = data;
-            response.status = status;
-            response.message = message;
-            response.errors = errors;
-            response.isLoading = false;
-        })
-            .catch((err) => {
-                toast.error(err)
+        let url = `${process.env.REACT_APP_API_URL}purchase/getPurchaseOrderList?`;
+
+        url += searchValue !== "" ? `search=${searchValue}&` : '';
+        url += intBusinessLineId !== null ? `intBusinessLineId=${intBusinessLineId}&` : '';
+        url += intBusinessUnitId !== null ? `intBusinessUnitId=${intBusinessUnitId}&` : '';
+        url += intPurchaseOrganizationId !== null ? `intPurchaseOrganizationId=${intPurchaseOrganizationId}&` : '';
+        url += intPOReferenceTypeId !== null ? `intPOReferenceTypeId=${intPOReferenceTypeId}&` : '';
+
+        if (searchValue === "" && intBusinessLineId === null && intBusinessUnitId === null && intPurchaseOrganizationId === null && intPOReferenceTypeId === null) {
+            dispatch({ type: Types.GET_PO_APPROVAL_LIST, payload: response })
+        } else {
+            await Axios.get(url).then((res) => {
+                const { status, message, errors, data } = res.data;
+                response.POApprovalList = data;
+                response.status = status;
+                response.message = message;
+                response.errors = errors;
+                response.isLoading = false;
             })
-    } catch (error) {
+                .catch((err) => {
+                    toast.error(err)
+                })
+
+
+        }
+        response.isLoading = false;
+        dispatch({ type: Types.GET_PO_APPROVAL_LIST, payload: response })
+    }
+    catch (error) {
         response.message = "Something wrong!";
         toast.error(error);
     }
-    response.isLoading = false;
-    dispatch({ type: Types.GET_PO_APPROVAL_LIST, payload: response })
 
 }

@@ -27,17 +27,6 @@ const PurchaseApprovalFilter = () => {
         dispatch(getPurchaseApprovalList(search, intSBUId, intBusinessUnitId, intShipID, dteFromDate, dteToDate));
     }
 
-    const shipList = [
-        {
-            value: 1,
-            label: "Akij"
-        },
-        {
-            value: 2,
-            label: "Akij Noor"
-        },
-    ]
-
     useEffect(() => {
         dispatch(getShipName());
         dispatch(getBranchName());

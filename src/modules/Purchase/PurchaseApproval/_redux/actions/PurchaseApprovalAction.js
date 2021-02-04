@@ -15,6 +15,18 @@ export const handleChangePurchaseApprovalFilterInput = (name, value) => (dispatc
     });
 };
 
+export const handleChangePurchaseApprovalDetailInput = (name, value, item) => (dispatch) => {
+    const formData = {
+        name: name,
+        value: value,
+        item: item
+    };
+    dispatch({
+        type: Types.CHANGE_PURCHASE_APPROVAL_DETAIL_INPUT,
+        payload: formData,
+    });
+};
+
 export const getSBUName = (data) => (dispatch) => {
 
     Axios.get(`${process.env.REACT_APP_API_URL}purchase/sbuList`).then(
