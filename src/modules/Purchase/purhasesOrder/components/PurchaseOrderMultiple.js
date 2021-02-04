@@ -15,13 +15,15 @@ const PurchaseOrderMultiple = () => {
     const finalOrderInput = useSelector(state => state.purchasesOrderInfo.finalOrderInput);
 
     useEffect(() => {
-        dispatch(SubmitFinalOrder(finalOrderInput))
+        if (finalOrderInput.orderRow) {
+            dispatch(SubmitFinalOrder(finalOrderInput))
+        }
+
     }, [finalOrderInput])
     const changeTextValue = (name, value) => {
         dispatch(purchasesOrderInput(name, value))
     }
     const addMultiple = () => {
-        console.log('orderInput :>> ', orderInput);
         dispatch(addMultipleOrder(orderInput))
     }
     const deleteMultiple = (index) => {

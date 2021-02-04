@@ -116,6 +116,8 @@ const PurchasesOrderReducer = (state = initialstate, action) => {
             const data = action.payload;
             const finalOrderList = { ...state.finalOrderInput, orderRow: data }
             return { ...state, finalOrderInput: finalOrderList }
+        case Types.GET_ORDER_VIEW:
+            return { ...state, orderViewList: action.payload }
         default:
             break;
     }

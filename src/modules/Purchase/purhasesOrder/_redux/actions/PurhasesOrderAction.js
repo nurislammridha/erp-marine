@@ -114,3 +114,11 @@ export const SubmitFinalOrder = (finalOrderInput) => (dispatch) => {
         showToast("error", message);
     })
 }
+export const PurchaseOrderView = (id) => (dispatch) => {
+    const url = `${process.env.REACT_APP_API_URL}purchase/purchaseOrderHeaderRow/${id}`;
+    Axios.get(url).then(
+        (res) => {
+            dispatch({ type: Types.GET_ORDER_VIEW, payload: res.data.data })
+        }
+    )
+}
