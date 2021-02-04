@@ -115,9 +115,11 @@ const RequisitionApprovalDetail = () => {
                                                 <td>{round(item.numPurchaseRequestQty)}</td>
                                                 <td>
                                                     <Form.Control
-                                                        type="text"
+                                                        type="number"
                                                         name="numApprovedQty"
+                                                        defaultValue={round(item.numPurchaseRequestQty)}
                                                         value={item.numApprovedQty}
+                                                        max={50}
                                                         className="fromStyle formHeight"
                                                         onChange={(e) =>
                                                             handleChangeTextInput(

@@ -14,11 +14,6 @@ const initialState = {
         dteToDate: ""
     },
 
-    PurchaseApprovalDetailInput: {
-        numApprovedQty: "",
-        remarks: ""
-    },
-
     listPaginatedData: null,
     purchaseApprovalList: [],
     status: false,
@@ -43,12 +38,8 @@ const PurchaseApprovalReducer = (state = initialState, action) => {
             // const PurchaseApprovalDetailInput = { ...state.PurchaseApprovalDetailInput };
             // console.log('object', object)
             // PurchaseApprovalDetailInput[action.payload.name] = action.payload.value;
-
-
             const purchaseDetails = state.purchaseApprovalMultiple;
             console.log('purchaseDetails', purchaseDetails);
-
-
             for (let i = 0; i < purchaseDetails.length; i++) {
                 if (purchaseDetails[i].intId == action.payload.item.intId) {
                     purchaseDetails[i][action.payload.name] = action.payload.value
