@@ -117,7 +117,7 @@ const PurchaseApprovalList = () => {
         handleShow={() => setRequisitionDetailsShow(true)}
         modalTitle={"Requisition Approval Details"}
       >
-        <RequisitionApprovalDetail />
+        <RequisitionApprovalDetail handleClose={() => setRequisitionDetailsShow(false)} />
       </SimpleModal>
 
     </Card >
