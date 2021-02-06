@@ -25,7 +25,6 @@ const RequisitionApprovalDetail = () => {
 
 
     const handleChangeTextInput = (name, value, item) => {
-        console.log('name', name, 'value', value, 'item', item);
         dispatch(handleChangePurchaseApprovalDetailInput(name, value, item));
     };
 

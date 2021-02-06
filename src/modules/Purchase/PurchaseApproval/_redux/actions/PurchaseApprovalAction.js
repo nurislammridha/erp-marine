@@ -48,7 +48,7 @@ export const getShipName = (data) => (dispatch) => {
 };
 
 
-export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBusinessUnitId = null, intShipID = null, dteFromDate = null, dteToDate = null) => async (dispatch) => {
+export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBusinessUnitId = null, intShipID = null) => async (dispatch) => {
     let response = {
         purchaseApprovalList: [],
         status: false,
@@ -67,7 +67,7 @@ export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBu
         url += intSBUId !== null ? `intSBUId=${intSBUId}&` : '';
         url += intBusinessUnitId !== null ? `intBusinessUnitId=${intBusinessUnitId}&` : '';
         url += intShipID !== null ? `intShipID=${intShipID}&` : '';
-        url += dteFromDate !== null ? `dteFromDate=${dteFromDate}&` : '';
+        // url += dteFromDate !== null ? `dteFromDate=${dteFromDate}&` : '';
 
         if (searchValue === "" && intSBUId === null && intBusinessUnitId === null && intShipID === null) {
             dispatch({ type: Types.GET_PURCHASE_APPROVAL_LIST, payload: response })
@@ -120,16 +120,12 @@ export const SubmitPurchaseApprove = (purchaseApprovalDetail) => (
         type: Types.SUBMIT_PURCHASE_APPROVE,
         payload: responseList,
     });
-    let multiple = []
-    for (let i = 0; i < purchaseApprovalDetail.purchase_row.length; i++) {
-        if (purchaseApprovalDetail.purchase_row[i].isChecked == true) {
-            multiple.push(purchaseApprovalDetail.purchase_row[i])
-        }
+    const purchase_rows = purchaseApprovalDetail.purchase_row.filter(item => item.isChecked == true)
+    let postData = {
+        ...purchaseApprovalDetail,
+        purchase_row: purchase_rows
     }
-    purchaseApprovalDetail.purchase_row = multiple;
-
-    let postData = purchaseApprovalDetail
-
+    console.log('postData', postData)
     // let postData = {
     //     intCertificateTypeID: certificateEditInfoData.intCertificateTypeID,
     //     strCertificateTypeName: certificateEditInfoData.strCertificateTypeName,

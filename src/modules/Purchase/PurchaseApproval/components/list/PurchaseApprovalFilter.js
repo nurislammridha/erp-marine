@@ -23,8 +23,8 @@ const PurchaseApprovalFilter = () => {
     };
 
     const changeFilter = () => {
-        const { search, intSBUId, intBusinessUnitId, intShipID, dteFromDate, dteToDate } = PurchaseApprovalFilterInput;
-        dispatch(getPurchaseApprovalList(search, intSBUId, intBusinessUnitId, intShipID, dteFromDate, dteToDate));
+        const { search, intSBUId, intBusinessUnitId, intShipID } = PurchaseApprovalFilterInput;
+        dispatch(getPurchaseApprovalList(search, intSBUId, intBusinessUnitId, intShipID));
     }
 
     useEffect(() => {
