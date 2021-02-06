@@ -21,7 +21,6 @@ const PurchaseRequestList = () => {
   const [PRDetailsID, setPRDetailsID] = useState(null)
   const [status, setStatus] = useState()
 
-  console.log('PRListData :>> ', PRListData);
   useEffect(() => {
     dispatch(getPRListData(currentPage));
   }, [dispatch, currentPage]);
@@ -138,7 +137,7 @@ const PurchaseRequestList = () => {
 
       </Card.Body >
       <SimpleModal
-        size="xl"
+        size="lg"
         status={status}
         show={PRDetailsShow}
         handleClose={() => setPRDetailsShow(false)}

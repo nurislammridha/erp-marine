@@ -8,7 +8,6 @@ const MultipplePreviewAttachment = (props) => {
     const customTitle = (typeof title === 'undefined' || title === "") ? 'See Attachment' : title;
     const customHeight = (typeof height === 'undefined' || height === "") ? 50 : height;
     const customWidth = (typeof width === 'undefined' || width === "") ? 50 : width;
-
     useEffect(() => {
         // Extract the extension from the url
         const extension = GetExtensionFromUrl(url);
@@ -27,8 +26,8 @@ const MultipplePreviewAttachment = (props) => {
             //     console.log('url :>> ', url);
             // }
             else {
-                // thumbnail = url;
-                thumbnail = '/media/default/icons/image.png';
+                thumbnail = base64;
+                // thumbnail = '/media/default/icons/image.png';
             }
         }
         setCustomThumbnail(thumbnail);
@@ -38,7 +37,7 @@ const MultipplePreviewAttachment = (props) => {
         <>
             {
                 customThumbnail !== null ?
-                    <a target="_blank" rel="noopener noreferrer" href={(typeof base64 === 'unedfined' && base64 === null) ? url : base64} title={customTitle}>
+                    // <a target="_blank" rel="noopener noreferrer" href={(typeof base64 === 'unedfined' && base64 === null) ? url : base64} title={customTitle}>
                         <Image
                             src={customThumbnail}
                             style={{
@@ -46,7 +45,8 @@ const MultipplePreviewAttachment = (props) => {
                                 width: customWidth
                             }}
                         />
-                    </a> :
+                    // </a>
+                     :
                     <p className="text-warning">N/A</p>
             }
         </>

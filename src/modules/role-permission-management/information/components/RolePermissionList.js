@@ -1,128 +1,125 @@
-import React, { useEffect } from "react";
-import { Form } from "react-bootstrap";
-import { dispacth } from 'react-redux'
+import React, { useState, useEffect } from "react";
+import { Card, Button } from "react-bootstrap";
+import { Link } from 'react-router-dom';
+import { InputBase, Paper, IconButton } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { allCheckboxSelected, getRoleList, roleCheckboxSelect, checkPermissionGroupAction } from "../_redux/actions/RolePermissionManagementAction";
-
+import PaginationLaravel from "../../../master/pagination/PaginationLaravel";
+import { getRoleListByPagination } from "../_redux/actions/RolePermissionManagementAction";
+import LoadingSpinner from '../../../master/spinner/LoadingSpinner'
 const RolePermissionList = () => {
-
-
   const dispatch = useDispatch();
-  const roleList = useSelector((state) => state.roleReducer.roleList);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  console.log('roleList', roleList);
+  const isLoading = useSelector(state => state.roleReducer.isLoading);
+  const rolesListPaginated = useSelector(state => state.roleReducer.rolesListPaginated);
+  const rolesList = useSelector(state => state.roleReducer.rolesListAll);
 
   useEffect(() => {
-    dispatch(getRoleList());
-  }, [])
+    dispatch(getRoleListByPagination());
+  }, []);
 
-  const roleCheck = (
-    e,
-    parentRole,
-    item,
-    indexChild,
-    indexparentRole
-  ) => {
-    console.log('e.target.checked', e.target.checked);
-    let checkboxStatus = e.target.checked
-    dispatch(roleCheckboxSelect(checkboxStatus, parentRole, item, indexChild, indexparentRole));
-  }
-
-  const checkPermissionGroup = (e, index, checkboxStatus) => {
-    dispatch(checkPermissionGroupAction(index, checkboxStatus));
-  }
-
-  const allChecked = (e) => {
-    let checkStausCheck = e.target.checked;
-    dispatch(allCheckboxSelected(checkStausCheck));
-  }
+  const changePage = (data) => {
+    setCurrentPage(data.page);
+    dispatch(getRoleListByPagination(data.page));
+  };
 
   return (
     <>
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <div className="card card-custom gutter-b p-5">
-              <form
-                className="form form-label-right voyageEngineerForm"
-                method="post"
-              >
-                <div className="form-group row mt-2">
-                  <div className="col-7 ">
-                    <Form.Group>
-                      <Form.Label className="formFont pl-1">
-                        Role Name
-                      </Form.Label>
-                      <Form.Control
-                        className="formHeight"
-                        type="text"
-                        placeholder="Type"
-                        name="strSupplierAddress"
-                      />
-                    </Form.Group>
-                  </div>
-                </div>
+      <Card>
+        <Card.Body>
+          <div className="container ">
+            <div className="row mb-5 table-form ">
+              <h1 className="tableheading mt-0">Roles List</h1>
+              <div className="col-xl-6 col-lg-6 col-md-6 mb-2 mt-2"></div>
+              <div className="col-xl-3 col-lg-3 col-md-6 mb-2 mt-2">
+                <Paper className="searchInput">
+                  <InputBase
+                    placeholder="Search "
+                    className="custome-purchase-search"
+                  />
+                  <IconButton aria-label="Search" className="searchPlaceholder purchaseSearch">
+                    <i className="flaticon-search "></i>
+                  </IconButton>
+                </Paper>
+              </div>
 
-                <div className="form-group row mt-3">
-                  <div className="col-3 ">
-                    <p>Permission</p>
-                  </div>
-                  <div className="col-9">
-                    <Form.Group controlId="all">
-                      <Form.Check type="checkbox" label="All" for="all" onClick={(e) => allChecked(e)} />
-                    </Form.Group>
-                  </div>
-                </div>
-                {roleList && roleList.map((parentRole, indexparentRole) => (
-                  <div className="form-group row mt-5 pl-5">
-                    <div className="col-3 ">
-                      <Form.Group controlId="supplier">
-                        <Form.Check
-                          type="checkbox"
-                          label={parentRole.name}
-                          for="supplier"
-                          checked={parentRole.isChecked}
-                          onClick={(e) => checkPermissionGroup(e, indexparentRole, parentRole.isChecked ? false: true)}
-                        />
-
-                      </Form.Group>
-                    </div>
-                    {parentRole && parentRole.permissions.map((item, indexChild) => (
-                      <div className="col-9 ">
-                        <div className="row ">
-                          <Form.Group controlId="Create">
-                            <Form.Check
-                              type="checkbox"
-                              label={item.name}
-                              for="Create"
-                              className="mr-3"
-                              checked={item.isChecked}
-                              onClick={(e) =>
-                                roleCheck(
-                                  e,
-                                  parentRole,
-                                  item,
-                                  indexChild,
-                                  indexparentRole
-
-                                )
-                              }
-                            />
-                          </Form.Group>
-                        </div>
-                      </div>
-                    ))}
-
-                  </div>
-                ))}
-
-
-                <button className="btn btn-primary">Save</button>
-              </form>
+              <div className="">
+                <i className="fas fa-filter tableFilter  mr-2"></i>
+                <i className="far fa-filter"></i>
+                <Link to="/role-permission/create">
+                  <Button className="btn-sm" variant="primary">
+                    Add New
+                </Button>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+          <div className="">
+            {/* <table className="table mt-5 voyageTable table-responsive"> */}
+            <div className="react-bootstrap-table table-responsive pl-5">
+              {isLoading && <LoadingSpinner text="Loading Roles List..." />}
+              <table className="table table table-head-custom table-vertical-center  voyageTable itemtable ">
+                <thead>
+                  <tr>
+                    <th scope="col">SL</th>
+                    <th scope="col">Role</th>
+                    <th scope="col" width={600}>Total Permissions</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rolesList && rolesList.map((item, index) => (
+                    <tr>
+                      <td>{rolesListPaginated.from + index}</td>
+                      <td>{item.name}</td>
+                      <td>
+                        {
+                          item.permissions && item.permissions != null &&
+                          (
+                            <div>
+                              {
+                                item.permissions.map((permission, index2) => (
+                                  <span className="badge badge-primary mt-2 ml-2">
+                                    { permission.name}
+                                  </span>
+                                ))
+                              }
+                            </div>
+                          )
+                        }
+                        {/* {item.permissions ? item.permissions != null ? item.permissions.length() : '' : ''} */}
+                      </td>
+                      <td>
+                        <span className="badge badge-success">
+                          Active
+                          </span>
+                      </td>
+                      <td>
+                        {" "}
+                        <Link to={`/role-permission/edit/${item.id}`}>
+                          <i className="far fa-edit editIcon item-list-icon ml-4"></i>
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              {!isLoading && rolesList.length === 0 && (
+                <div className="alert alert-warning mt-5">
+                  Sorry ! No Role Found
+                </div>
+              )}
+              <PaginationLaravel
+                changePage={changePage}
+                data={rolesListPaginated}
+              />
+            </div>
+          </div>
+
+        </Card.Body>
+      </Card>
     </>
   );
 };
