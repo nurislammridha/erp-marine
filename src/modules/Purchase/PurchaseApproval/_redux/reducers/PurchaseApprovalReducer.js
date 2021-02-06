@@ -35,16 +35,14 @@ const PurchaseApprovalReducer = (state = initialState, action) => {
             };
 
         case Types.CHANGE_PURCHASE_APPROVAL_DETAIL_INPUT:
-            // const PurchaseApprovalDetailInput = { ...state.PurchaseApprovalDetailInput };
-            // console.log('object', object)
-            // PurchaseApprovalDetailInput[action.payload.name] = action.payload.value;
+
             const purchaseDetails = state.purchaseApprovalMultiple;
             for (let i = 0; i < purchaseDetails.length; i++) {
                 if (purchaseDetails[i].intId == action.payload.item.intId) {
                     purchaseDetails[i][action.payload.name] = action.payload.value
                 }
             }
-
+            console.log('purchaseDetails', purchaseDetails)
             return {
                 ...state,
                 purchaseApprovalMultiple: purchaseDetails,

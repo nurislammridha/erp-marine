@@ -32,9 +32,10 @@ const RequisitionApprovalDetail = ({ handleClose }) => {
 
     };
 
-    const handleReject = () => {
+    const handleReject = (e) => {
         purchaseApprovalDetail.intStatus = 0;
         dispatch(SubmitPurchaseApprove(purchaseApprovalDetail));
+        e.preventDefault();
     };
 
     return (
@@ -189,7 +190,7 @@ const RequisitionApprovalDetail = ({ handleClose }) => {
                                         <button
                                             type="button"
                                             className="btn btn-danger btn-sm"
-                                            onClick={() => handleReject()}
+                                            onClick={(e) => handleReject(e)}
                                         >
                                             Reject
                                     </button>
