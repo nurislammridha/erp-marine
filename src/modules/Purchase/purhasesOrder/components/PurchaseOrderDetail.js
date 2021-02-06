@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 const PurchaseOrderDetail = () => {
     const orderViewList = useSelector(state => state.purchasesOrderInfo.orderViewList);
+    console.log('orderViewList :>> ', orderViewList);
     return (
         <div>
             {orderViewList && (
@@ -11,7 +12,7 @@ const PurchaseOrderDetail = () => {
                     <div className="row">
                         <div className="col-md-3">
                             Po No
-                <h5>{orderViewList.intPOId}</h5>
+                <h5>{orderViewList.strPONo}</h5>
                         </div>
                         <div className="col-md-3">
                             Business Line

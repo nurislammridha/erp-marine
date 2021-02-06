@@ -9,6 +9,7 @@ const PurhasesOrderList = () => {
   const dispatch = useDispatch()
   const [orderDetailsShow, setOrderDetailsShow] = useState(false)
   const purchaseOrderList = useSelector(state => state.purchasesOrderInfo.purchaseOrderList);
+  console.log('purchaseOrderList :>> ', purchaseOrderList);
   const handleClickView = (id) => {
     setOrderDetailsShow(true);
     dispatch(PurchaseOrderView(id))

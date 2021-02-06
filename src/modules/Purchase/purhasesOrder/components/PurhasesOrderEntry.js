@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../../_metronic/_assets/css/default-style.css";
 import "../../../../styles/global-style.css";
@@ -10,14 +10,26 @@ import DatePicker from "react-datepicker";
 import { useDispatch, useSelector } from "react-redux";
 import PurchaseOrderMultiple from "./PurchaseOrderMultiple";
 import { FinalOrderInput } from "../_redux/actions/PurhasesOrderAction";
+import { getPaymentTerms } from "../../../master/DropDownData/PaymentTerms/_redux/PaymentTermsAction/PaymentTermsAction";
+import { getCurrencyList } from "../../../master/DropDownData/Currency/_redux/CurrencyAction/CurrencyAction";
+import { getSupplierName } from "../../../master/DropDownData/SupplierName/_redux/SupplierNameAction/SupplierNameAction";
 
 const PurhasesOrderEntry = () => {
   const dispatch = useDispatch()
   const { register, setValue } = useForm();
   const finalOrderInput = useSelector(state => state.purchasesOrderInfo.finalOrderInput);
+  const paymentTerms = useSelector(state => state.PaymentTermsReducer.paymentTerms);
+  const CurrencyList = useSelector(state => state.CurrencyListReducer.CurrencyList);
+  const supplierNameList = useSelector(state => state.SupplierNameReducer.supplierNameList);
+
   const handleChangeTextInput = (name, value) => {
     dispatch(FinalOrderInput(name, value));
   }
+  useEffect(()=> {
+    dispatch(getPaymentTerms())
+    dispatch(getCurrencyList())
+    dispatch(getSupplierName())
+  },[])
   const shipList = [
     {
       value: 1,
@@ -49,7 +61,7 @@ const PurhasesOrderEntry = () => {
                   <div className="col-xl-4 col-lg-4 col-md-4 col-12">
                     <label className="formFont">Supplier Name</label>
                     <RHFInput
-                      as={<Select options={shipList} />}
+                      as={<Select options={supplierNameList} />}
                       rules={{ required: false }}
                       name="inSupplierId"
                       register={register}
@@ -68,7 +80,7 @@ const PurhasesOrderEntry = () => {
                         className="formHeight"
                         name=""
                         type="text"
-                        value={""}
+                        // value={""}
                         placeholder="Enter Address No"
                       />
                     </Form.Group>
@@ -91,7 +103,7 @@ const PurhasesOrderEntry = () => {
                   <div className="col-xl-4 col-lg-4 col-md-4 col-12">
                     <label className="formFont">Currency</label>
                     <RHFInput
-                      as={<Select options={shipList} />}
+                      as={<Select options={CurrencyList} />}
                       rules={{ required: false }}
                       name="intCurrencyId"
                       register={register}
@@ -106,7 +118,7 @@ const PurhasesOrderEntry = () => {
                   <div className="col-xl-4 col-lg-4 col-md-4 col-12">
                     <label className="formFont">Payment Terms</label>
                     <RHFInput
-                      as={<Select options={shipList} />}
+                      as={<Select options={paymentTerms} />}
                       rules={{ required: false }}
                       name="intPaymentTerms"
                       register={register}
