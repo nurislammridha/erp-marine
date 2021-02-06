@@ -3,6 +3,7 @@ import moment from "moment";
 
 // Initial state
 const initialState = {
+  certificateDetails: null,
   certificates: [],
   certificatesPaginatedData: null,
   certificateMainEdit: [],
@@ -223,6 +224,7 @@ const CertificateMainReducer = (state = initialState, action) => {
       return {
         ...state,
         certificateEditInfo: action.payload,
+        certificateDetails: action.payload,
         isEditLoaded: true
       };
 

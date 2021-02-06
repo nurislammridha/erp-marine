@@ -1,12 +1,26 @@
 import * as Types from "../types/Types";
 const initialstate = {
     orderInput: {
-        intRefferenceId: "",
-        strRefferenceName: "",
+        intPOId: "",
+        intReferenceId: "",
         intItemId: "",
+        intUoMId: "",
+        strReferenceCode: "",
         strItemName: "",
-        strRemarks: "",
-        numQTY: ""
+        strUoMName: "",
+        numReferenceQty: "",
+        numOrderQty: "",
+        numRate: "",
+        numAmount: "",
+        numTotalAmount: "",
+        numTaxAmount: "",
+        strPurchaseDescription: "",
+        strCostCenterName: "",
+        strCostElementName: "",
+        intCostCenterId: "",
+        intCostElementId: "",
+        intInventoryReceiveNo: "",
+        intActionBy: 1
     },
     multipleOrder: [],
     orderFilter: {
@@ -19,6 +33,42 @@ const initialstate = {
         intPOReferenceTypeId: "",
         strPOReferenceType: ""
     },
+    finalOrderInput: {
+        strPONo: "",
+        intAccountId: "",
+        intBusinessLineId: "",
+        strBusinessLineName: "",
+        intBusinessUnitId: "",
+        strBusinessUnitName: "",
+        intPurchaseOrganizationId: "",
+        strPurchaseOrganizationName: "",
+        intShipId: "",
+        intWarehouseId: "",
+        strWarehouseName: "",
+        intPurchaseTypeId: "",
+        inSupplierId: "",
+        strSupplierName: "",
+        intPOTypeId: "",
+        intIncotermsId: "",
+        intCurrencyId: "",
+        strCurrencyCode: "",
+        strSupplierReference: "",
+        intReferenceTypeId: "",
+        strReferenceTypeName: "",
+        isApproved: "",
+        intApproveBy: "",
+        intPaymentTerms: "",
+        intPercent: "",
+        strOtherTerms: "",
+        intPaymentDaysAfterDelivery: "",
+        strDeliveryAddress: "",
+        monFreight: "",
+        monOthers: "",
+        monDiscount: "",
+        intTaxType: "",
+        isClosed: "",
+        intActionBy: 1,
+    }
 };
 const PurchasesOrderReducer = (state = initialstate, action) => {
     const newState = { ...state };
@@ -58,6 +108,16 @@ const PurchasesOrderReducer = (state = initialstate, action) => {
             return { ...state, orderInput: editData, editOptionReference: editOptionReference, editOptionItem: editOptionItem }
         case Types.GET_PURCHASE_ORDER:
             return { ...state, purchaseOrderList: action.payload }
+        case Types.FINAL_ORDER_INPUT:
+            const finalOrderInput = { ...state.finalOrderInput };
+            finalOrderInput[action.payload.name] = action.payload.value;
+            return { ...state, finalOrderInput }
+        case Types.CREATE_FIANL_INPUT:
+            const data = action.payload;
+            const finalOrderList = { ...state.finalOrderInput, orderRow: data }
+            return { ...state, finalOrderInput: finalOrderList }
+        case Types.GET_ORDER_VIEW:
+            return { ...state, orderViewList: action.payload }
         default:
             break;
     }

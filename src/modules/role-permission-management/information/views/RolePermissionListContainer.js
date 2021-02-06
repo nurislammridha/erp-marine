@@ -5,7 +5,6 @@ export default function RolePermissionListContainer() {
   return (
     <div>
       <RolePermissionList />
-      {/* <BasicInfoAdd /> */}
     </div>
   );
 }

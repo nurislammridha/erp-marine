@@ -151,7 +151,6 @@ export const MainCertificateUpdateAction = (certificateInfoInput, id) => async (
   }
   if (certificateInfoInput.strCustomeCode === null) {
     showToast("error", "Certificate Code can't be blank!");
-    return false;
   }
   if (certificateInfoInput.intIssuingAuthorityID === null) {
     showToast("error", "Issue Autherity can't be blank!");
@@ -366,10 +365,10 @@ export const getCertificateName = (intCategoryID = null) => (dispatch) => {
           dispatch({ type: Types.GET_CERTIFICATE_NAME, payload: data });
         }
       );
-  }else {
+  } else {
     dispatch({ type: Types.GET_CERTIFICATE_NAME, payload: [] });
   }
-  
+
 };
 
 export const getCertificateType = () => (dispatch) => {
@@ -500,7 +499,6 @@ export const getMainCertificateDeteailByID = (id) => (dispatch) => {
         dispatch(getCertificateChildCategoryData(data.intParentCategoryID));
       }
       data.certificateDates = data.certificate_dates;
-
       dispatch({
         type: Types.GET_MAIN_CERTIFICATE_SINGLE_DATA,
         payload: data,

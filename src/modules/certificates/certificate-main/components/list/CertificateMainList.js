@@ -18,6 +18,8 @@ import {
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
+import SimpleModal from "../../../../master/components/Modal/SimpleModal";
+import CertificateDetails from "../create/details/CertificateDetails";
 // import { CirclePicker, Circle } from 'react-color';
 
 const CertificateMainList = () => {
@@ -71,11 +73,11 @@ const CertificateMainList = () => {
     }
   };
 
-  const handleClick =(event)=>{
-        console.log(event);
+  const handleClick = (event) => {
+    console.log(event);
   }
 
-  const certificateDelete = () => {};
+  const certificateDelete = () => { };
 
   const getCertificateColorClass = (difference) => {
     let rowClassName = "";
@@ -101,7 +103,12 @@ const CertificateMainList = () => {
     width: "100%",
     textAlign: 'center'
   };
-
+  const [CertificateDetailShow, setCertificateDetailShow] = useState(false)
+  const [CertificateID, setCertificateID] = useState(null)
+  const certificateDetails = (certificate) => {
+    setCertificateID(certificate.intCertificateDetailsID);
+    setCertificateDetailShow(true)
+  }
   return (
     <>
       <Card>
@@ -193,10 +200,10 @@ const CertificateMainList = () => {
                   {/* <th scope="col">Code</th> */}
                   <th scope="col">Description</th>
                   <th scope="col">Type</th>
-                  <th scope="col">Issued By</th>
+                  {/* <th scope="col">Issued By</th> */}
                   <th scope="col">Issued Place</th>
                   <th scope="col">Location</th>
-                  <th scope="col">Issued Date</th>
+                  {/* <th scope="col">Issued Date</th> */}
                   <th scope="col">Valid Until</th>
                   <th scope="col">Entended Until</th>
                   <th scope="col">Last Endorsement</th>
@@ -214,52 +221,56 @@ const CertificateMainList = () => {
                     {/* <td>{certificate.strCustomeCode}</td> */}
                     <td>{certificate.strShipRemarks}</td>
                     <td>{certificate.strCertificateTypeName}</td>
-                    <td>{certificate.strIssuingAuthorityName}</td>
+                    {/* <td>{certificate.strIssuingAuthorityName}</td> */}
                     <td>{certificate.strIssuedPlace}</td>
                     <td>{certificate.strLocation}</td>
-                    <td>
+                    {/* <td>
                       {certificate.dteCertificateIssueDate !== null
                         ? generateStringDateFromDate(
                             certificate.dteCertificateIssueDate
                           )
                         : ""}
-                    </td>
+                    </td> */}
                     <td>
                       {certificate.dteCertificateValidUntil !== null
                         ? generateStringDateFromDate(
-                            certificate.dteCertificateValidUntil
-                          )
+                          certificate.dteCertificateValidUntil
+                        )
                         : ""}
                     </td>
                     <td>
                       {certificate.dteExtendedUntil !== null
                         ? generateStringDateFromDate(
-                            certificate.dteExtendedUntil
-                          )
+                          certificate.dteExtendedUntil
+                        )
                         : ""}
                     </td>
                     <td>
                       {certificate.dteLastEndorsementDate !== null
                         ? generateStringDateFromDate(
-                            certificate.dteLastEndorsementDate
-                          )
+                          certificate.dteLastEndorsementDate
+                        )
                         : ""}
                     </td>
                     <td>{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
                     <td>{certificate.differenceDays}</td>
                     <td>
                       <button className={`btn btn-primary btn-sm text-white certificate-lis-btn certificate-${getCertificateColorClass(certificate.differenceDays)}`}>
-                      {
-                        certificate.differenceDays === 0 ? 'Expired' : 'Due'
-                      }
-                    </button>
+                        {
+                          certificate.differenceDays === 0 ? 'Expired' : 'Due'
+                        }
+                      </button>
                     </td>
                     <td className="">
-                      <Link
-                        to={`/certificates-main/edit/${certificate.intCertificateDetailsID}`}
-                      >
-                        <i className="fa fa-edit text-success"></i>
-                      </Link>
+                      <div>
+                        <Link onClick={() => certificateDetails(certificate)} >
+                          <i className="far fa-eye text-success editIcon item-list-icon"></i>
+                        </Link>
+                        <Link className="ml-2" to={`/certificates-main/edit/${certificate.intCertificateDetailsID}`} >
+                          <i className="fa fa-edit text-success editIcon item-list-icon"></i>
+                        </Link>
+                      </div>
+
                       &nbsp;&nbsp;&nbsp;
                       {/* <button
                         className="btn btn-icon btn-light btn-hover-danger btn-sm"
@@ -299,33 +310,42 @@ const CertificateMainList = () => {
           <div className="row justify-content-center">
             <div className="col-2">
               <div className="between-thirty due-days">
-                <input type="color" value="#8ec7ff" className="color-picker float-left mr-2"/>
+                <input type="color" value="#8ec7ff" className="color-picker float-left mr-2" />
                 <h6>Due between 30 days </h6>
-                
+
               </div>
             </div>
             <div className="col-2">
               <div className="between-sixty due-days">
-              <input type="color" value="#678db2" className="color-picker between-sixty float-left"/>
+                <input type="color" value="#678db2" className="color-picker between-sixty float-left" />
                 <h6 >Due between 60 days </h6>
               </div>
             </div>
             <div className="col-2">
               <div className="between-thirty More-than-sixty due-days ">
-              <input type="color" value="#8af2c0" className="color-picker more-than-sixty float-left "/>
+                <input type="color" value="#8af2c0" className="color-picker more-than-sixty float-left " />
                 <h6 className=" ">Due more than 60 days </h6>
               </div>
             </div>
             <div className="col-2 ">
               <div className="expired due-days">
-              <input type="color" value="#ea673e" className="color-picker float-left mr-2"/>
+                <input type="color" value="#ea673e" className="color-picker float-left mr-2" />
                 <h6>Expired </h6>
               </div>
             </div>
           </div>
-         
         </Card>
       )}
+
+      <SimpleModal
+        size="xl"
+        show={CertificateDetailShow}
+        handleClose={() => setCertificateDetailShow(false)}
+        handleShow={() => setCertificateDetailShow(true)}
+        modalTitle={"Certificate Details"}
+      >
+        <CertificateDetails handleClose={() => setCertificateDetailShow(false)} CertificateID={CertificateID} />
+      </SimpleModal>
     </>
   );
 };
