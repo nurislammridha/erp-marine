@@ -106,9 +106,7 @@ export const GetPurchaseApprovalDetail = (id) => (dispatch) => {
         });
 };
 
-export const SubmitPurchaseApprove = (purchaseApprovalDetail) => (
-    dispatch
-) => {
+export const SubmitPurchaseApprove = (purchaseApprovalDetail) => (dispatch) => {
     let responseList = {
         isLoading: true,
         data: {},
@@ -126,12 +124,7 @@ export const SubmitPurchaseApprove = (purchaseApprovalDetail) => (
         purchase_row: purchase_rows
     }
     console.log('postData', postData)
-    // let postData = {
-    //     intCertificateTypeID: certificateEditInfoData.intCertificateTypeID,
-    //     strCertificateTypeName: certificateEditInfoData.strCertificateTypeName,
-    //     intActionBy: 1,
-    //     isActive: certificateEditInfoData.isActive,
-    // };
+
 
     Axios.put(
         `${process.env.REACT_APP_API_URL}certificate/types/updat`,
