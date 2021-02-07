@@ -1,15 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Card } from 'react-bootstrap';
 import { Form } from "react-bootstrap";
 const PurhasesOrderEntryHeader = () => {
     const finalOrderInput = useSelector(state => state.purchasesOrderInfo.finalOrderInput);
-    // const multipleOrder = useSelector(state => state.purchasesOrderInfo.multipleOrder);
-    // const [test, setTest] = useState(orderFilter)
-    // console.log('test :>> ', test);
-    // useEffect(() => {
-    //     setTest(orderFilter)
-    // }, [multipleOrder])
     return (
         <>
             <Card>

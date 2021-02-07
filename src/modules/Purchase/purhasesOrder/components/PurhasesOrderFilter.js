@@ -18,10 +18,6 @@ const PurhasesOrderFilter = () => {
     const finalOrderInput = useSelector(state => state.purchasesOrderInfo.finalOrderInput);
     const { intBusinessLineId, intBusinessUnitId, intPurchaseOrganizationId, intReferenceTypeId } = finalOrderInput;
     const dispatch = useDispatch();
-    // const handleChangeSBU =(value)=>{
-    //     dispatch()
-    // }
-
     useEffect(() => {
         dispatch(getSBUlist())
         dispatch(getBranchList())
@@ -34,7 +30,7 @@ const PurhasesOrderFilter = () => {
     }
     useEffect(() => {
         dispatch(getPurchaseOrder(finalOrderInput))
-    }, [finalOrderInput])
+    }, [finalOrderInput, dispatch])
     return (
         <>
             <Card>
@@ -48,8 +44,6 @@ const PurhasesOrderFilter = () => {
                                 <InputBase
                                     className="custome-purchase-search"
                                     placeholder="Search"
-                                // value={searchText}
-                                // onChange={searchProduct}
                                 />
                                 <IconButton aria-label="Search" className="searchPlaceholder purchaseSearch">
                                     <i className="flaticon-search "></i>

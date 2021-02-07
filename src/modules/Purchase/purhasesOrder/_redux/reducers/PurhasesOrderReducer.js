@@ -23,16 +23,6 @@ const initialstate = {
         intActionBy: 1
     },
     multipleOrder: [],
-    // orderFilter: {
-    //     intSBUId: "",
-    //     strSBUName: "",
-    //     intBusinessUnitId: "",
-    //     strBusinessUnitName: "",
-    //     intPurchaseOrganizationId: "",
-    //     strPurchaseOrganizationName: "",
-    //     intPOReferenceTypeId: "",
-    //     strPOReferenceType: ""
-    // },
     finalOrderInput: {
         strBusinessLineName: "",
         intBusinessLineId: "",
@@ -44,12 +34,6 @@ const initialstate = {
         strReferenceTypeName: "",
         strPONo: "",
         intAccountId: "",
-        intBusinessLineId: "",
-        strBusinessLineName: "",
-        intBusinessUnitId: "",
-        strBusinessUnitName: "",
-        intPurchaseOrganizationId: "",
-        strPurchaseOrganizationName: "",
         intShipId: "",
         intWarehouseId: "",
         strWarehouseName: "",
@@ -61,8 +45,6 @@ const initialstate = {
         intCurrencyId: "",
         strCurrencyCode: "",
         strSupplierReference: "",
-        intReferenceTypeId: "",
-        strReferenceTypeName: "",
         isApproved: "",
         intApproveBy: "",
         intPaymentTerms: "",
@@ -115,7 +97,6 @@ const PurchasesOrderReducer = (state = initialstate, action) => {
             return { ...state, multipleOrder: multipleOrderOld }
         case Types.EDIT_MULTIPLE:
             const editData = { ...state.multipleOrder[action.payload] }
-            console.log('editData :>> ', editData);
             const editOptionItem = optionItem(editData);
             const editOptionReference = optionReference(editData);
             return { ...state, orderInput: editData, editOptionReference: editOptionReference, editOptionItem: editOptionItem }

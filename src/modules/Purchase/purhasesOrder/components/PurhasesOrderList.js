@@ -4,12 +4,11 @@ import { Card } from 'react-bootstrap';
 import PurchaseOrderDetail from './PurchaseOrderDetail';
 import SimpleModal from '../../../master/components/Modal/SimpleModal';
 import { PurchaseOrderView } from '../_redux/actions/PurhasesOrderAction';
-
+import moment from "moment";
 const PurhasesOrderList = () => {
   const dispatch = useDispatch()
   const [orderDetailsShow, setOrderDetailsShow] = useState(false)
   const purchaseOrderList = useSelector(state => state.purchasesOrderInfo.purchaseOrderList);
-  console.log('purchaseOrderList :>> ', purchaseOrderList);
   const handleClickView = (id) => {
     setOrderDetailsShow(true);
     dispatch(PurchaseOrderView(id))
@@ -31,8 +30,8 @@ const PurhasesOrderList = () => {
                   <tr>
                     <th scope="col">PO NO</th>
                     <th scope="col">PO DATE</th>
-                    <th scope="col">PO CATEGORY</th>
-                    <th scope="col">REMARKS</th>
+                    <th scope="col">CURRENCY</th>
+                    <th scope="col">SUPPLIER NAME</th>
                     <th scope="col">STATUS</th>
                     <th scope="col">ACTION</th>
                   </tr>
@@ -40,14 +39,14 @@ const PurhasesOrderList = () => {
                 <tbody>
                   {purchaseOrderList.map((item, index) => (
                     <tr>
-                      <td>{item.strPONo}</td>
-                      <td>{item.dtePODate}</td>
-                      <td>Lorem Ipsom</td>
-                      <td>Lorem ipsum dolor sit amet.</td>
+                      <td>{item.intPOId}</td>
+                      <td>{moment(item.dtePODate).format("YYYY-MM-DD")}</td>
+                      <td>{item.strCurrencyCode}</td>
+                      <td>{item.strSupplierName}</td>
                       <td>
-                        <button className="btn rejected-status booking-list-btn text-danger">
-                          Approved
-                        </button>
+                        <h2 className="btn rejected-status booking-list-btn text-danger">
+                          {item.strStatus}
+                        </h2>
                       </td>
                       <td>
                         {""}
@@ -70,7 +69,6 @@ const PurhasesOrderList = () => {
         </Card.Body >
         <SimpleModal
           size="xl"
-          // status={status}
           show={orderDetailsShow}
           handleClose={() => setOrderDetailsShow(false)}
           handleShow={() => setOrderDetailsShow(true)}

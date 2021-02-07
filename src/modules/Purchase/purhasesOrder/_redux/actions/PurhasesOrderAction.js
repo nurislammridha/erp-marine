@@ -91,7 +91,6 @@ export const getPurchaseOrder = (orderFilter) => (dispatch) => {
 
 
 export const submitMultipleOrderList = (multipleOrder, finalOrderInput) => (dispatch) => {
-    console.log('finalOrderInput :>> ', finalOrderInput);
     if (finalOrderInput.inSupplierId.length === 0) {
         showToast("error", "Please Select Supplier Name");
         return false;
@@ -150,11 +149,9 @@ export const FinalOrderInput = (name, value) => (dispatch) => {
     dispatch({ type: Types.FINAL_ORDER_INPUT, payload: formData })
 }
 export const SubmitFinalOrder = (finalOrderInput) => (dispatch) => {
-    console.log('finalOrderInput acccc:>> ', finalOrderInput);
     const url = `${process.env.REACT_APP_API_URL}purchase/purchaseOrderHeaderRow`;
     Axios.post(url, finalOrderInput).then(function (response) {
         dispatch({ type: Types.RESPONSE_DATA_STATUS, payload: response.data.status })
-        // console.log('response.data.status :>> ', response.data.status);
 
         if (response.data.status) {
             showToast("success", response.data.message);
