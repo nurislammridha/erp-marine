@@ -16,7 +16,7 @@ const POFilter = () => {
     const SBUOptionData = useSelector((state) => state.POApprovalFilter.SBUNameData);
     const branchOptionData = useSelector((state) => state.POApprovalFilter.branchNameData);
     const referenceTypeOptionData = useSelector((state) => state.POApprovalFilter.referenceTypeData);
-    console.log('branchOptionData', branchOptionData);
+
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangePOApprovalFilterInput(name, value));
         changeFilter();

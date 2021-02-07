@@ -2,7 +2,7 @@ import * as Types from "../types/Types";
 import Axios from "axios";
 import { toast } from "react-toastify";
 import { showToast } from "../../../../master/utils/ToastHelper";
-
+import store from '../../../../../redux/store';
 
 export const handleChangePurchaseApprovalFilterInput = (name, value) => (dispatch) => {
     const formData = {
@@ -13,6 +13,10 @@ export const handleChangePurchaseApprovalFilterInput = (name, value) => (dispatc
         type: Types.CHANGE_PURCHASE_APPROVAL_FILTER_INPUT,
         payload: formData,
     });
+
+    const PurchaseApprovalFilterInput = store.getState().purchaseApprovalFilter.PurchaseApprovalFilterInput;
+    const { intSBUId, intBusinessUnitId, intShipID } = PurchaseApprovalFilterInput;
+    dispatch(getPurchaseApprovalList(intSBUId, intBusinessUnitId, intShipID));
 };
 
 export const handleChangePurchaseApprovalDetailInput = (name, value, item) => (dispatch) => {
@@ -48,7 +52,7 @@ export const getShipName = (data) => (dispatch) => {
 };
 
 
-export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBusinessUnitId = null, intShipID = null, dteFromDate = null, dteToDate = null) => async (dispatch) => {
+export const getPurchaseApprovalList = (intSBUId = null, intBusinessUnitId = null, intShipID = null) => async (dispatch) => {
     let response = {
         purchaseApprovalList: [],
         status: false,
@@ -62,14 +66,14 @@ export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBu
 
     try {
         let url = `${process.env.REACT_APP_API_URL}purchase/getApproval?`;
-
-        url += searchValue !== "" ? `search=${searchValue}&` : '';
+        // url += searchValue !== "" ? `search=${searchValue}&` : '';
+        console.log('intSBUId =', intSBUId)
         url += intSBUId !== null ? `intSBUId=${intSBUId}&` : '';
         url += intBusinessUnitId !== null ? `intBusinessUnitId=${intBusinessUnitId}&` : '';
         url += intShipID !== null ? `intShipID=${intShipID}&` : '';
-        url += dteFromDate !== null ? `dteFromDate=${dteFromDate}&` : '';
+        // url += dteFromDate !== null ? `dteFromDate=${dteFromDate}&` : '';
 
-        if (searchValue === "" && intSBUId === null && intBusinessUnitId === null && intShipID === null) {
+        if (intSBUId === null && intBusinessUnitId === null && intShipID === null) {
             dispatch({ type: Types.GET_PURCHASE_APPROVAL_LIST, payload: response })
         } else {
             await Axios.get(url).then((res) => {
@@ -98,7 +102,15 @@ export const GetPurchaseApprovalDetail = (id) => (dispatch) => {
 
     Axios.get(`${process.env.REACT_APP_API_URL}purchase/reqList/${id}`)
         .then((res) => {
-            console.log('resdetail', res)
+            let data = res.data.data;
+            const numApprovedQty = null;
+            for (let index = 0; index < data.purchase_row.length; index++) {
+                const element = data.purchase_row[index];
+                element.numApprovedQty = numApprovedQty;
+
+            }
+            // data.purchase_row.push = approveQty;
+            console.log('data', data)
             dispatch({
                 type: Types.GET_PURCHASE_APPROVAL_DETAIL,
                 payload: res.data,
@@ -106,9 +118,7 @@ export const GetPurchaseApprovalDetail = (id) => (dispatch) => {
         });
 };
 
-export const SubmitPurchaseApprove = (purchaseApprovalDetail) => (
-    dispatch
-) => {
+export const SubmitPurchaseApprove = (purchaseApprovalDetail, handleClose) => (dispatch) => {
     let responseList = {
         isLoading: true,
         data: {},
@@ -120,25 +130,16 @@ export const SubmitPurchaseApprove = (purchaseApprovalDetail) => (
         type: Types.SUBMIT_PURCHASE_APPROVE,
         payload: responseList,
     });
-    let multiple = []
-    for (let i = 0; i < purchaseApprovalDetail.purchase_row.length; i++) {
-        if (purchaseApprovalDetail.purchase_row[i].isChecked == true) {
-            multiple.push(purchaseApprovalDetail.purchase_row[i])
-        }
+    const requestStatus = purchaseApprovalDetail.purchase_row.filter(item => item.isChecked == true)
+    let postData = {
+        ...purchaseApprovalDetail,
+        requestStatus: requestStatus
     }
-    purchaseApprovalDetail.purchase_row = multiple;
+    console.log('postData', postData)
 
-    let postData = purchaseApprovalDetail
-
-    // let postData = {
-    //     intCertificateTypeID: certificateEditInfoData.intCertificateTypeID,
-    //     strCertificateTypeName: certificateEditInfoData.strCertificateTypeName,
-    //     intActionBy: 1,
-    //     isActive: certificateEditInfoData.isActive,
-    // };
 
     Axios.put(
-        `${process.env.REACT_APP_API_URL}certificate/types/updat`,
+        `${process.env.REACT_APP_API_URL}purchase/reqStatus/${purchaseApprovalDetail.intPurchaseRequestID}`,
         postData
     )
         .then(async (response) => {
@@ -152,6 +153,8 @@ export const SubmitPurchaseApprove = (purchaseApprovalDetail) => (
                     type: Types.SUBMIT_PURCHASE_APPROVE,
                     payload: responseList,
                 });
+                handleClose();
+
             } else {
                 showToast("error", response.data.message);
             }

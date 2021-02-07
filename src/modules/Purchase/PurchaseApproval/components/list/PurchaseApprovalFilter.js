@@ -19,13 +19,8 @@ const PurchaseApprovalFilter = () => {
 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangePurchaseApprovalFilterInput(name, value));
-        changeFilter();
     };
 
-    const changeFilter = () => {
-        const { search, intSBUId, intBusinessUnitId, intShipID, dteFromDate, dteToDate } = PurchaseApprovalFilterInput;
-        dispatch(getPurchaseApprovalList(search, intSBUId, intBusinessUnitId, intShipID, dteFromDate, dteToDate));
-    }
 
     useEffect(() => {
         dispatch(getShipName());
@@ -47,8 +42,9 @@ const PurchaseApprovalFilter = () => {
                             name="intSBUId"
                             register={register}
                             onChange={(option) => {
-                                handleChangeTextInput('strBusinessUnitName', option.label);
-                                handleChangeTextInput('intSBUId', option.value)
+                                // handleChangeTextInput('strBusinessUnitName', option.label);
+                                handleChangeTextInput('intSBUId', option.value);
+                                // dispatch(getPurchaseApprovalList(option.value))
                             }}
                             setValue={setValue}
                         />
@@ -61,8 +57,8 @@ const PurchaseApprovalFilter = () => {
                             name="intBusinessUnitId"
                             register={register}
                             onChange={(option) => {
-                                handleChangeTextInput('strBusinessUnitName', option.label);
                                 handleChangeTextInput('intBusinessUnitId', option.value)
+                                // dispatch(getPurchaseApprovalList(option.value))
                             }}
                             setValue={setValue}
                         />

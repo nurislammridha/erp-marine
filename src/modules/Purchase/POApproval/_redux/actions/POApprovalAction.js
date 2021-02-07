@@ -15,6 +15,18 @@ export const handleChangePOApprovalFilterInput = (name, value) => (dispatch) => 
     });
 };
 
+export const handleChangePOApprovalDetailInput = (name, value, item) => (dispatch) => {
+    const formData = {
+        name: name,
+        value: value,
+        item: item
+    };
+    dispatch({
+        type: Types.CHANGE_PO_APPROVAL_DETAIL_INPUT,
+        payload: formData,
+    });
+};
+
 
 export const getSBUName = () => (dispatch) => {
 
@@ -105,3 +117,25 @@ export const getPOApprovalList = (searchValue = "", intBusinessLineId = null, in
     }
 
 }
+
+export const GetPOApprovalDetail = (id) => (dispatch) => {
+
+    Axios.get(`${process.env.REACT_APP_API_URL}purchase/purchaseOrderHeaderRow/${id}`)
+        .then((res) => {
+            let data = res.data.data;
+            const numApprovedQty = "";
+            const remarks = "";
+            for (let index = 0; index < data.purchase_row.length; index++) {
+                const element = data.purchase_row[index];
+                element.numApprovedQty = numApprovedQty;
+                element.remarks = remarks;
+
+            }
+            // data.purchase_row.push = approveQty;
+            console.log('data', data)
+            dispatch({
+                type: Types.GET_PO_APPROVAL_DETAIL,
+                payload: res.data,
+            });
+        });
+};
