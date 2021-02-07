@@ -23,17 +23,25 @@ const initialstate = {
         intActionBy: 1
     },
     multipleOrder: [],
-    orderFilter: {
-        intSBUId: "",
-        strSBUName: "",
+    // orderFilter: {
+    //     intSBUId: "",
+    //     strSBUName: "",
+    //     intBusinessUnitId: "",
+    //     strBusinessUnitName: "",
+    //     intPurchaseOrganizationId: "",
+    //     strPurchaseOrganizationName: "",
+    //     intPOReferenceTypeId: "",
+    //     strPOReferenceType: ""
+    // },
+    finalOrderInput: {
+        strBusinessLineName: "",
+        intBusinessLineId: "",
         intBusinessUnitId: "",
         strBusinessUnitName: "",
         intPurchaseOrganizationId: "",
         strPurchaseOrganizationName: "",
-        intPOReferenceTypeId: "",
-        strPOReferenceType: ""
-    },
-    finalOrderInput: {
+        intReferenceTypeId: "",
+        strReferenceTypeName: "",
         strPONo: "",
         intAccountId: "",
         intBusinessLineId: "",
@@ -98,9 +106,9 @@ const PurchasesOrderReducer = (state = initialstate, action) => {
         case Types.GET_REFERENCE_TYPE:
             return { ...state, referenceType: ReferenceType(action.payload) }
         case Types.PURCHASE_ORDER_FILTER:
-            const orderFilter = { ...state.orderFilter };
-            orderFilter[action.payload.name] = action.payload.value;
-            return { ...state, orderFilter }
+            const finalOrderInput2 = { ...state.finalOrderInput };
+            finalOrderInput2[action.payload.name] = action.payload.value;
+            return { ...state, finalOrderInput: finalOrderInput2 }
         case Types.DELETE_MULTIPLE:
             const multipleOrderOld = [...state.multipleOrder]
             multipleOrderOld.splice(action.payload, 1);

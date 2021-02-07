@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Card } from 'react-bootstrap';
 import { Form } from "react-bootstrap";
 const PurhasesOrderEntryHeader = () => {
-    const orderFilter = useSelector(state => state.purchasesOrderInfo.orderFilter);
+    const finalOrderInput = useSelector(state => state.purchasesOrderInfo.finalOrderInput);
     // const multipleOrder = useSelector(state => state.purchasesOrderInfo.multipleOrder);
     // const [test, setTest] = useState(orderFilter)
     // console.log('test :>> ', test);
@@ -26,7 +26,7 @@ const PurhasesOrderEntryHeader = () => {
                                 <Form.Control
                                     className="formHeight"
                                     type="text"
-                                    value={orderFilter.strSBUName}
+                                    value={finalOrderInput.strBusinessLineName}
                                     disabled
                                 />
                             </Form.Group>
@@ -37,7 +37,7 @@ const PurhasesOrderEntryHeader = () => {
                                 <Form.Control
                                     className="formHeight"
                                     type="text"
-                                    value={orderFilter.strBusinessUnitName}
+                                    value={finalOrderInput.strBusinessUnitName}
                                     disabled
                                 />
                             </Form.Group>
@@ -48,7 +48,7 @@ const PurhasesOrderEntryHeader = () => {
                                 <Form.Control
                                     className="formHeight"
                                     type="text"
-                                    value={orderFilter.strPurchaseOrganizationName}
+                                    value={finalOrderInput.strPurchaseOrganizationName}
                                     disabled
                                 />
                             </Form.Group>
@@ -59,7 +59,7 @@ const PurhasesOrderEntryHeader = () => {
                                 <Form.Control
                                     className="formHeight"
                                     type="text"
-                                    value={orderFilter.strPOReferenceType}
+                                    value={finalOrderInput.strReferenceTypeName}
                                     disabled
                                 />
                             </Form.Group>
