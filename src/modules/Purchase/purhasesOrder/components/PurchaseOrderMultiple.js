@@ -7,7 +7,9 @@ import { useForm } from "react-hook-form";
 import { addMultipleOrder, deleteMultipleItem, editOrderMultiple, purchasesOrderInput, SubmitFinalOrder, submitMultipleOrderList } from '../_redux/actions/PurhasesOrderAction';
 import { getRefferenceNo } from '../../../master/DropDownData/RefferenceNo/_redux/RefferenceNoAction/RefferenceNoAction';
 import { getItemList } from '../../../master/DropDownData/Item/_redux/ItemListAction/ItemListAction';
+import { useHistory } from 'react-router-dom';
 const PurchaseOrderMultiple = () => {
+    const history = useHistory();
     const { register, setValue } = useForm();
     const dispatch = useDispatch();
     const orderInput = useSelector(state => state.purchasesOrderInfo.orderInput);
@@ -15,7 +17,11 @@ const PurchaseOrderMultiple = () => {
     const editOptionReference = useSelector(state => state.purchasesOrderInfo.editOptionReference);
     const editOptionItem = useSelector(state => state.purchasesOrderInfo.editOptionItem);
     const finalOrderInput = useSelector(state => state.purchasesOrderInfo.finalOrderInput);
-
+    const status = useSelector(state => state.purchasesOrderInfo.status);
+    console.log('status mul:>> ', status);
+    if (status) {
+        history.push('/purchase/order/list')
+    }
     useEffect(() => {
         if (finalOrderInput.orderRow) {
             dispatch(SubmitFinalOrder(finalOrderInput))
@@ -27,7 +33,9 @@ const PurchaseOrderMultiple = () => {
     }
     const addMultiple = () => { dispatch(addMultipleOrder(orderInput)) }
     const deleteMultiple = (index) => { dispatch(deleteMultipleItem(index)) }
-    const submitMultipleOrder = (multipleOrder) => { dispatch(submitMultipleOrderList(multipleOrder)) }
+    const submitMultipleOrder = (multipleOrder) => {
+        dispatch(submitMultipleOrderList(multipleOrder, finalOrderInput))
+    }
     const refferenceList = useSelector(state => state.RefferenceTypeReducer.refferenceList);
     const ItemList = useSelector(state => state.ItemListReducer.ItemList);
 
@@ -37,7 +45,7 @@ const PurchaseOrderMultiple = () => {
     }, [])
 
     useEffect(() => {
-        setValue("intRefferenceId", "");
+        setValue("intReferenceId", "");
         setValue("intItemId", "");
     }, [multipleOrder, setValue])
     const handleEdit = (index) => {
