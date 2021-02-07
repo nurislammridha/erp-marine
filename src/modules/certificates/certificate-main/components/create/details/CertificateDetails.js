@@ -31,6 +31,7 @@ const CertificateDetails = ({ handleClose, CertificateID }) => {
     const handleDownloadAttachment = () => {
         if (CRDetails !== null && CRDetails.multipleAttachments !== null && CRDetails.multipleAttachments.length > 0) {
             let attachmentFiles = CRDetails.multipleAttachments;
+            console.log('attachmentFiles :>> ', attachmentFiles);
             let newAttachment = [];
             if (attachmentFiles) {
                 attachmentFiles.forEach((item) => {
@@ -41,8 +42,7 @@ const CertificateDetails = ({ handleClose, CertificateID }) => {
             let count = 0;
             const zipFilename = `attachment-${CRDetails.intCertificateDetailsID ? CRDetails.intCertificateDetailsID : ''}.zip`;
             newAttachment.forEach(function (url) {
-                const extension = GetExtensionFromUrl(url);
-                const fileName = GetExtensionFromUrl(url, '/');
+                const fileName = url.split("/")[6]+'-'+url.split("/")[7];
                 const saveFileName = `attachment/${fileName}`;
                 // loading a file and add it in a zip file
                 JSZipUtils.getBinaryContent(url, function (err, data) {
