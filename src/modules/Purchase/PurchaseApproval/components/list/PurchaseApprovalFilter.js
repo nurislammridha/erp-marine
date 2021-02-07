@@ -34,13 +34,13 @@ const PurchaseApprovalFilter = () => {
         dispatch(getSBUName());
     }, []);
 
-    const categorySelecte = (intSBUId) => {
-        dispatch(getPurchaseApprovalList(null, intSBUId, null, null, null, null)
-        );
-    };
+    // const categorySelecte = (intSBUId) => {
+    //     dispatch(getPurchaseApprovalList(null, intSBUId, null, null, null, null)
+    //     );
+    // };
 
     useEffect(() => {
-        changeFilter();
+        // changeFilter();
     }, [dispatch]);
 
     return (
@@ -58,7 +58,6 @@ const PurchaseApprovalFilter = () => {
                             onChange={(option) => {
                                 handleChangeTextInput('strBusinessUnitName', option.label);
                                 handleChangeTextInput('intSBUId', option.value);
-                                    // categorySelecte(option.value)
                             }}
                             setValue={setValue}
                         />

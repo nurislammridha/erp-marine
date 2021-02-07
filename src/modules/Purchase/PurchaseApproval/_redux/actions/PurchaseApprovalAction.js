@@ -9,17 +9,14 @@ export const handleChangePurchaseApprovalFilterInput = (name, value) => (dispatc
         name: name,
         value: value,
     };
-    dispatch({
-        type: Types.CHANGE_PURCHASE_APPROVAL_FILTER_INPUT,
-        payload: formData,
-    });
+    dispatch({ type: Types.CHANGE_PURCHASE_APPROVAL_FILTER_INPUT, payload: formData });
 };
 
 export const handleChangePurchaseApprovalDetailInput = (name, value, item) => (dispatch) => {
     const formData = {
         name: name,
         value: value,
-        item: item
+        item: item,
     };
     dispatch({
         type: Types.CHANGE_PURCHASE_APPROVAL_DETAIL_INPUT,
@@ -48,7 +45,7 @@ export const getShipName = (data) => (dispatch) => {
 };
 
 
-export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBusinessUnitId = null, intShipID = null, dteFromDate = null, dteToDate = null) => async (dispatch) => {
+export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBusinessUnitId = null, intShipID = null, dteFromDate = null, dteToDate = null, page) => async (dispatch) => {
     let response = {
         purchaseApprovalList: [],
         status: false,
@@ -59,11 +56,18 @@ export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBu
 
     dispatch({ type: Types.GET_PURCHASE_APPROVAL_LIST, payload: response });
     console.log('intSBUId checking :>> ', intSBUId);
-  
-    // http://127.0.0.1:8000/api/v1/purchase/getApproval?search=akij&branchName=akij&shipName=akij 
+    console.log('intBusinessUnitId checking :>> ', intBusinessUnitId);
+    console.log('intShipID checking :>> ', intShipID);
+    console.log('dteFromDate checking :>> ', dteFromDate);
+
+    //http://127.0.0.1:8000/api/v1/purchase/getApproval?search=Akij%20&branchName=Akij&shipName=Akij&isPaginated=1&paginateNo=20 
 
     try {
         let url = `${process.env.REACT_APP_API_URL}purchase/getApproval?`;
+
+        if (page !== null || page === "") {
+            url += `&page=${page}`;
+        }
 
         url += searchValue !== "" ? `search=${searchValue}&` : '';
         url += intSBUId !== null ? `intSBUId=${intSBUId}&` : '';
@@ -110,66 +114,58 @@ export const GetPurchaseApprovalDetail = (id) => (dispatch) => {
         });
 };
 
-export const SubmitPurchaseApprove = (purchaseApprovalDetail) => (
-    dispatch
-) => {
+export const handleApprovePRApproval = (purchaseApprovalDetail) => async (dispatch) => {
     let responseList = {
         isLoading: true,
         data: {},
         status: false,
     };
-    console.log('detail data', purchaseApprovalDetail);
 
-    dispatch({
-        type: Types.SUBMIT_PURCHASE_APPROVE,
-        payload: responseList,
-    });
-    let multiple = []
-    for (let i = 0; i < purchaseApprovalDetail.purchase_row.length; i++) {
-        if (purchaseApprovalDetail.purchase_row[i].isChecked == true) {
-            multiple.push(purchaseApprovalDetail.purchase_row[i])
-        }
-    }
-    purchaseApprovalDetail.purchase_row = multiple;
+    dispatch({ type: Types.SUBMIT_PURCHASE_APPROVE, payload: responseList });
 
-    let postData = purchaseApprovalDetail
+    const newPRApprovalData = purchaseApprovalDetail.purchase_row.filter((item) => item.isChecked && item.isChecked === true);
 
-    // let postData = {
-    //     intCertificateTypeID: certificateEditInfoData.intCertificateTypeID,
-    //     strCertificateTypeName: certificateEditInfoData.strCertificateTypeName,
-    //     intActionBy: 1,
-    //     isActive: certificateEditInfoData.isActive,
-    // };
-
-    Axios.put(
-        `${process.env.REACT_APP_API_URL}certificate/types/updat`,
-        postData
-    )
-        .then(async (response) => {
-            responseList.data = response.data;
-            responseList.isLoading = false;
-            responseList.status = response.data.status;
-
+    await Axios.put(`${process.env.REACT_APP_API_URL}certificate/types/updat`, newPRApprovalData)
+        .then((response) => {
             if (response.data.status) {
+                responseList.data = response.data;
+                responseList.isLoading = false;
+                responseList.status = response.data.status;
                 showToast("success", response.data.message);
-                dispatch({
-                    type: Types.SUBMIT_PURCHASE_APPROVE,
-                    payload: responseList,
-                });
-            } else {
-                showToast("error", response.data.message);
-            }
-        })
-
-        .catch(function (error) {
+                dispatch({ type: Types.SUBMIT_PURCHASE_APPROVE, payload: responseList });
+            } else { showToast("error", response.data.message) }
+        }).catch(function (error) {
             responseList.isLoading = false;
-            const message =
-                "Something went wrong ! Please fill all inputs and try again !";
+            const message = "Something went wrong ! Please fill all inputs and try again !";
             showToast("error", message);
-
-            dispatch({
-                type: Types.SUBMIT_PURCHASE_APPROVE,
-                payload: responseList,
-            });
+            dispatch({ type: Types.SUBMIT_PURCHASE_APPROVE, payload: responseList });
         });
 };
+
+
+
+// export const handleRejectedPRApproval = (purchaseApprovalDetail) => async (dispatch) => {
+//     let responseList = {
+//         isLoading: true,
+//         data: {},
+//         status: false,
+//     };
+
+//     dispatch({ type: Types.REJECTED_PURCHASE_APPROVAL, payload: responseList });
+//     const newPRApprovalData = purchaseApprovalDetail.purchase_row.filter((item) => item.isChecked && item.isChecked === true);
+//     await Axios.put(`${process.env.REACT_APP_API_URL}certificate/types/updat`, newPRApprovalData)
+//         .then((response) => {
+//             if (response.data.status) {
+//                 responseList.data = response.data;
+//                 responseList.isLoading = false;
+//                 responseList.status = response.data.status;
+//                 showToast("success", response.data.message);
+//                 dispatch({ type: Types.REJECTED_PURCHASE_APPROVAL, payload: responseList });
+//             } else { showToast("error", response.data.message) }
+//         }).catch(function (error) {
+//             responseList.isLoading = false;
+//             const message = "Something went wrong ! Please fill all inputs and try again !";
+//             showToast("error", message);
+//             dispatch({ type: Types.REJECTED_PURCHASE_APPROVAL, payload: responseList });
+//         });
+// };
