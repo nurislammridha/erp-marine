@@ -5,6 +5,8 @@ import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { addMultipleOrder, deleteMultipleItem, editOrderMultiple, purchasesOrderInput, SubmitFinalOrder, submitMultipleOrderList } from '../_redux/actions/PurhasesOrderAction';
+import { getRefferenceNo } from '../../../master/DropDownData/RefferenceNo/_redux/RefferenceNoAction/RefferenceNoAction';
+import { getItemList } from '../../../master/DropDownData/Item/_redux/ItemListAction/ItemListAction';
 const PurchaseOrderMultiple = () => {
     const { register, setValue } = useForm();
     const dispatch = useDispatch();
@@ -23,16 +25,17 @@ const PurchaseOrderMultiple = () => {
     const changeTextValue = (name, value) => {
         dispatch(purchasesOrderInput(name, value))
     }
-    const addMultiple = () => {
-        dispatch(addMultipleOrder(orderInput))
-    }
-    const deleteMultiple = (index) => {
-        dispatch(deleteMultipleItem(index))
+    const addMultiple = () => { dispatch(addMultipleOrder(orderInput)) }
+    const deleteMultiple = (index) => { dispatch(deleteMultipleItem(index)) }
+    const submitMultipleOrder = (multipleOrder) => { dispatch(submitMultipleOrderList(multipleOrder)) }
+    const refferenceList = useSelector(state => state.RefferenceTypeReducer.refferenceList);
+    const ItemList = useSelector(state => state.ItemListReducer.ItemList);
 
-    }
-    const submitMultipleOrder = (multipleOrder) => {
-        dispatch(submitMultipleOrderList(multipleOrder))
-    }
+    useEffect(() => {
+        dispatch(getRefferenceNo())
+        dispatch(getItemList())
+    }, [])
+
     useEffect(() => {
         setValue("intRefferenceId", "");
         setValue("intItemId", "");
@@ -40,24 +43,13 @@ const PurchaseOrderMultiple = () => {
     const handleEdit = (index) => {
         dispatch(editOrderMultiple(index))
     }
-
-    const shipList = [
-        {
-            value: 1,
-            label: "Akij"
-        },
-        {
-            value: 2,
-            label: "Akij Noor"
-        },
-    ]
     return (
         <>
             <div className="row">
                 <div className="col-md-4 col-12">
                     <label className="formFont">Refference No</label>
                     <RHFInput
-                        as={<Select options={shipList} />}
+                        as={<Select options={refferenceList} />}
                         rules={{ required: false }}
                         name="intReferenceId"
                         register={register}
@@ -72,7 +64,7 @@ const PurchaseOrderMultiple = () => {
                 <div className="col-md-4 col-12">
                     <label className="formFont">Item</label>
                     <RHFInput
-                        as={<Select options={shipList} />}
+                        as={<Select options={ItemList} />}
                         rules={{ required: false }}
                         name="intItemId"
                         register={register}

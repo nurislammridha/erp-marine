@@ -130,7 +130,6 @@ const PurhasesOrderFilter = () => {
                             </div>
                         </div>
                     </form>
-
                 </Card.Body >
             </Card >
         </>

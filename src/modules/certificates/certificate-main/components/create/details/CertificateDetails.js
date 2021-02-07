@@ -6,11 +6,16 @@ import moment from "moment";
 import MultipplePreviewAttachment from "../../../../../master/components/previews/MultiplePreviewAttachment";
 import SimpleModal from "../../../../../master/components/Modal/SimpleModal";
 import AttachmentPreviewModel from "../../../../../master/components/previews/AttachmentPreviewModel";
+import JSZip from 'jszip';
+import JSZipUtils from 'jszip-utils';
+import saveAs from 'save-as';
+
 const CertificateDetails = ({ handleClose, CertificateID }) => {
     const CRDetails = useSelector((state) => state.certificateMainInfo.certificateDetails);
     const [attachmentPreviewModel, setAttachmentPreviewModel] = useState(false);
     const [previewAttachment, setPreviewAttachment] = useState(null);
 
+    console.log('CRDetails :>> ', CRDetails);
     const PreviewAttachment = (item) => {
         setAttachmentPreviewModel(true);
         setPreviewAttachment(item)
@@ -19,6 +24,45 @@ const CertificateDetails = ({ handleClose, CertificateID }) => {
     useEffect(() => {
         dispatch(getMainCertificateDeteailByID(CertificateID))
     }, [])
+
+
+
+    const handleDownloadAttachment = () => {
+        if (CRDetails !== null && CRDetails.multipleAttachments !== null && CRDetails.multipleAttachments.length > 0) {
+            let attachmentFiles = CRDetails.multipleAttachments;
+            console.log('attachmentFiles :>> ', attachmentFiles);
+            let newAttachment = [];
+            if (attachmentFiles) {
+                attachmentFiles.forEach((item) => {
+                    newAttachment.push(item.filePreviewUrl);
+                });
+            }
+            const zip = new JSZip();
+            console.log('zip :>> ', zip);
+            let count = 0;
+            const zipFilename = "attachment.zip";
+            newAttachment.forEach(function (url) {
+                const filename = "filename";
+                console.log('url check :>> ', url);
+                // loading a file and add it in a zip file
+                JSZipUtils.getBinaryContent(url, function (err, data) {
+                    console.log('data :>> ', data);
+                    // if (err) {
+                    //     throw err; // or handle the error
+                    // }
+                    zip.file(filename, data, { binary: true });
+                    count++;
+                    if (count == newAttachment.length) {
+                        zip.generateAsync({ type: 'blob' }).then(function (content) {
+                            saveAs(content, zipFilename);
+                        });
+                    }
+                });
+            })
+        }
+    }
+
+
     return (
         <>
             {
@@ -89,20 +133,21 @@ const CertificateDetails = ({ handleClose, CertificateID }) => {
                             <div className="custome-border-design">
                             </div>
                         </div>
+                        <Button variant="success" className="float-right m-2" onClick={() => handleDownloadAttachment()} download={true}>Download Documents</Button>
                         <Row>
                             <Col md={8} className="p-3 mt-1">
                                 <div className="react-bootstrap-table table-responsive">
                                     <table className="table table table-head-custom table-vertical-center user-list-table">
                                         <thead>
                                             <tr>
-                                                <th>
+                                                {/* <th>
                                                     <Form.Check
                                                         className=""
                                                         type="checkbox"
                                                         name="isRevLoadingPorts"
                                                     // onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
                                                     />
-                                                </th>
+                                                </th> */}
                                                 <th>Image Name</th>
                                                 <th>Image Size</th>
                                                 <th>Image View</th>
@@ -112,14 +157,14 @@ const CertificateDetails = ({ handleClose, CertificateID }) => {
                                             {
                                                 CRDetails && CRDetails.multipleAttachments.length > 0 && CRDetails.multipleAttachments.map((item, index) => (
                                                     <tr>
-                                                        <td>
+                                                        {/* <td>
                                                             <Form.Check
                                                                 className=""
                                                                 type="checkbox"
                                                                 name="isRevLoadingPorts"
                                                             // onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
                                                             />
-                                                        </td>
+                                                        </td> */}
                                                         <td>{item.name !== null && item.name !== '' ? item.name : ''}</td>
                                                         <td>{item.size !== null && item.size !== '' ? item.size : ''}</td>
                                                         <td>
