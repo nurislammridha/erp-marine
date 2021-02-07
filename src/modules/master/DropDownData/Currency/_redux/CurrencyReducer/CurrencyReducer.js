@@ -20,7 +20,7 @@ const GetCurrencyData = (data) => {
     if (data) {
         data.forEach((item) => {
             let itemData = {
-                value: item.strCurrencyCode,
+                value: item.intCurrencyId,
                 label: item.strCurrencyName,
             };
             options.push(itemData);
