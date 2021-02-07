@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getMainCertificateDeteailByID } from "../../../_redux/actions/CertificateMainAction";
 import moment from "moment";
@@ -9,7 +9,6 @@ import AttachmentPreviewModel from "../../../../../master/components/previews/At
 import JSZip from 'jszip';
 import JSZipUtils from 'jszip-utils';
 import saveAs from 'save-as';
-import { GetExtensionFromUrl } from "../../../../../master/utils/StringHelper";
 
 const CertificateDetails = ({ handleClose, CertificateID }) => {
     const CRDetails = useSelector((state) => state.certificateMainInfo.certificateDetails);
@@ -59,9 +58,7 @@ const CertificateDetails = ({ handleClose, CertificateID }) => {
                 });
             })
         }
-
     }
-
 
     return (
         <>
@@ -133,21 +130,13 @@ const CertificateDetails = ({ handleClose, CertificateID }) => {
                             <div className="custome-border-design">
                             </div>
                         </div>
-                        <Button variant="success" className="float-right m-2" onClick={() => handleDownloadAttachment()} download={true}>Download All Documents</Button>
+                        <Button variant="success" className="float-right m-2 cursor-pointer" onClick={() => handleDownloadAttachment()} download={true}>Download All Documents</Button>
                         <Row>
                             <Col md={8} className="p-3 mt-1">
                                 <div className="react-bootstrap-table table-responsive">
                                     <table className="table table table-head-custom table-vertical-center user-list-table">
                                         <thead>
                                             <tr>
-                                                {/* <th>
-                                                    <Form.Check
-                                                        className=""
-                                                        type="checkbox"
-                                                        name="isRevLoadingPorts"
-                                                    // onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
-                                                    />
-                                                </th> */}
                                                 <th>Image Name</th>
                                                 <th>Image Size</th>
                                                 <th>Image View</th>
@@ -157,24 +146,9 @@ const CertificateDetails = ({ handleClose, CertificateID }) => {
                                             {
                                                 CRDetails && CRDetails.multipleAttachments.length > 0 && CRDetails.multipleAttachments.map((item, index) => (
                                                     <tr>
-                                                        {/* <td>
-                                                            <Form.Check
-                                                                className=""
-                                                                type="checkbox"
-                                                                name="isRevLoadingPorts"
-                                                            // onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
-                                                            />
-                                                        </td> */}
                                                         <td>{item.name !== null && item.name !== '' ? item.name : ''}</td>
                                                         <td>{item.size !== null && item.size !== '' ? item.size : ''}</td>
                                                         <td>
-                                                            {/* <MultipplePreviewAttachment
-                                                                url={item.filePreviewUrl ? item.filePreviewUrl : `/${item.name}`}
-                                                                base64={item.base64}
-                                                                title="Preview"
-                                                                height={50}
-                                                                width={50}
-                                                            /> */}
                                                             <span className="btn border-none" onClick={() => PreviewAttachment(item)}>
                                                                 <MultipplePreviewAttachment
                                                                     url={item.filePreviewUrl ? item.filePreviewUrl : `/${item.name}`}
