@@ -84,8 +84,8 @@ const PurchaseApprovalList = () => {
 
                           <div className="d-flex">
                             <a onClick={() =>
-                              handleClick(item.intPurchaseRequestID)
-                            }>
+                              handleClick(item.intPurchaseRequestID)}
+                            >
                               <i className="far fa-eye editIcon item-list-icon"></i>
                             </a>
                           </div>
@@ -117,7 +117,7 @@ const PurchaseApprovalList = () => {
         handleShow={() => setRequisitionDetailsShow(true)}
         modalTitle={"Requisition Approval Details"}
       >
-        <RequisitionApprovalDetail />
+        <RequisitionApprovalDetail handleClose={() => setRequisitionDetailsShow(false)} />
       </SimpleModal>
 
     </Card >

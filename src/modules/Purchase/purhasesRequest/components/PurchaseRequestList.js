@@ -99,9 +99,14 @@ const PurchaseRequestList = () => {
                         <td>{item.strCategoryName !== null && item.strCategoryName !== '' ? item.strCategoryName : ''}</td>
                         <td>{item.strRemarks !== null && item.strRemarks !== '' ? item.strRemarks : ''}</td>
                         <td>
-                          <button className={item.strStatus === "Rejected" ? "btn rejected-status booking-list-btn text-danger" : (item.strStatus === "Pending" ? "btn pending-status booking-list-btn text-warning" : (item.strStatus === "Approve" ? "btn approve-status booking-list-btn text-success" : ''))}>
-                            {item.strStatus !== null && item.strStatus !== '' ? item.strStatus : ''}
-                          </button>
+                          {
+                            item.strStatus === 'Approved' ? <button className="btn approve-status booking-list-btn text-success">Approved</button>
+                              :
+                              <button className={item.strStatus === "Rejected" ? "btn rejected-status booking-list-btn text-danger" : (item.strStatus === "Pending" ? "btn pending-status booking-list-btn text-warning" : (item.strStatus === "Approve" ? "btn approve-status booking-list-btn text-success" : ''))}>
+                                {item.strStatus !== null && item.strStatus !== '' ? item.strStatus : ''}
+                              </button>
+                          }
+
                         </td>
                         <td className="text-center">
 

@@ -7,7 +7,7 @@ import { handleChangePurchaseApprovalDetailInput, SubmitPurchaseApprove } from '
 import { round } from 'lodash';
 
 
-const RequisitionApprovalDetail = () => {
+const RequisitionApprovalDetail = ({ handleClose }) => {
 
     const { handleSubmit, register, errors, setValue } = useForm();
     const dispatch = useDispatch();
@@ -21,23 +21,27 @@ const RequisitionApprovalDetail = () => {
         (state) => state.purchaseApprovalFilter.purchaseApprovalMultiple
     );
 
-    console.log('purchaseApprovalMultiple', purchaseApprovalMultiple);
-
-
     const handleChangeTextInput = (name, value, item) => {
-        console.log('name', name, 'value', value, 'item', item);
         dispatch(handleChangePurchaseApprovalDetailInput(name, value, item));
     };
 
-    const onSubmit = () => {
+    const handleApprove = (e) => {
+        purchaseApprovalDetail.intStatus = 1;
+        dispatch(SubmitPurchaseApprove(purchaseApprovalDetail, handleClose));
+        e.preventDefault();
+
+    };
+
+    const handleReject = (e) => {
+        purchaseApprovalDetail.intStatus = 0;
         dispatch(SubmitPurchaseApprove(purchaseApprovalDetail));
+        e.preventDefault();
     };
 
     return (
         <div>
             <form
                 className="form form-label-right"
-                onSubmit={handleSubmit(onSubmit)}
                 method="post"
             >
                 {
@@ -134,7 +138,7 @@ const RequisitionApprovalDetail = () => {
                                                         <Form.Control
                                                             type="number"
                                                             name="numApprovedQty"
-                                                            defaultValue={round(item.numPurchaseRequestQty)}
+                                                            // defaultValue={round(item.numPurchaseRequestQty)}
                                                             value={item.numApprovedQty}
                                                             max={50}
                                                             className="fromStyle formHeight"
@@ -184,13 +188,16 @@ const RequisitionApprovalDetail = () => {
                                 <div className="col-sm-12">
                                     <div className="float-right">
                                         <button
+                                            type="button"
                                             className="btn btn-danger btn-sm"
+                                            onClick={(e) => handleReject(e)}
                                         >
                                             Reject
                                     </button>
                                         <button
-                                            type="submit"
+                                            type="button"
                                             className="btn btn-primary btn-sm ml-3 mr-3"
+                                            onClick={(e) => handleApprove(e)}
                                         >
                                             Approve
                                     </button>
