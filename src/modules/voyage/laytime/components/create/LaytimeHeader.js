@@ -96,7 +96,7 @@ const LaytimeHeader = () => {
   };
   return (
     <div className="container">
-      <div className="card card-custom gutter-b card-top-border">
+      <div className="card card-custom gutter-b card-tgitop-border">
         <div className="card-header">
           <div className="card-title">
             <h3 className="card-label">Laytime</h3>
