@@ -9,6 +9,7 @@ import AttachmentPreviewModel from "../../../../../master/components/previews/At
 import JSZip from 'jszip';
 import JSZipUtils from 'jszip-utils';
 import saveAs from 'save-as';
+import { GetExtensionFromUrl } from "../../../../../master/utils/StringHelper";
 
 const CertificateDetails = ({ handleClose, CertificateID }) => {
     const CRDetails = useSelector((state) => state.certificateMainInfo.certificateDetails);
@@ -30,7 +31,6 @@ const CertificateDetails = ({ handleClose, CertificateID }) => {
     const handleDownloadAttachment = () => {
         if (CRDetails !== null && CRDetails.multipleAttachments !== null && CRDetails.multipleAttachments.length > 0) {
             let attachmentFiles = CRDetails.multipleAttachments;
-            console.log('attachmentFiles :>> ', attachmentFiles);
             let newAttachment = [];
             if (attachmentFiles) {
                 attachmentFiles.forEach((item) => {
@@ -38,19 +38,18 @@ const CertificateDetails = ({ handleClose, CertificateID }) => {
                 });
             }
             const zip = new JSZip();
-            console.log('zip :>> ', zip);
             let count = 0;
-            const zipFilename = "attachment.zip";
+            const zipFilename = `attachment-${CRDetails.intCertificateDetailsID ? CRDetails.intCertificateDetailsID : ''}.zip`;
             newAttachment.forEach(function (url) {
-                const filename = "filename";
-                console.log('url check :>> ', url);
+                const extension = GetExtensionFromUrl(url);
+                const fileName = GetExtensionFromUrl(url, '/');
+                const saveFileName = `attachment/${fileName}`;
                 // loading a file and add it in a zip file
                 JSZipUtils.getBinaryContent(url, function (err, data) {
-                    console.log('data :>> ', data);
-                    // if (err) {
-                    //     throw err; // or handle the error
-                    // }
-                    zip.file(filename, data, { binary: true });
+                    if (err) {
+                        throw err; // or handle the error
+                    }
+                    zip.file(saveFileName, data, { binary: true });
                     count++;
                     if (count == newAttachment.length) {
                         zip.generateAsync({ type: 'blob' }).then(function (content) {
@@ -60,6 +59,7 @@ const CertificateDetails = ({ handleClose, CertificateID }) => {
                 });
             })
         }
+
     }
 
 
@@ -133,7 +133,7 @@ const CertificateDetails = ({ handleClose, CertificateID }) => {
                             <div className="custome-border-design">
                             </div>
                         </div>
-                        <Button variant="success" className="float-right m-2" onClick={() => handleDownloadAttachment()} download={true}>Download Documents</Button>
+                        <Button variant="success" className="float-right m-2" onClick={() => handleDownloadAttachment()} download={true}>Download All Documents</Button>
                         <Row>
                             <Col md={8} className="p-3 mt-1">
                                 <div className="react-bootstrap-table table-responsive">
