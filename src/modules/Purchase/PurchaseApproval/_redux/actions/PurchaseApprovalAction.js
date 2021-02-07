@@ -58,7 +58,9 @@ export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBu
     };
 
     dispatch({ type: Types.GET_PURCHASE_APPROVAL_LIST, payload: response });
-
+    console.log('intSBUId checking :>> ', intSBUId);
+  
+    // http://127.0.0.1:8000/api/v1/purchase/getApproval?search=akij&branchName=akij&shipName=akij 
 
     try {
         let url = `${process.env.REACT_APP_API_URL}purchase/getApproval?`;
@@ -69,10 +71,12 @@ export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBu
         url += intShipID !== null ? `intShipID=${intShipID}&` : '';
         url += dteFromDate !== null ? `dteFromDate=${dteFromDate}&` : '';
 
+        console.log('url :>> ', url);
         if (searchValue === "" && intSBUId === null && intBusinessUnitId === null && intShipID === null) {
             dispatch({ type: Types.GET_PURCHASE_APPROVAL_LIST, payload: response })
         } else {
             await Axios.get(url).then((res) => {
+                console.log('res :>> ', res);
                 const { status, message, errors, data } = res.data;
                 response.purchaseApprovalList = data;
                 response.status = status;
