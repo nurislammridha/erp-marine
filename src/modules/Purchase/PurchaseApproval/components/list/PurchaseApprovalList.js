@@ -16,10 +16,11 @@ const PurchaseApprovalList = () => {
   const dispatch = useDispatch();
   const purchaseApprovalListData = useSelector((state) => state.purchaseApprovalFilter.purchaseApprovalList);
   const [requisitionDetailsShow, setRequisitionDetailsShow] = useState(false)
-
+  const [PRID, setPRID] = useState(null)
   const handleClick = (id) => {
     setRequisitionDetailsShow(true);
     dispatch(GetPurchaseApprovalDetail(id));
+    setPRID(id)
   }
 
 
@@ -117,7 +118,7 @@ const PurchaseApprovalList = () => {
         handleShow={() => setRequisitionDetailsShow(true)}
         modalTitle={"Requisition Approval Details"}
       >
-        <RequisitionApprovalDetail handleClose={() => setRequisitionDetailsShow(false)} />
+        <RequisitionApprovalDetail handleClose={() => setRequisitionDetailsShow(false)} id={PRID} />
       </SimpleModal>
 
     </Card >

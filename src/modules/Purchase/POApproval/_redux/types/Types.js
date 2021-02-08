@@ -9,4 +9,7 @@ export const GET_PO_APPROVAL_DETAIL = "GET_PO_APPROVAL_DETAIL";
 export const SUBMIT_PO_APPROVE = "SUBMIT_PO_APPROVE";
 export const CHANGE_PO_APPROVAL_DETAIL_INPUT = "CHANGE_PO_APPROVAL_DETAIL_INPUT";
 
+//************Purhase Order Approval ************ */
+export const PO_APPROVAL_DETAILS_INPUT = "PO_APPROVAL_DETAILS_INPUT";
+
 
