@@ -110,7 +110,7 @@ const POApprovalReducer = (state = initialState, action) => {
             const newMultipleData = {
                 intStatus: null,
                 strStatus: '',
-                POApprovalMultiple: POApproval,
+                poApprovalStatus: POApproval,
             }
             return {
                 ...state,
