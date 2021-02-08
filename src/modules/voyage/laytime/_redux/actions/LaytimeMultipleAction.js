@@ -37,19 +37,31 @@ export const handleChangeLaytimeMultiple = (name, value,index) => (dispatch) => 
   export const showSoftacton = (data)=>(dispatch)=>{
     let id = data.item.intLayTimeRowID;
     let LayTimeSofOperationListURL = `${process.env.REACT_APP_API_URL}voyage/layTimeSofOperationList/${id}`;
+    // if(isEmptyData){
+    //   dispatch({ type: Types.ADD_NEW_SOF, payload: null });
+    //   dispatch({ type: Types.ADD_NEW_OPERATION, payload: null });
+    // }else{
+      Axios.get(LayTimeSofOperationListURL)
+      .then((response) => {
+           
+          let data = response.data.data;
+          data['sof'].forEach(sof => {
+            dispatch({ type: Types.ADD_NEW_SOF, payload: sof });
+          });
+          data['operation'].forEach(operation => {
+            dispatch({ type: Types.ADD_NEW_OPERATION, payload: operation });
+          });
 
-    Axios.get(LayTimeSofOperationListURL)
-    .then((response) => {
-         
-        let data = response.data.data;
-        console.log('data', data);
-        data['sof'].forEach(sof => {
-          dispatch({ type: Types.ADD_NEW_SOF, payload: sof });
-        });
-        data['operation'].forEach(operation => {
-          dispatch({ type: Types.ADD_NEW_OPERATION, payload: operation });
-        });
-    })
+          if(data['sof'].length === 0){
+            dispatch({ type: Types.ADD_NEW_SOF, payload: null });
+          }
+
+          if(data['operation'].length === 0){
+            dispatch({ type: Types.ADD_NEW_OPERATION, payload: null });
+          }
+      })
+    // }
+    
   }
 
   export const addNewSof = () => (dispatch)=>{
@@ -61,11 +73,9 @@ export const handleChangeLaytimeMultiple = (name, value,index) => (dispatch) => 
   }
 
   //submit sof and operation 
-export const multipleSubmitAction = (layTimeMultipleInput) => async (dispatch) => {
-
-  console.log("layTimeMultipleInput from action : >>>> ",layTimeMultipleInput);
-
-  const sofAndOperationData = layTimeMultipleInput;
+export const multipleSubmitAction = (layTimeMultipleInput, intLayTimeHeaderID, intLayTimeRowID) => async (dispatch) => {
+  layTimeMultipleInput.intLayTimeHeaderID = intLayTimeHeaderID;
+  layTimeMultipleInput.intLayTimeRowID = intLayTimeRowID;
   let responseList = {
       loading: true,
       data: {},
@@ -74,10 +84,9 @@ export const multipleSubmitAction = (layTimeMultipleInput) => async (dispatch) =
 
   // dispatch({ type: Types.SOFANDOPERATION_DATA_SUBMITTING, payload: responseList });
 
-  Axios.post(`${process.env.REACT_APP_API_URL}voyage/layTimeDetail`, sofAndOperationData)
+  Axios.post(`${process.env.REACT_APP_API_URL}voyage/layTimeDetail`, layTimeMultipleInput)
 
       .then((res) => {
-          console.log('res sofAndOperationData row data :>> ', res);
           responseList.data = res.data;
           responseList.loading = false;
           responseList.status = res.data.status;
@@ -90,7 +99,6 @@ export const multipleSubmitAction = (layTimeMultipleInput) => async (dispatch) =
           }
       })
       .catch((error) => {
-          console.log('error', error);
           responseList.loading = false;
           const message = "Something went wrong, Please try again !";
           showToast("error", message);
@@ -98,8 +106,8 @@ export const multipleSubmitAction = (layTimeMultipleInput) => async (dispatch) =
       });
 }
 
-export const removeSofData = (data) => (dispatch) => {
-
+export const removeSofData = (data) => (dispatch) => { 
+  Axios.delete(`${process.env.REACT_APP_API_URL}voyage/deleteLayTimeSofList/${data.intLayTimeDetailsID}`);
   dispatch({
       type: Types.DELETE_SOF_DATA,
       payload: data,
@@ -107,7 +115,7 @@ export const removeSofData = (data) => (dispatch) => {
 }
 
 export const removeOperationData = (data) => (dispatch) => {
-
+  Axios.delete(`${process.env.REACT_APP_API_URL}voyage/deleteLayTimeSofList/${data.intLaytimeOperationID}`);
   dispatch({
       type: Types.DELETE_OPERATION_DATA,
       payload: data,

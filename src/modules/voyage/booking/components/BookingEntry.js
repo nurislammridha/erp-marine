@@ -212,18 +212,6 @@ const BookingEntry = () => {
 
             <div className="col-xl-3 col-lg-3 col-6">
               <label className="formFont">Freight/ Hire Rate</label>
-              {/* <RHFInput
-                as={<Select options={VesselBooking} />}
-                rules={{ required: false }}
-                name="numFreightOrHireRate"
-                register={register}
-                value={VesselBooking.numFreightOrHireRate}
-                onChange={(option) => {
-                  handleChangeTextInput('strFreightOrHireName', option.label);
-                  handleChangeTextInput('numFreightOrHireRate', option.value)
-                }}
-                setValue={setValue}
-              /> */}
               <Form.Control
                 className="formHeight"
                 name="numFreightOrHireRate"

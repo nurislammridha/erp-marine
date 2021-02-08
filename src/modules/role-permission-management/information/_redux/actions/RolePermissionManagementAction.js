@@ -2,46 +2,107 @@ import Axios from "axios";
 import { showToast } from "../../../../master/utils/ToastHelper";
 import * as Types from "../types/Types";
 
+export const AddRolePermissionInput = (name, value) => (dispatch) => {
+  const formData = {
+      name: name,
+      value: value
+  }
+  dispatch({ type: Types.CHANGE_ROLE_INPUT, payload: formData })
+}
 
+export const getRoleListByPagination = () => (dispatch) => {
+  const responseList = {
+    isLoading: true,
+    rolesList: [],
+    rolesListPaginated: null,
+  };
 
-export const getRoleList = (id) => (dispatch) => {
+  dispatch({ type: Types.GET_USER_ROLE_LIST_PAGINATED, payload: responseList });
+
   Axios
-    .get(
-      `http://10.17.2.222:8080/iMarineAPI/public/api/v1/roles/getAllPermission`
-    )
+    .get(`${process.env.REACT_APP_API_URL}roles/getAllRoles`)
     .then((res) => {
-      let data = res.data.data;
-      console.log('res.data roles', res.data.data);
-      dispatch({ type: Types.GET_USER_ROLE_LIST, payload: data });
+      const { data, message } = res.data;
+      responseList.rolesList = data.data;
+      responseList.message = message;
+      responseList.rolesListPaginated = data;
+      responseList.isLoading = false;
+      dispatch({ type: Types.GET_USER_ROLE_LIST_PAGINATED, payload: responseList });
     });
-
 };
-export const storePermission = (postData,roleData) => (dispatch) => {
 
-   postData.name=roleData;
+export const getRoleDetailsData = (id) => (dispatch) => {
+  const responseList = {
+    isLoading: true,
+    data: []
+  };
 
-   console.log('postData', postData);
+  dispatch({ type: Types.GET_ROLE_DETAILS_DATA, payload: responseList });
 
-  let postUrl = `http://10.17.2.222:8080/iMarineAPI/public/api/v1/roles/storePermission`
   Axios
-    .post(postUrl,postData)
+    .get(`${process.env.REACT_APP_API_URL}roles/getAllPermissionByRole/${id}`)
     .then((res) => {
-      let data = res.data.data;
-      console.log('storePermission', res.data.data);
-
-      dispatch({ type: Types.GET_USER_ROLE_POST, payload: data });
+      dispatch({ type: Types.GET_ROLE_DETAILS_DATA, payload: res.data.data });
     });
-
 };
+
+
+export const emptyRoleStatusMessage = () => (dispatch) => {
+  dispatch({ type: Types.EMPTY_ROLE_STATUS, payload: null });
+}
+
+export const storeRoleAction = (roleInputData) => (dispatch) => {
+  const responseList = {
+    isLoading: true,
+    status: false,
+    message: '',
+    data: null
+  };
+  dispatch({ type: Types.CREATE_ROLE, payload: responseList });
+
+  Axios
+    .post(`${process.env.REACT_APP_API_URL}roles/storePermission`, roleInputData)
+    .then((res) => {
+      const { data, status, message } = res.data;
+      responseList.status = status;
+      responseList.message = message;
+      responseList.isLoading = false;
+      responseList.data = data;
+      showToast('success', message);
+      dispatch({ type: Types.CREATE_ROLE, payload: responseList });
+    }).catch(err => {
+      responseList.status = false;
+      responseList.isLoading = false;
+      responseList.message = 'Somethting went wrong, Please check inputs !';
+      showToast('error', responseList.message);
+      dispatch({ type: Types.CREATE_ROLE, payload: responseList });
+    });
+};
+
+export const getRoleList = () => (dispatch) => {
+  Axios
+    .get(`${process.env.REACT_APP_API_URL}roles/getAllPermission`)
+    .then((res) => {
+      dispatch({ type: Types.GET_USER_ROLE_LIST, payload: res.data.data });
+    });
+};
+
+export const getPermissionGroups = () => (dispatch) => {
+  Axios
+    .get(`${process.env.REACT_APP_API_URL}roles/getAllPermission`)
+    .then((res) => {
+      dispatch({ type: Types.GET_USER_PERMISSION_GROUPS, payload: res.data.data });
+    });
+};
+
 export const roleCheckboxSelect = (checkboxStatus, parentRole, item, indexChild, indexparentRole) => (dispatch) => {
-  let data = {
+  dispatch({ type: Types.USER_ROLE_CHECKED, payload: {
     checkboxStatus: checkboxStatus,
     parentRole: parentRole,
     item: item,
     indexChild: indexChild,
     indexparentRole: indexparentRole,
-  }
-  dispatch({ type: Types.USER_ROLE_CHECKED, payload: data });
+  }});
 
 };
 export const handleInputData = (name,value) => (dispatch) => {
@@ -59,9 +120,8 @@ export const allCheckboxSelected = (status) => (dispatch) => {
 };
 
 export const checkPermissionGroupAction = (index, isGroupChecked) => (dispatch) => {
-  const data = {
+  dispatch({ type: Types.USER_ROLE_CHECKED_GROUP, payload: {
     index: index,
     isGroupChecked: isGroupChecked
-  }
-  dispatch({ type: Types.USER_ROLE_CHECKED_GROUP, payload: data });
+  }});
 };

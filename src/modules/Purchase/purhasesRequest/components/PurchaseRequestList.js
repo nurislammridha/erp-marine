@@ -1,25 +1,64 @@
+import React, { useEffect, useState } from 'react';
 import { IconButton, InputBase, Paper } from '@material-ui/core';
-import React from 'react';
 import { Button, Card } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SimpleModal from '../../../master/components/Modal/SimpleModal';
+import { getPRListData } from '../_redux/actions/PurhasesRequestAction';
+import PaginationLaravel from '../../../master/pagination/PaginationLaravel';
+import LoadingSpinner from "../../../master/spinner/LoadingSpinner";
 
+import moment from "moment"
+import PurchaseRequestDetails from './PurchaseRequestDetails';
 const PurchaseRequestList = () => {
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.purchaseRequest.isLoading);
+  const PRListData = useSelector((state) => state.purchaseRequest.PRListData);
+  const PRPaginateData = useSelector((state) => state.purchaseRequest.PRPaginateData);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchText, setSearchText] = useState("");
+  const [PRDetailsShow, setPRDetailsShow] = useState(false)
+  const [PRDetailsID, setPRDetailsID] = useState(null)
+  const [status, setStatus] = useState()
+
+  useEffect(() => {
+    dispatch(getPRListData(currentPage));
+  }, [dispatch, currentPage]);
+
+  const changePage = (data) => {
+    setCurrentPage(data.page);
+    dispatch(getPRListData(data.page));
+  };
+
+  const searchProduct = (e) => {
+    const searchText = e.target.value;
+    setSearchText(searchText);
+    if (searchText.length === 0) {
+      dispatch(getPRListData(currentPage));
+    } else {
+      dispatch(getPRListData(currentPage, searchText));
+    }
+  };
+  const handleShowPQDetails = (item) => {
+    setPRDetailsID(item.intPurchaseRequestID);
+    setPRDetailsShow(true);
+    setStatus(item.strStatus)
+  }
   return (
     <Card>
       <Card.Body>
         <div className="container ">
-          <div className="row mb-5 table-form ">
+          <div className="row mb-5 table-form">
             <h1 className="tableheading mt-0 ">Purchase Request</h1>
 
             <hr></hr>
-            <div className="col-xl-4 col-lg-4 col-5 mb-2">
+            <div className="col-xl-4 col-lg-4 col-5">
               <Paper className="searchInput">
-
                 <InputBase
+                  className="custome-purchase-search"
                   placeholder="Search "
-                // value={searchText}
-                // onChange={searchProduct}
+                  value={searchText}
+                  onChange={searchProduct}
                 />
                 <IconButton aria-label="Search" className="searchPlaceholder purchaseSearch">
                   <i className="flaticon-search "></i>
@@ -29,15 +68,15 @@ const PurchaseRequestList = () => {
             {/* <div className="col-xl-6 col-lg-6 col-md-6 col-sm-0"></div> */}
 
             <div>
-              <Link to="/voyage/booking/bookingentry">
+              <Link to="/purchase/request/create">
                 <Button className="btn-sm" variant="primary">
-                  Add New
+                  New Requisition
             </Button>
               </Link>
 
             </div>
           </div>
-          {/* {isLoading && <LoadingSpinner text="Loading Vessel Booking List..." />} */}
+          {isLoading && <LoadingSpinner text="Loading Purchase Request List..." />}
           <div className="row">
             <div className="react-bootstrap-table table-responsive">
               <table className="table table table-head-custom table-vertical-center  voyageTable">
@@ -51,70 +90,67 @@ const PurchaseRequestList = () => {
                     <th scope="col">ACTION</th>
                   </tr>
                 </thead>
-                {/* <tbody>
+                <tbody>
                   {
-                    VesselBookingList.length > 0 && VesselBookingList.map((item, index) => (
+                    PRListData.length > 0 && PRListData.map((item, index) => (
                       <tr>
-                        <td onClick={(id) => getVesselBookingID(item)}>{vesselPaginateData.from + index}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strCargoName !== null && item.strCargoName !== '' ? item.strCargoName : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strShipName !== null && item.strShipName !== '' ? item.strShipName : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strVoyageNo !== null && item.strVoyageNo !== '' ? item.strVoyageNo : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.dteCommenceDate !== null && item.dteCommenceDate !== '' ? moment(item.dteCommenceDate).format("DD-MM-YYYY") : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strCompletionPortName !== null && item.strCompletionPortName !== '' ? item.strCompletionPortName : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.dteCompletionDate !== null && item.dteCompletionDate !== '' ? moment(item.dteCompletionDate).format("DD-MM-YYYY") : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strCommencePortName !== null && item.strCommencePortName !== '' ? item.strCommencePortName : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.numFreightOrHireRate !== null && item.numFreightOrHireRate !== '' ? item.numFreightOrHireRate : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>
-                          <button className={item.strBookingStatus === "Rejected" ? "btn rejected-status booking-list-btn text-danger" : (item.strBookingStatus === "Pending" ? "btn pending-status booking-list-btn text-warning" : "btn approve-status booking-list-btn text-success")}>
-                            {item.strBookingStatus !== null && item.strBookingStatus !== '' ? item.strBookingStatus : ''}
-                          </button>
+                        <td>{item.intPurchaseRequestID !== null && item.intPurchaseRequestID !== '' ? item.intPurchaseRequestID : ''}</td>
+                        <td>{item.dtePurchaseRequestDate !== null && item.dtePurchaseRequestDate !== '' ? moment(item.dtePurchaseRequestDate).format("DD-MM-YYYY") : ''}</td>
+                        <td>{item.strCategoryName !== null && item.strCategoryName !== '' ? item.strCategoryName : ''}</td>
+                        <td>{item.strRemarks !== null && item.strRemarks !== '' ? item.strRemarks : ''}</td>
+                        <td>
+                          {
+                            item.strStatus === 'Approved' ? <button className="btn approve-status booking-list-btn text-success">Approved</button>
+                              :
+                              <button className={item.strStatus === "Rejected" ? "btn rejected-status booking-list-btn text-danger" : (item.strStatus === "Pending" ? "btn pending-status booking-list-btn text-warning" : (item.strStatus === "Approve" ? "btn approve-status booking-list-btn text-success" : ''))}>
+                                {item.strStatus !== null && item.strStatus !== '' ? item.strStatus : ''}
+                              </button>
+                          }
+
                         </td>
-                        {/* intBookingStatusId */}
-                {/* <td>
-                  {/* {""} */}
-                {/*}  <div className="d-flex">
-                    <Link onClick={(id) => getVesselBookingID(item)}>
-                      <i className="far fa-eye editIcon item-list-icon"></i>
-                    </Link>
-                    <Link to={`/voyage/booking/bookingEdit/${item.intShipBookingId}`}>
-                      <i className="far fa-edit editIcon item-list-icon ml-2"></i>
-                    </Link>
-                    <a href onClick={() => deleteVesselBookDetails(item.intShipBookingId)} >
-                      <i className="fas fa-trash-alt editIcon item-list-icon ml-2"></i>
-                    </a>
-                  </div>
-                </td>
+                        <td className="text-center">
+
+                          <div className="d-flex">
+                            <Link onClick={() => handleShowPQDetails(item)}>
+                              <i className="far fa-eye editIcon item-list-icon"></i>
+                            </Link>
+                            {/* <Link>
+                              <i className="far fa-edit editIcon item-list-icon ml-2"></i>
+                            </Link>
+                            <a href >
+                              <i className="fas fa-trash-alt editIcon item-list-icon ml-2"></i>
+                            </a> */}
+                          </div>
+                        </td>
                       </tr>
                     ))
                   }
-                </tbody>  */}
+                </tbody>
               </table>
-              {/* {!isLoading && VesselBookingList.length === 0 && (
+              {!isLoading && PRListData.length === 0 && (
                 <div className="alert alert-warning mt-5">
-                  Sorry ! Vessel Booking List Not Found.
+                  Sorry ! Purchase Request List Not Found.
                 </div>
-              )} */}
-              {/* <PaginationLaravel
+              )}
+              <PaginationLaravel
                 changePage={changePage}
-                data={vesselPaginateData}
-              /> */}
+                data={PRPaginateData}
+              />
             </div>
           </div>
         </div>
-        {/*  */}
+
       </Card.Body >
       <SimpleModal
-        size="xl"
-        // status={status}
-        // show={bookDetailShow}
-        // handleClose={() => setBookDetailShow(false)}
-        // handleShow={() => setBookDetailShow(true)}
-        // vesselBookingID={vesselBookingID}
-        modalTitle={"Vessel Booking Details"}
+        size="lg"
+        status={status}
+        show={PRDetailsShow}
+        handleClose={() => setPRDetailsShow(false)}
+        handleShow={() => setPRDetailsShow(true)}
+        PRDetailsID={PRDetailsID}
+        modalTitle={"Purchase Request Details"}
       >
-        {/* <VesselBookingDetails handleClose={() => setBookDetailShow(false)} vesselBookingID={vesselBookingID} /> */}
+        <PurchaseRequestDetails handleClose={() => setPRDetailsShow(false)} PRDetailsID={PRDetailsID} />
       </SimpleModal>
     </Card >
   );

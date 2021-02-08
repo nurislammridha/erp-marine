@@ -8,7 +8,6 @@ import { RHFInput } from "react-hook-form-input";
 import DatePicker from "react-datepicker";
 import FileBase64 from "react-file-base64";
 import moment from 'moment';
-
 import {
   deleteProductImagePreview,
   handleChangeProductInputAction,
@@ -37,6 +36,8 @@ import {
 import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
 import MultipplePreviewAttachment from "../../../../master/components/previews/MultiplePreviewAttachment";
 import { handleChangeCertificateMasterInput } from "../../../certificate-master/_redux/actions/CertificateListAction";
+import AttachmentPreviewModel from "../../../../master/components/previews/AttachmentPreviewModel";
+import { GetExtensionFromUrl } from "../../../../master/utils/StringHelper";
 
 const CertificateMainEdit = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -127,6 +128,13 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
   const [showCertificateModal, setShowCertificateModal] = useState(false);
   const [showIssuedByModal, setShowIssuedByModal] = useState(false);
   const startDate = new Date().toLocaleDateString();
+  const [attachmentPreviewModel, setAttachmentPreviewModel] = useState(false);
+  const [previewAttachment, setPreviewAttachment] = useState(null);
+
+  const PreviewAttachment = (attachment) => {
+    setAttachmentPreviewModel(true);
+    setPreviewAttachment(attachment)
+  }
 
   return (
     <>
@@ -137,7 +145,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
       {isEditLoaded && certificateEditInfo !== null && (
         <>
           <div className="container">
-            <div className="card card-custom gutter-b">
+            <div className="card card-custom gutter-b card-top-border">
               <div className="card-header">
                 <div className="card-title">
                   <h3 className="card-label">Certificate Edit <span className="badge badge-primary">{certificateEditInfo.strCustomeCode}</span></h3>
@@ -214,7 +222,8 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                             setValue={setValue}
                           />
                         </div>
-                        <div className="float-right">
+
+                        {/* <div className="float-right">
                           <button
                             className="btn btn-default"
                             type="button"
@@ -224,7 +233,8 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                           >
                             <i className="fa fa-plus-circle"></i>
                           </button>
-                        </div>
+                        </div> */}
+
                       </div>
                     </div>
                     {/*====Sub Category=====*/}
@@ -233,28 +243,6 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                       <label className="form-label">Certificate Name</label>
                       <div className="input-area-add">
                         <div className="float-left">
-                          {/* <RHFInput
-                            as={<Select options={certificatesNameOption} defaultValue={"Hello"} />}
-                            // rules={{ required: true }}
-                            name="intCertificateID"
-                            register={register}
-                            value={certificateEditInfo.certificate}
-                            onChange={(option) => {
-                              certificateMainInfoChange(
-                                "intCertificateName",
-                                option.label
-                              );
-                              certificateMainInfoChange("certificate", {
-                                label: option.label,
-                                value: option.value,
-                              });
-                              certificateMainInfoChange(
-                                "intCertificateID",
-                                option.value
-                              );
-                            }}
-                            setValue={setValue}
-                          /> */}
                           <RHFInput
                             as={<Select options={certificatesNameOption} />}
                             // rules={{ required: true }}
@@ -274,7 +262,8 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                             setValue={setValue}
                           />
                         </div>
-                        <div className="float-right">
+
+                        {/* <div className="float-right">
                           <button
                             className="btn btn-default"
                             type="button"
@@ -284,7 +273,8 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                           >
                             <i className="fa fa-plus-circle"></i>
                           </button>
-                        </div>
+                        </div> */}
+
                       </div>
                     </div>
 
@@ -315,7 +305,8 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                             setValue={setValue}
                           />
                         </div>
-                        <div className="float-right">
+
+                        {/* <div className="float-right">
                           <button
                             className="btn btn-default"
                             type="button"
@@ -325,7 +316,8 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                           >
                             <i className="fa fa-plus-circle"></i>
                           </button>
-                        </div>
+                        </div> */}
+
                       </div>
                     </div>
 
@@ -442,7 +434,8 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                             setValue={setValue}
                           />
                         </div>
-                        <div className="float-right">
+
+                        {/* <div className="float-right">
                           <button
                             className="btn btn-default"
                             type="button"
@@ -452,7 +445,9 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                           >
                             <i className="fa fa-plus-circle"></i>
                           </button>
-                        </div>
+                        </div> */}
+
+
                       </div>
 
                       {/* <div className="inputError margin-minus-10">
@@ -943,21 +938,6 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                   <div className="form-group row mt-1 border mt-2 pb-3 bg-light">
                     <div className="col-lg-3">
                       <label className="form-label mt-2">Attachments</label>
-                      {/* <Form.Control
-                      type="file"
-                      name="multipleAttachments[]"
-                      className="fromStyle formHeight" 
-                      onChange={(e) =>
-                        certificateMainInfoChange(
-                          "multipleAttachments",
-                          e.target.value
-                        )
-                      }
-                      ref={register({
-                        required: false,
-                        maxLength: 100,
-                      })}
-                    /> */}
                       <div className="attachment-file">
                         <FileBase64
                           name="multipleAttachments"
@@ -966,6 +946,8 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                         />
                       </div>
                     </div>
+
+
                     <div className="col-lg-8">
                       {certificateEditInfo.multipleAttachments.length > 0 && (
                         <table className="table tbl-standard table-bordered tbl-survey">
@@ -987,14 +969,15 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                                   <td>{attachment.size}</td>
                                   <td>
                                     {" "}
-                                    <MultipplePreviewAttachment
-                                      attachment={attachment.filePreviewUrl}
-                                      url={attachment.filePreviewUrl ? attachment.filePreviewUrl : "files/" + attachment.name}
-                                      base64={attachment.base64}
-                                      title="Preview"
-                                      height={50}
-                                      width={50}
-                                    />
+                                    <span className="btn border-none" onClick={() => PreviewAttachment(attachment)}>
+                                      <MultipplePreviewAttachment
+                                        url={attachment.filePreviewUrl ? attachment.filePreviewUrl : `/${attachment.name}`}
+                                        base64={attachment.base64}
+                                        title="Preview"
+                                        height={50}
+                                        width={50}
+                                      />
+                                    </span>
                                   </td>
                                   <td
                                     style={{ width: 70, textAlign: "center" }}
@@ -1014,6 +997,9 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                         </table>
                       )}
                     </div>
+
+
+
                   </div>
                   <div className="form-group row">
                     <div className="col-sm-10">
@@ -1084,6 +1070,17 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                   modalTitle={"Issuing Authority"}
                 >
                   <IssueAuthorityAdd />
+                </SimpleModal>
+
+                <SimpleModal
+                  size="lg"
+                  previewAttachment={previewAttachment}
+                  show={attachmentPreviewModel}
+                  handleClose={() => setAttachmentPreviewModel(false)}
+                  handleShow={() => setAttachmentPreviewModel(true)}
+                  modalTitle={"Attachment Preview"}
+                >
+                  <AttachmentPreviewModel handleClose={() => setAttachmentPreviewModel(false)} previewAttachment={previewAttachment} />
                 </SimpleModal>
               </div>
             </div>

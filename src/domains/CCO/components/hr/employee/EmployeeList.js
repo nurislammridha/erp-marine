@@ -120,7 +120,7 @@ const EmployeeList = withRouter(({ history, props }) => {
         <div className="card card-custom gutter-b">
           <div className="card-header">
             <div className="card-title">
-              <h3 className="card-label">Employee List</h3>
+              <h3 className="card-label">Employee List </h3>
             </div>
             <PermissionWiseDisplay permission_name={'crew_create'} display={false}>
             <div className="card-toolbar">
@@ -143,7 +143,7 @@ const EmployeeList = withRouter(({ history, props }) => {
                 <label className="form-label">Vessel</label>
               </div>
               <select
-                className="form-control"
+                className="form-control employee-list-input"
                 name="vesselId"
                 placeholder="Search Any Information"
                 onChange={selectHandle}
@@ -169,15 +169,16 @@ const EmployeeList = withRouter(({ history, props }) => {
                 name="employee"
                 id="ysnSignIn"
                 onChange={handleChange}
+                className="formHeight"
               />
             </div>
 
-            <div className="col-lg-3 mt-2">
+            <div className="col-lg-3 ">
               <div>
                 <label className="form-label"></label>
               </div>
               <button
-                className="btn"
+                className="btn btn-sm"
                 onClick={serchEmployee}
                 style={{ backgroundColor: "#E1F0FF", color: "#3699FF" }}
               >

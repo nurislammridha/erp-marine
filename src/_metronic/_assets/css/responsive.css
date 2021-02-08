@@ -38,9 +38,7 @@
     .doug__left {
         padding-top: 0px;
     }
-    .dashboard-cardsection {
-        padding-top: 30px;
-    }
+    
     .chart__box {
         height: 407px !important;
     }
@@ -167,6 +165,55 @@
     }
     .row.custom-modal {
         width: 329px;
+    }
+    .aside {
+      
+        width: 184px;
+    }
+   
+    h5.text-muted.font-weight-bold.my-2.mr-5.ml-5 {
+        font-size: 13px!important;
+        width: 55%!important;
+    }
+    .dashboard-cardsection {
+        margin-bottom: -11px!important;
+    }
+    .topbar {
+        background-color: #3699FF;
+        z-index: 95!important;
+    }
+    .header-fixed.subheader-fixed .subheader {
+        z-index: 93!important;
+    }
+    .dashboard-cardsection {
+        padding-top: 45px!important;
+    }
+    .purchase-table{
+        margin-top: 10px;
+    }
+    .linechart {
+        margin-top: -18px;
+    }
+    .float-left.booking-text {
+        width: 23%;
+    }
+    
+    .booking-text.float-right {
+        width: 74%;
+    }
+    .float-left.booking-text.one {
+        width: 25%;
+    }
+    
+    .booking-text.float-right.one {
+        width: 70%;
+    }
+    .float-left.booking-text.two {
+        width: 23%;
+    }
+    
+    .booking-text.float-right.two{
+        width: 67%;
     }
 }
 

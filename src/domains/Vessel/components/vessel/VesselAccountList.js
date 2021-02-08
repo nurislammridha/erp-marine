@@ -134,7 +134,7 @@ const VesselAccountList = withRouter(({ history, props }) => {
                 <label className="form-label">Vessel</label>
               </div>
               <select
-                className="form-control"
+                className="form-control employee-list-input"
                 name="vesselId"
                 placeholder="Search Any Information"
                 onChange={selectHandle}

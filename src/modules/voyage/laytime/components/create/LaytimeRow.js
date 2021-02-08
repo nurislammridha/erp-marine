@@ -21,14 +21,11 @@ const LaytimeRow = () => {
         (state) => state.laytimeDetailInfo.laytimeDataList
       );
 
-    // console.log("laytimeRowInput data by row:",laytimeRowInput);
-
     const [show, setShow] = useState(false);
     // handle change lay time row input
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeLaytimeRowInput(name, value));
     };
-console.log('laytimeRowInput', laytimeRowInput)
     // for testing port 
     const selectPort = [
         {
@@ -87,7 +84,7 @@ console.log('laytimeRowInput', laytimeRowInput)
                     <div className="card card-custom gutter-b">
                         <div className="card-header">
                             <div className="card-title">
-                                <h3 className="card-label">Laytime Row</h3>
+                                <h3 className="card-label">Port Details</h3>
                             </div>
                         </div>
                         <div className="card-body">
@@ -225,7 +222,7 @@ console.log('laytimeRowInput', laytimeRowInput)
                                     </div>
                                     <div className="row">
                                         <div className="row col-md-6">
-                                            <div className="col-md-7">
+                                            <div className="col-md-12">
                                                 <label className="form-label mt-2 formFont">Time Allowed</label>
                                                 <Form.Control
                                                     type="number"

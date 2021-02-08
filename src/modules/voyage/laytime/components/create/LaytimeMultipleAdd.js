@@ -39,9 +39,6 @@ const LaytimeMultipleAdd = () => {
   const remarkList = useSelector(
     (state) => state.layTimeOperationRemark.remarkList
   );
-
-  console.log("layTimeOperationList : ", remarkList);
-
   const dispatch = useDispatch();
   const laytimeDataList = useSelector(
     (state) => state.laytimeDetailInfo.laytimeDataList
@@ -50,9 +47,6 @@ const LaytimeMultipleAdd = () => {
   // const layTImeRowData = useSelector(
   //   (state) => state.laytimeDetailInfo.laytimeRowData
   // );
-
-  console.log("laytimeDataList list >>>>>>>>>> : ", laytimeDataList);
-
   useEffect(() => {
     dispatch(getRemarkList());
   }, []);
@@ -66,16 +60,19 @@ const LaytimeMultipleAdd = () => {
   const layTimeMultipleInput = useSelector(
     (state) => state.LaytimeMultiple.layTimeMultipleInput
   );
+  const intLayTimeHeaderID = useSelector(
+    (state) => state.LaytimeMultiple.intLayTimeHeaderID
+  );
+  const intLayTimeRowID = useSelector(
+    (state) => state.LaytimeMultiple.intLayTimeRowID
+  );
   const layTimeDetailsList = useSelector(
     (state) => state.LaytimeMultiple.layTimeMultipleInput.layTimeDetails
   );
-  console.log("laytimeDetailsData page", layTimeDetailsList);
 
   const layTimeOperationList = useSelector(
     (state) => state.LaytimeMultiple.layTimeMultipleInput.layTimeOperations
   );
-
-  console.log("layTimeMultipleInput from reducer", layTimeMultipleInput);
 
   const laytimeopData = useSelector(
     (state) => state.LaytimeMultiple.layTimeOperation
@@ -92,13 +89,8 @@ const LaytimeMultipleAdd = () => {
   const loading = useSelector((state) => state.LaytimeMultiple.loading);
 
   const operationhandleChangeTextInput = (name, value, index) => {
-    console.log("index", index);
-    console.log("name", name);
-    console.log("value", value);
     dispatch(handleChangeLaytimeMultipleOperation(name, value, index));
   };
-
-  console.log("softShow", softShow);
 
   const [show, setShow] = useState([]);
 
@@ -113,10 +105,35 @@ const LaytimeMultipleAdd = () => {
   };
 
   const showSofsList = (data) => {
+    // normal insert, payload data set getted insert,
+    // const isEmptyData = false;
+    // isEmptyData)
     dispatch(showSoftacton(data));
   };
 
   const addSof = (index) => {
+   
+    if (layTimeMultipleInput.layTimeDetails.dteStartTime === "undefined") {
+      showToast('error', "Start date can't be blank!")
+      return false;
+    }
+    if (layTimeMultipleInput.layTimeDetails.dteEndTime === "undefined") {
+      showToast('error', "End date can't be blank!")
+      return false;
+    }
+    if (layTimeMultipleInput.layTimeDetails.numTimeUsed === null) {
+      showToast('error', "Time Used can't be blank!")
+      return false;
+    }
+    if (layTimeMultipleInput.layTimeDetails.numRatio === null) {
+      showToast('error', "Ratio can't be blank!")
+      return false;
+    }
+    if (layTimeMultipleInput.layTimeDetails.strRemarks === "undefined") {
+      showToast('error', "Remarks can't be blank!")
+      return false;
+    }
+
     dispatch(addNewSof(index));
   };
 
@@ -137,10 +154,14 @@ const LaytimeMultipleAdd = () => {
   //SOF AND OPERATION FINAL SUBMIT
 
   const HandleMultipleSubmit = (e) => {
-    dispatch(multipleSubmitAction(layTimeMultipleInput));
+    dispatch(
+      multipleSubmitAction(
+        layTimeMultipleInput,
+        intLayTimeHeaderID,
+        intLayTimeRowID
+      )
+    );
   };
-
-  console.log("layTimeRowList data by multiplerow:", laytimeDataList);
   return (
     <div className="">
       <div className="card card-custom gutter-b">
@@ -177,7 +198,7 @@ const LaytimeMultipleAdd = () => {
                       >
                         <i className="fas fa-trash"></i>
                       </button>
-                      
+
                       <button
                         type="submit"
                         class="saveButton text-white btn ml-3"
@@ -345,15 +366,13 @@ const LaytimeMultipleAdd = () => {
                                     <i className="fas fa-plus"></i>
                                   </a>
                                 ) : (
-                                  ""
+                                  <a
+                                    className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm"
+                                    onClick={() => deleteSofData(item)}
+                                  >
+                                    <i className="fas fa-trash"></i>
+                                  </a>
                                 )}
-
-                                <a
-                                  className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm"
-                                  onClick={() => deleteSofData(item)}
-                                >
-                                  <i className="fas fa-trash"></i>
-                                </a>
                               </td>
                             </tr>
                           ))}
@@ -375,19 +394,19 @@ const LaytimeMultipleAdd = () => {
                           layTimeOperationList.map((item, index) => (
                             <tr>
                               <td>
-                                {/*} <DatePicker
-                            className="date-picker"
-                            name=""
-                            dateFormat="MM-dd-yyyy"
-                            minDate={moment().toDate()}
-                            placeholderText="select commence date"
-                            selected={item.dteStartTime !== '' ? moment(item.dteStartTime).toDate() : null}
-                            onChange={(date) => handleChangeTextInput("dteStartTime", date,index)}
-                            ref={register({
-                              required: true,
-                              maxLength: 100,
-                            })}
-                          />*/}
+                                <DatePicker
+                                  className="date-picker"
+                                  name=""
+                                  dateFormat="MM-dd-yyyy"
+                                  minDate={moment().toDate()}
+                                  placeholderText="select commence date"
+                                  //  selected={item.dteStartTime !== '' ? moment(item.dteStartTime).toDate() : null}
+                                  //   onChange={(date) => handleChangeTextInput("dteStartTime", date,index)}
+                                  ref={register({
+                                    required: true,
+                                    maxLength: 100,
+                                  })}
+                                />
                               </td>
                               <td>
                                 <RHFInput
@@ -425,14 +444,13 @@ const LaytimeMultipleAdd = () => {
                                     <i className="fas fa-plus"></i>
                                   </a>
                                 ) : (
-                                  ""
+                                  <a
+                                    className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm"
+                                    onClick={() => deleteOperationData(item)}
+                                  >
+                                    <i className="fas fa-trash"></i>
+                                  </a>
                                 )}
-                                <a
-                                  className="ml-3 btn btn-icon btn-light btn-hover-danger btn-sm"
-                                  onClick={() => deleteOperationData(item)}
-                                >
-                                  <i className="fas fa-trash"></i>
-                                </a>
                               </td>
                             </tr>
                           ))}

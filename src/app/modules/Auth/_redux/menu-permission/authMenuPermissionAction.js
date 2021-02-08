@@ -176,6 +176,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
         },
       ],
     },
+    
     {
       moduleName: "Items",
       moduleRouteUrl: "/items",
@@ -254,15 +255,15 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
       moduleImageIcon: "/media/svg/icons/Code/voyage.svg",
       subModules: [
         {
-          subModuleName: "Voyage",
+          subModuleName: "Voyage List",
           subModuleRouteUrl: "/voyage/list",
           subModuleIcon: "menu-bullet menu-bullet-dot",
           features: [
-            {
-              featureName: "Voyage List",
-              featureRouteUrl: "/voyage/list",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
+            // {
+            //   featureName: "Voyage List",
+            //   featureRouteUrl: "/voyage/list",
+            //   featureIcon: "menu-bullet menu-bullet-dot",
+            // },
             // {
             //   featureName: "Voyage Create",
             //   featureRouteUrl: "/voyage/create",
@@ -275,11 +276,11 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
           subModuleRouteUrl: "/voyage/voyage-activity",
           subModuleIcon: "menu-bullet menu-bullet-dot",
           features: [
-            {
-              featureName: "Noon Report List",
-              featureRouteUrl: "/voyage/voyage-activity",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
+            // {
+            //   featureName: "Noon Report List",
+            //   featureRouteUrl: "/voyage/voyage-activity",
+            //   featureIcon: "menu-bullet menu-bullet-dot",
+            // },
             // {
             //   featureName: "Voyage Activity Create",
             //   featureRouteUrl: "/voyage/voyage-activity/create",
@@ -288,37 +289,26 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
           ],
         },
         {
-          subModuleName: "Laytime",
-          subModuleRouteUrl: "/voyage/laytime/laytimelist",
+          subModuleName: "Laytime Calculation",
+          subModuleRouteUrl: "/voyage/laytime/laytimeinfo",
           subModuleIcon: "menu-bullet menu-bullet-dot",
-          features: [
-            {
-              featureName: "Laytime List",
-              featureRouteUrl: "/voyage/laytime/laytimelist",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-            {
-              featureName: "Laytime Calculation",
-              featureRouteUrl: "/voyage/laytime/laytimeinfo",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-          ],
+          features: []
         },
         {
           subModuleName: "Booking",
           subModuleRouteUrl: "/voyage/booking/bookinglist",
           subModuleIcon: "menu-bullet menu-bullet-dot",
           features: [
-            {
-              featureName: "Booking List",
-              featureRouteUrl: "/voyage/booking/bookinglist",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
-            {
-              featureName: "Booking Entry",
-              featureRouteUrl: "/voyage/booking/bookingentry",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
+            // {
+            //   featureName: "Booking List",
+            //   featureRouteUrl: "/voyage/booking/bookinglist",
+            //   featureIcon: "menu-bullet menu-bullet-dot",
+            // },
+            // {
+            //   featureName: "Booking Entry",
+            //   featureRouteUrl: "/voyage/booking/bookingentry",
+            //   featureIcon: "menu-bullet menu-bullet-dot",
+            // },
           ],
         },
       ],
@@ -334,49 +324,43 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
           subModuleName: "Purchase Request",
           subModuleRouteUrl: "/purchase/request/list",
           subModuleIcon: "menu-bullet menu-bullet-dot",
-          features: [
-            {
-              featureName: "Purchase Request List",
-              featureRouteUrl: "/purchase/request/list",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            }
-          ],
+          features: [],
         },
         {
           subModuleName: "Purchase Approval",
           subModuleRouteUrl: "/purchase/approval/list",
           subModuleIcon: "menu-bullet menu-bullet-dot",
-          features: [
-            {
-              featureName: "Purchase Approval List",
-              featureRouteUrl: "/purchase/approval/list",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            }
-          ],
+          features: [],
         },
         {
           subModuleName: "Purchase Order",
           subModuleRouteUrl: "/purchase/order/list",
           subModuleIcon: "menu-bullet menu-bullet-dot",
-          features: [
-            {
-              featureName: "Purchase Order List",
-              featureRouteUrl: "/purchase/order/list",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            }
-          ],
+          features: [],
         },
         {
           subModuleName: "PO Approval",
-          subModuleRouteUrl: "/purchase/po/list",
+          subModuleRouteUrl: "/purchase/order/approval/list",
           subModuleIcon: "menu-bullet menu-bullet-dot",
-          features: [
-            {
-              featureName: "PO Approval List",
-              featureRouteUrl: "/purchase/po/list",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            }
-          ],
+          features: [],
+        },
+        {
+          subModuleName: "Supplier CS",
+          subModuleRouteUrl: "/supplier/info",
+          subModuleIcon: "menu-bullet menu-bullet-dot",
+          features: [],
+        },
+        {
+          subModuleName: "Quotation",
+          subModuleRouteUrl: "/quotation/details",
+          subModuleIcon: "menu-bullet menu-bullet-dot",
+          features: [],
+        },
+        {
+          subModuleName:"Comparative Statement",
+          subModuleRouteUrl: "/comparativestatement/list",
+          subModuleIcon: "menu-bullet menu-bullet-dot",
+          features: [],
         },
       ],
     },
@@ -467,15 +451,15 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
       moduleImageIcon: "/media/svg/icons/Code/utility.svg",
       subModules: [
         {
-          subModuleName: "Utility Info",
-          subModuleRouteUrl: "/utility/info",
+          subModuleName: "Loadable Calculator",
+          subModuleRouteUrl: "/utility/calculator",
           subModuleIcon: "menu-bullet menu-bullet-dot",
           features: [
-            {
-              featureName: "Loadable Calculator",
-              featureRouteUrl: "/utility/calculator",
-              featureIcon: "menu-bullet menu-bullet-dot",
-            },
+            // {
+            //   featureName: "Loadable Calculator",
+            //   featureRouteUrl: "/utility/calculator",
+            //   featureIcon: "menu-bullet menu-bullet-dot",
+            // },
           ],
         },
       ],

@@ -1,52 +1,94 @@
 import React, { useState } from "react";
-
+import {  Card, Button } from "react-bootstrap";
+import { InputBase, Paper, IconButton } from "@material-ui/core";
+import { RHFInput } from "react-hook-form-input";
+import Select from "react-select";
+import { useForm } from "react-hook-form";
 import UserModal from "./UserModal";
 const UserList = () => {
   const [show, setShow] = useState(false);
+  const { register, setValue } = useForm();
+  const courseData = [
+    {
+      id: 1,
+      name: "cse",
+    },
+    {
+      id: 1,
+      name: "EEE",
+    },
+    {
+      id: 1,
+      name: "MBA",
+    },
+  ];
 
+  let CourseName = [];
+  if (courseData) {
+    courseData.forEach((item) => {
+      let items = {
+        value: item.id,
+        label: item.name,
+      };
+      CourseName.push(items);
+    });
+  }
   return (
     <>
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <div className="card card-custom gutter-b p-5">
-              <h1>User List</h1>
-              <div className="react-bootstrap-table table-responsive">
-                <table className="table table table-head-custom table-vertical-center user-list-table ">
-                  <thead>
-                    <tr>
-                      <th scope="col">SI</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Roles</th>
-                      <th scope="col">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>#01</td>
-                      <td>Super Admin</td>
-                      <td>superadmin@example.com</td>
-                      <td className=" text-white">
-                        <span className="badge badge-primary">superadmin</span>
-                      </td>
-                      <td>
-                        <i className="fa fa-edit text-success pointer ml-2"></i>
-                        <i className="fa fa-trash text-danger pointer ml-2"></i>
-                        <i
-                          className="fa fa-check text-info pointer ml-2"
-                          onClick={setShow}
-                        ></i>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+     <Card>
+      <Card.Body>
+        <div className="container ">
+          <div className="row mb-5 table-form ">
+            <h1 className="tableheading mt-0">User List</h1>
+            <div className="col-xl-3 col-lg-3 col-md-6 mb-2 mt-2">
+            
+              <Paper className="searchInput">
+              
+                <InputBase
+                  placeholder="Search "
+                  className="custome-purchase-search"
+                  // inputProps={{ "aria-label": "Search Google Maps" }}
+                  // onChange={(e) => searchEmployee(e)}
+                  // value={employeeInfo.employeeName}
+                />
+                  <IconButton aria-label="Search" className="searchPlaceholder purchaseSearch">
+                  <i className="flaticon-search "></i>
+                </IconButton>
+              </Paper>
+            </div>
+            <div className="col-xl-3 col-lg-3 col-md-6">
+            <RHFInput
+                  as={<Select options={CourseName} />}
+                  rules={{ required: false }}
+                  name="courseData"
+                  register={register}
+                  value={CourseName.label}
+                  setValue={setValue}
+                />
+            </div>
+            <div className="col-xl-3 col-lg-3 col-md-6">
+            <RHFInput
+                  as={<Select options={CourseName} />}
+                  rules={{ required: false }}
+                  name="courseData"
+                  register={register}
+                  value={CourseName.label}
+                  setValue={setValue}
+                />
+            </div>
+            {/* <div className="col-xl-3 col-lg-3 col-md-6">use RHFInput</div> */}
+
+            <div className="">
+              <i className="fas fa-filter tableFilter  mr-2"></i>
+              <i className="far fa-filter"></i>
+              <Button className="btn-sm" variant="primary">
+                Add New
+              </Button>
             </div>
           </div>
-        </div>
-      </div>
-
+       </div>
+       </Card.Body>
+       </Card>
       <UserModal show={show} setShow={setShow} />
     </>
   );

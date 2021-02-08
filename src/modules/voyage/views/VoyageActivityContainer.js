@@ -30,7 +30,7 @@ const VoyageActivityContainer = (props) => {
       <div className="card card-custom gutter-b">
         <div className="row pt-5 pl-4">
           <div className="col-xl-9 col-lg-9 col-md-9 col-5">
-            <h3>Noon Report</h3>
+            <h3>Noon Report </h3>
             {/* <p className="pl-1 subHeader">Sub Header</p> */}
           </div>
           <div className="col-xl-3 col-lg-3 col-md-3 col-7 voyageActivityListBtn">
@@ -39,7 +39,7 @@ const VoyageActivityContainer = (props) => {
             </Button> */}
             <Dropdown className="d-inline mr-2">
               <Dropdown.Toggle
-                className="text-bold"
+                className="text-bold "
                 variant="light text-primary"
                 id="dropdown-basic"
               >

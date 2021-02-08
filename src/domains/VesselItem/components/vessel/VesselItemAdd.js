@@ -130,7 +130,7 @@ const ItemType=[
   return (
     <>
       <div className="container">
-        <div className="card card-custom gutter-b">
+        <div className="card card-custom gutter-b card-top-border">
           <div className="card-header">
             <div className="card-title">
               <h3 class="card-label">Vessel Item Entry</h3>
@@ -142,14 +142,14 @@ const ItemType=[
               onSubmit={handleSubmit(onSubmit)}
               method="post"
             >
-              <div className="form-group row mt-5">
+              <div className="form-group row mt-2">
                 <div className="col-lg-4">
                   <label className="form-label">Item Name</label>
                   <Form.Control
                     type="text"
                     placeholder="Enter Item Name"
                     name="strVesselItemName"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -190,7 +190,7 @@ const ItemType=[
                     type="text"
                     placeholder="Enter Quantity Available"
                     name="decQtyAvailable"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -211,7 +211,7 @@ const ItemType=[
                     type="text"
                     placeholder="Enter Purchase Price"
                     name="decDefaultPurchasePrice"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -232,7 +232,7 @@ const ItemType=[
                     type="text"
                     placeholder="Enter Sale Price"
                     name="decDefaultSalePrice"
-                    className="fromStyle"
+                    className="formHeight"
                     onChange={handleChange}
                     ref={register({
                       required: true,
@@ -267,24 +267,24 @@ const ItemType=[
                 </div>
               </div>
 
-              <div className="form-group row">
+              <div className="form-group row mt-2">
                 <div className="col-sm-10">
                   <a
                     onClick={() => {
                       history.push("/vessels/list");
                     }}
                   >
-                    <button type="button" class="btn btn-secondary btn-lg mr-2">
+                    <button type="button" class="btn btn-secondary btn-sm mr-2">
                       Back
                     </button>
                   </a>
-                  {/* <button type="submit" class="btn btn-primary btn-lg">
+                  {/* <button type="submit" class="btn btn-primary btn-sm">
                     Next
                     </button> */}
                   {loading && (
                     <button
                       type="submit"
-                      class="btn btn-primary btn-lg"
+                      class="btn btn-primary btn-sm"
                       disabled={true}
                     >
                       <span>Submit</span>
@@ -293,7 +293,7 @@ const ItemType=[
                   )}
 
                   {!loading && (
-                    <button type="submit" class="btn btn-primary btn-lg">
+                    <button type="submit" class="btn btn-primary btn-sm">
                       <span>Submit</span>
                     </button>
                   )}

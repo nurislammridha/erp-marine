@@ -81,45 +81,14 @@ const LaytimeRowReducer = (state = initialState, action) => {
             if(action.payload){
                 const rowPayload = action.payload;
                 let newRowList = state.laytimeDataList;
-                   
-                // for(let i=0;i<rowPayload.length;i++){
-                //     // console.log('getLayTimeRowDataFromAPI', getLayTimeRowDataFromAPI[i]);
-                //     let data ={
-                //         intType : rowPayload[i].intType,
-                //         intPortID : rowPayload[i].intPortID,
-                //         intCargoID : rowPayload[i].intCargoID,
-                //         numBLQty : rowPayload[i].numBLQty,
-                //         dteLaytimeCommenced : rowPayload[i].dteLaytimeCommenced,
-                //         dteLaytimeCompleted : rowPayload[i].dteLaytimeCompleted
-                //     }
-                //     console.log('data reducer', data);
-                //  newRowList.push(data);
-                //     newRowList = data;
-                   
-                    
-                   
-
-                // }
-
-                // console.log('newDataList', newDataList);
-           
-              
                 return {
                     ...state,
                   laytimeDataList: concat(state.laytimeDataList, rowPayload),
                     //  laytimeDataList:newRowList,
                     };
-                }
-
-            // const getLayTimeRowDataFromAPI = action.payload;
-            // const laytimeRowInputData = { ...state.laytimeRowInput };
-            
-
-            
-            
+                }         
         case Types.LAYTIME_DATA_SUBMIT:
             let cloneObj = state.laytimeDataList;
-            console.log('action.payload laytime', action.payload);
             cloneObj.push(action.payload.data.data);
 
             if (action.payload.status) {

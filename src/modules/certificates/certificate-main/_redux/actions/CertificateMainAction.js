@@ -30,7 +30,7 @@ export const handleChangeProductInputAction = (
     let reader = new FileReader();
     const file = e.target.files[0];
     reader.onloadend = () => {
-      data.name = "imagePreviewUrl";
+      // data.name = "imagePreviewUrl";
       data.value = reader.result;
       dispatch({ type: type, payload: data });
     };
@@ -151,7 +151,6 @@ export const MainCertificateUpdateAction = (certificateInfoInput, id) => async (
   }
   if (certificateInfoInput.strCustomeCode === null) {
     showToast("error", "Certificate Code can't be blank!");
-    return false;
   }
   if (certificateInfoInput.intIssuingAuthorityID === null) {
     showToast("error", "Issue Autherity can't be blank!");
@@ -366,10 +365,10 @@ export const getCertificateName = (intCategoryID = null) => (dispatch) => {
           dispatch({ type: Types.GET_CERTIFICATE_NAME, payload: data });
         }
       );
-  }else {
+  } else {
     dispatch({ type: Types.GET_CERTIFICATE_NAME, payload: [] });
   }
-  
+
 };
 
 export const getCertificateType = () => (dispatch) => {
@@ -500,7 +499,6 @@ export const getMainCertificateDeteailByID = (id) => (dispatch) => {
         dispatch(getCertificateChildCategoryData(data.intParentCategoryID));
       }
       data.certificateDates = data.certificate_dates;
-
       dispatch({
         type: Types.GET_MAIN_CERTIFICATE_SINGLE_DATA,
         payload: data,
@@ -515,3 +513,26 @@ export const getCertificateStatusData = () => (dispatch) => {
     dispatch({ type: Types.MAIN_CERTIFICATE_STATUS, payload: res.data.data });
   });
 };
+
+
+// export const roleCheckboxSelect = (checkboxStatus, parentRole, item, indexChild, indexparentRole) => (dispatch) => {
+//   dispatch({ type: Types.USER_ROLE_CHECKED, payload: {
+//     checkboxStatus: checkboxStatus,
+//     parentRole: parentRole,
+//     item: item,
+//     indexChild: indexChild,
+//     indexparentRole: indexparentRole,
+//   }});
+
+// };
+
+// export const allCheckboxSelected = (status) => (dispatch) => {
+//   dispatch({ type: Types.USER_ROLE_ALL_CHECKED, payload: status });
+// };
+
+// export const checkPermissionGroupAction = (index, isGroupChecked) => (dispatch) => {
+//   dispatch({ type: Types.USER_ROLE_CHECKED_GROUP, payload: {
+//     index: index,
+//     isGroupChecked: isGroupChecked
+//   }});
+// };

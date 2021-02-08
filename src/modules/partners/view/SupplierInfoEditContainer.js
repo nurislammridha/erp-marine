@@ -4,7 +4,7 @@ import StepProgressEdit from '../step-progress-bar/StepProgressEdit';
 const SupplierInfoEditContainer = () => {
     return (
         <div className="container">
-            <div className="card card-custom gutter-b">
+            <div className="card card-custom gutter-b card-top-border">
                 <StepProgressEdit />
             </div>
         </div>

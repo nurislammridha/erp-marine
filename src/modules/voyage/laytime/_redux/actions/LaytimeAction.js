@@ -28,18 +28,41 @@ export const GetVoyageID = () => async (dispatch) => {
     Axios.get(`${process.env.REACT_APP_API_URL}voyage/charterVoyage/`)
         .then((res) => {
             let data = res.data;
-            console.log('data :>> ', data);
             dispatch({ type: Types.GET_VOYAGE_ID, payload: data });
         });
 };
+
+//get voyage list
+
+export const getVoyageList = ()=>(dispatch)=>{
+    // const url = `${process.env.REACT_APP_API_URL}voyage/charterList`;
+    const url = `${process.env.REACT_APP_API_URL}voyage/charterVoyage`; 
+    Axios.get(url).then((res) => {
+      dispatch({
+        type: Types.GET_VOYAGE_LIST,
+        payload: res.data.data,
+      });
+    
+    });
+  }
+
 // get data for lay time header input with voyage id
 export const getHearInputData = (id) => (dispatch) => {
+    const responseList = {
+        isLoading: true,
+        status:false,
+        data: null,    
+    }
+    dispatch({ type: Types.GET_HEADER_INPUT_FROM_API, payload: responseList });
+
     let LayTimeURL = `${process.env.REACT_APP_API_URL}voyage/charterVoyage/${id}`;
     Axios.get(LayTimeURL)
         .then((response) => {
-            if (response.status === 200) {
+            if (response.data.status) {
                 let data = response.data.data;
-                console.log('data :>> ', data);
+                responseList.isLoading = false;
+                responseList.status = response.data.status;
+                responseList.data = data;
                 if (data.commmence_port !== null) {
                     data.commmencePort = {
                         label: data.commmence_port.strPortName,
@@ -52,8 +75,11 @@ export const getHearInputData = (id) => (dispatch) => {
                         value: data.completion_port.intPortID
                     }
                 }
-                dispatch({ type: Types.GET_HEADER_INPUT_FROM_API, payload: data })
+                dispatch({ type: Types.GET_HEADER_INPUT_FROM_API, payload: responseList })
             }
+        }).catch((error)=>{
+            responseList.isLoading = false;
+            dispatch({ type: Types.GET_HEADER_INPUT_FROM_API, payload: responseList })
         })
 }
 
@@ -134,90 +160,90 @@ export const handleChangeLaytimeRowInput = (name, value) => (dispatch) => {
 
 //submit laytime data 
 export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setShow) => async (dispatch) => {
-    // if (laytimeHeaderInput.intCharterVoyageID === null) {
-    //     showToast('error', "Laytime header can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeHeaderInput.demurrages.length === 0) {
-    //     showToast('error', "Please add minimum one demurrage!")
-    //     return false;
-    // }
-    // if (laytimeHeaderInput.strOnceOnDemmurrage.length === 0) {
-    //     showToast('error', "Please select once demmurrage!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.intPortID === null) {
-    //     showToast('error', "Port can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.dteLaytimeCommenced.length === 0) {
-    //     showToast('error', "Laytime commenced can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.dteLaytimeCompleted.length === 0) {
-    //     showToast('error', "Laytime completed can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.intCargoID === null) {
-    //     showToast('error', "Cargo can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.numBLQty === null) {
-    //     showToast('error', "B/L Quantity can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.intTermsID === null) {
-    //     showToast('error', "Terms can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.numTimeAllowence === null) {
-    //     showToast('error', "Time allowed can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.numTimeAllowence.length === 0) {
-    //     showToast('error', "Time allowed can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.intAdditionalDay === null) {
-    //     showToast('error', "Additional/saved times can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.numAdditionalHrs === null) {
-    //     showToast('error', "Additional hrs can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.dteTermArraivalTime.length === 0) {
-    //     showToast('error', "Arrival time can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.dteTermSailTime.length === 0) {
-    //     showToast('error', "Sailing time can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.numDemurrageRate === null) {
-    //     showToast('error', "Demurrage rate can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.intDemurrageCurrID === null) {
-    //     showToast('error', "USD can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.numDespatchRate === null) {
-    //     showToast('error', "Despatch rate can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.numDespatchRatePercent === null) {
-    //     showToast('error', "Percentage can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.dteNORtender.length === 0) {
-    //     showToast('error', "NOR tender can't be blank!")
-    //     return false;
-    // }
-    // if (laytimeRowInput.numLodingOrDischargeRate === null) {
-    //     showToast('error', "Load rate can't be blank!")
-    //     return false;
-    // }
+    if (laytimeHeaderInput.intCharterVoyageID === null) {
+        showToast('error', "Laytime header can't be blank!")
+        return false;
+    }
+    if (laytimeHeaderInput.demurrages.length === 0) {
+        showToast('error', "Please add minimum one demurrage!")
+        return false;
+    }
+    if (laytimeHeaderInput.strOnceOnDemmurrage.length === 0) {
+        showToast('error', "Please select once demmurrage!")
+        return false;
+    }
+    if (laytimeRowInput.intPortID === null) {
+        showToast('error', "Port can't be blank!")
+        return false;
+    }
+    if (laytimeRowInput.dteLaytimeCommenced.length === 0) {
+        showToast('error', "Laytime commenced can't be blank!")
+        return false;
+    }
+    if (laytimeRowInput.dteLaytimeCompleted.length === 0) {
+        showToast('error', "Laytime completed can't be blank!")
+        return false;
+    }
+    if (laytimeRowInput.intCargoID === null) {
+        showToast('error', "Cargo can't be blank!")
+        return false;
+    }
+    if (laytimeRowInput.numBLQty === null) {
+        showToast('error', "B/L Quantity can't be blank!")
+        return false;
+    }
+    if (laytimeRowInput.intTermsID === null) {
+        showToast('error', "Terms can't be blank!")
+        return false;
+    }
+    if (laytimeRowInput.numTimeAllowence === null) {
+        showToast('error', "Time allowed can't be blank!")
+        return false;
+    }
+    if (laytimeRowInput.numTimeAllowence.length === 0) {
+        showToast('error', "Time allowed can't be blank!")
+        return false;
+    }
+    if (laytimeRowInput.intAdditionalDay === null) {
+        showToast('error', "Additional/saved times can't be blank!")
+        return false;
+    }
+    if (laytimeRowInput.numAdditionalHrs === null) {
+        showToast('error', "Additional hrs can't be blank!")
+        return false;
+    }
+    if (laytimeRowInput.dteTermArraivalTime.length === 0) {
+        showToast('error', "Arrival time can't be blank!")
+        return false;
+    }
+    if (laytimeRowInput.dteTermSailTime.length === 0) {
+        showToast('error', "Sailing time can't be blank!")
+        return false;
+    }
+    if (laytimeRowInput.numDemurrageRate === null) {
+        showToast('error', "Demurrage rate can't be blank!")
+        return false;
+    }
+    if (laytimeRowInput.intDemurrageCurrID === null) {
+        showToast('error', "USD can't be blank!")
+        return false;
+    }
+    if (laytimeRowInput.numDespatchRate === null) {
+        showToast('error', "Despatch rate can't be blank!")
+        return false;
+    }
+    if (laytimeRowInput.numDespatchRatePercent === null) {
+        showToast('error', "Percentage can't be blank!")
+        return false;
+    }
+    if (laytimeRowInput.dteNORtender.length === 0) {
+        showToast('error', "NOR tender can't be blank!")
+        return false;
+    }
+    if (laytimeRowInput.numLodingOrDischargeRate === null) {
+        showToast('error', "Load rate can't be blank!")
+        return false;
+    }
     const layTimeRowData = [
         {
             intPortID: laytimeRowInput.intPortID,
@@ -241,8 +267,6 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
         }
     ];
 
-    console.log('laytimeHeaderInput data check', laytimeHeaderInput);
-
     laytimeHeaderInput.intActionBy = 1;
     const intShipID = await getVesselId();
     if (typeof intShipID === 'undefined' || intShipID === null || intShipID === "") {
@@ -264,12 +288,8 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
     Axios.post(`${process.env.REACT_APP_API_URL}voyage/layTimeHeaderRow`, laytimeHeaderInput)
 
         .then((res) => {
-            console.log('res row data :>> ', res.data);
             const intLayTimeHeaderID = res.data.data.intLayTimeHeaderID;
             const intLayTimeRowID = res.data.data.intLayTimeRowID;
-
-            console.log('intLayTimeHeaderID from action :>> ', intLayTimeHeaderID);
-            console.log('intLayTimeRowID from action :>> ', intLayTimeRowID);
             
             dispatch({ type: Types.LAYTIME_DETAILS_ENTRY_HEADER_DATA, payload: {
                 name: 'intLayTimeHeaderID', value: intLayTimeHeaderID
@@ -292,7 +312,6 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
             }
         })
         .catch((error) => {
-            console.log('error', error);
             responseList.loading = false;
             const message = "Something went wrong, Please try again !";
             showToast("error", message);

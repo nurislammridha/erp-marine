@@ -106,7 +106,7 @@ const EmployeeSigningList = withRouter(({ history, props }) => {
                   <label className="form-label">Vessel</label>
                 </div>
                 <select
-                  className="form-control"
+                  className="form-control employee-list-input"
                   name="vesselId"
                   placeholder="Search Any Information"
                   onChange={selectHandle}
@@ -124,7 +124,7 @@ const EmployeeSigningList = withRouter(({ history, props }) => {
                   <label className="form-label"></label>
                 </div>
                 <button
-                  className="btn"
+                  className="btn btn-sm"
                   onClick={serchEmployee}
                   style={{ backgroundColor: "#E1F0FF", color: "#3699FF" }}
                 >

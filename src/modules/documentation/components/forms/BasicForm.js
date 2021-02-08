@@ -94,32 +94,7 @@ const BasicForm = () => {
               </div>
             </div>
 
-            {/* <Form.Group className="mt-3" controlId="formBasicChecbox">
-                <Form.Check type="checkbox" />
-              </Form.Group>
-
-              <Form.Check className="mt-3" type="radio" aria-label="radio 1" /> */}
-            {/* 
-              <div className="col-xl-4 col-lg-4 col-md-6 ">
-                <Form.Group as={Row} controlId="">
-                  <Form.Label className="formFont pl-1" column sm="3">
-                    Password
-                  </Form.Label>
-                  <Col sm="9">
-                    <Form.Control
-                      className="formHeight"
-                      type="password"
-                      placeholder="Password"
-                    />
-                  </Col>
-                </Form.Group>
-              </div> */}
-            {/* <Form.Group controlId="exampleForm.ControlTextarea1">
-                <Form.Label className="formFont pl-1">
-                  Example textarea
-                </Form.Label>
-                <Form.Control as="textarea" rows="3" />
-              </Form.Group> */}
+            
             <div className="form-group row">
               <div className="col-xl-3 col-lg-3 col-md-6">
                 <Form.Group>
@@ -131,31 +106,7 @@ const BasicForm = () => {
                   />
                 </Form.Group>
               </div>
-              {/* <div className="">
-                <Form.Group as={Col} md="" controlId="">
-                  <Form.Label className="formFont">Pic an image</Form.Label>
-                  <InputGroup className="custome-inputfile">
-                    <InputGroup.Prepend>
-                      <InputGroup.Text
-                        id="inputGroupPrepend"
-                        className="formHeight"
-                      >
-                        <p className="chooseFileText">Choose File</p>
-                      </InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <Form.Control
-                      type="file"
-                      placeholder="No file chosen"
-                      aria-describedby="inputGroupPrepend"
-                      required
-                      className="bg-white fileInput formHeight "
-                    />
-                    <Form.Control.Feedback type="invalid" className="bg-white">
-                      No file chosen
-                    </Form.Control.Feedback>
-                  </InputGroup>
-                </Form.Group>
-              </div> */}
+            
               <div className="col-lg-3 col-md-6 mb-2">
                 <label className="formFont">Pic an image</label>
                 <div className="custom-file formHeight">
@@ -246,6 +197,22 @@ const BasicForm = () => {
               </Button>
             </div>
             <div className="clearfix"></div>
+            <div className="col-xl-4 col-lg-4 col-md-6 mt-2">
+              
+              <Paper className="searchInput supplier-search">
+               
+                <InputBase
+                  placeholder="Search"
+                  // inputProps={{ "aria-label": "Search Google Maps" }}
+                  // onChange={(e) => searchEmployee(e)}
+                  // value={employeeInfo.employeeName}
+                />
+                 <IconButton aria-label="Search" className="searchPlaceholder supplier-search-placeholder">
+                  <i className="flaticon-search "></i>
+                </IconButton>
+              </Paper>
+            </div>
+           
           </form>
         </Card.Body>
       </Card>

@@ -20,6 +20,12 @@ import getItemsRoutes from "../modules/item/routes";
 import getUtilityRoutes from "../modules/utility/routes";
 import getRolePermissionManagementRoutes from "../modules/role-permission-management/routes";
 import purchaseRoute from "../modules/Purchase/routes";
+import purchaseOrderRoute from "../modules/Purchase/purhasesOrder/routes";
+import purchaseOrderApproval from "../modules/Purchase/POApproval/routes";
+import PurchaseApproval from "../modules/Purchase/PurchaseApproval/routes";
+import getSupplierRoutes from "../modules/Purchase/SupplierCS/routes";
+import getQuotationRoutes from "../modules/Purchase/Quotation/routes";
+import getComparativeStatementRoutes from "../modules/Purchase/comparativeStatement/routes";
 
 const BasePage = () => {
   return (
@@ -81,6 +87,13 @@ const BasePage = () => {
         {getUtilityRoutes()}
         {getRolePermissionManagementRoutes()}
         {purchaseRoute()}
+        {purchaseOrderRoute()}
+        {purchaseOrderApproval()}
+        {PurchaseApproval()}
+        {getSupplierRoutes()}
+        {getQuotationRoutes()}
+        {getComparativeStatementRoutes()}
+       
 
         <Redirect to="error/error-v1" />
       </Switch>

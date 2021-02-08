@@ -59,7 +59,19 @@ import CargoReducer from "../modules/master/DropDownData/Cargo/_redux/CargoReduc
 import ShipReducer from "../modules/master/DropDownData/Ship/_redux/ShipReducer/ShipReducer";
 import BookingStatusReducer from "../modules/master/DropDownData/BookingStatus/_redux/BookingStatusReducer/BookingStatusReducer";
 import CharterReducer from "../modules/master/DropDownData/Charter/_redux/CharterReducer/CharterReducer";
+import PurhasesRequestReducer from "../modules/Purchase/purhasesRequest/_redux/reducers/PurhasesRequestReducer";
+import UtilityReducer from "../modules/utility/information/_redux/reducers/UtilityReducer";
 import RolePermissionManagementReducer from "../modules/role-permission-management/information/_redux/reducers/RolePermissionManagementReducer";
+import DepartmentReducer from "../modules/master/DropDownData/Department/_redux/DepartmentReducer/DepartmentReducer";
+import PurchaseReuestCategoryReducer from "../modules/master/DropDownData/PurchaseReuestCategory/_redux/PurchaseReuestCategoryReducer/PurchaseReuestCategoryReducer";
+import PurchasesOrderReducer from "../modules/Purchase/purhasesOrder/_redux/reducers/PurhasesOrderReducer";
+import PurchaseApprovalReducer from "../modules/Purchase/PurchaseApproval/_redux/reducers/PurchaseApprovalReducer";
+import POApprovalReducer from "../modules/Purchase/POApproval/_redux/reducers/POApprovalReducer";
+import PaymentTermsReducer from "../modules/master/DropDownData/PaymentTerms/_redux/PaymentTermsReducer/PaymentTermsReducer";
+import RefferenceTypeReducer from "../modules/master/DropDownData/RefferenceNo/_redux/RefferenceNoActionReducer/RefferenceNoActionReducer";
+import CurrencyListReducer from "../modules/master/DropDownData/Currency/_redux/CurrencyReducer/CurrencyReducer";
+import SupplierNameReducer from "../modules/master/DropDownData/SupplierName/_redux/SupplierNameReducer/SupplierNameReducer";
+import ItemListReducer from "../modules/master/DropDownData/Item/_redux/ItemListReducer/ItemListReducer";
 
 /** 
 | Domain : CCO
@@ -127,6 +139,11 @@ export const rootReducer = combineReducers({
   /** Promotion */
   promotion: EmployeePromotionReducer,
 
+  /** Purchase */
+  purchaseApprovalFilter: PurchaseApprovalReducer,
+  POApprovalFilter: POApprovalReducer,
+
+
   // master module reducer // dynamic data for all dropdown menu list 
   PortReducer: PortReducer,
   VoyageTypeReducer: VoyageTypeReducer,
@@ -134,6 +151,13 @@ export const rootReducer = combineReducers({
   CharterReducer: CharterReducer,
   ShipReducer: ShipReducer,
   BookingStatusReducer: BookingStatusReducer,
+  DepartmentReducer: DepartmentReducer,
+  PurchaseReuestCategoryReducer: PurchaseReuestCategoryReducer,
+  PaymentTermsReducer: PaymentTermsReducer,
+  RefferenceTypeReducer: RefferenceTypeReducer,
+  CurrencyListReducer: CurrencyListReducer,
+  SupplierNameReducer: SupplierNameReducer,
+  ItemListReducer: ItemListReducer,
 
   /**Certificates */
   certificateMainInfo: CertificateMainReducer,
@@ -144,7 +168,14 @@ export const rootReducer = combineReducers({
   laytimeInfo: LaytimeInfoReducer,
   supplierList: SuppliersListReducer,
   itemList: ItemReducer,
-  roleReducer:RolePermissionManagementReducer,
+
+  //purchase 
+  purchaseRequest: PurhasesRequestReducer,
+  utitlityInfo: UtilityReducer,
+  roleReducer: RolePermissionManagementReducer,
+
+  /**Purchase Order */
+  purchasesOrderInfo: PurchasesOrderReducer
 });
 
 export function* rootSaga() {
