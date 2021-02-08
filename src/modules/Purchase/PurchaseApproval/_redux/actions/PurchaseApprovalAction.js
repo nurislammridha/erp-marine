@@ -114,7 +114,7 @@ export const GetPurchaseApprovalDetail = (id) => (dispatch) => {
         });
 };
 
-export const handleApprovePRApproval = (purchaseApprovalDetail) => async (dispatch) => {
+export const handleApprovePRApproval = (purchaseApprovalDetail, handleClose, status) => async (dispatch) => {
     let responseList = {
         isLoading: true,
         data: {},
@@ -124,22 +124,24 @@ export const handleApprovePRApproval = (purchaseApprovalDetail) => async (dispat
     dispatch({ type: Types.SUBMIT_PURCHASE_APPROVE, payload: responseList });
 
     const newPRApprovalData = purchaseApprovalDetail.purchase_row.filter((item) => item.isChecked && item.isChecked === true);
+    console.log('purchaseApprovalDetail :>> ', purchaseApprovalDetail);
+    console.log('newPRApprovalData :>> ', newPRApprovalData);
 
-    await Axios.put(`${process.env.REACT_APP_API_URL}certificate/types/updat`, newPRApprovalData)
-        .then((response) => {
-            if (response.data.status) {
-                responseList.data = response.data;
-                responseList.isLoading = false;
-                responseList.status = response.data.status;
-                showToast("success", response.data.message);
-                dispatch({ type: Types.SUBMIT_PURCHASE_APPROVE, payload: responseList });
-            } else { showToast("error", response.data.message) }
-        }).catch(function (error) {
-            responseList.isLoading = false;
-            const message = "Something went wrong ! Please fill all inputs and try again !";
-            showToast("error", message);
-            dispatch({ type: Types.SUBMIT_PURCHASE_APPROVE, payload: responseList });
-        });
+    // await Axios.put(`${process.env.REACT_APP_API_URL}certificate/types/updat`, newPRApprovalData)
+    //     .then((response) => {
+    //         if (response.data.status) {
+    //             responseList.data = response.data;
+    //             responseList.isLoading = false;
+    //             responseList.status = response.data.status;
+    //             showToast("success", response.data.message);
+    //             dispatch({ type: Types.SUBMIT_PURCHASE_APPROVE, payload: responseList });
+    //         } else { showToast("error", response.data.message) }
+    //     }).catch(function (error) {
+    //         responseList.isLoading = false;
+    //         const message = "Something went wrong ! Please fill all inputs and try again !";
+    //         showToast("error", message);
+    //         dispatch({ type: Types.SUBMIT_PURCHASE_APPROVE, payload: responseList });
+    //     });
 };
 
 
