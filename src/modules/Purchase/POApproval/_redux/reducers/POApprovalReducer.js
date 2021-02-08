@@ -33,21 +33,10 @@ const POApprovalReducer = (state = initialState, action) => {
 
             };
 
-        case Types.CHANGE_PO_APPROVAL_DETAIL_INPUT:
-            const purchaseDetails = state.POApprovalMultiple;
-            for (let i = 0; i < purchaseDetails.length; i++) {
-                if (purchaseDetails[i].intRowId == action.payload.item.intRowId) {
-                    purchaseDetails[i][action.payload.name] = action.payload.value
-                }
-            }
-            console.log('purchaseDetails', purchaseDetails)
             return {
                 ...state,
-                POApprovalMultiple: purchaseDetails,
-
+                POApprovalMultiple: POApproval,
             };
-
-
         case Types.GET_SBU_NAME:
             return {
                 ...state,
@@ -87,11 +76,24 @@ const POApprovalReducer = (state = initialState, action) => {
             };
 
         case Types.SUBMIT_PO_APPROVE:
-
             return {
                 ...state,
                 status: action.payload.status,
                 isLoading: action.payload.isLoading,
+            };
+        //**********Purchase Order Approval *********** */
+        case Types.PO_APPROVAL_DETAILS_INPUT:
+            console.log('action.payload :>> ', action.payload);
+            const POApproval = state.POApprovalMultiple;
+            for (let i = 0; i < POApproval.length; i++) {
+                if (POApproval[i].intPOId == action.payload.item.intPOId) {
+                    POApproval[i][action.payload.name] = action.payload.value
+                }
+            }
+            console.log('POApproval :>> ', POApproval);
+            return {
+                ...state,
+                POApprovalMultiple: POApproval,
             };
 
         default:

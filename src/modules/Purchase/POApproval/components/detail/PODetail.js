@@ -3,16 +3,17 @@ import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment"
 import { round } from 'lodash';
-import { handleChangePOApprovalDetailInput } from '../../_redux/actions/POApprovalAction'
+import { handleChangePurchaseOrderApprovalDetailInput } from '../../_redux/actions/POApprovalAction'
 
 const PODetail = () => {
-
     const dispatch = useDispatch();
     const POApprovalDetail = useSelector((state) => state.POApprovalFilter.POApprovalDetail);
     const POApprovalMultiple = useSelector((state) => state.POApprovalFilter.POApprovalMultiple);
 
+    console.log('POApprovalDetail :>> ', POApprovalDetail);
+    console.log('POApprovalMultiple :>> ', POApprovalMultiple);
     const handleChangeTextInput = (name, value, item) => {
-        dispatch(handleChangePOApprovalDetailInput(name, value, item));
+        dispatch(handleChangePurchaseOrderApprovalDetailInput(name, value, item));
     };
 
     return (
@@ -115,11 +116,7 @@ const PODetail = () => {
                                                             name="numApprovedQty"
                                                             className="fromStyle formHeight"
                                                             onChange={(e) =>
-                                                                handleChangeTextInput(
-                                                                    "numApprovedQty",
-                                                                    e.target.value,
-                                                                    item
-                                                                )
+                                                                handleChangeTextInput("numApprovedQty", e.target.value, item)
                                                             }
                                                         />
                                                     </td>
@@ -129,11 +126,7 @@ const PODetail = () => {
                                                             name="remarks"
                                                             className="fromStyle formHeight"
                                                             onChange={(e) =>
-                                                                handleChangeTextInput(
-                                                                    "remarks",
-                                                                    e.target.value,
-                                                                    item
-                                                                )
+                                                                handleChangeTextInput("remarks", e.target.value, item)
                                                             }
                                                         />
                                                     </td>

@@ -139,3 +139,13 @@ export const GetPOApprovalDetail = (id) => (dispatch) => {
             });
         });
 };
+//*************Purchase Order Approval**************** */
+export const handleChangePurchaseOrderApprovalDetailInput = (name, value, item) => (dispatch) => {
+    const formData = {
+        name: name,
+        value: value,
+        item: item,
+    };
+    console.log('formData :>> ', formData);
+    dispatch({ type: Types.PO_APPROVAL_DETAILS_INPUT, payload: formData });
+};
