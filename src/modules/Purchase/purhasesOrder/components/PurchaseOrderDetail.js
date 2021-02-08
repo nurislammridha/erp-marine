@@ -1,10 +1,9 @@
 import React from 'react';
 import { useSelector } from "react-redux";
-
+import moment from "moment";
 
 const PurchaseOrderDetail = () => {
     const orderViewList = useSelector(state => state.purchasesOrderInfo.orderViewList);
-    console.log('orderViewList :>> ', orderViewList);
     return (
         <div>
             {orderViewList && (
@@ -12,7 +11,7 @@ const PurchaseOrderDetail = () => {
                     <div className="row">
                         <div className="col-md-3">
                             Po No
-                <h5>{orderViewList.strPONo}</h5>
+                <h5>{orderViewList.intPOId}</h5>
                         </div>
                         <div className="col-md-3">
                             Business Line
@@ -23,8 +22,8 @@ const PurchaseOrderDetail = () => {
                 <h5>{orderViewList.strBusinessUnitName}</h5>
                         </div>
                         <div className="col-md-3">
-                            Address
-                <h5>{orderViewList.strDeliveryAddress}</h5>
+                            Currrency
+                <h5>{orderViewList.strCurrencyCode}</h5>
                         </div>
                     </div>
                     <div className="row mt-5">
@@ -41,9 +40,34 @@ const PurchaseOrderDetail = () => {
                 <h5>{orderViewList.strSupplierName}</h5>
                         </div>
                         <div className="col-md-3">
-                            Ware house
-                <h5>{orderViewList.strWarehouseName}</h5>
+                            PO Date
+                <h5>{moment(orderViewList.dtePODate).format("YYYY-MM-DD")}</h5>
                         </div>
+                    </div>
+                    <div className="react-bootstrap-table table-responsive mt-9">
+                        <table className="table table table-head-custom table-vertical-center ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">SN</th>
+                                    <th scope="col">REFFERENCE</th>
+                                    <th scope="col">ITEM NAME</th>
+                                    <th scope="col">PURCHASE DESCRIPTION</th>
+                                    <th scope="col">QTY</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {orderViewList.purchase_row.map((item, index) => (
+                                    <tr>
+                                        <td>{index + 1}</td>
+                                        <td>{item.strReferenceCode}</td>
+                                        <td>{item.strItemName}</td>
+                                        <td>{item.strPurchaseDescription}</td>
+                                        <td>{item.numOrderQty}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+
                     </div>
                 </>
             )}

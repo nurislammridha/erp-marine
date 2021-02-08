@@ -1,15 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Card } from 'react-bootstrap';
 import { Form } from "react-bootstrap";
 const PurhasesOrderEntryHeader = () => {
-    const orderFilter = useSelector(state => state.purchasesOrderInfo.orderFilter);
-    // const multipleOrder = useSelector(state => state.purchasesOrderInfo.multipleOrder);
-    // const [test, setTest] = useState(orderFilter)
-    // console.log('test :>> ', test);
-    // useEffect(() => {
-    //     setTest(orderFilter)
-    // }, [multipleOrder])
+    const finalOrderInput = useSelector(state => state.purchasesOrderInfo.finalOrderInput);
     return (
         <>
             <Card>
@@ -26,7 +20,7 @@ const PurhasesOrderEntryHeader = () => {
                                 <Form.Control
                                     className="formHeight"
                                     type="text"
-                                    value={orderFilter.strSBUName}
+                                    value={finalOrderInput.strBusinessLineName}
                                     disabled
                                 />
                             </Form.Group>
@@ -37,7 +31,7 @@ const PurhasesOrderEntryHeader = () => {
                                 <Form.Control
                                     className="formHeight"
                                     type="text"
-                                    value={orderFilter.strBusinessUnitName}
+                                    value={finalOrderInput.strBusinessUnitName}
                                     disabled
                                 />
                             </Form.Group>
@@ -48,7 +42,7 @@ const PurhasesOrderEntryHeader = () => {
                                 <Form.Control
                                     className="formHeight"
                                     type="text"
-                                    value={orderFilter.strPurchaseOrganizationName}
+                                    value={finalOrderInput.strPurchaseOrganizationName}
                                     disabled
                                 />
                             </Form.Group>
@@ -59,7 +53,7 @@ const PurhasesOrderEntryHeader = () => {
                                 <Form.Control
                                     className="formHeight"
                                     type="text"
-                                    value={orderFilter.strPOReferenceType}
+                                    value={finalOrderInput.strReferenceTypeName}
                                     disabled
                                 />
                             </Form.Group>

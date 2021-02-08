@@ -15,13 +15,9 @@ const PurhasesOrderFilter = () => {
     const branchList = useSelector(state => state.purchasesOrderInfo.branchList);
     const purchaseOrganization = useSelector(state => state.purchasesOrderInfo.purchaseOrganization);
     const referenceType = useSelector(state => state.purchasesOrderInfo.referenceType);
-    const orderFilter = useSelector(state => state.purchasesOrderInfo.orderFilter);
-    const { intSBUId, intBusinessUnitId, intPurchaseOrganizationId, intPOReferenceTypeId } = orderFilter;
+    const finalOrderInput = useSelector(state => state.purchasesOrderInfo.finalOrderInput);
+    const { intBusinessLineId, intBusinessUnitId, intPurchaseOrganizationId, intReferenceTypeId } = finalOrderInput;
     const dispatch = useDispatch();
-    // const handleChangeSBU =(value)=>{
-    //     dispatch()
-    // }
-
     useEffect(() => {
         dispatch(getSBUlist())
         dispatch(getBranchList())
@@ -33,8 +29,8 @@ const PurhasesOrderFilter = () => {
 
     }
     useEffect(() => {
-        dispatch(getPurchaseOrder(orderFilter))
-    }, [orderFilter])
+        dispatch(getPurchaseOrder(finalOrderInput))
+    }, [finalOrderInput, dispatch])
     return (
         <>
             <Card>
@@ -48,8 +44,6 @@ const PurhasesOrderFilter = () => {
                                 <InputBase
                                     className="custome-purchase-search"
                                     placeholder="Search"
-                                // value={searchText}
-                                // onChange={searchProduct}
                                 />
                                 <IconButton aria-label="Search" className="searchPlaceholder purchaseSearch">
                                     <i className="flaticon-search "></i>
@@ -58,7 +52,7 @@ const PurhasesOrderFilter = () => {
                         </div>
                         <div className="col-xl-4 col-lg-4 col-md-4 col-5"></div>
                         <div className="col-xl-2 col-lg-2 col-md-2 col-5">
-                            {intSBUId && intBusinessUnitId && intPurchaseOrganizationId && intPOReferenceTypeId && (
+                            {intBusinessLineId && intBusinessUnitId && intPurchaseOrganizationId && intReferenceTypeId && (
                                 <button
                                     className="btn btn-primary btn-sm float-right"
                                     onClick={() => history.push('/purchase/order/create')}
@@ -77,11 +71,11 @@ const PurhasesOrderFilter = () => {
                                 <RHFInput
                                     as={<Select options={sbuList} />}
                                     rules={{ required: false }}
-                                    name="intSBUId"
+                                    name="intBusinessLineId"
                                     register={register}
                                     onChange={(option) => {
-                                        handleChangeInput("intSBUId", option.value);
-                                        handleChangeInput("strSBUName", option.label);
+                                        handleChangeInput("intBusinessLineId", option.value);
+                                        handleChangeInput("strBusinessLineName", option.label);
                                     }}
                                     setValue={setValue}
                                 />
@@ -119,11 +113,11 @@ const PurhasesOrderFilter = () => {
                                 <RHFInput
                                     as={<Select options={referenceType} />}
                                     rules={{ required: false }}
-                                    name="intPOReferenceTypeId"
+                                    name="intReferenceTypeId"
                                     register={register}
                                     onChange={(option) => {
-                                        handleChangeInput("intPOReferenceTypeId", option.value);
-                                        handleChangeInput("strPOReferenceType", option.label);
+                                        handleChangeInput("intReferenceTypeId", option.value);
+                                        handleChangeInput("strReferenceTypeName", option.label);
                                     }}
                                     setValue={setValue}
                                 />

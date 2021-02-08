@@ -18,7 +18,6 @@ const PurchaseOrderMultiple = () => {
     const editOptionItem = useSelector(state => state.purchasesOrderInfo.editOptionItem);
     const finalOrderInput = useSelector(state => state.purchasesOrderInfo.finalOrderInput);
     const status = useSelector(state => state.purchasesOrderInfo.status);
-    console.log('status mul:>> ', status);
     if (status) {
         history.push('/purchase/order/list')
     }
@@ -27,7 +26,7 @@ const PurchaseOrderMultiple = () => {
             dispatch(SubmitFinalOrder(finalOrderInput))
         }
 
-    }, [finalOrderInput])
+    }, [finalOrderInput, dispatch])
     const changeTextValue = (name, value) => {
         dispatch(purchasesOrderInput(name, value))
     }

@@ -22,7 +22,6 @@ const PurhasesOrderEntry = () => {
   const paymentTerms = useSelector(state => state.PaymentTermsReducer.paymentTerms);
   const CurrencyList = useSelector(state => state.CurrencyListReducer.CurrencyList);
   const supplierNameList = useSelector(state => state.SupplierNameReducer.supplierNameList);
-  console.log('incotermList :>> ', incotermList);
   const handleChangeTextInput = (name, value) => {
     dispatch(FinalOrderInput(name, value));
   }
@@ -66,18 +65,6 @@ const PurhasesOrderEntry = () => {
                       }}
                     />
                   </div>
-                  {/* <div className="col-xl-4 col-lg-4 col-md-4 col-12">
-                    <Form.Group>
-                      <Form.Label className="formFont pl-1">Supplier Address</Form.Label>
-                      <Form.Control
-                        className="formHeight"
-                        name=""
-                        type="text"
-                        // value={""}
-                        placeholder="Enter Address No"
-                      />
-                    </Form.Group>
-                  </div> */}
                   <div className="col-xl-4 col-lg-4 col-md-4 col-12">
                     <label className="formFont">Order Date</label>
                     <DatePicker

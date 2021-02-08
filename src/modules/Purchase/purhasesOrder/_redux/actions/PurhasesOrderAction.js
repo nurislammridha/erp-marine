@@ -77,10 +77,10 @@ export const editOrderMultiple = (index) => (dispatch) => {
     dispatch({ type: Types.EDIT_MULTIPLE, payload: index })
 }
 export const getPurchaseOrder = (orderFilter) => (dispatch) => {
-    const { strSBUName, strBusinessUnitName, strPurchaseOrganizationName, strPOReferenceType } = orderFilter;
+    const { strBusinessLineName, strBusinessUnitName, strPurchaseOrganizationName, strReferenceTypeName } = orderFilter;
 
-    if (strSBUName.length > 0 && strBusinessUnitName.length > 0 && strPurchaseOrganizationName.length > 0 && strPOReferenceType.length > 0) {
-        const url = `${process.env.REACT_APP_API_URL}purchase/getPurchaseOrderList?sbuName=${strSBUName}&branchName=${strBusinessUnitName}&purchaseOrganisationName=${strPurchaseOrganizationName}&referenceTypeName=${strPOReferenceType}`;
+    if (strBusinessLineName.length > 0 && strBusinessUnitName.length > 0 && strPurchaseOrganizationName.length > 0 && strReferenceTypeName.length > 0) {
+        const url = `${process.env.REACT_APP_API_URL}purchase/getPurchaseOrderList?sbuName=${strBusinessLineName}&branchName=${strBusinessUnitName}&purchaseOrganisationName=${strPurchaseOrganizationName}&referenceTypeName=${strReferenceTypeName}`;
         Axios.get(url).then(
             (res) => {
                 dispatch({ type: Types.GET_PURCHASE_ORDER, payload: res.data.data })
@@ -91,7 +91,6 @@ export const getPurchaseOrder = (orderFilter) => (dispatch) => {
 
 
 export const submitMultipleOrderList = (multipleOrder, finalOrderInput) => (dispatch) => {
-    console.log('finalOrderInput :>> ', finalOrderInput);
     if (finalOrderInput.inSupplierId.length === 0) {
         showToast("error", "Please Select Supplier Name");
         return false;
@@ -153,7 +152,6 @@ export const SubmitFinalOrder = (finalOrderInput) => (dispatch) => {
     const url = `${process.env.REACT_APP_API_URL}purchase/purchaseOrderHeaderRow`;
     Axios.post(url, finalOrderInput).then(function (response) {
         dispatch({ type: Types.RESPONSE_DATA_STATUS, payload: response.data.status })
-        // console.log('response.data.status :>> ', response.data.status);
 
         if (response.data.status) {
             showToast("success", response.data.message);
