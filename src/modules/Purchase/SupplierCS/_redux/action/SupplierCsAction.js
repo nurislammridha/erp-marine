@@ -8,3 +8,10 @@ export const getDepartmentList = () => (dispatch) => {
         }
     )
 }
+export const changeSupplierCSInput = (name, value) => (dispatch) => {
+    const formData = {
+        name: name,
+        value: value
+    }
+    dispatch({ type: Types.SUPPLIER_CS_INPUT, payload: formData })
+}
