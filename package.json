@@ -110,7 +110,7 @@
         "react-swipeable-views": "0.13.9",
         "react-syntax-highlighter": "12.2.1",
         "react-to-pdf": "0.0.13",
-        "react-to-print": "^2.12.2",
+        "react-to-print": "^2.12.3",
         "react-to-print-advanced": "^2.1.2",
         "react-toastify": "^6.2.0",
         "react-window": "1.8.5",
