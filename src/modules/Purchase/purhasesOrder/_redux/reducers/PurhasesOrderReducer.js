@@ -58,7 +58,7 @@ const initialstate = {
         isApproved: "",
         intApproveBy: "",
         intPaymentTerms: "",
-        intPercent: "",
+        numCaseInPercent: "",
         strOtherTerms: "",
         intPaymentDaysAfterDelivery: "",
         strDeliveryAddress: "",
@@ -68,6 +68,10 @@ const initialstate = {
         intTaxType: "",
         isClosed: "",
         intActionBy: 1,
+        dtePODate: "",
+        dtePayDays: "",
+        dtePOValidityDate: "",
+        dteReferenceDate: ""
     }
 };
 const PurchasesOrderReducer = (state = initialstate, action) => {
@@ -103,6 +107,7 @@ const PurchasesOrderReducer = (state = initialstate, action) => {
             return { ...state, multipleOrder: multipleOrderOld }
         case Types.EDIT_MULTIPLE:
             const editData = { ...state.multipleOrder[action.payload] }
+            console.log('editData :>> ', editData);
             const editOptionItem = optionItem(editData);
             const editOptionReference = optionReference(editData);
             return { ...state, orderInput: editData, editOptionReference: editOptionReference, editOptionItem: editOptionItem }
@@ -118,6 +123,10 @@ const PurchasesOrderReducer = (state = initialstate, action) => {
             return { ...state, finalOrderInput: finalOrderList }
         case Types.GET_ORDER_VIEW:
             return { ...state, orderViewList: action.payload }
+        case Types.GET_INCOTERM_NAME:
+            return { ...state, incotermList: IncotermList(action.payload) }
+        case Types.RESPONSE_DATA_STATUS:
+            return { ...state, status: action.payload }
         default:
             break;
     }
@@ -178,10 +187,23 @@ const ReferenceType = (data) => {
     }
     return options;
 }
+const IncotermList = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intIncotermId,
+                label: item.strIncotermName
+            }
+            options.push(itemData)
+        })
+    }
+    return options;
+}
 const optionReference = (data) => {
     const dataOption = {
-        value: data.intRefferenceId,
-        label: data.strRefferenceName
+        value: data.intReferenceId,
+        label: data.strReferenceCode
     }
     return dataOption;
 }
