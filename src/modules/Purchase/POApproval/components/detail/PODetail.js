@@ -156,16 +156,12 @@ const PODetail = () => {
                             <div className="row mt-5">
                                 <div className="col-sm-12">
                                     <div className="float-right">
-                                        <button
-                                            className="btn btn-danger btn-sm"
-                                        >
+                                        <button className="btn btn-danger btn-sm" >
                                             Reject
-                        </button>
-                                        <button
-                                            className="btn btn-primary btn-sm ml-3 mr-5"
-                                        >
+                                        </button>
+                                        <button className="btn btn-primary btn-sm ml-3 mr-5" >
                                             Approve
-                        </button>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
