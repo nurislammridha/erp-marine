@@ -30,7 +30,7 @@ const RequisitionApprovalDetail = ({ handleClose }) => {
 
     const handleReject = (e) => {
         purchaseApprovalDetail.intStatus = 0;
-        dispatch(handleRejectedPRApproval(purchaseApprovalDetail));
+        // dispatch(handleRejectedPRApproval(purchaseApprovalDetail));
         e.preventDefault();
     };
     console.log('purchaseApprovalDetail :>> ', purchaseApprovalDetail);
