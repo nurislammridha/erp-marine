@@ -81,7 +81,6 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                 isLoading: false,
                 inputData: initialState.inputData
             };
-
         case Types.USER_ROLE_CHECKED:
             const { indexparentRole, indexChild, checkboxStatus  } = action.payload;
             let roleList = state.inputData.groupList.slice();
@@ -94,7 +93,14 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                     roleList
                 }
             };
-
+        case Types.USER_ROLE_HANDLE_CHANGE:
+            const { name, value  } = action.payload;
+           
+           
+            return {
+                ...state,
+                rollname: value,
+            };
         case Types.USER_ROLE_CHECKED_GROUP:
             const groupIndex = action.payload.index
             const isGroupChecked = action.payload.isGroupChecked
@@ -112,7 +118,6 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                     }
                 }
             }
-
             return {
                 ...state,
                 inputData: {
@@ -120,7 +125,6 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                     roleList
                 }
             };
-
         case Types.USER_ROLE_ALL_CHECKED:
             let CheckroleList = state.inputData.groupList.slice();
             for (let i = 0; i < CheckroleList.length; i++) {
