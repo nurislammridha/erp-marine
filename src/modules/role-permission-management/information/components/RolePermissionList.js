@@ -2,15 +2,17 @@ import React, { useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { dispacth } from 'react-redux'
 import { useSelector, useDispatch } from "react-redux";
-import { allCheckboxSelected, getRoleList, roleCheckboxSelect, checkPermissionGroupAction } from "../_redux/actions/RolePermissionManagementAction";
+import { useForm } from "react-hook-form";
+import { allCheckboxSelected, getRoleList, roleCheckboxSelect, checkPermissionGroupAction, storePermission, handleInputData } from "../_redux/actions/RolePermissionManagementAction";
 
 const RolePermissionList = () => {
 
-
+  const { register, handleSubmit, errors, setValue } = useForm();
   const dispatch = useDispatch();
   const roleList = useSelector((state) => state.roleReducer.roleList);
+  const roleData = useSelector((state) => state.roleReducer.rollname);
 
-  console.log('roleList', roleList);
+ 
 
   useEffect(() => {
     dispatch(getRoleList());
@@ -36,6 +38,13 @@ const RolePermissionList = () => {
     let checkStausCheck = e.target.checked;
     dispatch(allCheckboxSelected(checkStausCheck));
   }
+  const handleChangeTextInput =(name,value)=>{
+    dispatch(handleInputData(name,value));
+  }
+  const onSubmit = async (e) => {
+   
+    dispatch(storePermission(roleList,roleData));
+  };
 
   return (
     <>
@@ -45,6 +54,8 @@ const RolePermissionList = () => {
             <div className="card card-custom gutter-b p-5">
               <form
                 className="form form-label-right voyageEngineerForm"
+                method="post"
+                onSubmit={handleSubmit(onSubmit)}
                 method="post"
               >
                 <div className="form-group row mt-2">
@@ -57,7 +68,9 @@ const RolePermissionList = () => {
                         className="formHeight"
                         type="text"
                         placeholder="Type"
-                        name="strSupplierAddress"
+                        name="rollname"
+                        value={roleData.rollname}
+                        onChange={(e) => handleChangeTextInput("rollname", e.target.value)}
                       />
                     </Form.Group>
                   </div>

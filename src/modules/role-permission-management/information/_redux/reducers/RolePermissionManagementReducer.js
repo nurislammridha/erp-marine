@@ -4,9 +4,7 @@ import moment from "moment";
 // Initial state
 const initialState = {
     roleList: [],
-    inputData: {
-
-    }
+    rollname:"",
 
 };
 
@@ -20,21 +18,26 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                 ...state,
                 roleList: action.payload,
             };
-
         case Types.USER_ROLE_CHECKED:
             const { indexparentRole, indexChild, checkboxStatus  } = action.payload;
+
             let roleList = state.roleList.slice();
             roleList[indexparentRole].permissions[indexChild].isChecked = checkboxStatus;
             roleList[indexparentRole].isChecked = checkAllPermissionIsChecked(roleList, indexparentRole);
-
             return {
                 ...state,
                 roleList: roleList,
             };
-
+        case Types.USER_ROLE_HANDLE_CHANGE:
+            const { name, value  } = action.payload;
+           
+           
+            return {
+                ...state,
+                rollname: value,
+            };
         case Types.USER_ROLE_CHECKED_GROUP:
             console.log(action.payload);
-
             const groupIndex = action.payload.index
             const isGroupChecked = action.payload.isGroupChecked
             const roles = state.roleList.slice();
@@ -51,13 +54,10 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                     }
                 }
             }
-
             return {
                 ...state,
                 roleList: roles
             };
-
-
         case Types.USER_ROLE_ALL_CHECKED:
             let CheckroleList = state.roleList.slice();
             for (let i = 0; i < CheckroleList.length; i++) {
