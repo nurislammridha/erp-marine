@@ -7,7 +7,7 @@ const initialState = {
     roleList: [], // For Insert/Edit Page
     rolesListPaginated: [],
     rolesListAll: [],
-
+    userList:[],
     inputData: {
         id: '',
         role: '',
@@ -36,6 +36,12 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                 isLoading: action.payload.isLoading,
                 isRoleCreated: action.payload.status,
                 roleCreateMessage: action.payload.message,
+            };
+        case Types.GET_PERMISSION_USER_LIST:
+            console.log('action.payload', action.payload);
+            return {
+                ...state,
+                userList:action.payload
             };
 
         case Types.GET_USER_ROLE_LIST_PAGINATED:

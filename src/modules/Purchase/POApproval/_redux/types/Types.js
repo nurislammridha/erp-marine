@@ -11,5 +11,6 @@ export const CHANGE_PO_APPROVAL_DETAIL_INPUT = "CHANGE_PO_APPROVAL_DETAIL_INPUT"
 
 //************Purhase Order Approval ************ */
 export const PO_APPROVAL_DETAILS_INPUT = "PO_APPROVAL_DETAILS_INPUT";
+export const UPDATE_PO_APPROVAL = "UPDATE_PO_APPROVAL";
 
 
