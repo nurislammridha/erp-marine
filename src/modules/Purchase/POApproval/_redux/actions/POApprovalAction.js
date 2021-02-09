@@ -140,12 +140,48 @@ export const GetPOApprovalDetail = (id) => (dispatch) => {
         });
 };
 //*************Purchase Order Approval**************** */
-export const handleChangePurchaseOrderApprovalDetailInput = (name, value, item) => (dispatch) => {
+export const handleChangePurchaseOrderApprovalDetailInput = (name, value, item, index) => (dispatch) => {
     const formData = {
         name: name,
         value: value,
         item: item,
+        index: index
     };
-    console.log('formData :>> ', formData);
     dispatch({ type: Types.PO_APPROVAL_DETAILS_INPUT, payload: formData });
+};
+
+
+export const handleUpdatePOApproval = (POApprovalData, handleClose, id) => async (dispatch) => {
+    let responseList = {
+        isLoading: true,
+        data: {},
+        status: false,
+    };
+    dispatch({ type: Types.UPDATE_PO_APPROVAL, payload: responseList });
+    const newPRApprovalData = POApprovalData.poApprovalStatus.filter((item) => item.isChecked && item.isChecked === true);
+    POApprovalData.poApprovalStatus = newPRApprovalData;
+    if (POApprovalData.intStatus === 1) {
+        POApprovalData.intStatus = 1;
+        POApprovalData.strStatus = "Approved";
+    } else {
+        POApprovalData.intStatus = 0;
+        POApprovalData.strStatus = "Rejected";
+    }
+   
+    await Axios.put(`${process.env.REACT_APP_API_URL}purchase/poApprovalStatus/${id}`,POApprovalData)
+        .then((response) => {
+            if (response.data.status) {
+                responseList.data = response.data;
+                responseList.isLoading = false;
+                responseList.status = response.data.status;
+                showToast("success", response.data.message);
+                dispatch({ type: Types.UPDATE_PO_APPROVAL, payload: responseList });
+                handleClose();
+            } else { showToast("error", response.data.message) }
+        }).catch(function (error) {
+            responseList.isLoading = false;
+            const message = "Something went wrong ! Please fill all inputs and try again !";
+            showToast("error", message);
+            dispatch({ type: Types.UPDATE_PO_APPROVAL, payload: responseList });
+        });
 };

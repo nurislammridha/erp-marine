@@ -1,12 +1,12 @@
 import * as Types from "../Type/Types";
 const initialstate = {
 };
-const ItemListReducer = (state = initialstate, action) => {
+const CatalogueListReducer = (state = initialstate, action) => {
     switch (action.type) {
-        case Types.GET_ITEM_LIST:
+        case Types.GET_CATALOUGE_LIST:
             return {
                 ...state,
-                ItemList: GetItemData(action.payload.itemList),
+                catalougList: getCataloug(action.payload),
             };
         default:
             break;
@@ -15,17 +15,17 @@ const ItemListReducer = (state = initialstate, action) => {
 };
 
 // voyage type list
-const GetItemData = (data) => {
+const getCataloug = (data) => {
     let options = [];
     if (data) {
         data.forEach((item) => {
             let itemData = {
-                value: item.intItemID,
-                label: item.strItemName,
+                value: item.intCurrencyId,
+                label: item.strCurrencyName,
             };
             options.push(itemData);
         });
     }
     return options;
 };
-export default ItemListReducer;
+export default CatalogueListReducer;

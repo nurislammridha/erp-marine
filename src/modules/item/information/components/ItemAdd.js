@@ -6,6 +6,7 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { deleteMultipleItemInput, itemAddInput, multipleItemAddInput, submitMultipleItem, getItemCategory, getUOM, getItemType, getItemSubCategory } from "../_redux/actions/ItemAction";
 import { useHistory } from "react-router-dom";
+import { getCatalougList } from './../../../master/DropDownData/Catalogue/_redux/CatalogueAction/CatalogueAction';
 const ItemAdd = () => {
   const { register, setValue } = useForm();
   const dispatch = useDispatch();
@@ -24,11 +25,12 @@ const ItemAdd = () => {
   const itemTypeOptionData = useSelector((state) => state.itemList.itemTypeOptionData);
   const itemCategoryOptionData = useSelector((state) => state.itemList.itemCategoryOptionData);
   const itemSubCategoryOptionData = useSelector((state) => state.itemList.itemSubCategoryOptionData);
+  const catalougList = useSelector((state) => state.CatalogueListReducer.catalougList);
+
   const changeText = (name, value) => {
     dispatch(itemAddInput(name, value))
   }
   const multipleItemAdd = () => {
-
     dispatch(multipleItemAddInput(itemDataInput))
   }
 
@@ -46,6 +48,7 @@ const ItemAdd = () => {
     dispatch(getItemType());
     dispatch(getItemCategory());
     dispatch(getItemSubCategory());
+    dispatch(getCatalougList());
     // dispatch(getItemCategory())
   }, [])
 
@@ -63,7 +66,7 @@ const ItemAdd = () => {
     <>
       <div className="card card-custom gutter-b pl-5 pr-5 mb-5 card-top-border">
         <div className="mt-5">
-          <h3 className="mb-0 pb-0">Item Add</h3>
+          <h3 className="mb-0 pb-0">Add Item</h3>
         </div>
         <hr></hr>
         <div className="form-group row">
@@ -191,18 +194,37 @@ const ItemAdd = () => {
               />
             </Form.Group>
           </div>
+
         </div>
         <div className="form-group row">
           <div className="col-xl-3 col-lg-3 col-md-6 ">
             <Form.Group>
               <Form.Label className="formFont pl-1">Catalogue No</Form.Label>
+              <RHFInput
+                as={<Select options={catalougList} />}
+                rules={{ required: false }}
+                name="intCatalogueID"
+                register={register}
+                value={itemDataInput.intCatalogueID}
+                setValue={setValue}
+                onChange={(option) => {
+                  changeText("intCatalogueID", option.value);
+                  changeText("cataloug", option);
+                }}
+                setValue={setValue}
+              />
+            </Form.Group>
+          </div>
+          <div className="col-xl-3 col-lg-3 col-md-6 ">
+            <Form.Group>
+              <Form.Label className="formFont pl-1">IMPA Code</Form.Label>
               <Form.Control
                 className="formHeight"
                 type="text"
-                placeholder="Enter Catalouge No"
-                name="intCatalogueID"
-                value={itemDataInput.intCatalogueID}
-                onChange={(e) => changeText("intCatalogueID", e.target.value)}
+                placeholder="Enter IMPA Code"
+                name="strIMPACode"
+                value={itemDataInput.strIMPACode}
+                onChange={(e) => changeText("strIMPACode", e.target.value)}
               />
             </Form.Group>
           </div>
