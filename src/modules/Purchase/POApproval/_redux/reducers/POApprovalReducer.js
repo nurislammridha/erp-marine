@@ -40,7 +40,6 @@ const POApprovalReducer = (state = initialState, action) => {
                     purchaseDetails[i][action.payload.name] = action.payload.value
                 }
             }
-            console.log('purchaseDetails', purchaseDetails)
             return {
                 ...state,
                 POApprovalMultiple: purchaseDetails,
