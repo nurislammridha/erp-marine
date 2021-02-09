@@ -78,6 +78,7 @@ import SupplierCsReducer from "../modules/Purchase/SupplierCS/_redux/reducer/Sup
 | Domain : CCO
 */
 // import authMenuPermissionReducer from "../app/modules/Auth/_redux/menu-permission/authMenuPermissionReducer";
+import CatalogueListReducer from './../modules/master/DropDownData/Catalogue/_redux/CatalogueReducer/CatalogueReducer';
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -159,6 +160,7 @@ export const rootReducer = combineReducers({
   CurrencyListReducer: CurrencyListReducer,
   SupplierNameReducer: SupplierNameReducer,
   ItemListReducer: ItemListReducer,
+  CatalogueListReducer: CatalogueListReducer,
 
   /**Certificates */
   certificateMainInfo: CertificateMainReducer,

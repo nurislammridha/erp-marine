@@ -17,7 +17,8 @@ const initialState = {
     status: false,
     isLoading: false,
     editStatus: false,
-    POApprovalMultiple: []
+    POApprovalMultiple: [],
+    POApprovalData: null,
 }
 
 const POApprovalReducer = (state = initialState, action) => {
@@ -33,10 +34,20 @@ const POApprovalReducer = (state = initialState, action) => {
 
             };
 
+        case Types.CHANGE_PO_APPROVAL_DETAIL_INPUT:
+            const purchaseDetails = state.POApprovalMultiple;
+            for (let i = 0; i < purchaseDetails.length; i++) {
+                if (purchaseDetails[i].intRowId == action.payload.item.intRowId) {
+                    purchaseDetails[i][action.payload.name] = action.payload.value
+                }
+            }
             return {
                 ...state,
-                POApprovalMultiple: POApproval,
+                POApprovalMultiple: purchaseDetails,
+
             };
+
+
         case Types.GET_SBU_NAME:
             return {
                 ...state,
@@ -84,17 +95,52 @@ const POApprovalReducer = (state = initialState, action) => {
         //**********Purchase Order Approval *********** */
         case Types.PO_APPROVAL_DETAILS_INPUT:
             console.log('action.payload :>> ', action.payload);
-            const POApproval = state.POApprovalMultiple;
+            let POApproval = state.POApprovalMultiple.slice();
             for (let i = 0; i < POApproval.length; i++) {
-                if (POApproval[i].intPOId == action.payload.item.intPOId) {
-                    POApproval[i][action.payload.name] = action.payload.value
+                if (i === action.payload.index) {
+                    POApproval[i][action.payload.name] = action.payload.value;
+                    POApproval[i].intPurchaseOrdertId = action.payload.item.intPOId;
+                    POApproval[i].intItemId = action.payload.item.intItemId;
+                    POApproval[i].strItemName = action.payload.item.strItemName;
+                    POApproval[i].isApproved = null;
+                    POApproval[i].numRequestQty = action.payload.item.numOrderQty;
+                    POApproval[i].numApprovedQtybyShip = null;
+                    POApproval[i].intApprovedByshipId = null;
+                    POApproval[i].strApprovedByShip = null;
+                    POApproval[i].numApprovedQtybyOffice = null;
+                    POApproval[i].intApprovedByOfficeId = null;
+                    POApproval[i].strApprovedByOffice = null;
+                    POApproval[i].numApprovedQtybyFinance = null;
+                    POApproval[i].intApprovedByFinanceId = null;
+                    POApproval[i].strApprovedByFinance = null;
+                    POApproval[i].intActionBy = action.payload.item.intActionBy;
+                    POApproval[i].isActive = action.payload.item.isActive;
                 }
             }
-            console.log('POApproval :>> ', POApproval);
+            const newMultipleData = {
+                intStatus: null,
+                strStatus: '',
+                poApprovalStatus: POApproval,
+            }
             return {
                 ...state,
                 POApprovalMultiple: POApproval,
+                POApprovalData: newMultipleData,
             };
+        case Types.UPDATE_PO_APPROVAL:
+            if (action.payload.status) {
+                return {
+                    ...state,
+                    POApprovalFilterInput: initialState.POApprovalFilterInput,
+                    POApprovalData: initialState.POApprovalData,
+                    isLoading: action.payload.isLoading,
+                };
+            } else {
+                return {
+                    ...state,
+                    isLoading: action.payload.isLoading,
+                };
+            }
 
         default:
             break;
