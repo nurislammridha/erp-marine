@@ -34,10 +34,20 @@ const POApprovalReducer = (state = initialState, action) => {
 
             };
 
-        // return {
-        //     ...state,
-        //     POApprovalMultiple: POApproval,
-        // };
+        case Types.CHANGE_PO_APPROVAL_DETAIL_INPUT:
+            const purchaseDetails = state.POApprovalMultiple;
+            for (let i = 0; i < purchaseDetails.length; i++) {
+                if (purchaseDetails[i].intRowId == action.payload.item.intRowId) {
+                    purchaseDetails[i][action.payload.name] = action.payload.value
+                }
+            }
+            return {
+                ...state,
+                POApprovalMultiple: purchaseDetails,
+
+            };
+
+
         case Types.GET_SBU_NAME:
             return {
                 ...state,
