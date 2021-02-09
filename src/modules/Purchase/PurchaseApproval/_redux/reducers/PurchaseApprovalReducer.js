@@ -35,7 +35,6 @@ const PurchaseApprovalReducer = (state = initialState, action) => {
             };
 
         case Types.CHANGE_PURCHASE_APPROVAL_DETAIL_INPUT:
-
             const purchaseDetails = state.purchaseApprovalMultiple;
             for (let i = 0; i < purchaseDetails.length; i++) {
                 if (purchaseDetails[i].intId == action.payload.item.intId) {

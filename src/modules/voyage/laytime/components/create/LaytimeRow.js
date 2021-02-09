@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
@@ -8,6 +8,9 @@ import LaytimeDetail from '../detail/LaytimeDetail';
 import LaytimeMultipleAdd from './LaytimeMultipleAdd';
 import { useSelector, useDispatch } from "react-redux";
 import { handleChangeLaytimeRowInput, submitLaytime } from '../../_redux/actions/LaytimeAction';
+import { getCurrencyList } from './../../../../master/DropDownData/Currency/_redux/CurrencyAction/CurrencyAction';
+import { getPortList } from './../../../../master/DropDownData/Port/_redux/PortAction/PortAction';
+import { getCargoList } from './../../../../master/DropDownData/Cargo/_redux/CargoAction/CargoAction';
 
 const LaytimeRow = () => {
     const dispatch = useDispatch();
@@ -17,45 +20,22 @@ const LaytimeRow = () => {
     const loading = useSelector((state) => state.laytimeDetailInfo.loading);
     const layTimeRowList = useSelector((state) => state.laytimeDetailInfo.layTimeRowList);
     const laytimeDatList = useSelector((state) => state.laytimeDetailInfo.laytimeDatList);
-    const laytimeDataList = useSelector(
-        (state) => state.laytimeDetailInfo.laytimeDataList
-      );
+    const CurrencyList = useSelector((state) => state.CurrencyListReducer.CurrencyList);
+    const laytimeDataList = useSelector((state) => state.laytimeDetailInfo.laytimeDataList);
+    const PortList = useSelector((state) => state.PortReducer.portList);
+    const cargoList = useSelector((state) => state.CargoReducer.cargoList);
 
     const [show, setShow] = useState(false);
     // handle change lay time row input
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeLaytimeRowInput(name, value));
     };
-    // for testing port 
-    const selectPort = [
-        {
-            label: 'Port-1',
-            value: "1"
-        },
-        {
-            label: 'Port-2',
-            value: "2"
-        },
-        {
-            label: 'Port-3',
-            value: "3"
-        }
-    ]
-    //testing for cargo type 
-    const selectCargo = [
-        {
-            label: 'Cargo-1',
-            value: "1"
-        },
-        {
-            label: 'Cargo-2',
-            value: "2"
-        },
-        {
-            label: 'Cargo-3',
-            value: "3"
-        }
-    ]
+    useEffect(() => {
+        dispatch(getCurrencyList())
+        dispatch(getPortList())
+        dispatch(getCargoList())
+    }, [])
+  
     //testing for cargo type 
     const selectTerms = [
         {
@@ -117,7 +97,7 @@ const LaytimeRow = () => {
                                         <div className="col-md-6 pr-11">
                                             <label className="form-label">Port Name</label>
                                             <RHFInput
-                                                as={<Select options={selectPort} />}
+                                                as={<Select options={PortList} />}
                                                 rules={{ required: true }}
                                                 name="intPortID"
                                                 register={register}
@@ -168,7 +148,7 @@ const LaytimeRow = () => {
                                             <div className="col-md-7">
                                                 <label className="form-label">Cargo Name</label>
                                                 <RHFInput
-                                                    as={<Select options={selectCargo} />}
+                                                    as={<Select options={cargoList} />}
                                                     rules={{ required: true }}
                                                     name="intCargoID"
                                                     register={register}
@@ -236,7 +216,7 @@ const LaytimeRow = () => {
                                                     })}
                                                 />
                                             </div>
-                                           {/* <div className="col-md-5">
+                                            {/* <div className="col-md-5">
                                                 <label className="form-label mt-2 formFont">Day</label>
                                                 <Form.Control
                                                     type="number"
@@ -317,7 +297,7 @@ const LaytimeRow = () => {
                                     </div>
                                     <div className="row">
                                         <div className="row col-md-6">
-                                            <div className="col-md-7">
+                                            <div className="col-md-6">
                                                 <label className="form-label mt-2 formFont">Demurrage Rate</label>
                                                 <Form.Control
                                                     type="number"
@@ -331,9 +311,9 @@ const LaytimeRow = () => {
                                                     })}
                                                 />
                                             </div>
-                                            <div className="col-md-5">
-                                                <label className="form-label mt-2 formFont">USD</label>
-                                                <Form.Control
+                                            <div className="col-md-6">
+                                                <label className="form-label mt-2 formFont">Currency</label>
+                                                {/* <Form.Control
                                                     type="number"
                                                     name="intDemurrageCurrID"
                                                     className="fromStyle formHeight"
@@ -343,6 +323,22 @@ const LaytimeRow = () => {
                                                         required: true,
                                                         maxLength: 100,
                                                     })}
+                                                /> */}
+                                                <RHFInput
+                                                    as={<Select options={CurrencyList} />}
+                                                    rules={{ required: true }}
+                                                    name="intCurrencyID"
+                                                    register={register}
+                                                    value={laytimeRowInput.currency}
+                                                    onChange={(option) => {
+                                                        handleChangeTextInput("intCurrencyID", option.value);
+                                                        handleChangeTextInput("currency", option);
+                                                    }}
+                                                    ref={register({
+                                                        required: true,
+                                                        maxLength: 100,
+                                                    })}
+                                                    setValue={setValue}
                                                 />
                                             </div>
                                         </div>

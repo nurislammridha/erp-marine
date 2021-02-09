@@ -18,10 +18,11 @@ const POList = () => {
   const [PODetailsShow, setPODetailsShow] = useState(false)
   const POApprovalListData = useSelector((state) => state.POApprovalFilter.POApprovalList);
 
-
+ const [POID, setPOID] = useState(null)
   const handleClick = (id) => {
     setPODetailsShow(true)
     dispatch(GetPOApprovalDetail(id));
+    setPOID(id);
   }
 
   useEffect(() => {
@@ -139,7 +140,7 @@ const POList = () => {
         // vesselBookingID={vesselBookingID}
         modalTitle={"Purchase Order Details"}
       >
-        <PODetail />
+        <PODetail id={POID} handleClose={() => setPODetailsShow(false)} />
       </SimpleModal>
 
     </Card >

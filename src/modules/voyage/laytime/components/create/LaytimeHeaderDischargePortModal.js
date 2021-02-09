@@ -9,42 +9,10 @@ import { GetCurrencyData, multipleLaytimeAction } from '../../_redux/actions/Lay
 const LaytimeHeaderDischargePortModal = (props) => {
     const dispatch = useDispatch()
     const { register, handleSubmit, errors, setValue } = useForm();
-    const { layTimeDemurrage, handleLayTimeDemurrageInput, handleClose, handleCloseLoadingPortModal } = props;
+    const { layTimeDemurrage, handleLayTimeDemurrageInput, handleClose, handleCloseLoadingPortModal, CurrencyList } = props;
     const isLoading = "";
-    const currency = [
-        {
-            label: 'TK',
-            value: "1"
-        },
-        {
-            label: 'USD',
-            value: "2"
-        },
-        {
-            label: 'Euro',
-            value: "3"
-        },
-        {
-            label: 'CAD',
-            value: "4"
-        }
-    ]
-    //currency data 
     const currencyList = useSelector((state) => state.currencyInfo.currencyList);
-    let Currency = [];
-    if (currencyList) {
-        currencyList.forEach((item) => {
-            let getCurrency = {
-                value: item.intCurrencyID,
-                label: item.strCurrencyName,
-            };
-            Currency.push(getCurrency);
-        });
-    }
-    useEffect(() => {
-        dispatch(GetCurrencyData());
-    }, []);
-
+   
     // add multiple demmurage data 
     const addMultipleDemmurage = () => {
         dispatch(multipleLaytimeAction(layTimeDemurrage, handleClose))
@@ -53,7 +21,7 @@ const LaytimeHeaderDischargePortModal = (props) => {
         <>
             <div className="col-md-9">
                 <div className="row">
-                    <div className="col-md-8">
+                    <div className="col-md-6">
                         <label className="form-label mt-2 formFont">Demurrage Rate</label>
                         <Form.Control
                             type="number"
@@ -68,10 +36,10 @@ const LaytimeHeaderDischargePortModal = (props) => {
                             }
                         />
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-6">
                         <label className="form-label mt-5 formFont"></label>
                         <RHFInput
-                            as={<Select options={currency} />}
+                            as={<Select options={CurrencyList} />}
                             className="fromStyle formHeight"
                             rules={{ required: true }}
                             name="intCurrencyID"
@@ -86,7 +54,7 @@ const LaytimeHeaderDischargePortModal = (props) => {
                     </div>
                 </div>
                 <div className="row mt-3">
-                    <div className="col-md-8">
+                    <div className="col-md-6">
                         <label className="form-label mt-2 formFont">Despatch Rate</label>
                         <Form.Control
                             type="number"
@@ -101,7 +69,7 @@ const LaytimeHeaderDischargePortModal = (props) => {
                             }
                         />
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-6">
                         <label className="form-label mt-5 formFont"></label>
                         <InputGroup>
                             <FormControl

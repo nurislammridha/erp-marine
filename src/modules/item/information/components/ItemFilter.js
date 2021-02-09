@@ -61,7 +61,7 @@ const ItemFilter = ({currentPage, setCurrentPage}) => {
     return (
         <>
             <div className="row m-4">
-                <h1 className="tableheading">Items</h1>
+                <h1 className="tableheading">Item List</h1>
                 <Form.Group as={Col} controlId="formGridState">
                     <input
                         type="search"

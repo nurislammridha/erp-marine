@@ -24,14 +24,13 @@ const RequisitionApprovalDetail = ({ handleClose, id }) => {
         purchaseApprovalDetail.intStatus = 1;
         dispatch(handleApprovePRApproval(purchaseApprovalDetail, handleClose, id));
         e.preventDefault();
-
     };
     const handleReject = (e) => {
         purchaseApprovalDetail.intStatus = 0;
         dispatch(handleApprovePRApproval(purchaseApprovalDetail, handleClose, id));
         e.preventDefault();
     };
-    console.log('purchaseApprovalDetail :>> ', purchaseApprovalDetail);
+    console.log('purchaseApprovalMultiple :>> ', purchaseApprovalMultiple);
     return (
         <div>
             <form
