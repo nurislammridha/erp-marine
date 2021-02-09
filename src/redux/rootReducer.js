@@ -79,6 +79,7 @@ import SupplierCsReducer from "../modules/Purchase/SupplierCS/_redux/reducer/Sup
 */
 // import authMenuPermissionReducer from "../app/modules/Auth/_redux/menu-permission/authMenuPermissionReducer";
 import CatalogueListReducer from './../modules/master/DropDownData/Catalogue/_redux/CatalogueReducer/CatalogueReducer';
+import QuotationFilterReducer from "../modules/Purchase/Quotation/_redux/reducers/QuotationFilterReducer";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -145,6 +146,10 @@ export const rootReducer = combineReducers({
   purchaseApprovalFilter: PurchaseApprovalReducer,
   POApprovalFilter: POApprovalReducer,
 
+
+
+  /** Quotation */
+  QuotationFilterinfo: QuotationFilterReducer,
 
   // master module reducer // dynamic data for all dropdown menu list 
   PortReducer: PortReducer,
