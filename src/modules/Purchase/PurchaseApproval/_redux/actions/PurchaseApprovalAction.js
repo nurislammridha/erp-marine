@@ -55,12 +55,6 @@ export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBu
     };
 
     dispatch({ type: Types.GET_PURCHASE_APPROVAL_LIST, payload: response });
-    console.log('intSBUId checking :>> ', intSBUId);
-    console.log('intBusinessUnitId checking :>> ', intBusinessUnitId);
-    console.log('intShipID checking :>> ', intShipID);
-    console.log('dteFromDate checking :>> ', dteFromDate);
-
-    //http://127.0.0.1:8000/api/v1/purchase/getApproval?search=Akij%20&branchName=Akij&shipName=Akij&isPaginated=1&paginateNo=20 
 
     try {
         let url = `${process.env.REACT_APP_API_URL}purchase/getApproval?`;
@@ -114,18 +108,57 @@ export const GetPurchaseApprovalDetail = (id) => (dispatch) => {
         });
 };
 
-export const handleApprovePRApproval = (purchaseApprovalDetail) => async (dispatch) => {
+export const handleApprovePRApproval = (purchaseApprovalDetail, handleClose, id) => async (dispatch) => {
     let responseList = {
         isLoading: true,
         data: {},
         status: false,
     };
-
     dispatch({ type: Types.SUBMIT_PURCHASE_APPROVE, payload: responseList });
-
     const newPRApprovalData = purchaseApprovalDetail.purchase_row.filter((item) => item.isChecked && item.isChecked === true);
-
-    await Axios.put(`${process.env.REACT_APP_API_URL}certificate/types/updat`, newPRApprovalData)
+    purchaseApprovalDetail.reqApprovalStatus = newPRApprovalData;
+    if (purchaseApprovalDetail.intStatus === 1) {
+        purchaseApprovalDetail.intStatus = 1;
+        purchaseApprovalDetail.strStatus = "Approved";
+        let newData = []
+        for (let i = 0; i < purchaseApprovalDetail.reqApprovalStatus.length; i++) {
+            let element = purchaseApprovalDetail.reqApprovalStatus[i];
+            element.isApproved = 1;
+            element.numRequestQty = element.numPurchaseRequestQty;
+            element.numApprovedQtybyShip = element.intQCBy;
+            element.intApprovedByshipId = purchaseApprovalDetail.intShipID;
+            element.strApprovedByShip = purchaseApprovalDetail.strShipName;
+            element.numApprovedQtybyOffice = element.intQCBy;
+            element.intApprovedByOfficeId = element.intQCBy;
+            element.strApprovedByOffice = purchaseApprovalDetail.strSBUName;
+            element.numApprovedQtybyFinance = 1;
+            element.intApprovedByFinanceId = 1;
+            element.strApprovedByFinance = 'AKij It';
+            newData.push(element)
+        }
+        purchaseApprovalDetail.reqApprovalStatus = newData;
+    } else {
+        purchaseApprovalDetail.intStatus = 0;
+        purchaseApprovalDetail.strStatus = "Rejected";
+        let newData = []
+        for (let i = 0; i < purchaseApprovalDetail.reqApprovalStatus.length; i++) {
+            let element = purchaseApprovalDetail.reqApprovalStatus[i];
+            element.isApproved = 0;
+            element.numRequestQty = element.numPurchaseRequestQty;
+            element.numApprovedQtybyShip = element.intQCBy;
+            element.intApprovedByshipId = purchaseApprovalDetail.intShipID;
+            element.strApprovedByShip = purchaseApprovalDetail.strShipName;
+            element.numApprovedQtybyOffice = element.intQCBy;
+            element.intApprovedByOfficeId = element.intQCBy;
+            element.strApprovedByOffice = purchaseApprovalDetail.strSBUName;
+            element.numApprovedQtybyFinance = 1;
+            element.intApprovedByFinanceId = 1;
+            element.strApprovedByFinance = 'AKij It';
+            newData.push(element)
+        }
+        purchaseApprovalDetail.reqApprovalStatus = newData;
+    }
+    await Axios.put(`${process.env.REACT_APP_API_URL}purchase/reqApprovalStatus/${id}`, purchaseApprovalDetail)
         .then((response) => {
             if (response.data.status) {
                 responseList.data = response.data;
@@ -133,6 +166,7 @@ export const handleApprovePRApproval = (purchaseApprovalDetail) => async (dispat
                 responseList.status = response.data.status;
                 showToast("success", response.data.message);
                 dispatch({ type: Types.SUBMIT_PURCHASE_APPROVE, payload: responseList });
+                handleClose();
             } else { showToast("error", response.data.message) }
         }).catch(function (error) {
             responseList.isLoading = false;
@@ -141,31 +175,3 @@ export const handleApprovePRApproval = (purchaseApprovalDetail) => async (dispat
             dispatch({ type: Types.SUBMIT_PURCHASE_APPROVE, payload: responseList });
         });
 };
-
-
-
-// export const handleRejectedPRApproval = (purchaseApprovalDetail) => async (dispatch) => {
-//     let responseList = {
-//         isLoading: true,
-//         data: {},
-//         status: false,
-//     };
-
-//     dispatch({ type: Types.REJECTED_PURCHASE_APPROVAL, payload: responseList });
-//     const newPRApprovalData = purchaseApprovalDetail.purchase_row.filter((item) => item.isChecked && item.isChecked === true);
-//     await Axios.put(`${process.env.REACT_APP_API_URL}certificate/types/updat`, newPRApprovalData)
-//         .then((response) => {
-//             if (response.data.status) {
-//                 responseList.data = response.data;
-//                 responseList.isLoading = false;
-//                 responseList.status = response.data.status;
-//                 showToast("success", response.data.message);
-//                 dispatch({ type: Types.REJECTED_PURCHASE_APPROVAL, payload: responseList });
-//             } else { showToast("error", response.data.message) }
-//         }).catch(function (error) {
-//             responseList.isLoading = false;
-//             const message = "Something went wrong ! Please fill all inputs and try again !";
-//             showToast("error", message);
-//             dispatch({ type: Types.REJECTED_PURCHASE_APPROVAL, payload: responseList });
-//         });
-// };
