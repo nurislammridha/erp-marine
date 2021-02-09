@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { Form, Card, Button } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
 
 
 const QuotationDetails = () => {
+
+  const quotationDetailList = useSelector((state) => state.QuotationFilterinfo.quotationDetailList);
+
 
   return (
     <>
 
       <div className="row mt-5">
-        <div className="col-xl-8 co-lg-8 col-12">
+        <div className="col-lg-8 col-12">
           <Card>
             <Card.Body className="pt-5">
               <div className="border-top"></div>
@@ -28,9 +32,9 @@ const QuotationDetails = () => {
                     </tr>
                     <tr>
                       <td>#01</td>
+                      <td>8567</td>
                       <td>2021</td>
                       <td>Container Cargo</td>
-                      <td>8567</td>
                       <td>123</td>
                       <td>123</td>
                       <td>12</td>
@@ -46,9 +50,9 @@ const QuotationDetails = () => {
                     </tr>
                     <tr>
                       <td>#01</td>
+                      <td>8567</td>
                       <td>2021</td>
                       <td>Container Cargo</td>
-                      <td>8567</td>
                       <td>123</td>
                       <td>123</td>
                       <td>14</td>
@@ -80,27 +84,40 @@ const QuotationDetails = () => {
             <Card.Body className="pt-3">
               <h6 className="supplier-modal-header mb-2">Supplier Info</h6>
               <div className="border-bottom"></div>
-              <div className="row mt-3 supplier-info">
+              <div className="mt-3 supplier-info">
+                <div className="row">
+                  <div className="col-sm-5">
+                    <p>Supplier name</p>
+                  </div>
+                  <div className="col-sm-7">
+                    <p>:</p>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-5">
+                    <p>Supplier Address</p>
+                  </div>
+                  <div className="col-sm-7">
+                    <p>:</p>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-5">
+                    <p>Supplier Contact</p>
+                  </div>
+                  <div className="col-sm-7">
+                    <p>:</p>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-5">
+                    <p>Supplier Email</p>
+                  </div>
+                  <div className="col-sm-7">
+                    <p>:</p>
+                  </div>
+                </div>
 
-                <div className="col-5">
-
-                  <p>Supplier name</p>
-                  <p>Supplier Address</p>
-                  <p>Supplier Contact</p>
-                  <p>Supplier Email</p>
-                </div>
-                <div className="col-1">
-                  <p>:</p>
-                  <p>:</p>
-                  <p>:</p>
-                  <p>:</p>
-                </div>
-                <div className="col-6">
-                  <p></p>
-                  <p></p>
-                  <p></p>
-                  <p></p>
-                </div>
               </div>
             </Card.Body>
           </Card>

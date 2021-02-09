@@ -17,11 +17,6 @@ const QuotationFilter = () => {
     const { register, setValue } = useForm();
 
 
-    const CourseName = [{
-        name: "nur",
-        value: 2
-    }]
-
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangeQuotationFilterInput(name, value))
     }

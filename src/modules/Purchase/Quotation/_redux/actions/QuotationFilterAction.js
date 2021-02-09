@@ -35,3 +35,12 @@ export const getCurrencyType = () => (dispatch) => {
     )
 }
 
+export const getQuotationDetails = () => (dispatch) => {
+
+    Axios.get(`${process.env.REACT_APP_API_URL}purchase/currency`).then(
+        (res) => {
+            let data = res.data.data
+            dispatch({ type: Types.GET_QUOTATION_DETAILS, payload: data })
+        }
+    )
+}

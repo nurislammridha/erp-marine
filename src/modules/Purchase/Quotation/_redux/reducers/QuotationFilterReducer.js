@@ -30,6 +30,7 @@ const QuotationFilterReducer = (state = initialState, action) => {
         case Types.GET_SUPPLIER_NAME:
             return {
                 ...state,
+                supplierData: action.payload,
                 supplierNameData: supplierName(action.payload),
             }
 
@@ -37,6 +38,12 @@ const QuotationFilterReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currencyTypeData: currencyType(action.payload),
+            }
+
+        case Types.GET_QUOTATION_DETAILS:
+            return {
+                ...state,
+                quotationDetailList: action.payload,
             }
     }
 
