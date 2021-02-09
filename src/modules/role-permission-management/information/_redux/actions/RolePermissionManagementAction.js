@@ -16,9 +16,7 @@ export const getRoleListByPagination = () => (dispatch) => {
     rolesList: [],
     rolesListPaginated: null,
   };
-
   dispatch({ type: Types.GET_USER_ROLE_LIST_PAGINATED, payload: responseList });
-
   Axios
     .get(`${process.env.REACT_APP_API_URL}roles/getAllRoles`)
     .then((res) => {
@@ -44,6 +42,26 @@ export const getRoleDetailsData = (id) => (dispatch) => {
     .then((res) => {
       dispatch({ type: Types.GET_ROLE_DETAILS_DATA, payload: res.data.data });
     });
+};
+export const getPermissionUserList = () => (dispatch) => {
+
+
+  const responseList = {
+    isLoading: true,
+    data: []
+  };
+
+  // dispatch({ type: Types.GET_PERMISSION_USER_LIST, payload: responseList });
+
+  Axios
+    .get(`${process.env.REACT_APP_API_URL}roles/getAllUser`)
+    .then((res) => {
+      console.log('object get all user', res)
+      dispatch({ type: Types.GET_PERMISSION_USER_LIST, payload: res.data.data });
+    })
+    .catch((err)=>{
+      console.log('err', err);
+    })
 };
 
 
