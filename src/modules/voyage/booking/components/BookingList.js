@@ -86,9 +86,9 @@ const BookingList = () => {
             <hr></hr>
             <div className="col-xl-4 col-lg-4 col-5 mb-2">
               <Paper className="searchInput">
-                <IconButton aria-label="Search" className="searchPlaceholder">
+                {/* <IconButton aria-label="Search" className="searchPlaceholder">
                   <i className="flaticon-search "></i>
-                </IconButton>
+                </IconButton> */}
                 <InputBase
                   placeholder="Search "
                   value={searchText}

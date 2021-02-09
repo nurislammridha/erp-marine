@@ -19,8 +19,14 @@ const PurchaseApprovalFilter = () => {
 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangePurchaseApprovalFilterInput(name, value));
+        changeFilter();
     };
+    console.log('PurchaseApprovalFilterInput :>> ', PurchaseApprovalFilterInput);
 
+    const changeFilter = () => {
+        const { search, intSBUId, intBusinessUnitId, intShipID, dteFromDate, dteToDate } = PurchaseApprovalFilterInput;
+        dispatch(getPurchaseApprovalList(search, intSBUId, intBusinessUnitId, intShipID, dteFromDate, dteToDate));
+    }
 
     useEffect(() => {
         dispatch(getShipName());
@@ -28,6 +34,14 @@ const PurchaseApprovalFilter = () => {
         dispatch(getSBUName());
     }, []);
 
+    // const categorySelecte = (intSBUId) => {
+    //     dispatch(getPurchaseApprovalList(null, intSBUId, null, null, null, null)
+    //     );
+    // };
+
+    useEffect(() => {
+        // changeFilter();
+    }, [dispatch]);
 
     return (
         <form className="form form-label-right voyageEngineerForm" autoComplete="off" >
@@ -42,9 +56,8 @@ const PurchaseApprovalFilter = () => {
                             name="intSBUId"
                             register={register}
                             onChange={(option) => {
-                                // handleChangeTextInput('strBusinessUnitName', option.label);
+                                handleChangeTextInput('strBusinessUnitName', option.label);
                                 handleChangeTextInput('intSBUId', option.value);
-                                // dispatch(getPurchaseApprovalList(option.value))
                             }}
                             setValue={setValue}
                         />
@@ -57,8 +70,8 @@ const PurchaseApprovalFilter = () => {
                             name="intBusinessUnitId"
                             register={register}
                             onChange={(option) => {
+                                handleChangeTextInput('strBusinessUnitName', option.label);
                                 handleChangeTextInput('intBusinessUnitId', option.value)
-                                // dispatch(getPurchaseApprovalList(option.value))
                             }}
                             setValue={setValue}
                         />

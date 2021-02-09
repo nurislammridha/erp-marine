@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../../_metronic/_assets/css/default-style.css";
 import "../../../../styles/global-style.css";
@@ -9,25 +9,29 @@ import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import { useDispatch, useSelector } from "react-redux";
 import PurchaseOrderMultiple from "./PurchaseOrderMultiple";
-import { FinalOrderInput } from "../_redux/actions/PurhasesOrderAction";
+import { FinalOrderInput, getIncotermName } from "../_redux/actions/PurhasesOrderAction";
+import { getPaymentTerms } from "../../../master/DropDownData/PaymentTerms/_redux/PaymentTermsAction/PaymentTermsAction";
+import { getCurrencyList } from "../../../master/DropDownData/Currency/_redux/CurrencyAction/CurrencyAction";
+import { getSupplierName } from "../../../master/DropDownData/SupplierName/_redux/SupplierNameAction/SupplierNameAction";
 
 const PurhasesOrderEntry = () => {
   const dispatch = useDispatch()
   const { register, setValue } = useForm();
   const finalOrderInput = useSelector(state => state.purchasesOrderInfo.finalOrderInput);
+  const incotermList = useSelector(state => state.purchasesOrderInfo.incotermList);
+  const paymentTerms = useSelector(state => state.PaymentTermsReducer.paymentTerms);
+  const CurrencyList = useSelector(state => state.CurrencyListReducer.CurrencyList);
+  const supplierNameList = useSelector(state => state.SupplierNameReducer.supplierNameList);
   const handleChangeTextInput = (name, value) => {
     dispatch(FinalOrderInput(name, value));
   }
-  const shipList = [
-    {
-      value: 1,
-      label: "Akij"
-    },
-    {
-      value: 2,
-      label: "Akij Noor"
-    },
-  ]
+  useEffect(() => {
+    dispatch(getPaymentTerms())
+    dispatch(getCurrencyList())
+    dispatch(getSupplierName())
+    dispatch(getIncotermName())
+  }, [])
+
   return (
     <>
       <div className="row">
@@ -49,7 +53,7 @@ const PurhasesOrderEntry = () => {
                   <div className="col-xl-4 col-lg-4 col-md-4 col-12">
                     <label className="formFont">Supplier Name</label>
                     <RHFInput
-                      as={<Select options={shipList} />}
+                      as={<Select options={supplierNameList} />}
                       rules={{ required: false }}
                       name="inSupplierId"
                       register={register}
@@ -62,36 +66,25 @@ const PurhasesOrderEntry = () => {
                     />
                   </div>
                   <div className="col-xl-4 col-lg-4 col-md-4 col-12">
-                    <Form.Group>
-                      <Form.Label className="formFont pl-1">Supplier Address</Form.Label>
-                      <Form.Control
-                        className="formHeight"
-                        name=""
-                        type="text"
-                        value={""}
-                        placeholder="Enter Address No"
-                      />
-                    </Form.Group>
-                  </div>
-                  <div className="col-xl-4 col-lg-4 col-md-4 col-12">
                     <label className="formFont">Order Date</label>
                     <DatePicker
                       className="date-picker"
-                      name=""
+                      name="dtePODate"
                       dateFormat="MM-dd-yyyy"
-                      placeholderText="No date No"
-                      selected={""}
+                      placeholderText="Enter Order Date"
+                      selected={finalOrderInput.dtePODate}
                       ref={register({
                         required: true,
                         maxLength: 100,
                       })}
+                      onChange={(e) => handleChangeTextInput("dtePODate", e)}
                     />
                     <i className="fas fa-calendar-alt"></i>
                   </div>
                   <div className="col-xl-4 col-lg-4 col-md-4 col-12">
                     <label className="formFont">Currency</label>
                     <RHFInput
-                      as={<Select options={shipList} />}
+                      as={<Select options={CurrencyList} />}
                       rules={{ required: false }}
                       name="intCurrencyId"
                       register={register}
@@ -106,7 +99,7 @@ const PurhasesOrderEntry = () => {
                   <div className="col-xl-4 col-lg-4 col-md-4 col-12">
                     <label className="formFont">Payment Terms</label>
                     <RHFInput
-                      as={<Select options={shipList} />}
+                      as={<Select options={paymentTerms} />}
                       rules={{ required: false }}
                       name="intPaymentTerms"
                       register={register}
@@ -120,10 +113,11 @@ const PurhasesOrderEntry = () => {
                       <Form.Label className="formFont pl-1">Cash/Advance</Form.Label>
                       <Form.Control
                         className="formHeight"
-                        name=""
-                        type="text"
-                        value={""}
-                        placeholder="Enter Address NO"
+                        name="numCaseInPercent"
+                        type="number"
+                        value={finalOrderInput.numCaseInPercent}
+                        placeholder="Enter Cash/Advance"
+                        onChange={(e) => handleChangeTextInput("numCaseInPercent", e.target.value)}
                       />
                     </Form.Group>
                   </div>
@@ -131,14 +125,15 @@ const PurhasesOrderEntry = () => {
                     <label className="formFont">Pay Days</label>
                     <DatePicker
                       className="date-picker"
-                      name=""
+                      name="dtePayDays"
                       dateFormat="MM-dd-yyyy"
-                      placeholderText="select C/P date No"
-                      selected={""}
+                      placeholderText="Select Pay Days"
+                      selected={finalOrderInput.dtePayDays}
                       ref={register({
                         required: true,
                         maxLength: 100,
                       })}
+                      onChange={(e) => handleChangeTextInput("dtePayDays", e)}
                     />
                     <i className="fas fa-calendar-alt"></i>
                   </div>
@@ -163,7 +158,7 @@ const PurhasesOrderEntry = () => {
                   <div className="col-xl-12 col-lg-12 col-md-12 col-12">
                     <label className="formFont">Incoterm</label>
                     <RHFInput
-                      as={<Select options={shipList} />}
+                      as={<Select options={incotermList} />}
                       rules={{ required: false }}
                       name="intIncotermsId"
                       register={register}
@@ -189,14 +184,15 @@ const PurhasesOrderEntry = () => {
                     <label className="formFont">Reference Date</label>
                     <DatePicker
                       className="date-picker"
-                      name=""
+                      name="dteReferenceDate"
                       dateFormat="MM-dd-yyyy"
-                      placeholderText="Select Reference Date No"
-                      selected={""}
+                      placeholderText="Select Reference Date"
+                      selected={finalOrderInput.dteReferenceDate}
                       ref={register({
                         required: true,
                         maxLength: 100,
                       })}
+                      onChange={(e) => handleChangeTextInput("dteReferenceDate", e)}
                     />
                     <i className="fas fa-calendar-alt"></i>
                   </div>
@@ -204,26 +200,27 @@ const PurhasesOrderEntry = () => {
                     <label className="formFont">Validity</label>
                     <DatePicker
                       className="date-picker"
-                      name=""
+                      name="dtePOValidityDate"
                       dateFormat="MM-dd-yyyy"
-                      placeholderText="Select Validity No"
-                      selected={""}
+                      placeholderText="Select Validity Date"
+                      selected={finalOrderInput.dtePOValidityDate}
                       ref={register({
                         required: true,
                         maxLength: 100,
                       })}
+                      onChange={(e) => handleChangeTextInput("dtePOValidityDate", e)}
                     />
                     <i className="fas fa-calendar-alt"></i>
                   </div>
                   <div className="col-xl-12 col-lg-12 col-md-12 col-12">
                     <Form.Group>
-                      <Form.Label className="formFont pl-1">Order terms</Form.Label>
+                      <Form.Label className="formFont pl-1">Other terms</Form.Label>
                       <Form.Control
                         className="formHeight"
                         name="strOtherTerms"
                         type="text"
                         value={finalOrderInput.strOtherTerms}
-                        placeholder="Enter Address"
+                        placeholder="Enter Other terms"
                         onChange={(e) => handleChangeTextInput("strOtherTerms", e.target.value)}
                       />
                     </Form.Group>

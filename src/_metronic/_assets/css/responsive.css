@@ -194,6 +194,27 @@
     .linechart {
         margin-top: -18px;
     }
+    .float-left.booking-text {
+        width: 23%;
+    }
+    
+    .booking-text.float-right {
+        width: 74%;
+    }
+    .float-left.booking-text.one {
+        width: 25%;
+    }
+    
+    .booking-text.float-right.one {
+        width: 70%;
+    }
+    .float-left.booking-text.two {
+        width: 23%;
+    }
+    
+    .booking-text.float-right.two{
+        width: 67%;
+    }
 }
 
 @media (max-width: 426px) {

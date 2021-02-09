@@ -3,23 +3,18 @@ import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment"
 import { useForm } from "react-hook-form";
-import { handleChangePurchaseApprovalDetailInput, SubmitPurchaseApprove } from '../../_redux/actions/PurchaseApprovalAction';
+import { handleApprovePRApproval, handleChangePurchaseApprovalDetailInput, handleRejectedPRApproval } from '../../_redux/actions/PurchaseApprovalAction';
 import { round } from 'lodash';
 
 
-const RequisitionApprovalDetail = ({ handleClose }) => {
+const RequisitionApprovalDetail = ({ handleClose, id }) => {
 
     const { handleSubmit, register, errors, setValue } = useForm();
     const dispatch = useDispatch();
     const PurchaseApprovalDetailInput = useSelector((state) => state.purchaseApprovalFilter.PurchaseApprovalDetailInput);
-    const purchaseApprovalDetail = useSelector(
-        (state) => state.purchaseApprovalFilter.purchaseApprovalDetail
-    );
-    console.log('purchaseApprovalDetail', purchaseApprovalDetail)
-
-    const purchaseApprovalMultiple = useSelector(
-        (state) => state.purchaseApprovalFilter.purchaseApprovalMultiple
-    );
+    const purchaseApprovalDetail = useSelector((state) => state.purchaseApprovalFilter.purchaseApprovalDetail);
+    const isLoading = useSelector((state) => state.purchaseApprovalFilter.isLoading);
+    const purchaseApprovalMultiple = useSelector((state) => state.purchaseApprovalFilter.purchaseApprovalMultiple);
 
     const handleChangeTextInput = (name, value, item) => {
         dispatch(handleChangePurchaseApprovalDetailInput(name, value, item));
@@ -27,17 +22,16 @@ const RequisitionApprovalDetail = ({ handleClose }) => {
 
     const handleApprove = (e) => {
         purchaseApprovalDetail.intStatus = 1;
-        dispatch(SubmitPurchaseApprove(purchaseApprovalDetail, handleClose));
+        dispatch(handleApprovePRApproval(purchaseApprovalDetail, handleClose, id));
         e.preventDefault();
 
     };
-
     const handleReject = (e) => {
         purchaseApprovalDetail.intStatus = 0;
-        dispatch(SubmitPurchaseApprove(purchaseApprovalDetail));
+        dispatch(handleApprovePRApproval(purchaseApprovalDetail, handleClose, id));
         e.preventDefault();
     };
-
+    console.log('purchaseApprovalDetail :>> ', purchaseApprovalDetail);
     return (
         <div>
             <form
@@ -115,7 +109,7 @@ const RequisitionApprovalDetail = ({ handleClose }) => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {purchaseApprovalMultiple.map((item, index) => (
+                                            {purchaseApprovalMultiple.length && purchaseApprovalMultiple.map((item, index) => (
 
                                                 <tr>
                                                     <td>
@@ -143,11 +137,7 @@ const RequisitionApprovalDetail = ({ handleClose }) => {
                                                             max={50}
                                                             className="fromStyle formHeight"
                                                             onChange={(e) =>
-                                                                handleChangeTextInput(
-                                                                    "numApprovedQty",
-                                                                    e.target.value,
-                                                                    item
-                                                                )
+                                                                handleChangeTextInput("numApprovedQty", e.target.value, item)
                                                             }
                                                         />
                                                     </td>
@@ -158,11 +148,7 @@ const RequisitionApprovalDetail = ({ handleClose }) => {
                                                             value={item.remarks}
                                                             className="fromStyle formHeight"
                                                             onChange={(e) =>
-                                                                handleChangeTextInput(
-                                                                    "remarks",
-                                                                    e.target.value,
-                                                                    item
-                                                                )
+                                                                handleChangeTextInput("remarks", e.target.value, item)
                                                             }
                                                         />
                                                     </td>
@@ -187,20 +173,31 @@ const RequisitionApprovalDetail = ({ handleClose }) => {
                             <div className="row mt-5">
                                 <div className="col-sm-12">
                                     <div className="float-right">
-                                        <button
-                                            type="button"
-                                            className="btn btn-danger btn-sm"
-                                            onClick={(e) => handleReject(e)}
-                                        >
-                                            Reject
-                                    </button>
-                                        <button
-                                            type="button"
-                                            className="btn btn-primary btn-sm ml-3 mr-3"
-                                            onClick={(e) => handleApprove(e)}
-                                        >
-                                            Approve
-                                    </button>
+                                        {!isLoading && (
+                                            <button type="button" className="btn btn-primary btn-sm ml-3 mr-3" onClick={(e) => handleReject(e)}>
+                                                Reject
+                                            </button>
+                                        )}
+
+                                        {isLoading && purchaseApprovalDetail.intStatus === 0 && (
+                                            <button type="button" className="btn btn-primary btn-sm ml-3 mr-3" disabled={true}>
+                                                <span>Rejecting....</span>
+                                                <span className="ml-3 spinner spinner-white"></span>
+                                            </button>
+                                        )}
+
+                                        {!isLoading && (
+                                            <button type="button" className="btn btn-primary btn-sm ml-3 mr-3" onClick={(e) => handleApprove(e)}>
+                                                Approve
+                                            </button>
+                                        )}
+
+                                        {isLoading && purchaseApprovalDetail.intStatus === 1 &&  (
+                                            <button type="button" className="btn btn-primary btn-sm ml-3 mr-3" disabled={true}>
+                                                <span>Approving....</span>
+                                                <span className="ml-3 spinner spinner-white"></span>
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +205,7 @@ const RequisitionApprovalDetail = ({ handleClose }) => {
                     )
                 }
             </form>
-        </div>
+        </div >
     );
 }
 

@@ -67,6 +67,11 @@ import PurchaseReuestCategoryReducer from "../modules/master/DropDownData/Purcha
 import PurchasesOrderReducer from "../modules/Purchase/purhasesOrder/_redux/reducers/PurhasesOrderReducer";
 import PurchaseApprovalReducer from "../modules/Purchase/PurchaseApproval/_redux/reducers/PurchaseApprovalReducer";
 import POApprovalReducer from "../modules/Purchase/POApproval/_redux/reducers/POApprovalReducer";
+import PaymentTermsReducer from "../modules/master/DropDownData/PaymentTerms/_redux/PaymentTermsReducer/PaymentTermsReducer";
+import RefferenceTypeReducer from "../modules/master/DropDownData/RefferenceNo/_redux/RefferenceNoActionReducer/RefferenceNoActionReducer";
+import CurrencyListReducer from "../modules/master/DropDownData/Currency/_redux/CurrencyReducer/CurrencyReducer";
+import SupplierNameReducer from "../modules/master/DropDownData/SupplierName/_redux/SupplierNameReducer/SupplierNameReducer";
+import ItemListReducer from "../modules/master/DropDownData/Item/_redux/ItemListReducer/ItemListReducer";
 
 /** 
 | Domain : CCO
@@ -148,6 +153,11 @@ export const rootReducer = combineReducers({
   BookingStatusReducer: BookingStatusReducer,
   DepartmentReducer: DepartmentReducer,
   PurchaseReuestCategoryReducer: PurchaseReuestCategoryReducer,
+  PaymentTermsReducer: PaymentTermsReducer,
+  RefferenceTypeReducer: RefferenceTypeReducer,
+  CurrencyListReducer: CurrencyListReducer,
+  SupplierNameReducer: SupplierNameReducer,
+  ItemListReducer: ItemListReducer,
 
   /**Certificates */
   certificateMainInfo: CertificateMainReducer,

@@ -105,6 +105,15 @@ export const roleCheckboxSelect = (checkboxStatus, parentRole, item, indexChild,
   }});
 
 };
+export const handleInputData = (name,value) => (dispatch) => {
+
+  let data = {
+    name: name,
+    value: value,
+  }
+  dispatch({ type: Types.USER_ROLE_HANDLE_CHANGE, payload: data });
+
+};
 
 export const allCheckboxSelected = (status) => (dispatch) => {
   dispatch({ type: Types.USER_ROLE_ALL_CHECKED, payload: status });
