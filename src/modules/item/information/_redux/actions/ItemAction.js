@@ -77,7 +77,6 @@ export const submitMultipleItem = (multipleItemList) => (dispatch) => {
     const postData = {
         items: multipleItemList
     }
-    console.log('multipleItemList Action:>> ', multipleItemList);
     const url = `${process.env.REACT_APP_API_URL}inventory/itemList`;
 
     Axios.post(url, postData).then(function (response) {
