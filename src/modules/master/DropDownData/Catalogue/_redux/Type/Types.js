@@ -1,0 +1,1 @@
+export const GET_CATALOUGE_LIST = "GET_CATALOUGE_LIST";

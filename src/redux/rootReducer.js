@@ -72,11 +72,13 @@ import RefferenceTypeReducer from "../modules/master/DropDownData/RefferenceNo/_
 import CurrencyListReducer from "../modules/master/DropDownData/Currency/_redux/CurrencyReducer/CurrencyReducer";
 import SupplierNameReducer from "../modules/master/DropDownData/SupplierName/_redux/SupplierNameReducer/SupplierNameReducer";
 import ItemListReducer from "../modules/master/DropDownData/Item/_redux/ItemListReducer/ItemListReducer";
+import SupplierCsReducer from "../modules/Purchase/SupplierCS/_redux/reducer/SupplierCsReducer";
 
 /** 
 | Domain : CCO
 */
 // import authMenuPermissionReducer from "../app/modules/Auth/_redux/menu-permission/authMenuPermissionReducer";
+import CatalogueListReducer from './../modules/master/DropDownData/Catalogue/_redux/CatalogueReducer/CatalogueReducer';
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -158,6 +160,7 @@ export const rootReducer = combineReducers({
   CurrencyListReducer: CurrencyListReducer,
   SupplierNameReducer: SupplierNameReducer,
   ItemListReducer: ItemListReducer,
+  CatalogueListReducer: CatalogueListReducer,
 
   /**Certificates */
   certificateMainInfo: CertificateMainReducer,
@@ -175,7 +178,8 @@ export const rootReducer = combineReducers({
   roleReducer: RolePermissionManagementReducer,
 
   /**Purchase Order */
-  purchasesOrderInfo: PurchasesOrderReducer
+  purchasesOrderInfo: PurchasesOrderReducer,
+  supplierCsInfo: SupplierCsReducer
 });
 
 export function* rootSaga() {

@@ -3,19 +3,30 @@ import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment"
 import { round } from 'lodash';
-import { handleChangePurchaseOrderApprovalDetailInput } from '../../_redux/actions/POApprovalAction'
+import { handleChangePurchaseOrderApprovalDetailInput, handleUpdatePOApproval } from '../../_redux/actions/POApprovalAction'
 
-const PODetail = () => {
+const PODetail = ({ handleClose, id }) => {
     const dispatch = useDispatch();
     const POApprovalDetail = useSelector((state) => state.POApprovalFilter.POApprovalDetail);
     const POApprovalMultiple = useSelector((state) => state.POApprovalFilter.POApprovalMultiple);
+    const POApprovalData = useSelector((state) => state.POApprovalFilter.POApprovalData);
+    const isLoading = useSelector((state) => state.POApprovalFilter.isLoading);
 
-    console.log('POApprovalDetail :>> ', POApprovalDetail);
-    console.log('POApprovalMultiple :>> ', POApprovalMultiple);
-    const handleChangeTextInput = (name, value, item) => {
-        dispatch(handleChangePurchaseOrderApprovalDetailInput(name, value, item));
+
+    const handleChangeTextInput = (name, value, item, index) => {
+        dispatch(handleChangePurchaseOrderApprovalDetailInput(name, value, item, index));
+    };
+    const handleApprove = (e) => {
+        POApprovalData.intStatus = 1;
+        dispatch(handleUpdatePOApproval(POApprovalData, handleClose, id));
+        e.preventDefault();
     };
 
+    const handleReject = (e) => {
+        POApprovalData.intStatus = 0;
+        dispatch(handleUpdatePOApproval(POApprovalData, handleClose, id));
+        e.preventDefault();
+    };
     return (
         <div>
             <form
@@ -96,11 +107,11 @@ const PODetail = () => {
 
                                                     <td>
                                                         <Form.Check
-                                                            className=""
+                                                            className="isChecked"
                                                             type="checkbox"
                                                             name="isRevLoadingPorts"
                                                             value={item.isChecked}
-                                                            onChange={(e) => handleChangeTextInput('isChecked', e.target.checked, item)}
+                                                            onChange={(e) => handleChangeTextInput('isChecked', e.target.checked, item, index)}
                                                         />
                                                     </td>
                                                     <td>{item.intItemId}</td>
@@ -116,7 +127,7 @@ const PODetail = () => {
                                                             name="numApprovedQty"
                                                             className="fromStyle formHeight"
                                                             onChange={(e) =>
-                                                                handleChangeTextInput("numApprovedQty", e.target.value, item)
+                                                                handleChangeTextInput("numApprovedQty", e.target.value, item, index)
                                                             }
                                                         />
                                                     </td>
@@ -126,7 +137,7 @@ const PODetail = () => {
                                                             name="remarks"
                                                             className="fromStyle formHeight"
                                                             onChange={(e) =>
-                                                                handleChangeTextInput("remarks", e.target.value, item)
+                                                                handleChangeTextInput("remarks", e.target.value, item, index)
                                                             }
                                                         />
                                                     </td>
@@ -149,12 +160,31 @@ const PODetail = () => {
                             <div className="row mt-5">
                                 <div className="col-sm-12">
                                     <div className="float-right">
-                                        <button className="btn btn-danger btn-sm" >
-                                            Reject
-                                        </button>
-                                        <button className="btn btn-primary btn-sm ml-3 mr-5" >
-                                            Approve
-                                        </button>
+                                    {!isLoading && (
+                                            <button type="button" className="btn btn-primary btn-sm ml-3 mr-3" onClick={(e) => handleReject(e)}>
+                                                Reject
+                                            </button>
+                                        )}
+
+                                        {isLoading && POApprovalData.intStatus === 0 && (
+                                            <button type="button" className="btn btn-primary btn-sm ml-3 mr-3" disabled={true}>
+                                                <span>Rejecting....</span>
+                                                <span className="ml-3 spinner spinner-white"></span>
+                                            </button>
+                                        )}
+
+                                        {!isLoading && (
+                                            <button type="button" className="btn btn-primary btn-sm ml-3 mr-3" onClick={(e) => handleApprove(e)}>
+                                                Approve
+                                            </button>
+                                        )}
+
+                                        {isLoading && POApprovalData.intStatus === 1 &&  (
+                                            <button type="button" className="btn btn-primary btn-sm ml-3 mr-3" disabled={true}>
+                                                <span>Approving....</span>
+                                                <span className="ml-3 spinner spinner-white"></span>
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             </div>
