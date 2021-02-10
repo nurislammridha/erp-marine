@@ -260,6 +260,21 @@
     .headerText{
         padding-top: 0px!important;
     }
+    .voyagelist-type.form-label {
+        margin-left: 14px;
+    }
+    .form-label{
+    margin-bottom: 2px!important;
+    }
+    .card {
+        margin-top: 7px;
+    }
+    .voyage-vessel {
+        margin-top: 3px!important;
+    }
+    .laytimecCommenced{
+        margin-left: 24px!important;
+    }
 }
 
 @media (max-width: 426px) {

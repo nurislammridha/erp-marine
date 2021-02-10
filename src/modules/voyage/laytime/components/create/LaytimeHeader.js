@@ -439,7 +439,7 @@ const LaytimeHeader = () => {
                 )}
               </div>
 
-              <div className="col-md-4">
+              <div className="col-md-4 mt-3">
                 <div className="border rounded">
                   <div className="row">
                     <div className="col-sm-5">
