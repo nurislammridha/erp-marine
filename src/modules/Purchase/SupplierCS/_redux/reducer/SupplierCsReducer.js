@@ -30,6 +30,12 @@ const SupplierCsReducer = (state = initialState, action) => {
             return { ...state, supplierList: action.payload }
         case Types.GET_SUPPLIER_DETAILS:
             return { ...state, supplierDetailsList: action.payload }
+        case Types.GET_SUPPLIER_ADDRESS:
+            return { ...state, supplierAddress: action.payload }
+        case Types.SEARCH_RFQ:
+            return { ...state, valSearchRFQ: action.payload }
+        case Types.QUOTATION_RFQ_LIST:
+            return { ...state, quotationRFQlist: action.payload }
 
         default:
             break;
