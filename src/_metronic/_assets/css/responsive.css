@@ -275,6 +275,37 @@
     .laytimecCommenced{
         margin-left: 24px!important;
     }
+    i.fas.fa-calendar-alt {
+        display: none;
+    }
+   
+    .commence-date {
+    margin-top: 15px;
+}
+.float-left.Rate-commision {
+    width: 48%;
+    margin-left: 11px;
+   
+}
+.float-right.Rate-commision {
+    width: 48%;
+    margin-top: -6px;
+}
+.float-left.Rate-commision.one {
+    width: 26%;
+   
+}
+.float-right.Rate-commision.one {
+    width: 70%;
+    
+}
+.float-left.Rate-commision.two {
+    width: 30%;
+}
+.float-right.Rate-commision.two {
+    width: 65%;
+}
+    
 }
 
 @media (max-width: 426px) {
