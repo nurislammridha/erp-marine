@@ -153,7 +153,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               autoComplete="off"
             >
               <div className="form-group row mt-0 border pb-3 bg-light pt-3 ">
-                <div className="col-lg-3 cerificateCategory">
+                <div className="col-lg-3">
                   <label className="form-label formFont">Category</label>
                   <RHFInput
                     as={<Select options={certificateParentCategoryList} />}
@@ -207,9 +207,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                           dispatch(getCertificateName(option.value));
                         }}
                         setValue={setValue}
-                        
+
                       />
-                       
+
 
                     </div>
                     <div className="float-right">
@@ -334,7 +334,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   />
                 </div> */}
 
-                <div className="col-lg-3 cerificateCategory">
+                <div className="col-lg-3">
                   <label className="form-label mt-2 formFont">Code</label>
                   <Form.Control
                     type="text"
@@ -360,7 +360,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </div> */}
                 </div>
 
-                <div className="col-lg-3 cerificateCategory">
+                <div className="col-lg-3">
                   <label className="form-label mt-2 formFont">
                     Ship Folder No (Optional)
                   </label>
@@ -447,7 +447,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       "Certificate Name Can't be blank"}
                   </div> */}
                 </div>
-                <div className="col-lg-3 cerificateCategory">
+                <div className="col-lg-3">
                   <label className="form-label mt-2 formFont ">
                     Issue Place
                   </label>
@@ -516,7 +516,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
               {/*=====certificate details close===*/}
               <div className="form-group row mt-2 border mb-2 pb-3 bg-light">
-                <div className="col-lg-3 cerificateCategory">
+                <div className="col-lg-3">
                   <label className="form-label mt-2 formFont">
                     Certificate Issue date
                   </label>
@@ -543,7 +543,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 {certificateInfoInput.intCertificateTypeID !== 4 &&
                   certificateInfoInput.intCertificateTypeID !== null && (
                     <>
-                      <div className="col-lg-3 cerificateCategory">
+                      <div className="col-lg-3">
                         <label className="form-label mt-2">Expiry Date</label>{" "}
                         <div>
                           <DatePicker
@@ -615,7 +615,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     </>
                   )}
 
-                <div className="col-lg-3 cerificateCategory">
+                <div className="col-lg-3">
                   <label className="form-label formFont">
                     Extend Until {"  "}
                     <label>
@@ -713,10 +713,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       className="fromStyle formHeight"
                       value={certificateInfoInput.dteFromSurvey}
                       onChange={(e) =>
-                        certificateMainInfoChange(
-                          "dteFromSurvey",
-                          e.target.value
-                        )
+                        certificateMainInfoChange("dteFromSurvey", e.target.value)
                       }
                       ref={register({
                         required: false,
@@ -733,12 +730,16 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     <label className="form-label mt-2">To Survey</label>
                     <Form.Control
                       type="date"
+                      // disabled={certificateInfoInput.dteFromSurvey ? false : true}
                       name="dteToSurvey"
+                      min={certificateInfoInput.dteFromSurvey}
                       className="fromStyle formHeight"
+                      placeholder="Select to servey date"
                       value={certificateInfoInput.dteToSurvey}
-                      onChange={(e) =>
+                      onChange={(e) => (
+                        certificateInfoInput.dteFromSurvey === null || certificateInfoInput.dteFromSurvey === "" ? showToast('error', "At first selected a from date") :
                         certificateMainInfoChange("dteToSurvey", e.target.value)
-                      }
+                      )}
                       ref={register({
                         required: false,
                         maxLength: 100,
@@ -816,7 +817,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               )}
 
               <div className="form-group row mt-1 border mt-2 pb-3 bg-light">
-                <div className="col-lg-3 cerificateCategory">
+                <div className="col-lg-3">
                   <label className="form-label formFont mt-2">
                     Office Remarks
                   </label>
@@ -844,7 +845,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       "Expiry Date can't be blank"}
                   </div> */}
                 </div>
-                <div className="col-lg-3 cerificateCategory">
+                <div className="col-lg-3">
                   <label className="form-label formFont mt-2">
                     Ship remarks
                   </label>
@@ -874,7 +875,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               </div>
 
               <div className="form-group row mt-1 border mt-2 pb-3 bg-light">
-                <div className="col-lg-3 cerificateCategory">
+                <div className="col-lg-3">
                   <label className="form-label formFont mt-2">
                     Attachments
                   </label>
