@@ -49,3 +49,16 @@ export const changeComparativeInputField = (name, value, item, index) => (dispat
     };
     dispatch({ type: Types.COMPARATIVE_STATEMENT_INPUT_CHANGE, payload: formData });
 };
+
+//get comparative RQF No 
+export const getComparativeRQF = (id) => async (dispatch) => {
+    await Axios.get(`${process.env.REACT_APP_API_URL}purchase/quotation?search=${id}`)
+        .then((res) => {
+            console.log('res :>> ', res);
+            if (res.data.status) {
+                dispatch({ type: Types.GET_RQF_OPTION_LIST, payload: res.data.data })
+            }
+        }).catch((err) => {
+            
+        })
+}

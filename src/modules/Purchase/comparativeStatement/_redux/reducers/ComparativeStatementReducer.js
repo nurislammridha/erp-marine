@@ -5,6 +5,7 @@ const initialState = {
   comparativePaginationList: [],
   isLoading: false,
   comparativeSubmitList: [],
+  RQFOptionList: [],
 
 };
 
@@ -60,10 +61,27 @@ const ComparativeStatementReducer = (state = initialState, action) => {
         // POApprovalMultiple: POApproval,
         // POApprovalData: newMultipleData,
       };
+    case Types.GET_RQF_OPTION_LIST:
+      return {
+        ...state,
+        RQFOptionList: getRQFOptionList(action.payload),
+      };
     default:
       break;
   }
   return newState;
 };
-
+const getRQFOptionList = (data) => {
+  let options = [];
+  if (data) {
+    data.forEach((item) => {
+      let itemData = {
+        value: item.intCargoId,
+        label: item.strCargoName,
+      };
+      options.push(itemData);
+    });
+  }
+  return options;
+};
 export default ComparativeStatementReducer;
