@@ -228,6 +228,38 @@
     .cerificateCategory {
         width: 87%;
     }
+    .offcanvas.offcanvas-right {
+        right: -395px;
+        left: auto;
+        display: none;
+    }
+    .certificate-icon{
+        margin-left: 0px  !important;
+    }
+    .stickeyCard.card {
+        margin-left: -40px;
+    }
+    input.color-picker {
+       
+        height: 18px;
+        width: 18px;
+    }
+    .due-days h6 {
+       
+        top: 3px;
+        left:22px;
+        font-size: 8px!important;
+    }
+    .certificate-filter {
+        margin-left: 16px;
+    }
+    .certificate-card.card-body {
+       
+        padding:10px !important;
+    }
+    .headerText{
+        padding-top: 0px!important;
+    }
 }
 
 @media (max-width: 426px) {

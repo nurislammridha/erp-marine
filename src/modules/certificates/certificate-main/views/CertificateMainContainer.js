@@ -4,7 +4,11 @@ import CertificateMainList from "../components/list/CertificateMainList";
 const CertificateMainContainer = () => {
   return (
     <>
-      <CertificateMainList />
+      <div className="container">
+        <div className="pt-5">
+          <CertificateMainList />
+        </div>
+      </div>
       <br />
     </>
   );
