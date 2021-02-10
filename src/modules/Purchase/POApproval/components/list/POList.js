@@ -9,7 +9,7 @@ import POFilter from './POFilter';
 import moment from "moment"
 import SimpleModal from '../../../../master/components/Modal/SimpleModal';
 import PODetail from '../detail/PODetail';
-import { getPOApprovalList } from '../../_redux/actions/POApprovalAction';
+import { GetPOApprovalDetail, getPOApprovalList } from '../../_redux/actions/POApprovalAction';
 
 
 const POList = () => {
@@ -17,9 +17,12 @@ const POList = () => {
   const dispatch = useDispatch();
   const [PODetailsShow, setPODetailsShow] = useState(false)
   const POApprovalListData = useSelector((state) => state.POApprovalFilter.POApprovalList);
-  console.log('POApprovalListData', POApprovalListData)
-  const showModal = () => {
+
+ const [POID, setPOID] = useState(null)
+  const handleClick = (id) => {
     setPODetailsShow(true)
+    dispatch(GetPOApprovalDetail(id));
+    setPOID(id);
   }
 
   useEffect(() => {
@@ -87,7 +90,7 @@ const POList = () => {
                           // onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
                           />
                         </td>
-                        <td>{item.intBusinessLineId}</td>
+                        <td>{index + 1}</td>
                         <td>{item.strPONo !== null && item.strPONo !== '' ? item.strPONo : ''}</td>
                         <td>{item.dtePODate !== null && item.dtePODate !== '' ? moment(item.dtePODate).format("DD-MM-YYYY") : ''}</td>
                         <td>{item.strSupplierName !== null && item.strSupplierName !== '' ? item.strSupplierName : ''}</td>
@@ -102,7 +105,9 @@ const POList = () => {
                         {/* intBookingStatusId */}
                         <td>
                           <div className="d-flex">
-                            <a onClick={() => showModal()}>
+                            <a onClick={() =>
+                              handleClick(item.intPOId)}
+                            >
                               <i className="far fa-eye editIcon item-list-icon"></i>
                             </a>
                           </div>
@@ -135,7 +140,7 @@ const POList = () => {
         // vesselBookingID={vesselBookingID}
         modalTitle={"Purchase Order Details"}
       >
-        <PODetail />
+        <PODetail id={POID} handleClose={() => setPODetailsShow(false)} />
       </SimpleModal>
 
     </Card >

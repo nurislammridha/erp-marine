@@ -5,7 +5,11 @@ import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { addMultipleOrder, deleteMultipleItem, editOrderMultiple, purchasesOrderInput, SubmitFinalOrder, submitMultipleOrderList } from '../_redux/actions/PurhasesOrderAction';
+import { getRefferenceNo } from '../../../master/DropDownData/RefferenceNo/_redux/RefferenceNoAction/RefferenceNoAction';
+import { getItemList } from '../../../master/DropDownData/Item/_redux/ItemListAction/ItemListAction';
+import { useHistory } from 'react-router-dom';
 const PurchaseOrderMultiple = () => {
+    const history = useHistory();
     const { register, setValue } = useForm();
     const dispatch = useDispatch();
     const orderInput = useSelector(state => state.purchasesOrderInfo.orderInput);
@@ -13,51 +17,46 @@ const PurchaseOrderMultiple = () => {
     const editOptionReference = useSelector(state => state.purchasesOrderInfo.editOptionReference);
     const editOptionItem = useSelector(state => state.purchasesOrderInfo.editOptionItem);
     const finalOrderInput = useSelector(state => state.purchasesOrderInfo.finalOrderInput);
-
+    const status = useSelector(state => state.purchasesOrderInfo.status);
+    if (status) {
+        history.push('/purchase/order/list')
+    }
     useEffect(() => {
         if (finalOrderInput.orderRow) {
             dispatch(SubmitFinalOrder(finalOrderInput))
         }
 
-    }, [finalOrderInput])
+    }, [finalOrderInput, dispatch])
     const changeTextValue = (name, value) => {
         dispatch(purchasesOrderInput(name, value))
     }
-    const addMultiple = () => {
-        dispatch(addMultipleOrder(orderInput))
-    }
-    const deleteMultiple = (index) => {
-        dispatch(deleteMultipleItem(index))
-
-    }
+    const addMultiple = () => { dispatch(addMultipleOrder(orderInput)) }
+    const deleteMultiple = (index) => { dispatch(deleteMultipleItem(index)) }
     const submitMultipleOrder = (multipleOrder) => {
-        dispatch(submitMultipleOrderList(multipleOrder))
+        dispatch(submitMultipleOrderList(multipleOrder, finalOrderInput))
     }
+    const refferenceList = useSelector(state => state.RefferenceTypeReducer.refferenceList);
+    const ItemList = useSelector(state => state.ItemListReducer.ItemList);
+
     useEffect(() => {
-        setValue("intRefferenceId", "");
+        dispatch(getRefferenceNo())
+        dispatch(getItemList())
+    }, [])
+
+    useEffect(() => {
+        setValue("intReferenceId", "");
         setValue("intItemId", "");
     }, [multipleOrder, setValue])
     const handleEdit = (index) => {
         dispatch(editOrderMultiple(index))
     }
-
-    const shipList = [
-        {
-            value: 1,
-            label: "Akij"
-        },
-        {
-            value: 2,
-            label: "Akij Noor"
-        },
-    ]
     return (
         <>
             <div className="row">
                 <div className="col-md-4 col-12">
                     <label className="formFont">Refference No</label>
                     <RHFInput
-                        as={<Select options={shipList} />}
+                        as={<Select options={refferenceList} />}
                         rules={{ required: false }}
                         name="intReferenceId"
                         register={register}
@@ -72,7 +71,7 @@ const PurchaseOrderMultiple = () => {
                 <div className="col-md-4 col-12">
                     <label className="formFont">Item</label>
                     <RHFInput
-                        as={<Select options={shipList} />}
+                        as={<Select options={ItemList} />}
                         rules={{ required: false }}
                         name="intItemId"
                         register={register}

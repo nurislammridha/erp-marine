@@ -23,25 +23,17 @@ const initialstate = {
         intActionBy: 1
     },
     multipleOrder: [],
-    orderFilter: {
-        intSBUId: "",
-        strSBUName: "",
+    finalOrderInput: {
+        strBusinessLineName: "",
+        intBusinessLineId: "",
         intBusinessUnitId: "",
         strBusinessUnitName: "",
         intPurchaseOrganizationId: "",
         strPurchaseOrganizationName: "",
-        intPOReferenceTypeId: "",
-        strPOReferenceType: ""
-    },
-    finalOrderInput: {
+        intReferenceTypeId: "",
+        strReferenceTypeName: "",
         strPONo: "",
         intAccountId: "",
-        intBusinessLineId: "",
-        strBusinessLineName: "",
-        intBusinessUnitId: "",
-        strBusinessUnitName: "",
-        intPurchaseOrganizationId: "",
-        strPurchaseOrganizationName: "",
         intShipId: "",
         intWarehouseId: "",
         strWarehouseName: "",
@@ -53,12 +45,10 @@ const initialstate = {
         intCurrencyId: "",
         strCurrencyCode: "",
         strSupplierReference: "",
-        intReferenceTypeId: "",
-        strReferenceTypeName: "",
         isApproved: "",
         intApproveBy: "",
         intPaymentTerms: "",
-        intPercent: "",
+        numCaseInPercent: "",
         strOtherTerms: "",
         intPaymentDaysAfterDelivery: "",
         strDeliveryAddress: "",
@@ -68,6 +58,10 @@ const initialstate = {
         intTaxType: "",
         isClosed: "",
         intActionBy: 1,
+        dtePODate: "",
+        dtePayDays: "",
+        dtePOValidityDate: "",
+        dteReferenceDate: ""
     }
 };
 const PurchasesOrderReducer = (state = initialstate, action) => {
@@ -94,9 +88,9 @@ const PurchasesOrderReducer = (state = initialstate, action) => {
         case Types.GET_REFERENCE_TYPE:
             return { ...state, referenceType: ReferenceType(action.payload) }
         case Types.PURCHASE_ORDER_FILTER:
-            const orderFilter = { ...state.orderFilter };
-            orderFilter[action.payload.name] = action.payload.value;
-            return { ...state, orderFilter }
+            const finalOrderInput2 = { ...state.finalOrderInput };
+            finalOrderInput2[action.payload.name] = action.payload.value;
+            return { ...state, finalOrderInput: finalOrderInput2 }
         case Types.DELETE_MULTIPLE:
             const multipleOrderOld = [...state.multipleOrder]
             multipleOrderOld.splice(action.payload, 1);
@@ -118,6 +112,10 @@ const PurchasesOrderReducer = (state = initialstate, action) => {
             return { ...state, finalOrderInput: finalOrderList }
         case Types.GET_ORDER_VIEW:
             return { ...state, orderViewList: action.payload }
+        case Types.GET_INCOTERM_NAME:
+            return { ...state, incotermList: IncotermList(action.payload) }
+        case Types.RESPONSE_DATA_STATUS:
+            return { ...state, status: action.payload }
         default:
             break;
     }
@@ -178,10 +176,23 @@ const ReferenceType = (data) => {
     }
     return options;
 }
+const IncotermList = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intIncotermId,
+                label: item.strIncotermName
+            }
+            options.push(itemData)
+        })
+    }
+    return options;
+}
 const optionReference = (data) => {
     const dataOption = {
-        value: data.intRefferenceId,
-        label: data.strRefferenceName
+        value: data.intReferenceId,
+        label: data.strReferenceCode
     }
     return dataOption;
 }

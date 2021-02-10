@@ -1,145 +1,197 @@
 import React from 'react';
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment"
+import { round } from 'lodash';
+import { handleChangePurchaseOrderApprovalDetailInput, handleUpdatePOApproval } from '../../_redux/actions/POApprovalAction'
 
-const PODetail = () => {
+const PODetail = ({ handleClose, id }) => {
+    const dispatch = useDispatch();
+    const POApprovalDetail = useSelector((state) => state.POApprovalFilter.POApprovalDetail);
+    const POApprovalMultiple = useSelector((state) => state.POApprovalFilter.POApprovalMultiple);
+    const POApprovalData = useSelector((state) => state.POApprovalFilter.POApprovalData);
+    const isLoading = useSelector((state) => state.POApprovalFilter.isLoading);
+
+
+    const handleChangeTextInput = (name, value, item, index) => {
+        dispatch(handleChangePurchaseOrderApprovalDetailInput(name, value, item, index));
+    };
+    const handleApprove = (e) => {
+        POApprovalData.intStatus = 1;
+        dispatch(handleUpdatePOApproval(POApprovalData, handleClose, id));
+        e.preventDefault();
+    };
+
+    const handleReject = (e) => {
+        POApprovalData.intStatus = 0;
+        dispatch(handleUpdatePOApproval(POApprovalData, handleClose, id));
+        e.preventDefault();
+    };
     return (
         <div>
-            <div>
-                <div className="row">
-                    <div className="col-md-3">
-                        Requisition No
-                    <h5>value</h5>
-                    </div>
-                    <div className="col-md-3">
-                        Requisition Date
-                    <h5>value</h5>
-                    </div>
-                    <div className="col-md-3">
-                        Due Date
-                    <h5>value</h5>
-                    </div>
-                    <div className="col-md-3">
-                        Department
-                    <h5>value</h5>
-                    </div>
-                </div>
-                <div className="row mt-5">
-                    <div className="col-md-3">
-                        Reference
-                    <h5>value</h5>
-                    </div>
-                    <div className="col-md-3">
-                        Requisition Category
-                    <h5>value</h5>
-                    </div>
-                    <div className="col-md-3">
-                        Approved By
-                    <h5>value</h5>
-                    </div>
-                    <div className="col-md-3">
-                        Approved Date
-                    <h5>value</h5>
-                    </div>
-                </div>
-            </div>
-            <div className="mt-5">
-                <div className="react-bootstrap-table table-responsive">
-                    <table className="table table table-head-custom table-vertical-center  voyageTable">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <Form.Check
-                                        className=""
-                                        type="checkbox"
-                                        name="isRevLoadingPorts"
-                                    // onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
-                                    />
-                                </th>
-                                <th scope="col">ITEM ID</th>
-                                <th scope="col">ITEM NAME</th>
-                                <th scope="col">ITEM CATEGORY</th>
-                                <th scope="col">ITEM SUB CATEGORY</th>
-                                <th scope="col">UOM</th>
-                                <th scope="col">STOCK QTY</th>
-                                <th scope="col">REQ QTY</th>
-                                <th scope="col">APPROVED QTY</th>
-                                <th scope="col">REMARKS</th>
-                                <th scope="col">ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-
-                            <tr>
-                                {/* <td onClick={(id) => getVesselBookingID(item)}>{vesselPaginateData.from + index}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strCargoName !== null && item.strCargoName !== '' ? item.strCargoName : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strShipName !== null && item.strShipName !== '' ? item.strShipName : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>{item.strVoyageNo !== null && item.strVoyageNo !== '' ? item.strVoyageNo : ''}</td>
-                        <td onClick={(id) => getVesselBookingID(item)}>
-                          <button className={item.strBookingStatus === "Rejected" ? "btn rejected-status booking-list-btn text-danger" : (item.strBookingStatus === "Pending" ? "btn pending-status booking-list-btn text-warning" : "btn approve-status booking-list-btn text-success")}>
-                            {item.strBookingStatus !== null && item.strBookingStatus !== '' ? item.strBookingStatus : ''}
-                          </button>
-                        </td> */}
-                                <td>
-                                    <Form.Check
-                                        className=""
-                                        type="checkbox"
-                                        name="isRevLoadingPorts"
-                                    // onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
-                                    />
-                                </td>
-                                <td>VALUE</td>
-                                <td>VALUE</td>
-                                <td>VALUE</td>
-                                <td>VALUE</td>
-                                <td>VALUE</td>
-                                <td>VALUE</td>
-                                <td>VALUE</td>
-                                <td>
-                                    <Form.Control
-                                        type="number"
-                                        name="approvedQty"
-                                        className="fromStyle formHeight"
-                                    />
-                                </td>
-                                <td>
-                                    <Form.Control
-                                        type="text"
-                                        name="remarks"
-                                        className="fromStyle formHeight"
-                                    />
-                                </td>
-                                <td>
-                                    <div className="d-flex">
-                                        <a href>
-                                            <i className="fas fa-trash-alt editIcon item-list-icon ml-4"
-                                            // onClick={(id) => deleteList(item.intSupplierId)}
-                                            >
-                                            </i>
-                                        </a>
+            <form
+                className="form form-label-right"
+                method="post"
+            >
+                {
+                    POApprovalDetail && (
+                        <>
+                            <div>
+                                <div className="row">
+                                    <div className="col-md-3">
+                                        Requisition No
+                                        <h5>{POApprovalDetail.intPOId}</h5>
                                     </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div className="row mt-5">
-                <div className="col-sm-12">
-                    <div className="float-right">
-                        <button
-                            className="btn btn-danger btn-sm"
-                        >
-                            Reject
-                        </button>
-                        <button
-                            className="btn btn-primary btn-sm ml-3 mr-5"
-                        >
-                            Approve
-                        </button>
-                    </div>
-                </div>
-            </div>
+                                    <div className="col-md-3">
+                                        Requisition Date
+                                        <h5>{moment(POApprovalDetail.dtePODate).format("DD-MM-YYYY")}</h5>
+                                    </div>
+                                    <div className="col-md-3">
+                                        Due Date
+                                        <h5>{moment(POApprovalDetail.dtePOValidityDate).format("DD-MM-YYYY")}</h5>
+                                    </div>
+                                    <div className="col-md-3">
+                                        Department
+                                        <h5>{POApprovalDetail.intPOId}</h5>
+                                    </div>
+                                </div>
+                                <div className="row mt-5">
+                                    <div className="col-md-3">
+                                        Reference
+                                        <h5>{POApprovalDetail.strReferenceTypeName}</h5>
+                                    </div>
+                                    <div className="col-md-3">
+                                        Requisition Category
+                                        <h5>{POApprovalDetail.intPOId}</h5>
+                                    </div>
+                                    <div className="col-md-3">
+                                        Approved By
+                                        <h5>{POApprovalDetail.intPOId}</h5>
+                                    </div>
+                                    <div className="col-md-3">
+                                        Approved Date
+                                        <h5>{moment(POApprovalDetail.dteApproveDatetime).format("DD-MM-YYYY")}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="mt-5">
+                                <div className="react-bootstrap-table table-responsive">
+                                    <table className="table table table-head-custom table-vertical-center  voyageTable">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <Form.Check
+                                                        className=""
+                                                        type="checkbox"
+                                                        name="isRevLoadingPorts"
+                                                    // onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
+                                                    />
+                                                </th>
+                                                <th scope="col">ITEM ID</th>
+                                                <th scope="col">ITEM NAME</th>
+                                                <th scope="col">ITEM CATEGORY</th>
+                                                <th scope="col">ITEM SUB CATEGORY</th>
+                                                <th scope="col">UOM</th>
+                                                <th scope="col">STOCK QTY</th>
+                                                <th scope="col">REQ QTY</th>
+                                                <th scope="col">APPROVED QTY</th>
+                                                <th scope="col">REMARKS</th>
+                                                <th scope="col">ACTION</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {POApprovalMultiple.map((item, index) => (
+
+
+                                                <tr>
+
+                                                    <td>
+                                                        <Form.Check
+                                                            className="isChecked"
+                                                            type="checkbox"
+                                                            name="isRevLoadingPorts"
+                                                            value={item.isChecked}
+                                                            onChange={(e) => handleChangeTextInput('isChecked', e.target.checked, item, index)}
+                                                        />
+                                                    </td>
+                                                    <td>{item.intItemId}</td>
+                                                    <td>{item.strItemName}</td>
+                                                    <td>{item.strBeneficiaryName}</td>
+                                                    <td>{item.strBeneficiaryName}</td>
+                                                    <td>{item.strUoMName}</td>
+                                                    <td>{item.strBeneficiaryName}</td>
+                                                    <td>{round(item.numOrderQty)}</td>
+                                                    <td>
+                                                        <Form.Control
+                                                            type="number"
+                                                            name="numApprovedQty"
+                                                            className="fromStyle formHeight"
+                                                            onChange={(e) =>
+                                                                handleChangeTextInput("numApprovedQty", e.target.value, item, index)
+                                                            }
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <Form.Control
+                                                            type="text"
+                                                            name="remarks"
+                                                            className="fromStyle formHeight"
+                                                            onChange={(e) =>
+                                                                handleChangeTextInput("remarks", e.target.value, item, index)
+                                                            }
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <div className="d-flex">
+                                                            <a href>
+                                                                <i className="fas fa-trash-alt editIcon item-list-icon ml-4"
+                                                                // onClick={(id) => deleteList(item.intSupplierId)}
+                                                                >
+                                                                </i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div className="row mt-5">
+                                <div className="col-sm-12">
+                                    <div className="float-right">
+                                    {!isLoading && (
+                                            <button type="button" className="btn btn-primary btn-sm ml-3 mr-3" onClick={(e) => handleReject(e)}>
+                                                Reject
+                                            </button>
+                                        )}
+
+                                        {isLoading && POApprovalData.intStatus === 0 && (
+                                            <button type="button" className="btn btn-primary btn-sm ml-3 mr-3" disabled={true}>
+                                                <span>Rejecting....</span>
+                                                <span className="ml-3 spinner spinner-white"></span>
+                                            </button>
+                                        )}
+
+                                        {!isLoading && (
+                                            <button type="button" className="btn btn-primary btn-sm ml-3 mr-3" onClick={(e) => handleApprove(e)}>
+                                                Approve
+                                            </button>
+                                        )}
+
+                                        {isLoading && POApprovalData.intStatus === 1 &&  (
+                                            <button type="button" className="btn btn-primary btn-sm ml-3 mr-3" disabled={true}>
+                                                <span>Approving....</span>
+                                                <span className="ml-3 spinner spinner-white"></span>
+                                            </button>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+                    )
+                }
+            </form>
         </div>
     );
 }

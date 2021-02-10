@@ -16,10 +16,11 @@ const PurchaseApprovalList = () => {
   const dispatch = useDispatch();
   const purchaseApprovalListData = useSelector((state) => state.purchaseApprovalFilter.purchaseApprovalList);
   const [requisitionDetailsShow, setRequisitionDetailsShow] = useState(false)
-
+  const [PRID, setPRID] = useState(null)
   const handleClick = (id) => {
     setRequisitionDetailsShow(true);
     dispatch(GetPurchaseApprovalDetail(id));
+    setPRID(id)
   }
 
 
@@ -84,8 +85,8 @@ const PurchaseApprovalList = () => {
 
                           <div className="d-flex">
                             <a onClick={() =>
-                              handleClick(item.intPurchaseRequestID)
-                            }>
+                              handleClick(item.intPurchaseRequestID)}
+                            >
                               <i className="far fa-eye editIcon item-list-icon"></i>
                             </a>
                           </div>
@@ -117,7 +118,7 @@ const PurchaseApprovalList = () => {
         handleShow={() => setRequisitionDetailsShow(true)}
         modalTitle={"Requisition Approval Details"}
       >
-        <RequisitionApprovalDetail />
+        <RequisitionApprovalDetail handleClose={() => setRequisitionDetailsShow(false)} id={PRID} />
       </SimpleModal>
 
     </Card >

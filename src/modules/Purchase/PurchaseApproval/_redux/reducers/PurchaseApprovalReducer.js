@@ -35,16 +35,12 @@ const PurchaseApprovalReducer = (state = initialState, action) => {
             };
 
         case Types.CHANGE_PURCHASE_APPROVAL_DETAIL_INPUT:
-            // const PurchaseApprovalDetailInput = { ...state.PurchaseApprovalDetailInput };
-            // console.log('object', object)
-            // PurchaseApprovalDetailInput[action.payload.name] = action.payload.value;
             const purchaseDetails = state.purchaseApprovalMultiple;
             for (let i = 0; i < purchaseDetails.length; i++) {
                 if (purchaseDetails[i].intId == action.payload.item.intId) {
                     purchaseDetails[i][action.payload.name] = action.payload.value
                 }
             }
-
             return {
                 ...state,
                 purchaseApprovalMultiple: purchaseDetails,
@@ -77,13 +73,21 @@ const PurchaseApprovalReducer = (state = initialState, action) => {
             };
 
         case Types.SUBMIT_PURCHASE_APPROVE:
-            console.log('approvedetail action.payload', action.payload);
-            return {
-                ...state,
-                status: action.payload.status,
-                isLoading: action.payload.isLoading,
-            };
-
+            if (action.payload.status) {
+                return {
+                    ...state,
+                    // status: action.payload.status,
+                    PurchaseApprovalFilterInput: initialState.PurchaseApprovalFilterInput,
+                    purchaseApprovalMultiple: initialState.purchaseApprovalMultiple,
+                    isLoading: action.payload.isLoading,
+                };
+            } else {
+                return {
+                    ...state,
+                    // status: action.payload.status,
+                    isLoading: action.payload.isLoading,
+                };
+            }
         default:
             break;
     }

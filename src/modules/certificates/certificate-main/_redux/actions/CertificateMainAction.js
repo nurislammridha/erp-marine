@@ -513,3 +513,26 @@ export const getCertificateStatusData = () => (dispatch) => {
     dispatch({ type: Types.MAIN_CERTIFICATE_STATUS, payload: res.data.data });
   });
 };
+
+
+// export const roleCheckboxSelect = (checkboxStatus, parentRole, item, indexChild, indexparentRole) => (dispatch) => {
+//   dispatch({ type: Types.USER_ROLE_CHECKED, payload: {
+//     checkboxStatus: checkboxStatus,
+//     parentRole: parentRole,
+//     item: item,
+//     indexChild: indexChild,
+//     indexparentRole: indexparentRole,
+//   }});
+
+// };
+
+// export const allCheckboxSelected = (status) => (dispatch) => {
+//   dispatch({ type: Types.USER_ROLE_ALL_CHECKED, payload: status });
+// };
+
+// export const checkPermissionGroupAction = (index, isGroupChecked) => (dispatch) => {
+//   dispatch({ type: Types.USER_ROLE_CHECKED_GROUP, payload: {
+//     index: index,
+//     isGroupChecked: isGroupChecked
+//   }});
+// };
