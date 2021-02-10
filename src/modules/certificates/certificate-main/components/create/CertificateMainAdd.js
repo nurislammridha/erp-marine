@@ -207,9 +207,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                           dispatch(getCertificateName(option.value));
                         }}
                         setValue={setValue}
-                        
+
                       />
-                       
+
 
                     </div>
                     <div className="float-right">
@@ -713,10 +713,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       className="fromStyle formHeight"
                       value={certificateInfoInput.dteFromSurvey}
                       onChange={(e) =>
-                        certificateMainInfoChange(
-                          "dteFromSurvey",
-                          e.target.value
-                        )
+                        certificateMainInfoChange("dteFromSurvey", e.target.value)
                       }
                       ref={register({
                         required: false,
@@ -733,12 +730,17 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     <label className="form-label mt-2">To Survey</label>
                     <Form.Control
                       type="date"
+                      // disabled={certificateInfoInput.dteFromSurvey ? false : true}
+                      disabled={certificateInfoInput.dteFromSurvey ? false : true}
                       name="dteToSurvey"
+                      min={certificateInfoInput.dteFromSurvey}
                       className="fromStyle formHeight"
+                      placeholder="Select to servey date"
                       value={certificateInfoInput.dteToSurvey}
-                      onChange={(e) =>
+                      onChange={(e) => (
+                        certificateInfoInput.dteFromSurvey === null || certificateInfoInput.dteFromSurvey === "" ? showToast('error', "At first selected a from date") :
                         certificateMainInfoChange("dteToSurvey", e.target.value)
-                      }
+                      )}
                       ref={register({
                         required: false,
                         maxLength: 100,

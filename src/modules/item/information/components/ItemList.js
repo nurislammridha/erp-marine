@@ -74,13 +74,13 @@ const ItemList = () => {
               <tr>
                 <th scope="col">SL</th>
 
-                <th scope="col">Department</th>
+                {/* <th scope="col">Department</th> */}
                 <th scope="col">ITEM NAME</th>
                 <th scope="col">UOM</th>
                 <th scope="col">ITEM TYPE</th>
-                <th scope="col">ITEM CATEGORY</th>
+                {/* <th scope="col">ITEM CATEGORY</th> */}
                 <th scope="col">PART NO</th>
-                <th scope="col">MODEL</th>
+                {/* <th scope="col">MODEL</th> */}
                 <th scope="col">ACTION</th>
               </tr>
             </thead>
@@ -88,13 +88,13 @@ const ItemList = () => {
               {itemList && itemList.map((item, index) => (
                 <tr>
                   <td>{itemListPaginated.from + index}</td>
-                  <td>{item.strDepartmentName}</td>
+                  {/* <td>{item.strDepartmentName}</td> */}
                   <td>{item.strItemName}</td>
                   <td>{item.strUoM}</td>
                   <td>{item.StrItemTypeName}</td>
-                  <td>{item.strItemCategoryName}</td>
+                  {/* <td>{item.strItemCategoryName}</td> */}
                   <td>{item.strPartNo}</td>
-                  <td>{item.strModelNo}</td>
+                  {/* <td>{item.strModelNo}</td> */}
                   <td>
                     {" "}
                     <Link onClick={() => itemDetail(item)}>
