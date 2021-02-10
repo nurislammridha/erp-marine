@@ -49,12 +49,36 @@ export const getDataBySearch = (search) => (dispatch) => {
 
 }
 export const getSupplierCSDetails = (id) => (dispatch) => {
-    // const url = `${process.env.REACT_APP_API_URL}purchase/supplierCS/${id}`;
-    const url = `${process.env.REACT_APP_API_URL}purchase/supplierCS/1`;
+    const url = `${process.env.REACT_APP_API_URL}purchase/supplierCS/${id}`;
     Axios.get(url).then(
         (res) => {
             dispatch({ type: Types.GET_SUPPLIER_DETAILS, payload: res.data.data })
         }
     )
+
+}
+export const getSupplierAddress = (value) => (dispatch) => {
+    const url = `${process.env.REACT_APP_API_URL}purchase/getSupplierDetails/${value}`
+    Axios.get(url).then(
+        (res) => {
+            dispatch({ type: Types.GET_SUPPLIER_ADDRESS, payload: res.data.data })
+        }
+    )
+}
+export const searchValueRFQ = (value) => (dispatch) => {
+    dispatch({ type: Types.SEARCH_RFQ, payload: value })
+}
+export const getQuotationRFQDetails = (id) => (dispatch) => {
+    const url = `${process.env.REACT_APP_API_URL}purchase/getQuotationRFQDetails/${id}`
+    if (id && id.length > 0) {
+        Axios.get(url).then(
+            (res) => {
+                dispatch({ type: Types.QUOTATION_RFQ_LIST, payload: res.data.data })
+            }
+        )
+    }
+    else {
+        dispatch({ type: Types.QUOTATION_RFQ_LIST, payload: "" })
+    }
 
 }
