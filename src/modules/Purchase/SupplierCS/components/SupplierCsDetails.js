@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Form, Card, Button } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
@@ -12,6 +13,8 @@ import SupplierRFQ from "./SuplierRFQ";
 
 const SupplierCsDetails = () => {
   const { register, setValue } = useForm();
+  const supplierDetailsList = useSelector(state => state.supplierCsInfo.supplierDetailsList);
+  console.log('supplierDetailsList :>> ', supplierDetailsList);
   const courseData = [
     {
       id: 1,

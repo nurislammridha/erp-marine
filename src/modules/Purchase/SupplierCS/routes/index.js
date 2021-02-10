@@ -9,13 +9,13 @@ const routeSupplier = [
   {
     path: "/supplier/info",
     name: "suppliercs",
-    component:SupplierCsContainer,
+    component: SupplierCsContainer,
     exact: true,
   },
   {
-    path: "/supplier/details",
+    path: "/supplier/details/:id",
     name: "suppliercs",
-    component:SupplierCsDetails,
+    component: SupplierCsDetails,
     exact: true,
   },
 ];
