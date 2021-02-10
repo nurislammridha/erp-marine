@@ -5,6 +5,7 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { changeComparativeInputField, getComparativeRQF, selectedItem } from "../_redux/actions/ComparativeStatementAction";
+import { getSupplierName } from "../../../master/DropDownData/SupplierName/_redux/SupplierNameAction/SupplierNameAction";
 
 const ComparativeStatementList = () => {
   const [show, setShow] = useState(false);
@@ -15,11 +16,13 @@ const ComparativeStatementList = () => {
   const isLoading = useSelector((state)=> state.ComparativeStatementReducer.isLoading);
   const RQFOptionList = useSelector((state)=> state.ComparativeStatementReducer.RQFOptionList);
   const rfqNo = useSelector((state)=> state.ComparativeStatementReducer.rfqNo);
+  const supplierNameList = useSelector((state)=> state.SupplierNameReducer.supplierNameList);
 
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     getComparativeList()
+    dispatch(getSupplierName())
     // dispatch(getItemList(currentPage));
   }, [dispatch, currentPage]);
   
@@ -35,8 +38,6 @@ const ComparativeStatementList = () => {
     {value: "004",label: "MBA" },
   ];
 
-  
- 
   const listSelect =(item)=>{
     alert(item.intQuotationId);
 
@@ -168,7 +169,7 @@ const ComparativeStatementList = () => {
               <div className="col-xl-3 col-lg-3 col-md-6 ">
               <label className="formFont">Supplier</label>
                 <RHFInput
-                  as={<Select options={courseData} />}
+                  as={<Select options={supplierNameList} />}
                   rules={{ required: false }}
                   name="courseData"
                   register={register}
@@ -177,15 +178,14 @@ const ComparativeStatementList = () => {
                 />
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6 ">
-              <label className="formFont">Remarks</label>
-                <RHFInput
-                  as={<Select options={courseData} />}
-                  rules={{ required: false }}
-                  name="courseData"
-                  register={register}
-                  value={courseData.label}
-                  setValue={setValue}
-                />
+              <Form.Group>
+                  <Form.Label className="formFont pl-1">Remarks</Form.Label>
+                  <Form.Control
+                    className="formHeight"
+                    type="text"
+                    placeholder="Remarks"
+                  />
+                </Form.Group>
               </div>
 
           
