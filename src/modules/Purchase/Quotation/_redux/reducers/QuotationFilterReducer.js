@@ -1,4 +1,4 @@
-import { forEach } from "jszip";
+
 import * as Types from "../types/Types";
 
 const initialState = {
@@ -9,8 +9,9 @@ const initialState = {
         intSupplierId: "",
         strCurrencyCode: "",
         intCurrencyId: "",
-
-    }
+    },
+    status: false,
+    isLoading: false,
 }
 
 const QuotationFilterReducer = (state = initialState, action) => {
@@ -44,7 +45,17 @@ const QuotationFilterReducer = (state = initialState, action) => {
             return {
                 ...state,
                 quotationDetailList: action.payload,
+
             }
+
+        case Types.SUBMIT_QUOTATION:
+            return {
+                ...state,
+                status: action.payload.status,
+                isLoading: action.payload.isLoading,
+            }
+        default:
+            break;
     }
 
     return (
