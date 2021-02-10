@@ -10,6 +10,7 @@ const initialState = {
         strCurrencyCode: "",
         intCurrencyId: "",
     },
+    quotationDetailList: [],
     status: false,
     isLoading: false,
 }
@@ -21,17 +22,32 @@ const QuotationFilterReducer = (state = initialState, action) => {
     switch (action.type) {
         case Types.CHANGE_QUOTATION_FILTER_INPUT:
             const QuotationFilterInput = { ...state.QuotationFilterInput }
-            QuotationFilterInput[action.payload.name] = action.payload.value
+            QuotationFilterInput[action.payload.name] = action.payload.value;
 
             return {
                 ...state,
                 QuotationFilterInput,
             }
 
-        case Types.GET_SUPPLIER_NAME:
+        case Types.CHANGE_QUOTATION_DETAIL_INPUT:
+            const quotationDetails = state.quotationDetailList;
+            for (let i = 0; i < quotationDetails.length; i++) {
+                if (quotationDetails[i].intQuotationId == action.payload.item.intQuotationId) {
+                    quotationDetails[i][action.payload.name] = action.payload.value
+                }
+            }
             return {
                 ...state,
+                QuotationDetailInput: quotationDetails,
+            };
+
+        case Types.GET_SUPPLIER_NAME:
+
+            return {
+                ...state,
+
                 supplierData: action.payload,
+
                 supplierNameData: supplierName(action.payload),
             }
 

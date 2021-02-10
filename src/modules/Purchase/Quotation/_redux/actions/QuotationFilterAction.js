@@ -14,6 +14,17 @@ export const handleChangeQuotationFilterInput = (name, value) => (dispatch) => {
         payload: formData
     })
 }
+export const handleChangeQuotationDetailInput = (name, value, item) => (dispatch) => {
+    const formData = {
+        name: name,
+        value: value,
+        item: item,
+    };
+    dispatch({
+        type: Types.CHANGE_QUOTATION_DETAIL_INPUT,
+        payload: formData,
+    });
+};
 
 export const getSupplierName = () => (dispatch) => {
 
@@ -39,7 +50,6 @@ export const getQuotationDetails = () => (dispatch) => {
 
     Axios.get(`${process.env.REACT_APP_API_URL}purchase/supplierQuotation`).then(
         (res) => {
-            console.log('res', res)
             let data = res.data.data
             dispatch({ type: Types.GET_QUOTATION_DETAILS, payload: data })
         }

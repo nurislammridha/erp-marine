@@ -2,18 +2,31 @@ import { round } from "lodash";
 import React, { useState, useEffect } from "react";
 import { Form, Card, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { getQuotationDetails, submitQuotation } from "../_redux/actions/QuotationFilterAction";
+import { getQuotationDetails, handleChangeQuotationDetailInput, submitQuotation } from "../_redux/actions/QuotationFilterAction";
 
 
 const QuotationDetails = () => {
 
   const dispatch = useDispatch();
   const quotationDetailList = useSelector((state) => state.QuotationFilterinfo.quotationDetailList);
+  const QuotationDetailInput = useSelector((state) => state.QuotationFilterinfo.QuotationDetailInput);
+  const supplierData = useSelector((state) => state.QuotationFilterinfo.supplierData);
   const QuotationFilterInput = useSelector((state) => state.QuotationFilterinfo.QuotationFilterInput);
   const isLoading = useSelector((state) => state.QuotationFilterinfo.isLoading);
-  console.log('quotationDetailList', quotationDetailList)
+
+  const newData = supplierData;
+  if (QuotationFilterInput.intSupplierId) {
+    var FilterData = newData.filter((item) => item.intSupplierId === QuotationFilterInput.intSupplierId);
+  }
+
+  console.log('data', FilterData)
+
   const handleSubmit = () => {
     dispatchEvent(submitQuotation())
+  }
+
+  const handleChangeTextInput = (name, value, item) => {
+    dispatch(handleChangeQuotationDetailInput(name, value, item))
   }
 
   useEffect(() => {
@@ -56,7 +69,6 @@ const QuotationDetails = () => {
 
                         <tr>
                           <td>{index + 1}</td>
-                          {console.log('item', item.strRemarks)}
                           <td>{item.intSupplierQuotationId}</td>
                           <td>{item.intItemId}</td>
                           <td>{item.strItemName}</td>
@@ -65,11 +77,14 @@ const QuotationDetails = () => {
                           <td>{round(item.numQuotationQty)}</td>
                           <td >
                             <Form.Control
-                              type="number"
+                              type="text"
                               name="numQuotationRate"
-                              defaultValue={round(item.numQuotationRate)}
+                              value={item.numQuotationRate}
                               className="fromStyle formHeight"
                               style={{ width: "60%" }}
+                              onChange={(e) =>
+                                handleChangeTextInput("numQuotationRate", e.target.value, item)
+                              }
                             />
                           </td>
                           <td>100</td>
@@ -110,43 +125,48 @@ const QuotationDetails = () => {
           <div className="col-lg-4 col-12">
             <Card>
               <Card.Body className="pt-3">
-                <h6 className="supplier-modal-header mb-2">Supplier Info</h6>
-                <div className="border-bottom"></div>
-                <div className="mt-3 supplier-info">
-                  <div className="row">
-                    <div className="col-sm-5">
-                      <p>Supplier name</p>
-                    </div>
-                    <div className="col-sm-7">
-                      <p>:</p>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-5">
-                      <p>Supplier Address</p>
-                    </div>
-                    <div className="col-sm-7">
-                      <p>:</p>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-5">
-                      <p>Supplier Contact</p>
-                    </div>
-                    <div className="col-sm-7">
-                      <p>:</p>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-5">
-                      <p>Supplier Email</p>
-                    </div>
-                    <div className="col-sm-7">
-                      <p>:</p>
-                    </div>
-                  </div>
+                {FilterData && FilterData.map((item) => (
 
-                </div>
+                  <>
+                    <h6 className="supplier-modal-header mb-2">Supplier Info</h6>
+                    <div className="border-bottom"></div>
+                    <div className="mt-3 supplier-info">
+                      <div className="row">
+                        <div className="col-sm-5">
+                          <p>Supplier name</p>
+                        </div>
+                        <div className="col-sm-7">
+                          <p>: {item.strSupplierName}</p>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-sm-5">
+                          <p>Supplier Address</p>
+                        </div>
+                        <div className="col-sm-7">
+                          <p>: {item.strEmail}</p>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-sm-5">
+                          <p>Supplier Contact</p>
+                        </div>
+                        <div className="col-sm-7">
+                          <p>: {item.strContactNumber}</p>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-sm-5">
+                          <p>Supplier Email</p>
+                        </div>
+                        <div className="col-sm-7">
+                          <p>: {item.strEmail}</p>
+                        </div>
+                      </div>
+
+                    </div>
+                  </>
+                ))}
               </Card.Body>
             </Card>
           </div>

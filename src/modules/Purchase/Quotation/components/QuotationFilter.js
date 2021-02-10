@@ -83,7 +83,7 @@ const QuotationFilter = () => {
                                     register={register}
                                     onChange={(option) => {
                                         handleChangeTextInput('strSupplierName', option.label);
-                                        handleChangeTextInput('intSupplierId', option.value)
+                                        handleChangeTextInput('intSupplierId', option.value);
                                     }}
                                     setValue={setValue}
                                 />
