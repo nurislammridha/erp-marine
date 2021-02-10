@@ -4,7 +4,7 @@ import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { changeComparativeInputField } from "../_redux/actions/ComparativeStatementAction";
+import { changeComparativeInputField, getComparativeRQF } from "../_redux/actions/ComparativeStatementAction";
 
 const ComparativeStatementList = () => {
   const [show, setShow] = useState(false);
@@ -13,6 +13,7 @@ const ComparativeStatementList = () => {
   const comparativeList = useSelector((state)=> state.ComparativeStatementReducer.comparativeList);
   const comparativePaginationList = useSelector((state)=> state.ComparativeStatementReducer.comparativePaginationList);
   const isLoading = useSelector((state)=> state.ComparativeStatementReducer.isLoading);
+  const RQFOptionList = useSelector((state)=> state.ComparativeStatementReducer.RQFOptionList);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -28,41 +29,28 @@ const ComparativeStatementList = () => {
     dispatch(changeComparativeInputField(name, value, item, index));
   };
   const courseData = [
-    {
-      id: 1,
-      name: "cse",
-    },
-    {
-      id: 1,
-      name: "EEE",
-    },
-    {
-      id: 1,
-      name: "MBA",
-    },
+    {value: "001", label: "cse" },
+    { value: "003", label: "EEE" },
+    {value: "004",label: "MBA" },
   ];
 
-  let CourseName = [];
-  if (courseData) {
-    courseData.forEach((item) => {
-      let items = {
-        value: item.id,
-        label: item.name,
-      };
-      CourseName.push(items);
-    });
-  }
+  // let CourseName = [];
+  // if (courseData) {
+  //   courseData.forEach((item) => {
+  //     let items = {
+  //       value: item.id,
+  //       label: item.name,
+  //     };
+  //     CourseName.push(items);
+  //   });
+  // }
   const [startDate, setStartDate] = useState(new Date());
   return (
     <>
       <Card >
         <Card.Body className="pt-2">
         <div className="container ">
-        <form
-            className="form form-label-right voyageEngineerForm"
-            method="post"
-              
-          >
+        <form className="form form-label-right voyageEngineerForm">
            <h1 className="tableheading font-weight-bold ">comparative statement</h1>
            <div className="custom-border mt-5 "></div>
           <div className="row mb-5 table-form ">
@@ -70,11 +58,23 @@ const ComparativeStatementList = () => {
             <div className="col-xl-4 col-lg-4 col-md-6 mt-2">
             <Form.Group>
                   <Form.Label className="formFont pl-1">RFQ NO</Form.Label>
-                  <Form.Control
+                  {/* <Form.Control
                     className="formHeight"
                     type="text"
                     placeholder="Type"
-                  />
+                  /> */}
+                      <RHFInput
+                  as={<Select options={RQFOptionList} />}
+                  rules={{ required: false }}
+                  name="courseData"
+                  register={register}
+                  value={courseData.label}
+                  setValue={setValue}
+                  isSearchable={true}
+                  onChange={(option)=> (
+                    dispatch(getComparativeRQF(option.value))
+                  )}
+                /> 
                 </Form.Group>
              
             </div>
@@ -153,22 +153,22 @@ const ComparativeStatementList = () => {
               <div className="col-xl-3 col-lg-3 col-md-6 ">
               <label className="formFont">Supplier</label>
                 <RHFInput
-                  as={<Select options={CourseName} />}
+                  as={<Select options={courseData} />}
                   rules={{ required: false }}
                   name="courseData"
                   register={register}
-                  value={CourseName.label}
+                  value={courseData.label}
                   setValue={setValue}
                 />
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6 ">
               <label className="formFont">Remarks</label>
                 <RHFInput
-                  as={<Select options={CourseName} />}
+                  as={<Select options={courseData} />}
                   rules={{ required: false }}
                   name="courseData"
                   register={register}
-                  value={CourseName.label}
+                  value={courseData.label}
                   setValue={setValue}
                 />
               </div>

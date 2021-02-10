@@ -731,6 +731,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     <Form.Control
                       type="date"
                       // disabled={certificateInfoInput.dteFromSurvey ? false : true}
+                      disabled={certificateInfoInput.dteFromSurvey ? false : true}
                       name="dteToSurvey"
                       min={certificateInfoInput.dteFromSurvey}
                       className="fromStyle formHeight"
