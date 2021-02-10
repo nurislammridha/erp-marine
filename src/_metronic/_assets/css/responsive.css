@@ -45,12 +45,19 @@
     .login-signin {
         margin-top: -78px;
     }
+    .cerificateCategory {
+        width: 84%;
+    }
 }
 
 
 /* Small devices (landscape phones, 576px and up) */
 
-@media (min-width: 576px) and (max-width: 767.98px) {}
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .cerificateCategory {
+        width: 84%;
+    }
+}
 
 
 /* Extra small devices (portrait phones, less than 576px) */
@@ -214,6 +221,12 @@
     
     .booking-text.float-right.two{
         width: 67%;
+    }
+    .cerificateCategory {
+        width: 87%;
+    }
+    .cerificateCategory {
+        width: 87%;
     }
 }
 
