@@ -37,46 +37,44 @@ const CertificateCategoryFilter = () => {
   }, []);
   return (
     <>
-    <div className="col-lg-4">
-    <Form.Group as={Col} controlId="formGridState">
-    <Form.Control
-    type="text"
-    className="formHeight"
-    placeholder="Search"
-    value={search}
-    onChange={(e) => changeSearch(e.target.value)}
-    />
-  </Form.Group>
-  </div>
-  <div className="col-lg-4">
-  <div className="row">
-  <div className="col-1">
-  <Form.Label className="formFont">Status</Form.Label>
-  </div>
-  <div className="col-11">
-  <Form.Group as={Col} controlId="formGridState">
-    <RHFInput
-    as={<Select options={statusOptions} />}
-      rules={{ required: false }}
-      name="isActive"
-      className="formSelect pt-0"
-      register={register}
-      value={certificateCategoryInput.isActive}
-      onChange={(option) => {
-      setType(option.value);
-      dispatch(
-      getCertificateCategoryListData(search, option.value, 1)
-      );
-    }}
-    setValue={setValue}
-    />
-
-  </Form.Group>
-  </div>
-  </div>
-  </div>
-
-</>
+      <div className="col-lg-4">
+        <Form.Group as={Col} controlId="formGridState">
+          <Form.Control
+            type="text"
+            className="formHeight"
+            placeholder="Search"
+            value={search}
+            onChange={(e) => changeSearch(e.target.value)}
+          />
+        </Form.Group>
+      </div>
+      <div className="col-lg-4">
+        <div className="row">
+          <div className="col-1">
+            <Form.Label className="formFont">Status</Form.Label>
+          </div>
+          <div className="col-11">
+            <Form.Group as={Col} controlId="formGridState">
+              <RHFInput
+                as={<Select options={statusOptions} />}
+                rules={{ required: false }}
+                name="isActive"
+                className="formSelect pt-0"
+                register={register}
+                value={certificateCategoryInput.isActive}
+                onChange={(option) => {
+                  setType(option.value);
+                  dispatch(
+                    getCertificateCategoryListData(search, option.value, 1)
+                  );
+                }}
+                setValue={setValue}
+              />
+            </Form.Group>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

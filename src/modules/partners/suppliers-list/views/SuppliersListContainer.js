@@ -15,9 +15,12 @@ const SuppliersListContainer = () => {
         <Card>
             <Card.Body>
                 <div className="container">
-                    <div className="container row">
+                    <div className="row">
+                    <div className="col-lg-2">
                         <h1 className="tableheading">Suppliers List</h1>
+                        </div>
                         <SuppliersFilter />
+                        <div className="col-lg-2 export">
                         <Dropdown className="d-inline">
                             <Dropdown.Toggle
                                 className="btn btn-sm"
@@ -74,6 +77,7 @@ const SuppliersListContainer = () => {
                         >
                             Add New
                           </Button>
+                          </div>
                     </div>
                     <div id="id" ref={ref} className="mt-5">
                         <SuppliersList />

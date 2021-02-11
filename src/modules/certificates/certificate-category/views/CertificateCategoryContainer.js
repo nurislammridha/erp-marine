@@ -30,7 +30,6 @@ const CertificateCategoryContainer = () => {
   }, [modalStatus]);
 
   return (
-
     <Card>
       <Card.Body>
         <div className="container">
