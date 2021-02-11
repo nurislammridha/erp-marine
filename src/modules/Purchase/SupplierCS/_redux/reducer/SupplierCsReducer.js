@@ -13,6 +13,7 @@ const initialState = {
         flag1: "",
         flag2: ""
     },
+    rfqList: null
     // moment().format("YYYY-MM-DD") 
 }
 const SupplierCsReducer = (state = initialState, action) => {
@@ -29,13 +30,41 @@ const SupplierCsReducer = (state = initialState, action) => {
         case Types.SUPPLIER_LIST:
             return { ...state, supplierList: action.payload }
         case Types.GET_SUPPLIER_DETAILS:
-            return { ...state, supplierDetailsList: action.payload }
+            return { ...state, supplierDetailsList: action.payload, detailsID: action.detailsId }
         case Types.GET_SUPPLIER_ADDRESS:
             return { ...state, supplierAddress: action.payload }
         case Types.SEARCH_RFQ:
             return { ...state, valSearchRFQ: action.payload }
         case Types.QUOTATION_RFQ_LIST:
-            return { ...state, quotationRFQlist: action.payload }
+            return {
+                ...state,
+
+                quotationRFQlist: action.payload
+            }
+        case Types.RFQ_LIST:
+            // let rfqData = state.rfqList;
+
+            // for (let i = 0; i < action.payload.purchase_row.length; i++) {
+
+
+            //     rfqData.push(action.payload.purchase_row);
+
+            // }
+            console.log('action.payload :>> ', action.payload);
+            return {
+                ...state,
+                rfqList: action.payload
+            }
+
+        case Types.ADD_RFQ_PURCHASE_ROW:
+            const updatedRfqList = { ...state.rfqList };
+            const purchase_row = updatedRfqList.purchase_row;
+            purchase_row.push(action.payload);
+
+            return {
+                ...state,
+                rfqList: updatedRfqList
+            }
 
         default:
             break;
