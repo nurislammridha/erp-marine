@@ -37,6 +37,7 @@ const CertificateCategoryFilter = () => {
   }, []);
   return (
     <>
+    <div className="col-lg-4">
     <Form.Group as={Col} controlId="formGridState">
     <Form.Control
     type="text"
@@ -46,7 +47,13 @@ const CertificateCategoryFilter = () => {
     onChange={(e) => changeSearch(e.target.value)}
     />
   </Form.Group>
-  <Form.Label className="formFont pl-1 mt-2">Status</Form.Label>
+  </div>
+  <div className="col-lg-4">
+  <div className="row">
+  <div className="col-1">
+  <Form.Label className="formFont">Status</Form.Label>
+  </div>
+  <div className="col-11">
   <Form.Group as={Col} controlId="formGridState">
     <RHFInput
     as={<Select options={statusOptions} />}
@@ -65,6 +72,9 @@ const CertificateCategoryFilter = () => {
     />
 
   </Form.Group>
+  </div>
+  </div>
+  </div>
 
 </>
   );

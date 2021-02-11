@@ -34,9 +34,12 @@ const CertificateCategoryContainer = () => {
     <Card>
       <Card.Body>
         <div className="container">
-          <div className="container row">
+          <div className="row">
+          <div className="col-lg-2">
             <h1 className="tableheading">Certificate Categories List</h1>
+            </div>
             <CertificateCategoryFilter />
+            <div className="col-lg-2 export">
             <Dropdown className="d-inline">
               <Dropdown.Toggle
                 className="btn btn-sm"
@@ -93,7 +96,7 @@ const CertificateCategoryContainer = () => {
             >
               Add New
               </Button>
-
+</div>
             <SimpleModal
               show={show}
               handleClose={() => handleClose()}
