@@ -1263,9 +1263,7 @@ button.searchPlaceholder.purchaseSearch {
     background: #3699ff;
 }
 
-.login-bg:hover {
-    color: #000000 !important;
-}
+
 
 .top-search-bar {
     background: #0000001a;
@@ -1358,4 +1356,40 @@ h6.supplier-modal-header {
 }
 .employee-signin {
     margin-left: -11px;
+}
+.float-left.booking-text {
+    width: 8%;
+}
+
+.booking-text.float-right {
+    width: 92%;
+}
+.float-left.booking-text.one {
+    width: 10%;
+}
+
+.booking-text.float-right.one {
+    width: 90%;
+}
+.float-left.booking-text.two {
+    width: 16%;
+}
+
+.booking-text.float-right.two {
+    width: 84%;
+}
+.btn.btn-clean:hover:not(.btn-text):not(:disabled):not(.disabled), .btn.btn-clean:focus:not(.btn-text), .btn.btn-clean.focus:not(.btn-text) {
+   
+    background-color: transparent!important;
+    
+}
+.certificate-list-table th {
+    font-size: 10px!important;
+    font-weight: 400!important;
+}
+.certificate-list-table td {
+    font-size: 11px!important;
+}
+h1.headerText{
+    font-size: 13px!important;
 }

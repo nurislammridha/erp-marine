@@ -18,6 +18,7 @@ import LaytimeHeaderLoadingPortModal from "./LaytimeHeaderLoadingPortModal";
 import LaytimeHeaderDischargePortModal from "./LaytimeHeaderDischargePortModal";
 import moment from "moment";
 import { showToast } from "../../../../master/utils/ToastHelper";
+import { getCurrencyList } from './../../../../master/DropDownData/Currency/_redux/CurrencyAction/CurrencyAction';
 
 const LaytimeHeader = () => {
   const dispatch = useDispatch();
@@ -41,17 +42,13 @@ const LaytimeHeader = () => {
   const handleShow = () => setShow(true);
   const handleShowLoadingPortModal = () => setShowLoadingPortModal(true);
 
-  const laytimeHeaderInput = useSelector(
-    (state) => state.laytimeHeaderInfo.laytimeHeaderInput
-  );
+  const laytimeHeaderInput = useSelector((state) => state.laytimeHeaderInfo.laytimeHeaderInput );
   const isLoading = useSelector((state) => state.laytimeHeaderInfo.isLoading);
-  const layTimeDemurrage = useSelector(
-    (state) => state.laytimeHeaderInfo.layTimeDemurrage
-  );
+  const layTimeDemurrage = useSelector((state) => state.laytimeHeaderInfo.layTimeDemurrage );
   const voyageIDList = useSelector((state) => state.currencyInfo.voyageIDList);
-  const voyageDataList = useSelector(
-    (state) => state.laytimeHeaderInfo.voyageList
-  );
+  const voyageDataList = useSelector( (state) => state.laytimeHeaderInfo.voyageList);
+  const CurrencyList = useSelector((state) => state.CurrencyListReducer.CurrencyList);
+
   const loadingPort = (e) => {
     handleShow();
   };
@@ -73,22 +70,10 @@ const LaytimeHeader = () => {
   //handle submit laytime header
   const submiteLaytimeData = () => {};
 
-  // let voyageID = [];
-  // if (voyageIDList) {
-  //     voyageIDList.forEach((item) => {
-  //         let getVoyageID = {
-  //             value: item.intCurrencyID,
-  //             label: item.strCurrencyName,
-  //         };
-  //         voyageID.push(getVoyageID);
-  //     });
-  // }
   useEffect(() => {
     dispatch(getVoyageList());
-  }, []);
-
-  useEffect(() => {
     dispatch(GetVoyageID());
+    dispatch(getCurrencyList())
   }, []);
 
   const RevLoadingPortsFalse = () => {
@@ -96,7 +81,7 @@ const LaytimeHeader = () => {
   };
   return (
     <div className="container">
-      <div className="card card-custom gutter-b card-top-border">
+      <div className="card card-custom gutter-b card-tgitop-border">
         <div className="card-header">
           <div className="card-title">
             <h3 className="card-label">Laytime</h3>
@@ -580,6 +565,7 @@ const LaytimeHeader = () => {
                 handleCloseLoadingPortModal={handleCloseLoadingPortModal}
                 handleLayTimeDemurrageInput={handleLayTimeDemurrageInput}
                 layTimeDemurrage={layTimeDemurrage}
+                CurrencyList={CurrencyList}
               />
             </SimpleModal>
             <SimpleModal
@@ -592,6 +578,7 @@ const LaytimeHeader = () => {
                 handleCloseLoadingPortModal={handleCloseLoadingPortModal}
                 handleLayTimeDemurrageInput={handleLayTimeDemurrageInput}
                 layTimeDemurrage={layTimeDemurrage}
+                CurrencyList={CurrencyList}
               />
             </SimpleModal>
           </form>

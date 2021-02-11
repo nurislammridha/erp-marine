@@ -45,12 +45,19 @@
     .login-signin {
         margin-top: -78px;
     }
+    .cerificateCategory {
+        width: 84%;
+    }
 }
 
 
 /* Small devices (landscape phones, 576px and up) */
 
-@media (min-width: 576px) and (max-width: 767.98px) {}
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .cerificateCategory {
+        width: 84%;
+    }
+}
 
 
 /* Extra small devices (portrait phones, less than 576px) */
@@ -193,6 +200,65 @@
     }
     .linechart {
         margin-top: -18px;
+    }
+    .float-left.booking-text {
+        width: 23%;
+    }
+    
+    .booking-text.float-right {
+        width: 74%;
+    }
+    .float-left.booking-text.one {
+        width: 25%;
+    }
+    
+    .booking-text.float-right.one {
+        width: 70%;
+    }
+    .float-left.booking-text.two {
+        width: 23%;
+    }
+    
+    .booking-text.float-right.two{
+        width: 67%;
+    }
+    .cerificateCategory {
+        width: 87%;
+    }
+    .cerificateCategory {
+        width: 87%;
+    }
+    .offcanvas.offcanvas-right {
+        right: -395px;
+        left: auto;
+        display: none;
+    }
+    .certificate-icon{
+        margin-left: 0px  !important;
+    }
+    .stickeyCard.card {
+        margin-left: -40px;
+    }
+    input.color-picker {
+       
+        height: 18px;
+        width: 18px;
+    }
+    .due-days h6 {
+       
+        top: 3px;
+        left:22px;
+        font-size: 8px!important;
+    }
+    .certificate-filter {
+        margin-left: 16px;
+    }
+    .certificate-card.card-body {
+       
+        padding:10px !important;
+    }
+    .headerText{
+        padding-top: 0px!important;
     }
 }
 

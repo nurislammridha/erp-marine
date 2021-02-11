@@ -64,13 +64,15 @@ return (
       <h1 className="tableheading mt-0 pt-0 ">Booking Edit</h1>
       <hr></hr>
       <div className="row">
-        <div className="col-lg-1">
+        <div className="float-left booking-text">
           <h6 className="text-bold">BASIC INFO</h6>
         </div>
-        <div className="col-lg-11">
+        <div className=" float-right booking-text">
           <hr className="hr-margin"></hr>
         </div>
       </div>
+      <div className="clear-fix"></div>
+
 
       <form
         className="form form-label-right voyageEngineerForm" onSubmit={(e) => submitVesselBooking(e)} autoComplete="off" >
@@ -206,14 +208,15 @@ return (
         </div>
         <div className="mt-5">
           <div className="row">
-            <div className="col-lg-2">
+            <div className="float-left booking-text two">
               <h6 className="text-bold">RATE AND COMMISION</h6>
             </div>
-            <div className="col-lg-10">
+            <div className="float-right booking-text two">
               <hr className="hr-margin"></hr>
             </div>
           </div>
         </div>
+        <div className="clear-fix"></div>
 
         <div className="form-group row mb-1">
 
@@ -366,10 +369,10 @@ return (
         </div>
         <div className="mt-5">
           <div className="row">
-            <div className="col-lg-2">
+            <div className="float-left booking-text one">
               <h6 className="text-bold">DATE DETAILS</h6>
             </div>
-            <div className="col-lg-10">
+            <div className="float-right booking-text one">
               <hr className="hr-margin"></hr>
             </div>
           </div>

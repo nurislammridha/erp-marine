@@ -3,41 +3,38 @@ import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment"
 import { useForm } from "react-hook-form";
-import { handleChangePurchaseApprovalDetailInput, SubmitPurchaseApprove } from '../../_redux/actions/PurchaseApprovalAction';
+import { handleApprovePRApproval, handleChangePurchaseApprovalDetailInput, handleRejectedPRApproval } from '../../_redux/actions/PurchaseApprovalAction';
 import { round } from 'lodash';
 
 
-const RequisitionApprovalDetail = () => {
+const RequisitionApprovalDetail = ({ handleClose, id }) => {
 
     const { handleSubmit, register, errors, setValue } = useForm();
     const dispatch = useDispatch();
     const PurchaseApprovalDetailInput = useSelector((state) => state.purchaseApprovalFilter.PurchaseApprovalDetailInput);
-    const purchaseApprovalDetail = useSelector(
-        (state) => state.purchaseApprovalFilter.purchaseApprovalDetail
-    );
-    console.log('purchaseApprovalDetail', purchaseApprovalDetail)
-
-    const purchaseApprovalMultiple = useSelector(
-        (state) => state.purchaseApprovalFilter.purchaseApprovalMultiple
-    );
-
-    console.log('purchaseApprovalMultiple', purchaseApprovalMultiple);
-
+    const purchaseApprovalDetail = useSelector((state) => state.purchaseApprovalFilter.purchaseApprovalDetail);
+    const isLoading = useSelector((state) => state.purchaseApprovalFilter.isLoading);
+    const purchaseApprovalMultiple = useSelector((state) => state.purchaseApprovalFilter.purchaseApprovalMultiple);
 
     const handleChangeTextInput = (name, value, item) => {
-        console.log('name', name, 'value', value, 'item', item);
         dispatch(handleChangePurchaseApprovalDetailInput(name, value, item));
     };
 
-    const onSubmit = () => {
-        dispatch(SubmitPurchaseApprove(purchaseApprovalDetail));
+    const handleApprove = (e) => {
+        purchaseApprovalDetail.intStatus = 1;
+        dispatch(handleApprovePRApproval(purchaseApprovalDetail, handleClose, id));
+        e.preventDefault();
     };
-
+    const handleReject = (e) => {
+        purchaseApprovalDetail.intStatus = 0;
+        dispatch(handleApprovePRApproval(purchaseApprovalDetail, handleClose, id));
+        e.preventDefault();
+    };
+    console.log('purchaseApprovalMultiple :>> ', purchaseApprovalMultiple);
     return (
         <div>
             <form
                 className="form form-label-right"
-                onSubmit={handleSubmit(onSubmit)}
                 method="post"
             >
                 {
@@ -111,7 +108,7 @@ const RequisitionApprovalDetail = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {purchaseApprovalMultiple.map((item, index) => (
+                                            {purchaseApprovalMultiple.length && purchaseApprovalMultiple.map((item, index) => (
 
                                                 <tr>
                                                     <td>
@@ -134,16 +131,12 @@ const RequisitionApprovalDetail = () => {
                                                         <Form.Control
                                                             type="number"
                                                             name="numApprovedQty"
-                                                            defaultValue={round(item.numPurchaseRequestQty)}
+                                                            // defaultValue={round(item.numPurchaseRequestQty)}
                                                             value={item.numApprovedQty}
                                                             max={50}
                                                             className="fromStyle formHeight"
                                                             onChange={(e) =>
-                                                                handleChangeTextInput(
-                                                                    "numApprovedQty",
-                                                                    e.target.value,
-                                                                    item
-                                                                )
+                                                                handleChangeTextInput("numApprovedQty", e.target.value, item)
                                                             }
                                                         />
                                                     </td>
@@ -154,11 +147,7 @@ const RequisitionApprovalDetail = () => {
                                                             value={item.remarks}
                                                             className="fromStyle formHeight"
                                                             onChange={(e) =>
-                                                                handleChangeTextInput(
-                                                                    "remarks",
-                                                                    e.target.value,
-                                                                    item
-                                                                )
+                                                                handleChangeTextInput("remarks", e.target.value, item)
                                                             }
                                                         />
                                                     </td>
@@ -183,17 +172,31 @@ const RequisitionApprovalDetail = () => {
                             <div className="row mt-5">
                                 <div className="col-sm-12">
                                     <div className="float-right">
-                                        <button
-                                            className="btn btn-danger btn-sm"
-                                        >
-                                            Reject
-                                    </button>
-                                        <button
-                                            type="submit"
-                                            className="btn btn-primary btn-sm ml-3 mr-3"
-                                        >
-                                            Approve
-                                    </button>
+                                        {!isLoading && (
+                                            <button type="button" className="btn btn-primary btn-sm ml-3 mr-3" onClick={(e) => handleReject(e)}>
+                                                Reject
+                                            </button>
+                                        )}
+
+                                        {isLoading && purchaseApprovalDetail.intStatus === 0 && (
+                                            <button type="button" className="btn btn-primary btn-sm ml-3 mr-3" disabled={true}>
+                                                <span>Rejecting....</span>
+                                                <span className="ml-3 spinner spinner-white"></span>
+                                            </button>
+                                        )}
+
+                                        {!isLoading && (
+                                            <button type="button" className="btn btn-primary btn-sm ml-3 mr-3" onClick={(e) => handleApprove(e)}>
+                                                Approve
+                                            </button>
+                                        )}
+
+                                        {isLoading && purchaseApprovalDetail.intStatus === 1 &&  (
+                                            <button type="button" className="btn btn-primary btn-sm ml-3 mr-3" disabled={true}>
+                                                <span>Approving....</span>
+                                                <span className="ml-3 spinner spinner-white"></span>
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -201,7 +204,7 @@ const RequisitionApprovalDetail = () => {
                     )
                 }
             </form>
-        </div>
+        </div >
     );
 }
 

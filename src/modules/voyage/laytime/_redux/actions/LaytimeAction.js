@@ -224,8 +224,8 @@ export const submitLaytime = (laytimeHeaderInput, laytimeRowInput, e, show, setS
         showToast('error', "Demurrage rate can't be blank!")
         return false;
     }
-    if (laytimeRowInput.intDemurrageCurrID === null) {
-        showToast('error', "USD can't be blank!")
+    if (laytimeRowInput.intCurrencyID === null) {
+        showToast('error', "Currency can't be blank!")
         return false;
     }
     if (laytimeRowInput.numDespatchRate === null) {

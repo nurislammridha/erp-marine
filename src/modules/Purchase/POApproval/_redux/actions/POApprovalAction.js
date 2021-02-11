@@ -15,6 +15,18 @@ export const handleChangePOApprovalFilterInput = (name, value) => (dispatch) => 
     });
 };
 
+export const handleChangePOApprovalDetailInput = (name, value, item) => (dispatch) => {
+    const formData = {
+        name: name,
+        value: value,
+        item: item
+    };
+    dispatch({
+        type: Types.CHANGE_PO_APPROVAL_DETAIL_INPUT,
+        payload: formData,
+    });
+};
+
 
 export const getSBUName = () => (dispatch) => {
 
@@ -105,3 +117,71 @@ export const getPOApprovalList = (searchValue = "", intBusinessLineId = null, in
     }
 
 }
+
+export const GetPOApprovalDetail = (id) => (dispatch) => {
+
+    Axios.get(`${process.env.REACT_APP_API_URL}purchase/purchaseOrderHeaderRow/${id}`)
+        .then((res) => {
+            let data = res.data.data;
+            const numApprovedQty = "";
+            const remarks = "";
+            for (let index = 0; index < data.purchase_row.length; index++) {
+                const element = data.purchase_row[index];
+                element.numApprovedQty = numApprovedQty;
+                element.remarks = remarks;
+
+            }
+            // data.purchase_row.push = approveQty;
+            console.log('data', data)
+            dispatch({
+                type: Types.GET_PO_APPROVAL_DETAIL,
+                payload: res.data,
+            });
+        });
+};
+//*************Purchase Order Approval**************** */
+export const handleChangePurchaseOrderApprovalDetailInput = (name, value, item, index) => (dispatch) => {
+    const formData = {
+        name: name,
+        value: value,
+        item: item,
+        index: index
+    };
+    dispatch({ type: Types.PO_APPROVAL_DETAILS_INPUT, payload: formData });
+};
+
+
+export const handleUpdatePOApproval = (POApprovalData, handleClose, id) => async (dispatch) => {
+    let responseList = {
+        isLoading: true,
+        data: {},
+        status: false,
+    };
+    dispatch({ type: Types.UPDATE_PO_APPROVAL, payload: responseList });
+    const newPRApprovalData = POApprovalData.poApprovalStatus.filter((item) => item.isChecked && item.isChecked === true);
+    POApprovalData.poApprovalStatus = newPRApprovalData;
+    if (POApprovalData.intStatus === 1) {
+        POApprovalData.intStatus = 1;
+        POApprovalData.strStatus = "Approved";
+    } else {
+        POApprovalData.intStatus = 0;
+        POApprovalData.strStatus = "Rejected";
+    }
+   
+    await Axios.put(`${process.env.REACT_APP_API_URL}purchase/poApprovalStatus/${id}`,POApprovalData)
+        .then((response) => {
+            if (response.data.status) {
+                responseList.data = response.data;
+                responseList.isLoading = false;
+                responseList.status = response.data.status;
+                showToast("success", response.data.message);
+                dispatch({ type: Types.UPDATE_PO_APPROVAL, payload: responseList });
+                handleClose();
+            } else { showToast("error", response.data.message) }
+        }).catch(function (error) {
+            responseList.isLoading = false;
+            const message = "Something went wrong ! Please fill all inputs and try again !";
+            showToast("error", message);
+            dispatch({ type: Types.UPDATE_PO_APPROVAL, payload: responseList });
+        });
+};
