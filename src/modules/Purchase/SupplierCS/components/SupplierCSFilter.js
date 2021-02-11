@@ -6,7 +6,7 @@ import { InputBase, Paper, IconButton, Divider } from "@material-ui/core";
 import DatePicker from "react-datepicker";
 import { useForm } from "react-hook-form";
 import { getBranchList, getSBUlist } from "../../purhasesOrder/_redux/actions/PurhasesOrderAction";
-import { changeSupplierCSInput, getDepartmentList } from "../_redux/action/SupplierCsAction";
+import { changeSupplierCSInput, getDataBySearch, getDataFilterSelect, getDepartmentList, searchSupplierInput } from "../_redux/action/SupplierCsAction";
 const SupplierCSFilter = () => {
     const dispatch = useDispatch();
     const [startDate, setStartDate] = useState(new Date());
@@ -15,13 +15,31 @@ const SupplierCSFilter = () => {
     const branchList = useSelector(state => state.purchasesOrderInfo.branchList);
     const departmentList = useSelector(state => state.supplierCsInfo.departmentList);
     const supplierCSInput = useSelector(state => state.supplierCsInfo.supplierCSInput);
+    const search = useSelector(state => state.supplierCsInfo.search);
+
     useEffect(() => {
         dispatch(getSBUlist())
         dispatch(getBranchList())
         dispatch(getDepartmentList())
     }, [])
+    useEffect(() => {
+        if (search && search.length > 0) {
+            setValue("intDepartmentId", "");
+            setValue("intSBUId", "");
+            setValue("intBranchId", "");
+        }
+        dispatch(getDataBySearch(search))
+    }, [search, setValue, dispatch])
+    useEffect(() => {
+        dispatch(getDataFilterSelect(supplierCSInput))
+    }, [supplierCSInput, dispatch])
     const handleChangeText = (name, value) => {
         dispatch(changeSupplierCSInput(name, value))
+
+    }
+    const searchSupplierCS = (value) => {
+        dispatch(searchSupplierInput(value))
+
     }
     return (
         <>
@@ -30,14 +48,14 @@ const SupplierCSFilter = () => {
                 method="post"
             >
                 <div className="row mb-5 table-form ">
-                    <h1 className="tableheading font-weight-bold ">comparative statement</h1>
+                    <h1 className="tableheading font-weight-bold ">Supplier CS</h1>
                     <div className="col-xl-4 col-lg-4 col-md-6 mt-2">
                         <Paper className="searchInput supplier-search">
                             <InputBase
                                 placeholder="Search"
-                            // inputProps={{ "aria-label": "Search Google Maps" }}
-                            // onChange={(e) => searchEmployee(e)}
-                            // value={employeeInfo.employeeName}
+                                // inputProps={{ "aria-label": "Search Google Maps" }}
+                                onChange={(e) => searchSupplierCS(e.target.value)}
+                                value={search}
                             />
                             <IconButton aria-label="Search" className="searchPlaceholder supplier-search-placeholder">
                                 <i className="flaticon-search "></i>

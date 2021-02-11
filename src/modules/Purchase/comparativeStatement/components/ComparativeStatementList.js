@@ -1,39 +1,54 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { Card,Form,Button } from "react-bootstrap";
-import { useState } from "react";
-import { Link } from 'react-router-dom'
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
-
+import { useDispatch, useSelector } from "react-redux";
+import { changeComparativeInputField, getComparativeRQF, selectedItem } from "../_redux/actions/ComparativeStatementAction";
+import { getSupplierName } from "../../../master/DropDownData/SupplierName/_redux/SupplierNameAction/SupplierNameAction";
 
 const ComparativeStatementList = () => {
-    const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
   const { register, setValue } = useForm();
+  const dispatch = useDispatch()
+  const comparativeList = useSelector((state)=> state.ComparativeStatementReducer.comparativeList);
+  const comparativePaginationList = useSelector((state)=> state.ComparativeStatementReducer.comparativePaginationList);
+  const isLoading = useSelector((state)=> state.ComparativeStatementReducer.isLoading);
+  const RQFOptionList = useSelector((state)=> state.ComparativeStatementReducer.RQFOptionList);
+  const rfqNo = useSelector((state)=> state.ComparativeStatementReducer.rfqNo);
+  const supplierNameList = useSelector((state)=> state.SupplierNameReducer.supplierNameList);
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    getComparativeList()
+    dispatch(getSupplierName())
+    // dispatch(getItemList(currentPage));
+  }, [dispatch, currentPage]);
+  
+  const getComparativeList = (currentPage, id)=>{
+   // dispatch(getItemList(currentPage, id));
+  }
+  const handleChangeTextInput = (name, value, item, index) => {
+    dispatch(changeComparativeInputField(name, value, item, index));
+  };
   const courseData = [
-    {
-      id: 1,
-      name: "cse",
-    },
-    {
-      id: 1,
-      name: "EEE",
-    },
-    {
-      id: 1,
-      name: "MBA",
-    },
+    {value: "001", label: "cse" },
+    { value: "003", label: "EEE" },
+    {value: "004",label: "MBA" },
   ];
 
-  let CourseName = [];
-  if (courseData) {
-    courseData.forEach((item) => {
-      let items = {
-        value: item.id,
-        label: item.name,
-      };
-      CourseName.push(items);
-    });
+  const listSelect =(item)=>{
+    alert(item.intQuotationId);
+
+    dispatch(selectedItem(item));
+    
+    // setRFQValue(item.strQuotationNo)
+  }
+
+  const getRQFList = (value)=>{
+   let length = value.length;
+      dispatch(getComparativeRQF(value,length))
   }
   const [startDate, setStartDate] = useState(new Date());
   return (
@@ -41,17 +56,11 @@ const ComparativeStatementList = () => {
       <Card >
         <Card.Body className="pt-2">
         <div className="container ">
-        <form
-            className="form form-label-right voyageEngineerForm"
-            method="post"
-              
-          >
+        <form className="form form-label-right voyageEngineerForm">
            <h1 className="tableheading font-weight-bold ">comparative statement</h1>
            <div className="custom-border mt-5 "></div>
           <div className="row mb-5 table-form ">
           
-         
-           
             <div className="col-xl-4 col-lg-4 col-md-6 mt-2">
             <Form.Group>
                   <Form.Label className="formFont pl-1">RFQ NO</Form.Label>
@@ -59,19 +68,37 @@ const ComparativeStatementList = () => {
                     className="formHeight"
                     type="text"
                     placeholder="Type"
+                    value={rfqNo && rfqNo}
+                    onChange={(e)=> (
+                      getRQFList(e.target.value)
+                    )}
+                    
                   />
                 </Form.Group>
+                <div className="customSearchField">
+                  <ul class="list-group">
+                 {
+                    !isLoading &&  RQFOptionList && RQFOptionList.map((item, index)=>(
+                    <li onClick={()=>listSelect(item)} class="list-group-item list-group-item-action cursor-pointer">{item.strQuotationNo}</li>
+                   )) 
+                 }
+                 
+                
+                 { isLoading && 
+                    <li class="list-group-item cursor-pointer">
+                      <span>Loading</span>
+                      <span className="ml-3 spinner spinner-white "></span>
+                    </li>
+                 }
+                  </ul>
+                </div>
              
             </div>
             </div>
-       
-         
-           
+    
              
             </form>
             <div className="border-bottom mt-5 "></div>
-            
-        
         <div className="react-bootstrap-table table-responsive mt-5">
           <table className="table table table-head-custom table-vertical-center voyageTable supplier-table">
             <thead>
@@ -116,29 +143,25 @@ const ComparativeStatementList = () => {
             
           </tr>
               <tr>
-              <td>
-                    
-                      <Form.Check type="checkbox" />
-                    </td>
-              <td>#01</td>
+                   <td>
+                     <Form.Check type="checkbox" />
+                   </td>
+                   <td>#01</td>
                    <td>2021-01-05 00:00</td>
                    <td>Container Cargo</td>
                    <td>Durres(Durazzo)</td>
                    <td>Akij Noor</td>
                    <td scope="col" className=" ">
-            17338 <span className="ml-2">37616</span>{" "}
-            </td>
-          
-            <td scope="col" >
-             39364 <span className="ml-2">69822</span>{" "}
-            </td>
+                   17338 <span className="ml-2">37616</span>{" "}
+                   </td>
+           
+                   <td scope="col" >
+                   39364 <span className="ml-2">69822</span>{" "}
+                   </td>
             <td scope="col" >
               0273 <span className="ml-2">72025</span>{" "}
             </td>
-                 
-
               </tr>
-            
             </thead>
           </table>
         </div>
@@ -146,36 +169,34 @@ const ComparativeStatementList = () => {
               <div className="col-xl-3 col-lg-3 col-md-6 ">
               <label className="formFont">Supplier</label>
                 <RHFInput
-                  as={<Select options={CourseName} />}
+                  as={<Select options={supplierNameList} />}
                   rules={{ required: false }}
                   name="courseData"
                   register={register}
-                  value={CourseName.label}
+                  value={courseData.label}
                   setValue={setValue}
                 />
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6 ">
-              <label className="formFont">Remarks</label>
-                <RHFInput
-                  as={<Select options={CourseName} />}
-                  rules={{ required: false }}
-                  name="courseData"
-                  register={register}
-                  value={CourseName.label}
-                  setValue={setValue}
-                />
+              <Form.Group>
+                  <Form.Label className="formFont pl-1">Remarks</Form.Label>
+                  <Form.Control
+                    className="formHeight"
+                    type="text"
+                    placeholder="Remarks"
+                  />
+                </Form.Group>
               </div>
 
           
             </div>
-            <Button className="text-white float-right " variant="primary">
+             <Button className="text-white float-right " variant="primary">
                 Send
               </Button>
              
             </div>
             </Card.Body>
             </Card>
-          
             </>
   );
 };

@@ -70,6 +70,7 @@ const LaytimeRow = () => {
                         <div className="card-body">
                             <form
                                 className="form form-label-right"
+                                autoComplete="off"
                             // method="post"
                             >
                                 <div className="form-group">

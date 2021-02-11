@@ -1383,3 +1383,13 @@ h6.supplier-modal-header {
     background-color: transparent!important;
     
 }
+.certificate-list-table th {
+    font-size: 10px!important;
+    font-weight: 400!important;
+}
+.certificate-list-table td {
+    font-size: 11px!important;
+}
+h1.headerText{
+    font-size: 13px!important;
+}

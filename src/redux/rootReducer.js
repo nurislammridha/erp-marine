@@ -79,7 +79,12 @@ import SupplierCsReducer from "../modules/Purchase/SupplierCS/_redux/reducer/Sup
 */
 // import authMenuPermissionReducer from "../app/modules/Auth/_redux/menu-permission/authMenuPermissionReducer";
 import CatalogueListReducer from './../modules/master/DropDownData/Catalogue/_redux/CatalogueReducer/CatalogueReducer';
+<<<<<<< HEAD
 import UserRoleReducer from "../modules/role-permission-management/information/_redux/reducers/UserRoleReducer";
+=======
+import ComparativeStatementReducer from "../modules/Purchase/comparativeStatement/_redux/reducers/ComparativeStatementReducer";
+import QuotationFilterReducer from "../modules/Purchase/Quotation/_redux/reducers/QuotationFilterReducer";
+>>>>>>> 77319dc1bf8e3fe3eeb28e15bd19528641059e32
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -147,6 +152,10 @@ export const rootReducer = combineReducers({
   POApprovalFilter: POApprovalReducer,
 
 
+
+  /** Quotation */
+  QuotationFilterinfo: QuotationFilterReducer,
+
   // master module reducer // dynamic data for all dropdown menu list 
   PortReducer: PortReducer,
   VoyageTypeReducer: VoyageTypeReducer,
@@ -181,7 +190,13 @@ export const rootReducer = combineReducers({
   /**Purchase Order */
   purchasesOrderInfo: PurchasesOrderReducer,
   supplierCsInfo: SupplierCsReducer,
+<<<<<<< HEAD
   userRole: UserRoleReducer
+=======
+
+  // comparative statement 
+  ComparativeStatementReducer: ComparativeStatementReducer,
+>>>>>>> 77319dc1bf8e3fe3eeb28e15bd19528641059e32
 });
 
 export function* rootSaga() {
