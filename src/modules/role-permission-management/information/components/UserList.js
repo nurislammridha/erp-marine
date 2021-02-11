@@ -85,7 +85,7 @@ const UserList = () => {
                 </IconButton>
               </Paper>
             </div>
-            <div className="col-xl-3 col-lg-3 col-md-6">
+            <div className="col-xl-3 col-lg-3 col-md-6 "> 
             <RHFInput
                   as={<Select options={CourseName} />}
                   rules={{ required: false }}
@@ -95,7 +95,7 @@ const UserList = () => {
                   setValue={setValue}
                 />
             </div>
-            <div className="col-xl-3 col-lg-3 col-md-6">
+            <div className="col-xl-3 col-lg-3 col-md-6 userlist-select">
             <RHFInput
                   as={<Select options={CourseName} />}
                   rules={{ required: false }}
@@ -107,7 +107,7 @@ const UserList = () => {
             </div>
             {/* <div className="col-xl-3 col-lg-3 col-md-6">use RHFInput</div> */}
 
-            <div className="">
+            <div className="export">
               <i className="fas fa-filter tableFilter  mr-2"></i>
               <i className="far fa-filter"></i>
               <Button className="btn-sm" variant="primary" onClick={()=>showUserModal()}>
@@ -117,6 +117,7 @@ const UserList = () => {
           </div>
        </div>
        { userList.length > 0 && (
+        <div className="react-bootstrap-table table-responsive">
             <table className="table table table-head-custom table-vertical-center user-list-table ">
               <thead>
                 <tr>
@@ -154,6 +155,7 @@ const UserList = () => {
                 ))}
               </tbody>
             </table>
+            </div>
           )}
        </Card.Body>
        </Card>

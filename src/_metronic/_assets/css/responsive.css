@@ -312,6 +312,14 @@
     margin-left: 14px!important;
     margin-top: -11px!important;
 }
+.custom-border {
+   
+     margin-left:0px!important;
+}
+.userlist-select{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
     
 }
 
