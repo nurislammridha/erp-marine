@@ -20,8 +20,8 @@ const getCataloug = (data) => {
     if (data) {
         data.forEach((item) => {
             let itemData = {
-                value: item.intCurrencyId,
-                label: item.strCurrencyName,
+                value: item.intCatalogueId,
+                label: item.strCatalogueName,
             };
             options.push(itemData);
         });
