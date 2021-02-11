@@ -303,3 +303,8 @@ button.btn.rejected-status {
   padding-bottom: 2px;
   padding-left: 2;
 }
+.customSearchField {
+ position: absolute;
+ z-index: 999;
+ width: 93%;
+}

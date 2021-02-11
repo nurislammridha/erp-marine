@@ -8,9 +8,15 @@ import UserModal from "./UserModal";
 import { getPermissionUserList } from "../_redux/actions/RolePermissionManagementAction";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
+import SimpleModal from "../../../master/components/Modal/SimpleModal";
+import NewUser from "./NewUser";
+
+
 
 const UserList = () => {
   const [show, setShow] = useState(false);
+  const [userId, setUserId] = useState(false);
+  const [userModalShow, setUserModalShow] = useState(false);
   const { register, setValue } = useForm();
 
   const dispatch = useDispatch();
@@ -48,6 +54,12 @@ const UserList = () => {
   dispatch( getPermissionUserList());
 
   }, [])
+
+  const showUserModal = () => {
+  
+    setUserModalShow(true)
+
+  }
 
 
   return (
@@ -98,7 +110,7 @@ const UserList = () => {
             <div className="">
               <i className="fas fa-filter tableFilter  mr-2"></i>
               <i className="far fa-filter"></i>
-              <Button className="btn-sm" variant="primary">
+              <Button className="btn-sm" variant="primary" onClick={()=>showUserModal()}>
                 Add New
               </Button>
             </div>
@@ -130,7 +142,7 @@ const UserList = () => {
                     <td>{item.phone_no}</td>
                     <td className="">
                       <div>
-                        <Link >
+                        <Link onClick={() => showUserModal(item)}>
                           <i className="far fa-eye text-success editIcon item-list-icon"></i>
                         </Link>
                         <Link className="ml-2">
@@ -145,7 +157,16 @@ const UserList = () => {
           )}
        </Card.Body>
        </Card>
-      {/* <UserModal show={show} setShow={setShow} /> */}
+       <SimpleModal
+        size="xl"
+        show={userModalShow}
+        handleClose={() => setUserModalShow(false)}
+        handleShow={() => setUserModalShow(true)}
+        modalTitle={"Certificate Details"}
+      >
+        <NewUser/>
+        {/* <CertificateDetails handleClose={() => setUserModalShow(false)} CertificateID={CertificateID} /> */}
+      </SimpleModal>
       
     </>
   );

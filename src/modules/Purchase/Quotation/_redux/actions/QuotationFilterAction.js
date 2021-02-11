@@ -37,10 +37,23 @@ export const getCurrencyType = () => (dispatch) => {
 
 export const getQuotationDetails = () => (dispatch) => {
 
-    Axios.get(`${process.env.REACT_APP_API_URL}purchase/currency`).then(
+    Axios.get(`${process.env.REACT_APP_API_URL}purchase/supplierQuotation`).then(
         (res) => {
+            console.log('res', res)
             let data = res.data.data
             dispatch({ type: Types.GET_QUOTATION_DETAILS, payload: data })
         }
     )
+}
+
+export const submitQuotation = () => async (dispatch) => {
+
+    let responselist = {
+        status: false,
+        isLoading: true,
+        data: {},
+    }
+
+    dispatch({ type: Types.SUBMIT_QUOTATION, payload: responselist })
+
 }

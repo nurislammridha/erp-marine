@@ -6,6 +6,8 @@ const initialState = {
   isLoading: false,
   comparativeSubmitList: [],
   RQFOptionList: [],
+  rfqNo: ""
+
 
 };
 
@@ -64,24 +66,19 @@ const ComparativeStatementReducer = (state = initialState, action) => {
     case Types.GET_RQF_OPTION_LIST:
       return {
         ...state,
-        RQFOptionList: getRQFOptionList(action.payload),
+        RQFOptionList: action.payload.length > 0 ? action.payload.data : [],
+        isLoading: action.payload.isLoading,
+        rfqNo: null,
+      };
+    case Types.COMPARATIVE_STATEMENT_SELECT_ITEM:
+      return {
+        ...state,
+        rfqNo:action.payload.strQuotationNo,
+        RQFOptionList:[]
       };
     default:
       break;
   }
   return newState;
-};
-const getRQFOptionList = (data) => {
-  let options = [];
-  if (data) {
-    data.forEach((item) => {
-      let itemData = {
-        value: item.intCargoId,
-        label: item.strCargoName,
-      };
-      options.push(itemData);
-    });
-  }
-  return options;
 };
 export default ComparativeStatementReducer;

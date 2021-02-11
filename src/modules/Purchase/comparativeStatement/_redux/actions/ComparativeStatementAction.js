@@ -50,15 +50,29 @@ export const changeComparativeInputField = (name, value, item, index) => (dispat
     dispatch({ type: Types.COMPARATIVE_STATEMENT_INPUT_CHANGE, payload: formData });
 };
 
+export const selectedItem = (item) => (dispatch) => {
+    dispatch({ type: Types.COMPARATIVE_STATEMENT_SELECT_ITEM, payload: item });
+};
+
 //get comparative RQF No 
-export const getComparativeRQF = (id) => async (dispatch) => {
+export const getComparativeRQF = (id,length) => async (dispatch) => {
+    let responseList = {
+        isLoading: true,
+        data: [],
+        status: false,
+        length:length,
+        value:id
+    };
+    dispatch({ type: Types.GET_RQF_OPTION_LIST, payload: responseList });
     await Axios.get(`${process.env.REACT_APP_API_URL}purchase/quotation?search=${id}`)
         .then((res) => {
-            console.log('res :>> ', res);
             if (res.data.status) {
-                dispatch({ type: Types.GET_RQF_OPTION_LIST, payload: res.data.data })
+                responseList.isLoading = false;
+                responseList.data = res.data.data;
+                dispatch({ type: Types.GET_RQF_OPTION_LIST, payload: responseList })
             }
         }).catch((err) => {
-            
+            responseList.isLoading = false;
+            dispatch({ type: Types.GET_RQF_OPTION_LIST, payload: responseList })
         })
 }

@@ -4,7 +4,8 @@ import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { changeComparativeInputField, getComparativeRQF } from "../_redux/actions/ComparativeStatementAction";
+import { changeComparativeInputField, getComparativeRQF, selectedItem } from "../_redux/actions/ComparativeStatementAction";
+import { getSupplierName } from "../../../master/DropDownData/SupplierName/_redux/SupplierNameAction/SupplierNameAction";
 
 const ComparativeStatementList = () => {
   const [show, setShow] = useState(false);
@@ -14,11 +15,14 @@ const ComparativeStatementList = () => {
   const comparativePaginationList = useSelector((state)=> state.ComparativeStatementReducer.comparativePaginationList);
   const isLoading = useSelector((state)=> state.ComparativeStatementReducer.isLoading);
   const RQFOptionList = useSelector((state)=> state.ComparativeStatementReducer.RQFOptionList);
+  const rfqNo = useSelector((state)=> state.ComparativeStatementReducer.rfqNo);
+  const supplierNameList = useSelector((state)=> state.SupplierNameReducer.supplierNameList);
 
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     getComparativeList()
+    dispatch(getSupplierName())
     // dispatch(getItemList(currentPage));
   }, [dispatch, currentPage]);
   
@@ -34,16 +38,18 @@ const ComparativeStatementList = () => {
     {value: "004",label: "MBA" },
   ];
 
-  // let CourseName = [];
-  // if (courseData) {
-  //   courseData.forEach((item) => {
-  //     let items = {
-  //       value: item.id,
-  //       label: item.name,
-  //     };
-  //     CourseName.push(items);
-  //   });
-  // }
+  const listSelect =(item)=>{
+    alert(item.intQuotationId);
+
+    dispatch(selectedItem(item));
+    
+    // setRFQValue(item.strQuotationNo)
+  }
+
+  const getRQFList = (value)=>{
+   let length = value.length;
+      dispatch(getComparativeRQF(value,length))
+  }
   const [startDate, setStartDate] = useState(new Date());
   return (
     <>
@@ -54,28 +60,38 @@ const ComparativeStatementList = () => {
            <h1 className="tableheading font-weight-bold ">comparative statement</h1>
            <div className="custom-border mt-5 "></div>
           <div className="row mb-5 table-form ">
-           
+          
             <div className="col-xl-4 col-lg-4 col-md-6 mt-2">
             <Form.Group>
                   <Form.Label className="formFont pl-1">RFQ NO</Form.Label>
-                  {/* <Form.Control
+                  <Form.Control
                     className="formHeight"
                     type="text"
                     placeholder="Type"
-                  /> */}
-                      <RHFInput
-                  as={<Select options={RQFOptionList} />}
-                  rules={{ required: false }}
-                  name="courseData"
-                  register={register}
-                  value={courseData.label}
-                  setValue={setValue}
-                  isSearchable={true}
-                  onChange={(option)=> (
-                    dispatch(getComparativeRQF(option.value))
-                  )}
-                /> 
+                    value={rfqNo && rfqNo}
+                    onChange={(e)=> (
+                      getRQFList(e.target.value)
+                    )}
+                    
+                  />
                 </Form.Group>
+                <div className="customSearchField">
+                  <ul class="list-group">
+                 {
+                    !isLoading &&  RQFOptionList && RQFOptionList.map((item, index)=>(
+                    <li onClick={()=>listSelect(item)} class="list-group-item list-group-item-action cursor-pointer">{item.strQuotationNo}</li>
+                   )) 
+                 }
+                 
+                
+                 { isLoading && 
+                    <li class="list-group-item cursor-pointer">
+                      <span>Loading</span>
+                      <span className="ml-3 spinner spinner-white "></span>
+                    </li>
+                 }
+                  </ul>
+                </div>
              
             </div>
             </div>
@@ -153,7 +169,7 @@ const ComparativeStatementList = () => {
               <div className="col-xl-3 col-lg-3 col-md-6 ">
               <label className="formFont">Supplier</label>
                 <RHFInput
-                  as={<Select options={courseData} />}
+                  as={<Select options={supplierNameList} />}
                   rules={{ required: false }}
                   name="courseData"
                   register={register}
@@ -162,15 +178,14 @@ const ComparativeStatementList = () => {
                 />
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6 ">
-              <label className="formFont">Remarks</label>
-                <RHFInput
-                  as={<Select options={courseData} />}
-                  rules={{ required: false }}
-                  name="courseData"
-                  register={register}
-                  value={courseData.label}
-                  setValue={setValue}
-                />
+              <Form.Group>
+                  <Form.Label className="formFont pl-1">Remarks</Form.Label>
+                  <Form.Control
+                    className="formHeight"
+                    type="text"
+                    placeholder="Remarks"
+                  />
+                </Form.Group>
               </div>
 
           
