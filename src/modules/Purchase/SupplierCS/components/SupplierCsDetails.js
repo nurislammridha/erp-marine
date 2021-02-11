@@ -10,42 +10,17 @@ import SimpleModal from "../../../master/components/Modal/SimpleModal";
 
 import { Link } from "react-router-dom";
 import SupplierRFQ from "./SuplierRFQ";
-import { getQuotationRFQDetails, searchValueRFQ } from "../_redux/action/SupplierCsAction";
+import { createPrepareRFQ, getQuotationRFQDetails, searchValueRFQ } from "../_redux/action/SupplierCsAction";
 
 const SupplierCsDetails = () => {
   const dispatch = useDispatch()
   const { register, setValue } = useForm();
   const supplierDetailsList = useSelector(state => state.supplierCsInfo.supplierDetailsList);
 
-
-
-
-  const courseData = [
-    {
-      id: 1,
-      name: "cse",
-    },
-    {
-      id: 1,
-      name: "EEE",
-    },
-    {
-      id: 1,
-      name: "MBA",
-    },
-  ];
-
-  let CourseName = [];
-  if (courseData) {
-    courseData.forEach((item) => {
-      let items = {
-        value: item.id,
-        label: item.name,
-      };
-      CourseName.push(items);
-    });
+  const handlePrepareRFQ = () => {
+    dispatch(createPrepareRFQ(supplierDetailsList));
+    setShow(true);
   }
-
   const [show, setShow] = useState(false);
   return (
     <>
@@ -146,7 +121,7 @@ const SupplierCsDetails = () => {
                 <Button
                   className="mr-4 text-white float-right mt-5"
                   variant="primary"
-                  onClick={() => setShow(true)}
+                  onClick={() => handlePrepareRFQ()}
                 >
                   Prepare RFQ
               </Button>
