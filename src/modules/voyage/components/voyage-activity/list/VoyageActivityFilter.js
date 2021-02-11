@@ -61,9 +61,9 @@ const VoyageActivityFilter = (props) => {
           </Form.Group>
         </div> */}
 
-        <div className="col-lg-3 col-md-6 col-10 mt-5 voyage-vessel ">
+        <div className="col-lg-3 col-md-6 col-10 mt-5 ">
           <Form.Group as={Row} controlId="formPlaintextPassword">
-            <Form.Label className=" ml-4">Select Vessel</Form.Label>
+            <Form.Label className="voyage-vessel">Select Vessel</Form.Label>
             <Col sm="9">
               <Select
                 options={vesselListOptions}

@@ -308,6 +308,10 @@
 .export {
     margin-left: 15px;
 }
+.voyage-vessel {
+    margin-left: 14px!important;
+    margin-top: -11px!important;
+}
     
 }
 
