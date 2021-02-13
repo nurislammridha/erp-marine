@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Form, Card, Button } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Form, Card } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { InputBase, Paper, IconButton } from "@material-ui/core";
-import { getCurrencyType, getQuotationDetails, getSupplierName, handleChangeQuotationFilterInput } from "../_redux/actions/QuotationFilterAction";
+import { getCurrencyType, getSupplierName, handleChangeQuotationFilterInput } from "../_redux/actions/QuotationFilterAction";
 
 
 const QuotationFilter = () => {
@@ -83,7 +83,7 @@ const QuotationFilter = () => {
                                     register={register}
                                     onChange={(option) => {
                                         handleChangeTextInput('strSupplierName', option.label);
-                                        handleChangeTextInput('intSupplierId', option.value)
+                                        handleChangeTextInput('intSupplierId', option.value);
                                     }}
                                     setValue={setValue}
                                 />

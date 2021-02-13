@@ -1,6 +1,5 @@
 import * as Types from "../types/Types";
 import Axios from "axios";
-import { toast } from "react-toastify";
 import { showToast } from "../../../../master/utils/ToastHelper";
 
 export const handleChangeQuotationFilterInput = (name, value) => (dispatch) => {
@@ -14,6 +13,17 @@ export const handleChangeQuotationFilterInput = (name, value) => (dispatch) => {
         payload: formData
     })
 }
+export const handleChangeQuotationDetailInput = (name, value, item) => (dispatch) => {
+    const formData = {
+        name: name,
+        value: value,
+        item: item,
+    };
+    dispatch({
+        type: Types.CHANGE_QUOTATION_DETAIL_INPUT,
+        payload: formData,
+    });
+};
 
 export const getSupplierName = () => (dispatch) => {
 
@@ -39,21 +49,43 @@ export const getQuotationDetails = () => (dispatch) => {
 
     Axios.get(`${process.env.REACT_APP_API_URL}purchase/supplierQuotation`).then(
         (res) => {
-            console.log('res', res)
             let data = res.data.data
             dispatch({ type: Types.GET_QUOTATION_DETAILS, payload: data })
         }
     )
 }
 
-export const submitQuotation = () => async (dispatch) => {
+export const submitQuotation = (quotationDetailList) => async (dispatch) => {
 
-    let responselist = {
+    let responseList = {
         status: false,
         isLoading: true,
         data: {},
     }
+    dispatch({ type: Types.SUBMIT_QUOTATION, payload: responseList })
 
-    dispatch({ type: Types.SUBMIT_QUOTATION, payload: responselist })
+    let postData = {
+        quoteRow: quotationDetailList
+    }
+    console.log('postData', postData)
+
+    await Axios.post(`${process.env.REACT_APP_API_URL}purchase/supplierQuotation`, postData).then(
+        (res) => {
+            if (res.data.status) {
+                responseList.data = res.data;
+                responseList.isLoading = false;
+                responseList.status = res.data.status;
+                showToast("success", res.data.message);
+                dispatch({ type: Types.SUBMIT_QUOTATION, payload: responseList });
+                dispatch(getQuotationDetails());
+
+            } else { showToast("error", res.data.message) }
+        }
+    ).catch(function (error) {
+        responseList.isLoading = false;
+        const message = "Something went wrong ! Please fill all inputs and try again !";
+        showToast("error", message);
+        dispatch({ type: Types.SUBMIT_QUOTATION, payload: responseList });
+    });
 
 }
