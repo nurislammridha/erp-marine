@@ -62,7 +62,7 @@ const NewUser = () => {
                   <div className="col-xl-3 col-lg-3 col-md-6 ">
                     <Form.Group>
                       <Form.Label className="formFont pl-1">
-                        Sur Email
+                        Sur Name
                       </Form.Label>
                       <Form.Control
                         className="formHeight"

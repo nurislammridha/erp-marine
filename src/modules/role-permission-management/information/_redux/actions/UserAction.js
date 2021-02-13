@@ -20,6 +20,8 @@ export const handleChangeUserAction = (name,value,e
       rolesListPaginated: null,
     };
     
+
+    console.log('inputData',inputData);
     // dispatch({ type: Types.GET_USER_ROLE_LIST_PAGINATED, payload: responseList });
     Axios
       .post(`${process.env.REACT_APP_API_URL}roles/multipleUserRoleStore`,inputData)
@@ -30,6 +32,6 @@ export const handleChangeUserAction = (name,value,e
         responseList.message = message;
         responseList.rolesListPaginated = data;
         responseList.isLoading = false;
-        dispatch({ type: Types.GET_USER_ROLE_LIST_PAGINATED, payload: responseList });
+        dispatch({ type: Types.GET_USER_CREATED, payload: responseList });
       });
   };
