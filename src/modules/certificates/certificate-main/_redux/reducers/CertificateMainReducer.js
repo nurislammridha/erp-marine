@@ -117,7 +117,7 @@ const initialState = {
       statusLabel: 'Due',
     },
     {
-      minDate : '30',
+      minDate : '31',
       maxDate : '60',
       colorCode : '#678db2',
       inputName: 'due_60_days_code',
@@ -125,8 +125,8 @@ const initialState = {
       statusLabel: 'Due',
     },
     {
-      minDate : '60',
-      maxDate : '30',
+      minDate : '61',
+      maxDate : '',
       colorCode : '#8af2c0',
       inputName: 'due_more_60_days_code',
       bottomLabel: 'DUE MORE THAN 60 DAYS',
