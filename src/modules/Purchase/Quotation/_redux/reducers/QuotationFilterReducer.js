@@ -10,6 +10,7 @@ const initialState = {
         strCurrencyCode: "",
         intCurrencyId: "",
     },
+    quotationDetailInput: [],
     quotationDetailList: [],
     status: false,
     isLoading: false,
@@ -30,15 +31,19 @@ const QuotationFilterReducer = (state = initialState, action) => {
             }
 
         case Types.CHANGE_QUOTATION_DETAIL_INPUT:
-            const quotationDetails = state.quotationDetailList;
+            const quotationDetails = state.quotationDetailList.slice();
+            console.log('quotationDetails', quotationDetails);
+            console.log('action.payload', action.payload);
             for (let i = 0; i < quotationDetails.length; i++) {
-                if (quotationDetails[i].intQuotationId == action.payload.item.intQuotationId) {
-                    quotationDetails[i][action.payload.name] = action.payload.value
+                if (quotationDetails[i].intAutoId == action.payload.item.intAutoId) {
+                    quotationDetails[i][action.payload.name] = action.payload.value;
+                    quotationDetails[i].intTotal = action.payload.item.numQuotationQty * action.payload.value
                 }
             }
+
             return {
                 ...state,
-                QuotationDetailInput: quotationDetails,
+                quotationDetailList: quotationDetails,
             };
 
         case Types.GET_SUPPLIER_NAME:
@@ -58,6 +63,7 @@ const QuotationFilterReducer = (state = initialState, action) => {
             }
 
         case Types.GET_QUOTATION_DETAILS:
+
             return {
                 ...state,
                 quotationDetailList: action.payload,

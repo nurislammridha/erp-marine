@@ -19,14 +19,18 @@ const QuotationDetails = () => {
     var FilterData = newData.filter((item) => item.intSupplierId === QuotationFilterInput.intSupplierId);
   }
 
+  console.log('quotationDetailList', quotationDetailList);
   console.log('data', FilterData)
 
-  const handleSubmit = () => {
-    dispatchEvent(submitQuotation())
-  }
+
 
   const handleChangeTextInput = (name, value, item) => {
     dispatch(handleChangeQuotationDetailInput(name, value, item))
+  }
+
+  const handleSubmit = (e) => {
+    dispatch(submitQuotation(quotationDetailList));
+    e.preventDefault();
   }
 
   useEffect(() => {
@@ -74,12 +78,12 @@ const QuotationDetails = () => {
                           <td>{item.strItemName}</td>
                           <td>{item.intSupplierQuotationId}</td>
                           <td>{item.intSupplierQuotationId}</td>
-                          <td>{round(item.numQuotationQty)}</td>
+                          <td>{item.numQuotationQty}</td>
                           <td >
                             <Form.Control
-                              type="text"
+                              type="number"
                               name="numQuotationRate"
-                              value={item.numQuotationRate}
+                              defaultValue="0"
                               className="fromStyle formHeight"
                               style={{ width: "60%" }}
                               onChange={(e) =>
@@ -87,7 +91,7 @@ const QuotationDetails = () => {
                               }
                             />
                           </td>
-                          <td>100</td>
+                          <td>{item.intTotal == null ? 0 : item.intTotal}</td>
                         </tr>
                       ))}
 
@@ -98,22 +102,23 @@ const QuotationDetails = () => {
 
                   <div className="float-right mt-5">
                     {!isLoading && (
-                      <Button
-
-                        onClick={() => handleSubmit()}
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={(e) => handleSubmit(e)}
                       >
                         Submit
-                      </Button>
+                      </button>
                     )}
 
                     {isLoading && (
-                      <Button
-
+                      <button
+                        className="btn btn-primary"
                         type="button"
                       >
                         <span>Submitting</span>
                         <span className="ml-3 spinner spinner-white"></span>
-                      </Button>
+                      </button>
                     )}
 
                   </div>
@@ -123,15 +128,40 @@ const QuotationDetails = () => {
             </Card>
           </div>
           <div className="col-lg-4 col-12">
-            <Card>
-              <Card.Body className="pt-3">
-                {FilterData && FilterData.map((item) => (
+            {FilterData && FilterData.map((item) => (
+
+              <Card>
+
+                <Card.Body className="pt-3">
 
                   <>
                     <h6 className="supplier-modal-header mb-2">Supplier Info</h6>
                     <div className="border-bottom"></div>
                     <div className="mt-3 supplier-info">
-                      <div className="row">
+
+                      <table>
+                        <tr>
+                          <th scope="row">Supplier name</th>
+                          <td>:</td>
+                          <td>{item.strSupplierName}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Supplier Address</th>
+                          <td>:</td>
+                          <td>{item.strEmail}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Supplier Contact</th>
+                          <td>:</td>
+                          <td>{item.strContactNumber}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Supplier Email</th>
+                          <td>:</td>
+                          <td>{item.strEmail}</td>
+                        </tr>
+                      </table>
+                      {/* <div className="row">
                         <div className="col-sm-5">
                           <p>Supplier name</p>
                         </div>
@@ -162,13 +192,14 @@ const QuotationDetails = () => {
                         <div className="col-sm-7">
                           <p>: {item.strEmail}</p>
                         </div>
-                      </div>
+                      </div> */}
 
                     </div>
                   </>
-                ))}
-              </Card.Body>
-            </Card>
+
+                </Card.Body>
+              </Card>
+            ))}
           </div>
         </div>
       )}
