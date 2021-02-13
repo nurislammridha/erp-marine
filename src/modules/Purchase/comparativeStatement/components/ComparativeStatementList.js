@@ -4,69 +4,51 @@ import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { changeComparativeInputField } from "../_redux/actions/ComparativeStatementAction";
+import { changeComparativeInputField, getComparativeRQF, selectedItem, getComparativeStatementList, getCSOptionList, updateCS } from "../_redux/actions/ComparativeStatementAction";
+import LoadingSpinner from "../../../master/spinner/LoadingSpinner";
 
 const ComparativeStatementList = () => {
-  const [show, setShow] = useState(false);
-  const { register, setValue } = useForm();
+  const { register, handleSubmit, errors, setValue } = useForm();
   const dispatch = useDispatch()
   const comparativeList = useSelector((state)=> state.ComparativeStatementReducer.comparativeList);
-  const comparativePaginationList = useSelector((state)=> state.ComparativeStatementReducer.comparativePaginationList);
   const isLoading = useSelector((state)=> state.ComparativeStatementReducer.isLoading);
+  const RQFOptionList = useSelector((state)=> state.ComparativeStatementReducer.RQFOptionList);
+  const rfqNo = useSelector((state)=> state.ComparativeStatementReducer.rfqNo);
+  const csOptionList = useSelector((state)=> state.ComparativeStatementReducer.csOptionList);
+  const csInputData = useSelector((state)=> state.ComparativeStatementReducer.csInputData);
 
-  const [currentPage, setCurrentPage] = useState(1);
-
-  useEffect(() => {
-    getComparativeList()
-    // dispatch(getItemList(currentPage));
-  }, [dispatch, currentPage]);
-  
-  const getComparativeList = (currentPage, id)=>{
-   // dispatch(getItemList(currentPage, id));
-  }
-  const handleChangeTextInput = (name, value, item, index) => {
-    dispatch(changeComparativeInputField(name, value, item, index));
+  const handleChangeTextInput = (name, value) => {
+    dispatch(changeComparativeInputField(name, value));
   };
-  const courseData = [
-    {
-      id: 1,
-      name: "cse",
-    },
-    {
-      id: 1,
-      name: "EEE",
-    },
-    {
-      id: 1,
-      name: "MBA",
-    },
-  ];
 
-  let CourseName = [];
-  if (courseData) {
-    courseData.forEach((item) => {
-      let items = {
-        value: item.id,
-        label: item.name,
-      };
-      CourseName.push(items);
-    });
+  const listSelect =(item)=>{
+    dispatch(getComparativeStatementList(item.intQuotationId))
+    dispatch(getCSOptionList(item.intQuotationId))
+    dispatch(selectedItem(item));
+      }
+  const getRQFList = (value)=>{
+   let length = value.length;
+      dispatch(getComparativeRQF(value,length))
   }
-  const [startDate, setStartDate] = useState(new Date());
+  const onSubmit = async (e) => {
+    dispatch(updateCS(csInputData));
+  };
   return (
     <>
       <Card >
         <Card.Body className="pt-2">
         <div className="container ">
-        <form
-            className="form form-label-right voyageEngineerForm"
-            method="post"
-              
-          >
+        <form 
+        className="form form-label-right voyageEngineerForm"
+        onSubmit={handleSubmit(onSubmit)}
+        method="post"
+        encType="multipart/form-data"
+        autoComplete="off"
+        >
+
            <h1 className="tableheading font-weight-bold ">comparative statement</h1>
            <div className="custom-border mt-5 "></div>
           <div className="row mb-5 table-form ">
-           
             <div className="col-xl-4 col-lg-4 col-md-6 mt-2">
             <Form.Group>
                   <Form.Label className="formFont pl-1">RFQ NO</Form.Label>
@@ -74,111 +56,165 @@ const ComparativeStatementList = () => {
                     className="formHeight"
                     type="text"
                     placeholder="Type"
+                    value={rfqNo && rfqNo}
+                    onChange={(e)=> (
+                      getRQFList(e.target.value)
+                    )}
+                    
                   />
                 </Form.Group>
-             
-            </div>
-            </div>
-    
-             
-            </form>
-            <div className="border-bottom mt-5 "></div>
-        <div className="react-bootstrap-table table-responsive mt-5">
-          <table className="table table table-head-custom table-vertical-center voyageTable supplier-table">
-            <thead>
-              <tr>
-              <th scope="col">
-                      {" "}
-                      <Form.Check type="checkbox" />
-                    </th>
-              <th scope="col">SL NO</th>
-                    <th scope="col">ITEM ID</th>
-                    <th scope="col">ITEM NAME</th>
-                    <th scope="col">UOM</th> 
-                    <th scope="col">RFQ QTY</th>
-                    <th scope="col">SUPPLIER 1
-                    
-                    {/* <span>RATE</span>
-                    <span>TOTAL</span> */}
-                    </th>
-                    <th scope="col">SUPPLIER 2</th>
-                    <th scope="col">SUPPLIER 3</th>
-                   
-
+                <div className="customSearchField">
+                  <ul class="list-group">
+                 {
+                    !isLoading &&  RQFOptionList && RQFOptionList.map((item, index)=>(
+                    <li onClick={()=>listSelect(item)} class="list-group-item list-group-item-action cursor-pointer">{item.strQuotationNo}</li>
+                   )) 
+                 }
+                 
                 
-              </tr>
-              <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+                 { isLoading && 
+                    <li class="list-group-item cursor-pointer">
+                      <span>Loading</span>
+                      <span className="ml-3 spinner spinner-white "></span>
+                    </li>
+                 }
+                  </ul>
+                </div>
+             
+            </div>
+            </div>
+            {/* </form> */}
+            <div className="border-bottom mt-5 "></div>
+             {isLoading && <LoadingSpinner text="Loading Comparative Statement List..." />}
 
-            <th scope="col" className=" ">
-              RATE <span className="ml-2">TOTAL</span>{" "}
-            </th>
-            <th scope="col" className=" ">
-              RATE <span className="ml-2">TOTAL</span>{" "}
-            </th>
-            <th scope="col" className=" ">
-              RATE <span className="ml-2">TOTAL</span>{" "}
-            </th>
-            
-          </tr>
-              <tr>
-                   <td>
-                     <Form.Check type="checkbox" />
-                   </td>
-                   <td>#01</td>
-                   <td>2021-01-05 00:00</td>
-                   <td>Container Cargo</td>
-                   <td>Durres(Durazzo)</td>
-                   <td>Akij Noor</td>
-                   <td scope="col" className=" ">
-                   17338 <span className="ml-2">37616</span>{" "}
-                   </td>
-           
-                   <td scope="col" >
-                   39364 <span className="ml-2">69822</span>{" "}
-                   </td>
-            <td scope="col" >
-              0273 <span className="ml-2">72025</span>{" "}
-            </td>
-              </tr>
-            </thead>
-          </table>
-        </div>
+     { comparativeList && (
+        <div className="react-bootstrap-table table-responsive mt-5">
+        <table className="table table table-head-custom table-vertical-center voyageTable supplier-table">
+          <thead>
+            <tr>
+            <th scope="col">
+                    {" "}
+                    <Form.Check type="checkbox" />
+                  </th>
+                  <th scope="col">SL NO</th>
+                  <th scope="col">ITEM ID</th>
+                  <th scope="col">ITEM NAME</th>
+                  <th scope="col">UOM</th> 
+                  <th scope="col">RFQ QTY</th>
+                  <th scope="col">SUPPLIER 1
+                  
+                  {/* <span>RATE</span>
+                  <span>TOTAL</span> */}
+                  </th>
+                  <th scope="col">SUPPLIER 2</th>
+                  <th scope="col">SUPPLIER 3</th>
+            </tr>
+            <tr>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+
+          <th scope="col" className=" ">
+            RATE <span className="ml-2">TOTAL</span>{" "}
+          </th>
+          <th scope="col" className=" ">
+            RATE <span className="ml-2">TOTAL</span>{" "}
+          </th>
+          <th scope="col" className=" ">
+            RATE <span className="ml-2">TOTAL</span>{" "}
+          </th>
+          
+        </tr>
+           {comparativeList && comparativeList.length > 0 && comparativeList.map((item, index)=> (
+             <>
+               <tr>
+                 <td>
+                   <Form.Check type="checkbox" />
+                 </td>
+                 <td>{index + 1}</td>
+                 <td>{item.intItemId !== null && item.intItemId !== "" ? item.intItemId : "N/A"}</td>
+                 <td>{item.strItemName !== null && item.strItemName !== "" ? item.strItemName : "N/A"}</td>
+                 <td>{item.strUoM !== null && item.strUoM !== "" ? item.strUoM : "N/A"}</td>
+                 <td>{item.numQuotationQty !== null && item.numQuotationQty !== "" ? item.numQuotationQty : "N/A"}</td>
+         
+                 <td scope="col" className=" ">
+                 {item.numQuotationRate !== null && item.numQuotationRate !== "" ? item.numQuotationRate : 1}
+                 <span className="ml-2">{parseInt(item.numQuotationQty)*parseInt(item.numQuotationRate)}</span>{" "}
+                 </td>
+         
+                 <td scope="col" >
+                 {item.numQuotationRate !== null && item.numQuotationRate !== "" ? item.numQuotationRate : 1}
+                 <span className="ml-2">{parseInt(item.numQuotationQty)*parseInt(item.numQuotationRate)}</span>{" "}
+                 </td>
+                <td scope="col" >
+                {item.numQuotationRate !== null && item.numQuotationRate !== "" ? item.numQuotationRate : 1}
+                 <span className="ml-2">{parseInt(item.numQuotationQty)*parseInt(item.numQuotationRate)}</span>{" "}
+              </td>
+            </tr>
+           </>
+           )) 
+          
+           }
+          </thead>
+        </table>
+      </div>
+       )
+     }
+    {/* {!isLoading && comparativeList.length === 0 && (
+            <div className="alert alert-warning mt-5">
+              Sorry ! Comparative Statement List Not Found.
+            </div>
+          )} */}
+
         <div className="form-group row mt-3">
               <div className="col-xl-3 col-lg-3 col-md-6 ">
               <label className="formFont">Supplier</label>
                 <RHFInput
-                  as={<Select options={CourseName} />}
+                  as={<Select options={csOptionList} />}
                   rules={{ required: false }}
-                  name="courseData"
+                  name="intWinSupplierId"
                   register={register}
-                  value={CourseName.label}
+                  value={csInputData.supplier}
+                  onChange={(option)=>(
+                    handleChangeTextInput('intWinSupplierId', option.value),
+                    handleChangeTextInput('supplier', option)
+                  )}
                   setValue={setValue}
                 />
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6 ">
-              <label className="formFont">Remarks</label>
-                <RHFInput
-                  as={<Select options={CourseName} />}
-                  rules={{ required: false }}
-                  name="courseData"
-                  register={register}
-                  value={CourseName.label}
-                  setValue={setValue}
-                />
+              <Form.Group>
+                  <Form.Label className="formFont pl-1">Remarks</Form.Label>
+                  <Form.Control
+                    className="formHeight"
+                    type="text"
+                    name="strWinCause"
+                    placeholder="Remarks"
+                    value={csInputData.strWinCause}
+                    onChange={(e)=> handleChangeTextInput('strWinCause', e.target.value)}
+                  />
+                </Form.Group>
               </div>
 
           
             </div>
-             <Button className="text-white float-right " variant="primary">
-                Send
+             {
+               !isLoading && (
+                <Button type="submit" className="text-white float-right" variant="primary">
+                Submit
               </Button>
-             
+               )
+             }
+               {isLoading && (
+                  <Button type="submit" className="text-white float-right" variant="primary">
+                  <span>Submitting</span>
+                  <span className="ml-3 spinner spinner-white"></span>
+                </Button>  
+                )}
+              </form>
             </div>
             </Card.Body>
             </Card>

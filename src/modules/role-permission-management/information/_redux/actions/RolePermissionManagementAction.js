@@ -11,6 +11,8 @@ export const AddRolePermissionInput = (name, value) => (dispatch) => {
 }
 
 export const getRoleListByPagination = () => (dispatch) => {
+
+ 
   const responseList = {
     isLoading: true,
     rolesList: [],
@@ -20,6 +22,7 @@ export const getRoleListByPagination = () => (dispatch) => {
   Axios
     .get(`${process.env.REACT_APP_API_URL}roles/getAllRoles`)
     .then((res) => {
+      console.log('res', res);
       const { data, message } = res.data;
       responseList.rolesList = data.data;
       responseList.message = message;

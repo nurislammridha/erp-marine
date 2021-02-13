@@ -1,7 +1,35 @@
 import React, { useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import { getRoleListByPagination } from "../_redux/actions/RolePermissionManagementAction";
+import {
+  createNewUser,
+  handleChangeUserAction,
+} from "../_redux/actions/UserAction";
+import { RHFInput } from "react-hook-form-input";
+import Select from "react-select";
 
 const NewUser = () => {
+  const { register, handleSubmit, errors, setValue } = useForm();
+  const userInput = useSelector((state) => state.userRole.inputData);
+  console.log('userInput', userInput);
+  const roleListOption = useSelector((state) => state.roleReducer.roleListOption);
+  const dispatch = useDispatch();
+
+  
+
+  const onSubmit = () => {
+    dispatch(createNewUser(userInput));
+  };
+
+  const handleChange = (name, value, e = null) => {
+    dispatch(handleChangeUserAction(name, value, e));
+  };
+
+  useEffect(() => {
+    dispatch(getRoleListByPagination());
+  }, []);
   return (
     <>
       <div className="container">
@@ -12,34 +40,102 @@ const NewUser = () => {
               <form
                 className="form form-label-right voyageEngineerForm"
                 method="post"
+                onSubmit={handleSubmit(onSubmit)}
               >
                 <div className="form-group row">
                   <div className="col-xl-3 col-lg-3 col-md-6 ">
                     <Form.Group>
                       <Form.Label className="formFont pl-1">
-                        Admin Name
+                        First Name
                       </Form.Label>
                       <Form.Control
                         className="formHeight"
                         type="text"
+                        name="first_name"
                         placeholder="Enter Name"
+                        onChange={(e) =>
+                          handleChange("first_name", e.target.value)
+                        }
                       />
                     </Form.Group>
                   </div>
                   <div className="col-xl-3 col-lg-3 col-md-6 ">
                     <Form.Group>
                       <Form.Label className="formFont pl-1">
-                        Admin Email
+                        Sur Email
                       </Form.Label>
                       <Form.Control
                         className="formHeight"
                         type="text"
-                        placeholder="Enter email"
+                        name="surname"
+                        placeholder="Enter Name"
+                        onChange={(e) =>
+                          handleChange("surname", e.target.value)
+                        }
                       />
                     </Form.Group>
                   </div>
-
                   <div className="col-xl-3 col-lg-3 col-md-6 ">
+                    <Form.Group>
+                      <Form.Label className="formFont pl-1">
+                        Last Name
+                      </Form.Label>
+                      <Form.Control
+                        className="formHeight"
+                        type="text"
+                        name="last_name"
+                        placeholder="Enter Name"
+                        onChange={(e) =>
+                          handleChange("last_name", e.target.value)
+                        }
+                      />
+                    </Form.Group>
+                  </div>
+                  <div className="col-xl-3 col-lg-3 col-md-6">
+                    <Form.Group>
+                      <Form.Label className="formFont pl-1">
+                        username
+                      </Form.Label>
+                      <Form.Control
+                        className="formHeight"
+                        type="text"
+                        name="username"
+                        placeholder="Enter Name"
+                        onChange={(e) =>
+                          handleChange("username", e.target.value)
+                        }
+                      />
+                    </Form.Group>
+                  </div>
+                  <div className="col-xl-3 col-lg-3 col-md-6">
+                    <Form.Group>
+                      <Form.Label className="formFont pl-1">Email</Form.Label>
+                      <Form.Control
+                        className="formHeight"
+                        type="text"
+                        name="email"
+                        placeholder="Enter Name"
+                        onChange={(e) => handleChange("email", e.target.value)}
+                      />
+                    </Form.Group>
+                  </div>
+                  <div className="col-xl-3 col-lg-3 col-md-6">
+                    <Form.Group>
+                      <Form.Label className="formFont pl-1">
+                        Phone No
+                      </Form.Label>
+                      <Form.Control
+                        className="formHeight"
+                        type="text"
+                        name="phone_no"
+                        placeholder="Enter Name"
+                        onChange={(e) =>
+                          handleChange("phone_no", e.target.value)
+                        }
+                      />
+                    </Form.Group>
+                  </div>
+                  <div className="col-xl-3 col-lg-3 col-md-6">
                     <Form.Group>
                       <Form.Label className="formFont pl-1">
                         Password
@@ -47,7 +143,11 @@ const NewUser = () => {
                       <Form.Control
                         className="formHeight"
                         type="text"
-                        placeholder="Enter Username"
+                        name="password"
+                        placeholder="Enter Name"
+                        onChange={(e) =>
+                          handleChange("password", e.target.value)
+                        }
                       />
                     </Form.Group>
                   </div>
@@ -59,12 +159,16 @@ const NewUser = () => {
                       <Form.Control
                         className="formHeight"
                         type="text"
-                        placeholder="Enter Password"
+                        name="password"
+                        placeholder="Enter Name"
+                        onChange={(e) =>
+                          handleChange("password", e.target.value)
+                        }
                       />
                     </Form.Group>
                   </div>
                 </div>
-                <div className="form-group row">
+                {/* <div className="form-group row">
                   <div className="col-xl-3 col-lg-3 col-md-6 ">
                     <Form.Group>
                       <Form.Label className="formFont pl-1">
@@ -73,24 +177,37 @@ const NewUser = () => {
                       <Form.Control
                         className="formHeight"
                         type="text"
-                        placeholder="Type"
+                        name="first_name"
+                        placeholder="Enter Name"
+                        onChange={(e) =>
+                          handleChange(
+                            "first_name",
+                            e.target.value
+                          )
+                        }
                       />
                     </Form.Group>
                   </div>
-                  <div className="col-xl-3 col-lg-3 col-md-6 ">
-                    <Form.Group>
-                      <Form.Label className="formFont pl-1">
-                        Admin Username
-                      </Form.Label>
-                      <Form.Control
-                        className="formHeight"
-                        type="text"
-                        placeholder="Enter Username"
-                      />
-                    </Form.Group>
-                  </div>
+                </div> */}
+                <div className="col-xl-3 col-lg-3 col-md-6">
+                  <RHFInput
+                    as={<Select options={roleListOption} />}
+                    rules={{ required: false }}
+                    name="courseData"
+                    register={register}
+                    onChange={(option) => {
+                      handleChange('name', option.label);
+                      handleChange('roleId', option.value)
+                    }}
+                    // value={CourseName.label}
+                    setValue={setValue}
+                  />
                 </div>
-                <Button className="mr-4  saveButton text-white" variant="">
+                <Button
+                  className="mr-4  saveButton text-white"
+                  variant=""
+                  onClick={() => onSubmit()}
+                >
                   Submit
                 </Button>
               </form>

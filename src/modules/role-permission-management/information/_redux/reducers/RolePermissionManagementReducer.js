@@ -8,6 +8,7 @@ const initialState = {
     rolesListPaginated: [],
     rolesListAll: [],
     userList:[],
+    roleListOption:[],
     inputData: {
         id: '',
         role: '',
@@ -49,7 +50,9 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: action.payload.isLoading,
                 rolesListPaginated: action.payload.rolesListPaginated,
-                rolesListAll: action.payload.rolesList
+                rolesListAll: action.payload.rolesList,
+                roleListOption:getUserRoleDropdown(action.payload.rolesList)
+
             };
 
         case Types.GET_USER_PERMISSION_GROUPS:
@@ -177,5 +180,19 @@ const checkAllPermissionIsChecked = (roles, permissionGroupIndex) => {
     const getTotalCheckedPermissions = getTotalPermissions.filter(x=> x.isChecked);
     return getTotalPermissions.length === getTotalCheckedPermissions.length ? true : false;
 }
+
+const getUserRoleDropdown = (data) => {
+    let options = [];
+    if (data) {
+      data.forEach((item) => {
+        let itemData = {
+          value: item.id,
+          label: item.name,
+        };
+        options.push(itemData);
+      });
+    }
+    return options;
+  };
 
 export default RolePermissionManagementReducer;

@@ -6,61 +6,71 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import ReactToPrint from 'react-to-print';
 import { getSupplierName } from '../../../master/DropDownData/SupplierName/_redux/SupplierNameAction/SupplierNameAction';
+import { getQuotationRFQDetails, getSupplierAddress, newRfqList, searchValueRFQ } from '../_redux/action/SupplierCsAction';
 const SupplierRFQ = () => {
     const componentRef = useRef();
     const { register, setValue } = useForm();
     const supplierNameList = useSelector(state => state.SupplierNameReducer.supplierNameList);
+    const supplierAddress = useSelector(state => state.supplierCsInfo.supplierAddress);
+    const valSearchRFQ = useSelector(state => state.supplierCsInfo.valSearchRFQ);
+    const rfqList = useSelector(state => state.supplierCsInfo.rfqList);
+    console.log('rfqList :>> ', rfqList);
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getSupplierName())
     }, [])
-    const courseData = [
-        {
-            id: 1,
-            name: "cse",
-        },
-        {
-            id: 1,
-            name: "EEE",
-        },
-        {
-            id: 1,
-            name: "MBA",
-        },
-    ];
-    let CourseName = [];
-    if (courseData) {
-        courseData.forEach((item) => {
-            let items = {
-                value: item.id,
-                label: item.name,
-            };
-            CourseName.push(items);
-        });
+
+    const changeSupplierList = (value) => {
+        dispatch(getSupplierAddress(value))
     }
+    const searchRFQ = (value) => {
+        dispatch(searchValueRFQ(value))
+    }
+    const addRfqList = () => {
+
+        dispatch(getQuotationRFQDetails(rfqList, valSearchRFQ));
+    }
+
+
     return (
+
         <>
+
             <div className="form-group row">
-                <div className="col-xl-4 col-lg-4 col-md-6">
-                    <Form.Group>
-                        <Form.Label className="formFont pl-1">RFQ NO</Form.Label>
-                        <Form.Control
-                            className="formHeight"
-                            type="text"
-                            placeholder="Type"
-                        />
-                    </Form.Group>
+                {rfqList && (
+                    <div className="col-xl-3 col-lg-3 col-md-5">
+                        <Form.Group>
+                            <Form.Label className="formFont pl-1">RFQ NO</Form.Label>
+                            <Form.Control
+                                className="formHeight"
+                                type="number"
+                                placeholder={rfqList.intPurchaseRequestID}
+                                name="searchRFQ"
+                                value={valSearchRFQ}
+                                onChange={(e) => searchRFQ(e.target.value)}
+                            />
+                        </Form.Group>
+                    </div>
+                )}
+                <div className="col-xl-2 col-lg-2 col-md-2">
+                    <button
+                        className="btn btn-primary"
+                        onClick={() => addRfqList()}
+                    >
+                        Add List
+                   </button>
                 </div>
 
-                <div className="col-xl-4 col-lg-4 col-md-6">
+                <div className="col-xl-3 col-lg-3 col-md-5">
                     <label className="formFont">Supplier</label>
                     <RHFInput
                         as={<Select options={supplierNameList} />}
                         rules={{ required: false }}
-                        name="courseData"
+                        name="intSupplierId"
                         register={register}
-                        value={CourseName.label}
+                        value={''}
                         setValue={setValue}
+                        onChange={(option) => changeSupplierList(option.value)}
                     />
                 </div>
 
@@ -80,49 +90,42 @@ const SupplierRFQ = () => {
                     content={() => componentRef.current}
                 />
 
+
             </div>
             <div className="row" ref={componentRef}>
                 <div className="col-xl-8 col-lg-8 col-12">
                     <div className="react-bootstrap-table table-responsive mt-5">
-                        <table className="table table table-head-custom table-vertical-center voyageTable supplier-table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">SL NO</th>
+                        {rfqList && (
+                            <table className="table table table-head-custom table-vertical-center voyageTable supplier-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">SL NO</th>
+                                        <th scope="col">INDENT NO</th>
+                                        <th scope="col">ITEM ID</th>
+                                        <th scope="col">ITEM NAME</th>
+                                        <th scope="col">UOM</th>
+                                        <th scope="col">REMARKS</th>
+                                        <th scope="col">RFQ QTY</th>
+                                    </tr>
 
-                                    <th scope="col">INDENT NO</th>
-                                    <th scope="col">ITEM ID</th>
-                                    <th scope="col">ITEM NAME</th>
-                                    <th scope="col">UOM</th>
-                                    <th scope="col">REMARKS</th>
-                                    <th scope="col">RFQ QTY</th>
+                                    {rfqList.purchase_row.map((item, index) => (
 
-                                    <th scope="col">RATE</th>
-                                    <th scope="col">TOTAL</th>
-                                </tr>
-                                <tr>
-                                    <td>#01</td>
-                                    <td>2021</td>
-                                    <td>Container Cargo</td>
-                                    <td>8567</td>
-                                    <td>123</td>
-                                    <td>123</td>
-                                    <td>Chottogram</td>
-                                    <td>100</td>
-                                    <td>100</td>
-                                </tr>
-                                <tr>
-                                    <td>#01</td>
-                                    <td>2021</td>
-                                    <td>Container Cargo</td>
-                                    <td>8567</td>
-                                    <td>123</td>
-                                    <td>123</td>
-                                    <td>Chottogram</td>
-                                    <td>100</td>
-                                    <td>100</td>
-                                </tr>
-                            </thead>
-                        </table>
+                                        <tr>
+                                            <td>{index + 1}</td>
+                                            <td>{item.intId}</td>
+                                            <td>{item.intitemid}</td>
+                                            <td>{item.strItemName}</td>
+                                            <td>Test</td>
+                                            <td>Test</td>
+                                            <td>Test</td>
+                                        </tr>
+                                    ))}
+
+
+                                </thead>
+                            </table>
+                        )}
+
                     </div>
                 </div>
                 <div className="col-xl-4 col-lg-4 col-12 mt-5">
@@ -138,12 +141,15 @@ const SupplierRFQ = () => {
                                 <p>Supplier Contact</p>
                                 <p>Supplier Email</p>
                             </div>
-                            <div className="col-1">
-                                <p>:</p>
-                                <p>:</p>
-                                <p>:</p>
-                                <p>:</p>
-                            </div>
+                            {supplierAddress && supplierAddress.map((item, index) => (
+                                <div className="col-1">
+                                    <p>:{item.strSupplierName}</p>
+                                    <p>:{item.strSupplierAddress}</p>
+                                    <p>:{item.strContactNumber}</p>
+                                    <p>:{item.strEmail}</p>
+                                </div>
+                            ))}
+
                             <div className="col-5">
                                 <p></p>
                                 <p></p>
