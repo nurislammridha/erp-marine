@@ -536,3 +536,13 @@ export const getCertificateStatusData = () => (dispatch) => {
 //     isGroupChecked: isGroupChecked
 //   }});
 // };
+
+//changeable color code with date 
+export const handleColorCode = (status, colorCode, index) => (dispatch) => {
+  const Data = {
+    name: status,
+    value: colorCode,
+    index: index
+  }
+  dispatch({ type: Types.CHANGE_STATUS_BACKGROUD, payload: Data });
+}
