@@ -126,7 +126,7 @@ const initialState = {
     },
     {
       minDate : '61',
-      maxDate : '',
+      maxDate : '200',
       colorCode : '#8af2c0',
       inputName: 'due_more_60_days_code',
       bottomLabel: 'DUE MORE THAN 60 DAYS',

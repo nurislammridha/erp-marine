@@ -70,50 +70,13 @@ const CertificateMainList = () => {
     }
   };
 
-  const handleClick = (event) => {
-    console.log(event);
-  };
-
-  const certificateDelete = () => { };
-
-  // const getCertificateColorClass = (difference) => {
-  //   let rowClassName = "";
-  //   if (difference === 0) {
-  //     rowClassName = "due-0";
-  //   } else if (difference > 0 && difference <= 30) {
-  //     rowClassName = "due-l-30";
-  //   } else if (difference > 30 && difference < 60) {
-  //     rowClassName = "due-30-60";
-  //   } else if (difference >= 60) {
-  //     rowClassName = "due-g-60";
-  //   }
-  //   return rowClassName;
-  // };
   const getColorCode = (difference) => {
-    let colorCode = "";
-    if (difference === 0) {
-      colorCode = `${certificateBackgroundColor.expired_code ? certificateBackgroundColor.expired_code : '#ea673e'}`;
-    } else if (difference > 0 && difference <= 30) {
-      colorCode = `${certificateBackgroundColor.due_30_days_code ? certificateBackgroundColor.due_30_days_code : '#8ec7ff'}`
-    } else if (difference > 30 && difference < 60) {
-      colorCode = `${certificateBackgroundColor.due_60_days_code ? certificateBackgroundColor.due_60_days_code : '#678db2'}`
-    } else if (difference >= 60) {
-      colorCode = `${certificateBackgroundColor.due_more_60_days_code ? certificateBackgroundColor.due_more_60_days_code : '#8af2c0'}`
-    }
-    return colorCode;
-
-    // Get the Single Item from `bottomStatus` array by filter() where difference Day >= `bottomStatus`.min && <= `bottomStatus`.max
-    // let singleItem = []
-    // singleItem = bottomStatus.filter((item, index) => (
-    //   difference >= item.minDate && difference <= item.maxDate
-    // ))
-   
-    // let getCode = ''
-
-    // return singleItem === 'undefined' ? singleItem[0].colorCode : ''
+    const singleItem = bottomStatus.filter((item, index) => (
+      difference >= item.minDate && difference <= item.maxDate
+    ))
+    return singleItem[0].colorCode;
   }
 
-  
   const dataWithColorCodeFilter = (name, value, index) => {
     dispatch(handleColorCode(name, value, index));
   }
@@ -370,7 +333,7 @@ const CertificateMainList = () => {
                     <h6>
                       {item.bottomLabel}
                     </h6>
-                 
+
                   </div>
                 </div>
               ))
