@@ -41,8 +41,6 @@ const CertificateMainList = () => {
   const certificateBackgroundColor = useSelector((state) => state.certificateMainInfo.certificateBackgroundColor);
   const bottomStatus = useSelector((state) => state.certificateMainInfo.bottomStatus);
 
-  console.log('bottomStatus :>> ', bottomStatus);
-
   useEffect(() => {
     dispatch(getCertificateMainListAction(currentPage));
     dispatch(getCertificateCategory());
@@ -70,37 +68,12 @@ const CertificateMainList = () => {
     }
   };
 
-  const handleClick = (event) => {
-    console.log(event);
-  };
-
-  const certificateDelete = () => { };
-
-  const getCertificateColorClass = (difference) => {
-    let rowClassName = "";
-    if (difference === 0) {
-      rowClassName = "due-0";
-    } else if (difference > 0 && difference <= 30) {
-      rowClassName = "due-l-30";
-    } else if (difference > 30 && difference < 60) {
-      rowClassName = "due-30-60";
-    } else if (difference >= 60) {
-      rowClassName = "due-g-60";
-    }
-    return rowClassName;
-  };
+  //filter sttus color code 
   const getColorCode = (difference) => {
-    let colorCode = "";
-    if (difference === 0) {
-      colorCode = "red";
-    } else if (difference > 0 && difference <= 30) {
-      colorCode = "yellow";
-    } else if (difference > 30 && difference < 60) {
-      colorCode = "green";
-    } else if (difference >= 60) {
-      colorCode = "gray";
-    }
-    return colorCode;
+    const singleItem = bottomStatus.filter((item, index) => (
+      difference >= item.minDate && difference <= item.maxDate
+    ))
+    return singleItem[0].colorCode;
   }
 
   const dataWithColorCodeFilter = (name, value, index) => {
@@ -283,17 +256,17 @@ const CertificateMainList = () => {
                       <td>{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
                       <td>{certificate.differenceDays}</td>
                       <td>
-                        <button
+                        {/* <button
                           className={`btn btn-primary btn-sm text-white certificate-lis-btn certificate-${getCertificateColorClass(
                             certificate.differenceDays
                           )}`}>
                           {certificate.differenceDays === 0 ? "Expired" : "Due"}
-                        </button>
+                        </button> */}
                         <button
-                          className="btn btn-primary btn-sm text-white certificate-lis-btn" style={{backgroundColor: `${getColorCode(certificate.differenceDays)}`}}>
+                          className="btn btn-primary btn-sm text-white certificate-lis-btn" style={{ backgroundColor: `${getColorCode(certificate.differenceDays)}` }}>
                           {certificate.differenceDays === 0 ? "Expired" : "Due"}
                         </button>
-                       
+
                       </td>
                       <td>
                         <div className="mt-5">
@@ -351,23 +324,27 @@ const CertificateMainList = () => {
                   <div className="between-thirty due-days">
                     <input
                       type="color"
-                      // value={certificateBackgroundColor.expired_code ? certificateBackgroundColor.expired_code : ((certificateBackgroundColor.due_30_days_code ? certificateBackgroundColor.due_30_days_code) : (certificateBackgroundColor.due_60_days_code ? certificateBackgroundColor.due_60_days_code) : (cetificateBackgroundColor.due_more_60_days_code ? certificateBackgroundColor.due_more_60_days_code) : item.colorCode)}
+                      value={item.colorCode}
                       className="color-picker float-left mr-2"
                       name={item.inputName}
                       onChange={(e) => dataWithColorCodeFilter(item.inputName, e.target.value, index)}
                     />
-                    <h6>{item.bottomLabel} </h6>
+                    <h6>
+                      {item.bottomLabel}
+                    </h6>
+
                   </div>
                 </div>
               ))
             }
+
             {/* <div className="col-lg-2 col-3">
               <div className="between-thirty due-days">
                 <input
                   type="color"
-                  value={certificateBackgroundColor.due_30_days_code ? certificateBackgroundColor.due_30_days_code : "#8ec7ff"}
                   className="color-picker float-left mr-2"
                   name="due_30_days_code"
+                  value={certificateBackgroundColor.due_30_days_code ? certificateBackgroundColor.due_30_days_code : "#8ec7ff"}
                   onChange={(e) => dataWithColorCodeFilter('due_30_days_code', e.target.value)}
                 />
                 <h6>Due between 30 days </h6>
@@ -377,9 +354,9 @@ const CertificateMainList = () => {
               <div className="between-sixty due-days">
                 <input
                   type="color"
-                  value={certificateBackgroundColor.due_60_days_code ? certificateBackgroundColor.due_60_days_code : "#678db2"}
                   className="color-picker between-sixty float-left"
                   name="due_60_days_code"
+                  value={certificateBackgroundColor.due_60_days_code ? certificateBackgroundColor.due_60_days_code : "#678db2"}
                   onChange={(e) => dataWithColorCodeFilter('due_60_days_code', e.target.value)}
                 />
                 <h6>Due between 60 days </h6>
@@ -389,9 +366,9 @@ const CertificateMainList = () => {
               <div className="between-thirty More-than-sixty due-days ">
                 <input
                   type="color"
-                  value={certificateBackgroundColor.due_more_60_days_code ? certificateBackgroundColor.due_more_60_days_code : "#8af2c0"}
                   className="color-picker more-than-sixty float-left"
                   name="due_more_60_days_code"
+                  value={certificateBackgroundColor.due_more_60_days_code ? certificateBackgroundColor.due_more_60_days_code : "#8af2c0"}
                   onChange={(e) => dataWithColorCodeFilter('due_more_60_days_code', e.target.value)}
                 />
                 <h6 className=" ">Due more than 60 days </h6>
@@ -402,9 +379,9 @@ const CertificateMainList = () => {
               <div className="expired due-days">
                 <input
                   type="color"
-                  value={certificateBackgroundColor.expired_code ? certificateBackgroundColor.expired_code : "#ea673e"}
                   className="color-picker float-left mr-2"
                   name="expired_code"
+                  value={certificateBackgroundColor.expired_code ? certificateBackgroundColor.expired_code : "#ea673e"}
                   onChange={(e) => dataWithColorCodeFilter('expired_code', e.target.value)}
                 />
                 <h6>Expired </h6>
