@@ -1,6 +1,6 @@
-import { round } from "lodash";
-import React, { useState, useEffect } from "react";
-import { Form, Card, Button } from "react-bootstrap";
+
+import React, { useEffect } from "react";
+import { Form, Card } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getQuotationDetails, handleChangeQuotationDetailInput, submitQuotation } from "../_redux/actions/QuotationFilterAction";
 
@@ -9,7 +9,6 @@ const QuotationDetails = () => {
 
   const dispatch = useDispatch();
   const quotationDetailList = useSelector((state) => state.QuotationFilterinfo.quotationDetailList);
-  const QuotationDetailInput = useSelector((state) => state.QuotationFilterinfo.QuotationDetailInput);
   const supplierData = useSelector((state) => state.QuotationFilterinfo.supplierData);
   const QuotationFilterInput = useSelector((state) => state.QuotationFilterinfo.QuotationFilterInput);
   const isLoading = useSelector((state) => state.QuotationFilterinfo.isLoading);
@@ -20,7 +19,6 @@ const QuotationDetails = () => {
   }
 
   console.log('quotationDetailList', quotationDetailList);
-  console.log('data', FilterData)
 
 
 
@@ -73,7 +71,7 @@ const QuotationDetails = () => {
 
                         <tr>
                           <td>{index + 1}</td>
-                          <td>{item.intSupplierQuotationId}</td>
+                          <td>{item.strQutationNo}</td>
                           <td>{item.intItemId}</td>
                           <td>{item.strItemName}</td>
                           <td>{item.intSupplierQuotationId}</td>

@@ -1,6 +1,5 @@
 import * as Types from "../types/Types";
 import Axios from "axios";
-import { toast } from "react-toastify";
 import { showToast } from "../../../../master/utils/ToastHelper";
 
 export const handleChangeQuotationFilterInput = (name, value) => (dispatch) => {
@@ -63,14 +62,14 @@ export const submitQuotation = (quotationDetailList) => async (dispatch) => {
         isLoading: true,
         data: {},
     }
+    dispatch({ type: Types.SUBMIT_QUOTATION, payload: responseList })
 
     let postData = {
         quoteRow: quotationDetailList
     }
     console.log('postData', postData)
-    dispatch({ type: Types.SUBMIT_QUOTATION, payload: responseList })
 
-    Axios.post(`${process.env.REACT_APP_API_URL}purchase/supplierQuotation`, postData).then(
+    await Axios.post(`${process.env.REACT_APP_API_URL}purchase/supplierQuotation`, postData).then(
         (res) => {
             if (res.data.status) {
                 responseList.data = res.data;
@@ -78,6 +77,8 @@ export const submitQuotation = (quotationDetailList) => async (dispatch) => {
                 responseList.status = res.data.status;
                 showToast("success", res.data.message);
                 dispatch({ type: Types.SUBMIT_QUOTATION, payload: responseList });
+                dispatch(getQuotationDetails());
+
             } else { showToast("error", res.data.message) }
         }
     ).catch(function (error) {
