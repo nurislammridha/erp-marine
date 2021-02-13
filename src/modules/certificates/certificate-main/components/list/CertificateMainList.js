@@ -41,8 +41,6 @@ const CertificateMainList = () => {
   const certificateBackgroundColor = useSelector((state) => state.certificateMainInfo.certificateBackgroundColor);
   const bottomStatus = useSelector((state) => state.certificateMainInfo.bottomStatus);
 
-  console.log('certificateBackgroundColor :>> ', certificateBackgroundColor);
-
   useEffect(() => {
     dispatch(getCertificateMainListAction(currentPage));
     dispatch(getCertificateCategory());
@@ -70,6 +68,7 @@ const CertificateMainList = () => {
     }
   };
 
+  //filter sttus color code 
   const getColorCode = (difference) => {
     const singleItem = bottomStatus.filter((item, index) => (
       difference >= item.minDate && difference <= item.maxDate
