@@ -37,12 +37,12 @@ const QuotationDetails = () => {
 
   return (
     <>
-      {!quotationDetailList && (
+      { quotationDetailList && (quotationDetailList.length < 1) && (
         <div className="text-center display-block bg-warning mt-5 rounded text-white p-5">
-          <h4>please give quotating number</h4>
-        </div>
-      )}
-      {quotationDetailList && (
+          <h4>Please Give Quotation Number</h4>
+        </div>)
+      }
+      {quotationDetailList && (quotationDetailList.length > 0) && (
 
         <div className="row mt-5">
           <div className="col-lg-8 col-12">

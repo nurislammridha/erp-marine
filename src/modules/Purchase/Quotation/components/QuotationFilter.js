@@ -5,7 +5,7 @@ import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { InputBase, Paper, IconButton } from "@material-ui/core";
-import { getCurrencyType, getSupplierName, handleChangeQuotationFilterInput } from "../_redux/actions/QuotationFilterAction";
+import { getCurrencyType, getQuotationDetails, getSupplierName, handleChangeQuotationFilterInput } from "../_redux/actions/QuotationFilterAction";
 
 
 const QuotationFilter = () => {
@@ -18,8 +18,13 @@ const QuotationFilter = () => {
 
 
     const handleChangeTextInput = (name, value) => {
-        dispatch(handleChangeQuotationFilterInput(name, value))
+        dispatch(handleChangeQuotationFilterInput(name, value));
     }
+
+    // const changeFilter = () => {
+    //     const { search } = QuotationFilterInput;
+    //     dispatch(getQuotationDetails(search));
+    // }
 
     useEffect(() => {
         dispatch(getSupplierName());

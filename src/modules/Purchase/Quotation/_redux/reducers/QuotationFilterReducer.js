@@ -63,10 +63,11 @@ const QuotationFilterReducer = (state = initialState, action) => {
             }
 
         case Types.GET_QUOTATION_DETAILS:
+            console.log('quotation list', action.payload)
 
             return {
                 ...state,
-                quotationDetailList: action.payload,
+                quotationDetailList: action.payload.quotationDetailList,
 
             }
 
