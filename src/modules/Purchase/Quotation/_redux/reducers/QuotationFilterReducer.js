@@ -32,8 +32,6 @@ const QuotationFilterReducer = (state = initialState, action) => {
 
         case Types.CHANGE_QUOTATION_DETAIL_INPUT:
             const quotationDetails = state.quotationDetailList.slice();
-            console.log('quotationDetails', quotationDetails);
-            console.log('action.payload', action.payload);
             for (let i = 0; i < quotationDetails.length; i++) {
                 if (quotationDetails[i].intAutoId == action.payload.item.intAutoId) {
                     quotationDetails[i][action.payload.name] = action.payload.value;
@@ -50,9 +48,7 @@ const QuotationFilterReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-
                 supplierData: action.payload,
-
                 supplierNameData: supplierName(action.payload),
             }
 
@@ -63,7 +59,6 @@ const QuotationFilterReducer = (state = initialState, action) => {
             }
 
         case Types.GET_QUOTATION_DETAILS:
-            console.log('quotation list', action.payload)
 
             return {
                 ...state,
@@ -72,11 +67,14 @@ const QuotationFilterReducer = (state = initialState, action) => {
             }
 
         case Types.SUBMIT_QUOTATION:
+
             return {
                 ...state,
+                QuotationFilterInput: initialState.QuotationFilterInput,
                 status: action.payload.status,
                 isLoading: action.payload.isLoading,
-            }
+
+            };
         default:
             break;
     }

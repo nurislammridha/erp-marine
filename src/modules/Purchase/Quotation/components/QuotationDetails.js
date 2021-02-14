@@ -14,13 +14,10 @@ const QuotationDetails = () => {
   const isLoading = useSelector((state) => state.QuotationFilterinfo.isLoading);
 
   const newData = supplierData;
+
   if (QuotationFilterInput.intSupplierId) {
     var FilterData = newData.filter((item) => item.intSupplierId === QuotationFilterInput.intSupplierId);
   }
-
-  console.log('quotationDetailList', quotationDetailList);
-
-
 
   const handleChangeTextInput = (name, value, item) => {
     dispatch(handleChangeQuotationDetailInput(name, value, item))
