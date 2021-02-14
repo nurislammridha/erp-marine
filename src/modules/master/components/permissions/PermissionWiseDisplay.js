@@ -1,5 +1,5 @@
 import React from 'react'
-import { checkModulePermission } from '../../../../app/modules/Auth/_redux/menu-permission/ModulePermission';
+import { checkFeaturePermission } from '../../../../app/modules/Auth/_redux/menu-permission/ModulePermission';
 import ErrorViewComponent from '../Error/ErrorViewComponent';
 
 const PermissionWiseDisplay = (props) => {
@@ -9,7 +9,7 @@ const PermissionWiseDisplay = (props) => {
     return (
         <>
             {
-                checkModulePermission(permission_name) ?
+                checkFeaturePermission(permission_name) ?
                     children : <ErrorViewComponent
                         code={401}
                         display={permissionErrorDisplay}
