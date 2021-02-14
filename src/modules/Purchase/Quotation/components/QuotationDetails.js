@@ -159,39 +159,6 @@ const QuotationDetails = () => {
                           <td>{item.strEmail}</td>
                         </tr>
                       </table>
-                      {/* <div className="row">
-                        <div className="col-sm-5">
-                          <p>Supplier name</p>
-                        </div>
-                        <div className="col-sm-7">
-                          <p>: {item.strSupplierName}</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-sm-5">
-                          <p>Supplier Address</p>
-                        </div>
-                        <div className="col-sm-7">
-                          <p>: {item.strEmail}</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-sm-5">
-                          <p>Supplier Contact</p>
-                        </div>
-                        <div className="col-sm-7">
-                          <p>: {item.strContactNumber}</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-sm-5">
-                          <p>Supplier Email</p>
-                        </div>
-                        <div className="col-sm-7">
-                          <p>: {item.strEmail}</p>
-                        </div>
-                      </div> */}
-
                     </div>
                   </>
 
