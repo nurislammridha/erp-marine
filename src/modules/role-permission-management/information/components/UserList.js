@@ -12,13 +12,14 @@ import SimpleModal from "../../../master/components/Modal/SimpleModal";
 import NewUser from "./NewUser";
 import LoadingSpinner from "../../../master/spinner/LoadingSpinner";
 import PaginationLaravel from "../../../master/pagination/PaginationLaravel";
+import UserEdit from "./UserEdit";
 
 
 
 const UserList = () => {
   const [show, setShow] = useState(false);
-  const [userId, setUserId] = useState(false);
   const [userModalShow, setUserModalShow] = useState(false);
+  const [userID, setUserID] = useState(null);
   const { register, setValue } = useForm();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
@@ -74,11 +75,12 @@ const UserList = () => {
     }
   };
   const showUserModal = () => {
-
     setUserModalShow(true)
-
   }
-
+  const showUserModel = (item) => {
+    setUserModalShow(true);
+    setUserID(item.id);
+  }
 
   return (
     <>
@@ -162,7 +164,7 @@ const UserList = () => {
                         <Link onClick={() => showUserModal(item)}>
                           <i className="far fa-eye text-success editIcon item-list-icon"></i>
                         </Link>
-                        <Link className="ml-2" to={`/user/edit/${item.id}`}>
+                        <Link className="ml-2" onClick={() => showUserModel(item)}>
                           <i className="fa fa-edit text-success editIcon item-list-icon"></i>
                         </Link>
                       </div>
@@ -192,6 +194,16 @@ const UserList = () => {
         modalTitle={"User Create"}
       >
         <NewUser handleClose={() => setUserModalShow(false)} />
+      </SimpleModal>
+      <SimpleModal
+        size="xl"
+        show={userModalShow}
+        id={userID}
+        handleClose={() => setUserModalShow(false)}
+        handleShow={() => setUserModalShow(true)}
+        modalTitle={"Edit User"}
+      >
+        <UserEdit handleClose={() => setUserModalShow(false)} id={userID} />
       </SimpleModal>
 
     </>

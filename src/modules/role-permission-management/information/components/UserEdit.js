@@ -11,8 +11,7 @@ import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
 
-const UserEdit = ({handleClose}) => {
-  const {id} = useParams()
+const UserEdit = ({handleClose, id}) => {
   const { register, handleSubmit, errors, setValue } = useForm();
   const userInput = useSelector((state) => state.userRole.inputData);
   const isLoading = useSelector((state) => state.userRole.isLoading);
@@ -38,7 +37,6 @@ const UserEdit = ({handleClose}) => {
         <div className="row">
           <div className="col-12">
             <div className="card card-custom gutter-b p-5">
-              <h5>Create New User </h5>
               <form
                 className="form form-label-right voyageEngineerForm"
                 method="post"
