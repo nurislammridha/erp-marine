@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from "react";
-import {  Card, Button } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Card, Button } from "react-bootstrap";
 import { InputBase, Paper, IconButton } from "@material-ui/core";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
@@ -10,6 +10,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import SimpleModal from "../../../master/components/Modal/SimpleModal";
 import NewUser from "./NewUser";
+import LoadingSpinner from "../../../master/spinner/LoadingSpinner";
+import PaginationLaravel from "../../../master/pagination/PaginationLaravel";
 
 
 
@@ -18,11 +20,14 @@ const UserList = () => {
   const [userId, setUserId] = useState(false);
   const [userModalShow, setUserModalShow] = useState(false);
   const { register, setValue } = useForm();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchText, setSearchText] = useState("");
 
   const dispatch = useDispatch();
 
   const userList = useSelector(state => state.roleReducer.userList);
-  console.log('userList', userList);
+  const isLoading = useSelector(state => state.roleReducer.isLoading);
+  const userPaginationList = useSelector(state => state.roleReducer.userPaginationList);
 
   const courseData = [
     {
@@ -51,12 +56,25 @@ const UserList = () => {
   }
 
   useEffect(() => {
-  dispatch( getPermissionUserList());
+    dispatch(getPermissionUserList(currentPage));
+  }, [dispatch, currentPage]);
 
-  }, [])
+  const changePage = (data) => {
+    setCurrentPage(data.page);
+    dispatch(getPermissionUserList(data.page));
+  };
 
+  const searchItems = (e) => {
+    const searchText = e.target.value;
+    setSearchText(searchText);
+    if (searchText.length === 0) {
+      dispatch(getPermissionUserList(currentPage));
+    } else {
+      dispatch(getPermissionUserList(currentPage, searchText));
+    }
+  };
   const showUserModal = () => {
-  
+
     setUserModalShow(true)
 
   }
@@ -64,59 +82,58 @@ const UserList = () => {
 
   return (
     <>
-     <Card>
-      <Card.Body>
-        <div className="container ">
-          <div className="row mb-5 table-form ">
-            <h1 className="tableheading mt-0">User List</h1>
-            <div className="col-xl-3 col-lg-3 col-md-6 mb-2 mt-2">
-            
-              <Paper className="searchInput">
-              
-                <InputBase
-                  placeholder="Search "
-                  className="custome-purchase-search"
-                  // inputProps={{ "aria-label": "Search Google Maps" }}
-                  // onChange={(e) => searchEmployee(e)}
-                  // value={employeeInfo.employeeName}
-                />
-                  <IconButton aria-label="Search" className="searchPlaceholder purchaseSearch">
-                  <i className="flaticon-search "></i>
-                </IconButton>
-              </Paper>
-            </div>
-            <div className="col-xl-3 col-lg-3 col-md-6">
-            <RHFInput
-                  as={<Select options={CourseName} />}
-                  rules={{ required: false }}
-                  name="courseData"
-                  register={register}
-                  value={CourseName.label}
-                  setValue={setValue}
-                />
-            </div>
-            <div className="col-xl-3 col-lg-3 col-md-6">
-            <RHFInput
-                  as={<Select options={CourseName} />}
-                  rules={{ required: false }}
-                  name="courseData"
-                  register={register}
-                  value={CourseName.label}
-                  setValue={setValue}
-                />
-            </div>
-            {/* <div className="col-xl-3 col-lg-3 col-md-6">use RHFInput</div> */}
+      <Card>
+        <Card.Body>
+          <div className="container ">
+            <div className="row mb-5 table-form ">
+              <h1 className="tableheading mt-0">User List</h1>
+              <div className="col-xl-3 col-lg-3 col-md-6 mb-2 mt-2">
 
-            <div className="">
-              <i className="fas fa-filter tableFilter  mr-2"></i>
-              <i className="far fa-filter"></i>
-              <Button className="btn-sm" variant="primary" onClick={()=>showUserModal()}>
-                Add New
+                <Paper className="searchInput">
+                  <InputBase
+                    placeholder="Search "
+                    className="custome-purchase-search"
+                    value={searchText}
+                    onChange={searchItems}
+                  />
+                  <IconButton aria-label="Search" className="searchPlaceholder purchaseSearch">
+                    <i className="flaticon-search "></i>
+                  </IconButton>
+                </Paper>
+              </div>
+              <div className="col-xl-3 col-lg-3 col-md-6">
+                <RHFInput
+                  as={<Select options={CourseName} />}
+                  rules={{ required: false }}
+                  name="courseData"
+                  register={register}
+                  value={CourseName.label}
+                  setValue={setValue}
+                />
+              </div>
+              <div className="col-xl-3 col-lg-3 col-md-6">
+                <RHFInput
+                  as={<Select options={CourseName} />}
+                  rules={{ required: false }}
+                  name="courseData"
+                  register={register}
+                  value={CourseName.label}
+                  setValue={setValue}
+                />
+              </div>
+              {/* <div className="col-xl-3 col-lg-3 col-md-6">use RHFInput</div> */}
+
+              <div className="">
+                <i className="fas fa-filter tableFilter  mr-2"></i>
+                <i className="far fa-filter"></i>
+                <Button className="btn-sm" variant="primary" onClick={() => showUserModal()}>
+                  Add New
               </Button>
+              </div>
             </div>
           </div>
-       </div>
-       { userList.length > 0 && (
+          {isLoading && <LoadingSpinner text="Loading user list...." />}
+          {userList.length > 0 && (
             <table className="table table table-head-custom table-vertical-center user-list-table ">
               <thead>
                 <tr>
@@ -145,7 +162,7 @@ const UserList = () => {
                         <Link onClick={() => showUserModal(item)}>
                           <i className="far fa-eye text-success editIcon item-list-icon"></i>
                         </Link>
-                        <Link className="ml-2">
+                        <Link className="ml-2" to={`/user/edit/${item.id}`}>
                           <i className="fa fa-edit text-success editIcon item-list-icon"></i>
                         </Link>
                       </div>
@@ -155,19 +172,28 @@ const UserList = () => {
               </tbody>
             </table>
           )}
-       </Card.Body>
-       </Card>
-       <SimpleModal
+
+          {!isLoading && userList.length === 0 && (
+            <div className="alert alert-warning mt-5">
+              Sorry ! User List Not Found.
+            </div>
+          )}
+          <PaginationLaravel
+            changePage={changePage}
+            data={userPaginationList}
+          />
+        </Card.Body>
+      </Card>
+      <SimpleModal
         size="xl"
         show={userModalShow}
         handleClose={() => setUserModalShow(false)}
         handleShow={() => setUserModalShow(true)}
-        modalTitle={"Certificate Details"}
+        modalTitle={"User Create"}
       >
-        <NewUser/>
-        {/* <CertificateDetails handleClose={() => setUserModalShow(false)} CertificateID={CertificateID} /> */}
+        <NewUser handleClose={() => setUserModalShow(false)} />
       </SimpleModal>
-      
+
     </>
   );
 };

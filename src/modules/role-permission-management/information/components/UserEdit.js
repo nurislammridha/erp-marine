@@ -9,8 +9,10 @@ import {
 } from "../_redux/actions/UserAction";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
+import { useParams } from "react-router-dom";
 
-const NewUser = ({handleClose}) => {
+const UserEdit = ({handleClose}) => {
+  const {id} = useParams()
   const { register, handleSubmit, errors, setValue } = useForm();
   const userInput = useSelector((state) => state.userRole.inputData);
   const isLoading = useSelector((state) => state.userRole.isLoading);
@@ -227,4 +229,4 @@ const NewUser = ({handleClose}) => {
   );
 };
 
-export default NewUser;
+export default UserEdit;
