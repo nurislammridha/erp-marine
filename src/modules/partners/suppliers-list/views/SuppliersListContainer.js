@@ -16,15 +16,11 @@ const SuppliersListContainer = () => {
       <Card.Body>
         <div className="container">
           <div className="col-lg-2">
-            <h1 className="tableheading">Suppliers List</h1>
+            <h4>Suppliers List</h4>
           </div>
           <div className="row mt-5">
 
-
             <SuppliersFilter />
-
-
-
 
             <div className="col-md-4 export">
               <div className="float-right mr-10">
