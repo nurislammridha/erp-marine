@@ -81,6 +81,10 @@
   min-width: 108px !important;
   
 }
+label.form-control.criteriaOptionsInput {
+  padding-bottom: 42px;
+  
+}
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -132,6 +136,19 @@ button.MuiButtonBase-root.MuiTab-root {
  .header.header-fixed {
   height: 16px !important;
  }
+ label.form-control.criteriaOptionsInput {
+  padding-bottom: 78px;
+  
+}
+.form-check.radio__button.Promotion-radio-button {
+  margin-left: 15px;
+}
+.form-check.radio__button.Promotion-radio-button {
+  margin-left: 15px;
+}
+.Promotion-radio-no-button {
+  margin-left: 15px;
+}
 }
 
 /* Extra small devices (portrait phones, less than 576px) */
@@ -417,7 +434,9 @@ button.MuiButtonBase-root.MuiTab-root {
   text-transform: capitalize!important;
   padding: 6px 3px!important;
 }
-
+.Promotion-radio-button{
+  margin-left: 13px;
+}
 
 }
 

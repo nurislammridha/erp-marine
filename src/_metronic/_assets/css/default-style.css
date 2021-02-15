@@ -1434,3 +1434,6 @@ position: relative;
 input[type="file"] {
     width: 100%;
 }
+label.form-check-label {
+    font-size: 14px;
+}
