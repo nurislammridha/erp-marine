@@ -70,6 +70,17 @@
   .dashboard-cardsection {
     padding-top: 3px !important;
 }
+.header-fixed.subheader-fixed .header {
+  background: transparent;
+   
+ }
+ .header.header-fixed {
+  height: 16px !important;
+ }
+ .MuiTab-root {
+  min-width: 108px !important;
+  
+}
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -100,6 +111,27 @@
 .purchase-table{
   margin-top: 10px;
 }
+label.voyagelist-type.form-label {
+  margin-left: 10px;
+}
+label.mt-2.voyagelist-formlabel.form-label {
+  margin-left: 10px;
+}
+button.MuiButtonBase-root.MuiTab-root {
+  width: 73px!important;
+  min-width: 2px!important;
+ 
+  font-size: 9px!important;
+  text-transform: capitalize!important;
+  padding: 6px 8px!important;
+}
+.header-fixed.subheader-fixed .header {
+  background: transparent;
+   
+ }
+ .header.header-fixed {
+  height: 16px !important;
+ }
 }
 
 /* Extra small devices (portrait phones, less than 576px) */
@@ -377,6 +409,15 @@
 .paid__widget {
   margin-bottom: 10px;
 }
+button.MuiButtonBase-root.MuiTab-root {
+  width: 56px!important;
+  min-width: 2px!important;
+ 
+  font-size: 9px!important;
+  text-transform: capitalize!important;
+  padding: 6px 3px!important;
+}
+
 
 }
 
