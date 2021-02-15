@@ -99,13 +99,9 @@ const CertificateMainList = () => {
     <>
       <Card>
         <Card.Body className="certificate-card">
+        <h1 className="headerText pt-2">Certificates</h1> <hr/>
           <div className="row mb-5">
-            <div className="col-lg-4 ">
-              <div className="row">
-                <div className="col-lg-3">
-                  <h1 className="headerText pt-2">Certificates</h1>
-                </div>
-                <div className="col-lg-9 ">
+            <div className="col-lg-4">
                   <Form.Group as={Col} controlId="formGridState">
                     <input
                       type="search"
@@ -115,8 +111,6 @@ const CertificateMainList = () => {
                       onChange={searchProduct}
                     />
                   </Form.Group>
-                </div>
-              </div>
             </div>
             <div className="col-lg-3 ">
               <Form.Group as={Col} controlId="formGridState">

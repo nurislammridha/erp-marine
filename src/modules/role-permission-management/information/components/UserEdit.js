@@ -18,8 +18,6 @@ const UserEdit = ({handleClose, id}) => {
   const roleListOption = useSelector((state) => state.roleReducer.roleListOption);
   const dispatch = useDispatch();
 
-  console.log('isLoading :>> ', isLoading);
-
   const onSubmit = () => {
     dispatch(createNewUser(userInput, handleClose));
   };
