@@ -99,9 +99,9 @@ export const updatedUserPermission = (inputData, handleClose, id) => (dispatch) 
     rolesListPaginated: null,
   };
 
-  dispatch({ type: Types.CREATE_MULTIPLE_ROLE, payload: responseList });
+  dispatch({ type: Types.UPDATE_MULTIPLE_ROLE, payload: responseList });
 
-  Axios.post(`${process.env.REACT_APP_API_URL}roles/multipleUserRoleStore/${id}`, inputData)
+  Axios.put(`${process.env.REACT_APP_API_URL}roles/multipleUserRoleUpdate/${id}`, inputData)
     .then((res) => {
       if (res.data.status) {
         const { data, message } = res.data;
@@ -110,13 +110,13 @@ export const updatedUserPermission = (inputData, handleClose, id) => (dispatch) 
         responseList.rolesListPaginated = data;
         responseList.isLoading = false;
         showToast('success', responseList.message)
-        dispatch({ type: Types.CREATE_MULTIPLE_ROLE, payload: responseList });
+        dispatch({ type: Types.UPDATE_MULTIPLE_ROLE, payload: responseList });
         handleClose()
       }
     }).catch((err) => {
       responseList.isLoading = false;
       responseList.message = "Something went wrong!"
       showToast('error', responseList.message)
-      dispatch({ type: Types.CREATE_MULTIPLE_ROLE, payload: responseList });
+      dispatch({ type: Types.UPDATE_MULTIPLE_ROLE, payload: responseList });
     })
 };

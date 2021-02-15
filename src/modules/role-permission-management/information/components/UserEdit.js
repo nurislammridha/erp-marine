@@ -3,15 +3,13 @@ import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { getRoleListByPagination } from "../_redux/actions/RolePermissionManagementAction";
-import {
-  createNewUser,
-  handleChangeUserAction,
-} from "../_redux/actions/UserAction";
+import { handleChangeUserAction, updatedUserPermission } from "../_redux/actions/UserAction";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
 
-const UserEdit = ({handleClose, id}) => {
+const UserEdit = ({ handleClose, id }) => {
+
   const { register, handleSubmit, errors, setValue } = useForm();
   const userInput = useSelector((state) => state.userRole.inputData);
   const isLoading = useSelector((state) => state.userRole.isLoading);
@@ -19,7 +17,7 @@ const UserEdit = ({handleClose, id}) => {
   const dispatch = useDispatch();
 
   const onSubmit = () => {
-    dispatch(createNewUser(userInput, handleClose));
+    dispatch(updatedUserPermission(userInput, handleClose, id));
   };
 
   const handleChange = (name, value, e = null) => {
@@ -200,7 +198,7 @@ const UserEdit = ({handleClose, id}) => {
                     // value={CourseName.label}
                     setValue={setValue}
                   />
-                </div> <br/>
+                </div> <br />
 
                 {isLoading && (
                   <Button

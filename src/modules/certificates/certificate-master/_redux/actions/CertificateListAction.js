@@ -19,11 +19,7 @@ export const handleChangeCertificateMasterInput = (name, value) => async (
   });
 };
 
-export const getCertificateMasterList = (
-  searchValue = "",
-  status = "",
-  page
-) => async (dispatch) => {
+export const getCertificateMasterList = (searchValue = "", status = "", page) => async (dispatch) => {
   let response = {
     certificateMasterList: [],
     status: false,
@@ -35,12 +31,18 @@ export const getCertificateMasterList = (
   dispatch({ type: Types.GET_CERTIFICATE_MASTER_LIST, payload: response });
 
   let isActive = status == "" ? "" : parseInt(status);
-  let url = `${process.env.REACT_APP_API_URL}certificate/certificateList`;
+  let url = `${process.env.REACT_APP_API_URL}certificate/certificateList&isPaginated=1&paginateNo=10`;
 
+  if (page !== null || page === "") {
+    url += `&page=${page}`;
+  }
   if (searchValue !== "" || isActive !== "") {
-    url += `?search=${searchValue}&isActive=${isActive}&isPaginated=1&paginateNo=${page}`;
+    url += `?search=${searchValue}`;
   } else {
-    url += `?isPaginated=1&paginateNo=${page}`;
+    // url += `?isPaginated=1&paginateNo=${page}`;
+  }
+  if (isActive !== "") {
+    url += `$isActive=${isActive}`
   }
   try {
     await Axios.get(url)
