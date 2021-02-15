@@ -100,12 +100,12 @@ const CertificateMainList = () => {
       <Card>
         <Card.Body className="certificate-card">
           <div className="row mb-5">
-            <div className="col-lg-4 ">
+            <div className="col-lg-4 col-md-6 ">
               <div className="row">
-                <div className="col-lg-3">
+                <div className="col-lg-3 col-md-4">
                   <h1 className="headerText pt-2">Certificates</h1>
                 </div>
-                <div className="col-lg-9 ">
+                <div className="col-lg-9 col-md-8">
                   <Form.Group as={Col} controlId="formGridState">
                     <input
                       type="search"
@@ -118,7 +118,7 @@ const CertificateMainList = () => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-3 ">
+            <div className="col-lg-3 col-md-6">
               <Form.Group as={Col} controlId="formGridState">
                 <RHFInput
                   as={<Select options={certificateParentCategoryList} />}
@@ -136,7 +136,7 @@ const CertificateMainList = () => {
                 />
               </Form.Group>
             </div>
-            <div className="col-lg-3 ">
+            <div className="col-lg-3 col-md-6 ">
               <Form.Group as={Col} controlId="formGridState">
                 <RHFInput
                   as={<Select options={certificateChildCategoryList} />}
@@ -176,7 +176,7 @@ const CertificateMainList = () => {
                 setValue={setValue}
               />
             </Form.Group> */}
-            <div className="col-lg-2  certificate-filter">
+            <div className="col-lg-2 col-md-6 certificate-filter">
               <i className="fas fa-filter tableFilter mt-1 mr-2"></i>
               <i className="far fa-filter"></i>
               <Link

@@ -153,7 +153,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               autoComplete="off"
             >
               <div className="form-group row mt-0 border pb-3 bg-light pt-3 ">
-                <div className="col-lg-3">
+                <div className="col-lg-3 col-md-4 ">
                   <label className="form-label formFont">Category</label>
                   <RHFInput
                     as={<Select options={certificateParentCategoryList} />}
@@ -185,7 +185,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div>
 
                 {/*====Sub Category=====*/}
-                <div className="col-lg-3">
+                <div className="col-lg-3 col-md-4">
                   <label className="form-label formFont">Sub Category</label>
                   <div className="input-area-add">
                     <div className="float-left">
@@ -236,7 +236,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div>
                 {/*====Sub Category=====*/}
 
-                <div className="col-lg-3">
+                <div className="col-lg-3 col-md-4">
                   <label className="form-label formFont">
                     Certificate Name
                   </label>
@@ -280,7 +280,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </div>
                 </div>
 
-                <div className="col-lg-3">
+                <div className="col-lg-3 col-md-4">
                   <label className="form-label formFont">
                     Certificate Type
                   </label>
@@ -334,7 +334,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   />
                 </div> */}
 
-                <div className="col-lg-3">
+                <div className="col-lg-3 col-md-4">
                   <label className="form-label mt-2 formFont">Code</label>
                   <Form.Control
                     type="text"
@@ -360,7 +360,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </div> */}
                 </div>
 
-                <div className="col-lg-3">
+                <div className="col-lg-3 col-md-4">
                   <label className="form-label mt-2 formFont">
                     Ship Folder No (Optional)
                   </label>
@@ -403,7 +403,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   />
                 </div> */}
 
-                <div className="col-lg-3 mt-2">
+                <div className="col-lg-3 col-md-4 mt-2">
                   <label className="form-label formFont">
                     Issuing Authority
                   </label>
@@ -447,7 +447,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       "Certificate Name Can't be blank"}
                   </div> */}
                 </div>
-                <div className="col-lg-3">
+                <div className="col-lg-3 col-md-4">
                   <label className="form-label mt-2 formFont ">
                     Issue Place
                   </label>
@@ -496,7 +496,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   </div>
                 </div> */}
 
-                <div className="col-lg-3 mt-3">
+                <div className="col-lg-3 col-md-4 mt-3">
                   <label htmlFor="">{""}</label>
                   <Form.Group controlId="formBasicChecbox">
                     <Form.Check
@@ -516,7 +516,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
               {/*=====certificate details close===*/}
               <div className="form-group row mt-2 border mb-2 pb-3 bg-light">
-                <div className="col-lg-3">
+                <div className="col-lg-3  col-md-4">
                   <label className="form-label mt-2 formFont">
                     Certificate Issue date
                   </label>
@@ -543,7 +543,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 {certificateInfoInput.intCertificateTypeID !== 4 &&
                   certificateInfoInput.intCertificateTypeID !== null && (
                     <>
-                      <div className="col-lg-3">
+                      <div className="col-lg-3  col-md-4">
                         <label className="form-label mt-2">Expiry Date</label>{" "}
                         <div>
                           <DatePicker
@@ -615,7 +615,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     </>
                   )}
 
-                <div className="col-lg-3">
+                <div className="col-lg-3  col-md-4">
                   <label className="form-label formFont">
                     Extend Until {"  "}
                     <label>
@@ -666,7 +666,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   certificateInfoInput.intCertificateTypeID !== 4 &&
                   certificateInfoInput.intCertificateTypeID !== null && (
                     <>
-                      <div className="col-lg-3">
+                      <div className="col-lg-3  col-md-4">
                         <label className="form-label formFont mt-2">
                           Endorsement Date
                         </label>
@@ -705,7 +705,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               {/*certificate create dates close*/}
               {certificateInfoInput.intParentCategoryID === 4 && (
                 <div className="form-group row mt-2 mb-2 border pb-3 bg-light">
-                  <div className="col-lg-3">
+                  <div className="col-lg-3 col-md-4">
                     <label className="form-label mt-2">From Survey</label>
                     <Form.Control
                       type="date"
@@ -726,7 +726,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         "Expiry Date can't be blank"}
                     </div> */}
                   </div>
-                  <div className="col-lg-3">
+                  <div className="col-lg-3 col-md-4">
                     <label className="form-label mt-2">To Survey</label>
                     <Form.Control
                       type="date"
@@ -752,7 +752,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         "Expiry Date can't be blank"}
                     </div> */}
                   </div>
-                  <div className="col-lg-3">
+                  <div className="col-lg-3 col-md-4">
                     <label className="form-label mt-2">Survey Status</label>
                     <RHFInput
                       as={<Select options={certificateStatus} />}
@@ -773,7 +773,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       setValue={setValue}
                     />
                   </div>
-                  <div className="col-lg-3">
+                  <div className="col-lg-3 col-md-4">
                     <button
                       type="button"
                       className="btn saveButton text-white mt-11"
@@ -818,7 +818,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               )}
 
               <div className="form-group row mt-1 border mt-2 pb-3 bg-light">
-                <div className="col-lg-3">
+                <div className="col-lg-3  col-md-4">
                   <label className="form-label formFont mt-2">
                     Office Remarks
                   </label>
@@ -846,7 +846,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       "Expiry Date can't be blank"}
                   </div> */}
                 </div>
-                <div className="col-lg-3">
+                <div className="col-lg-3  col-md-4">
                   <label className="form-label formFont mt-2">
                     Ship remarks
                   </label>
@@ -876,7 +876,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               </div>
 
               <div className="form-group row mt-1 border mt-2 pb-3 bg-light">
-                <div className="col-lg-3">
+                <div className="col-lg-3  col-md-6">
                   <label className="form-label formFont mt-2">
                     Attachments
                   </label>
@@ -888,7 +888,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     />
                   </div>
                 </div>
-                <div className="col-lg-8">
+                <div className="col-12">
                   {certificateInfoInput.multipleAttachments.length > 0 && (
                     <table className="table tbl-standard table-bordered tbl-survey">
                       <thead>

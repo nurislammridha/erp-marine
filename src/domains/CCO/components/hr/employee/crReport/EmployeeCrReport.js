@@ -229,10 +229,10 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
           <div className="col-lg-8 col-md-6">
             <form>
               <div className="form-group row">
-                <label for="Employee Name" className="col-sm-3 col-form-label">
+                <label for="Employee Name" className=" col-3 col-form-label">
                   Employee Name
                 </label>
-                <div className="col-sm-9">
+                <div className=" col-9 ">
                   <input
                     type="text"
                     className="form-control"
@@ -246,10 +246,10 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
           <div className="col-lg-4 col-md-6">
             <form>
               <div className="form-group row">
-                <label for="Employee Name" className="col-sm-2 col-form-label">
+                <label for="Employee Name" className="col-2 col-form-label">
                   RANK
                 </label>
-                <div className="col-sm-10">
+                <div className="col-10">
                   <input
                     type="text"
                     className="form-control"

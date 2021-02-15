@@ -85,6 +85,10 @@ label.form-control.criteriaOptionsInput {
   padding-bottom: 42px;
   
 }
+.stickeyCard.card {
+  margin-left: -40px;
+}
+
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -148,6 +152,12 @@ button.MuiButtonBase-root.MuiTab-root {
 }
 .Promotion-radio-no-button {
   margin-left: 15px;
+}
+.laytimecCommenced {
+  margin-left: 24px;
+}
+.laytimecCompleted{
+  margin-left: 24px!important;
 }
 }
 
