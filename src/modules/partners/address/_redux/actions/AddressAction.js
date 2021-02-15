@@ -8,14 +8,14 @@ export const handleChangePartnerAddressInput = (name, value) => (dispatch) => {
         name: name,
         value: value
     }
-    // console.log('formData :>> ', formData);
+
     dispatch({ type: Types.CHANGE_PARTNER_ADDRESS_INPUT, payload: formData })
 }
 export const partnerAddressSubmit = () => {
     const partnerAddress = store.getState().partnerAddress.addressInfo;
     let isValidated = true;
 
-    // dispatch({ type: Types.GET_ADDRESS_ACTION_SUBMIT, payload: response })
+
     if (partnerAddress === undefined || partnerAddress === null || partnerAddress.length < 1) {
         showToast("error", "Add before submit");
         isValidated = false;
@@ -24,12 +24,16 @@ export const partnerAddressSubmit = () => {
     return isValidated;
 }
 
+export const emptyAddMultipleStatus = () => (dispatch) => {
+    dispatch({ type: Types.EMPTY_ADD_MULTIPLE_FIELDS, payload: null })
+}
+
 export const partnerAddressSubmitMultiple = (partnerAddress) => (dispatch) => {
-    console.log('address', partnerAddress)
     let responseList = {
         data: {},
         status: false,
     };
+
     // Check Inputs for validation
     if (partnerAddress.strSupplierAddress === undefined || partnerAddress.strSupplierAddress === null || partnerAddress.strSupplierAddress.length < 1) {
         showToast("error", "Address should not be empty");
@@ -66,7 +70,6 @@ export const getCountryName = (data) => (dispatch) => {
     Axios.get(`${process.env.REACT_APP_API_URL}master/country`).then(
 
         (res) => {
-            console.log('res', res)
             let data = res.data.data;
             dispatch({ type: Types.GET_COUNTRY_NAME, payload: data });
         }

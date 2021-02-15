@@ -8,38 +8,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { getBusinessType, getPartnerType, getTaxType, handleChangePartnerInfoInput } from '../_redux/actions/BasicInfoAction';
 
 
-const BasicInfoAdd = withRouter(({ history }) => {
+const BasicInfoAdd = withRouter(() => {
 
-    const selectOptions = [
-        {
-            label: 'Partner 1',
-            value: "1"
-        },
-        {
-            label: 'Partner 2',
-            value: "2"
-        },
-        {
-            label: 'Partner 3',
-            value: "3"
-        },
-        {
-            label: 'Partner 4',
-            value: "4"
-        }
-    ]
-
-
-    const { register, handleSubmit, errors, setValue } = useForm();
+    const { register, setValue } = useForm();
     const dispatch = useDispatch();
     const partnerInfoInput = useSelector((state) => state.partnerInfo.partnerInfoInput);
     const taxTypeOptionData = useSelector((state) => state.partnerInfo.taxTypeData);
     const partnerTypeOptionData = useSelector((state) => state.partnerInfo.partnerTypeData);
     const businessUnitOptionData = useSelector((state) => state.partnerInfo.businessUnitData);
-    const addStatus = useSelector((state) => state.partnerInfo.addStatus);
-    console.log('addStatus', addStatus);
 
-    console.log('partnerInfoInput', partnerInfoInput)
     useEffect(() => {
         dispatch(getTaxType());
         dispatch(getPartnerType());
@@ -60,6 +37,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                 <form
                     className="form form-label-right"
                     method="post"
+                    autocomplete="off"
                 >
                     <div className="form-group">
                         <div className="row">

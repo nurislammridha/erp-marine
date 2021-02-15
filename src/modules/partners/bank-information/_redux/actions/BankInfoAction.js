@@ -24,6 +24,11 @@ export const bankInfoSubmitAction = () => {
     }
     return isValidated;
 };
+
+export const emptyAddMultipleStatus = () => (dispatch) => {
+    dispatch({ type: Types.EMPTY_ADD_MULTIPLE_FIELDS, payload: null })
+}
+
 export const bankInfoSubmitMultiple = (bankInfoInput) => (dispatch) => {
 
     let responseList = {

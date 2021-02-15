@@ -201,9 +201,10 @@ export const partnerCreateSubmitAction = () => async (dispatch) => {
 
 
 export const EditSupplierInfo = (id) => (dispatch) => {
-    console.log('basicAction', id)
+
     Axios.get(`${process.env.REACT_APP_API_URL}partner/showPartner/${id}`)
         .then((res) => {
+            console.log('supplierinfo', res)
             let data = res.data.data
             if (data.intSupplierTypeID !== null) {
                 data.supplierTypeName = {
