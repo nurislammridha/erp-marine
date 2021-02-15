@@ -30,13 +30,12 @@ const PurchaseRequestList = () => {
     dispatch(getPRListData(data.page));
   };
 
-  const searchProduct = (e) => {
-    const searchText = e.target.value;
-    setSearchText(searchText);
-    if (searchText.length === 0) {
+  const searchProduct = (value) => {
+    setSearchText(value);
+    if (value.length === 0) {
       dispatch(getPRListData(currentPage));
     } else {
-      dispatch(getPRListData(currentPage, searchText));
+      dispatch(getPRListData(currentPage, value));
     }
   };
   const handleShowPQDetails = (item) => {
@@ -58,7 +57,7 @@ const PurchaseRequestList = () => {
                   className="custome-purchase-search"
                   placeholder="Search "
                   value={searchText}
-                  onChange={searchProduct}
+                  onChange={(e) => searchProduct(e.target.value)}
                 />
                 <IconButton aria-label="Search" className="searchPlaceholder purchaseSearch">
                   <i className="flaticon-search "></i>

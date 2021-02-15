@@ -62,11 +62,14 @@ const ItemFilter = ({ currentPage, setCurrentPage }) => {
   ];
   return (
     <>
-      <div className="row m-4">
-        <div className="col-lg-1">
-          <h1 className="tableheading">Item List</h1>
+      <div className="row">
+        <div className="mt-5">
+          <h3 className="ml-3">Item List</h3>
         </div>
-        <div className="col-lg-2 ">
+        <hr></hr>
+      </div>
+      <div className="form-group row mt-5">
+        <div className="col-lg-2 col-md-2 ml-0 pl-0">
           <Form.Group as={Col} controlId="formGridState">
             <input
               type="search"
@@ -77,7 +80,7 @@ const ItemFilter = ({ currentPage, setCurrentPage }) => {
             />
           </Form.Group>
         </div>
-        <div className="col-lg-2">
+        <div className="col-lg-3 col-md-3">
           <Form.Group as={Col} controlId="formGridState">
             <RHFInput
               as={<Select options={itemCategoryOptionData} />}
@@ -95,7 +98,7 @@ const ItemFilter = ({ currentPage, setCurrentPage }) => {
             />
           </Form.Group>
         </div>
-        <div className="col-lg-2">
+        <div className="col-lg-3 col-md-3">
           <Form.Group as={Col} controlId="formGridState">
             <RHFInput
               as={<Select options={itemSubCategoryOptionData} />}
@@ -111,7 +114,7 @@ const ItemFilter = ({ currentPage, setCurrentPage }) => {
             />
           </Form.Group>
         </div>
-        <div className="col-lg-2">
+        <div className="col-lg-2 col-md-2">
           <Form.Group as={Col} controlId="formGridState">
             <RHFInput
               as={<Select options={department} />}
@@ -124,16 +127,19 @@ const ItemFilter = ({ currentPage, setCurrentPage }) => {
             />
           </Form.Group>
         </div>
-        <div className="certificate-filter">
-          <i className="fas fa-filter tableFilter mt-1 mr-2"></i>
-          <i className="far fa-filter"></i>
-          <Link
-            to="/items/add"
-            className="btn btn-primary text-center text-white btn-sm custome-addnew-btn certificate-add-btn"
-          >
-            Add New
+        <div className="col-lg-2 col-md-2">
+          <div className="certificate-filter">
+            <i className="fas fa-filter tableFilter mt-1 mr-2"></i>
+            <i className="far fa-filter"></i>
+            <Link
+              to="/items/add"
+              className="btn btn-primary text-center text-white btn-sm custome-addnew-btn certificate-add-btn"
+            >
+              Add New
           </Link>
+          </div>
         </div>
+
       </div>
     </>
   );
