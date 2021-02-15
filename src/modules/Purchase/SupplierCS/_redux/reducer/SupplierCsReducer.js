@@ -42,15 +42,6 @@ const SupplierCsReducer = (state = initialState, action) => {
                 quotationRFQlist: action.payload
             }
         case Types.RFQ_LIST:
-            // let rfqData = state.rfqList;
-
-            // for (let i = 0; i < action.payload.purchase_row.length; i++) {
-
-
-            //     rfqData.push(action.payload.purchase_row);
-
-            // }
-            console.log('action.payload :>> ', action.payload);
             return {
                 ...state,
                 rfqList: action.payload

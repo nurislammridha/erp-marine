@@ -54,7 +54,7 @@ const SupplierRFQ = () => {
                 )}
                 <div className="col-xl-2 col-lg-2 col-md-2">
                     <button
-                        className="btn btn-primary"
+                        className="btn btn-primary mt-5"
                         onClick={() => addRfqList()}
                     >
                         Add List
