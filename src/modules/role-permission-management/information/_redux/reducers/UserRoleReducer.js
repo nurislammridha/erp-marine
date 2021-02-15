@@ -8,6 +8,7 @@ const initialState = {
     rolesListPaginated: [],
     rolesListAll: [],
     userList:[],
+    submitStatus:false,
     inputData: {
         business_id:1,
         first_name: "",
@@ -44,6 +45,11 @@ const UserRoleReducer = (state = initialState, action) => {
                 ...state, 
                 inputData: initialState.inputData,
                 isLoading: action.payload.isLoading,
+            };
+        case Types.GET_USER_CREATED:
+            return { 
+                ...state, 
+                submitStatus: true,
             };
 
         default:
