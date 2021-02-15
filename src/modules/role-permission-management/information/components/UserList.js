@@ -103,7 +103,7 @@ const UserList = () => {
                   </IconButton>
                 </Paper>
               </div>
-              <div className="col-xl-3 col-lg-3 col-md-6">
+              <div className="col-xl-3 col-lg-3 col-md-6 ">
                 <RHFInput
                   as={<Select options={CourseName} />}
                   rules={{ required: false }}
@@ -133,57 +133,59 @@ const UserList = () => {
               </Button>
               </div>
             </div>
-          </div>
-          {isLoading && <LoadingSpinner text="Loading user list...." />}
-          {userList.length > 0 && (
-            <table className="table table table-head-custom table-vertical-center user-list-table ">
-              <thead>
-                <tr>
-                  <th className="td-sl">#</th>
-                  <th scope="col">First Name</th>
-                  <th scope="col">Sur Name</th>
-                  <th scope="col">last_name</th>
-                  <th scope="col">User name</th>
-                  <th scope="col">email</th>
-                  <th scope="col">phone_no</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {userList && userList.map((item, index) => (
-                  <tr key={index + 1}>
-                    <td>{index + 1}</td>
-                    <td>{item.first_name}</td>
-                    <td>{item.surname}</td>
-                    <td>{item.last_name}</td>
-                    <td>{item.username}</td>
-                    <td>{item.email}</td>
-                    <td>{item.phone_no}</td>
-                    <td className="">
-                      <div>
-                        <Link onClick={() => showUserModal(item)}>
-                          <i className="far fa-eye text-success editIcon item-list-icon"></i>
-                        </Link>
-                        <Link className="ml-2" onClick={() => showUserModel(item)}>
-                          <i className="fa fa-edit text-success editIcon item-list-icon"></i>
-                        </Link>
-                      </div>
-                    </td>
+            {/* </div> */}
+            {isLoading && <LoadingSpinner text="Loading user list...." />}
+            {userList.length > 0 && (
+              <table className="table table table-head-custom table-vertical-center user-list-table ">
+                <thead>
+                  <tr>
+                    <th className="td-sl">#</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Sur Name</th>
+                    <th scope="col">last_name</th>
+                    <th scope="col">User name</th>
+                    <th scope="col">email</th>
+                    <th scope="col">phone_no</th>
+                    <th>Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+                </thead>
+                <tbody>
+                  {userList && userList.map((item, index) => (
+                    <tr key={index + 1}>
+                      <td>{index + 1}</td>
+                      <td>{item.first_name}</td>
+                      <td>{item.surname}</td>
+                      <td>{item.last_name}</td>
+                      <td>{item.username}</td>
+                      <td>{item.email}</td>
+                      <td>{item.phone_no}</td>
+                      <td className="">
+                        <div>
+                          <Link onClick={() => showUserModal(item)}>
+                            <i className="far fa-eye text-success editIcon item-list-icon"></i>
+                          </Link>
+                          <Link className="ml-2" onClick={() => showUserModel(item)}>
+                            <i className="fa fa-edit text-success editIcon item-list-icon"></i>
+                          </Link>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              // </div>
+            )}
 
-          {!isLoading && userList.length === 0 && (
-            <div className="alert alert-warning mt-5">
-              Sorry ! User List Not Found.
-            </div>
-          )}
-          <PaginationLaravel
-            changePage={changePage}
-            data={userPaginationList}
-          />
+            {!isLoading && userList.length === 0 && (
+              <div className="alert alert-warning mt-5">
+                Sorry ! User List Not Found.
+              </div>
+            )}
+            <PaginationLaravel
+              changePage={changePage}
+              data={userPaginationList}
+            />
+          </div>
         </Card.Body>
       </Card>
       <SimpleModal
