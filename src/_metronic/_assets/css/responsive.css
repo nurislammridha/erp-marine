@@ -159,6 +159,31 @@ button.MuiButtonBase-root.MuiTab-root {
 .laytimecCompleted{
   margin-left: 24px!important;
 }
+.float-left.Rate-commision.one {
+  width: 16%;
+}
+.float-right.Rate-commision.one {
+ 
+  display: none;
+}
+.float-left.Rate-commision {
+  width: 32%;
+  
+}
+.float-right.Rate-commision {
+ 
+  display: none;
+}
+.form-group label {
+  font-size: 10px !important;
+}
+.float-left.Rate-commision.two {
+  width: 20%;
+}
+.float-right.Rate-commision.two {
+  
+  display: none;
+}
 }
 
 /* Extra small devices (portrait phones, less than 576px) */
