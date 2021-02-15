@@ -6,6 +6,10 @@
 /* Large devices (desktops, 992px and up) */
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
+  .widget__right h4 {
+    
+    font-size: 17px;
+}
 }
 
 /* All Mobile Devices */
@@ -47,14 +51,55 @@
   .cerificateCategory {
     width: 84%;
   }
+  .dashboard-cardsection {
+    margin-bottom: -11px !important;
+  }
+  .topbar {
+    background-color: #3699ff;
+    z-index: 95 !important;
+  }
+  .header-fixed.subheader-fixed .subheader {
+    z-index: 93 !important;
+  }
+  .dashboard-cardsection {
+    padding-top: 45px !important;
+  }
+  .purchase-table{
+    margin-top: 10px;
+  }
+  .dashboard-cardsection {
+    padding-top: 3px !important;
+}
 }
 
 /* Small devices (landscape phones, 576px and up) */
 
-@media (min-width: 576px) and (max-width: 767.98px) {
+@media (min-width: 476px) and (max-width: 767.98px) {
   .cerificateCategory {
     width: 84%;
   }
+  .dashboard-cardsection {
+    margin-bottom: -11px !important;
+  }
+  .topbar {
+    background-color: #3699ff;
+    z-index: 95 !important;
+  }
+  .header-fixed.subheader-fixed .subheader {
+    z-index: 93 !important;
+  }
+  .dashboard-cardsection {
+    padding-top: 3px !important;
+  }
+  .paid__widget {
+    margin-bottom: 10px;
+  }
+  .container.dashboard__pb {
+    margin-top: 23px;
+}
+.purchase-table{
+  margin-top: 10px;
+}
 }
 
 /* Extra small devices (portrait phones, less than 576px) */
@@ -329,6 +374,10 @@
 .employee-cr-report-input{
     margin-top: -19px;
 }
+.paid__widget {
+  margin-bottom: 10px;
+}
+
 }
 
 @media (max-width: 426px) {

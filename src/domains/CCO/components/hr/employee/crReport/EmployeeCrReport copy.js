@@ -538,7 +538,7 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
           <div className="col-lg-12">
            
               <p>Additional comments of Master/CE:</p>
-
+</div>
               <div className="row">
                 <div className="col-lg-6">
                   <div className="form-check radio__button">
@@ -613,7 +613,7 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
                 </div>
               </div>
             
-          </div>
+          
         </div>
         <div className="row">
           <div className="col-lg-12 nb">
