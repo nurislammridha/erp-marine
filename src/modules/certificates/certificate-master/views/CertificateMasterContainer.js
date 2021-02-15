@@ -41,12 +41,10 @@ const CertificateMasterContainer = () => {
       <Card>
         <Card.Body>
           <div className="container">
+              <h1 className="tableheading">Certificate Master List </h1> <hr/>
             <div className="row">
-              <div className="col-lg-2">
-                <h1 className="tableheading">Certificate Master List </h1>
-              </div>
               <CertificateMasterFilter />
-              <div className="col-lg-2 export">
+              <div className="col-lg-3 export text-right">
                 <Dropdown className="d-inline mr-2">
                   <Dropdown.Toggle
                     className="btn btn-sm"

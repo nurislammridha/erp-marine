@@ -14,7 +14,7 @@ export function checkFeaturePermission(moduleName) {
   let featureData = getFeaturesPermissionData();
   const filters = featureData.filter(
     (element) => console.log('element >> ', element),
-    // (element) => element == moduleName,
+    (element) => element == moduleName,
   );
   
   if (filters.length > 0) {
