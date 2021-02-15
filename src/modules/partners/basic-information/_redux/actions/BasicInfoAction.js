@@ -104,7 +104,7 @@ export const getPartnerType = (data) => (dispatch) => {
     );
 };
 export const getBusinessType = (data) => (dispatch) => {
-    Axios.get(`${process.env.REACT_APP_API_URL}master/tax`).then(
+    Axios.get(`${process.env.REACT_APP_API_URL}purchase/branchList`).then(
 
         (res) => {
             console.log('res', res)

@@ -39,6 +39,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
     const addStatus = useSelector((state) => state.partnerInfo.addStatus);
     console.log('addStatus', addStatus);
 
+    console.log('partnerInfoInput', partnerInfoInput)
     useEffect(() => {
         dispatch(getTaxType());
         dispatch(getPartnerType());
@@ -83,13 +84,14 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                         <label className="form-label mt-2 formFont">Supplier Type</label>
                                         <RHFInput
                                             as={<Select options={partnerTypeOptionData} />}
-                                            rules={{ required: true }}
+                                            rules={{ required: false }}
                                             name="intSupplierTypeID"
                                             register={register}
-                                            value={selectOptions.value}
+                                            value={partnerInfoInput.supplierType}
                                             onChange={(e) => {
-                                                handleChangeTextInput("intSupplierTypeID", e.value);
                                                 handleChangeTextInput("strSupplierTypeName", e.label);
+                                                handleChangeTextInput("intSupplierTypeID", e.value);
+
                                             }}
                                             setValue={setValue}
                                         />
@@ -164,11 +166,12 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                         <RHFInput
                                             as={<Select options={businessUnitOptionData} />}
                                             rules={{ required: true }}
-                                            name="intAction"
+                                            name="intCompanyID"
                                             register={register}
-                                            value={selectOptions.value}
+                                            value={partnerInfoInput.businessUnit}
                                             onChange={(e) => {
-                                                handleChangeTextInput("intAction", e.value);
+                                                handleChangeTextInput("strBusinessUnitName", e.label);
+                                                handleChangeTextInput("intCompanyID", e.value);
                                             }}
                                             setValue={setValue}
                                         />
@@ -196,7 +199,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                             as={<Select options={taxTypeOptionData} />}
                                             rules={{ required: true }}
                                             name="intTaxTypeId"
-                                            value={partnerInfoInput.intTaxTypeID}
+                                            value={partnerInfoInput.taxType}
                                             register={register}
                                             onChange={(e) => {
                                                 handleChangeTextInput("intTaxTypeId", e.value);
@@ -234,7 +237,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                             placeholder="Enter PIC Name"
                                             name="strPICName"
                                             className="fromStyle formHeight"
-                                            value={partnerInfoInput.picName}
+                                            value={partnerInfoInput.strPICName}
                                             onChange={(e) => handleChangeTextInput("strPICName", e.target.value)}
                                         />
                                     </div>
@@ -245,7 +248,7 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                             placeholder="Enter PIC Contact"
                                             name="strPICContactNo"
                                             className="fromStyle formHeight"
-                                            value={partnerInfoInput.picContact}
+                                            value={partnerInfoInput.strPICContactNo}
                                             onChange={(e) => handleChangeTextInput("strPICContactNo", e.target.value)}
                                         />
                                     </div>
@@ -253,11 +256,10 @@ const BasicInfoAdd = withRouter(({ history }) => {
                                         <label className="form-label mt-2 formFont">PIC Email</label>
                                         <Form.Control
                                             type="email"
-                                            pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
                                             placeholder="Enter PIC Email"
                                             name="strPICEmail"
                                             className="fromStyle formHeight"
-                                            value={partnerInfoInput.picEmail}
+                                            value={partnerInfoInput.strPICEmail}
                                             onChange={(e) => handleChangeTextInput("strPICEmail", e.target.value)}
                                         />
                                     </div>

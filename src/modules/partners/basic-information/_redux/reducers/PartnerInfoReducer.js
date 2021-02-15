@@ -19,11 +19,12 @@ const initialState = {
         dteLastActionDateTime: "",
         dteServerDateTime: "",
         isActive: "",
-        businessUnitName: "",
+        strBusinessUnitName: "",
         intAction: "",
         strPICName: "",
         strPICEmail: "",
-        strPICContactNo: ""
+        strPICContactNo: "",
+        supplierType: {},
 
     },
     status: false,
@@ -36,9 +37,20 @@ const PartnerInfoReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case Types.CHANGE_PARTNERINFO_INPUT:
-            console.log('action.payload.value', action.payload.value);
             const partnerInfoInput = { ...state.partnerInfoInput };
             partnerInfoInput[action.payload.name] = action.payload.value;
+            partnerInfoInput.supplierType = {
+                label: partnerInfoInput.strSupplierTypeName,
+                value: partnerInfoInput.intSupplierTypeID,
+            }
+            partnerInfoInput.businessUnit = {
+                label: partnerInfoInput.strBusinessUnitName,
+                value: partnerInfoInput.intCompanyID,
+            }
+            partnerInfoInput.taxType = {
+                label: partnerInfoInput.intTaxTypeName,
+                value: partnerInfoInput.intTaxTypeId,
+            }
             return {
                 ...state,
                 partnerInfoInput,
@@ -59,7 +71,7 @@ const PartnerInfoReducer = (state = initialState, action) => {
         case Types.GET_BUSINESS_TYPE:
             return {
                 ...state,
-                businessUnitData: getTaxType(action.payload),
+                businessUnitData: getBusinessUnit(action.payload),
 
             };
 
@@ -121,6 +133,19 @@ const getPartnerType = (data) => {
             let itemData = {
                 value: item.intSupplierTypeID,
                 label: item.strSupplierTypeName,
+            };
+            options.push(itemData);
+        });
+    }
+    return options;
+};
+const getBusinessUnit = (data) => {
+    let options = [];
+    if (data) {
+        data.forEach((item) => {
+            let itemData = {
+                value: item.intBusinessUnitId,
+                label: item.strBusinessUnitName,
             };
             options.push(itemData);
         });
