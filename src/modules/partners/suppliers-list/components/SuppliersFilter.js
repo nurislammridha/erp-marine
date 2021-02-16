@@ -32,6 +32,7 @@ const SuppliersFilter = () => {
       value: "0",
     },
   ];
+  console.log('object', statusOptions)
   return (
     <>
       <div className="col-md-4">
