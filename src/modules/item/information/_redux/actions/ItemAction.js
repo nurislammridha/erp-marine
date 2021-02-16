@@ -131,7 +131,6 @@ export const getItemCategory = () => (dispatch) => {
 };
 
 export const getItemSubCategory = (intItemCategoryID = null) => (dispatch) => {
-    // let url = `${process.env.REACT_APP_API_URL}inventory/itemCategory/child-categories/list/`;  
     if (intItemCategoryID !== null) {
         let url = `${process.env.REACT_APP_API_URL}inventory/itemCategory/child-categories/list/${intItemCategoryID}`;
         Axios.get(url).then(
@@ -140,7 +139,7 @@ export const getItemSubCategory = (intItemCategoryID = null) => (dispatch) => {
                 dispatch({ type: Types.GET_ITEM_SUB_CATEGORY, payload: data });
             }
         );
-    }else{
+    } else {
         dispatch({ type: Types.GET_ITEM_SUB_CATEGORY, payload: [] });
     }
 
