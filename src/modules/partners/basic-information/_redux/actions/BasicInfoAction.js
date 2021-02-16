@@ -50,10 +50,7 @@ export const partnerInfoSubmitAction = () => {
         showToast('error', 'Please give license no');
         isValidated = false;
     }
-    // else if (partnerInfoInput.intAction === undefined || partnerInfoInput.intAction === null || partnerInfoInput.intAction.length === 0) {
-    //     showToast('error', 'Please give Business Unit no');
-    //     isValidated = false;
-    // }
+
     else if (partnerInfoInput.intTaxTypeId === undefined || partnerInfoInput.intTaxTypeId === null || partnerInfoInput.intTaxTypeId.length === 0) {
         showToast('error', 'Please give Tax type');
         isValidated = false;
@@ -83,7 +80,7 @@ export const partnerInfoSubmitAction = () => {
 };
 
 
-export const getTaxType = (data) => (dispatch) => {
+export const getTaxType = () => (dispatch) => {
     Axios.get(`${process.env.REACT_APP_API_URL}master/tax`).then(
 
         (res) => {
@@ -93,7 +90,7 @@ export const getTaxType = (data) => (dispatch) => {
         }
     );
 };
-export const getPartnerType = (data) => (dispatch) => {
+export const getPartnerType = () => (dispatch) => {
     Axios.get(`${process.env.REACT_APP_API_URL}partner/partnerType`).then(
 
         (res) => {
@@ -103,7 +100,7 @@ export const getPartnerType = (data) => (dispatch) => {
         }
     );
 };
-export const getBusinessType = (data) => (dispatch) => {
+export const getBusinessType = () => (dispatch) => {
     Axios.get(`${process.env.REACT_APP_API_URL}purchase/branchList`).then(
 
         (res) => {
@@ -204,8 +201,9 @@ export const EditSupplierInfo = (id) => (dispatch) => {
 
     Axios.get(`${process.env.REACT_APP_API_URL}partner/showPartner/${id}`)
         .then((res) => {
-            console.log('supplierinfo', res)
+
             let data = res.data.data
+            console.log('supplier info', data)
             if (data.intSupplierTypeID !== null) {
                 data.supplierTypeName = {
                     label: data.strSupplierTypeName,
@@ -213,20 +211,28 @@ export const EditSupplierInfo = (id) => (dispatch) => {
                 }
 
             }
-            // if (data.intSupplierTypeID !== null) {
-            //     data.supplierTypeName = {
-            //         label: data.strSupplierTypeName,
-            //         value: data.intSupplierTypeID
-            //     }
 
-            // }
+            if (data.intCompanyID !== null) {
+                data.businessUnit = {
+                    label: data.strBusinessUnitName,
+                    value: data.intCompanyID
+                }
+            }
+
+            if (data.intTaxTypeId !== null) {
+                data.taxType = {
+                    label: data.strTaxTypeName,
+                    value: data.intTaxTypeId
+                }
+            }
             dispatch({
                 type: Types.EDIT_PARTNER_INFO,
                 payload: data,
             });
-
+            console.log('country', data.address)
             if (data.address !== null) {
-                if (data.address.intCountryID !== null) {
+
+                if (data.address.intCountryID !== null || data.address.intCountryID !== undefined) {
                     data.address.countryName = {
                         label: data.address.strCountry,
                         value: data.address.intCountryID
@@ -242,13 +248,7 @@ export const EditSupplierInfo = (id) => (dispatch) => {
                     payload: [],
                 });
             }
-            // if (data.address.intCountryID !== null) {
-            //     data.address.countryName = {
-            //         label: data.address.strCountry,
-            //         value: data.address.intCountryID
-            //     }
 
-            // }
 
             if (data.bank_info !== null) {
                 dispatch({

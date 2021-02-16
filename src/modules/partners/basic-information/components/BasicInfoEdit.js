@@ -24,8 +24,7 @@ const BasicInfoEdit = withRouter(({ history }) => {
     const partnerTypeOptionData = useSelector((state) => state.partnerInfo.partnerTypeData);
     const businessUnitOptionData = useSelector((state) => state.partnerInfo.businessUnitData);
     const addStatus = useSelector((state) => state.partnerInfo.addStatus);
-    console.log('addStatus', addStatus);
-    console.log('setValue', addStatus);
+
     useEffect(() => {
         dispatch(getTaxType());
         dispatch(getPartnerType());
@@ -152,11 +151,12 @@ const BasicInfoEdit = withRouter(({ history }) => {
                                         <RHFInput
                                             as={<Select options={businessUnitOptionData} />}
                                             rules={{ required: true }}
-                                            name="intAction"
+                                            name="intCompanyID"
                                             register={register}
-                                            value={partnerInfoInput.intAction}
+                                            value={partnerInfoInput.businessUnit}
                                             onChange={(e) => {
-                                                handleChangeTextInput("intAction", e.value);
+                                                handleChangeTextInput("intCompanyID", e.value);
+                                                handleChangeTextInput("strBusinessUnitName", e.label);
                                             }}
                                             setValue={setValue}
                                         />
@@ -184,11 +184,11 @@ const BasicInfoEdit = withRouter(({ history }) => {
                                             as={<Select options={taxTypeOptionData} />}
                                             rules={{ required: true }}
                                             name="intTaxTypeId"
-                                            value={partnerInfoInput.intTaxTypeId}
+                                            value={partnerInfoInput.taxType}
                                             register={register}
                                             onChange={(e) => {
                                                 handleChangeTextInput("intTaxTypeId", e.value);
-                                                handleChangeTextInput("intTaxTypeName", e.label);
+                                                handleChangeTextInput("strTaxTypeName", e.label);
                                             }}
                                             setValue={setValue}
                                         />
