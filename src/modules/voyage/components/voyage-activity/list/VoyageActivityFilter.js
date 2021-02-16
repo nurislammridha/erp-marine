@@ -31,7 +31,7 @@ const VoyageActivityFilter = (props) => {
   return (
     <form className="form form-label-right" method="post">
       <div className="form-group row ml-2">
-        <div className="col-lg-3 col-md-6 col-10 voyage-search">
+        <div className="col-lg-4 col-md-6 col-10 voyage-search">
           <Form.Label className="">Search</Form.Label>
           <Form.Control
             type="text"
@@ -61,7 +61,7 @@ const VoyageActivityFilter = (props) => {
           </Form.Group>
         </div> */}
 
-        <div className="col-lg-3 col-md-6 col-10 mt-5 ">
+        <div className="col-lg-4 col-md-6 col-10 mt-5 voyage-activity-vessel">
           <Form.Group as={Row} controlId="formPlaintextPassword">
             <Form.Label className="voyage-vessel">Select Vessel</Form.Label>
             <Col sm="9">
@@ -74,7 +74,7 @@ const VoyageActivityFilter = (props) => {
           </Form.Group>
         </div>
 
-        <div className="col-lg-3 col-md-6 col-10">
+        <div className="col-lg-4 col-md-6 col-10">
           <Form.Group as={Row} controlId="formPlaintextPassword">
             <Form.Label className="ml-4">Select Voyage</Form.Label>
             <Col sm="9">

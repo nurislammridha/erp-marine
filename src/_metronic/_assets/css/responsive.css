@@ -10,6 +10,13 @@
     
     font-size: 17px;
 }
+.voyage-activity-vessel {
+  margin-top: 0px!important;
+}
+a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
+  margin-top: 5px;
+}
+
 }
 
 /* All Mobile Devices */
@@ -90,6 +97,9 @@ label.form-control.criteriaOptionsInput {
 }
 .css-yk16xz-control {
   width: 100%!important;
+}
+a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
+  margin-top: 5px;
 }
 
 }
@@ -189,6 +199,9 @@ button.MuiButtonBase-root.MuiTab-root {
 }
 i.fas.fa-trash-alt.editIcon.item-list-icon {
   margin-left: 0px!important;
+}
+label.voyage-vessel.form-label {
+  margin-left: 12px;
 }
 }
 
@@ -506,4 +519,7 @@ button.MuiButtonBase-root.MuiTab-root {
     left: 203px;
     color: #b5b5c3 !important;
   }
+  a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
+    margin-top: 6px;
+}
 }
