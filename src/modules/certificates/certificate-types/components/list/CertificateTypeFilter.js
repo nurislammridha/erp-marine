@@ -42,7 +42,7 @@ const CertificateTypeFilter = () => {
           <Form.Control
             className="formHeight"
             type="text"
-            placeholder="Search"
+            placeholder="Search by certificate type"
             value={search}
             onChange={(e) => changeSearch(e.target.value)}
           />
@@ -55,6 +55,7 @@ const CertificateTypeFilter = () => {
             as={<Select options={statusOptions} />}
             rules={{ required: false }}
             name="isActive"
+            placeholder="Filter by status"
             register={register}
             value={certificateTypeInput.isActive}
             onChange={(option) => {

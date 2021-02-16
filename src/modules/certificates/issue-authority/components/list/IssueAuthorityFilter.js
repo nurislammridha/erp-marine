@@ -43,7 +43,7 @@ const IssueAuthorityFilter = () => {
             <Form.Control
               className="formHeight"
               type="text"
-              placeholder="Search"
+              placeholder="Search by author name"
               value={search}
               onChange={(e) => changeSearch(e.target.value)}
             />

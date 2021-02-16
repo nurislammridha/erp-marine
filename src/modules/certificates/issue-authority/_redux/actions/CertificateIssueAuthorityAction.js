@@ -30,18 +30,12 @@ export const getIssuingAuthorities = (searchValue = "", status = "", page) => as
   // let isActive = status == "" ? "" : parseInt(status);
   let isActive = status == "" ? 1 : parseInt(status);
 
-  let url = `${process.env.REACT_APP_API_URL}certificate/issuingAuthority?isPaginated=1&paginateNo=10`;
+  let url = `${process.env.REACT_APP_API_URL}certificate/issuingAuthority?search=${searchValue}&isActive=${isActive}&isPaginated=1&paginateNo=10`;
 
   if (page !== null || page === "") {
     url += `&page=${page}`;
   }
-  if (searchValue !== "") {
-    url += `?search=${searchValue}`;
-    // url += `?search=${searchValue}&isActive=${isActive}&isPaginated=1&paginateNo=${page}`;
-  }
-  if (isActive !== "") {
-    url += `&isActive=${isActive}`
-  }
+
   try {
     await Axios.get(url)
       .then((res) => {

@@ -82,15 +82,14 @@ export const getCertificateCategoryListData = (searchValue = "", status = "", pa
     errors: [],
   };
   dispatch({ type: Types.GET_CERTIFICATE_CATEGORY_LIST, payload: response });
-  let isActive = status == "" ? 1 : parseInt(status);
-  let url = `${process.env.REACT_APP_API_URL}certificate/category?isPaginated=1&paginateNo=10`;
+  let isActive = status == "" ? 1 : parseInt(status); 
+
+  let url = `${process.env.REACT_APP_API_URL}certificate/category?search=${searchValue}&isPaginated=1&paginateNo=10`;
+  
   if (page !== null || page === "") {
     url += `&page=${page}`;
   }
-  if (searchValue !== "") {
-    url += `?search=${searchValue}`;
-    // url += `?search=${searchValue}&isActive=${isActive}&isPaginated=1&paginateNo=${page}`;
-  }
+  
   if (isActive !== "") {
     url += `&isActive=${isActive}`
   }

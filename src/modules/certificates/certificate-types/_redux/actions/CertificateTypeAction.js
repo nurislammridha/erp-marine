@@ -26,21 +26,11 @@ export const getCertificateTypeList = (searchValue = "", status = "", page) => a
   dispatch({ type: Types.GET_CERTIFICATE_TYPE_LIST, payload: response });
 
   let isActive = status == "" ? 1 : parseInt(status);
-  let url = `${process.env.REACT_APP_API_URL}certificate/types?isPaginated=1&paginateNo=10`;
-
+  let url = `${process.env.REACT_APP_API_URL}certificate/types?search=${searchValue}&isActive=${isActive}&isPaginated=1&paginateNo=10`;
   if (page !== null || page === "") {
+    console.log('page :>> ', page);
     url += `&page=${page}`;
   }
-  if (searchValue !== "") {
-    url += `?search=${searchValue}`;
-    // url += `?search=${searchValue}&isActive=${isActive}&isPaginated=1&paginateNo=${page}`;
-  } 
-  if (isActive !== "") {
-    url += `&isActive=${isActive}`
-  }
-  //   axios.get(url).then((res) => {
-  //     dispatch({ type: Types.GET_CERTIFICATE_TYPE_LIST, payload: res.data });
-  //   });
   try {
     await Axios.get(url)
       .then((res) => {
