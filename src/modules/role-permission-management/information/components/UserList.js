@@ -113,7 +113,7 @@ const UserList = () => {
                   setValue={setValue}
                 />
               </div>
-              <div className="col-xl-3 col-lg-3 col-md-6">
+              <div className="col-xl-3 col-lg-3 col-md-6 user-list-dropdown">
                 <RHFInput
                   as={<Select options={CourseName} />}
                   rules={{ required: false }}
@@ -125,7 +125,7 @@ const UserList = () => {
               </div>
               {/* <div className="col-xl-3 col-lg-3 col-md-6">use RHFInput</div> */}
 
-              <div className="">
+              <div className="user-list-addbutton">
                 <i className="fas fa-filter tableFilter  mr-2"></i>
                 <i className="far fa-filter"></i>
                 <Button className="btn-sm" variant="primary" onClick={() => showUserModal()}>
@@ -136,6 +136,7 @@ const UserList = () => {
             {/* </div> */}
             {isLoading && <LoadingSpinner text="Loading user list...." />}
             {userList.length > 0 && (
+              <div className="react-bootstrap-table table-responsive">
               <table className="table table table-head-custom table-vertical-center user-list-table ">
                 <thead>
                   <tr>
@@ -164,7 +165,7 @@ const UserList = () => {
                           <Link onClick={() => showUserModal(item)}>
                             <i className="far fa-eye text-success editIcon item-list-icon"></i>
                           </Link>
-                          <Link className="ml-2" onClick={() => showUserModel(item)}>
+                          <Link className="ml-2 user-list-icon" onClick={() => showUserModel(item)}>
                             <i className="fa fa-edit text-success editIcon item-list-icon"></i>
                           </Link>
                         </div>
@@ -173,6 +174,7 @@ const UserList = () => {
                   ))}
                 </tbody>
               </table>
+              </div>
               // </div>
             )}
 

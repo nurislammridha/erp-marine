@@ -101,6 +101,10 @@ label.form-control.criteriaOptionsInput {
 a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
   margin-top: 5px;
 }
+.user-list-addbutton{
+  margin-top: 5px;
+  margin-left: 10px;
+}
 
 }
 
@@ -203,6 +207,13 @@ i.fas.fa-trash-alt.editIcon.item-list-icon {
 label.voyage-vessel.form-label {
   margin-left: 12px;
 }
+.user-list-addbutton{
+  margin-top: 5px;
+  margin-left: 12px;
+}
+.user-list-dropdown{
+  margin-top: 5px;
+  }
 }
 
 /* Extra small devices (portrait phones, less than 576px) */
@@ -490,6 +501,16 @@ button.MuiButtonBase-root.MuiTab-root {
 }
 .Promotion-radio-button{
   margin-left: 13px;
+}
+.user-list-addbutton{
+  margin-top: 5px;
+  margin-left: 11px;
+}
+.user-list-dropdown{
+margin-top: 5px;
+}
+a.ml-2.user-list-icon {
+  margin-left: 0px!important;
 }
 
 }
