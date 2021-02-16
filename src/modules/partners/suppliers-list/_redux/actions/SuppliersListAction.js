@@ -17,6 +17,7 @@ export const getSupplierList = (searchValue = "") => async (dispatch) => {
     if (searchValue !== "") {
         url += `?search=${searchValue}`
     }
+    console.log('url', url)
     try {
         await Axios.get(url).then((res) => {
             const { status, message, errors, data } = res.data;

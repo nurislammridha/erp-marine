@@ -9,7 +9,7 @@ import { getCertificateTypeList } from "../../_redux/actions/CertificateTypeActi
 const CertificateTypeFilter = () => {
   const [search, setSearch] = useState("");
   const [type, setType] = useState("");
-  const [currentPage, setCurrentPage] = useState(15);
+  const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
   const certificateTypeInput = useSelector(
     (state) => state.certificateTypeInfo.certificateTypeInput

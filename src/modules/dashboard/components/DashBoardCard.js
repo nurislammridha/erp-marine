@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetEmployeeList } from "../../../domains/CCO/_redux/actions/EmployeeAction";
 import { getCertificateMainListAction } from "../../certificates/certificate-main/_redux/actions/CertificateMainAction";
+import PermissionWiseDisplay from "../../master/components/permissions/PermissionWiseDisplay";
 const DashBoardCard = () => {
   const dispatch = useDispatch();
   //get total employee
@@ -25,17 +26,19 @@ const DashBoardCard = () => {
     <>
       <div className="container dashboard__pb dashboard-cardsection mb-5 mt-5">
         <div className="row">
-          <div className="col-xl-3 col-lg-3 col-md-6">
-            <div className="paid__widget">
-              <div className="widget__left">
-                <img src="/media/svg/icons/Code/cil_money.svg" alt="iMarine" />
-              </div>
-              <div className="widget__right">
-                <h4>৳ 40,18,858.00</h4>
-                <p>Total Expense</p>
+          <PermissionWiseDisplay permission_name={"expense.list"} display={false}>
+            <div className="col-xl-3 col-lg-3 col-md-6">
+              <div className="paid__widget">
+                <div className="widget__left">
+                  <img src="/media/svg/icons/Code/cil_money.svg" alt="iMarine" />
+                </div>
+                <div className="widget__right">
+                  <h4>৳ 40,18,858.00</h4>
+                  <p>Total Expense</p>
+                </div>
               </div>
             </div>
-          </div>
+          </PermissionWiseDisplay>
           <div className="col-xl-3 col-lg-3 col-md-6">
             <div className="paid__widget one">
               <div className="widget__left">

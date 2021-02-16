@@ -14,6 +14,7 @@ const QuotationDetails = () => {
   const isLoading = useSelector((state) => state.QuotationFilterinfo.isLoading);
 
   const newData = supplierData;
+  console.log('object', newData);
 
   if (QuotationFilterInput.intSupplierId) {
     var FilterData = newData.filter((item) => item.intSupplierId === QuotationFilterInput.intSupplierId);

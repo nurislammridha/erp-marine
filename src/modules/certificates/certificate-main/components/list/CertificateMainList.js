@@ -99,6 +99,7 @@ const CertificateMainList = () => {
     <>
       <Card>
         <Card.Body className="certificate-card">
+          <h1 className="headerText pt-2">Certificates</h1> <hr />
           <div className="row mb-5">
             <div className="col-lg-4 col-md-6 ">
               <div className="row">
@@ -303,7 +304,7 @@ const CertificateMainList = () => {
           )}
 
           {!isLoading && certificates.length === 0 && (
-            <div className="alert border-1 p-4">
+            <div className="alert alert-warning mt-5">
               Sorry ! No Certificates Found.
             </div>
           )}

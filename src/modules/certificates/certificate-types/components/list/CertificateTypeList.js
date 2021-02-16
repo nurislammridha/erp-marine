@@ -11,19 +11,13 @@ import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 
 const CertificateTypeList = (props) => {
   const dispatch = useDispatch();
-  const [currentPage, setCurrentPage] = useState(15);
-  const certificateTypeData = useSelector(
-    (state) => state.certificateTypeInfo.certificateTypeList
-  );
-  const modalStatus = useSelector(
-    (state) => state.certificateTypeInfo.editStatus
-  );
+  const [currentPage, setCurrentPage] = useState(1);
+  const certificateTypeData = useSelector((state) => state.certificateTypeInfo.certificateTypeList);
+  const modalStatus = useSelector((state) => state.certificateTypeInfo.editStatus);
   const isLoading = useSelector((state) => state.certificateTypeInfo.isLoading);
+  const certificateTypePaginatedData = useSelector((state) => state.certificateTypeInfo.certificateTypePaginatedData);
 
-  const certificateTypePaginatedData = useSelector(
-    (state) => state.certificateTypeInfo.certificateTypePaginatedData
-  );
-
+  console.log('certificateTypePaginatedData :>> ', certificateTypePaginatedData);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -34,6 +28,7 @@ const CertificateTypeList = (props) => {
       setShow(false);
     }
   }, [dispatch, currentPage, modalStatus]);
+
 
   const changePage = (data) => {
     setCurrentPage(data.page);
@@ -60,7 +55,7 @@ const CertificateTypeList = (props) => {
       {!isLoading && certificateTypeData.length > 0 && (
         <>
           <div className="react-bootstrap-table table-responsive pr-7">
-            <table className="table mt-2 tbl-standard">
+            <table className="table mt-2 tbl-standard" id="table-to-xls">
               <thead>
                 <tr>
                   <th scope="col">No</th>
@@ -74,7 +69,7 @@ const CertificateTypeList = (props) => {
                 {certificateTypeData &&
                   certificateTypeData.map((item, index) => (
                     <tr>
-                      <td>{index + 1}</td>
+                      <td>{certificateTypePaginatedData.from + index}</td>
                       <td>{item.strCertificateTypeName}</td>
                       <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
                       <td className="mt-3">
@@ -92,8 +87,12 @@ const CertificateTypeList = (props) => {
                   ))}
               </tbody>
             </table>
-            <PaginationLaravel
+            {/* <PaginationLaravel
               isDescription={true}
+              changePage={changePage}
+              data={certificateTypePaginatedData}
+            /> */}
+            <PaginationLaravel
               changePage={changePage}
               data={certificateTypePaginatedData}
             />

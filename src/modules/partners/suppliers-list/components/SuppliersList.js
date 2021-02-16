@@ -12,7 +12,7 @@ const SuppliersList = () => {
     const dispatch = useDispatch();
     const supplierList = useSelector(state => state.supplierList.supplierList)
     const isLoading = useSelector(state => state.supplierList.isLoading)
-    console.log('isLoading :>> ', isLoading);
+
     useEffect(() => {
         dispatch(getSupplierList());
     }, [])

@@ -9,7 +9,7 @@ import { getCertificateMasterList } from "../../_redux/actions/CertificateListAc
 const CertificateMasterFilter = () => {
   const [search, setSearch] = useState("");
   const [type, setType] = useState("");
-  const [currentPage, setCurrentPage] = useState(15);
+  const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
   const CertificateMasterInput = useSelector(
     (state) => state.CertificateListReducer.certificateMasterInput

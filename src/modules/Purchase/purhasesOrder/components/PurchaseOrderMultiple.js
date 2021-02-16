@@ -37,7 +37,7 @@ const PurchaseOrderMultiple = () => {
     }
     const refferenceList = useSelector(state => state.RefferenceTypeReducer.refferenceList);
     const ItemList = useSelector(state => state.ItemListReducer.ItemList);
-
+    console.log('ItemList :>> ', ItemList);
     useEffect(() => {
         dispatch(getRefferenceNo())
         dispatch(getItemList())

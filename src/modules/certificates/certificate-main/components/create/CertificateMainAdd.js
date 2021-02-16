@@ -36,6 +36,7 @@ import MultipplePreviewAttachment from "../../../../master/components/previews/M
 import { showToast } from "../../../../master/utils/ToastHelper";
 import { handleChangeCertificateMasterInput } from "../../../certificate-master/_redux/actions/CertificateListAction";
 import AttachmentPreviewModel from "../../../../master/components/previews/AttachmentPreviewModel";
+import PermissionWiseDisplay from "../../../../master/components/permissions/PermissionWiseDisplay";
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -93,10 +94,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
     dispatch(getCertificateStatusData());
   }, []);
 
-  const onSubmit = async (e) => {
-    dispatch(MainCertificateCreateAction(certificateInfoInput));
-  };
-
   const addMultipleData = () => {
     dispatch(certificateMultipleDataAdd(certificateInfoInput));
   };
@@ -135,8 +132,12 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
     setAttachmentPreviewModel(true);
     setPreviewAttachment(attachment)
   }
+
+  const onSubmit = async (e) => {
+    dispatch(MainCertificateCreateAction(certificateInfoInput));
+  };
   return (
-    <>
+    <PermissionWiseDisplay permission_name={"certificate.create"}>
       <div className="container ">
         <div className="card card-custom gutter-b card-top-border">
           <div className="card-header certificate-cardheader border-bottom-0">
@@ -157,7 +158,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <label className="form-label formFont">Category</label>
                   <RHFInput
                     as={<Select options={certificateParentCategoryList} />}
-                    rules={{ required: true }}
                     name="intCategoryID"
                     register={register}
                     value={certificateInfoInput.intParentCategoryID}
@@ -191,7 +191,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     <div className="float-left">
                       <RHFInput
                         as={<Select options={certificateChildCategoryList} />}
-                        rules={{ required: true }}
                         name="intCategoryID"
                         register={register}
                         value={certificateInfoInput.intCategoryID}
@@ -244,7 +243,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     <div className="float-left">
                       <RHFInput
                         as={<Select options={certificatesNameOption} />}
-                        // rules={{ required: true }}
                         name="intCertificateID"
                         register={register}
                         value={certificateInfoInput.intCertificateID}
@@ -288,7 +286,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     <div className="float-left">
                       <RHFInput
                         as={<Select options={certificatesTypeOption} />}
-                        // rules={{ required: true }}
                         name="intCertificateTypeID"
                         register={register}
                         value={certificateInfoInput.intCertificateTypeID}
@@ -349,7 +346,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       )
                     }
                     ref={register({
-                      // required: true,
                       maxLength: 100,
                     })}
                   />
@@ -411,7 +407,6 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                     <div className="float-left">
                       <RHFInput
                         as={<Select options={certificatesIssueByOption} />}
-                        rules={{ required: true }}
                         name="intIssuingAuthorityID"
                         register={register}
                         value={certificateInfoInput.intIssuingAuthorityID}
@@ -463,7 +458,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       )
                     }
                     ref={register({
-                      required: true,
+                      required: false,
                       maxLength: 100,
                     })}
                   />
@@ -647,7 +642,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         certificateMainInfoChange("dteExtendedUntil", e)
                       }
                       ref={register({
-                        required: true,
+                        required: false,
                         maxLength: 100,
                       })}
                     />
@@ -688,7 +683,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                               )
                             }
                             ref={register({
-                              required: true,
+                              required: false,
                               maxLength: 100,
                             })}
                           />
@@ -739,7 +734,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       value={certificateInfoInput.dteToSurvey}
                       onChange={(e) => (
                         certificateInfoInput.dteFromSurvey === null || certificateInfoInput.dteFromSurvey === "" ? showToast('error', "At first selected a from date") :
-                        certificateMainInfoChange("dteToSurvey", e.target.value)
+                          certificateMainInfoChange("dteToSurvey", e.target.value)
                       )}
                       ref={register({
                         required: false,
@@ -941,14 +936,8 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               </div>
               <div className="form-group row">
                 <div className="col-sm-10">
-                  <a
-                    onClick={() => {
-                      history.push("/certificates-main/list");
-                    }}
-                  >
-                    <button type="button" className="cancelButton btn mr-3">
-                      Back
-                    </button>
+                  <a onClick={() => { history.push("/certificates-main/list") }}>
+                    <button type="button" className="cancelButton btn mr-3"> Back </button>
                   </a>
 
                   {isLoading && (
@@ -957,7 +946,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       className="mr-4 saveButton text-white btn"
                       disabled={true}
                     >
-                      <span>Submitting</span>
+                      <span>Submitting...</span>
                       <span className="ml-3 spinner spinner-white"></span>
                     </button>
                   )}
@@ -1024,7 +1013,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
           </div>
         </div>
       </div>
-    </>
+    </PermissionWiseDisplay>
   );
 });
 

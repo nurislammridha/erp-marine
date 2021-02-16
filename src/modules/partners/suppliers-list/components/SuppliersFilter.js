@@ -34,7 +34,7 @@ const SuppliersFilter = () => {
   ];
   return (
     <>
-      <div className="col-lg-4">
+      <div className="col-md-4">
         <Form.Group as={Col} controlId="formGridState">
           <Form.Control
             className="formHeight"
@@ -45,7 +45,7 @@ const SuppliersFilter = () => {
           />
         </Form.Group>
       </div>
-      <div className="col-lg-4">
+      <div className="col-md-4">
         <Form.Group as={Col} controlId="formGridState">
           <RHFInput
             className="formSelect pt-0"

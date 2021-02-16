@@ -44,13 +44,18 @@ const BankInfoReducer = (state = initialState, action) => {
             };
 
         case Types.SUBMIT_BANK_INFO_MULTIPLE:
-            console.log('action.payload reducer :>> ', action.payload);
             return {
                 ...state,
                 bankInfoMultiple: [...state.bankInfoMultiple, action.payload.data],
                 bankInfoInput: initialState.bankInfoInput,
                 isMultipleAdded: action.payload.status
             };
+        case Types.EMPTY_ADD_MULTIPLE_FIELDS:
+            return {
+                ...state,
+                isMultipleAdded: false
+            };
+
         case Types.DELETE_PARTNER_BANK_MULTIPLE:
             const bankOld = [...state.bankInfoMultiple];
             bankOld.splice(action.payload, 1);

@@ -15,11 +15,7 @@ export const handleChangeCertificateTypeInput = (name, value) => (dispatch) => {
   });
 };
 
-export const getCertificateTypeList = (
-  searchValue = "",
-  status = "",
-  page
-) => async (dispatch) => {
+export const getCertificateTypeList = (searchValue = "", status = "", page) => async (dispatch) => {
   let response = {
     certificateTypeList: [],
     status: false,
@@ -30,12 +26,17 @@ export const getCertificateTypeList = (
   dispatch({ type: Types.GET_CERTIFICATE_TYPE_LIST, payload: response });
 
   let isActive = status == "" ? 1 : parseInt(status);
-  let url = `${process.env.REACT_APP_API_URL}certificate/types`;
+  let url = `${process.env.REACT_APP_API_URL}certificate/types?isPaginated=1&paginateNo=10`;
 
-  if (searchValue !== "" || isActive !== "") {
-    url += `?search=${searchValue}&isActive=${isActive}&isPaginated=1&paginateNo=${page}`;
-  } else {
-    url += `?isPaginated=1&paginateNo=${page}`;
+  if (page !== null || page === "") {
+    url += `&page=${page}`;
+  }
+  if (searchValue !== "") {
+    url += `?search=${searchValue}`;
+    // url += `?search=${searchValue}&isActive=${isActive}&isPaginated=1&paginateNo=${page}`;
+  } 
+  if (isActive !== "") {
+    url += `&isActive=${isActive}`
   }
   //   axios.get(url).then((res) => {
   //     dispatch({ type: Types.GET_CERTIFICATE_TYPE_LIST, payload: res.data });

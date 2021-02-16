@@ -125,16 +125,19 @@ const ItemFilter = ({ currentPage, setCurrentPage }) => {
             />
           </Form.Group>
         </div>
-        <div className="certificate-filter">
-          <i className="fas fa-filter tableFilter mt-1 mr-2"></i>
-          <i className="far fa-filter"></i>
-          <Link
-            to="/items/add"
-            className="btn btn-primary text-center text-white btn-sm custome-addnew-btn certificate-add-btn"
-          >
-            Add New
+        <div className="col-lg-2 col-md-2">
+          <div className="certificate-filter">
+            <i className="fas fa-filter tableFilter mt-1 mr-2"></i>
+            <i className="far fa-filter"></i>
+            <Link
+              to="/items/add"
+              className="btn btn-primary text-center text-white btn-sm custome-addnew-btn certificate-add-btn"
+            >
+              Add New
           </Link>
+          </div>
         </div>
+
       </div>
     </>
   );

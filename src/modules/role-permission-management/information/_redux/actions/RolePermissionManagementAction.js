@@ -46,22 +46,7 @@ export const getRoleDetailsData = (id) => (dispatch) => {
       dispatch({ type: Types.GET_ROLE_DETAILS_DATA, payload: res.data.data });
     });
 };
-// export const getPermissionUserList = () => (dispatch) => {
-//   const responseList = {
-//     isLoading: true,
-//     data: []
-//   };
 
-//   dispatch({ type: Types.GET_PERMISSION_USER_LIST, payload: responseList });
-
-//   Axios.get(`${process.env.REACT_APP_API_URL}roles/getAllUser`)
-//     .then((res) => {
-//       dispatch({ type: Types.GET_PERMISSION_USER_LIST, payload: res.data.data });
-//     })
-//     .catch((err) => {
-//       console.log('err', err);
-//     })
-// };
 export const getPermissionUserList = (searchValue = "", page) => async (dispatch) => {
   let response = {
     userList: [],
@@ -86,7 +71,6 @@ export const getPermissionUserList = (searchValue = "", page) => async (dispatch
   try {
     await Axios.get(url)
       .then((res) => {
-        console.log('res :>> ', res.data.data);
         const { data, message, status } = res.data;
         response.status = status;
         response.userList = data;

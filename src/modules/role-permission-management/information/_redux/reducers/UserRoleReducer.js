@@ -46,6 +46,12 @@ const UserRoleReducer = (state = initialState, action) => {
                 inputData: initialState.inputData,
                 isLoading: action.payload.isLoading,
             };
+        case Types.UPDATE_MULTIPLE_ROLE:
+            return { 
+                ...state, 
+                inputData: initialState.inputData,
+                isLoading: action.payload.isLoading,
+            };
         case Types.GET_USER_CREATED:
             return { 
                 ...state, 

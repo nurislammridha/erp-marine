@@ -66,3 +66,57 @@ export const createNewUser = (inputData, handleClose) => (dispatch) => {
       dispatch({ type: Types.CREATE_MULTIPLE_ROLE, payload: responseList });
     })
 };
+
+//updaetd user roles permission 
+export const updatedUserPermission = (inputData, handleClose, id) => (dispatch) => {
+  if (inputData.first_name.length === 0) {
+    showToast('error', "First name can't blank!");
+    return false;
+  }
+  if (inputData.last_name.length === 0) {
+    showToast('error', "Last name can't blank!");
+    return false;
+  }
+  if (inputData.email.length === 0) {
+    showToast('error', "Email can't blank!");
+    return false;
+  }
+  if (inputData.phone_no.length === 0) {
+    showToast('error', "Phone number can't blank!");
+    return false;
+  }
+  if (inputData.password.length === 0) {
+    showToast('error', "Password can't blank!");
+    return false;
+  }
+  if (inputData.roleId.length === 0) {
+    showToast('error', "Role can't blank!");
+    return false;
+  }
+  const responseList = {
+    isLoading: true,
+    rolesList: [],
+    rolesListPaginated: null,
+  };
+
+  dispatch({ type: Types.UPDATE_MULTIPLE_ROLE, payload: responseList });
+
+  Axios.put(`${process.env.REACT_APP_API_URL}roles/multipleUserRoleUpdate/${id}`, inputData)
+    .then((res) => {
+      if (res.data.status) {
+        const { data, message } = res.data;
+        responseList.rolesList = data.data;
+        responseList.message = message;
+        responseList.rolesListPaginated = data;
+        responseList.isLoading = false;
+        showToast('success', responseList.message)
+        dispatch({ type: Types.UPDATE_MULTIPLE_ROLE, payload: responseList });
+        handleClose()
+      }
+    }).catch((err) => {
+      responseList.isLoading = false;
+      responseList.message = "Something went wrong!"
+      showToast('error', responseList.message)
+      dispatch({ type: Types.UPDATE_MULTIPLE_ROLE, payload: responseList });
+    })
+};
