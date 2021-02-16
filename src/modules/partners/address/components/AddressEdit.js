@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
     deletePartnerAddressMultiple,
+    emptyAddMultipleStatus,
     getCountryName,
     handleChangePartnerAddressInput,
     partnerAddressSubmitMultiple
@@ -34,6 +35,7 @@ const AddressEdit = withRouter(() => {
     useEffect(() => {
         if (isMultipleAdded) {
             setValue("intCountryID", "");
+            dispatch(emptyAddMultipleStatus());
         }
     }, [isMultipleAdded]);
 

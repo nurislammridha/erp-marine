@@ -84,7 +84,6 @@ export const getTaxType = () => (dispatch) => {
     Axios.get(`${process.env.REACT_APP_API_URL}master/tax`).then(
 
         (res) => {
-            console.log('res', res)
             let data = res.data.data;
             dispatch({ type: Types.GET_TAX_TYPE, payload: data });
         }
@@ -94,7 +93,6 @@ export const getPartnerType = () => (dispatch) => {
     Axios.get(`${process.env.REACT_APP_API_URL}partner/partnerType`).then(
 
         (res) => {
-            console.log('res', res)
             let data = res.data.data;
             dispatch({ type: Types.GET_PARTNER_TYPE, payload: data });
         }
@@ -104,7 +102,6 @@ export const getBusinessType = () => (dispatch) => {
     Axios.get(`${process.env.REACT_APP_API_URL}purchase/branchList`).then(
 
         (res) => {
-            console.log('res', res)
             let data = res.data.data;
             dispatch({ type: Types.GET_BUSINESS_TYPE, payload: data });
         }
@@ -229,15 +226,9 @@ export const EditSupplierInfo = (id) => (dispatch) => {
                 type: Types.EDIT_PARTNER_INFO,
                 payload: data,
             });
-            console.log('country', data.address)
+
             if (data.address !== null) {
 
-                if (data.address.intCountryID !== null || data.address.intCountryID !== undefined) {
-                    data.address.countryName = {
-                        label: data.address.strCountry,
-                        value: data.address.intCountryID
-                    }
-                }
                 dispatch({
                     type: TypesAddress.EDIT_ADDRESS_INFO,
                     payload: data.address,

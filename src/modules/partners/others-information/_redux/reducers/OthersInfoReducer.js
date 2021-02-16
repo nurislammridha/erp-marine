@@ -3,14 +3,10 @@ import * as Types from "../types/Types";
 const initialState = {
     portList: [],
     psProviderList: [],
-    partnerOtherInfoInput: {
-        // intPortID: "",
-        // strPortName: "",
 
+    partnerOtherInfoInput: {
         multiplePort: [],
         multipleProduct: [],
-
-        // multipleServiceList: []
     },
 
     status: false,
@@ -21,7 +17,7 @@ const OthersInfoReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case Types.CHANGE_PARTNER_OTHERINFO_INPUT:
-            console.log('action.payload.name', action.payload.name);
+
             const partnerOtherInfoInput = { ...state.partnerOtherInfoInput };
             partnerOtherInfoInput[action.payload.name] = action.payload.value;
             return {
@@ -30,13 +26,6 @@ const OthersInfoReducer = (state = initialState, action) => {
             };
 
 
-        // case Types.GET_PORT_NAME:
-        //     return {
-        //         ...state,
-        //         portOptionData: getPortName(
-        //             action.payload
-        //         ),
-        //     };
         case Types.GET_PORT_NAME:
             return {
                 ...state,
@@ -59,30 +48,18 @@ const OthersInfoReducer = (state = initialState, action) => {
             };
         case Types.EDIT_OTHERS_INFO:
 
-
-            console.log('action.payload for other', action.payload);
-            console.log('action.payload.port_served', action.payload.port_served);
             let portServed = { ...partnerOtherInfoInput };
             portServed.multiplePort = action.payload.port_served;
             portServed.multipleProduct = action.payload.service_provide;
-            // portServed.service_provide = action.payload.service_provide;
 
-            console.log('portServed', portServed)
             return {
                 ...state,
                 partnerOtherInfoInput: portServed,
 
             };
 
-
-        // case Types.PARTNER_OTHERINFO_SUBMIT:
-        //     return {
-        //         ...state,
-        //         status: action.payload.status,
-        //         isLoading: action.payload.isLoading,
-        //     };
-        // default:
-        //     break;
+        default:
+            break;
     }
 
     return newState
@@ -90,17 +67,3 @@ const OthersInfoReducer = (state = initialState, action) => {
 
 export default OthersInfoReducer;
 
-
-const getPortName = (data) => {
-    let options = [];
-    if (data) {
-        data.forEach((item) => {
-            let itemData = {
-                value: item.intPortID,
-                label: item.strPortName,
-            };
-            options.push(itemData);
-        });
-    }
-    return options;
-};

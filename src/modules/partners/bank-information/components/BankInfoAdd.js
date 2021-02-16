@@ -34,7 +34,6 @@ const BankInfoAdd = withRouter(() => {
         if (isMultipleAdded) {
             setValue("intBankId", "");
             dispatch(emptyAddMultipleStatus());
-
         }
     }, [isMultipleAdded]);
 
