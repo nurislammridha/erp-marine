@@ -14,10 +14,11 @@ export const handleChangeSupplierFilterInput = (name, value) => (dispatch) => {
         type: Types.CHANGE_SUPPLIER_FILTER_INPUT,
         payload: formData,
     });
+
     const search = store.getState().supplierList.supplierFilterInput.search;
-    const strSupplierTypeName = store.getState().supplierList.supplierFilterInput.strSupplierTypeName;
-    console.log('search', search)
-    dispatch(getSupplierList(search, strSupplierTypeName));
+    const intSupplierTypeID = store.getState().supplierList.supplierFilterInput.intSupplierTypeID;
+
+    dispatch(getSupplierList(search, intSupplierTypeID));
 
 }
 
@@ -30,7 +31,7 @@ export const getSupplierType = () => (dispatch) => {
     )
 }
 
-export const getSupplierList = (searchValue = "", strSupplierTypeName = null) => async (dispatch) => {
+export const getSupplierList = (searchValue = "", intSupplierTypeID = null) => async (dispatch) => {
     let response = {
         supplierList: [],
         status: false,
@@ -42,23 +43,22 @@ export const getSupplierList = (searchValue = "", strSupplierTypeName = null) =>
     dispatch({ type: Types.GET_SUPPLIER_LIST, payload: response });
 
 
+
+    let url = `${process.env.REACT_APP_API_URL}partner/basicInfo?`;
+
+    url += searchValue !== "" ? `search=${searchValue}&` : '';
+    url += intSupplierTypeID !== null ? `intSupplierTypeID=${intSupplierTypeID}` : '';
     try {
-        let url = `${process.env.REACT_APP_API_URL}partner/basicInfo?`;
-
-        url += searchValue !== "" ? `search=${searchValue}&` : '';
-        url += strSupplierTypeName !== null ? `strSupplierTypeName=${strSupplierTypeName}` : '';
-
-        // if (searchValue === "") {
-        //     dispatch({ type: Types.GET_SUPPLIER_LIST, payload: response });
-        // } else{}
         console.log('url', url)
         await Axios.get(url).then((res) => {
+            console.log('res', res)
             const { status, message, errors, data } = res.data;
             response.supplierList = data;
             response.status = status;
             response.message = message;
             response.errors = errors;
             response.isLoading = false;
+
         })
             .catch((err) => {
                 toast.error(err)
@@ -75,7 +75,7 @@ export const getSupplierList = (searchValue = "", strSupplierTypeName = null) =>
 }
 
 export const supplierListDelete = (id) => (dispatch) => {
-    console.log('id', id)
+
     let isLoading = true;
     dispatch({ type: Types.DELETE_SUPPLIER_LIST, payload: isLoading })
 
