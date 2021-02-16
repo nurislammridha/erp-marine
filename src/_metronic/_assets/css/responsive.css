@@ -184,6 +184,9 @@ button.MuiButtonBase-root.MuiTab-root {
   
   display: none;
 }
+i.fas.fa-trash-alt.editIcon.item-list-icon {
+  margin-left: 0px!important;
+}
 }
 
 /* Extra small devices (portrait phones, less than 576px) */
