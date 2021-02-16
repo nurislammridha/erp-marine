@@ -6,7 +6,7 @@ const ItemListReducer = (state = initialstate, action) => {
         case Types.GET_ITEM_LIST:
             return {
                 ...state,
-                ItemList: GetItemData(action.payload.itemList),
+                ItemList: GetItemData(action.payload),
             };
         default:
             break;

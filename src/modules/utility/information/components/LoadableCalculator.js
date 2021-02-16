@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { changeTextInput, getShipList, getShipId } from "../_redux/actions/UtilityAction";
 
 const LoadableCalculator = () => {
+  const [isDisbale, setIsDisbale] = useState(false)
   const { register, setValue } = useForm();
   const dispatch = useDispatch();
   const LoadableCalculatorInput = useSelector(state => state.utitlityInfo.LoadableCalculatorInput);
@@ -24,6 +25,14 @@ const LoadableCalculator = () => {
   }
   const printValue = (value) => {
     return new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 4 }).format(value)
+  }
+  const getShipName = (value) => {
+    console.log('value :>> ', value);
+    if (value === 'Akij Pearl' || value === "Akij Noor") {
+      setIsDisbale(true)
+    } else {
+      setIsDisbale(false)
+    }
   }
 
   return (
@@ -49,7 +58,10 @@ const LoadableCalculator = () => {
                       name="strVesselName"
                       register={register}
                       setValue={setValue}
-                      onChange={(option) => changeShipListInput(option.value)}
+                      onChange={(option) => {
+                        changeShipListInput(option.value)
+                        getShipName(option.label)
+                      }}
                     />
                   </div>
                   <div className="col-6 ">
@@ -84,6 +96,8 @@ const LoadableCalculator = () => {
                       name="intDWT"
                       value={LoadableCalculatorInput.intDWT}
                       onChange={(e) => changeText("intDWT", e.target.value)}
+                      // {LoadableCalculatorInput.}
+                      disabled={isDisbale}
                     />
                   </Form.Group>
                 </div>
@@ -97,6 +111,7 @@ const LoadableCalculator = () => {
                       name="intFW"
                       value={LoadableCalculatorInput.intFW}
                       onChange={(e) => changeText("intFW", e.target.value)}
+                      disabled={isDisbale}
                     />
                   </Form.Group>
                 </div>
@@ -110,6 +125,7 @@ const LoadableCalculator = () => {
                       name="intTPC"
                       value={LoadableCalculatorInput.intTPC}
                       onChange={(e) => changeText("intTPC", e.target.value)}
+                      disabled={isDisbale}
                     />
                   </Form.Group>
                 </div>
@@ -124,6 +140,7 @@ const LoadableCalculator = () => {
                       name="intIFO"
                       value={LoadableCalculatorInput.intIFO}
                       onChange={(e) => changeText("intIFO", e.target.value)}
+                      disabled={isDisbale}
                     />
                   </Form.Group>
                 </div>
@@ -137,6 +154,7 @@ const LoadableCalculator = () => {
                       name="intMGO"
                       value={LoadableCalculatorInput.intMGO}
                       onChange={(e) => changeText("intMGO", e.target.value)}
+                      disabled={isDisbale}
                     />
                   </Form.Group>
                 </div>
@@ -150,6 +168,7 @@ const LoadableCalculator = () => {
                       name="intFWA"
                       value={LoadableCalculatorInput.intFWA}
                       onChange={(e) => changeText("intFWA", e.target.value)}
+                      disabled={isDisbale}
                     />
                   </Form.Group>
                 </div>
@@ -166,6 +185,7 @@ const LoadableCalculator = () => {
                       name="intSummerDraft"
                       value={LoadableCalculatorInput.intSummerDraft}
                       onChange={(e) => changeText("intSummerDraft", e.target.value)}
+                      disabled={isDisbale}
                     />
                   </Form.Group>
                 </div>
@@ -181,6 +201,7 @@ const LoadableCalculator = () => {
                       name="intUnpumpableBallast"
                       value={LoadableCalculatorInput.intUnpumpableBallast}
                       onChange={(e) => changeText("intUnpumpableBallast", e.target.value)}
+                      disabled={isDisbale}
                     />
                   </Form.Group>
                 </div>
@@ -196,6 +217,7 @@ const LoadableCalculator = () => {
                       name="intConstant"
                       value={LoadableCalculatorInput.intConstant}
                       onChange={(e) => changeText("intConstant", e.target.value)}
+                      disabled={isDisbale}
                     />
                   </Form.Group>
                 </div>
