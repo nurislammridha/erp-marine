@@ -4,15 +4,15 @@ import * as Types from "../types/Types";
 
 export const AddRolePermissionInput = (name, value) => (dispatch) => {
   const formData = {
-      name: name,
-      value: value
+    name: name,
+    value: value
   }
   dispatch({ type: Types.CHANGE_ROLE_INPUT, payload: formData })
 }
 
 export const getRoleListByPagination = () => (dispatch) => {
 
- 
+
   const responseList = {
     isLoading: true,
     rolesList: [],
@@ -46,26 +46,66 @@ export const getRoleDetailsData = (id) => (dispatch) => {
       dispatch({ type: Types.GET_ROLE_DETAILS_DATA, payload: res.data.data });
     });
 };
-export const getPermissionUserList = () => (dispatch) => {
+// export const getPermissionUserList = () => (dispatch) => {
+//   const responseList = {
+//     isLoading: true,
+//     data: []
+//   };
 
+//   dispatch({ type: Types.GET_PERMISSION_USER_LIST, payload: responseList });
 
-  const responseList = {
+//   Axios.get(`${process.env.REACT_APP_API_URL}roles/getAllUser`)
+//     .then((res) => {
+//       dispatch({ type: Types.GET_PERMISSION_USER_LIST, payload: res.data.data });
+//     })
+//     .catch((err) => {
+//       console.log('err', err);
+//     })
+// };
+export const getPermissionUserList = (searchValue = "", page) => async (dispatch) => {
+  let response = {
+    userList: [],
+    userPaginationList: [],
+    status: false,
+    message: "",
     isLoading: true,
-    data: []
+    errors: [],
   };
 
-  // dispatch({ type: Types.GET_PERMISSION_USER_LIST, payload: responseList });
+  dispatch({ type: Types.GET_PERMISSION_USER_LIST, payload: response });
 
-  Axios
-    .get(`${process.env.REACT_APP_API_URL}roles/getAllUser`)
-    .then((res) => {
-      console.log('object get all user', res)
-      dispatch({ type: Types.GET_PERMISSION_USER_LIST, payload: res.data.data });
-    })
-    .catch((err)=>{
-      console.log('err', err);
-    })
-};
+  let url = `${process.env.REACT_APP_API_URL}roles/getAllUser?isPaginated=1&paginateNo=5`;
+  if (page !== null || page === "") {
+    url += `&page=${page}`;
+  }
+  if (searchValue !== "") {
+    url += `?search=${searchValue}`;
+  } else {
+    // url += `?isPaginated=1&paginateNo=${page}`;
+  }
+  try {
+    await Axios.get(url)
+      .then((res) => {
+        console.log('res :>> ', res.data.data);
+        const { data, message, status } = res.data;
+        response.status = status;
+        response.userList = data;
+        response.message = message;
+        response.userPaginationList = data;
+        response.isLoading = false;
+
+      }).catch((err) => {
+        console.log("ErrorCertificate1");
+      });
+  } catch (error) {
+    console.log("ErrorCertificate2");
+    response.message = "Something Went Wrong !";
+    showToast('error', response.message);
+  }
+
+  response.isLoading = false;
+  dispatch({ type: Types.GET_PERMISSION_USER_LIST, payload: response });
+}
 
 
 export const emptyRoleStatusMessage = () => (dispatch) => {
@@ -81,15 +121,14 @@ export const storeRoleAction = (roleInputData) => (dispatch) => {
   };
   dispatch({ type: Types.CREATE_ROLE, payload: responseList });
 
-  Axios
-    .post(`${process.env.REACT_APP_API_URL}roles/storePermission`, roleInputData)
+  Axios.post(`${process.env.REACT_APP_API_URL}roles/storePermission`, roleInputData)
     .then((res) => {
       const { data, status, message } = res.data;
       responseList.status = status;
       responseList.message = message;
       responseList.isLoading = false;
       responseList.data = data;
-      showToast('success', message);
+      showToast('success', responseList.message);
       dispatch({ type: Types.CREATE_ROLE, payload: responseList });
     }).catch(err => {
       responseList.status = false;
@@ -117,16 +156,18 @@ export const getPermissionGroups = () => (dispatch) => {
 };
 
 export const roleCheckboxSelect = (checkboxStatus, parentRole, item, indexChild, indexparentRole) => (dispatch) => {
-  dispatch({ type: Types.USER_ROLE_CHECKED, payload: {
-    checkboxStatus: checkboxStatus,
-    parentRole: parentRole,
-    item: item,
-    indexChild: indexChild,
-    indexparentRole: indexparentRole,
-  }});
+  dispatch({
+    type: Types.USER_ROLE_CHECKED, payload: {
+      checkboxStatus: checkboxStatus,
+      parentRole: parentRole,
+      item: item,
+      indexChild: indexChild,
+      indexparentRole: indexparentRole,
+    }
+  });
 
 };
-export const handleInputData = (name,value) => (dispatch) => {
+export const handleInputData = (name, value) => (dispatch) => {
 
   let data = {
     name: name,
@@ -141,8 +182,10 @@ export const allCheckboxSelected = (status) => (dispatch) => {
 };
 
 export const checkPermissionGroupAction = (index, isGroupChecked) => (dispatch) => {
-  dispatch({ type: Types.USER_ROLE_CHECKED_GROUP, payload: {
-    index: index,
-    isGroupChecked: isGroupChecked
-  }});
+  dispatch({
+    type: Types.USER_ROLE_CHECKED_GROUP, payload: {
+      index: index,
+      isGroupChecked: isGroupChecked
+    }
+  });
 };

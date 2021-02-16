@@ -19,7 +19,8 @@ const initialState = {
         phone_no:"",
         password:"",
         language:"",
-        name:''
+        name:'',
+        roleId: ""
 
     },
     isRoleCreated: false,
@@ -32,12 +33,18 @@ const UserRoleReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case Types.GET_USER_ROLE_INPUT_DATA:
-            console.log('action.payload', action.payload);
             const roleInputData = { ...state.inputData };
             roleInputData[action.payload.name] = action.payload.value;
             return { 
                 ...state, 
                 inputData: roleInputData,
+                isLoading: action.payload.isLoading,
+            };
+        case Types.CREATE_MULTIPLE_ROLE:
+            return { 
+                ...state, 
+                inputData: initialState.inputData,
+                isLoading: action.payload.isLoading,
             };
         case Types.GET_USER_CREATED:
             return { 

@@ -14,16 +14,26 @@ const QuotationFilter = () => {
     const QuotationFilterInput = useSelector((state) => state.QuotationFilterinfo.QuotationFilterInput);
     const supplierOptionData = useSelector((state) => state.QuotationFilterinfo.supplierNameData);
     const currencyOptionData = useSelector((state) => state.QuotationFilterinfo.currencyTypeData);
+    const status = useSelector((state) => state.QuotationFilterinfo.status);
     const { register, setValue } = useForm();
 
-
     const handleChangeTextInput = (name, value) => {
-        dispatch(handleChangeQuotationFilterInput(name, value))
+        dispatch(handleChangeQuotationFilterInput(name, value));
     }
+
+    useEffect(() => {
+        if (status) {
+            setValue("intSupplierId", "");
+            setValue("intCurrencyId", "");
+
+        }
+
+    }, [status])
 
     useEffect(() => {
         dispatch(getSupplierName());
         dispatch(getCurrencyType());
+
     }, [])
 
     return (
@@ -79,7 +89,7 @@ const QuotationFilter = () => {
                                 <RHFInput
                                     as={<Select options={supplierOptionData} />}
                                     rules={{ required: false }}
-                                    name="courseData"
+                                    name="intSupplierId"
                                     register={register}
                                     onChange={(option) => {
                                         handleChangeTextInput('strSupplierName', option.label);
@@ -93,7 +103,7 @@ const QuotationFilter = () => {
                                 <RHFInput
                                     as={<Select options={currencyOptionData} />}
                                     rules={{ required: false }}
-                                    name="intSupplierId"
+                                    name="intCurrencyId"
                                     register={register}
                                     onChange={(option) => {
                                         handleChangeTextInput('strCurrencyCode', option.label);

@@ -37,31 +37,36 @@ const CertificateTypeFilter = () => {
 
   return (
     <>
-      <Form.Group as={Col} controlId="formGridState">
-        <Form.Control
-          className="formHeight"
-          type="text"
-          placeholder="Search"
-          value={search}
-          onChange={(e) => changeSearch(e.target.value)}
-        />
-      </Form.Group>
-
-      <Form.Group as={Col} controlId="formGridState">
-        <RHFInput
-          className="formSelect pt-0"
-          as={<Select options={statusOptions} />}
-          rules={{ required: false }}
-          name="isActive"
-          register={register}
-          value={certificateTypeInput.isActive}
-          onChange={(option) => {
-            setType(option.value);
-            dispatch(getCertificateTypeList(search, option.value, currentPage));
-          }}
-          setValue={setValue}
-        />
-      </Form.Group>
+      <div className="col-lg-4">
+        <Form.Group as={Col} controlId="formGridState">
+          <Form.Control
+            className="formHeight"
+            type="text"
+            placeholder="Search"
+            value={search}
+            onChange={(e) => changeSearch(e.target.value)}
+          />
+        </Form.Group>
+      </div>
+      <div className="col-lg-4">
+        <Form.Group as={Col} controlId="formGridState">
+          <RHFInput
+            className="formSelect pt-0"
+            as={<Select options={statusOptions} />}
+            rules={{ required: false }}
+            name="isActive"
+            register={register}
+            value={certificateTypeInput.isActive}
+            onChange={(option) => {
+              setType(option.value);
+              dispatch(
+                getCertificateTypeList(search, option.value, currentPage)
+              );
+            }}
+            setValue={setValue}
+          />
+        </Form.Group>
+      </div>
     </>
   );
 };

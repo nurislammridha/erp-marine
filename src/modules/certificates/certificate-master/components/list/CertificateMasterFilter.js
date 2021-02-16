@@ -34,6 +34,7 @@ const CertificateMasterFilter = () => {
   }, []);
   return (
     <>
+    <div className="col-lg-4">
       <Form.Group as={Col} controlId="formGridState">
         <Form.Control
           className="formHeight"
@@ -43,7 +44,8 @@ const CertificateMasterFilter = () => {
           onChange={(e) => changeSearch(e.target.value)}
         />
       </Form.Group>
-
+      </div>
+      <div className="col-lg-4">
       <Form.Group as={Col} controlId="formGridState">
         <RHFInput
           className="formSelect pt-0"
@@ -61,6 +63,7 @@ const CertificateMasterFilter = () => {
           setValue={setValue}
         />
       </Form.Group>
+      </div>
     </>
   );
 };

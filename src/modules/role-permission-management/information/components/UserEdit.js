@@ -9,8 +9,9 @@ import {
 } from "../_redux/actions/UserAction";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
+import { useParams } from "react-router-dom";
 
-const NewUser = ({handleClose}) => {
+const UserEdit = ({handleClose, id}) => {
   const { register, handleSubmit, errors, setValue } = useForm();
   const userInput = useSelector((state) => state.userRole.inputData);
   const isLoading = useSelector((state) => state.userRole.isLoading);
@@ -36,7 +37,6 @@ const NewUser = ({handleClose}) => {
         <div className="row">
           <div className="col-12">
             <div className="card card-custom gutter-b p-5">
-              <h5>Create New User </h5>
               <form
                 className="form form-label-right voyageEngineerForm"
                 method="post"
@@ -62,7 +62,7 @@ const NewUser = ({handleClose}) => {
                   <div className="col-xl-3 col-lg-3 col-md-6 ">
                     <Form.Group>
                       <Form.Label className="formFont pl-1">
-                        Sur Name
+                        Sur Email
                       </Form.Label>
                       <Form.Control
                         className="formHeight"
@@ -227,4 +227,4 @@ const NewUser = ({handleClose}) => {
   );
 };
 
-export default NewUser;
+export default UserEdit;

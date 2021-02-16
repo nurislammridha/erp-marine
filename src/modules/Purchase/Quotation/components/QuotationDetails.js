@@ -14,13 +14,10 @@ const QuotationDetails = () => {
   const isLoading = useSelector((state) => state.QuotationFilterinfo.isLoading);
 
   const newData = supplierData;
+
   if (QuotationFilterInput.intSupplierId) {
     var FilterData = newData.filter((item) => item.intSupplierId === QuotationFilterInput.intSupplierId);
   }
-
-  console.log('quotationDetailList', quotationDetailList);
-
-
 
   const handleChangeTextInput = (name, value, item) => {
     dispatch(handleChangeQuotationDetailInput(name, value, item))
@@ -37,12 +34,12 @@ const QuotationDetails = () => {
 
   return (
     <>
-      {!quotationDetailList && (
+      { quotationDetailList && (quotationDetailList.length < 1) && (
         <div className="text-center display-block bg-warning mt-5 rounded text-white p-5">
-          <h4>please give quotating number</h4>
-        </div>
-      )}
-      {quotationDetailList && (
+          <h4>Please Give Quotation Number</h4>
+        </div>)
+      }
+      {quotationDetailList && (quotationDetailList.length > 0) && (
 
         <div className="row mt-5">
           <div className="col-lg-8 col-12">
@@ -159,39 +156,6 @@ const QuotationDetails = () => {
                           <td>{item.strEmail}</td>
                         </tr>
                       </table>
-                      {/* <div className="row">
-                        <div className="col-sm-5">
-                          <p>Supplier name</p>
-                        </div>
-                        <div className="col-sm-7">
-                          <p>: {item.strSupplierName}</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-sm-5">
-                          <p>Supplier Address</p>
-                        </div>
-                        <div className="col-sm-7">
-                          <p>: {item.strEmail}</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-sm-5">
-                          <p>Supplier Contact</p>
-                        </div>
-                        <div className="col-sm-7">
-                          <p>: {item.strContactNumber}</p>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-sm-5">
-                          <p>Supplier Email</p>
-                        </div>
-                        <div className="col-sm-7">
-                          <p>: {item.strEmail}</p>
-                        </div>
-                      </div> */}
-
                     </div>
                   </>
 
