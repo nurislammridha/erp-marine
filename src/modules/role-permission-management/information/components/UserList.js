@@ -87,8 +87,9 @@ const UserList = () => {
       <Card>
         <Card.Body>
           <div className="container ">
+          <h1 className="tableheading mt-0">User List</h1>
             <div className="row mb-5 table-form ">
-              <h1 className="tableheading mt-0">User List</h1>
+             
               <div className="col-xl-3 col-lg-3 col-md-6 mb-2 mt-2">
 
                 <Paper className="searchInput">

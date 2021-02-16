@@ -87,21 +87,12 @@ const EmployeeSigningList = withRouter(({ history, props }) => {
             <div className="card-title">
               <h3 class="card-label">Employee Signing List</h3>
             </div>
-            <div className="card-toolbar">
-              <a
-                onClick={() => {
-                  history.push("/employee/employee-signing-add");
-                }}
-              >
-                <button type="button" class="btn btn-primary">
-                  Sign Employee{" "}
-                </button>
-              </a>
-            </div>
+            
           </div>
           <div className="card-body">
+          
             <div className="row mb-2">
-              <div className="col-lg-3">
+              <div className="col-lg-4">
                 <div>
                   <label className="form-label">Vessel</label>
                 </div>
@@ -119,7 +110,7 @@ const EmployeeSigningList = withRouter(({ history, props }) => {
                     ))}
                 </select>
               </div>
-              <div className="col-lg-3 mt-2">
+              <div className="col-lg-4 mt-2">
                 <div>
                   <label className="form-label"></label>
                 </div>
@@ -131,6 +122,19 @@ const EmployeeSigningList = withRouter(({ history, props }) => {
                   Search
               </button>
               </div>
+              <div className="col-lg-4 mt-5">
+              <div className="card-toolbar">
+              <a
+                onClick={() => {
+                  history.push("/employee/employee-signing-add");
+                }}
+              >
+                <button type="button" class="btn btn-primary">
+                  Sign Employee{" "}
+                </button>
+              </a>
+            </div>
+            </div>
             </div>
 
             <div className="react-bootstrap-table table-responsive">

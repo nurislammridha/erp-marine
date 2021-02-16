@@ -13,11 +13,12 @@ const VoyageListContainer = () => {
 
   return (
     <div className="card card-custom gutter-b">
+         <h3 className="mt-3 ml-3">Voyage List</h3>
       <div className="row pt-5 pl-4 pb-3">
-        <div className="col-xl-9 col-lg-9 col-md-9 col-6">
-          <h3>Voyage List </h3>
+        <div className="col-xl-9 col-lg-9 col-md-9 col-8">
+     
         </div>
-        <div className="col-xl-3 col-lg-3 col-md-3 col-6 VoyageListBtn">
+        <div className="col-xl-3 col-lg-3 col-md-3 col-4 VoyageListBtn">
           <Button className="mr-2 text-bold btn-sm" variant="light text-primary ">
             Export
           </Button>
