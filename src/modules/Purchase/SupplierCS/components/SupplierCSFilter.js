@@ -47,9 +47,10 @@ const SupplierCSFilter = () => {
                 className="form form-label-right voyageEngineerForm"
                 method="post"
             >
+               <h1 className="tableheading font-weight-bold ">Supplier CS</h1>
                 <div className="row mb-5 table-form ">
-                    <h1 className="tableheading font-weight-bold ">Supplier CS</h1>
-                    <div className="col-xl-4 col-lg-4 col-md-6 mt-2">
+                 
+                    <div className="offset-xl-8 offset-lg-8 col-xl-4 col-lg-4 col-md-6 mt-2">
                         <Paper className="searchInput supplier-search">
                             <InputBase
                                 placeholder="Search"
