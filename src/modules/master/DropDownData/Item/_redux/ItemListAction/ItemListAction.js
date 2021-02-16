@@ -6,6 +6,6 @@ export const getItemList = () => (dispatch) => {
     const url = `${process.env.REACT_APP_API_URL}inventory/itemList`;
     Axios.get(url)
         .then((res) => {
-            dispatch({ type: Types.GET_ITEM_LIST, payload: res.data.data });
+            dispatch({ type: Types.GET_ITEM_LIST_DROPDOWN, payload: res.data.data });
         });
 };
