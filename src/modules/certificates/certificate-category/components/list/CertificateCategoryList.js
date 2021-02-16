@@ -1,15 +1,4 @@
 import React, { useEffect, useState } from "react";
-import {
-  Form,
-  Button,
-  Image,
-  Col,
-  Row,
-  Table,
-  Dropdown,
-} from "react-bootstrap";
-import Modal from "react-bootstrap/Modal";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import CertificateCategoryEdit from "../edit/CertificateCategoryEdit";
 import {
@@ -26,7 +15,7 @@ const CertificateCategoryList = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [editItem, setEditItem] = useState({});
-  const [currentPage, setCurrentPage] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   const certificateCategoryData = useSelector(
     (state) => state.CertificateCategoryReducer.certificateCategoryList
@@ -43,13 +32,22 @@ const CertificateCategoryList = () => {
       state.CertificateCategoryReducer.certificatesCategoryPaginatedData
   );
 
+  // useEffect(() => {
+  //   dispatch(getCertificateCategoryListData(currentPage));
+  // }, [dispatch, currentPage]);
+
+  // const changePage = (data) => {
+  //   setCurrentPage(data.page);
+  //   dispatch(getCertificateCategoryListData(data.page));
+  // };
   useEffect(() => {
-    dispatch(getCertificateCategoryListData(currentPage));
+    dispatch(getCertificateCategoryListData("", "", currentPage));
   }, [dispatch, currentPage]);
+
 
   const changePage = (data) => {
     setCurrentPage(data.page);
-    dispatch(getCertificateCategoryListData(data.page));
+    dispatch(getCertificateCategoryListData("", "", data.page));
   };
   // const status = useSelector(
   //     (state) => state.CertificateCategoryReducer.editStatus
