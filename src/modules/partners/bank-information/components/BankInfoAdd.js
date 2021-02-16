@@ -5,10 +5,10 @@ import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { bankInfoSubmitMultiple, deleteBankMultiple, getBankName, handleChangeBankInfoInput } from '../_redux/actions/BankInfoAction';
+import { bankInfoSubmitMultiple, deleteBankMultiple, emptyAddMultipleStatus, getBankName, handleChangeBankInfoInput } from '../_redux/actions/BankInfoAction';
 
 
-const BankInfoAdd = withRouter(({ history }) => {
+const BankInfoAdd = withRouter(() => {
 
 
     const { register, setValue } = useForm();
@@ -33,6 +33,8 @@ const BankInfoAdd = withRouter(({ history }) => {
     useEffect(() => {
         if (isMultipleAdded) {
             setValue("intBankId", "");
+            dispatch(emptyAddMultipleStatus());
+
         }
     }, [isMultipleAdded]);
 
@@ -46,6 +48,7 @@ const BankInfoAdd = withRouter(({ history }) => {
                         <div className="col-md-3">
                             <label className="form-label mt-2 formFont">Beneficiary Name</label>
                             <Form.Control
+                                autocomplete="off"
                                 type="text"
                                 name="strBeneficiaryName"
                                 className="fromStyle formHeight"
@@ -61,6 +64,7 @@ const BankInfoAdd = withRouter(({ history }) => {
                         <div className="col-md-3">
                             <label className="form-label mt-2 formFont">Account No</label>
                             <Form.Control
+                                autocomplete="off"
                                 type="text"
                                 name="strBankAccountNo"
                                 className="fromStyle formHeight"
@@ -76,6 +80,7 @@ const BankInfoAdd = withRouter(({ history }) => {
                         <div className="col-md-3">
                             <label className="form-label mt-2 formFont">Routing No</label>
                             <Form.Control
+                                autocomplete="off"
                                 type="text"
                                 name="strRoutingNo"
                                 className="fromStyle formHeight"
@@ -91,6 +96,7 @@ const BankInfoAdd = withRouter(({ history }) => {
                         <div className="col-md-3">
                             <label className="form-label mt-2 formFont">Swift Code</label>
                             <Form.Control
+                                autocomplete="off"
                                 type="text"
                                 name="strSWIFTCode"
                                 className="fromStyle formHeight"
@@ -126,6 +132,7 @@ const BankInfoAdd = withRouter(({ history }) => {
                         <div className="col-md-3">
                             <label className="form-label mt-2 formFont">Branch Name</label>
                             <Form.Control
+                                autocomplete="off"
                                 type="text"
                                 name="strBankBranchName"
                                 className="fromStyle formHeight"
@@ -141,6 +148,7 @@ const BankInfoAdd = withRouter(({ history }) => {
                         <div className="col-md-3">
                             <label className="form-label mt-2 formFont">IBAN(optional)</label>
                             <Form.Control
+                                autocomplete="off"
                                 type="text"
                                 name="strIBANNo"
                                 className="fromStyle formHeight"

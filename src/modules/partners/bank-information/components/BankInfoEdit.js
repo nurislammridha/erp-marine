@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { bankInfoSubmitMultiple, deleteBankMultiple, getBankName, handleChangeBankInfoInput } from '../_redux/actions/BankInfoAction';
 
 
-const BankInfoEdit = withRouter(({ history }) => {
+const BankInfoEdit = withRouter(() => {
 
 
     const { register, setValue } = useForm();
