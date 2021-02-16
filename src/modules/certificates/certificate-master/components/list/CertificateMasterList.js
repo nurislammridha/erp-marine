@@ -18,13 +18,8 @@ const CertificateMasterList = () => {
   );
 
   const dispatch = useDispatch();
-  const certificateMasterData = useSelector(
-    (state) => state.CertificateListReducer.certificateMasterList
-  );
-
-  const certificateMasterPaginatedData = useSelector(
-    (state) => state.CertificateListReducer.certificateMasterPaginatedData
-  );
+  const certificateMasterData = useSelector((state) => state.CertificateListReducer.certificateMasterList);
+  const certificateMasterPaginatedData = useSelector((state) => state.CertificateListReducer.certificateMasterPaginatedData);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -64,6 +59,7 @@ const CertificateMasterList = () => {
             <table className="table mt-4 tbl-standard" id="table-to-xls">
               <thead>
                 <tr>
+                  <th scope="col">SI</th>
                   <th scope="col">Certificate Name</th>
                   <th scope="col">Category Name</th>
                   <th scope="col">Status</th>
@@ -74,6 +70,7 @@ const CertificateMasterList = () => {
                 {certificateMasterData &&
                   certificateMasterData.map((item, index) => (
                     <tr>
+                      <td>{certificateMasterPaginatedData.from + index}</td>
                       <td>{item.strCertificateName}</td>
                       <td>{item.strCertificateCategoryName}</td>
                       <td>{item.isActive ? "Active" : "Inactive"}</td>
@@ -102,7 +99,7 @@ const CertificateMasterList = () => {
               handleClose={() => handleClose()}
               modalTitle={"Certificate Master Edit"}
             >
-              <CertificateMasterEdit editData={editItem}/>
+              <CertificateMasterEdit editData={editItem} />
             </SimpleModal>
           </div>
         </>

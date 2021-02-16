@@ -22,7 +22,8 @@ export function Dashboard() {
   //   };
   // }, [uiService]);
   return (
-    <PermissionWiseDisplay permission_name={"expense.list"}>
+    // <PermissionWiseDisplay permission_name={"expense.list"}>
+      <>
       {/* <DashboardMain /> */}
 
       {/* DashBoard design Starts 11:00   */}
@@ -61,6 +62,7 @@ export function Dashboard() {
         </div>
       
       </div>
-    </PermissionWiseDisplay>
+      </>
+    // {/* </PermissionWiseDisplay> */}
   );
 }

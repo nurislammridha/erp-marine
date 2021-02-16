@@ -9,7 +9,7 @@ import { getIssuingAuthorities } from "../../_redux/actions/CertificateIssueAuth
 const IssueAuthorityFilter = () => {
   const [search, setSearch] = useState("");
   const [type, setType] = useState("");
-  const [currentPage, setCurrentPage] = useState(15);
+  const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
   const CertificateIssueAuthirityInput = useSelector(
     (state) =>

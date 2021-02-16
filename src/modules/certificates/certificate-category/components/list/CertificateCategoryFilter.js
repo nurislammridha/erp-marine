@@ -10,10 +10,10 @@ const CertificateCategoryFilter = () => {
   const [search, setSearch] = useState("");
   const [type, setType] = useState(1);
   const dispatch = useDispatch();
-  const certificateCategoryInput = useSelector(
-    (state) => state.CertificateCategoryReducer.certificateCategoryInput
-  );
+  const certificateCategoryInput = useSelector((state) => state.CertificateCategoryReducer.certificateCategoryInput);
   const { register, setValue } = useForm();
+  const [currentPage, setCurrentPage] = useState(1);
+
   const statusOptions = [
     {
       label: "Active",
@@ -28,12 +28,20 @@ const CertificateCategoryFilter = () => {
   const handleChangeTextInput = (name, value) => {
     // dispatch(GetVoyageList(value, type));
   };
+  // const changeSearch = (value) => {
+  //   setSearch(value);
+  //   dispatch(getCertificateCategoryListData(value, type, 1));
+  // };
+  // useEffect(() => {
+  //   dispatch(getCertificateCategoryListData("", "", 1));
+  // }, []);
   const changeSearch = (value) => {
     setSearch(value);
-    dispatch(getCertificateCategoryListData(value, type, 1));
+    dispatch(getCertificateCategoryListData(value, type, currentPage));
   };
+
   useEffect(() => {
-    dispatch(getCertificateCategoryListData("", "", 1));
+    dispatch(getCertificateCategoryListData("", "", currentPage));
   }, []);
   return (
     <>
@@ -50,28 +58,23 @@ const CertificateCategoryFilter = () => {
       </div>
       <div className="col-lg-4">
         <div className="row">
-          <div className="col-1">
-            <Form.Label className="formFont">Status</Form.Label>
-          </div>
-          <div className="col-11">
-            <Form.Group as={Col} controlId="formGridState">
-              <RHFInput
-                as={<Select options={statusOptions} />}
-                rules={{ required: false }}
-                name="isActive"
-                className="formSelect pt-0"
-                register={register}
-                value={certificateCategoryInput.isActive}
-                onChange={(option) => {
-                  setType(option.value);
-                  dispatch(
-                    getCertificateCategoryListData(search, option.value, 1)
-                  );
-                }}
-                setValue={setValue}
-              />
-            </Form.Group>
-          </div>
+          <Form.Group as={Col} controlId="formGridState">
+            <RHFInput
+              as={<Select options={statusOptions} />}
+              rules={{ required: false }}
+              name="isActive"
+              className="formSelect pt-0"
+              register={register}
+              value={certificateCategoryInput.isActive}
+              onChange={(option) => {
+                setType(option.value);
+                dispatch(
+                  getCertificateCategoryListData(search, option.value, 1)
+                );
+              }}
+              setValue={setValue}
+            />
+          </Form.Group>
         </div>
       </div>
     </>

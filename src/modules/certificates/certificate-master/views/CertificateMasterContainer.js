@@ -57,7 +57,7 @@ const CertificateMasterContainer = () => {
                   <Dropdown.Menu>
                     <Pdf
                       targetRef={ref}
-                      filename="Certificate Type.pdf"
+                      filename="certificate_master_list.pdf"
                       x={0.5}
                       y={0.5}
                       scale={0.93}
@@ -76,7 +76,7 @@ const CertificateMasterContainer = () => {
                         <ReactHTMLTableToExcel
                           className="excelBtn ml-1"
                           table="table-to-xls"
-                          filename="Certificate Type"
+                          filename="certificate_master_list"
                           sheet="tablexls"
                           buttonText="Excel"
                         />
