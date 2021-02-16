@@ -99,24 +99,18 @@ const CertificateMainList = () => {
     <>
       <Card>
         <Card.Body className="certificate-card">
+          <h1 className="headerText pt-2">Certificates</h1> <hr />
           <div className="row mb-5">
-            <div className="col-lg-4 ">
-              <div className="row">
-                <div className="col-lg-3">
-                  <h1 className="headerText pt-2">Certificates</h1>
-                </div>
-                <div className="col-lg-9 ">
-                  <Form.Group as={Col} controlId="formGridState">
-                    <input
-                      type="search"
-                      value={searchText}
-                      className="form-control product-search-input formHeight"
-                      placeholder="Search"
-                      onChange={searchProduct}
-                    />
-                  </Form.Group>
-                </div>
-              </div>
+            <div className="col-lg-4">
+              <Form.Group as={Col} controlId="formGridState">
+                <input
+                  type="search"
+                  value={searchText}
+                  className="form-control product-search-input formHeight"
+                  placeholder="Search"
+                  onChange={searchProduct}
+                />
+              </Form.Group>
             </div>
             <div className="col-lg-3 ">
               <Form.Group as={Col} controlId="formGridState">
@@ -303,7 +297,7 @@ const CertificateMainList = () => {
           )}
 
           {!isLoading && certificates.length === 0 && (
-            <div className="alert border-1 p-4">
+            <div className="alert alert-warning mt-5">
               Sorry ! No Certificates Found.
             </div>
           )}

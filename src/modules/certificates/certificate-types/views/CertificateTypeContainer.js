@@ -29,12 +29,10 @@ const CertificateTypeContainer = () => {
     <Card>
       <Card.Body>
         <div className="container">
+          <h1 className="tableheading">Certificate Type List</h1> <hr/>
           <div className="row">
-            <div className="col-lg-2">
-              <h1 className="tableheading">Certificate Type List</h1>
-            </div>
             <CertificateTypeFilter />
-            <div className="col-lg-2 export">
+            <div className="col-lg-3 export text-right">
               <Dropdown className="d-inline">
                 <Dropdown.Toggle
                   className="btn btn-sm"

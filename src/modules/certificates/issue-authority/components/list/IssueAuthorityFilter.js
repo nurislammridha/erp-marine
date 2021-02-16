@@ -37,43 +37,39 @@ const IssueAuthorityFilter = () => {
 
   return (
     <>
-      <div className="col-lg-4">
-        <Form.Group as={Col} controlId="formGridState">
-          <Form.Control
-            className="formHeight"
-            type="text"
-            placeholder="Search"
-            value={search}
-            onChange={(e) => changeSearch(e.target.value)}
-          />
-        </Form.Group>
-      </div>
-      <div className="col-lg-4">
-        <div className="row">
-          <div className="col-1">
-            <Form.Label className="formFont pl-1 mt-2">Status</Form.Label>
-          </div>
-          <div className="col-11">
-            <Form.Group as={Col} controlId="formGridState">
-              <RHFInput
-                as={
-                  <Select options={action} className="formSelect formHeight" />
-                }
-                rules={{ required: false }}
-                className="formSelect pt-0"
-                name="isActive"
-                register={register}
-                value={CertificateIssueAuthirityInput.isActive}
-                onChange={(option) => {
-                  setType(option.value);
-                  dispatch(
-                    getIssuingAuthorities(search, option.value, currentPage)
-                  );
-                }}
-                setValue={setValue}
-              />
-            </Form.Group>
-          </div>
+      <div className="row">
+        <div className="col-lg-6">
+          <Form.Group as={Col} controlId="formGridState">
+            <Form.Control
+              className="formHeight"
+              type="text"
+              placeholder="Search"
+              value={search}
+              onChange={(e) => changeSearch(e.target.value)}
+            />
+          </Form.Group>
+        </div>
+        <div className="col-lg-6">
+          <Form.Group as={Col} controlId="formGridState">
+            <RHFInput
+              as={
+                <Select options={action} className="formSelect formHeight" />
+              }
+              rules={{ required: false }}
+              className="formSelect pt-0"
+              placeholder="Filter by status"
+              name="isActive"
+              register={register}
+              value={CertificateIssueAuthirityInput.isActive}
+              onChange={(option) => {
+                setType(option.value);
+                dispatch(
+                  getIssuingAuthorities(search, option.value, currentPage)
+                );
+              }}
+              setValue={setValue}
+            />
+          </Form.Group>
         </div>
       </div>
     </>

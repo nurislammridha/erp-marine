@@ -40,7 +40,6 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                 roleCreateMessage: action.payload.message,
             };
         case Types.GET_PERMISSION_USER_LIST:
-            console.log('action.payload', action.payload);
             return {
                 ...state,
                 userList: action.payload.userList,

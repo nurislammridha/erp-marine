@@ -64,7 +64,7 @@ const IssueAuthorityEdit = (props) => {
       <div className="container">
         <Form.Group as={Row} controlId="formAuthorityName">
           <Form.Label className="formFont pl-1 ml-3" column sm="12">
-            Authority Name:
+            Issue Name:
           </Form.Label>
           <Col sm="12">
             <Form.Control

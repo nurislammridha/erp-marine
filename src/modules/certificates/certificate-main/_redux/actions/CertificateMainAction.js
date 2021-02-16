@@ -112,10 +112,10 @@ export const MainCertificateCreateAction = (certificateInfoInput) => async (disp
     toast.error(responseList.message);
   }
 
-  // dispatch({
-  //   type: Types.CERTIFICATE_MAIN_SUBMITTING,
-  //   payload: false,
-  // });
+  dispatch({
+    type: Types.CERTIFICATE_MAIN_SUBMITTING,
+    payload: false,
+  });
 
   dispatch({
     type: Types.CERTIFICATE_MAIN_SUBMIT,

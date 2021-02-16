@@ -1,8 +1,10 @@
 import axios from "axios";
 import { getVesselId } from "../authCrud";
 import * as Types from "../authTypes";
+import { checkFeaturePermission } from "./ModulePermission";
 
 export const GetMenuListsByPermission = () => async (dispatch) => {
+
   let menuList = [
     /**
         | Module : Hr Management
@@ -116,6 +118,7 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
               featureRouteUrl: "/certificates-main/create",
               featureIcon: "menu-bullet menu-bullet-dot",
             },
+            
             {
               featureName: "Certificate List",
               featureRouteUrl: "/certificates-main/list",
