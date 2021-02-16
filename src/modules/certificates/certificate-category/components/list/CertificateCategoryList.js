@@ -93,7 +93,7 @@ const CertificateCategoryList = () => {
       {!isLoading && certificateCategoryData.length > 0 && (
         <>
           <div className="react-bootstrap-table table-responsive">
-            <table className="table mt-2 tbl-standard">
+            <table className="table mt-2 tbl-standard" id="table-to-xls">
               <thead>
                 <tr>
                   {/* <th scope="col">
