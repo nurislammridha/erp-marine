@@ -12,6 +12,7 @@ const SuppliersFilter = () => {
   const { register, setValue } = useForm();
 
   const supplierOptionData = useSelector((state) => state.supplierList.supplierTypeData)
+  const supplierFilterInput = useSelector((state) => state.supplierList.supplierFilterInput)
 
   useEffect(() => {
     dispatch(getSupplierList());
@@ -43,12 +44,14 @@ const SuppliersFilter = () => {
             className="formSelect pt-0"
             as={<Select options={supplierOptionData} />}
             rules={{ required: false }}
-            name="strSupplierTypeName"
+            name="intSupplierTypeID"
             placeholder="Search by Supplier Type"
             register={register}
+            value={supplierFilterInput.intSupplierTypeID}
             onChange={(e) => {
-              handleChangeTextInput('strSupplierTypeName', e.label);
               handleChangeTextInput('intSupplierTypeID', e.value);
+              handleChangeTextInput('strSupplierTypeName', e.label);
+
             }}
             setValue={setValue}
           />
