@@ -161,8 +161,6 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                     roleList
                 }
             };
-
-
         default:
             break;
     }

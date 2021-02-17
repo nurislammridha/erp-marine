@@ -1,6 +1,7 @@
 import Axios from "axios";
 import { showToast } from "../../../../master/utils/ToastHelper";
 import * as Types from "../types/Types";
+import { getPermissionUserList } from "./RolePermissionManagementAction";
 
 export const handleChangeUserAction = (name, value, e
 ) => (dispatch) => {
@@ -35,7 +36,7 @@ export const createNewUser = (inputData, handleClose) => (dispatch) => {
     showToast('error', "Password can't blank!");
     return false;
   }
-  if (inputData.roleId.length === 0) {
+  if (inputData.role_id.length === 0) {
     showToast('error', "Role can't blank!");
     return false;
   }
@@ -69,6 +70,7 @@ export const createNewUser = (inputData, handleClose) => (dispatch) => {
 
 //updaetd user roles permission 
 export const updatedUserPermission = (inputData, handleClose, id) => (dispatch) => {
+  console.log('inputData :>> ', inputData);
   if (inputData.first_name.length === 0) {
     showToast('error', "First name can't blank!");
     return false;
@@ -89,7 +91,7 @@ export const updatedUserPermission = (inputData, handleClose, id) => (dispatch) 
     showToast('error', "Password can't blank!");
     return false;
   }
-  if (inputData.roleId.length === 0) {
+  if (inputData.role_id === '' || inputData.role_id === null ) {
     showToast('error', "Role can't blank!");
     return false;
   }
@@ -112,6 +114,7 @@ export const updatedUserPermission = (inputData, handleClose, id) => (dispatch) 
         showToast('success', responseList.message)
         dispatch({ type: Types.UPDATE_MULTIPLE_ROLE, payload: responseList });
         handleClose()
+        dispatch(getPermissionUserList())
       }
     }).catch((err) => {
       responseList.isLoading = false;
