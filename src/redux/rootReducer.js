@@ -135,6 +135,7 @@ export const rootReducer = combineReducers({
   bankInfo: BankInfoReducer,
   partnerAddress: PartnerAddressReducer,
   partnerOthersInfo: OthersInfoReducer,
+  supplierList: SuppliersListReducer,
 
 
   /** Procurement Module Reducers */
@@ -176,7 +177,6 @@ export const rootReducer = combineReducers({
   CertificateListReducer: CertificateListReducer,
   certificateTypeInfo: CertificateTypeReducer,
   laytimeInfo: LaytimeInfoReducer,
-  supplierList: SuppliersListReducer,
   itemList: ItemReducer,
 
   //purchase 

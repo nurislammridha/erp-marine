@@ -181,7 +181,7 @@ const BasicInfoAdd = withRouter(() => {
                                             register={register}
                                             onChange={(e) => {
                                                 handleChangeTextInput("intTaxTypeId", e.value);
-                                                handleChangeTextInput("intTaxTypeName", e.label);
+                                                handleChangeTextInput("strTaxTypeName", e.label);
                                             }}
                                             setValue={setValue}
                                         />

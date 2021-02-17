@@ -2,8 +2,36 @@ import * as Types from "../types/Types";
 import Axios from "axios";
 import { toast } from "react-toastify";
 import { showToast } from "../../../../master/utils/ToastHelper";
+import store from '../../../../../redux/store';
 
-export const getSupplierList = (searchValue = "") => async (dispatch) => {
+export const handleChangeSupplierFilterInput = (name, value) => (dispatch) => {
+    const formData = {
+        name: name,
+        value, value
+    }
+
+    dispatch({
+        type: Types.CHANGE_SUPPLIER_FILTER_INPUT,
+        payload: formData,
+    });
+
+    const search = store.getState().supplierList.supplierFilterInput.search;
+    const intSupplierTypeID = store.getState().supplierList.supplierFilterInput.intSupplierTypeID;
+
+    dispatch(getSupplierList(search, intSupplierTypeID));
+
+}
+
+export const getSupplierType = () => (dispatch) => {
+    Axios.get(`${process.env.REACT_APP_API_URL}partner/partnerType`).then(
+        (res) => {
+            let data = res.data.data;
+            dispatch({ type: Types.GET_SUPPLIER_TYPE_NAME, payload: data })
+        }
+    )
+}
+
+export const getSupplierList = (searchValue = "", intSupplierTypeID = null) => async (dispatch) => {
     let response = {
         supplierList: [],
         status: false,
@@ -13,23 +41,30 @@ export const getSupplierList = (searchValue = "") => async (dispatch) => {
     };
 
     dispatch({ type: Types.GET_SUPPLIER_LIST, payload: response });
-    let url = `${process.env.REACT_APP_API_URL}partner/basicInfo`;
-    if (searchValue !== "") {
-        url += `?search=${searchValue}`
-    }
-    console.log('url', url)
+
+
+
+    let url = `${process.env.REACT_APP_API_URL}partner/basicInfo?`;
+
+    url += searchValue !== "" ? `search=${searchValue}&` : '';
+    url += intSupplierTypeID !== null ? `intSupplierTypeID=${intSupplierTypeID}` : '';
     try {
+        console.log('url', url)
         await Axios.get(url).then((res) => {
+            console.log('res', res)
             const { status, message, errors, data } = res.data;
             response.supplierList = data;
             response.status = status;
             response.message = message;
             response.errors = errors;
             response.isLoading = false;
+
         })
             .catch((err) => {
                 toast.error(err)
             })
+
+
     } catch (error) {
         response.message = "Something wrong!";
         toast.error(error);
@@ -40,7 +75,7 @@ export const getSupplierList = (searchValue = "") => async (dispatch) => {
 }
 
 export const supplierListDelete = (id) => (dispatch) => {
-    console.log('id', id)
+
     let isLoading = true;
     dispatch({ type: Types.DELETE_SUPPLIER_LIST, payload: isLoading })
 
