@@ -1,1 +1,1 @@
-export const GET_ITEM_LIST = "GET_ITEM_LIST";
+export const GET_ITEM_LIST_DROPDOWN = "GET_ITEM_LIST_DROPDOWN";
