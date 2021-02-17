@@ -15,7 +15,6 @@ export const handleChangeUserAction = (name, value, e
 
 
 export const createNewUser = (inputData, handleClose) => (dispatch) => {
-  console.log('inputData :>> ', inputData);
   if (inputData.first_name.length === 0) {
     showToast('error', "First name can't blank!");
     return false;
@@ -36,7 +35,7 @@ export const createNewUser = (inputData, handleClose) => (dispatch) => {
     showToast('error', "Password can't blank!");
     return false;
   }
-  if (inputData.role_id.length === 0) {
+  if (inputData.role_id === '' || inputData.role_id === null) {
     showToast('error', "Role can't blank!");
     return false;
   }
@@ -59,6 +58,7 @@ export const createNewUser = (inputData, handleClose) => (dispatch) => {
         showToast('success', responseList.message)
         dispatch({ type: Types.CREATE_MULTIPLE_ROLE, payload: responseList });
         handleClose()
+        dispatch(getPermissionUserList())
       }
     }).catch((err) => {
       responseList.isLoading = false;

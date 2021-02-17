@@ -3,7 +3,7 @@ import { Badge, Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 
 const SimpleModal = (props) => {
-    const { show, showLoadingPortModal, handleClose, handleShow, size, modalTitle, handleCloseLoadingPortModal, status, vesselBookingID, PRDetailsID } = props;
+    const { show, showLoadingPortModal, handleClose, handleShow, size, modalTitle, handleCloseLoadingPortModal, status, vesselBookingID, PRDetailsID, id } = props;
     return (
         <Modal
             onClose={handleClose ? handleClose : handleCloseLoadingPortModal}
@@ -21,6 +21,9 @@ const SimpleModal = (props) => {
                             }
                             {
                                 PRDetailsID ? (<Badge className="ml-2" variant="success">Purchase Request ID : #{PRDetailsID}</Badge>) : ''
+                            }
+                            {
+                                id ? (<Badge className="ml-2" variant="success"> #{id}</Badge>) : ''
                             }
                         </div>
                         {

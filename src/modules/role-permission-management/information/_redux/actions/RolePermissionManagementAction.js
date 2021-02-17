@@ -55,7 +55,6 @@ export const getPermissionUserList = (searchValue = "", page) => async (dispatch
   };
   dispatch({ type: Types.GET_PERMISSION_USER_LIST, payload: response });
   let url = `${process.env.REACT_APP_API_URL}roles/getAllUser?search=${searchValue}&isPaginated=1&paginateNo=10`;
-  console.log('searchValue :>> ', searchValue);
   if (page !== null || page === "") {
     url += `&page=${page}`;
   }
@@ -70,10 +69,8 @@ export const getPermissionUserList = (searchValue = "", page) => async (dispatch
         response.isLoading = false;
 
       }).catch((err) => {
-        console.log("ErrorCertificate1");
       });
   } catch (error) {
-    console.log("ErrorCertificate2");
     response.message = "Something Went Wrong !";
     showToast('error', response.message);
   }

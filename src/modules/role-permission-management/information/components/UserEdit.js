@@ -6,7 +6,6 @@ import { getRoleListByPagination, getUserDetails } from "../_redux/actions/RoleP
 import { handleChangeUserAction, updatedUserPermission } from "../_redux/actions/UserAction";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
-import { useParams } from "react-router-dom";
 
 const UserEdit = ({ handleClose, id }) => {
   const { register, handleSubmit, errors, setValue } = useForm();

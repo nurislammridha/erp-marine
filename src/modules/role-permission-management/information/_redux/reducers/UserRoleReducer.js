@@ -26,6 +26,7 @@ const initialState = {
     isRoleCreated: false,
     roleCreateMessage: '',
     userDetails: null,
+    detailsLoading: false,
     updatedLoading: false,
 
 };
@@ -65,6 +66,8 @@ const UserRoleReducer = (state = initialState, action) => {
                 return {
                     ...state,
                     inputData: action.payload.userDetails,
+                    userDetails: action.payload.userDetails,
+                    detailsLoading: action.payload.isLoading
                 }
             }
         default:

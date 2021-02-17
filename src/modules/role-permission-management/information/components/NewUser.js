@@ -193,11 +193,11 @@ const NewUser = ({handleClose}) => {
                   <RHFInput
                     as={<Select options={roleListOption} />}
                     rules={{ required: false }}
-                    name="roleId"
+                    name="role_id"
                     register={register}
                     onChange={(option) => {
                       handleChange('name', option.label);
-                      handleChange('roleId', option.value)
+                      handleChange('role_id', option.value)
                     }}
                     // value={CourseName.label}
                     setValue={setValue}
