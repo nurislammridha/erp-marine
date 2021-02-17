@@ -267,10 +267,10 @@ const BookingEntry = () => {
                 />
               </Form.Group>
             </div>
-            <div className="col-lg-3 col-6 ">
+            <div className="col-lg-3 col-6">
               <Form.Group
                 as={Col}
-                md="12"
+                sm="8"
                 className="booking-entry-input"
                 controlId="validationCustomUsername"
               >

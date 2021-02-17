@@ -608,7 +608,8 @@ i.fa.fa-plus-circle {
 }
 
 .tbl-survey {
-    width: 74.5% !important;
+    /* width: 74.5% !important; */
+    width: 100% !important;
     margin: 10px 0px 10px 0px;
 }
 
@@ -1431,3 +1432,13 @@ position: relative;
 .float-right.Rate-commision.two {
     width: 90%;
 }
+input[type="file"] {
+    width: 100%;
+}
+label.form-check-label {
+    font-size: 14px;
+}
+label.form-control.criteriaOptionsInput {
+    padding-bottom:43px;
+    
+  }

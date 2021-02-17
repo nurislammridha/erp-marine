@@ -33,10 +33,11 @@ const POList = () => {
     <Card>
       <Card.Body>
         <div className="container ">
+        <h1 className="tableheading mt-0 ">Purchase Order Approval</h1>
           <div className="row mb-5 table-form">
-            <h1 className="tableheading mt-0 ">Purchase Order Approval</h1>
-            <hr></hr>
-            <div className="col-xl-4 col-lg-4 col-5">
+         
+          
+            <div className="offset-xl-8 offset-lg-8 col-xl-4 col-lg-4 col-10">
               <Paper className="searchInput">
                 <InputBase
                   className="custome-purchase-search"

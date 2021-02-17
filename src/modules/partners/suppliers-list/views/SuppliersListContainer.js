@@ -15,7 +15,7 @@ const SuppliersListContainer = () => {
     <Card>
       <Card.Body>
         <div className="container">
-          <div className="col-lg-2">
+          <div className="col-lg-3">
             <h4>Suppliers List</h4>
           </div>
           <div className="row mt-5">

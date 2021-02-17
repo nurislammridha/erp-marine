@@ -6,6 +6,17 @@
 /* Large devices (desktops, 992px and up) */
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
+  .widget__right h4 {
+    
+    font-size: 17px;
+}
+.voyage-activity-vessel {
+  margin-top: 0px!important;
+}
+a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
+  margin-top: 5px;
+}
+
 }
 
 /* All Mobile Devices */
@@ -47,13 +58,161 @@
   .cerificateCategory {
     width: 84%;
   }
+  .dashboard-cardsection {
+    margin-bottom: -11px !important;
+  }
+  .topbar {
+    background-color: #3699ff;
+    z-index: 95 !important;
+  }
+  .header-fixed.subheader-fixed .subheader {
+    z-index: 93 !important;
+  }
+  .dashboard-cardsection {
+    padding-top: 45px !important;
+  }
+  .purchase-table{
+    margin-top: 10px;
+  }
+  .dashboard-cardsection {
+    padding-top: 3px !important;
+}
+.header-fixed.subheader-fixed .header {
+  background: transparent;
+   
+ }
+ .header.header-fixed {
+  height: 16px !important;
+ }
+ .MuiTab-root {
+  min-width: 108px !important;
+  
+}
+label.form-control.criteriaOptionsInput {
+  padding-bottom: 42px;
+  
+}
+.stickeyCard.card {
+  margin-left: -40px;
+}
+.css-yk16xz-control {
+  width: 100%!important;
+}
+a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
+  margin-top: 5px;
+}
+.user-list-addbutton{
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
 }
 
 /* Small devices (landscape phones, 576px and up) */
 
-@media (min-width: 576px) and (max-width: 767.98px) {
+@media (min-width: 476px) and (max-width: 767.98px) {
   .cerificateCategory {
     width: 84%;
+  }
+  .dashboard-cardsection {
+    margin-bottom: -11px !important;
+  }
+  .topbar {
+    background-color: #3699ff;
+    z-index: 95 !important;
+  }
+  .header-fixed.subheader-fixed .subheader {
+    z-index: 93 !important;
+  }
+  .dashboard-cardsection {
+    padding-top: 3px !important;
+  }
+  .paid__widget {
+    margin-bottom: 10px;
+  }
+  .container.dashboard__pb {
+    margin-top: 23px;
+}
+.purchase-table{
+  margin-top: 10px;
+}
+label.voyagelist-type.form-label {
+  margin-left: 10px;
+}
+label.mt-2.voyagelist-formlabel.form-label {
+  margin-left: 10px;
+}
+button.MuiButtonBase-root.MuiTab-root {
+  width: 73px!important;
+  min-width: 2px!important;
+ 
+  font-size: 9px!important;
+  text-transform: capitalize!important;
+  padding: 6px 8px!important;
+}
+.header-fixed.subheader-fixed .header {
+  background: transparent;
+   
+ }
+ .header.header-fixed {
+  height: 16px !important;
+ }
+ label.form-control.criteriaOptionsInput {
+  padding-bottom: 78px;
+  
+}
+.form-check.radio__button.Promotion-radio-button {
+  margin-left: 15px;
+}
+.form-check.radio__button.Promotion-radio-button {
+  margin-left: 15px;
+}
+.Promotion-radio-no-button {
+  margin-left: 15px;
+}
+.laytimecCommenced {
+  margin-left: 24px;
+}
+.laytimecCompleted{
+  margin-left: 24px!important;
+}
+.float-left.Rate-commision.one {
+  width: 16%;
+}
+.float-right.Rate-commision.one {
+ 
+  display: none;
+}
+.float-left.Rate-commision {
+  width: 32%;
+  
+}
+.float-right.Rate-commision {
+ 
+  display: none;
+}
+.form-group label {
+  font-size: 10px !important;
+}
+.float-left.Rate-commision.two {
+  width: 20%;
+}
+.float-right.Rate-commision.two {
+  
+  display: none;
+}
+i.fas.fa-trash-alt.editIcon.item-list-icon {
+  margin-left: 0px!important;
+}
+label.voyage-vessel.form-label {
+  margin-left: 12px;
+}
+.user-list-addbutton{
+  margin-top: 5px;
+  margin-left: 12px;
+}
+.user-list-dropdown{
+  margin-top: 5px;
   }
 }
 
@@ -329,6 +488,31 @@
 .employee-cr-report-input{
     margin-top: -19px;
 }
+.paid__widget {
+  margin-bottom: 10px;
+}
+button.MuiButtonBase-root.MuiTab-root {
+  width: 56px!important;
+  min-width: 2px!important;
+ 
+  font-size: 9px!important;
+  text-transform: capitalize!important;
+  padding: 6px 3px!important;
+}
+.Promotion-radio-button{
+  margin-left: 13px;
+}
+.user-list-addbutton{
+  margin-top: 5px;
+  margin-left: 11px;
+}
+.user-list-dropdown{
+margin-top: 5px;
+}
+a.ml-2.user-list-icon {
+  margin-left: 0px!important;
+}
+
 }
 
 @media (max-width: 426px) {
@@ -356,4 +540,7 @@
     left: 203px;
     color: #b5b5c3 !important;
   }
+  a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
+    margin-top: 6px;
+}
 }

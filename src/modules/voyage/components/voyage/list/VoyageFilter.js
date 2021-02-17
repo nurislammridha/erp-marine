@@ -49,7 +49,7 @@ const VoyageFilter = (props) => {
   return (
     <form className="form form-label-right" method="post">
       <div className="form-group row ml-2">
-        <div className="col-lg-3 col-md-6 col-10">
+        <div className="col-lg-4 col-md-6 col-10">
           <Form.Control
             type="text"
             placeholder="Search"
@@ -58,7 +58,7 @@ const VoyageFilter = (props) => {
             className="formHeight"
           />
         </div>
-        <div className="col-lg-3 col-md-6 col-10">
+        <div className="col-lg-4 col-md-6 col-10">
           <Form.Group
             className="noonReportInput"
             as={Row}
@@ -83,7 +83,7 @@ const VoyageFilter = (props) => {
           </Form.Group>
         </div>
 
-        <div className="col-lg-3 col-md-6 col-10">
+        <div className="col-lg-4 col-md-6 col-10">
           <Form.Group
             className="noonReportInput"
             as={Row}

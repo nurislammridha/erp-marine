@@ -62,14 +62,12 @@ const ItemFilter = ({ currentPage, setCurrentPage }) => {
   ];
   return (
     <>
-      <div className="row">
-        <div className="mt-5">
-          <h3 className="ml-3">Item List</h3>
-        </div>
-        <hr></hr>
-      </div>
-      <div className="form-group row mt-5">
-        <div className="col-lg-2 col-md-2 ml-0 pl-0">
+      <h1 className="tableheading ml-5 pt-5">Item List</h1>
+      <div className="row m-4">
+     
+        
+     
+        <div className="col-lg-2 col-md-6 ">
           <Form.Group as={Col} controlId="formGridState">
             <input
               type="search"
@@ -80,7 +78,7 @@ const ItemFilter = ({ currentPage, setCurrentPage }) => {
             />
           </Form.Group>
         </div>
-        <div className="col-lg-3 col-md-3">
+        <div className="col-lg-3 col-md-6 ">
           <Form.Group as={Col} controlId="formGridState">
             <RHFInput
               as={<Select options={itemCategoryOptionData} />}
@@ -98,7 +96,7 @@ const ItemFilter = ({ currentPage, setCurrentPage }) => {
             />
           </Form.Group>
         </div>
-        <div className="col-lg-3 col-md-3">
+        <div className="col-lg-3 col-md-6">
           <Form.Group as={Col} controlId="formGridState">
             <RHFInput
               as={<Select options={itemSubCategoryOptionData} />}
@@ -114,7 +112,7 @@ const ItemFilter = ({ currentPage, setCurrentPage }) => {
             />
           </Form.Group>
         </div>
-        <div className="col-lg-2 col-md-2">
+        <div className="col-lg-2 col-md-6 ">
           <Form.Group as={Col} controlId="formGridState">
             <RHFInput
               as={<Select options={department} />}
