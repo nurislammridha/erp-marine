@@ -1,290 +1,546 @@
 /* Extra large devices (large desktops, 1200px and up) */
 
-@media (min-width: 1200px) {}
-
+@media (min-width: 1200px) {
+}
 
 /* Large devices (desktops, 992px and up) */
 
-@media (min-width: 992px) and (max-width: 1199.98px) {}
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .widget__right h4 {
+    
+    font-size: 17px;
+}
+.voyage-activity-vessel {
+  margin-top: 0px!important;
+}
+a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
+  margin-top: 5px;
+}
 
+}
 
 /* All Mobile Devices */
 
 @media (min-width: 320px) and (max-width: 991.98px) {
-    .flex-row-fluid.d-flex.flex-column.position-relative.loginPage {
-        max-width: 100% !important;
-    }
-    .login-aside.d-flex.flex-row-auto.loginBg {
-        max-width: 100%;
-    }
+  .flex-row-fluid.d-flex.flex-column.position-relative.loginPage {
+    max-width: 100% !important;
+  }
+  .login-aside.d-flex.flex-row-auto.loginBg {
+    max-width: 100%;
+  }
 }
-
 
 /* Medium devices (tablets, 768px and up) */
 
 @media (min-width: 768px) and (max-width: 991.98px) {
-    .login.login-1 .login-aside {
-        height: 100vh;
-    }
-    .dashboard__pb {
-        padding-bottom: 0px;
-    }
-    .chart__box {
-        height: 410px;
-    }
-    .dough__main {
-        padding-top: 0px;
-    }
-    .doug__left {
-        padding-top: 0px;
-    }
-    
-    .chart__box {
-        height: 407px !important;
-    }
-    .login-signin {
-        margin-top: -78px;
-    }
-    .cerificateCategory {
-        width: 84%;
-    }
+  .login.login-1 .login-aside {
+    height: 100vh;
+  }
+  .dashboard__pb {
+    padding-bottom: 0px;
+  }
+  .chart__box {
+    height: 410px;
+  }
+  .dough__main {
+    padding-top: 0px;
+  }
+  .doug__left {
+    padding-top: 0px;
+  }
+
+  .chart__box {
+    height: 407px !important;
+  }
+  .login-signin {
+    margin-top: -78px;
+  }
+  .cerificateCategory {
+    width: 84%;
+  }
+  .dashboard-cardsection {
+    margin-bottom: -11px !important;
+  }
+  .topbar {
+    background-color: #3699ff;
+    z-index: 95 !important;
+  }
+  .header-fixed.subheader-fixed .subheader {
+    z-index: 93 !important;
+  }
+  .dashboard-cardsection {
+    padding-top: 45px !important;
+  }
+  .purchase-table{
+    margin-top: 10px;
+  }
+  .dashboard-cardsection {
+    padding-top: 3px !important;
+}
+.header-fixed.subheader-fixed .header {
+  background: transparent;
+   
+ }
+ .header.header-fixed {
+  height: 16px !important;
+ }
+ .MuiTab-root {
+  min-width: 108px !important;
+  
+}
+label.form-control.criteriaOptionsInput {
+  padding-bottom: 42px;
+  
+}
+.stickeyCard.card {
+  margin-left: -40px;
+}
+.css-yk16xz-control {
+  width: 100%!important;
+}
+a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
+  margin-top: 5px;
+}
+.user-list-addbutton{
+  margin-top: 5px;
+  margin-left: 10px;
 }
 
+}
 
 /* Small devices (landscape phones, 576px and up) */
 
-@media (min-width: 576px) and (max-width: 767.98px) {
-    .cerificateCategory {
-        width: 84%;
-    }
+@media (min-width: 476px) and (max-width: 767.98px) {
+  .cerificateCategory {
+    width: 84%;
+  }
+  .dashboard-cardsection {
+    margin-bottom: -11px !important;
+  }
+  .topbar {
+    background-color: #3699ff;
+    z-index: 95 !important;
+  }
+  .header-fixed.subheader-fixed .subheader {
+    z-index: 93 !important;
+  }
+  .dashboard-cardsection {
+    padding-top: 3px !important;
+  }
+  .paid__widget {
+    margin-bottom: 10px;
+  }
+  .container.dashboard__pb {
+    margin-top: 23px;
 }
-
+.purchase-table{
+  margin-top: 10px;
+}
+label.voyagelist-type.form-label {
+  margin-left: 10px;
+}
+label.mt-2.voyagelist-formlabel.form-label {
+  margin-left: 10px;
+}
+button.MuiButtonBase-root.MuiTab-root {
+  width: 73px!important;
+  min-width: 2px!important;
+ 
+  font-size: 9px!important;
+  text-transform: capitalize!important;
+  padding: 6px 8px!important;
+}
+.header-fixed.subheader-fixed .header {
+  background: transparent;
+   
+ }
+ .header.header-fixed {
+  height: 16px !important;
+ }
+ label.form-control.criteriaOptionsInput {
+  padding-bottom: 78px;
+  
+}
+.form-check.radio__button.Promotion-radio-button {
+  margin-left: 15px;
+}
+.form-check.radio__button.Promotion-radio-button {
+  margin-left: 15px;
+}
+.Promotion-radio-no-button {
+  margin-left: 15px;
+}
+.laytimecCommenced {
+  margin-left: 24px;
+}
+.laytimecCompleted{
+  margin-left: 24px!important;
+}
+.float-left.Rate-commision.one {
+  width: 16%;
+}
+.float-right.Rate-commision.one {
+ 
+  display: none;
+}
+.float-left.Rate-commision {
+  width: 32%;
+  
+}
+.float-right.Rate-commision {
+ 
+  display: none;
+}
+.form-group label {
+  font-size: 10px !important;
+}
+.float-left.Rate-commision.two {
+  width: 20%;
+}
+.float-right.Rate-commision.two {
+  
+  display: none;
+}
+i.fas.fa-trash-alt.editIcon.item-list-icon {
+  margin-left: 0px!important;
+}
+label.voyage-vessel.form-label {
+  margin-left: 12px;
+}
+.user-list-addbutton{
+  margin-top: 5px;
+  margin-left: 12px;
+}
+.user-list-dropdown{
+  margin-top: 5px;
+  }
+}
 
 /* Extra small devices (portrait phones, less than 576px) */
 
 @media (max-width: 425px) {
-    .dashboard__pb {
-        padding: 10px;
-    }
-    .dough__main,
-    .doug__left {
-        padding-top: 0px !important;
-    }
-    .chart__box {
-        height: 506px !important;
-    }
-    .loginBg {
-        display: none !important;
-    }
-    .login-signin {
-        margin-top: -150px !important;
-    }
-    .btn.btn-icon.btn-clean.btn-dropdown.btn-lg.mr-1 {
-        margin-right: 8px !important;
-    }
-    h1.tableheading {
-        margin-left: 13px;
-    }
-    i.fas.fa-calendar-alt {
-        top: 29px;
-        left: 245px;
-        color: #b5b5c3 !important;
-    }
-    .tbl-survey {
-        width: 100% !important;
-    }
-    .voyageTable i.fas.fa-trash-alt.editIcon.ml-4 {
-        margin-left: 0px !important;
-    }
-    .voyageTable td,
-    th,
-    ._1hzhf {
-        font-size: 10px !important;
-    }
-    button.btn.approve {
-        font-size: 9px;
-    }
-    i.editIcon {
-        font-size: 10px;
-        padding: 6px;
-        margin-right: 4px;
-    }
-    .tbl-standard thead tr th {
-        font-size: 9px !important;
-    }
-    .form-group label.voyagelist-formlabel {
-        font-size: 10px !important;
-        margin-left: 15px;
-    }
-    ._3uApM {
-        margin-top: -8px !important;
-        margin-left: 19px;
-    }
-    .form-group label {
-        font-size: 11px !important;
-    }
-    label.form-label.mt-2.formFont {
-        margin-top: 0px !important;
-    }
-    ._2Jtxm._35Ago ._2kL0S {
-        margin-left: 0px;
-    }
-    ._2Jtxm {
-        margin-left: 0px;
-    }
-    ._1Lo2h {
-        width: 97%;
-    }
-    ._hsN1w {
-        margin-right: 16px;
-    }
-    h3 {
-        font-size: 14px !important;
-    }
-    .header-fixed.subheader-fixed.subheader-enabled .wrapper {
-        padding-top: 6px !important;
-    }
-    table.table.table.item-add-table th,
-    tr,
-    td {
-        font-size: 10px !important;
-    }
-    .item-list-icon.ml-4 {
-        margin-left: 0px !important;
-    }
-    .completion-date {
-        margin-top: 14px;
-    }
-    i.fas.fa-calendar-alt {
-        left: 145px !important;
-        top: 22px !important;
-    }
-    .booking-entry-input.form-group {
-        margin-left: -13px;
-        width: 105% !important;
-    }
-    button.booking-listadd-btn {
-        font-size: 9px;
-    }
-    i.item-list-icon {
-        font-size: 8px !important;
-        margin-left: 0px !important;
-    }
-    .row.custom-modal {
-        width: 329px;
-    }
-    .aside {
-      
-        width: 184px;
-    }
-   
-    h5.text-muted.font-weight-bold.my-2.mr-5.ml-5 {
-        font-size: 13px!important;
-        width: 55%!important;
-    }
-    .dashboard-cardsection {
-        margin-bottom: -11px!important;
-    }
-    .topbar {
-        background-color: #3699FF;
-        z-index: 95!important;
-    }
-    .header-fixed.subheader-fixed .subheader {
-        z-index: 93!important;
-    }
-    .dashboard-cardsection {
-        padding-top: 45px!important;
-    }
-    .purchase-table{
-        margin-top: 10px;
-    }
-    .linechart {
-        margin-top: -18px;
-    }
-    .float-left.booking-text {
-        width: 23%;
-    }
-    
-    .booking-text.float-right {
-        width: 74%;
-    }
-    .float-left.booking-text.one {
-        width: 25%;
-    }
-    
-    .booking-text.float-right.one {
-        width: 70%;
-    }
-    .float-left.booking-text.two {
-        width: 23%;
-    }
-    
-    .booking-text.float-right.two{
-        width: 67%;
-    }
-    .cerificateCategory {
-        width: 87%;
-    }
-    .cerificateCategory {
-        width: 87%;
-    }
-    .offcanvas.offcanvas-right {
-        right: -395px;
-        left: auto;
-        display: none;
-    }
-    .certificate-icon{
-        margin-left: 0px  !important;
-    }
-    .stickeyCard.card {
-        margin-left: -40px;
-    }
-    input.color-picker {
-       
-        height: 18px;
-        width: 18px;
-    }
-    .due-days h6 {
-       
-        top: 3px;
-        left:22px;
-        font-size: 8px!important;
-    }
-    .certificate-filter {
-        margin-left: 16px;
-    }
-    .certificate-card.card-body {
-       
-        padding:10px !important;
-    }
-    .headerText{
-        padding-top: 0px!important;
-    }
+  .dashboard__pb {
+    padding: 10px;
+  }
+  .dough__main,
+  .doug__left {
+    padding-top: 0px !important;
+  }
+  .chart__box {
+    height: 506px !important;
+  }
+  .loginBg {
+    display: none !important;
+  }
+  .login-signin {
+    margin-top: -150px !important;
+  }
+  .btn.btn-icon.btn-clean.btn-dropdown.btn-lg.mr-1 {
+    margin-right: 8px !important;
+  }
+  h1.tableheading {
+    margin-left: 13px;
+  }
+  i.fas.fa-calendar-alt {
+    top: 29px;
+    left: 245px;
+    color: #b5b5c3 !important;
+  }
+  .tbl-survey {
+    width: 100% !important;
+  }
+  .voyageTable i.fas.fa-trash-alt.editIcon.ml-4 {
+    margin-left: 0px !important;
+  }
+  .voyageTable td,
+  th,
+  ._1hzhf {
+    font-size: 10px !important;
+  }
+  button.btn.approve {
+    font-size: 9px;
+  }
+  i.editIcon {
+    font-size: 10px;
+    padding: 6px;
+    margin-right: 4px;
+  }
+  .tbl-standard thead tr th {
+    font-size: 9px !important;
+  }
+  .form-group label.voyagelist-formlabel {
+    font-size: 10px !important;
+    margin-left: 15px;
+  }
+  ._3uApM {
+    margin-top: -8px !important;
+    margin-left: 19px;
+  }
+  .form-group label {
+    font-size: 11px !important;
+  }
+  label.form-label.mt-2.formFont {
+    margin-top: 0px !important;
+  }
+  ._2Jtxm._35Ago ._2kL0S {
+    margin-left: 0px;
+  }
+  ._2Jtxm {
+    margin-left: 0px;
+  }
+  ._1Lo2h {
+    width: 97%;
+  }
+  ._hsN1w {
+    margin-right: 16px;
+  }
+  h3 {
+    font-size: 14px !important;
+  }
+  .header-fixed.subheader-fixed.subheader-enabled .wrapper {
+    padding-top: 6px !important;
+  }
+  table.table.table.item-add-table th,
+  tr,
+  td {
+    font-size: 10px !important;
+  }
+  .item-list-icon.ml-4 {
+    margin-left: 0px !important;
+  }
+  .completion-date {
+    margin-top: 14px;
+  }
+  i.fas.fa-calendar-alt {
+    left: 145px !important;
+    top: 22px !important;
+  }
+  .booking-entry-input.form-group {
+    margin-left: -13px;
+    width: 105% !important;
+  }
+  button.booking-listadd-btn {
+    font-size: 9px;
+  }
+  i.item-list-icon {
+    font-size: 8px !important;
+    margin-left: 0px !important;
+  }
+  .row.custom-modal {
+    width: 329px;
+  }
+  .aside {
+    width: 184px;
+  }
+
+  h5.text-muted.font-weight-bold.my-2.mr-5.ml-5 {
+    font-size: 13px !important;
+    width: 55% !important;
+  }
+  .dashboard-cardsection {
+    margin-bottom: -11px !important;
+  }
+  .topbar {
+    background-color: #3699ff;
+    z-index: 95 !important;
+  }
+  .header-fixed.subheader-fixed .subheader {
+    z-index: 93 !important;
+  }
+  .dashboard-cardsection {
+    padding-top: 45px !important;
+  }
+  .purchase-table {
+    margin-top: 10px;
+  }
+  .linechart {
+    margin-top: -18px;
+  }
+  .float-left.booking-text {
+    width: 23%;
+  }
+
+  .booking-text.float-right {
+    width: 74%;
+  }
+  .float-left.booking-text.one {
+    width: 25%;
+  }
+
+  .booking-text.float-right.one {
+    width: 70%;
+  }
+  .float-left.booking-text.two {
+    width: 23%;
+  }
+
+  .booking-text.float-right.two {
+    width: 67%;
+  }
+  .cerificateCategory {
+    width: 87%;
+  }
+  .cerificateCategory {
+    width: 87%;
+  }
+  .offcanvas.offcanvas-right {
+    right: -395px;
+    left: auto;
+    display: none;
+  }
+  .certificate-icon {
+    margin-left: 0px !important;
+  }
+  .stickeyCard.card {
+    margin-left: -40px;
+  }
+  input.color-picker {
+    height: 18px;
+    width: 18px;
+  }
+  .due-days h6 {
+    top: 3px;
+    left: 22px;
+    font-size: 8px !important;
+  }
+  .certificate-filter {
+    margin-left: 16px;
+  }
+  .certificate-card.card-body {
+    padding: 10px !important;
+  }
+  .headerText {
+    padding-top: 0px !important;
+  }
+  .voyagelist-type.form-label {
+    margin-left: 14px;
+  }
+  .form-label {
+    margin-bottom: 2px !important;
+  }
+  .card {
+    margin-top: 7px;
+  }
+  .voyage-vessel {
+    margin-top: 3px !important;
+  }
+  .laytimecCommenced {
+    margin-left: 24px !important;
+  }
+  i.fas.fa-calendar-alt {
+    display: none;
+  }
+
+  .commence-date {
+    margin-top: 15px;
+  }
+  .float-left.Rate-commision {
+    width: 48%;
+    margin-left: 11px;
+  }
+  .float-right.Rate-commision {
+    width: 48%;
+    margin-top: -6px;
+  }
+  .float-left.Rate-commision.one {
+    width: 26%;
+  }
+  .float-right.Rate-commision.one {
+    width: 70%;
+  }
+  .float-left.Rate-commision.two {
+    width: 30%;
+  }
+  .float-right.Rate-commision.two {
+    width: 65%;
+  }
+  .export {
+    margin-left: 15px;
+  }
+  .voyage-vessel {
+    margin-left: 14px !important;
+    margin-top: -11px !important;
+  }
+  .custom-border {
+    margin-left: 0px !important;
+  }
+  .userlist-select {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .additional__comments label.form-check-label {
+    font-size: 12px;
+  }
+  .radio-button {
+    margin-left: 15px;
+  }
+  .radio-button {
+    margin-left: 29px;
+  }
+  .col-form-label {
+      padding-top: 0px!important;
+      padding-bottom: 0px!important;
+}
+.employee-cr-report-date{
+    margin-top: 0px!important;
+    margin-bottom: 0px!important;
+}
+.employee-cr-report-input{
+    margin-top: -19px;
+}
+.paid__widget {
+  margin-bottom: 10px;
+}
+button.MuiButtonBase-root.MuiTab-root {
+  width: 56px!important;
+  min-width: 2px!important;
+ 
+  font-size: 9px!important;
+  text-transform: capitalize!important;
+  padding: 6px 3px!important;
+}
+.Promotion-radio-button{
+  margin-left: 13px;
+}
+.user-list-addbutton{
+  margin-top: 5px;
+  margin-left: 11px;
+}
+.user-list-dropdown{
+margin-top: 5px;
+}
+a.ml-2.user-list-icon {
+  margin-left: 0px!important;
+}
+
 }
 
 @media (max-width: 426px) {
-    .loginBg {
-        height: 200px;
-    }
-    .dashboard__pb {
-        padding: 10px;
-    }
-    .dough__main,
-    .doug__left {
-        padding-top: 0px !important;
-    }
-    .chart__box {
-        height: 506px !important;
-    }
-    .empty-space {
-        width: 48% !important;
-    }
+  .loginBg {
+    height: 200px;
+  }
+  .dashboard__pb {
+    padding: 10px;
+  }
+  .dough__main,
+  .doug__left {
+    padding-top: 0px !important;
+  }
+  .chart__box {
+    height: 506px !important;
+  }
+  .empty-space {
+    width: 48% !important;
+  }
 }
 
 @media (max-width: 375px) {
-    i.fas.fa-calendar-alt {
-        top: 26px;
-        left: 203px;
-        color: #b5b5c3 !important;
-    }
+  i.fas.fa-calendar-alt {
+    top: 26px;
+    left: 203px;
+    color: #b5b5c3 !important;
+  }
+  a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
+    margin-top: 6px;
+}
 }

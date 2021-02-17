@@ -6,7 +6,7 @@ import { getPRDetailsData } from "../_redux/actions/PurhasesRequestAction";
 const PurchaseRequestDetails = ({ PRDetailsID, handleClose }) => {
     const dispatch = useDispatch()
     const PRDetails = useSelector((state) => state.purchaseRequest.PRDetails);
-    
+
     useEffect(() => {
         dispatch(getPRDetailsData(PRDetailsID))
     }, [])
@@ -56,14 +56,14 @@ const PurchaseRequestDetails = ({ PRDetailsID, handleClose }) => {
                             <table className="table table table-head-custom table-vertical-center table-hover">
                                 <thead>
                                     <tr>
-                                        <td>
+                                        {/* <td>
                                             <Form.Check
                                                 className=""
                                                 type="checkbox"
                                                 name="isRevLoadingPorts"
                                             // onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
                                             />
-                                        </td>
+                                        </td> */}
                                         <th scope="col">ITEM NO</th>
                                         <th scope="col">ITEM NAME</th>
                                         <th scope="col">REQUEST QUANTITY</th>
@@ -73,14 +73,14 @@ const PurchaseRequestDetails = ({ PRDetailsID, handleClose }) => {
                                     {
                                         PRDetails && PRDetails.purchase_row.length > 0 && PRDetails.purchase_row.map((item, index) => (
                                             <tr>
-                                                <td>
+                                                {/* <td>
                                                     <Form.Check
                                                         className=""
                                                         type="checkbox"
                                                         name="isRevLoadingPorts"
                                                     // onChange={(e) => handleChangeTextInput('isRevLoadingPorts', e.target.checked)}
                                                     />
-                                                </td>
+                                                </td> */}
                                                 <td>{item.intitemid !== null && item.intitemid !== '' ? item.intitemid : ''}</td>
                                                 <td>{item.strItemName !== null && item.strItemName !== '' ? item.strItemName : ''}</td>
                                                 <td>{item.numPurchaseRequestQty !== null && item.numPurchaseRequestQty !== '' ? parseInt(item.numPurchaseRequestQty) : ''}</td>

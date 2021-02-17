@@ -502,7 +502,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                 </div>
 
                 <div className="col-lg-4">
-                  <label className="form-label mt-2">CDC No.</label>
+                  <label className="form-label ">CDC No.</label>
                   <Form.Control
                     type="text"
                     placeholder="Enter CDC No."
@@ -515,8 +515,8 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     })}
                   />
                 </div>
-                <div className="col-lg-4 mt-8">
-                  <label className="form-label mt-2 mr-3">Profile Pic</label>
+                <div className="col-lg-4">
+                  <label className="form-label">Profile Pic</label>
                   <FileBase64
                     name="image"
                     multiple={true}
@@ -543,7 +543,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                 </div>
 
                 <div className="col-sm-4">
-                  <label className="form-label mt-2">
+                  <label className="form-label">
                     Expected Salary Amount
                   </label>
                   <Form.Control
@@ -660,7 +660,7 @@ const EmployeeAdd = withRouter(({ history, props }) => {
                     }}
                   >
                     <button type="button" class="btn btn-secondary btn-sm">
-                      Back
+                      Back 
                     </button>
                   </a>
                 </div>

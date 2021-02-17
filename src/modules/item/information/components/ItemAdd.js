@@ -303,13 +303,13 @@ const ItemAdd = () => {
                 <thead>
                   <tr>
                     <th scope="col">SL</th>
-                    <th scope="col">Department</th>
+                    {/* <th scope="col">Department</th> */}
                     <th scope="col">ITEM NAME</th>
                     <th scope="col">UOM</th>
                     <th scope="col">ITEM TYPE</th>
                     <th scope="col">ITEM CATEGORY</th>
                     <th scope="col">PART NO</th>
-                    <th scope="col">MODEL</th>
+                    {/* <th scope="col">MODEL</th> */}
                     <th scope="col">ACTION</th>
                   </tr>
                 </thead>
@@ -317,22 +317,27 @@ const ItemAdd = () => {
                   {multipleItemList.map((item, index) => (
                     <tr>
                       <td>{index + 1}</td>
-                      <td>{item.strDepartmentName}</td>
+                      {/* <td>{item.strDepartmentName}</td> */}
                       <td>{item.strItemName}</td>
                       <td>{item.strUoM}</td>
                       <td>{item.StrItemTypeName}</td>
                       <td>{item.strItemCategoryName}</td>
                       <td>{item.strPartNo}</td>
-                      <td>{item.strModelNo}</td>
+                      {/* <td>{item.strModelNo}</td> */}
 
                       <td>
                         {" "}
-                        <i className="far fa-edit editIcon item-list-icon"></i>
-                        <a
+                        {/* <i className="far fa-edit editIcon item-list-icon"></i> */}
+                        <a href
+
 
                           onClick={(index) => {
-                            alert("Are sure, you want to delete?")
-                            dispatch(deleteMultipleItemInput(index))
+                            if (
+                              window.confirm(
+                                "Are you sure you wish to delete this data"
+                              )
+                            )
+                              dispatch(deleteMultipleItemInput(index))
                           }}
                         >
                           <i className="fas fa-trash-alt editIcon item-list-icon ml-4"></i>

@@ -80,11 +80,12 @@ const BookingList = () => {
     <Card>
       <Card.Body>
         <div className="container ">
+        <h1 className="tableheading mt-0">Booking List</h1>
           <div className="row mb-5 table-form ">
-            <h1 className="tableheading mt-0 ">Booking List</h1>
+       
 
-            <hr></hr>
-            <div className="col-xl-4 col-lg-4 col-5 mb-2">
+          
+            <div className="offset-xl-6 offset-lg-6 col-xl-4 col-lg-4 col-9 mb-2">
               <Paper className="searchInput">
                 {/* <IconButton aria-label="Search" className="searchPlaceholder">
                   <i className="flaticon-search "></i>

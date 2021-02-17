@@ -36,12 +36,18 @@ const PartnerAddressReducer = (state = initialState, action) => {
             };
 
         case Types.SUBMIT_PARTNER_ADDRESS:
-            console.log('action.payload', action.payload)
+
             const partnerAddressSubmit = { ...state.partnerAddressInput };
             partnerAddressSubmit[action.payload.name] = action.payload.value;
 
             return {
                 ...state, partnerAddressSubmit,
+            };
+
+        case Types.EMPTY_ADD_MULTIPLE_FIELDS:
+            return {
+                ...state,
+                isMultipleAdded: false
             };
 
         case Types.SUBMIT_PARTNER_ADDRESS_MULTIPLE:
@@ -51,6 +57,13 @@ const PartnerAddressReducer = (state = initialState, action) => {
                 partnerAddressInput: initialState.partnerAddressInput,
                 isMultipleAdded: action.payload.status
             };
+
+        // case Types.EMPTY_PARTNER_ADDRESS:
+        //     return {
+        //         ...state,
+        //         partnerAddressInput: initialState.partnerAddressInput,
+        //         isMultipleAdded: action.payload
+        //     };
 
         case Types.DELETE_PARTNER_ADDRESS_MULTIPLE:
             const addressOld = [...state.addressInfo];

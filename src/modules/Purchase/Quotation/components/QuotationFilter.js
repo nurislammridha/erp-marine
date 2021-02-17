@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Form, Card, Button } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Form, Card } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { InputBase, Paper, IconButton } from "@material-ui/core";
-import { getCurrencyType, getQuotationDetails, getSupplierName, handleChangeQuotationFilterInput } from "../_redux/actions/QuotationFilterAction";
+import { getCurrencyType, getSupplierName, handleChangeQuotationFilterInput } from "../_redux/actions/QuotationFilterAction";
 
 
 const QuotationFilter = () => {
@@ -14,16 +14,26 @@ const QuotationFilter = () => {
     const QuotationFilterInput = useSelector((state) => state.QuotationFilterinfo.QuotationFilterInput);
     const supplierOptionData = useSelector((state) => state.QuotationFilterinfo.supplierNameData);
     const currencyOptionData = useSelector((state) => state.QuotationFilterinfo.currencyTypeData);
+    const status = useSelector((state) => state.QuotationFilterinfo.status);
     const { register, setValue } = useForm();
 
-
     const handleChangeTextInput = (name, value) => {
-        dispatch(handleChangeQuotationFilterInput(name, value))
+        dispatch(handleChangeQuotationFilterInput(name, value));
     }
+
+    useEffect(() => {
+        if (status) {
+            setValue("intSupplierId", "");
+            setValue("intCurrencyId", "");
+
+        }
+
+    }, [status])
 
     useEffect(() => {
         dispatch(getSupplierName());
         dispatch(getCurrencyType());
+
     }, [])
 
     return (
@@ -34,12 +44,13 @@ const QuotationFilter = () => {
                         className="form form-label-right voyageEngineerForm"
                         method="post"
                     >
-                        <div className="row mb-5 table-form ">
-                            <h1 className="tableheading font-weight-bold ">
+                     <h1 className="tableheading font-weight-bold ">
                                 Quotation Details
                             </h1>
+                        <div className="row mb-5 table-form ">
+                           
 
-                            <div className="col-xl-4 col-lg-4 col-md-6 mt-2">
+                            <div className="offset-xl-8 offset-lg-8 col-xl-4 col-lg-4 col-10 col-md-6 mt-2">
                                 <Paper className="searchInput supplier-search">
                                     <InputBase
                                         placeholder="Search"
@@ -79,11 +90,11 @@ const QuotationFilter = () => {
                                 <RHFInput
                                     as={<Select options={supplierOptionData} />}
                                     rules={{ required: false }}
-                                    name="courseData"
+                                    name="intSupplierId"
                                     register={register}
                                     onChange={(option) => {
                                         handleChangeTextInput('strSupplierName', option.label);
-                                        handleChangeTextInput('intSupplierId', option.value)
+                                        handleChangeTextInput('intSupplierId', option.value);
                                     }}
                                     setValue={setValue}
                                 />
@@ -93,7 +104,7 @@ const QuotationFilter = () => {
                                 <RHFInput
                                     as={<Select options={currencyOptionData} />}
                                     rules={{ required: false }}
-                                    name="intSupplierId"
+                                    name="intCurrencyId"
                                     register={register}
                                     onChange={(option) => {
                                         handleChangeTextInput('strCurrencyCode', option.label);

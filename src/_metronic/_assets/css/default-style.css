@@ -608,7 +608,8 @@ i.fa.fa-plus-circle {
 }
 
 .tbl-survey {
-    width: 74.5% !important;
+    /* width: 74.5% !important; */
+    width: 100% !important;
     margin: 10px 0px 10px 0px;
 }
 
@@ -1047,7 +1048,7 @@ td {
 }
 
 .form-group label {
-    font-size: 10px !important;
+    font-size: 12px !important;
     margin-bottom: 0px !important;
 }
 
@@ -1393,3 +1394,51 @@ h6.supplier-modal-header {
 h1.headerText{
     font-size: 13px!important;
 }
+.custome-border{
+position: relative;
+}
+.custome-border::before{
+    position: absolute;
+    content:"";
+    height: 1px;
+    width: 80%;
+    background-color: #000000;
+    left: 0;
+    top:0;
+
+}
+/* booking entry */
+
+.float-left.Rate-commision {
+    width: 13%;
+    margin-left: 11px;
+   
+}
+.float-right.Rate-commision {
+    width: 85%;
+    margin-top: -6px;
+}
+.float-left.Rate-commision.one {
+    width: 7%;
+   
+}
+.float-right.Rate-commision.one {
+    width: 91%;
+    
+}
+.float-left.Rate-commision.two {
+    width: 8%;
+}
+.float-right.Rate-commision.two {
+    width: 90%;
+}
+input[type="file"] {
+    width: 100%;
+}
+label.form-check-label {
+    font-size: 14px;
+}
+label.form-control.criteriaOptionsInput {
+    padding-bottom:43px;
+    
+  }

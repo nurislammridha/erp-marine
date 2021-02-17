@@ -38,7 +38,7 @@ export const certificatecategorySubmitAction = (getCategoryInpuData, isSubCatego
   }
   axios
     .post(postUrl, getCategoryInpuData)
-    .then(function(response) {
+    .then(function (response) {
       responseList.data = response.data;
       responseList.isLoading = false;
       responseList.status = response.data.status;
@@ -59,7 +59,7 @@ export const certificatecategorySubmitAction = (getCategoryInpuData, isSubCatego
         showToast("error", response.data.message);
       }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       responseList.isLoading = false;
       const message =
         "Something went wrong ! Please fill all inputs and try again !";
@@ -72,11 +72,7 @@ export const certificatecategorySubmitAction = (getCategoryInpuData, isSubCatego
     });
 };
 
-export const getCertificateCategoryListData = (
-  searchText = "",
-  status = "",
-  page
-) => async (dispatch) => {
+export const getCertificateCategoryListData = (searchValue = "", status = "", page) => async (dispatch) => {
   let response = {
     certificates: [],
     certificateCategoryList: [],
@@ -86,16 +82,18 @@ export const getCertificateCategoryListData = (
     errors: [],
   };
   dispatch({ type: Types.GET_CERTIFICATE_CATEGORY_LIST, payload: response });
-  let isActive = status == "" ? "" : parseInt(status);
-  // let url = "";
-  // url = `${process.env.REACT_APP_API_URL}certificate/category?isPaginated=1`;
-  let url = `${process.env.REACT_APP_API_URL}certificate/category`;
+  let isActive = status == "" ? 1 : parseInt(status); 
 
-  if (searchText !== "" || isActive !== "") {
-    url += `?search=${searchText}&isActive=${isActive}&isPaginated=1&paginateNo=15`;
-  } else {
-    url += `?isPaginated=1&paginateNo=15`;
+  let url = `${process.env.REACT_APP_API_URL}certificate/category?search=${searchValue}&isPaginated=1&paginateNo=10`;
+  
+  if (page !== null || page === "") {
+    url += `&page=${page}`;
   }
+  
+  if (isActive !== "") {
+    url += `&isActive=${isActive}`
+  }
+  
   try {
     await axios
       .get(url)
@@ -169,7 +167,7 @@ export const certificateCategoryEditAction = (
   let editUrl = `${process.env.REACT_APP_API_URL}certificate/category/${intCategoryID}`;
   axios
     .put(editUrl, certificateCategoryInput)
-    .then(function(response) {
+    .then(function (response) {
       responseList.data = response.data;
       responseList.isLoading = false;
       responseList.status = response.data.status;
@@ -183,7 +181,7 @@ export const certificateCategoryEditAction = (
         showToast("error", response.data.message);
       }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       responseList.isLoading = false;
       const message =
         "Something went wrong ! Please fill all inputs and try again !";

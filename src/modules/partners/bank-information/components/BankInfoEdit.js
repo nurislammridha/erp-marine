@@ -5,10 +5,10 @@ import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { bankInfoSubmitMultiple, deleteBankMultiple, getBankName, handleChangeBankInfoInput } from '../_redux/actions/BankInfoAction';
+import { bankInfoSubmitMultiple, deleteBankMultiple, emptyAddMultipleStatus, getBankName, handleChangeBankInfoInput } from '../_redux/actions/BankInfoAction';
 
 
-const BankInfoEdit = withRouter(({ history }) => {
+const BankInfoEdit = withRouter(() => {
 
 
     const { register, setValue } = useForm();
@@ -33,6 +33,7 @@ const BankInfoEdit = withRouter(({ history }) => {
     useEffect(() => {
         if (isMultipleAdded) {
             setValue("intBankId", "");
+            dispatch(emptyAddMultipleStatus());
         }
     }, [isMultipleAdded]);
 

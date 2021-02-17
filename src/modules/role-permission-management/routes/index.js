@@ -1,5 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import EditUserContainer from "../information/views/EditUserContainer";
 import NewUserContainer from "../information/views/NewUserContainer";
 import RolePermissionCreateContainer from "../information/views/RolePermissionCreateContainer";
 import RolePermissionEditContainer from "../information/views/RolePermissionEditContainer";
@@ -36,6 +37,12 @@ const routeRolePermissionManagement = [
     path: "/user/new user",
     name: "newuser",
     component: NewUserContainer,
+    exact: true,
+  },
+  {
+    path: "/user/edit/:id",
+    name: "user edit",
+    component: EditUserContainer,
     exact: true,
   },
 ];

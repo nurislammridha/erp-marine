@@ -13,12 +13,8 @@ import { partnerAddressSubmit } from '../address/_redux/actions/AddressAction';
 
 const StepProgress = () => {
     const history = useHistory();
-    const partnerInfoInput = useSelector((state) => state.partnerInfo.partnerInfoInput);
-    const partnerStatus = useSelector((state) => state.partnerInfo.status);
-    const bankInfoInput = useSelector((state) => state.bankInfo.bankInfoInput);
     const dispatch = useDispatch();
     const addStatus = useSelector((state) => state.partnerInfo.addStatus);
-    console.log('addStatus', addStatus);
 
 
 

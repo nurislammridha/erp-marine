@@ -33,11 +33,12 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
     console.log("Event", e);
   };
 
+
   const criteria = [
     {
       id: 1,
       name: "Conduct",
-      options: [
+      options:[
         {
           id: 1,
           name: "Very Satisfactory",
@@ -58,12 +59,13 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
           name: "Not Up To Mark",
           ysnChecked: 0,
         },
-      ],
+      ]
+
     },
     {
       id: 2,
       name: "Ability",
-      options: [
+      options:[
         {
           id: 1,
           name: "Exceptionally Good",
@@ -84,12 +86,12 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
           name: "Poor Decision Making",
           ysnChecked: 0,
         },
-      ],
+      ]
     },
     {
       id: 3,
       name: "Professional Knowledge",
-      options: [
+      options:[
         {
           id: 1,
           name: "Highly Knowladgeable",
@@ -110,12 +112,12 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
           name: "Not Up To Mark",
           ysnChecked: 0,
         },
-      ],
+      ]
     },
     {
       id: 4,
       name: "Initiative",
-      options: [
+      options:[
         {
           id: 4,
           name: "Criteria",
@@ -141,12 +143,12 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
           name: "Not Up To Mark",
           ysnChecked: 0,
         },
-      ],
+      ]
     },
     {
       id: 5,
       name: "Soberity",
-      options: [
+      options:[
         {
           id: 4,
           name: "Criteria",
@@ -172,12 +174,12 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
           name: "Not Up To Mark",
           ysnChecked: 0,
         },
-      ],
+      ]
     },
     {
       id: 6,
       name: "Sense of Responsibility",
-      options: [
+      options:[
         {
           id: 4,
           name: "Criteria",
@@ -203,7 +205,7 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
           name: "Not Up To Mark",
           ysnChecked: 0,
         },
-      ],
+      ]
     },
   ];
 
@@ -212,13 +214,13 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
     <>
       <div className="container pb-5 mb-4 ml-3">
         <div className="row  border-around">
-          <div className="col-8">
+          <div className="col-lg-8">
             <h3 className="card-label a-lebel text-center pt-5">
               AKIJ SHIPPING LINE LTD.
             </h3>
           </div>
 
-          <div className="col-4 shippingLineLogo">
+          <div className="col-lg-4 shippingLineLogo">
             <Image src={logo} roundedCircle className="akij-logo-ship" />
           </div>
         </div>
@@ -226,13 +228,13 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
 
       <div className="container">
         <div className="row">
-          <div className="col-lg-8 col-md-6">
+          <div className="col-lg-8 ">
             <form>
               <div className="form-group row">
-                <label for="Employee Name" className=" col-3 col-form-label">
+                <label for="Employee Name" className="col-sm-3 col-form-label">
                   Employee Name
                 </label>
-                <div className=" col-9 ">
+                <div className="col-sm-9">
                   <input
                     type="text"
                     className="form-control"
@@ -243,13 +245,13 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
               </div>
             </form>
           </div>
-          <div className="col-lg-4 col-md-6">
+          <div className="col-lg-4">
             <form>
               <div className="form-group row">
-                <label for="Employee Name" className="col-2 col-form-label">
+                <label for="Employee Name" className="col-sm-2 col-form-label">
                   RANK
                 </label>
-                <div className="col-10">
+                <div className="col-sm-10">
                   <input
                     type="text"
                     className="form-control"
@@ -263,13 +265,13 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
         </div>
         {/* Second Row */}
         <div className="row">
-          <div className="col-lg-6 col-md-6">
+          <div className="col-lg-6">
             <form>
               <div className="form-group row">
-                <label for="Employee Name" className="col-sm-3 col-form-label">
+                <label for="Employee Name" className="col-sm-4 col-form-label">
                   Name of Vessel
                 </label>
-                <div className="col-sm-9">
+                <div className="col-sm-8">
                   <input
                     type="text"
                     className="form-control"
@@ -280,7 +282,7 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
               </div>
             </form>
           </div>
-          <div className="col-lg-3 col-md-6">
+          <div className="col-lg-3">
             <form>
               <div className="form-group row">
                 <label for="Employee Name" className="col-sm-2 col-form-label">
@@ -297,13 +299,13 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
               </div>
             </form>
           </div>
-          <div className="col-lg-3 col-md-6">
+          <div className="col-lg-3">
             <form>
               <div className="form-group row">
-                <label for="Employee Name" className="col-sm-3 col-form-label">
+                <label for="Employee Name" className="col-sm-2 col-form-label">
                   To
                 </label>
-                <div className="col-sm-9">
+                <div className="col-sm-10">
                   <input
                     type="date"
                     className="form-control"
@@ -380,12 +382,12 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
                     <label className="form-control criteriaOptionsInput ">
                       {ct.name}
                     </label>
-                    {ct.options.map((item, index) => (
+                    {ct.options.map((item,index)=>(
                       <td>
-                        <label className="form-control criteriaOptionsInput ">
-                          {item.name}
-                        </label>
-                      </td>
+                      <label className="form-control criteriaOptionsInput ">
+                      {item.name}
+                    </label>
+                    </td>
                     ))}
                   </tr>
                 ))}
@@ -451,23 +453,19 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
             </div>
           </div>
         </div>
-       
-        {/*  */}
         <div className="row additional__comments">
           <div className="col-lg-12">
-          <p>Additional Comments Appraiser: </p>
-          </div>
-          <div className="col-lg-12">
+            <p>Additional Comments Appraiser: </p>
+
             <div className="row">
-              <div className="col-lg-4 col-md-4">
-              <div className="form-check radio__button">
+              <div className="col-lg-6">
+         
+                <div className="form-check radio__button">
                   <label className="form-check-label" for="exampleRadios1">
                     1. Promotion recommanded:
                   </label>
                 </div>
-              </div>
-              <div className="col-lg-4 col-md-4 ">
-              <div className="form-check radio__button  Promotion-radio-button ">
+                <div className="form-check radio__button ">
                   <input
                     className="form-check-input"
                     type="radio"
@@ -480,10 +478,7 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
                     Yes
                   </label>
                 </div>
-              </div>
-              <div className="col-lg-4 col-md-4 radio-button">
-               
-              <div className="form-check Promotion-radio-no-button ">
+                <div cslassName="form-check radio__button ">
                   <input
                     className="form-check-input"
                     type="radio"
@@ -493,106 +488,19 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
                     checked
                   />
                   <label className="form-check-label" for="exampleRadios1">
-                    No
+                    No 
                   </label>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-12 mt-2 mb-2">
-            <div className="row">
-              <div className="col-lg-6 col-md-6">
+                
                 <form>
-                  <div className="form-group">
-                    <label for="Employee Name" className="col-sm-2 ">
+                  <div className="form-group row pt-2 pl-2">
+                    <label
+                      for="Employee Name"
+                      className="col-sm-2 col-form-label"
+                    >
                       Date
                     </label>
-                    <div className="col-sm-12">
-                    <input
-                        type="date"
-                        className="form-control"
-                        id="inputRank"
-                        placeholder="Rank "
-                      />
-                    </div>
-                  </div>
-                </form>{" "}
-              </div>
-
-              <div className="col-lg-6 col-md-6 employee-cr-report-input">
-                <form>
-                  <label for="Employee Name" className="col-sm-2 ">
-                    {/* Date */}
-                  </label>
-                  <div className="col-sm-12">
-                  <input
-                      type="text"
-                      className="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                      placeholder="Enter Name"
-                    />
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/*  */}
-        <div className="row additional__comments">
-          <div className="col-lg-12">
-            <p>Additional comments of Master/CE:</p>
-          </div>
-          <div className="col-lg-12">
-            <div className="row">
-              <div className="col-lg-4 col-md-4">
-                <div className="form-check radio__button">
-                  <label className="form-check-label" for="exampleRadios1">
-                    2. Furtehr employment recommandation:
-                  </label>
-                </div>
-              </div>
-              <div className="col-lg-4 col-md-4">
-                <div className="form-check radio__button ml-5">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="exampleRadios"
-                    id="exampleRadios1"
-                    value="option1"
-                    checked
-                  />
-                  <label className="form-check-label" for="exampleRadios1">
-                    Yes
-                  </label>
-                </div>
-              </div>
-              <div className="col-lg-4 col-md-4">
-                <div className="form-check radio__button ml-5">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="exampleRadios"
-                    id="exampleRadios1"
-                    value="option1"
-                    checked
-                  />
-                  <label className="form-check-label" for="exampleRadios1">
-                    No
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-12 mt-2 mb-2 employee-cr-report-date">
-            <div className="row">
-              <div className="col-lg-6 col-md-6">
-                <form>
-                  <div className="form-group">
-                    <label for="Employee Name" className="col-sm-2 ">
-                      Date
-                    </label>
-                    <div className="col-sm-12">
+                    <div className="col-sm-6">
                       <input
                         type="date"
                         className="form-control"
@@ -604,12 +512,15 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
                 </form>{" "}
               </div>
 
-              <div className="col-lg-6 col-md-6 employee-cr-report-input">
+              <div className="col-lg-6">
                 <form>
-                  <label for="Employee Name" className="col-sm-2 ">
+                  <label
+                    for="Employee Name"
+                    className="col-sm-2 col-form-label"
+                  >
                     {/* Date */}
                   </label>
-                  <div className="col-sm-12">
+                  <div className="form-group">
                     <input
                       type="text"
                       className="form-control"
@@ -623,7 +534,88 @@ const EmployeeCrReport = withRouter(({ history, props }) => {
             </div>
           </div>
         </div>
-        <div className="row mt-2">
+        <div className="row additional__comments">
+          <div className="col-lg-12">
+           
+              <p>Additional comments of Master/CE:</p>
+</div>
+              <div className="row">
+                <div className="col-lg-6">
+                  <div className="form-check radio__button">
+                    <label className="form-check-label" for="exampleRadios1">
+                      2. Furtehr employment recommandation:
+                    </label>
+                  </div>
+                  <div className="form-check radio__button ml-4">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="exampleRadios"
+                      id="exampleRadios1"
+                      value="option1"
+                      checked
+                    />
+                    <label className="form-check-label" for="exampleRadios1">
+                      Yes
+                    </label>
+                  </div>
+                  <div className="form-check radio__button ml-5">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="exampleRadios"
+                      id="exampleRadios1"
+                      value="option1"
+                      checked
+                    />
+                    <label className="form-check-label" for="exampleRadios1">
+                      No
+                    </label>
+                  </div>
+                  <form>
+                    <div className="form-group row  pl-2">
+                      <label
+                        for="Employee Name"
+                        className="col-sm-2 col-form-label"
+                      >
+                        Date
+                      </label>
+                      <div className="col-sm-6">
+                        <input
+                          type="date"
+                          className="form-control"
+                          id="inputRank"
+                          placeholder="Rank "
+                        />
+                      </div>
+                    </div>
+                  </form>{" "}
+                </div>
+
+                <div className="col-lg-6">
+                  <form>
+                    <label
+                      for="Employee Name"
+                      className="col-sm-2 col-form-label"
+                    >
+                      {/* Date */}
+                    </label>
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="exampleInputEmail1"
+                        aria-describedby="emailHelp"
+                        placeholder="Enter Name"
+                      />
+                    </div>
+                  </form>
+                </div>
+              </div>
+            
+          
+        </div>
+        <div className="row">
           <div className="col-lg-12 nb">
             <p>
               {" "}

@@ -7,8 +7,9 @@ const initialState = {
     roleList: [], // For Insert/Edit Page
     rolesListPaginated: [],
     rolesListAll: [],
-    userList:[],
-    roleListOption:[],
+    userList: [],
+    userPaginationList: [],
+    roleListOption: [],
     inputData: {
         id: '',
         role: '',
@@ -26,9 +27,9 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
         case Types.CHANGE_ROLE_INPUT:
             const roleInputData = { ...state.inputData };
             roleInputData[action.payload.name] = action.payload.value;
-            return { 
-                ...state, 
-                inputData: roleInputData 
+            return {
+                ...state,
+                inputData: roleInputData
             };
 
         case Types.CREATE_ROLE:
@@ -39,10 +40,11 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                 roleCreateMessage: action.payload.message,
             };
         case Types.GET_PERMISSION_USER_LIST:
-            console.log('action.payload', action.payload);
             return {
                 ...state,
-                userList:action.payload
+                userList: action.payload.userList,
+                userPaginationList: action.payload.userPaginationList,
+                isLoading: action.payload.isLoading,
             };
 
         case Types.GET_USER_ROLE_LIST_PAGINATED:
@@ -51,7 +53,7 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                 isLoading: action.payload.isLoading,
                 rolesListPaginated: action.payload.rolesListPaginated,
                 rolesListAll: action.payload.rolesList,
-                roleListOption:getUserRoleDropdown(action.payload.rolesList)
+                roleListOption: getUserRoleDropdown(action.payload.rolesList)
 
             };
 
@@ -69,7 +71,7 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
             const roleDetailsData = {
                 ...state.inputData,
             }
-            if(action.payload != null && typeof action.payload.role !== 'undefined'){
+            if (action.payload != null && typeof action.payload.role !== 'undefined') {
                 roleDetailsData.id = action.payload.role.id;
                 roleDetailsData.role = action.payload.role.name;
                 roleDetailsData.groupList = action.payload.groups;
@@ -91,7 +93,7 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                 inputData: initialState.inputData
             };
         case Types.USER_ROLE_CHECKED:
-            const { indexparentRole, indexChild, checkboxStatus  } = action.payload;
+            const { indexparentRole, indexChild, checkboxStatus } = action.payload;
             let roleList = state.inputData.groupList.slice();
             roleList[indexparentRole].permissions[indexChild].isChecked = checkboxStatus;
             roleList[indexparentRole].isChecked = checkAllPermissionIsChecked(roleList, indexparentRole);
@@ -103,9 +105,9 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
                 }
             };
         case Types.USER_ROLE_HANDLE_CHANGE:
-            const { name, value  } = action.payload;
-           
-           
+            const { name, value } = action.payload;
+
+
             return {
                 ...state,
                 rollname: value,
@@ -177,22 +179,22 @@ const RolePermissionManagementReducer = (state = initialState, action) => {
  */
 const checkAllPermissionIsChecked = (roles, permissionGroupIndex) => {
     const getTotalPermissions = roles[permissionGroupIndex].permissions;
-    const getTotalCheckedPermissions = getTotalPermissions.filter(x=> x.isChecked);
+    const getTotalCheckedPermissions = getTotalPermissions.filter(x => x.isChecked);
     return getTotalPermissions.length === getTotalCheckedPermissions.length ? true : false;
 }
 
 const getUserRoleDropdown = (data) => {
     let options = [];
     if (data) {
-      data.forEach((item) => {
-        let itemData = {
-          value: item.id,
-          label: item.name,
-        };
-        options.push(itemData);
-      });
+        data.forEach((item) => {
+            let itemData = {
+                value: item.id,
+                label: item.name,
+            };
+            options.push(itemData);
+        });
     }
     return options;
-  };
+};
 
 export default RolePermissionManagementReducer;

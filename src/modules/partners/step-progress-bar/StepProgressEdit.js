@@ -12,16 +12,10 @@ import { partnerAddressSubmit } from '../address/_redux/actions/AddressAction';
 
 const StepProgressEdit = () => {
     const history = useHistory();
-    // const partnerInfoInput = useSelector((state) => state.partnerInfo.partnerInfoInput);
-    // const partnerStatus = useSelector((state) => state.partnerInfo.status);
-    // const bankInfoInput = useSelector((state) => state.bankInfo.bankInfoInput);
-    // const dispatch = useDispatch();
-    // const addStatus = useSelector((state) => state.partnerInfo.addStatus);
-    // console.log('addStatus', addStatus);
     const editStatus = useSelector((state) => state.partnerInfo.editStatus);
     const { id } = useParams();
-    console.log('step id', id)
     const dispatch = useDispatch();
+
     // setup step validators, will be called before proceeding to the next step
     const step1Validator = () => {
         return partnerInfoSubmitAction();
@@ -48,8 +42,6 @@ const StepProgressEdit = () => {
         history.push('/suppliers/list')
         dispatch(emptyStatus());
     }
-
-
 
     return (
         <div>

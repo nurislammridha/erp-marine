@@ -1,19 +1,15 @@
-import { getVesselId } from '../authCrud';
 
-export function getModulePermissionData() {
-  let userData = (localStorage.getItem('userData')) || 'none';
-  let dataParse = JSON.parse(userData);
-  return dataParse.moduleLists;
+export function getFeaturesPermissionData() {
+  let rolePermissionData = (localStorage.getItem('rolePermissionData')) || 'none';
+  return rolePermissionData;
 }
 
-export function checkModulePermission(moduleName) {
-  const intVesselId = getVesselId();
-  if(intVesselId == "")
-    return true;
-    
-  let permissionModule = getModulePermissionData();
-  const filters = permissionModule.filter(
-    (element) => element.strModuleShortName == moduleName,
+export function checkFeaturePermission(permissionName) {
+  let featureData = getFeaturesPermissionData().split(",");
+  console.log('featureData', featureData);
+
+  const filters = featureData.filter(
+    (element) => element == permissionName,
   );
   
   if (filters.length > 0) {

@@ -55,14 +55,17 @@ const BookingEntry = () => {
       <Card.Body className="pt-5 mt-0">
         <h1 className="tableheading mt-0 pt-0 ">Booking Entry</h1>
         <hr></hr>
+       
         <div className="row">
-          <div className="col-lg-1">
-            <h6 className="text-bold">BASIC INFO</h6>
-          </div>
-          <div className="col-lg-11">
-            <hr className="hr-margin"></hr>
-          </div>
-        </div>
+              <div className="float-left Rate-commision one">
+                <h6 className="text-bold">BASIC INFO</h6>
+              </div>
+              <div className="float-right Rate-commision one">
+              <hr></hr>
+              </div>
+           
+            </div>
+            <div className="clear-fix"></div>
 
         <form
           className="form form-label-right voyageEngineerForm" onSubmit={(e) => submitVesselBooking(e)} autoComplete="off" >
@@ -145,7 +148,7 @@ const BookingEntry = () => {
                 setValue={setValue}
               />
             </div>
-            <div className="col-lg-3 col-6">
+            <div className="col-lg-3 col-6 commence-date">
               <label className="formFont"> Commence Date</label>
               <DatePicker
                 className="date-picker"
@@ -198,13 +201,15 @@ const BookingEntry = () => {
           </div>
           <div className="mt-5">
             <div className="row">
-              <div className="col-lg-2">
+              <div className="float-left Rate-commision">
                 <h6 className="text-bold">RATE AND COMMISION</h6>
               </div>
-              <div className="col-lg-10">
-                <hr className="hr-margin"></hr>
+              <div className="float-right Rate-commision">
+              <hr></hr>
               </div>
+           
             </div>
+            <div className="clear-fix"></div>
           </div>
 
           <div className="form-group row mb-1">
@@ -262,10 +267,10 @@ const BookingEntry = () => {
                 />
               </Form.Group>
             </div>
-            <div className="col-lg-3 col-6 ">
+            <div className="col-lg-3 col-6">
               <Form.Group
                 as={Col}
-                md="12"
+                sm="8"
                 className="booking-entry-input"
                 controlId="validationCustomUsername"
               >
@@ -344,14 +349,16 @@ const BookingEntry = () => {
             </div>
           </div>
           <div className="mt-5">
-            <div className="row">
-              <div className="col-lg-2">
+          <div className="row">
+              <div className="float-left Rate-commision two">
                 <h6 className="text-bold">DATE DETAILS</h6>
               </div>
-              <div className="col-lg-10">
-                <hr className="hr-margin"></hr>
+              <div className="float-right Rate-commision two">
+              <hr></hr>
               </div>
+           
             </div>
+            <div className="clear-fix"></div>
           </div>
           <div className="form-group row mb-1">
             <div className="col-lg-3 col-6">

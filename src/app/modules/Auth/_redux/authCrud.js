@@ -35,14 +35,15 @@ export async function login(email, password) {
       .then(async (res) => {
         const { status, data, message } = res.data;
         let { user } = data;
+        console.log('user :>> ', user);
         loginResponse.access_token = data.access_token;
         loginResponse.data = data;
-
         loginResponse.status = true;
         if (status) {
           loginResponse.message = message;
           loginResponse.userData = user;
           localStorage.setItem('access_token', loginResponse.access_token);
+
         }
       })
       .catch(async (error) => {
@@ -50,9 +51,24 @@ export async function login(email, password) {
         loginResponse.status = false;
       });
 
-      // Do More..
+    // Do More..
+
     if (loginResponse.status) {
-      let loginUserData = null;
+      const rolePermissionURL = `${process.env.REACT_APP_API_URL}roles/getUserPermissions`;
+      await axios.get(`${rolePermissionURL}`, loginResponse.access_token)
+        .then((res) => {
+          if (res.data.status) {
+            console.log('res of permission:>> ', res.data.data);
+            localStorage.setItem('rolePermissionData', res.data.data);
+          }
+        })
+        .catch((error) => {
+          console.log('error res token :>> ', error);
+        });
+      // let loginUserData = localStorage.getItem('access_token');
+      // console.log('loginUserData :>> ', loginUserData);
+
+
       // await axios
       //   .get(`http://iapps.akij.net/asll/public/api/v1/hr/getUserDataByUserEmail?strOfficeEmail=${username}@akij.net`)
       //   .then(async function (response) {
@@ -69,29 +85,21 @@ export async function login(email, password) {
       // }
 
       // if successfull then call module list api and get modules list array and update that to userData.moduleLists
-      // const moduleURL = `http://iapps.akij.net/asll/public/api/v1/roles/getModulePermissionByUser?intUserTypeID=${loginResponse.userData.intUserTypeID}&intUserID=${loginResponse.userData.intEnroll}`;
-      // await axios
-      //   .get(`${moduleURL}`)
-      //   .then((res) => {
-      //     loginResponse.userData.moduleLists = res.data.data;
-      //   })
-      //   .catch((error) => {
-      //     loginResponse.isLoading = false;
-      //   });
-    }
 
+    }
     localStorage.setItem("userData", JSON.stringify(loginResponse.userData));
     loginResponse.isLoading = false;
     return loginResponse;
   } catch (error) {
     console.log('error', error);
-    
+
     loginResponse.isLoading = false;
     loginResponse.message =
       "❌ Network Not Available !\nConnect to Wifi or Internet Connection";
     return loginResponse;
   }
 }
+
 
 export function register(email, fullname, username, password) {
   return axios.post(REGISTER_URL, { email, fullname, username, password });

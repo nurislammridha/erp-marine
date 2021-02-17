@@ -1,7 +1,6 @@
 import * as Types from "../types/Types";
 import Axios from "axios";
-import store from '../../../../../redux/store';
-import { showToast } from "../../../../master/utils/ToastHelper";
+
 
 
 
@@ -48,7 +47,6 @@ export const getPortName = (data) => (dispatch) => {
     Axios.get(`${process.env.REACT_APP_API_URL}partner/port`).then(
 
         (res) => {
-            console.log('res', res)
             let data = res.data.data;
             dispatch({ type: Types.GET_PORT_NAME, payload: data });
         }
@@ -59,7 +57,6 @@ export const getProviderName = (data) => (dispatch) => {
     Axios.get(`${process.env.REACT_APP_API_URL}partner/psProvider`).then(
 
         (res) => {
-            console.log('res', res)
             let data = res.data.data;
             dispatch({ type: Types.GET_PROVIDER_NAME, payload: data });
         }

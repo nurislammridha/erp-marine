@@ -28,10 +28,11 @@ const RolePermissionList = () => {
       <Card>
         <Card.Body>
           <div className="container ">
+          <h1 className="tableheading mt-0">Roles List</h1>
             <div className="row mb-5 table-form ">
-              <h1 className="tableheading mt-0">Roles List</h1>
-              <div className="col-xl-6 col-lg-6 col-md-6 mb-2 mt-2"></div>
-              <div className="col-xl-3 col-lg-3 col-md-6 mb-2 mt-2">
+             
+             
+              <div className="offset-xl-6 offset-lg-6 col-xl-3 col-lg-3 col-6 mb-2 mt-2">
                 <Paper className="searchInput">
                   <InputBase
                     placeholder="Search "
@@ -43,7 +44,7 @@ const RolePermissionList = () => {
                 </Paper>
               </div>
 
-              <div className="">
+              <div className="col-xl-3 col-lg-3 col-6">
                 <i className="fas fa-filter tableFilter  mr-2"></i>
                 <i className="far fa-filter"></i>
                 <Link to="/role-permission/create">

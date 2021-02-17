@@ -287,7 +287,7 @@ const AdditionDeductionBulkUpload = withRouter(({ history, props }) => {
            
 
               <div className="form-group row">
-              <div className="col-md-2">
+              <div className="col-lg-3 col-md-3">
                       <label className="form-label">Month</label>
                       <RHFInput
                         as={<Select options={months} />}
@@ -300,7 +300,7 @@ const AdditionDeductionBulkUpload = withRouter(({ history, props }) => {
                       />
                     </div>
 
-                    <div className="col-md-2">
+                    <div className="col-lg-3 col-md-3">
                       <label className="form-label">Year</label>
                       <RHFInput
                         as={<Select options={year} />}
@@ -312,7 +312,7 @@ const AdditionDeductionBulkUpload = withRouter(({ history, props }) => {
                         setValue={setValue}
                       />
                     </div>
-                <div className="col-lg-4">
+                <div className="col-lg-3 col-md-3">
                   <label className="form-label ">
                     Upload Excel/CSV File
                   </label>
@@ -341,7 +341,7 @@ const AdditionDeductionBulkUpload = withRouter(({ history, props }) => {
                 {/* <div className="col-lg-4">
                   <DemoAdditionDeductionFile />
                 </div> */}
-                <div className="col-lg-4 ">
+                <div className="col-lg-3 col-md-3 ">
                   <p className="mt-5">
                     <a
                       target="_blank"

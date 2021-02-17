@@ -6,80 +6,69 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import ReactToPrint from 'react-to-print';
 import { getSupplierName } from '../../../master/DropDownData/SupplierName/_redux/SupplierNameAction/SupplierNameAction';
-import { getQuotationRFQDetails, getSupplierAddress, searchValueRFQ } from '../_redux/action/SupplierCsAction';
+import { getQuotationRFQDetails, getSupplierAddress, newRfqList, searchValueRFQ } from '../_redux/action/SupplierCsAction';
 const SupplierRFQ = () => {
     const componentRef = useRef();
     const { register, setValue } = useForm();
     const supplierNameList = useSelector(state => state.SupplierNameReducer.supplierNameList);
-    const supplierDetailsList = useSelector(state => state.supplierCsInfo.supplierDetailsList);
     const supplierAddress = useSelector(state => state.supplierCsInfo.supplierAddress);
     const valSearchRFQ = useSelector(state => state.supplierCsInfo.valSearchRFQ);
-    const quotationRFQlist = useSelector(state => state.supplierCsInfo.quotationRFQlist);
+    const rfqList = useSelector(state => state.supplierCsInfo.rfqList);
+    console.log('rfqList :>> ', rfqList);
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getSupplierName())
     }, [])
-    useEffect(() => {
-        dispatch(getQuotationRFQDetails(valSearchRFQ))
-    }, [valSearchRFQ, dispatch])
+
     const changeSupplierList = (value) => {
         dispatch(getSupplierAddress(value))
     }
     const searchRFQ = (value) => {
         dispatch(searchValueRFQ(value))
     }
-    console.log('quotationRFQlist :>> ', quotationRFQlist);
-    const courseData = [
-        {
-            id: 1,
-            name: "cse",
-        },
-        {
-            id: 1,
-            name: "EEE",
-        },
-        {
-            id: 1,
-            name: "MBA",
-        },
-    ];
-    let CourseName = [];
-    if (courseData) {
-        courseData.forEach((item) => {
-            let items = {
-                value: item.id,
-                label: item.name,
-            };
-            CourseName.push(items);
-        });
+    const addRfqList = () => {
+
+        dispatch(getQuotationRFQDetails(rfqList, valSearchRFQ));
     }
+
+
     return (
 
         <>
 
             <div className="form-group row">
-                <div className="col-xl-4 col-lg-4 col-md-6">
-                    <Form.Group>
-                        <Form.Label className="formFont pl-1">RFQ NO</Form.Label>
-                        <Form.Control
-                            className="formHeight"
-                            type="number"
-                            placeholder="Type RFQ"
-                            name="searchRFQ"
-                            value={valSearchRFQ}
-                            onChange={(e) => searchRFQ(e.target.value)}
-                        />
-                    </Form.Group>
+                {rfqList && (
+                    <div className="col-xl-3 col-lg-3 col-md-5">
+                        <Form.Group>
+                            <Form.Label className="formFont pl-1">RFQ NO</Form.Label>
+                            <Form.Control
+                                className="formHeight"
+                                type="number"
+                                placeholder={rfqList.intPurchaseRequestID}
+                                name="searchRFQ"
+                                value={valSearchRFQ}
+                                onChange={(e) => searchRFQ(e.target.value)}
+                            />
+                        </Form.Group>
+                    </div>
+                )}
+                <div className="col-xl-2 col-lg-2 col-md-2">
+                    <button
+                        className="btn btn-primary mt-5"
+                        onClick={() => addRfqList()}
+                    >
+                        Add List
+                   </button>
                 </div>
 
-                <div className="col-xl-4 col-lg-4 col-md-6">
+                <div className="col-xl-3 col-lg-3 col-md-5">
                     <label className="formFont">Supplier</label>
                     <RHFInput
                         as={<Select options={supplierNameList} />}
                         rules={{ required: false }}
                         name="intSupplierId"
                         register={register}
-                        value={CourseName.label}
+                        value={''}
                         setValue={setValue}
                         onChange={(option) => changeSupplierList(option.value)}
                     />
@@ -101,11 +90,12 @@ const SupplierRFQ = () => {
                     content={() => componentRef.current}
                 />
 
+
             </div>
             <div className="row" ref={componentRef}>
                 <div className="col-xl-8 col-lg-8 col-12">
                     <div className="react-bootstrap-table table-responsive mt-5">
-                        {quotationRFQlist && (
+                        {rfqList && (
                             <table className="table table table-head-custom table-vertical-center voyageTable supplier-table">
                                 <thead>
                                     <tr>
@@ -116,24 +106,21 @@ const SupplierRFQ = () => {
                                         <th scope="col">UOM</th>
                                         <th scope="col">REMARKS</th>
                                         <th scope="col">RFQ QTY</th>
-
-                                        <th scope="col">RATE</th>
-                                        <th scope="col">TOTAL</th>
                                     </tr>
 
-                                    {quotationRFQlist.map((item, index) => (
+                                    {rfqList.purchase_row.map((item, index) => (
+
                                         <tr>
                                             <td>{index + 1}</td>
-                                            <td>2021</td>
-                                            <td>{index.intItemId}</td>
-                                            <td>8567</td>
-                                            <td>123</td>
-                                            <td>{item.strRemarks}</td>
-                                            <td>{item.numPRQty}</td>
-                                            <td>100</td>
-                                            <td>100</td>
+                                            <td>{item.intId}</td>
+                                            <td>{item.intitemid}</td>
+                                            <td>{item.strItemName}</td>
+                                            <td>Test</td>
+                                            <td>Test</td>
+                                            <td>Test</td>
                                         </tr>
                                     ))}
+
 
                                 </thead>
                             </table>

@@ -35,11 +35,11 @@ const PurhasesOrderFilter = () => {
         <>
             <Card>
                 <Card.Body>
+                <h1 className="tableheading mt-0 ">Purchase Order</h1>
                     <div className="row mb-5 table-form">
-                        <div className="col-xl-2 col-lg-2 col-md-2 col-5">
-                            <h1 className="tableheading mt-0 ">Purchase Order</h1>
-                        </div>
-                        <div className="col-xl-4 col-lg-4 col-md-4 col-5">
+                  
+                        
+                        <div className="offset-xl-8 offset-lg-8 col-xl-4 col-lg-4 col-md-4 col-8">
                             <Paper className="searchInput">
                                 <InputBase
                                     className="custome-purchase-search"

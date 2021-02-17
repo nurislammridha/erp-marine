@@ -7,18 +7,18 @@ import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
     deletePartnerAddressMultiple,
+    emptyAddMultipleStatus,
     getCountryName,
     handleChangePartnerAddressInput,
-    partnerAddressSubmit,
     partnerAddressSubmitMultiple
 } from '../_redux/actions/AddressAction';
 
-const AddressEdit = withRouter(({ history }) => {
+const AddressEdit = withRouter(() => {
     const { register, setValue, handleSubmit } = useForm();
     const dispatch = useDispatch();
     const partnerAddress = useSelector(state => state.partnerAddress.partnerAddressInput);
     const addressInfo = useSelector(state => state.partnerAddress.addressInfo);
-    // console.log('partnerAddress :>> ', partnerAddress);
+
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangePartnerAddressInput(name, value))
     }
@@ -35,6 +35,7 @@ const AddressEdit = withRouter(({ history }) => {
     useEffect(() => {
         if (isMultipleAdded) {
             setValue("intCountryID", "");
+            dispatch(emptyAddMultipleStatus());
         }
     }, [isMultipleAdded]);
 

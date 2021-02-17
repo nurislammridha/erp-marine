@@ -12,6 +12,7 @@ import PolarChart from "../../../modules/master/components/Chart/PolarChart";
 import SalesPaymentTable from "../../../modules/master/components/DashboardTable/SalesPaymentTable";
 import PurchasePaymentTable from "../../../modules/master/components/DashboardTable/PurchasePaymentTable";
 import DashboardNavbar from "../../../modules/dashboard/components/DashboardNavbar";
+import PermissionWiseDisplay from "../../../modules/master/components/permissions/PermissionWiseDisplay";
 
 export function Dashboard() {
   const uiService = useHtmlClassService();
@@ -21,7 +22,8 @@ export function Dashboard() {
   //   };
   // }, [uiService]);
   return (
-    <>
+    // <PermissionWiseDisplay permission_name={"expense.list"}>
+      <>
       {/* <DashboardMain /> */}
 
       {/* DashBoard design Starts 11:00   */}
@@ -60,6 +62,7 @@ export function Dashboard() {
         </div>
       
       </div>
-    </>
+      </>
+    // {/* </PermissionWiseDisplay> */}
   );
 }

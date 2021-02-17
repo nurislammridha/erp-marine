@@ -115,7 +115,7 @@ const LaytimeRow = () => {
                                             />
                                         </div>
                                         <div className="row col-md-6 p-0">
-                                            <div className="col-md-6 p-0 mr-4">
+                                            <div className="col-md-6 p-0 mr-4 laytimecCommenced">
                                                 <label className="form-label mt-2 formFont">Laytime Commenced</label>
                                                 <DatePicker
                                                     name="dteLaytimeCommenced"
@@ -128,7 +128,7 @@ const LaytimeRow = () => {
                                                     })}
                                                 />
                                             </div>
-                                            <div className="col-md-4 ml-4 pl-0" style={{ minWidth: "37%" }}>
+                                            <div className="col-md-4 ml-4 pl-0 laytimecCommenced laytimecCompleted">
                                                 <label className="form-label mt-2 formFont">Laytime Completed</label>
                                                 <DatePicker
                                                     name="dteLaytimeCompleted"

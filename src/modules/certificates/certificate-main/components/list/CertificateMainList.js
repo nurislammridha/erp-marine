@@ -7,8 +7,10 @@ import { Form, Card, Button, Row, Col } from "react-bootstrap";
 import "./style.css";
 import { generateStringDateFromDate } from "../../../../../domains/CCO/utils/DateHelper";
 import {
+  changeColorCode,
   getCertificateCategory,
   getCertificateMainListAction,
+  handleColorCode,
 } from "../../_redux/actions/CertificateMainAction";
 import "./style.css";
 import {
@@ -30,22 +32,15 @@ const CertificateMainList = () => {
   const [expireInDays, setExpireInDays] = useState(30);
 
   const isLoading = useSelector((state) => state.certificateMainInfo.isLoading);
-  const certificates = useSelector(
-    (state) => state.certificateMainInfo.certificates
-  );
-  const certificateExpireDaysList = useSelector(
-    (state) => state.certificateMainInfo.certificateExpireDaysList
-  );
-  const certificatesPaginatedData = useSelector(
-    (state) => state.certificateMainInfo.certificatesPaginatedData
-  );
-  const certificateParentCategoryList = useSelector(
-    (state) => state.CertificateCategoryReducer.certificateParentCategoryList
-  );
+  const certificates = useSelector((state) => state.certificateMainInfo.certificates);
+  const certificateExpireDaysList = useSelector((state) => state.certificateMainInfo.certificateExpireDaysList);
+  const certificatesPaginatedData = useSelector((state) => state.certificateMainInfo.certificatesPaginatedData);
+  const certificateParentCategoryList = useSelector((state) => state.CertificateCategoryReducer.certificateParentCategoryList);
+  const certificateChildCategoryList = useSelector((state) => state.CertificateCategoryReducer.certificateChildCategoryList);
 
-  const certificateChildCategoryList = useSelector(
-    (state) => state.CertificateCategoryReducer.certificateChildCategoryList
-  );
+  const certificateBackgroundColor = useSelector((state) => state.certificateMainInfo.certificateBackgroundColor);
+  const bottomStatus = useSelector((state) => state.certificateMainInfo.bottomStatus);
+
   useEffect(() => {
     dispatch(getCertificateMainListAction(currentPage));
     dispatch(getCertificateCategory());
@@ -73,29 +68,17 @@ const CertificateMainList = () => {
     }
   };
 
-  const handleClick = (event) => {
-    console.log(event);
-  };
+  //filter sttus color code 
+  const getColorCode = (difference) => {
+    const singleItem = bottomStatus.filter((item, index) => (
+      difference >= item.minDate && difference <= item.maxDate
+    ))
+    return singleItem[0].colorCode;
+  }
 
-  const certificateDelete = () => {};
-
-  const getCertificateColorClass = (difference) => {
-    let rowClassName = "";
-    if (difference === 0) {
-      rowClassName = "due-0";
-    } else if (difference > 0 && difference <= 30) {
-      rowClassName = "due-l-30";
-    } else if (difference > 30 && difference < 60) {
-      rowClassName = "due-30-60";
-    } else if (difference >= 60) {
-      rowClassName = "due-g-60";
-    }
-    return rowClassName;
-  };
-  console.log(
-    "certificateParentCategoryList :>> ",
-    certificateParentCategoryList
-  );
+  const dataWithColorCodeFilter = (name, value, index) => {
+    dispatch(handleColorCode(name, value, index));
+  }
 
   const stickyFooter = {
     padding: "20px",
@@ -116,13 +99,14 @@ const CertificateMainList = () => {
     <>
       <Card>
         <Card.Body className="certificate-card">
+          <h1 className="headerText pt-2">Certificates</h1> <hr />
           <div className="row mb-5">
-            <div className="col-lg-4 ">
+            <div className="col-lg-4 col-md-6 ">
               <div className="row">
-                <div className="col-lg-3">
+                <div className="col-lg-3 col-md-4">
                   <h1 className="headerText pt-2">Certificates</h1>
-                  </div>
-                  <div className="col-lg-9 ">
+                </div>
+                <div className="col-lg-9 col-md-8">
                   <Form.Group as={Col} controlId="formGridState">
                     <input
                       type="search"
@@ -134,8 +118,8 @@ const CertificateMainList = () => {
                   </Form.Group>
                 </div>
               </div>
-           </div>
-            <div className="col-lg-3 ">
+            </div>
+            <div className="col-lg-3 col-md-6">
               <Form.Group as={Col} controlId="formGridState">
                 <RHFInput
                   as={<Select options={certificateParentCategoryList} />}
@@ -153,7 +137,7 @@ const CertificateMainList = () => {
                 />
               </Form.Group>
             </div>
-            <div className="col-lg-3 ">
+            <div className="col-lg-3 col-md-6 ">
               <Form.Group as={Col} controlId="formGridState">
                 <RHFInput
                   as={<Select options={certificateChildCategoryList} />}
@@ -193,7 +177,7 @@ const CertificateMainList = () => {
                 setValue={setValue}
               />
             </Form.Group> */}
-            <div className="col-lg-2  certificate-filter">
+            <div className="col-lg-2 col-md-6 certificate-filter">
               <i className="fas fa-filter tableFilter mt-1 mr-2"></i>
               <i className="far fa-filter"></i>
               <Link
@@ -208,90 +192,95 @@ const CertificateMainList = () => {
           {isLoading && <LoadingSpinner text="Loading Certificates..." />}
           {!isLoading && certificates.length > 0 && (
             <div className="react-bootstrap-table table-responsive">
-      
-            <table className="table table table-head-custom table-vertical-center user-list-table certificate-list-table">
-              <thead>
-                <tr>
-                  <th className="td-sl">#</th>
-                  {/* <th scope="col">Folder No.</th> */}
-                  {/* <th scope="col">Code</th> */}
-                  <th scope="col">Description</th>
-                  <th scope="col">Type</th>
-                  {/* <th scope="col">Issued By</th> */}
-                  <th scope="col">Issued Place</th>
-                  <th scope="col">Location</th>
-                  {/* <th scope="col">Issued Date</th> */}
-                  <th scope="col">Valid Until</th>
-                  <th scope="col">Entended Until</th>
-                  <th scope="col">Last Endorsement</th>
-                  <th scope="col">Not On Board</th>
-                  <th scope="col">Due Date</th>
-                  <th scope="col">Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {certificates.map((certificate, index) => (
-                  <tr key={index + 1}>
-                    <td>{index + 1}</td>
-                    {/* <td>{certificate.strShipFolderNo}</td> */}
-                    {/* <td>{certificate.strCustomeCode}</td> */}
-                    <td>{certificate.strShipRemarks}</td>
-                    <td>{certificate.strCertificateTypeName}</td>
-                    {/* <td>{certificate.strIssuingAuthorityName}</td> */}
-                    <td>{certificate.strIssuedPlace}</td>
-                    <td>{certificate.strLocation}</td>
-                    {/* <td>
+
+              <table className="table table table-head-custom table-vertical-center user-list-table certificate-list-table">
+                <thead>
+                  <tr>
+                    <th className="td-sl">#</th>
+                    {/* <th scope="col">Folder No.</th> */}
+                    {/* <th scope="col">Code</th> */}
+                    <th scope="col">Description</th>
+                    <th scope="col">Type</th>
+                    {/* <th scope="col">Issued By</th> */}
+                    <th scope="col">Issued Place</th>
+                    <th scope="col">Location</th>
+                    {/* <th scope="col">Issued Date</th> */}
+                    <th scope="col">Valid Until</th>
+                    <th scope="col">Entended Until</th>
+                    <th scope="col">Last Endorsement</th>
+                    <th scope="col">Not On Board</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {certificates.map((certificate, index) => (
+                    <tr key={index + 1}>
+                      <td>{index + 1}</td>
+                      {/* <td>{certificate.strShipFolderNo}</td> */}
+                      {/* <td>{certificate.strCustomeCode}</td> */}
+                      <td>{certificate.strShipRemarks}</td>
+                      <td>{certificate.strCertificateTypeName}</td>
+                      {/* <td>{certificate.strIssuingAuthorityName}</td> */}
+                      <td>{certificate.strIssuedPlace}</td>
+                      <td>{certificate.strLocation}</td>
+                      {/* <td>
                       {certificate.dteCertificateIssueDate !== null
                         ? generateStringDateFromDate(
                             certificate.dteCertificateIssueDate
                           )
                         : ""}
                     </td> */}
-                    <td>
-                      {certificate.dteCertificateValidUntil !== null
-                        ? generateStringDateFromDate(
+                      <td>
+                        {certificate.dteCertificateValidUntil !== null
+                          ? generateStringDateFromDate(
                             certificate.dteCertificateValidUntil
                           )
-                        : ""}
-                    </td>
-                    <td>
-                      {certificate.dteExtendedUntil !== null
-                        ? generateStringDateFromDate(
+                          : ""}
+                      </td>
+                      <td>
+                        {certificate.dteExtendedUntil !== null
+                          ? generateStringDateFromDate(
                             certificate.dteExtendedUntil
                           )
-                        : ""}
-                    </td>
-                    <td>
-                      {certificate.dteLastEndorsementDate !== null
-                        ? generateStringDateFromDate(
+                          : ""}
+                      </td>
+
+                      <td>
+                        {certificate.dteLastEndorsementDate !== null
+                          ? generateStringDateFromDate(
                             certificate.dteLastEndorsementDate
                           )
-                        : ""}
-                    </td>
-                    <td>{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
-                    <td>{certificate.differenceDays}</td>
-                    <td>
-                      <button
-                        className={`btn btn-primary btn-sm text-white certificate-lis-btn certificate-${getCertificateColorClass(
-                          certificate.differenceDays
-                        )}`}
-                      >
-                        {certificate.differenceDays === 0 ? "Expired" : "Due"}
-                      </button>
-                    </td>
-                    <td>
-                      <div className="mt-5">
-                        <Link onClick={() => certificateDetails(certificate)}>
-                          <i className="far fa-eye text-success editIcon item-list-icon"></i>
-                        </Link>
-                        <Link
-                          className="ml-2 certificate-icon"
-                          to={`/certificates-main/edit/${certificate.intCertificateDetailsID}`}
-                        >
-                          <i className="fa fa-edit text-success editIcon item-list-icon"></i>
-                        </Link>
-                      </div>
+                          : ""}
+                      </td>
+                      <td>{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
+                      <td>{certificate.differenceDays}</td>
+                      <td>
+                        {/* <button
+                          className={`btn btn-primary btn-sm text-white certificate-lis-btn certificate-${getCertificateColorClass(
+                            certificate.differenceDays
+                          )}`}>
+                          {certificate.differenceDays === 0 ? "Expired" : "Due"}
+                        </button> */}
+                        <button
+                          className="btn btn-primary btn-sm text-white certificate-lis-btn" style={{ backgroundColor: `${getColorCode(certificate.differenceDays)}` }}>
+                          {certificate.differenceDays === 0 ? "Expired" : "Due"}
+                        </button>
+
+                      </td>
+                      <td>
+                        <div className="mt-5">
+                          <Link onClick={() => certificateDetails(certificate)}>
+                            <i className="far fa-eye text-success editIcon item-list-icon"></i>
+                          </Link>
+                          <Link
+                            className="ml-2 certificate-icon"
+                            to={`/certificates-main/edit/${certificate.intCertificateDetailsID}`}
+                          >
+                            <i className="fa fa-edit text-success editIcon item-list-icon"></i>
+                          </Link>
+                        </div>
                       &nbsp;&nbsp;&nbsp;
                       {/* <button
                         className="btn btn-icon btn-light btn-hover-danger btn-sm"
@@ -306,16 +295,16 @@ const CertificateMainList = () => {
                       >
                         <i className="fa fa-trash"></i>
                       </button> */}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           )}
 
           {!isLoading && certificates.length === 0 && (
-            <div className="alert border-1 p-4">
+            <div className="alert alert-warning mt-5">
               Sorry ! No Certificates Found.
             </div>
           )}
@@ -330,12 +319,34 @@ const CertificateMainList = () => {
       {!isLoading && certificates.length > 0 && (
         <Card className="p-5 stickeyCard" sticky="bottom" style={stickyFooter}>
           <div className="row justify-content-center">
-            <div className="col-lg-2 col-3">
+            {
+              bottomStatus && bottomStatus.length > 0 && bottomStatus.map((item, index) => (
+                <div className="col-lg-2 col-3">
+                  <div className="between-thirty due-days">
+                    <input
+                      type="color"
+                      value={item.colorCode}
+                      className="color-picker float-left mr-2"
+                      name={item.inputName}
+                      onChange={(e) => dataWithColorCodeFilter(item.inputName, e.target.value, index)}
+                    />
+                    <h6>
+                      {item.bottomLabel}
+                    </h6>
+
+                  </div>
+                </div>
+              ))
+            }
+
+            {/* <div className="col-lg-2 col-3">
               <div className="between-thirty due-days">
                 <input
                   type="color"
-                  value="#8ec7ff"
                   className="color-picker float-left mr-2"
+                  name="due_30_days_code"
+                  value={certificateBackgroundColor.due_30_days_code ? certificateBackgroundColor.due_30_days_code : "#8ec7ff"}
+                  onChange={(e) => dataWithColorCodeFilter('due_30_days_code', e.target.value)}
                 />
                 <h6>Due between 30 days </h6>
               </div>
@@ -344,8 +355,10 @@ const CertificateMainList = () => {
               <div className="between-sixty due-days">
                 <input
                   type="color"
-                  value="#678db2"
                   className="color-picker between-sixty float-left"
+                  name="due_60_days_code"
+                  value={certificateBackgroundColor.due_60_days_code ? certificateBackgroundColor.due_60_days_code : "#678db2"}
+                  onChange={(e) => dataWithColorCodeFilter('due_60_days_code', e.target.value)}
                 />
                 <h6>Due between 60 days </h6>
               </div>
@@ -354,22 +367,30 @@ const CertificateMainList = () => {
               <div className="between-thirty More-than-sixty due-days ">
                 <input
                   type="color"
-                  value="#8af2c0"
-                  className="color-picker more-than-sixty float-left "
+                  className="color-picker more-than-sixty float-left"
+                  name="due_more_60_days_code"
+                  value={certificateBackgroundColor.due_more_60_days_code ? certificateBackgroundColor.due_more_60_days_code : "#8af2c0"}
+                  onChange={(e) => dataWithColorCodeFilter('due_more_60_days_code', e.target.value)}
                 />
                 <h6 className=" ">Due more than 60 days </h6>
               </div>
             </div>
+
             <div className="col-lg-2 col-3">
               <div className="expired due-days">
                 <input
                   type="color"
-                  value="#ea673e"
                   className="color-picker float-left mr-2"
+                  name="expired_code"
+                  value={certificateBackgroundColor.expired_code ? certificateBackgroundColor.expired_code : "#ea673e"}
+                  onChange={(e) => dataWithColorCodeFilter('expired_code', e.target.value)}
                 />
                 <h6>Expired </h6>
               </div>
-            </div>
+            </div> */}
+
+
+
           </div>
         </Card>
       )}

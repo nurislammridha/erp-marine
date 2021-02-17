@@ -39,10 +39,17 @@ const PurchaseRequestCreateTable = () => {
                                         <td>{item.numPurchaseRequestQty}</td>
                                         <td>{item.strPurchaseRequestPurpose}</td>
                                         <td>
-                                            <Link>
+                                            {/* <Link>
                                                 <i className="far fa-edit editIcon item-list-icon ml-2"></i>
-                                            </Link>
-                                            <Link onClick={() => dispatch(deleteMultiplePQRowData(index))}>
+                                            </Link> */}
+                                            <Link onClick={() => {
+                                                if (
+                                                    window.confirm(
+                                                        "Are you sure you wish to delete this item?"
+                                                    )
+                                                )
+                                                    dispatch(deleteMultiplePQRowData(index))
+                                            }}>
                                                 <i className="fas fa-trash-alt editIcon item-list-icon ml-2"></i>
                                             </Link>
                                         </td>

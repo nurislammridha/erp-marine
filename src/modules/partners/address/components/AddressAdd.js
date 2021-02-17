@@ -7,13 +7,13 @@ import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
     deletePartnerAddressMultiple,
+    emptyAddMultipleStatus,
     getCountryName,
     handleChangePartnerAddressInput,
-    partnerAddressSubmit,
     partnerAddressSubmitMultiple
 } from '../_redux/actions/AddressAction';
 
-const AddressAdd = withRouter(({ history }) => {
+const AddressAdd = withRouter(() => {
     const { register, setValue, handleSubmit } = useForm();
     const dispatch = useDispatch();
     const partnerAddress = useSelector(state => state.partnerAddress.partnerAddressInput);
@@ -22,7 +22,7 @@ const AddressAdd = withRouter(({ history }) => {
         (state) => state.partnerAddress.countryOptionData
     );
     const isMultipleAdded = useSelector((state) => state.partnerAddress.isMultipleAdded);
-
+    console.log('isMultipleAdded', isMultipleAdded)
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangePartnerAddressInput(name, value))
     }
@@ -31,16 +31,18 @@ const AddressAdd = withRouter(({ history }) => {
         dispatch(getCountryName());
     }, []);
 
+
     useEffect(() => {
         if (isMultipleAdded) {
             setValue("intCountryID", "");
+            dispatch(emptyAddMultipleStatus());
         }
-    }, [isMultipleAdded]);
+    }, [isMultipleAdded])
+
 
 
     const multipleAdd = () => {
         dispatch(partnerAddressSubmitMultiple(partnerAddress));
-
     }
 
     return (

@@ -17,11 +17,7 @@ export const handleChangeCertificateIssueAuthorityInput = (name, value) => (
   });
 };
 
-export const getIssuingAuthorities = (
-  searchText = "",
-  status = "",
-  page
-) => async (dispatch) => {
+export const getIssuingAuthorities = (searchValue = "", status = "", page) => async (dispatch) => {
   let response = {
     issuingAuthorities: [],
     status: false,
@@ -31,14 +27,15 @@ export const getIssuingAuthorities = (
   };
   dispatch({ type: Types.GET_ISSUING_AUTHORITY_LIST, payload: response });
 
-  let isActive = status == "" ? "" : parseInt(status);
-  let url = `${process.env.REACT_APP_API_URL}certificate/issuingAuthority`;
+  // let isActive = status == "" ? "" : parseInt(status);
+  let isActive = status == "" ? 1 : parseInt(status);
 
-  if (searchText !== "" || isActive !== "") {
-    url += `?search=${searchText}&isActive=${isActive}&isPaginated=1&paginateNo=${page}`;
-  } else {
-    url += `?isPaginated=1&paginateNo=${page}`;
+  let url = `${process.env.REACT_APP_API_URL}certificate/issuingAuthority?search=${searchValue}&isActive=${isActive}&isPaginated=1&paginateNo=10`;
+
+  if (page !== null || page === "") {
+    url += `&page=${page}`;
   }
+
   try {
     await Axios.get(url)
       .then((res) => {
@@ -160,14 +157,14 @@ export const issueAuthorityEditAction = (
 
 export const issueAuthorityDelete = (id) => (dispatch) => {
   let isLoading = true;
-  dispatch({type: Types.DELETE_ISSUING_AUTHORITY, payload: isLoading})
-  
+  dispatch({ type: Types.DELETE_ISSUING_AUTHORITY, payload: isLoading })
+
   Axios.delete(`${process.env.REACT_APP_API_URL}certificate/issuingAuthority/${id}`)
-  .then((res)=>{
-    if(res.status === 200){
-      const data = res.data;
-      showToast('success', data.message);
-      dispatch({type: Types.DELETE_ISSUING_AUTHORITY, payload: false})
-    }
-  })
+    .then((res) => {
+      if (res.status === 200) {
+        const data = res.data;
+        showToast('success', data.message);
+        dispatch({ type: Types.DELETE_ISSUING_AUTHORITY, payload: false })
+      }
+    })
 }
