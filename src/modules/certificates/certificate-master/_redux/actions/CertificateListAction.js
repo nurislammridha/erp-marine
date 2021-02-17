@@ -30,19 +30,17 @@ export const getCertificateMasterList = (searchValue = "", status = "", page) =>
 
   dispatch({ type: Types.GET_CERTIFICATE_MASTER_LIST, payload: response });
 
-  let isActive = status == "" ? "" : parseInt(status);
-  let url = `${process.env.REACT_APP_API_URL}certificate/certificateList&isPaginated=1&paginateNo=10`;
+  let isActive = status == "" ? 1 : parseInt(status);
 
+  let url = `${process.env.REACT_APP_API_URL}certificate/certificateList?isPaginated=1&paginateNo=10`;
   if (page !== null || page === "") {
     url += `&page=${page}`;
   }
-  if (searchValue !== "" || isActive !== "") {
+  if (searchValue !== "") {
     url += `?search=${searchValue}`;
-  } else {
-    // url += `?isPaginated=1&paginateNo=${page}`;
   }
   if (isActive !== "") {
-    url += `$isActive=${isActive}`
+    url += `&isActive=${isActive}`
   }
   try {
     await Axios.get(url)
