@@ -51,7 +51,7 @@ export const getSupplierList = (searchValue = "", intSupplierTypeID = null) => a
     try {
         console.log('url', url)
         await Axios.get(url).then((res) => {
-            console.log('res', res)
+
             const { status, message, errors, data } = res.data;
             response.supplierList = data;
             response.status = status;
