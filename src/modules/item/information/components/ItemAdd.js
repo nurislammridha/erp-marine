@@ -327,12 +327,17 @@ const ItemAdd = () => {
 
                       <td>
                         {" "}
-                        <i className="far fa-edit editIcon item-list-icon"></i>
-                        <a
+                        {/* <i className="far fa-edit editIcon item-list-icon"></i> */}
+                        <a href
+
 
                           onClick={(index) => {
-                            alert("Are sure, you want to delete?")
-                            dispatch(deleteMultipleItemInput(index))
+                            if (
+                              window.confirm(
+                                "Are you sure you wish to delete this data"
+                              )
+                            )
+                              dispatch(deleteMultipleItemInput(index))
                           }}
                         >
                           <i className="fas fa-trash-alt editIcon item-list-icon ml-4"></i>
