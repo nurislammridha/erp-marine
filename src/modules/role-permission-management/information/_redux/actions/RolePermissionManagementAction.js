@@ -56,24 +56,18 @@ export const getPermissionUserList = (searchValue = "", page) => async (dispatch
     isLoading: true,
     errors: [],
   };
-
   dispatch({ type: Types.GET_PERMISSION_USER_LIST, payload: response });
-
-  let url = `${process.env.REACT_APP_API_URL}roles/getAllUser?isPaginated=1&paginateNo=5`;
+  let url = `${process.env.REACT_APP_API_URL}roles/getAllUser?search=${searchValue}&isPaginated=1&paginateNo=10`;
+  console.log('searchValue :>> ', searchValue);
   if (page !== null || page === "") {
     url += `&page=${page}`;
-  }
-  if (searchValue !== "") {
-    url += `?search=${searchValue}`;
-  } else {
-    // url += `?isPaginated=1&paginateNo=${page}`;
   }
   try {
     await Axios.get(url)
       .then((res) => {
         const { data, message, status } = res.data;
         response.status = status;
-        response.userList = data;
+        response.userList = data.data;
         response.message = message;
         response.userPaginationList = data;
         response.isLoading = false;
@@ -173,3 +167,11 @@ export const checkPermissionGroupAction = (index, isGroupChecked) => (dispatch) 
     }
   });
 };
+
+//get user details   
+export const getUserDetails = (id) => async (dispatch) => {
+  await Axios.get(`${process.env.REACT_APP_API_URL}roles/userDetails/${id}`)
+    .then((res) => {
+      console.log('res :>> ', res);
+    })
+}

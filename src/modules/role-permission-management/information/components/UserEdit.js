@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { getRoleListByPagination } from "../_redux/actions/RolePermissionManagementAction";
+import { getRoleListByPagination, getUserDetails } from "../_redux/actions/RolePermissionManagementAction";
 import { handleChangeUserAction, updatedUserPermission } from "../_redux/actions/UserAction";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
@@ -26,6 +26,7 @@ const UserEdit = ({ handleClose, id }) => {
 
   useEffect(() => {
     dispatch(getRoleListByPagination());
+    dispatch(getUserDetails(id))
   }, []);
   return (
     <>

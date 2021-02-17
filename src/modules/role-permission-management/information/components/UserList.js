@@ -56,23 +56,27 @@ const UserList = () => {
     });
   }
 
+  // useEffect(() => {
+  //   dispatch(getPermissionUserList(currentPage));
+  // }, [dispatch, currentPage]);
+
+  // const changePage = (data) => {
+  //   setCurrentPage(data.page);
+  //   dispatch(getPermissionUserList(data.page));
+  // };
   useEffect(() => {
-    dispatch(getPermissionUserList(currentPage));
+    dispatch(getPermissionUserList("", currentPage));
   }, [dispatch, currentPage]);
+
 
   const changePage = (data) => {
     setCurrentPage(data.page);
-    dispatch(getPermissionUserList(data.page));
+    dispatch(getPermissionUserList("", data.page));
   };
 
-  const searchItems = (e) => {
-    const searchText = e.target.value;
-    setSearchText(searchText);
-    if (searchText.length === 0) {
-      dispatch(getPermissionUserList(currentPage));
-    } else {
-      dispatch(getPermissionUserList(currentPage, searchText));
-    }
+  const changeSearch = (value) => {
+    setSearchText(value);
+    dispatch(getPermissionUserList(value, currentPage));
   };
   const showUserModal = () => {
     setUserModalShow(true)
@@ -87,45 +91,30 @@ const UserList = () => {
       <Card>
         <Card.Body>
           <div className="container ">
+          <h1 className="tableheading mt-0">User List</h1> <hr/>
             <div className="row mb-5 table-form ">
-              <h1 className="tableheading mt-0">User List</h1>
               <div className="col-xl-3 col-lg-3 col-md-6 mb-2 mt-2">
-
                 <Paper className="searchInput">
                   <InputBase
-                    placeholder="Search "
+                    placeholder="Search"
                     className="custome-purchase-search"
                     value={searchText}
-                    onChange={searchItems}
-                  />
+                    onChange={(e) => changeSearch(e.target.value)}
+                    />
                   <IconButton aria-label="Search" className="searchPlaceholder purchaseSearch">
                     <i className="flaticon-search "></i>
                   </IconButton>
                 </Paper>
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6 ">
-                <RHFInput
-                  as={<Select options={CourseName} />}
-                  rules={{ required: false }}
-                  name="courseData"
-                  register={register}
-                  value={CourseName.label}
-                  setValue={setValue}
-                />
+
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6">
-                <RHFInput
-                  as={<Select options={CourseName} />}
-                  rules={{ required: false }}
-                  name="courseData"
-                  register={register}
-                  value={CourseName.label}
-                  setValue={setValue}
-                />
+
               </div>
               {/* <div className="col-xl-3 col-lg-3 col-md-6">use RHFInput</div> */}
 
-              <div className="">
+              <div className="text-right">
                 <i className="fas fa-filter tableFilter  mr-2"></i>
                 <i className="far fa-filter"></i>
                 <Button className="btn-sm" variant="primary" onClick={() => showUserModal()}>
@@ -152,7 +141,7 @@ const UserList = () => {
                 <tbody>
                   {userList && userList.map((item, index) => (
                     <tr key={index + 1}>
-                      <td>{index + 1}</td>
+                      <td>{userPaginationList.from + index}</td>
                       <td>{item.first_name}</td>
                       <td>{item.surname}</td>
                       <td>{item.last_name}</td>
