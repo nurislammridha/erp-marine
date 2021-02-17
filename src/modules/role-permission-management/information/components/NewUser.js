@@ -10,7 +10,7 @@ import {
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 
-const NewUser = ({handleClose}) => {
+const NewUser = ({ handleClose }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
   const userInput = useSelector((state) => state.userRole.inputData);
   const isLoading = useSelector((state) => state.userRole.isLoading);
@@ -36,7 +36,6 @@ const NewUser = ({handleClose}) => {
         <div className="row">
           <div className="col-12">
             <div className="card card-custom gutter-b p-5">
-              <h5>Create New User </h5>
               <form
                 className="form form-label-right voyageEngineerForm"
                 method="post"
@@ -167,46 +166,26 @@ const NewUser = ({handleClose}) => {
                       />
                     </Form.Group>
                   </div>
-                </div>
-                {/* <div className="form-group row">
-                  <div className="col-xl-3 col-lg-3 col-md-6 ">
-                    <Form.Group>
-                      <Form.Label className="formFont pl-1">
-                        Assign Roles
+                  <div className="col-xl-3 col-lg-3 col-md-6">
+                    <Form.Label className="formFont pl-1">
+                      Role
                       </Form.Label>
-                      <Form.Control
-                        className="formHeight"
-                        type="text"
-                        name="first_name"
-                        placeholder="Enter Name"
-                        onChange={(e) =>
-                          handleChange(
-                            "first_name",
-                            e.target.value
-                          )
-                        }
-                      />
-                    </Form.Group>
+                    <RHFInput
+                      as={<Select options={roleListOption} />}
+                      rules={{ required: false }}
+                      name="role_id"
+                      register={register}
+                      onChange={(option) => {
+                        handleChange('name', option.label);
+                        handleChange('role_id', option.value)
+                      }}
+                      setValue={setValue}
+                    />
                   </div>
-                </div> */}
-                <div className="col-xl-3 col-lg-3 col-md-6">
-                  <RHFInput
-                    as={<Select options={roleListOption} />}
-                    rules={{ required: false }}
-                    name="role_id"
-                    register={register}
-                    onChange={(option) => {
-                      handleChange('name', option.label);
-                      handleChange('role_id', option.value)
-                    }}
-                    // value={CourseName.label}
-                    setValue={setValue}
-                  />
-                </div> <br/>
-
+                </div>
                 {isLoading && (
                   <Button
-                    className="mr-4 saveButton text-white" disabled={true}>
+                    className="mr-4 saveButton text-white float-right" disabled={true}>
                     <span>Submitting</span>
                     <span className="ml-3 spinner spinner-white"></span>
                   </Button>
@@ -214,7 +193,7 @@ const NewUser = ({handleClose}) => {
 
                 {!isLoading && (
                   <Button
-                    className="mr-4 saveButton text-white" variant="" onClick={() => onSubmit()}>
+                    className="mr-4 saveButton text-white float-right" variant="" onClick={() => onSubmit()}>
                     Submit
                   </Button>
                 )}

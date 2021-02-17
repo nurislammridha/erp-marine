@@ -87,10 +87,6 @@ export const updatedUserPermission = (inputData, handleClose, id) => (dispatch) 
     showToast('error', "Phone number can't blank!");
     return false;
   }
-  if (inputData.password.length === 0) {
-    showToast('error', "Password can't blank!");
-    return false;
-  }
   if (inputData.role_id === '' || inputData.role_id === null ) {
     showToast('error', "Role can't blank!");
     return false;

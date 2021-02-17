@@ -21,22 +21,22 @@ const UserDetails = ({ id, handleClose }) => {
                         <Row className="mt-3">
                             <Col lg={3} md={4} sm={4} xs={6} className="mb-5">
                                 <p>First Name</p>
-                                <h5>{userDetails.first_name !== null && userDetails.first_name !== "" ? userDetails.first_name : "---"}</h5>
+                                <h6>{userDetails.first_name !== null && userDetails.first_name !== "" ? userDetails.first_name : "---"}</h6>
                             </Col>
                             <Col lg={3} md={4} sm={4} xs={6} className="mb-5">
                                 <p>Surname</p>
-                                <h5>{userDetails.username !== null && userDetails.username !== "" ? userDetails.username : "---"}</h5>                </Col>
+                                <h6>{userDetails.username !== null && userDetails.username !== "" ? userDetails.username : "---"}</h6>                </Col>
                             <Col lg={3} md={4} sm={4} xs={6} className="mb-5">
                                 <p>Last Name</p>
-                                <h5>{userDetails.last_name !== null && userDetails.last_name !== "" ? userDetails.last_name : "---"}</h5>
+                                <h6>{userDetails.last_name !== null && userDetails.last_name !== "" ? userDetails.last_name : "---"}</h6>
                             </Col>
                             <Col lg={3} md={4} sm={4} xs={6} className="mb-5">
                                 <p>Email</p>
-                                <h5>{userDetails.email !== null && userDetails.email !== "" ? userDetails.email : "---"}</h5>
+                                <h6>{userDetails.email !== null && userDetails.email !== "" ? userDetails.email : "---"}</h6>
                             </Col>
                             <Col lg={3} md={4} sm={4} xs={6} className="mb-5">
                                 <p>Phone</p>
-                                <h5>{userDetails.phone_no !== null && userDetails.phone_no !== "" ? userDetails.phone_no : "---"}</h5>
+                                <h6>{userDetails.phone_no !== null && userDetails.phone_no !== "" ? userDetails.phone_no : "---"}</h6>
                             </Col>
                             <Col lg={3} md={4} sm={4} xs={6} className="mb-5">
                                 <p>Role</p>

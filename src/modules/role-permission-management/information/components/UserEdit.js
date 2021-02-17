@@ -132,78 +132,27 @@ const UserEdit = ({ handleClose, id }) => {
                     </Form.Group>
                   </div>
                   <div className="col-xl-3 col-lg-3 col-md-6">
-                    <Form.Group>
-                      <Form.Label className="formFont pl-1">
-                        Password
+                    <Form.Label className="formFont pl-1">
+                      Role
                       </Form.Label>
-                      <Form.Control
-                        className="formHeight"
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        onChange={(e) =>
-                          handleChange("password", e.target.value)
-                        }
-                      />
-                    </Form.Group>
-                  </div>
-                  <div className="col-xl-3 col-lg-3 col-md-6">
-                    <Form.Group>
-                      <Form.Label className="formFont pl-1">
-                        Confirm Password
-                      </Form.Label>
-                      <Form.Control
-                        className="formHeight"
-                        type="password"
-                        name="Cpassword"
-                        placeholder="Password"
-                        onChange={(e) =>
-                          handleChange("Cpassword", e.target.value)
-                        }
-                      />
-                    </Form.Group>
-                  </div>
+                    <RHFInput
+                      as={<Select options={roleListOption} />}
+                      rules={{ required: false }}
+                      name="role_id"
+                      register={register}
+                      value={userInput !== null && userInput.role}
+                      onChange={(option) => {
+                        handleChange('name', option.label);
+                        handleChange('role_id', option.value)
+                      }}
+                      // value={CourseName.label}
+                      setValue={setValue}
+                    />
+                  </div> <br />
                 </div>
-                {/* <div className="form-group row">
-                  <div className="col-xl-3 col-lg-3 col-md-6 ">
-                    <Form.Group>
-                      <Form.Label className="formFont pl-1">
-                        Assign Roles
-                      </Form.Label>
-                      <Form.Control
-                        className="formHeight"
-                        type="text"
-                        name="first_name"
-                        placeholder="Enter Name"
-                        onChange={(e) =>
-                          handleChange(
-                            "first_name",
-                            e.target.value
-                          )
-                        }
-                      />
-                    </Form.Group>
-                  </div>
-                </div> */}
-                <div className="col-xl-3 col-lg-3 col-md-6">
-                  <RHFInput
-                    as={<Select options={roleListOption} />}
-                    rules={{ required: false }}
-                    name="role_id"
-                    register={register}
-                    value={userInput !== null && userInput.role}
-                    onChange={(option) => {
-                      handleChange('name', option.label);
-                      handleChange('role_id', option.value)
-                    }}
-                    // value={CourseName.label}
-                    setValue={setValue}
-                  />
-                </div> <br />
-
                 {updatedLoading && (
                   <Button
-                    className="mr-4 saveButton text-white" disabled={true}>
+                    className="mr-4 saveButton text-white float-right" disabled={true}>
                     <span>Submitting</span>
                     <span className="ml-3 spinner spinner-white"></span>
                   </Button>
@@ -211,7 +160,7 @@ const UserEdit = ({ handleClose, id }) => {
 
                 {!updatedLoading && (
                   <Button
-                    className="mr-4 saveButton text-white" variant="" onClick={() => onSubmit()}>
+                    className="mr-4 saveButton text-white float-right" variant="" onClick={() => onSubmit()}>
                     Submit
                   </Button>
                 )}

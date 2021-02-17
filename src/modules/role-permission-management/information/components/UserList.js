@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, Button, Badge } from "react-bootstrap";
 import { InputBase, Paper, IconButton } from "@material-ui/core";
-import { useForm } from "react-hook-form";
 import { getPermissionUserList } from "../_redux/actions/RolePermissionManagementAction";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -36,9 +35,6 @@ const UserList = () => {
     setSearchText(value);
     dispatch(getPermissionUserList(value, currentPage));
   };
-  const showUserModal = () => {
-    setUserModalShow(true)
-  }
   const showUserModel = (item) => {
     setUserModalShow(true);
     setUserID(item.id);
@@ -79,8 +75,6 @@ const UserList = () => {
               <div className="col-xl-3 col-lg-3 col-md-6">
 
               </div>
-              {/* <div className="col-xl-3 col-lg-3 col-md-6">use RHFInput</div> */}
-
               <div className="text-right">
                 <i className="fas fa-filter tableFilter  mr-2"></i>
                 <i className="far fa-filter"></i>
@@ -121,7 +115,6 @@ const UserList = () => {
                           {
                             item.role_name !== null && item.role_name !== "" ? <Badge className="mt-2" variant="success"> {item.role_name} </Badge> : <p className="pl-2">N/A</p>
                           }
-                          {/* <Badge className="mt-2" variant="success"> {item.role_name !== null && item.role_name !== "" ? item.role_name : "not set yet"} </Badge> */}
                         </td>
                         <td className="">
                           <div>
@@ -138,7 +131,6 @@ const UserList = () => {
                   </tbody>
                 </table>
               </div>
-              // </div>
             )}
 
             {!isLoading && userList.length === 0 && (
@@ -158,7 +150,7 @@ const UserList = () => {
         show={userCreate}
         handleClose={() => setUserCreate(false)}
         handleShow={() => setUserCreate(true)}
-        modalTitle={"User Create"}
+        modalTitle={"Create New User"}
       >
         <NewUser handleClose={() => setUserCreate(false)} />
       </SimpleModal>
