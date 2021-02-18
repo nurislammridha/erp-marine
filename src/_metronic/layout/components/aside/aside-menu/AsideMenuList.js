@@ -22,6 +22,8 @@ export function AsideMenuList({ layoutProps }) {
   const menuList = useSelector((state) => state.menu.menuList);
   const isMenuLoading = useSelector((state) => state.menu.isMenuLoading);
 
+  console.log('menuList', menuList);
+
   useEffect(() => {
     dispatch(GetMenuListsByPermission());
   }, [dispatch]);
