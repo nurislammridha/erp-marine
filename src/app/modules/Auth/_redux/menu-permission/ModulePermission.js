@@ -6,7 +6,6 @@ export function getFeaturesPermissionData() {
 
 export function checkFeaturePermission(permissionName) {
   let featureData = getFeaturesPermissionData().split(",");
-  console.log('featureData', featureData);
 
   const filters = featureData.filter(
     (element) => element == permissionName,

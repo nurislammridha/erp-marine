@@ -26,10 +26,6 @@ export function AsideMenuList({ layoutProps }) {
     dispatch(GetMenuListsByPermission());
   }, [dispatch]);
 
-
-  console.log('menuList', menuList);
-
-
   return (
     <>
       {/* begin::Menu Nav */}
