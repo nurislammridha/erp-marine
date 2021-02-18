@@ -5,7 +5,7 @@ import EmployeeAdd from "../../components/hr/employee/personal/EmployeeAdd";
 
 const EmployeeAddContainer = () => {
     return (
-        <PermissionWiseDisplay permission_name={'crew_create'} display={true}>
+        <PermissionWiseDisplay permission_name={'employee.create'} display={true}>
             <EmployeeAdd />
         </PermissionWiseDisplay>
     );

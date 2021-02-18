@@ -4,7 +4,7 @@ import EmployeeList from "../../components/hr/employee/EmployeeList";
 
 const EmployeeListContainer = () => {
     return (
-        <PermissionWiseDisplay permission_name={'crew_list'}>
+        <PermissionWiseDisplay permission_name={'employee.view'}>
             <EmployeeList />
         </PermissionWiseDisplay>
     );
