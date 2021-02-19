@@ -7,24 +7,28 @@ const initialState = {
     roleList: [], // For Insert/Edit Page
     rolesListPaginated: [],
     rolesListAll: [],
-    userList:[],
-    submitStatus:false,
+    userList: [],
+    submitStatus: false,
     inputData: {
-        business_id:1,
+        business_id: 1,
         first_name: "",
-        surname:"",
-        last_name:"",
-        username:"",
-        email:"",
-        phone_no:"",
-        password:"",
-        language:"",
-        name:'',
-        roleId: ""
+        surname: "",
+        last_name: "",
+        username: "",
+        email: "",
+        phone_no: "",
+        password: "",
+        language: "",
+        name: '',
+        role_id: ""
 
     },
     isRoleCreated: false,
     roleCreateMessage: '',
+    userDetails: null,
+    detailsLoading: false,
+    updatedLoading: false,
+
 };
 
 const UserRoleReducer = (state = initialState, action) => {
@@ -35,29 +39,37 @@ const UserRoleReducer = (state = initialState, action) => {
         case Types.GET_USER_ROLE_INPUT_DATA:
             const roleInputData = { ...state.inputData };
             roleInputData[action.payload.name] = action.payload.value;
-            return { 
-                ...state, 
+            return {
+                ...state,
                 inputData: roleInputData,
                 isLoading: action.payload.isLoading,
             };
         case Types.CREATE_MULTIPLE_ROLE:
-            return { 
-                ...state, 
+            return {
+                ...state,
                 inputData: initialState.inputData,
                 isLoading: action.payload.isLoading,
             };
         case Types.UPDATE_MULTIPLE_ROLE:
-            return { 
-                ...state, 
+            return {
+                ...state,
                 inputData: initialState.inputData,
-                isLoading: action.payload.isLoading,
+                updatedLoading: action.payload.isLoading,
             };
         case Types.GET_USER_CREATED:
-            return { 
-                ...state, 
+            return {
+                ...state,
                 submitStatus: true,
             };
-
+        case Types.GET_USER_DETAILS:
+            if (action.payload !== undefined) {
+                return {
+                    ...state,
+                    inputData: action.payload.userDetails,
+                    userDetails: action.payload.userDetails,
+                    detailsLoading: action.payload.isLoading
+                }
+            }
         default:
             break;
     }
@@ -74,7 +86,7 @@ const UserRoleReducer = (state = initialState, action) => {
  */
 const checkAllPermissionIsChecked = (roles, permissionGroupIndex) => {
     const getTotalPermissions = roles[permissionGroupIndex].permissions;
-    const getTotalCheckedPermissions = getTotalPermissions.filter(x=> x.isChecked);
+    const getTotalCheckedPermissions = getTotalPermissions.filter(x => x.isChecked);
     return getTotalPermissions.length === getTotalCheckedPermissions.length ? true : false;
 }
 

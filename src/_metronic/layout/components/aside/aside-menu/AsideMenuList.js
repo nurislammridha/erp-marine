@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router";
 import { NavLink } from "react-router-dom";
 import SVG from "react-inlinesvg";
+import Spinner from 'react-bootstrap/Spinner';
 import { toAbsoluteUrl, checkIsActive } from "../../../../_helpers";
 import { GetMenuListsByPermission } from "../../../../../app/modules/Auth/_redux/menu-permission/authMenuPermissionAction";
 
@@ -18,11 +19,12 @@ export function AsideMenuList({ layoutProps }) {
       : "";
   };
 
+  const menuList = useSelector((state) => state.menu.menuList);
+  const isMenuLoading = useSelector((state) => state.menu.isMenuLoading);
+
   useEffect(() => {
     dispatch(GetMenuListsByPermission());
   }, [dispatch]);
-
-  const menuList = useSelector((state) => state.menu.menuList);
 
   return (
     <>
@@ -52,11 +54,21 @@ export function AsideMenuList({ layoutProps }) {
         {/*end::1 Level*/}
 
         {/* Modules */}
+
+        {
+          isMenuLoading &&
+          <li className="menu-item menu-item-submenu text-center mt-5 text-white">
+            <p className="text-center">
+              <Spinner animation="grow" />
+            </p>
+            {/* Loading Menus... */}
+          </li>
+        }
         {typeof menuList != "undefined" &&
           menuList.map((menu, index) => (
             <li
               className={`menu-item menu-item-submenu ${getMenuItemActive(
-                menu.moduleRouteUrl
+                menu.strRouteURL
               )}`}
               aria-haspopup="true"
               data-menu-toggle="hover"
@@ -64,18 +76,18 @@ export function AsideMenuList({ layoutProps }) {
             >
               <NavLink
                 className="menu-link menu-toggle"
-                to={menu.moduleRouteUrl}
+                to={menu.strRouteURL}
               >
                 <span className="svg-icon menu-icon">
-                  <SVG src={toAbsoluteUrl(menu.moduleImageIcon)} />
+                  <SVG src={toAbsoluteUrl(menu.strIcon)} />
                 </span>
-                <span className="menu-text">{menu.moduleName}</span>
+                <span className="menu-text">{menu.strName}</span>
                 <i className="menu-arrow" />
               </NavLink>
 
               {/* Sub Menus of Module */}
-              {typeof menu.subModules !== "undefined" &&
-                menu.subModules.map((subMenu, subIndex) => (
+              {typeof menu.childs !== "undefined" &&
+                menu.childs.map((subMenu, subIndex) => (
                   <div className="menu-submenu " key={subIndex}>
                     <i className="menu-arrow" />
                     <ul className="menu-subnav">
@@ -84,54 +96,54 @@ export function AsideMenuList({ layoutProps }) {
                         aria-haspopup="true"
                       >
                         <span className="menu-link">
-                          <span className="menu-text">{menu.menuName}</span>
+                          <span className="menu-text">{menu.strName}</span>
                         </span>
                       </li>
                       <li
                         className={`menu-item menu-item-submenu ${getMenuItemActive(
-                          subMenu.subModuleRouteUrl
+                          subMenu.strRouteURL
                         )}`}
                         aria-haspopup="true"
                         data-menu-toggle="hover"
                       >
                         {
-                          subMenu.features.length === 0 && (
+                          subMenu.childs.length === 0 && (
                             <NavLink
                               className="menu-link menu-toggle"
                               to={
-                                subMenu.features.length === 0
-                                  ? subMenu.subModuleRouteUrl
+                                subMenu.childs.length === 0
+                                  ? subMenu.strRouteURL
                                   : ""
                               }
                               onClick={() =>
                                 history.push(
-                                  subMenu.features.length === 0
-                                    ? subMenu.subModuleRouteUrl
+                                  subMenu.childs.length === 0
+                                    ? subMenu.strRouteURL
                                     : ""
                                 )
                               }
                             >
-                              <i className={subMenu.subModuleIcon}>
+                              <i className={subMenu.strIcon}>
                                 <span />
                               </i>
                               <span className="menu-text">
-                                {subMenu.subModuleName}
+                                {subMenu.strName}
                               </span>
                               <i className="menu-arrow" />
                             </NavLink>
                           )}
 
                         {
-                          subMenu.features.length > 0 && (
+                          subMenu.childs.length > 0 && (
                             <NavLink
                               className="menu-link menu-toggle"
-                              to={subMenu.subModuleRouteUrl}
+                              to={subMenu.strRouteURL}
                             >
-                              <i className={subMenu.subModuleIcon}>
+                              <i className={subMenu.strIcon}>
                                 <span />
                               </i>
                               <span className="menu-text">
-                                {subMenu.subModuleName}
+                                {subMenu.strName}
                               </span>
                               <i className="menu-arrow" />
                             </NavLink>
@@ -140,25 +152,25 @@ export function AsideMenuList({ layoutProps }) {
                         <div className="menu-submenu ">
                           <i className="menu-arrow" />
                           <ul className="menu-subnav">
-                            {subMenu.features.length > 0 &&
-                              subMenu.features.map(
+                            {subMenu.childs.length > 0 &&
+                              subMenu.childs.map(
                                 (featureMenu, featureIndex) => (
                                   <li
                                     className={`menu-item  ${getMenuItemActive(
-                                      featureMenu.featureRouteUrl
+                                      featureMenu.strRouteURL
                                     )}`}
                                     aria-haspopup="true"
                                     key={featureIndex}
                                   >
                                     <NavLink
                                       className="menu-link"
-                                      to={featureMenu.featureRouteUrl}
+                                      to={featureMenu.strRouteURL}
                                     >
-                                      <i className={featureMenu.featureIcon}>
+                                      <i className={featureMenu.strIcon}>
                                         <span />
                                       </i>
                                       <span className="menu-text">
-                                        {featureMenu.featureName}
+                                        {featureMenu.strName}
                                       </span>
                                     </NavLink>
                                   </li>
