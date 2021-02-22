@@ -82,6 +82,7 @@ import CatalogueListReducer from './../modules/master/DropDownData/Catalogue/_re
 import UserRoleReducer from "../modules/role-permission-management/information/_redux/reducers/UserRoleReducer";
 import ComparativeStatementReducer from "../modules/Purchase/comparativeStatement/_redux/reducers/ComparativeStatementReducer";
 import QuotationFilterReducer from "../modules/Purchase/Quotation/_redux/reducers/QuotationFilterReducer";
+import BasicInformationReducer from "../modules/Asset-Registration/information/_redux/reducers/BasicInformationReducer";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -191,6 +192,9 @@ export const rootReducer = combineReducers({
 
   // comparative statement 
   ComparativeStatementReducer: ComparativeStatementReducer,
+
+  //Asset Registration
+  basicInformation: BasicInformationReducer
 });
 
 export function* rootSaga() {

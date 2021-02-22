@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Form,Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
-
+import { ChangeBasicInfoInput } from "../_redux/actions/BasicInformationAction"
 import DatePicker from "react-datepicker";
 
 const BasicInformation = () => {
+  const dispatch = useDispatch()
   const { register, setValue } = useForm();
+  const basicInfoInput = useSelector(state => state.basicInformation.basicInfoInput)
+  console.log('basicInfoInput :>> ', basicInfoInput);
+  const handleChangeText = (name, value) => {
+    dispatch(ChangeBasicInfoInput(name, value))
+  }
   const courseData = [
     {
       id: 1,
@@ -56,10 +62,14 @@ const BasicInformation = () => {
                     <RHFInput
                       as={<Select options={CourseName} />}
                       rules={{ required: false }}
-                      name="courseData"
+                      name="intSBUId"
                       register={register}
                       value={CourseName.label}
                       setValue={setValue}
+                      onChange={(option) => {
+                        handleChangeText("intSBUId", option.value);
+                        handleChangeText("strSBUName", option.label);
+                      }}
                     />
                   </div>
                   <div className="col-xl-3 col-lg-3 col-6">
@@ -67,10 +77,14 @@ const BasicInformation = () => {
                     <RHFInput
                       as={<Select options={CourseName} />}
                       rules={{ required: false }}
-                      name="courseData"
+                      name="intBranchId"
                       register={register}
                       value={CourseName.label}
                       setValue={setValue}
+                      onChange={(option) => {
+                        handleChangeText("intBranchId", option.value);
+                        handleChangeText("strBranchName", option.label);
+                      }}
                     />
                   </div>
                   <div className="col-xl-3 col-lg-3 col-6">
@@ -78,10 +92,14 @@ const BasicInformation = () => {
                     <RHFInput
                       as={<Select options={CourseName} />}
                       rules={{ required: false }}
-                      name="courseData"
+                      name="intShipId"
                       register={register}
                       value={CourseName.label}
                       setValue={setValue}
+                      onChange={(option) => {
+                        handleChangeText("intShipId", option.value);
+                        handleChangeText("strShipName", option.label);
+                      }}
                     />
                   </div>
                   <div className="col-xl-3 col-lg-3 col-6">
@@ -89,10 +107,14 @@ const BasicInformation = () => {
                     <RHFInput
                       as={<Select options={CourseName} />}
                       rules={{ required: false }}
-                      name="courseData"
+                      name="intCatalougeId"
                       register={register}
                       value={CourseName.label}
                       setValue={setValue}
+                      onChange={(option) => {
+                        handleChangeText("intCatalougeId", option.value);
+                        handleChangeText("strCatalougeName", option.label);
+                      }}
                     />
                   </div>
                 </div>
@@ -102,10 +124,14 @@ const BasicInformation = () => {
                     <RHFInput
                       as={<Select options={CourseName} />}
                       rules={{ required: false }}
-                      name="courseData"
+                      name="intCategoryId"
                       register={register}
                       value={CourseName.label}
                       setValue={setValue}
+                      onChange={(option) => {
+                        handleChangeText("intCategoryId", option.value);
+                        handleChangeText("strCategoryName", option.label);
+                      }}
                     />
                   </div>
                   <div className="col-xl-3 col-lg-3 col-6">
@@ -113,10 +139,14 @@ const BasicInformation = () => {
                     <RHFInput
                       as={<Select options={CourseName} />}
                       rules={{ required: false }}
-                      name="courseData"
+                      name="intSubCategoryId"
                       register={register}
                       value={CourseName.label}
                       setValue={setValue}
+                      onChange={(option) => {
+                        handleChangeText("intSubCategoryId", option.value);
+                        handleChangeText("strSubCategoryName", option.label);
+                      }}
                     />
                   </div>
                   <div className="col-xl-3 col-lg-3 col-6">
@@ -124,10 +154,14 @@ const BasicInformation = () => {
                     <RHFInput
                       as={<Select options={CourseName} />}
                       rules={{ required: false }}
-                      name="courseData"
+                      name="intCostCenterId"
                       register={register}
                       value={CourseName.label}
                       setValue={setValue}
+                      onChange={(option) => {
+                        handleChangeText("intCostCenterId", option.value);
+                        handleChangeText("strCostCenterName", option.label);
+                      }}
                     />
                   </div>
                   <div className="col-xl-3 col-lg-3 col-6">
@@ -136,7 +170,10 @@ const BasicInformation = () => {
                       <Form.Control
                         className="formHeight"
                         type="text"
-                        placeholder="Type"
+                        placeholder="Enter Asset Name"
+                        name="strItemName"
+                        value={basicInfoInput.strItemName}
+                        onChange={(e) => handleChangeText("strItemName", e.target.value)}
                       />
                     </Form.Group>
                   </div>
@@ -147,10 +184,14 @@ const BasicInformation = () => {
                     <RHFInput
                       as={<Select options={CourseName} />}
                       rules={{ required: false }}
-                      name="courseData"
+                      name="intAssetTypeId"
                       register={register}
                       value={CourseName.label}
                       setValue={setValue}
+                      onChange={(option) => {
+                        handleChangeText("intAssetTypeId", option.value);
+                        handleChangeText("strAssetTypeName", option.label);
+                      }}
                     />
                   </div>
                   <div className="col-xl-3 col-lg-3 col-6">
@@ -159,25 +200,38 @@ const BasicInformation = () => {
                       <Form.Control
                         className="formHeight"
                         type="text"
-                        placeholder="Type"
+                        placeholder="Enter Description"
+                        name="strDescriptions"
+                        value={basicInfoInput.strDescriptions}
+                        onChange={(e) => handleChangeText("strDescriptions", e.target.value)}
                       />
                     </Form.Group>
                   </div>
                   <div className="col-xl-3 col-lg-3 col-6">
                     <label className="formFont">Store Issue Date</label>
                     <DatePicker
-                      selected={startDate}
-                      onChange={(date) => setStartDate(date)}
+                      selected={basicInfoInput.dteStoreIssueDate}
                       className="date-picker"
+                      name="dteStoreIssueDate"
+                      onChange={(date) => handleChangeText("dteStoreIssueDate", date)}
+                      ref={register({
+                        required: true,
+                        maxLength: 100,
+                      })}
                     />
                     <i className="fas fa-calendar-alt"></i>
                   </div>
                   <div className="col-xl-3 col-lg-3 col-6">
                     <label className="formFont">GRN Date</label>
                     <DatePicker
-                      selected={startDate}
-                      onChange={(date) => setStartDate(date)}
+                      selected={basicInfoInput.dteGRNDate}
                       className="date-picker"
+                      name="dteGRNDate"
+                      onChange={(date) => handleChangeText("dteGRNDate", date)}
+                      ref={register({
+                        required: true,
+                        maxLength: 100,
+                      })}
                     />
                     <i className="fas fa-calendar-alt"></i>
                   </div>
@@ -188,9 +242,14 @@ const BasicInformation = () => {
                       Date Place In Service Date(DPS Date)
                     </label>
                     <DatePicker
-                      selected={startDate}
-                      onChange={(date) => setStartDate(date)}
+                      selected={basicInfoInput.dteDatePlaceInServiceDate}
                       className="date-picker"
+                      name="dteDatePlaceInServiceDate"
+                      onChange={(date) => handleChangeText("dteDatePlaceInServiceDate", date)}
+                      ref={register({
+                        required: true,
+                        maxLength: 100,
+                      })}
                     />
                     <i className="fas fa-calendar-alt"></i>
                   </div>
@@ -199,8 +258,11 @@ const BasicInformation = () => {
                       <Form.Label className="formFont">Asset Qty</Form.Label>
                       <Form.Control
                         className="formHeight"
-                        type="text"
-                        placeholder="Type"
+                        type="number"
+                        placeholder="Enter Asset QTY"
+                        name="numAssetQty"
+                        value={basicInfoInput.numAssetQty}
+                        onChange={(e) => handleChangeText("numAssetQty", e.target.value)}
                       />
                     </Form.Group>
                   </div>
@@ -210,7 +272,10 @@ const BasicInformation = () => {
                       <Form.Control
                         className="formHeight"
                         type="text"
-                        placeholder="Type"
+                        placeholder="Enter Project Name"
+                        name="strProjectName"
+                        value={basicInfoInput.strProjectName}
+                        onChange={(e) => handleChangeText("strProjectName", e.target.value)}
                       />
                     </Form.Group>
                   </div>
@@ -220,7 +285,10 @@ const BasicInformation = () => {
                       <Form.Control
                         className="formHeight"
                         type="text"
-                        placeholder="Type"
+                        placeholder="Enter Remarks"
+                        name="strRemarks"
+                        value={basicInfoInput.strRemarks}
+                        onChange={(e) => handleChangeText("strRemarks", e.target.value)}
                       />
                     </Form.Group>
                   </div>

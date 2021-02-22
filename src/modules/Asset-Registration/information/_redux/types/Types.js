@@ -1,4 +1,1 @@
-export const CHANGE_TEXT_INPUT = "CHANGE_TEXT_INPUT";
-export const CALCULATE_ALL = "CALCULATE_ALL";
-export const GET_SHIP_LIST = "GET_SHIP_LIST";
-export const GET_DATA_BY_SHIP = "GET_DATA_BY_SHIP";
+export const BASIC_INFO_INPUT = "BASIC_INFO_INPUT";
