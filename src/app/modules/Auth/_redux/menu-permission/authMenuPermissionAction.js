@@ -12,8 +12,17 @@ export const GetMenuListsByPermission = () => async (dispatch) => {
 
   axios.get(`${process.env.REACT_APP_API_URL}roles/getUserModules`)
   .then(res => {
+    let dataProcessed = [];
+    if(res.data.data.length === 1 || res.data.data.length === 0){
+      dataProcessed = res.data.data;
+    }else{
+      for (const [key, value] of Object.entries(res.data.data)) {
+        dataProcessed.push(value);
+      }
+    }
+
     data = {
-      menuList: res.data.data,
+      menuList: dataProcessed,
       isMenuLoading: false,
     }
     dispatch({ type: Types.GET_MENU_LIST, payload: data });
