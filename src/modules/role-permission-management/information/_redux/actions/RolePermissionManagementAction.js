@@ -11,8 +11,6 @@ export const AddRolePermissionInput = (name, value) => (dispatch) => {
 }
 
 export const getRoleListByPagination = () => (dispatch) => {
-
-
   const responseList = {
     isLoading: true,
     rolesList: [],
@@ -22,7 +20,6 @@ export const getRoleListByPagination = () => (dispatch) => {
   Axios
     .get(`${process.env.REACT_APP_API_URL}roles/getAllRoles`)
     .then((res) => {
-      console.log('res', res);
       const { data, message } = res.data;
       responseList.rolesList = data.data;
       responseList.message = message;
@@ -58,7 +55,6 @@ export const getPermissionUserList = (searchValue = "", page) => async (dispatch
   };
   dispatch({ type: Types.GET_PERMISSION_USER_LIST, payload: response });
   let url = `${process.env.REACT_APP_API_URL}roles/getAllUser?search=${searchValue}&isPaginated=1&paginateNo=10`;
-  console.log('searchValue :>> ', searchValue);
   if (page !== null || page === "") {
     url += `&page=${page}`;
   }
@@ -73,10 +69,8 @@ export const getPermissionUserList = (searchValue = "", page) => async (dispatch
         response.isLoading = false;
 
       }).catch((err) => {
-        console.log("ErrorCertificate1");
       });
   } catch (error) {
-    console.log("ErrorCertificate2");
     response.message = "Something Went Wrong !";
     showToast('error', response.message);
   }
@@ -170,8 +164,31 @@ export const checkPermissionGroupAction = (index, isGroupChecked) => (dispatch) 
 
 //get user details   
 export const getUserDetails = (id) => async (dispatch) => {
+  let response = {
+    status: false,
+    message: "",
+    isLoading: true,
+    errors: [],
+    userDetails: null,
+  };
+ dispatch({ type: Types.GET_USER_DETAILS, payload: response });
   await Axios.get(`${process.env.REACT_APP_API_URL}roles/userDetails/${id}`)
     .then((res) => {
-      console.log('res :>> ', res);
+      if (res.data.status) {
+        if (res.data.data.role_id !== null && res.data.data.role_name) {
+          res.data.data.role = {
+            label: res.data.data.role_name,
+            value: res.data.data.role_id
+          }
+        }
+        res.data.data.password = '';
+        response.status = res.data.status;
+        response.isLoading = false;
+        response.userDetails = res.data.data;
+        dispatch({ type: Types.GET_USER_DETAILS, payload: response });
+      }
+    }).catch((err) => {
+      response.isLoading = false;
+      dispatch({ type: Types.GET_USER_DETAILS, payload: response });
     })
 }
