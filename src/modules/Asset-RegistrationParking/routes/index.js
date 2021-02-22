@@ -5,15 +5,15 @@ import AccountsInformationContainer from "../view/AccountsInformationContainer";
 
 
 
-const routeAssetRegistration = [
+const routeAssetRegistrationParking = [
   {
-    path: "/basic-information/create",
+    path: "/asset-parking/basic-information/create",
     name: "basicinformation",
     component:BasicInformationContainer,
     exact: true,
   },
   {
-    path: "/accounts-information/create",
+    path: "/asset-parking/accounts-information/create",
     name: "accountsinformation",
     component:AccountsInformationContainer,
     exact: true,
@@ -21,9 +21,9 @@ const routeAssetRegistration = [
  
 ];
 
-function getAssetRegistrationRoutes() {
+function getAssetRegistrationParkingRoutes() {
   {
-    return routeAssetRegistration.map((route, index) => (
+    return routeAssetRegistrationParking.map((route, index) => (
       <Route
         path={route.path}
         component={route.component}
@@ -32,4 +32,4 @@ function getAssetRegistrationRoutes() {
     ));
   }
 }
-export default  getAssetRegistrationRoutes;
+export default  getAssetRegistrationParkingRoutes;
