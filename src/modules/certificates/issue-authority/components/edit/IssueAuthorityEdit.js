@@ -21,6 +21,13 @@ const IssueAuthorityEdit = (props) => {
   const editStatus = useSelector(
     (state) => state.certificateIssueAuthorityInfo.editStatus
   );
+  const editValue = [
+    {
+      value: props.editData.isActive,
+      label: (props.editData.isActive === "1") ? "Active" : "In Active"
+    }
+
+  ]
   const action = [
     {
       label: "Active",
@@ -93,7 +100,7 @@ const IssueAuthorityEdit = (props) => {
               rules={{ required: false }}
               name="isActive"
               register={register}
-              value={action.label}
+              value={editValue}
               onChange={(e) => handleChangeTextInput("isActive", e.value)}
               setValue={setValue}
             />

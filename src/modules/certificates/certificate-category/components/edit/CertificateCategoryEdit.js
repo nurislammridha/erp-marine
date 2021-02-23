@@ -16,10 +16,23 @@ import {
 import { typeOf } from "react-is";
 
 const CertificateCategoryEdit = (props) => {
+  console.log('props.editData :>> ', props.editData);
   const history = useHistory();
   const { register, handleSubmit, errors, setValue } = useForm();
   const dispatch = useDispatch();
+  const parentCategory = [
+    {
+      value: props.editData.intParentsCategoryID,
+      label: props.editData.parentCategoryName
+    }
+  ]
+  const editStatus = [
+    {
+      value: props.editData.isActive,
+      label: (props.editData.isActive === "1") ? "Active" : "In Active"
+    }
 
+  ]
   const action = [
     {
       label: "Active",
@@ -134,7 +147,7 @@ const CertificateCategoryEdit = (props) => {
               rules={{ required: false }}
               name="isActive"
               register={register}
-              value={action.label}
+              value={editStatus}
               onChange={(e) => handleChangeTextInput("isActive", e.value)}
               setValue={setValue}
             />
@@ -153,7 +166,7 @@ const CertificateCategoryEdit = (props) => {
               rules={{ required: false }}
               name="intParentsCategoryID"
               register={register}
-              value={certificateParentCategoryList.intParentsCategoryID}
+              value={parentCategory}
               onChange={(option) => {
                 // categoryInputChange("strCertificateCategoryName", option.label);
                 categoryInputChange("intParentsCategoryID", option.value);

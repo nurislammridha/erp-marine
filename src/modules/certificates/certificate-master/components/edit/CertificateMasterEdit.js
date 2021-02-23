@@ -1,46 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Button, Modal, Form, Col, Row } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-// import { Form } from "react-bootstrap";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   certificateMasterEditAction,
   getCertificateMasterList,
   handleChangeCertificateMasterInput,
   setMasterCertificateEditValue,
 } from "../../_redux/actions/CertificateListAction";
+import { getCertificateCategory } from "../../../certificate-main/_redux/actions/CertificateMainAction";
 
 const CertificateMasterEdit = (props) => {
+  console.log('props.editData :>> ', props.editData);
   const isLoading = useSelector(
     (state) => state.CertificateListReducer.isLoading
   );
-  const history = useHistory();
   const { register, handleSubmit, errors, setValue } = useForm();
   const [currentPage, setCurrentPage] = useState(15);
   const dispatch = useDispatch();
-  const action = [
-    {
-      label: "Active",
-      value: "1",
-    },
-    {
-      label: "In Active",
-      value: "0",
-    },
-  ];
-  //   const vesselName = [
-  //     {
-  //         label: 'Akij Noor',
-  //         value: "1"
-  //     },
-  //     {
-  //         label: 'Akij Pearl',
-  //         value: "0"
-  //     }
-  // ];
+
   const editStatus = useSelector(
     (state) => state.CertificateListReducer.editStatus
   );
@@ -55,13 +36,15 @@ const CertificateMasterEdit = (props) => {
   const CertificateMasterInput = useSelector(
     (state) => state.CertificateListReducer.certificateMasterInput
   );
-
   useEffect(() => {
-    // dispatch(setMasterCertificateEditValue(CertificateMasterInput));
+    dispatch(getCertificateCategory())
+  }, [])
+  useEffect(() => {
+    console.log('Hi :>> ');
     dispatch(setMasterCertificateEditValue(props.editData));
-    if (editStatus) {
-      dispatch(getCertificateMasterList("", "", currentPage));
-    }
+    // if (editStatus) {
+    //   dispatch(getCertificateMasterList("", "", currentPage));
+    // }
   }, [dispatch, editStatus]);
 
   const submitecertificateMaster = (data) => {
@@ -72,7 +55,12 @@ const CertificateMasterEdit = (props) => {
       )
     );
   };
-
+  const editCategory = [
+    {
+      value: props.editData.intCategoryID,
+      label: props.editData.strCertificateCategoryName
+    }
+  ]
   return (
     <>
       <form
@@ -102,7 +90,8 @@ const CertificateMasterEdit = (props) => {
               rules={{ required: false }}
               name="intCategoryID"
               register={register}
-              value={CertificatesCategoryOptionData.strCertificateCategoryName}
+              // value={CertificatesCategoryOptionData.strCertificateCategoryName}
+              value={editCategory}
               setValue={setValue}
               onChange={(option) => {
                 certificateMainInfoChange(
