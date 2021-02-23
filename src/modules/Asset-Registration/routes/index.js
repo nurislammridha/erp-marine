@@ -8,7 +8,7 @@ import AccountsInformationContainer from "../view/AccountsInformationContainer";
 
 const routeAssetRegistration = [
   {
-    path: "/basic_information/create",
+    path: "/basic-information/create",
     name: "basicinformation",
     component: BasicInformationContainer,
     exact: true,
@@ -20,7 +20,7 @@ const routeAssetRegistration = [
     exact: true,
   },
   {
-    path: "/accounts_information/create",
+    path: "/accounts-information/create",
     name: "accountsinformation",
     component: AccountsInformationContainer,
     exact: true,
