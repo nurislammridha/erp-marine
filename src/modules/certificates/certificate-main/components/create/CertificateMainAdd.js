@@ -104,9 +104,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
   const getFiles = (files) => {
     console.log("files", files[0]);
+   
 
     if (files.length > 0) {
       files.forEach((file) => {
+        
         const filesUpdated = [
           file,
           ...certificateInfoInput.multipleAttachments,
@@ -114,8 +116,10 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
         dispatch(
           handleChangeProductInputAction("multipleAttachments", filesUpdated)
         );
+       
       });
     }
+    
   };
 
   const deleteMultipleAttachmentData = (index) => {
@@ -363,7 +367,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <Form.Control
                     type="text"
                     name="strShipFolderNo"
-                    className="fromStyle formHeight"
+                    className="fromStyle formHeight formWidth"
                     value={certificateInfoInput.strShipFolderNo}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -449,7 +453,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <Form.Control
                     type="text"
                     name="strIssuedPlace"
-                    className="fromStyle formHeight"
+                    className="fromStyle formHeight formWidth"
                     value={certificateInfoInput.strIssuedPlace}
                     onChange={(e) =>
                       certificateMainInfoChange(

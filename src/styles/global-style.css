@@ -101,4 +101,8 @@
   letter-spacing: 0.07em;
 }
 
+.formWidth {
+  width: 90% !important;
+}
+
 /*********************************** Sidebar **************************/

@@ -25,6 +25,7 @@ export function AsideMenuList({ layoutProps }) {
   useEffect(() => {
     dispatch(GetMenuListsByPermission());
   }, [dispatch]);
+  
 
   return (
     <>
