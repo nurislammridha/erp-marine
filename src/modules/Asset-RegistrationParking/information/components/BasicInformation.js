@@ -219,7 +219,7 @@ const BasicInformation = () => {
                   </div>
                   <div className="col-xl-3 col-lg-3 col-6">
                     <Form.Group>
-                      <Form.Label className="formFont">Asset Qty</Form.Label>
+                      <Form.Label className="formFont Asset-Qty">Asset Qty</Form.Label>
                       <Form.Control
                         className="formHeight"
                         type="text"
