@@ -18,6 +18,7 @@ const CertificateMasterContainer = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const ref = React.createRef();
+  // const ref1 = React.createRef();
   const modalAddStatus = useSelector(
     (state) => state.CertificateListReducer.addStatus
   );
@@ -41,7 +42,7 @@ const CertificateMasterContainer = () => {
       <Card>
         <Card.Body>
           <div className="container">
-              <h1 className="tableheading">Certificate Master List </h1> <hr/>
+            <h1 className="tableheading">Certificate Master List </h1> <hr />
             <div className="row">
               <CertificateMasterFilter />
               <div className="col-lg-3 export text-right">
@@ -110,7 +111,7 @@ const CertificateMasterContainer = () => {
                 <CertificateMasterAdd />
               </SimpleModal>
             </div>
-            <div id="id" ref={ref}>
+            <div id="id" ref={ref} >
               <CertificateMasterList />
             </div>
           </div>

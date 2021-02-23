@@ -40,7 +40,7 @@ const CertificateMasterList = () => {
     setCurrentPage(data.page);
     dispatch(getCertificateMasterList("", "", data.page));
   };
-
+  console.log('certificateMasterData :>> ', certificateMasterData);
   return (
     <>
       {isLoading && (
