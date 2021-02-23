@@ -14,7 +14,7 @@ const routeAssetRegistration = [
     exact: true,
   },
   {
-    path: "/admin_information/create",
+    path: "/admin-information/create",
     name: "admininformation",
     component: AdminInformationContainer,
     exact: true,
