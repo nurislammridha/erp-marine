@@ -111,9 +111,12 @@ const CertificateMasterContainer = () => {
                 <CertificateMasterAdd />
               </SimpleModal>
             </div>
-            <div id="id" ref={ref} >
+            {/* <div id="id" ref={ref} >
               <CertificateMasterList />
-            </div>
+            </div> */}
+            {/* <div ref={ref} > */}
+              <CertificateMasterList printRef={ref}/>
+            {/* </div> */}
           </div>
         </Card.Body>
       </Card>

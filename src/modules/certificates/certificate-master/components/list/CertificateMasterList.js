@@ -6,8 +6,10 @@ import CertificateMasterEdit from "../edit/CertificateMasterEdit";
 import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
 import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 
-const CertificateMasterList = () => {
+const CertificateMasterList = (props) => {
+  console.log('props checking',props);
   const [show, setShow] = useState(false);
+  const ref = React.createRef();
   const [editItem, setEditItem] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const modalEditStatus = useSelector(
@@ -56,7 +58,7 @@ const CertificateMasterList = () => {
       {!isLoading && certificateMasterData.length > 0 && (
         <>
           <div className="react-bootstrap-table table-responsive">
-            <table className="table mt-4 tbl-standard" id="table-to-xls">
+            <table className="table mt-4 tbl-standard" id="table-to-xls id" ref={props.printRef}>
               <thead>
                 <tr>
                   <th scope="col">SI</th>
