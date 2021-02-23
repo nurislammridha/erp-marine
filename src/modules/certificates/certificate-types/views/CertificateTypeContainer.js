@@ -29,7 +29,7 @@ const CertificateTypeContainer = () => {
     <Card>
       <Card.Body>
         <div className="container">
-          <h1 className="tableheading">Certificate Type List</h1> <hr/>
+          <h1 className="tableheading">Certificate Type List</h1> <hr />
           <div className="row">
             <CertificateTypeFilter />
             <div className="col-lg-3 export text-right">
@@ -98,8 +98,8 @@ const CertificateTypeContainer = () => {
               <CertificateTypeAdd />
             </SimpleModal>
           </div>
-          <div id="id" ref={ref}>
-            <CertificateTypeList />
+          <div id="id">
+            <CertificateTypeList printRef={ref} />
           </div>
         </div>
       </Card.Body>

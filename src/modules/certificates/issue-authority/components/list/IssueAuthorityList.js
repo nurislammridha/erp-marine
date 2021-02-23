@@ -9,6 +9,7 @@ import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 import { confirmAlert } from "react-confirm-alert";
 
 const IssueAuthorityList = (props) => {
+  const ref = React.createRef();
   const [show, setShow] = useState(false);
   const [editItem, setEditItem] = useState({});
   const handleClose = () => setShow(false);
@@ -16,13 +17,13 @@ const IssueAuthorityList = (props) => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
-  const modalEditStatus = useSelector( (state) => state.certificateIssueAuthorityInfo.editStatus);
+  const modalEditStatus = useSelector((state) => state.certificateIssueAuthorityInfo.editStatus);
 
   const isLoading = useSelector((state) => state.certificateIssueAuthorityInfo.isLoading);
   const issuingAuthorities = useSelector((state) => state.certificateIssueAuthorityInfo.issuingAuthorities);
   const issuingAuthoritiesData = useSelector((state) => state.certificateIssueAuthorityInfo.issuingAuthoritiesData);
 
-  const issuingAuthoritiesPaginatedData = useSelector((state) =>state.certificateIssueAuthorityInfo.issuingAuthoritiesPaginatedData);
+  const issuingAuthoritiesPaginatedData = useSelector((state) => state.certificateIssueAuthorityInfo.issuingAuthoritiesPaginatedData);
 
   useEffect(() => {
     dispatch(getIssuingAuthorities("", "", currentPage));
@@ -46,7 +47,7 @@ const IssueAuthorityList = (props) => {
     dispatch(issueAuthorityDelete(id));
     dispatch(getIssuingAuthorities("", "", currentPage));
   }
-  
+
   const deleteIssuingAuthority = (id) => {
     confirmAlert({
       title: "Confirm To Delete",
@@ -62,7 +63,7 @@ const IssueAuthorityList = (props) => {
       ]
     });
   };
- 
+
   return (
     <>
       {isLoading && (
@@ -78,13 +79,13 @@ const IssueAuthorityList = (props) => {
       {!isLoading && issuingAuthorities.length > 0 && (
         <>
           <div className="react-bootstrap-table table-responsive">
-            <table className="table mt-2 tbl-standard" id="table-to-xls">
+            <table className="table mt-2 tbl-standard" id="table-to-xls" ref={props.printRef}>
               <thead>
                 <tr>
                   <th scope="col">SL</th>
                   <th scope="col">Authority Name</th>
                   <th scope="col">Status</th>
-                  <th scope="col">Action</th>
+                  <th scope="col" className="print-test">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -94,7 +95,7 @@ const IssueAuthorityList = (props) => {
                       <td>{issuingAuthoritiesPaginatedData.from + index}</td>
                       <td>{item.strIssuingAuthorityName}</td>
                       <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
-                      <td>
+                      <td className="print-test">
                         <i
                           className="far fa-edit pointer editIcon"
                           onClick={() => handleEdit(item)}

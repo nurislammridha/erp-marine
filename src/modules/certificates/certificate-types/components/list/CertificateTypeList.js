@@ -10,6 +10,7 @@ import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
 import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 
 const CertificateTypeList = (props) => {
+  const ref = React.createRef();
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const certificateTypeData = useSelector((state) => state.certificateTypeInfo.certificateTypeList);
@@ -55,13 +56,13 @@ const CertificateTypeList = (props) => {
       {!isLoading && certificateTypeData.length > 0 && (
         <>
           <div className="react-bootstrap-table table-responsive pr-7">
-            <table className="table mt-2 tbl-standard" id="table-to-xls">
+            <table className="table mt-2 tbl-standard" id="table-to-xls" ref={props.printRef}>
               <thead>
                 <tr>
                   <th scope="col">No</th>
                   <th scope="col">Certificate Type</th>
                   <th scope="col">Status</th>
-                  <th scope="col">Action</th>
+                  <th scope="col" className="print-test">Action</th>
                 </tr>
               </thead>
 
@@ -72,7 +73,7 @@ const CertificateTypeList = (props) => {
                       <td>{certificateTypePaginatedData.from + index}</td>
                       <td>{item.strCertificateTypeName}</td>
                       <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
-                      <td className="mt-3">
+                      <td className="mt-3 print-test">
                         <a>
                           <i
                             className="far fa-edit editIcon"

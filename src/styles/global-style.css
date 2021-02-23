@@ -104,13 +104,5 @@
 .formWidth {
   width: 90% !important;
 }
-@media print {
-  body {
-    margin: 0;
-    color: #000;
-    background-color: rgb(218, 38, 38);
-  }
-
-}
 
 /*********************************** Sidebar **************************/

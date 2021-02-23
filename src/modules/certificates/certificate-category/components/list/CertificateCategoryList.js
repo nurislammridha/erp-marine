@@ -9,7 +9,8 @@ import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
 import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 
-const CertificateCategoryList = () => {
+const CertificateCategoryList = (props) => {
+  const ref = React.createRef();
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -93,7 +94,7 @@ const CertificateCategoryList = () => {
       {!isLoading && certificateCategoryData.length > 0 && (
         <>
           <div className="react-bootstrap-table table-responsive">
-            <table className="table mt-2 tbl-standard" id="table-to-xls">
+            <table className="table mt-2 tbl-standard" id="table-to-xls" ref={props.printRef}>
               <thead>
                 <tr>
                   {/* <th scope="col">
@@ -104,7 +105,7 @@ const CertificateCategoryList = () => {
                   <th scope="col">Category Name</th>
                   <th scope="col">Parent Category</th>
                   <th scope="col">Status</th>
-                  <th scope="col">Action</th>
+                  <th scope="col" className="print-test">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -118,7 +119,7 @@ const CertificateCategoryList = () => {
                           : ""}
                       </td>
                       <td>{item.isActive === "1" ? "Active" : "Inactive"}</td>
-                      <td>
+                      <td className="print-test">
                         <i
                           className="far fa-edit pointer editIcon"
                           onClick={() => handleEdit(item)}
