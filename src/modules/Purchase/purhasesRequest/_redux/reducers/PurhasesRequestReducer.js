@@ -60,13 +60,22 @@ const PurhasesRequestReducer = (state = initialstate, action) => {
                 PQRowData,
             }
         //add multiple purchase request data
+        // case Types.MULTIPLE_PURCHASE_DATA_CREATE:
+        //     const newMultiplePQ = { ...state.purchaseRequestData };
+        //     newMultiplePQ.requestRow.push(action.payload);
+        //     return {
+        //         ...state,
+        //         purchaseRequestData: newMultiplePQ,
+        //         multiplePQData: newMultiplePQ.requestRow,
+        //         PQRowData: initialstate.PQRowData
+        //     }
         case Types.MULTIPLE_PURCHASE_DATA_CREATE:
-            const newMultiplePQ = { ...state.purchaseRequestData };
-            newMultiplePQ.requestRow.push(action.payload);
+            // const newMultiplePQ = { ...state.purchaseRequestData };
+            // newMultiplePQ.requestRow.push(action.payload);
             return {
                 ...state,
-                purchaseRequestData: newMultiplePQ,
-                multiplePQData: newMultiplePQ.requestRow,
+                // purchaseRequestData: newMultiplePQ,
+                multiplePQData: [...state.multiplePQData, action.payload],
                 PQRowData: initialstate.PQRowData
             }
         //delete multiple Purchase request data 
@@ -81,7 +90,15 @@ const PurhasesRequestReducer = (state = initialstate, action) => {
             return {
                 ...state,
                 isLoading: action.payload.isLoading,
+                addStatus: action.payload.status,
+
+            }
+
+        case Types.EMPTY_STATUS:
+            return {
+                ...state,
                 purchaseRequestData: initialstate.purchaseRequestData,
+                multiplePQData: initialstate.multiplePQData
             }
         //get purchase list data 
         case Types.GET_PQ_LIST_DATA:
@@ -99,10 +116,10 @@ const PurhasesRequestReducer = (state = initialstate, action) => {
                 };
             }
         case Types.GET_PR_DETAILS_DATA:
-                return {
-                    ...state,
-                    PRDetails: action.payload,
-                };
+            return {
+                ...state,
+                PRDetails: action.payload,
+            };
         default:
             break;
     }

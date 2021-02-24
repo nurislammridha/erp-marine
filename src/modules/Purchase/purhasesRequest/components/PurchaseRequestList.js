@@ -4,13 +4,17 @@ import { Button, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SimpleModal from '../../../master/components/Modal/SimpleModal';
+import { useHistory } from 'react-router-dom';
 import { getPRListData } from '../_redux/actions/PurhasesRequestAction';
 import PaginationLaravel from '../../../master/pagination/PaginationLaravel';
 import LoadingSpinner from "../../../master/spinner/LoadingSpinner";
-
 import moment from "moment"
 import PurchaseRequestDetails from './PurchaseRequestDetails';
+import { emptyStatus } from '../_redux/actions/PurhasesRequestAddAction';
+
+
 const PurchaseRequestList = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.purchaseRequest.isLoading);
   const PRListData = useSelector((state) => state.purchaseRequest.PRListData);
@@ -43,15 +47,21 @@ const PurchaseRequestList = () => {
     setPRDetailsShow(true);
     setStatus(item.strStatus)
   }
+
+  const handleClick = () => {
+    dispatch(emptyStatus());
+    history.push('/purchase/request/create')
+  }
+
   return (
     <Card>
       <Card.Body>
         <div className="container ">
-        <h1 className="tableheading mt-0 ">Purchase Request</h1>
+          <h1 className="tableheading mt-0 ">Purchase Request</h1>
           <div className="row mb-5 table-form">
-         
 
-         
+
+
             <div className="offset-xl-6 offset-lg-6 col-xl-4 col-lg-4  col-8">
               <Paper className="searchInput">
                 <InputBase
@@ -68,11 +78,12 @@ const PurchaseRequestList = () => {
             {/* <div className="col-xl-6 col-lg-6 col-md-6 col-sm-0"></div> */}
 
             <div>
-              <Link to="/purchase/request/create">
-                <Button className="btn-sm" variant="primary">
-                  New Requisition
-            </Button>
-              </Link>
+              {/* <Link to="/purchase/request/create">
+                
+              </Link> */}
+              <Button className="btn-sm" variant="primary" onClick={() => handleClick()}>
+                New Requisition
+              </Button>
 
             </div>
           </div>
