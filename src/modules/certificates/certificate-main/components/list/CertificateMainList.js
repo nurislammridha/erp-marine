@@ -39,8 +39,6 @@ const CertificateMainList = () => {
 
   const certificateBackgroundColor = useSelector((state) => state.certificateMainInfo.certificateBackgroundColor);
   const bottomStatus = useSelector((state) => state.certificateMainInfo.bottomStatus);
-
-  console.log('certificates :>> ', certificates);
   useEffect(() => {
     dispatch(getCertificateMainListAction(currentPage));
     dispatch(getCertificateCategory());
@@ -189,15 +187,16 @@ const CertificateMainList = () => {
                 </thead>
               </table>
               <table className="table table table-head-custom table-vertical-center user-list-table certificate-list-table">
-                
+
                 {certificates.map((certificate, index) => (
                   <Accordion defaultActiveKey="0">
-                    <Card>
+                    <Card className="Custome-collapse">
                       <thead>
                         <tr>
                           <th rowspan="12">
                             <Card.Header>
-                              <Accordion.Toggle as={Button} variant="light" eventKey={index.toString()}>
+                              <Accordion.Toggle className="collapse-btn" eventKey={index.toString()}>
+                                <i className="fas fa-sort mr-2"></i>
                                 {certificate.strCertificateCategoryName !== null && certificate.strCertificateCategoryName !== "" && certificate.strCertificateCategoryName}
                               </Accordion.Toggle>
                             </Card.Header>
@@ -210,14 +209,14 @@ const CertificateMainList = () => {
                           {certificate.certificates.data.map((certificate, index) => (
                             <tr key={index + 1}>
                               <td>{index + 1}</td>
-                             
+
                               {/* <td className="description">{certificate.strShipFolderNo}</td> */}
                               {/* <td>{certificate.strCustomeCode}</td>
                               <td>{certificate.strShipRemarks}</td> */}
                               <td className="type">{certificate.strCertificateTypeName}</td>
                               {/* <td>{certificate.strIssuingAuthorityName}</td> */}
                               <td className="issuePlace">{certificate.strIssuedPlace}</td>
-                            
+
                               <td className="location">{certificate.strLocation}</td>
                               {/* <td className="">
                                 {certificate.dteCertificateIssueDate !== null
@@ -251,12 +250,6 @@ const CertificateMainList = () => {
                               <td className="NotOnBoard">{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
                               <td className="dueDate">{certificate.differenceDays}</td>
                               <td className="status">
-                                {/* <button
-                          className={`btn btn-primary btn-sm text-white certificate-lis-btn certificate-${getCertificateColorClass(
-                            certificate.differenceDays
-                          )}`}>
-                          {certificate.differenceDays === 0 ? "Expired" : "Due"}
-                        </button> */}
                                 <button
                                   className="btn btn-primary btn-sm text-white certificate-lis-btn" style={{ backgroundColor: `${getColorCode(certificate.differenceDays)}` }}>
                                   {certificate.differenceDays === 0 ? "Expired" : "Due"}
@@ -275,20 +268,7 @@ const CertificateMainList = () => {
                                     <i className="fa fa-edit text-success editIcon item-list-icon"></i>
                                   </Link>
                                 </div>
-                      &nbsp;&nbsp;&nbsp;
-                      {/* <button
-                        className="btn btn-icon btn-light btn-hover-danger btn-sm"
-                        onClick={() => {
-                          if (
-                            window.confirm(
-                              "Are you sure you wish to delete this item?"
-                            )
-                          )
-                            certificateDelete(certificate.intID);
-                        }}
-                      >
-                        <i className="fa fa-trash"></i>
-                      </button> */}
+                                 &nbsp;&nbsp;&nbsp;
                               </td>
                             </tr>
                           ))}

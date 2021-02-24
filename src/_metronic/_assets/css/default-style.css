@@ -1450,3 +1450,16 @@ td.NotOnBoard {
 td.dueDate {
   width: 5%;
 }
+.Custome-collapse{
+  border: none!important;
+  border-bottom: 1px solid rgba(0,0,0,.125)!important;
+  border-radius: 0.2rem!important;
+  width: 100%!important;
+}
+.collapse-btn{
+  border: none !important;
+  background-color: #fff;
+  padding: 8px 25px !important;
+  font-size: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
