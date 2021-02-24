@@ -1423,3 +1423,30 @@ label.form-control.criteriaOptionsInput {
     display: none !important;
   }
 }
+.certificate-list-table td {
+  /* width: 6%!important; */
+}
+td.type {
+  width: 2%;
+}
+td.issuePlace {
+  width: 10%;
+}
+td.location {
+  width: 8%;
+}
+td.validUntil {
+  width: 10%;
+}
+td.extendUntil {
+  width: 13%!important;
+}
+td.LastEndorsementDate {
+  width: 19%;
+}
+td.NotOnBoard {
+  width: 13%;
+}
+td.dueDate {
+  width: 5%;
+}

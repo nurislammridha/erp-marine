@@ -173,7 +173,6 @@ const CertificateMainList = () => {
                 <thead>
                   <tr>
                     <th className="td-sl">#</th>
-                    <th scope="col">Description</th>
                     <th scope="col">Type</th>
                     {/* <th scope="col">Issued By</th> */}
                     <th scope="col">Issued Place</th>
@@ -190,12 +189,13 @@ const CertificateMainList = () => {
                 </thead>
               </table>
               <table className="table table table-head-custom table-vertical-center user-list-table certificate-list-table">
+                
                 {certificates.map((certificate, index) => (
                   <Accordion defaultActiveKey="0">
                     <Card>
                       <thead>
                         <tr>
-                          <th rowspan="14">
+                          <th rowspan="12">
                             <Card.Header>
                               <Accordion.Toggle as={Button} variant="light" eventKey={index.toString()}>
                                 {certificate.strCertificateCategoryName !== null && certificate.strCertificateCategoryName !== "" && certificate.strCertificateCategoryName}
@@ -210,28 +210,30 @@ const CertificateMainList = () => {
                           {certificate.certificates.data.map((certificate, index) => (
                             <tr key={index + 1}>
                               <td>{index + 1}</td>
-                              <td>{certificate.strShipFolderNo}</td>
-                              <td>{certificate.strCustomeCode}</td>
-                              <td>{certificate.strShipRemarks}</td>
-                              <td>{certificate.strCertificateTypeName}</td>
-                              <td>{certificate.strIssuingAuthorityName}</td>
-                              <td>{certificate.strIssuedPlace}</td>
-                              <td>{certificate.strLocation}</td>
-                              <td>
+                             
+                              {/* <td className="description">{certificate.strShipFolderNo}</td> */}
+                              {/* <td>{certificate.strCustomeCode}</td>
+                              <td>{certificate.strShipRemarks}</td> */}
+                              <td className="type">{certificate.strCertificateTypeName}</td>
+                              {/* <td>{certificate.strIssuingAuthorityName}</td> */}
+                              <td className="issuePlace">{certificate.strIssuedPlace}</td>
+                            
+                              <td className="location">{certificate.strLocation}</td>
+                              {/* <td className="">
                                 {certificate.dteCertificateIssueDate !== null
                                   ? generateStringDateFromDate(
                                     certificate.dteCertificateIssueDate
                                   )
                                   : ""}
-                              </td>
-                              <td>
+                              </td> */}
+                              <td className="validUntil">
                                 {certificate.dteCertificateValidUntil !== null
                                   ? generateStringDateFromDate(
                                     certificate.dteCertificateValidUntil
                                   )
                                   : ""}
                               </td>
-                              <td>
+                              <td className="extendUntil">
                                 {certificate.dteExtendedUntil !== null
                                   ? generateStringDateFromDate(
                                     certificate.dteExtendedUntil
@@ -239,16 +241,16 @@ const CertificateMainList = () => {
                                   : ""}
                               </td>
 
-                              <td>
+                              <td className="LastEndorsementDate">
                                 {certificate.dteLastEndorsementDate !== null
                                   ? generateStringDateFromDate(
                                     certificate.dteLastEndorsementDate
                                   )
                                   : ""}
                               </td>
-                              <td>{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
-                              <td>{certificate.differenceDays}</td>
-                              <td>
+                              <td className="NotOnBoard">{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
+                              <td className="dueDate">{certificate.differenceDays}</td>
+                              <td className="status">
                                 {/* <button
                           className={`btn btn-primary btn-sm text-white certificate-lis-btn certificate-${getCertificateColorClass(
                             certificate.differenceDays
@@ -261,7 +263,7 @@ const CertificateMainList = () => {
                                 </button>
 
                               </td>
-                              <td>
+                              <td className="action">
                                 <div className="mt-5">
                                   <Link onClick={() => certificateDetails(certificate)}>
                                     <i className="far fa-eye text-success editIcon item-list-icon"></i>
