@@ -2,6 +2,7 @@ import * as Types from "../types/Types";
 import Axios from "axios";
 import { toast } from "react-toastify";
 import { showToast } from "../../../../master/utils/ToastHelper";
+import store from '../../../../../redux/store';
 
 
 export const handleChangePurchaseApprovalFilterInput = (name, value) => (dispatch) => {
@@ -10,6 +11,15 @@ export const handleChangePurchaseApprovalFilterInput = (name, value) => (dispatc
         value: value,
     };
     dispatch({ type: Types.CHANGE_PURCHASE_APPROVAL_FILTER_INPUT, payload: formData });
+
+
+    const search = store.getState().purchaseApprovalFilter.PurchaseApprovalFilterInput.search;
+    const intSBUId = store.getState().purchaseApprovalFilter.PurchaseApprovalFilterInput.intSBUId;
+    const intBusinessUnitId = store.getState().purchaseApprovalFilter.PurchaseApprovalFilterInput.intBusinessUnitId;
+    const intShipID = store.getState().purchaseApprovalFilter.PurchaseApprovalFilterInput.intShipID;
+    const dteFromDate = store.getState().purchaseApprovalFilter.PurchaseApprovalFilterInput.dteFromDate;
+    const dteToDate = store.getState().purchaseApprovalFilter.PurchaseApprovalFilterInput.dteToDate;
+    dispatch(getPurchaseApprovalList(search, intSBUId, intBusinessUnitId, intShipID, dteFromDate, dteToDate));
 };
 
 export const handleChangePurchaseApprovalDetailInput = (name, value, item) => (dispatch) => {
@@ -59,9 +69,9 @@ export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBu
     try {
         let url = `${process.env.REACT_APP_API_URL}purchase/getApproval?`;
 
-        if (page !== null || page === "") {
-            url += `&page=${page}`;
-        }
+        // if (page !== null || page === "") {
+        //     url += `&page=${page}`;
+        // }
 
         url += searchValue !== "" ? `search=${searchValue}&` : '';
         url += intSBUId !== null ? `intSBUId=${intSBUId}&` : '';
