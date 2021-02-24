@@ -16,7 +16,7 @@ const BasicInfoAdd = withRouter(() => {
     const taxTypeOptionData = useSelector((state) => state.partnerInfo.taxTypeData);
     const partnerTypeOptionData = useSelector((state) => state.partnerInfo.partnerTypeData);
     const businessUnitOptionData = useSelector((state) => state.partnerInfo.businessUnitData);
-
+    console.log('object', taxTypeOptionData)
     useEffect(() => {
         dispatch(getTaxType());
         dispatch(getPartnerType());
