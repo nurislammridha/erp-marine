@@ -172,7 +172,7 @@ const AddressEdit = withRouter(() => {
                                         <td>{item.isDefault ? 'Yes' : 'No'}</td>
                                         <td>
                                             <a><i className="fas fa-trash-alt editIcon ml-4"
-                                                onClick={() => dispatch(deletePartnerAddressMultiple(index))}
+                                                onClick={() => dispatch(deletePartnerAddressMultiple(index, item))}
                                             ></i></a>
 
                                         </td>

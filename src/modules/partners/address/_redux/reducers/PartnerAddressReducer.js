@@ -13,6 +13,7 @@ const initialState = {
     },
     addressInfo: [],
     isMultipleAdded: false,
+    deleted_address_info: []
 }
 
 const PartnerAddressReducer = (state = initialState, action) => {
@@ -71,6 +72,12 @@ const PartnerAddressReducer = (state = initialState, action) => {
             return {
                 ...state,
                 addressInfo: addressOld,
+            };
+
+        case Types.DELETE_ADDRESS_MULTIPLE_IN_EDIT:
+            return {
+                ...state,
+                deleted_address_info: [...state.deleted_address_info, action.payload]
             };
 
         case Types.EMPTY_ADDRESS_INFO:

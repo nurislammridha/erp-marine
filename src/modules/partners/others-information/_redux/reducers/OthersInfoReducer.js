@@ -7,6 +7,9 @@ const initialState = {
     partnerOtherInfoInput: {
         multiplePort: [],
         multipleProduct: [],
+        deleted_item: {},
+        deleted_ports: [],
+        deleted_provider: []
     },
 
     status: false,

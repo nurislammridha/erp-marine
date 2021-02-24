@@ -202,7 +202,7 @@ const BankInfoEdit = withRouter(() => {
                                                 <td>{item.isDefaultAccount ? 'Yes' : 'No'}</td>
                                                 <td>
                                                     <a><i className="fas fa-trash-alt editIcon ml-4"
-                                                        onClick={() => dispatch(deleteBankMultiple(index))}
+                                                        onClick={() => dispatch(deleteBankMultiple(index, item))}
                                                     ></i></a>
                                                 </td>
                                             </tr>

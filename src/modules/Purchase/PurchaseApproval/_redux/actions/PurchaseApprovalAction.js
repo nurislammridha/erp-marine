@@ -55,7 +55,7 @@ export const getShipName = (data) => (dispatch) => {
 };
 
 
-export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBusinessUnitId = null, intShipID = null, dteFromDate = null, dteToDate = null, page) => async (dispatch) => {
+export const getPurchaseApprovalList = (searchValue = "", intSBUId = null, intBusinessUnitId = null, intShipID = null, dteFromDate = null, dteToDate = null) => async (dispatch) => {
     let response = {
         purchaseApprovalList: [],
         status: false,

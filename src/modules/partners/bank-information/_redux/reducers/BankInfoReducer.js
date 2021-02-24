@@ -19,7 +19,8 @@ const initialState = {
         intActionBy: ""
     },
     bankInfoMultiple: [],
-    isMultipleAdded: false
+    isMultipleAdded: false,
+    deleted_bank_info: []
 };
 
 
@@ -62,6 +63,12 @@ const BankInfoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 bankInfoMultiple: bankOld,
+            };
+        case Types.DELETE_BANK_MULTIPLE_IN_EDIT:
+
+            return {
+                ...state,
+                deleted_bank_info: [...state.deleted_bank_info, action.payload]
             };
 
         case Types.EMPTY_BANK_INFO:

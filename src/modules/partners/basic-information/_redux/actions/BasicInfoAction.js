@@ -200,7 +200,7 @@ export const EditSupplierInfo = (id) => (dispatch) => {
         .then((res) => {
 
             let data = res.data.data
-            console.log('supplier info', data)
+
             if (data.intSupplierTypeID !== null) {
                 data.supplierTypeName = {
                     label: data.strSupplierTypeName,
@@ -272,9 +272,11 @@ export const UpdatePartnerInfo = (id) => async (dispatch) => {
 
     const basicInfo = store.getState().partnerInfo.partnerInfoInput;
     const addressInfo = store.getState().partnerAddress.addressInfo;
+    const deleted_address_info = store.getState().partnerAddress.deleted_address_info;
     const bankInfo = store.getState().bankInfo.bankInfoMultiple;
+    const deleted_bank_info = store.getState().bankInfo.deleted_bank_info;
     const otherInfo = store.getState().partnerOthersInfo.partnerOtherInfoInput;
-
+    console.log('deleted_ports', otherInfo.deleted_ports)
     let responseList = {
         isLoading: true,
         data: {},
@@ -286,12 +288,38 @@ export const UpdatePartnerInfo = (id) => async (dispatch) => {
         payload: responseList,
     });
 
+
+    let option1 = [];
+    if (deleted_address_info) {
+        deleted_address_info.forEach((item) => {
+            let itemData = {
+                id: item.intSupplierAddressID
+            };
+            option1.push(itemData);
+        });
+    }
+
+    let option2 = [];
+    if (deleted_bank_info) {
+        deleted_bank_info.forEach((item) => {
+            let itemData = {
+                id: item.intSupplierBankInfoID
+            };
+            option2.push(itemData);
+        });
+    }
+
+
     const finalSubmitInputData = {
         basicInfo: basicInfo,
         addressInfo: addressInfo,
+        deleted_address_info: option1,
         bankInfo: bankInfo,
+        deleted_bank_info: option2,
         ports: otherInfo.multiplePort,
+        deleted_ports: otherInfo.deleted_ports,
         psProvider: otherInfo.multipleProduct,
+        deleted_ports: otherInfo.deleted_ports,
         // psType: otherInfo.multipleServiceList,
     }
     console.log('finalSubmitInputData', finalSubmitInputData)
