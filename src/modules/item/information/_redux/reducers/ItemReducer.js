@@ -23,6 +23,7 @@ const initialState = {
         intItemSubCategoryID: "",
         strItemCode: "1",
         intActionBy: "502648",
+        strIMPACode: ""
     },
     multipleItemAdd: [],
     itemList: [],
@@ -132,6 +133,8 @@ const ItemReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: action.payload,
             };
+        case Types.EMPTY_ITEM_DATA_INPUT:
+            return { ...state, itemDataInput: initialState.itemDataInput }
             break;
         default:
             break;

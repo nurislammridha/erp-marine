@@ -40,7 +40,10 @@ const ItemEdit = () => {
     }
 
     useEffect(() => {
+
         if (multipleItemList.length > 0) {
+            dispatch(editMultipleItemData(multipleItemList, id));
+            history.push('/items/list');
             setValue("intDepartmentID", "");
             setValue("intUoMID", "");
             setValue("intItemTypeID", "");
@@ -167,7 +170,7 @@ const ItemEdit = () => {
                             setValue={setValue}
                             onChange={(option) => {
                                 changeText("intItemSubCategoryID", option.value);
-                                changeText("strtemSubCategoryName", option.label);
+                                changeText("strSubCategoryName", option.label);
                             }}
                             setValue={setValue}
                         />
@@ -274,14 +277,17 @@ const ItemEdit = () => {
           </Button>
                     <button
                         className="btn btn-primary btn-sm float-right text-center custome-addnew-btn item-list-btn"
-                        onClick={() => multipleItemAdd()}
+                        onClick={() => {
+                            multipleItemAdd();
+
+                        }}
                     >
-                        Add <i className="fas fa-plus pl-2 item-list-icon pt-1"></i>
+                        Update
                     </button>
                     <div className="clear-fix"></div>
                 </div>
             </div>
-            {multipleItemList.length > 0 && (
+            {/* {multipleItemList.length > 0 && (
                 <div className="card card-custom gutter-b pl-5 pr-5">
                     <div className="row mt-5 pb-1">
                         <div className="react-bootstrap-table table-responsive border-0 pl-5">
@@ -341,7 +347,7 @@ const ItemEdit = () => {
                         <div className="clear-fix"></div>
                     </div>
                 </div>
-            )}
+            )} */}
 
         </>
     );

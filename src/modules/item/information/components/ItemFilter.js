@@ -4,14 +4,16 @@ import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
+  EmptyitemDataInput,
   getItemCategory,
   getItemList,
   getItemSubCategory,
 } from "../_redux/actions/ItemAction";
 
 const ItemFilter = ({ currentPage, setCurrentPage }) => {
+  const history = useHistory()
   const { register, setValue } = useForm();
   const dispatch = useDispatch();
   const itemCategoryOptionData = useSelector(
@@ -64,9 +66,9 @@ const ItemFilter = ({ currentPage, setCurrentPage }) => {
     <>
       <h1 className="tableheading ml-5 pt-5">Item List</h1>
       <div className="row m-4">
-     
-        
-     
+
+
+
         <div className="col-lg-2 col-md-6 ">
           <Form.Group as={Col} controlId="formGridState">
             <input
@@ -129,12 +131,21 @@ const ItemFilter = ({ currentPage, setCurrentPage }) => {
           <div className="certificate-filter">
             <i className="fas fa-filter tableFilter mt-1 mr-2"></i>
             <i className="far fa-filter"></i>
-            <Link
+            {/* <Link
               to="/items/add"
               className="btn btn-primary text-center text-white btn-sm custome-addnew-btn certificate-add-btn"
             >
               Add New
-          </Link>
+          </Link> */}
+            <a href
+              onClick={() => {
+                dispatch(EmptyitemDataInput())
+                history.push("/items/add")
+              }}
+              className="btn btn-primary text-center text-white btn-sm custome-addnew-btn certificate-add-btn"
+            >
+              Add New
+          </a>
           </div>
         </div>
 

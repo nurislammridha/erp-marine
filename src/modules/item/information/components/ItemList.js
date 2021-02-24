@@ -17,7 +17,7 @@ const ItemList = () => {
   const itemListPaginated = useSelector(state => state.itemList.itemListPaginated)
   const isLoading = useSelector(state => state.itemList.isLoading)
   const [currentPage, setCurrentPage] = useState(1);
-
+  console.log('itemList :>> ', itemList);
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(emptyItemSubmit());

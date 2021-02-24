@@ -77,6 +77,7 @@ export const submitMultipleItem = (multipleItemList) => (dispatch) => {
     const postData = {
         items: multipleItemList
     }
+    console.log('postData :>> ', postData);
     const url = `${process.env.REACT_APP_API_URL}inventory/itemList`;
 
     Axios.post(url, postData).then(function (response) {
@@ -229,4 +230,7 @@ export const DeleteItem = (id) => (dispatch) => {
                 dispatch(getItemList())
             }
         })
+}
+export const EmptyitemDataInput = () => (dispatch) => {
+    dispatch({ type: Types.EMPTY_ITEM_DATA_INPUT, payload: null })
 }
