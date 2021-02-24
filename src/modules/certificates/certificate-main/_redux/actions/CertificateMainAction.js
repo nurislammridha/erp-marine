@@ -201,13 +201,7 @@ export const MainCertificateUpdateAction = (certificateInfoInput, id) => async (
   });
 };
 
-export const getCertificateMainListAction = (
-  page,
-  searchText = null,
-  isPublic = false,
-  category = null,
-  expireDays = null
-) => async (dispatch) => {
+export const getCertificateMainListAction = (page, searchText = null, isPublic = false, category = null, expireDays = null) => async (dispatch) => {
   let response = {
     certificates: [],
     status: false,
@@ -217,7 +211,8 @@ export const getCertificateMainListAction = (
   };
   dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
   let url = "";
-  url = `${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1`;
+  url = `${process.env.REACT_APP_API_URL}certificate/categoryList?isPaginated=1`;
+  // url = `${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1`;
 
   if (page !== null || page === "") {
     url += `&page=${page}`;
@@ -240,9 +235,10 @@ export const getCertificateMainListAction = (
   try {
     await Axios.get(url)
       .then((res) => {
+        console.log('response for certificate list :>> ', res.data.data);
         const { data, message, status } = res.data;
         response.status = status;
-        response.certificates = data.data;
+        response.certificates = data;
         response.message = message;
         response.certificatesPaginatedData = data;
         response.isLoading = false;

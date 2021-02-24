@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
-import { Form, Card, Button, Row, Col } from "react-bootstrap";
+import { Form, Card, Button, Row, Col, Accordion, Table } from "react-bootstrap";
 import "./style.css";
 import { generateStringDateFromDate } from "../../../../../domains/CCO/utils/DateHelper";
 import {
@@ -22,7 +22,6 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 import CertificateDetails from "../create/details/CertificateDetails";
-// import { CirclePicker, Circle } from 'react-color';
 
 const CertificateMainList = () => {
   const dispatch = useDispatch();
@@ -41,6 +40,7 @@ const CertificateMainList = () => {
   const certificateBackgroundColor = useSelector((state) => state.certificateMainInfo.certificateBackgroundColor);
   const bottomStatus = useSelector((state) => state.certificateMainInfo.bottomStatus);
 
+  console.log('certificates :>> ', certificates);
   useEffect(() => {
     dispatch(getCertificateMainListAction(currentPage));
     dispatch(getCertificateCategory());
@@ -103,10 +103,10 @@ const CertificateMainList = () => {
           <div className="row mb-5">
             <div className="col-lg-4 col-md-6 ">
               <div className="row">
-                <div className="col-lg-3 col-md-4">
+                <div className="col-lg-4 col-md-4">
                   <h1 className="headerText pt-2">Certificates</h1>
                 </div>
-                <div className="col-lg-9 col-md-8">
+                <div className="col-lg-8 col-md-8">
                   <Form.Group as={Col} controlId="formGridState">
                     <input
                       type="search"
@@ -153,30 +153,6 @@ const CertificateMainList = () => {
                 />
               </Form.Group>
             </div>
-
-            {/* <Form.Group as={Col} controlId="formGridState">
-              <RHFInput
-                as={<Select options={certificateExpireDaysList} />}
-                rules={{ required: true }}
-                placeholder="Expire In"
-                name="intCategoryID"
-                register={register}
-                value={expireInDays}
-                onChange={(option) => {
-                  setExpireInDays(option.value);
-                  dispatch(
-                    getCertificateMainListAction(
-                      currentPage,
-                      searchText,
-                      true,
-                      certificateChildCategoryList.intCategoryID,
-                      option.value
-                    )
-                  );
-                }}
-                setValue={setValue}
-              />
-            </Form.Group> */}
             <div className="col-lg-2 col-md-6 certificate-filter">
               <i className="fas fa-filter tableFilter mt-1 mr-2"></i>
               <i className="far fa-filter"></i>
@@ -188,23 +164,21 @@ const CertificateMainList = () => {
               </Link>
             </div>
           </div>
+          {/* {isLoading && <LoadingSpinner text="Loading Certificates..." />} */}
 
-          {isLoading && <LoadingSpinner text="Loading Certificates..." />}
+          {/**=================Certficate list body start====================== */}
           {!isLoading && certificates.length > 0 && (
             <div className="react-bootstrap-table table-responsive">
-
               <table className="table table table-head-custom table-vertical-center user-list-table certificate-list-table">
                 <thead>
                   <tr>
                     <th className="td-sl">#</th>
-                    {/* <th scope="col">Folder No.</th> */}
-                    {/* <th scope="col">Code</th> */}
                     <th scope="col">Description</th>
                     <th scope="col">Type</th>
                     {/* <th scope="col">Issued By</th> */}
                     <th scope="col">Issued Place</th>
-                    <th scope="col">Location</th>
                     {/* <th scope="col">Issued Date</th> */}
+                    <th scope="col">Location</th>
                     <th scope="col">Valid Until</th>
                     <th scope="col">Entended Until</th>
                     <th scope="col">Last Endorsement</th>
@@ -214,73 +188,91 @@ const CertificateMainList = () => {
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                  {certificates.map((certificate, index) => (
-                    <tr key={index + 1}>
-                      <td>{index + 1}</td>
-                      {/* <td>{certificate.strShipFolderNo}</td> */}
-                      {/* <td>{certificate.strCustomeCode}</td> */}
-                      <td>{certificate.strShipRemarks}</td>
-                      <td>{certificate.strCertificateTypeName}</td>
-                      {/* <td>{certificate.strIssuingAuthorityName}</td> */}
-                      <td>{certificate.strIssuedPlace}</td>
-                      <td>{certificate.strLocation}</td>
-                      {/* <td>
-                      {certificate.dteCertificateIssueDate !== null
-                        ? generateStringDateFromDate(
-                            certificate.dteCertificateIssueDate
-                          )
-                        : ""}
-                    </td> */}
-                      <td>
-                        {certificate.dteCertificateValidUntil !== null
-                          ? generateStringDateFromDate(
-                            certificate.dteCertificateValidUntil
-                          )
-                          : ""}
-                      </td>
-                      <td>
-                        {certificate.dteExtendedUntil !== null
-                          ? generateStringDateFromDate(
-                            certificate.dteExtendedUntil
-                          )
-                          : ""}
-                      </td>
+              </table>
+              <table className="table table table-head-custom table-vertical-center user-list-table certificate-list-table">
+                {certificates.map((certificate, index) => (
+                  <Accordion defaultActiveKey="0">
+                    <Card>
+                      <thead>
+                        <tr>
+                          <th rowspan="14">
+                            <Card.Header>
+                              <Accordion.Toggle as={Button} variant="link" eventKey={index.toString()}>
+                                {certificate.strCertificateCategoryName !== null && certificate.strCertificateCategoryName !== "" && certificate.strCertificateCategoryName}
+                              </Accordion.Toggle>
+                            </Card.Header>
+                          </th>
+                        </tr>
+                      </thead>
+                      <Accordion.Collapse eventKey={index.toString()}>
+                        {/* <Card.Body> */}
+                        <tbody>
+                          {certificate.certificates.data.map((certificate, index) => (
+                            <tr key={index + 1}>
+                              <td>{index + 1}</td>
+                              <td>{certificate.strShipFolderNo}</td>
+                              <td>{certificate.strCustomeCode}</td>
+                              <td>{certificate.strShipRemarks}</td>
+                              <td>{certificate.strCertificateTypeName}</td>
+                              <td>{certificate.strIssuingAuthorityName}</td>
+                              <td>{certificate.strIssuedPlace}</td>
+                              <td>{certificate.strLocation}</td>
+                              <td>
+                                {certificate.dteCertificateIssueDate !== null
+                                  ? generateStringDateFromDate(
+                                    certificate.dteCertificateIssueDate
+                                  )
+                                  : ""}
+                              </td>
+                              <td>
+                                {certificate.dteCertificateValidUntil !== null
+                                  ? generateStringDateFromDate(
+                                    certificate.dteCertificateValidUntil
+                                  )
+                                  : ""}
+                              </td>
+                              <td>
+                                {certificate.dteExtendedUntil !== null
+                                  ? generateStringDateFromDate(
+                                    certificate.dteExtendedUntil
+                                  )
+                                  : ""}
+                              </td>
 
-                      <td>
-                        {certificate.dteLastEndorsementDate !== null
-                          ? generateStringDateFromDate(
-                            certificate.dteLastEndorsementDate
-                          )
-                          : ""}
-                      </td>
-                      <td>{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
-                      <td>{certificate.differenceDays}</td>
-                      <td>
-                        {/* <button
+                              <td>
+                                {certificate.dteLastEndorsementDate !== null
+                                  ? generateStringDateFromDate(
+                                    certificate.dteLastEndorsementDate
+                                  )
+                                  : ""}
+                              </td>
+                              <td>{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
+                              <td>{certificate.differenceDays}</td>
+                              <td>
+                                {/* <button
                           className={`btn btn-primary btn-sm text-white certificate-lis-btn certificate-${getCertificateColorClass(
                             certificate.differenceDays
                           )}`}>
                           {certificate.differenceDays === 0 ? "Expired" : "Due"}
                         </button> */}
-                        <button
-                          className="btn btn-primary btn-sm text-white certificate-lis-btn" style={{ backgroundColor: `${getColorCode(certificate.differenceDays)}` }}>
-                          {certificate.differenceDays === 0 ? "Expired" : "Due"}
-                        </button>
+                                <button
+                                  className="btn btn-primary btn-sm text-white certificate-lis-btn" style={{ backgroundColor: `${getColorCode(certificate.differenceDays)}` }}>
+                                  {certificate.differenceDays === 0 ? "Expired" : "Due"}
+                                </button>
 
-                      </td>
-                      <td>
-                        <div className="mt-5">
-                          <Link onClick={() => certificateDetails(certificate)}>
-                            <i className="far fa-eye text-success editIcon item-list-icon"></i>
-                          </Link>
-                          <Link
-                            className="ml-2 certificate-icon"
-                            to={`/certificates-main/edit/${certificate.intCertificateDetailsID}`}
-                          >
-                            <i className="fa fa-edit text-success editIcon item-list-icon"></i>
-                          </Link>
-                        </div>
+                              </td>
+                              <td>
+                                <div className="mt-5">
+                                  <Link onClick={() => certificateDetails(certificate)}>
+                                    <i className="far fa-eye text-success editIcon item-list-icon"></i>
+                                  </Link>
+                                  <Link
+                                    className="ml-2 certificate-icon"
+                                    to={`/certificates-main/edit/${certificate.intCertificateDetailsID}`}
+                                  >
+                                    <i className="fa fa-edit text-success editIcon item-list-icon"></i>
+                                  </Link>
+                                </div>
                       &nbsp;&nbsp;&nbsp;
                       {/* <button
                         className="btn btn-icon btn-light btn-hover-danger btn-sm"
@@ -295,13 +287,19 @@ const CertificateMainList = () => {
                       >
                         <i className="fa fa-trash"></i>
                       </button> */}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                        {/* </Card.Body> */}
+                      </Accordion.Collapse>
+                    </Card>
+                  </Accordion>
+                ))}
               </table>
             </div>
           )}
+
 
           {!isLoading && certificates.length === 0 && (
             <div className="alert alert-warning mt-5">
@@ -338,59 +336,6 @@ const CertificateMainList = () => {
                 </div>
               ))
             }
-
-            {/* <div className="col-lg-2 col-3">
-              <div className="between-thirty due-days">
-                <input
-                  type="color"
-                  className="color-picker float-left mr-2"
-                  name="due_30_days_code"
-                  value={certificateBackgroundColor.due_30_days_code ? certificateBackgroundColor.due_30_days_code : "#8ec7ff"}
-                  onChange={(e) => dataWithColorCodeFilter('due_30_days_code', e.target.value)}
-                />
-                <h6>Due between 30 days </h6>
-              </div>
-            </div>
-            <div className="col-lg-2 col-3">
-              <div className="between-sixty due-days">
-                <input
-                  type="color"
-                  className="color-picker between-sixty float-left"
-                  name="due_60_days_code"
-                  value={certificateBackgroundColor.due_60_days_code ? certificateBackgroundColor.due_60_days_code : "#678db2"}
-                  onChange={(e) => dataWithColorCodeFilter('due_60_days_code', e.target.value)}
-                />
-                <h6>Due between 60 days </h6>
-              </div>
-            </div>
-            <div className="col-lg-2 col-3">
-              <div className="between-thirty More-than-sixty due-days ">
-                <input
-                  type="color"
-                  className="color-picker more-than-sixty float-left"
-                  name="due_more_60_days_code"
-                  value={certificateBackgroundColor.due_more_60_days_code ? certificateBackgroundColor.due_more_60_days_code : "#8af2c0"}
-                  onChange={(e) => dataWithColorCodeFilter('due_more_60_days_code', e.target.value)}
-                />
-                <h6 className=" ">Due more than 60 days </h6>
-              </div>
-            </div>
-
-            <div className="col-lg-2 col-3">
-              <div className="expired due-days">
-                <input
-                  type="color"
-                  className="color-picker float-left mr-2"
-                  name="expired_code"
-                  value={certificateBackgroundColor.expired_code ? certificateBackgroundColor.expired_code : "#ea673e"}
-                  onChange={(e) => dataWithColorCodeFilter('expired_code', e.target.value)}
-                />
-                <h6>Expired </h6>
-              </div>
-            </div> */}
-
-
-
           </div>
         </Card>
       )}
