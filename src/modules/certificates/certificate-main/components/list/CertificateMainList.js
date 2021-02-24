@@ -197,7 +197,7 @@ const CertificateMainList = () => {
                         <tr>
                           <th rowspan="14">
                             <Card.Header>
-                              <Accordion.Toggle as={Button} variant="link" eventKey={index.toString()}>
+                              <Accordion.Toggle as={Button} variant="light" eventKey={index.toString()}>
                                 {certificate.strCertificateCategoryName !== null && certificate.strCertificateCategoryName !== "" && certificate.strCertificateCategoryName}
                               </Accordion.Toggle>
                             </Card.Header>
