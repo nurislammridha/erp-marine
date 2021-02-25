@@ -1,16 +1,17 @@
 import * as Types from "../types/Types";
 
 const initialState = {
-    portList: [],
-    psProviderList: [],
+
 
     partnerOtherInfoInput: {
         multiplePort: [],
         multipleProduct: [],
         deleted_item: {},
-        deleted_ports: [],
+
         deleted_provider: []
     },
+    deleted_ports: [],
+
 
     status: false,
 };
@@ -27,6 +28,13 @@ const OthersInfoReducer = (state = initialState, action) => {
                 ...state,
                 partnerOtherInfoInput,
             };
+
+        case Types.DELETED_PORTS:
+            console.log('deltport', action.payload)
+            return {
+                ...state,
+                deleted_ports: [...state.deleted_ports, action.payload],
+            }
 
 
         case Types.GET_PORT_NAME:
@@ -47,7 +55,7 @@ const OthersInfoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 partnerOtherInfoInput: initialState.partnerOtherInfoInput,
-
+                deleted_ports: initialState.deleted_ports
             };
         case Types.EDIT_OTHERS_INFO:
 

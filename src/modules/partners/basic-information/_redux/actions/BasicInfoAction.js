@@ -276,7 +276,21 @@ export const UpdatePartnerInfo = (id) => async (dispatch) => {
     const bankInfo = store.getState().bankInfo.bankInfoMultiple;
     const deleted_bank_info = store.getState().bankInfo.deleted_bank_info;
     const otherInfo = store.getState().partnerOthersInfo.partnerOtherInfoInput;
-    console.log('deleted_ports', otherInfo.deleted_ports)
+    const multiPort = store.getState().partnerOthersInfo.partnerOtherInfoInput.multiplePort;
+    const deleted_ports = store.getState().partnerOthersInfo.deleted_ports;
+
+    let newArray = [];
+    if (deleted_ports) {
+        deleted_ports.forEach(id => {
+            multiPort.forEach(item => {
+                if (id.strPortName !== item.strPortName) {
+                    newArray.push(id);
+                }
+            })
+        })
+    }
+
+
     let responseList = {
         isLoading: true,
         data: {},
@@ -309,21 +323,22 @@ export const UpdatePartnerInfo = (id) => async (dispatch) => {
         });
     }
 
-
+    console.log('newArray', newArray)
     const finalSubmitInputData = {
+
         basicInfo: basicInfo,
         addressInfo: addressInfo,
         deleted_address_info: option1,
         bankInfo: bankInfo,
         deleted_bank_info: option2,
         ports: otherInfo.multiplePort,
-        deleted_ports: otherInfo.deleted_ports,
+        deleted_ports: newArray,
         psProvider: otherInfo.multipleProduct,
-        deleted_ports: otherInfo.deleted_ports,
+
         // psType: otherInfo.multipleServiceList,
     }
     console.log('finalSubmitInputData', finalSubmitInputData)
-    Axios.put(
+    await Axios.put(
         `${process.env.REACT_APP_API_URL}partner/partnerUpdate/${id}`,
         finalSubmitInputData
     )

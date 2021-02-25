@@ -64,8 +64,8 @@ const BankInfoReducer = (state = initialState, action) => {
                 ...state,
                 bankInfoMultiple: bankOld,
             };
-        case Types.DELETE_BANK_MULTIPLE_IN_EDIT:
 
+        case Types.DELETE_BANK_MULTIPLE_IN_EDIT:
             return {
                 ...state,
                 deleted_bank_info: [...state.deleted_bank_info, action.payload]

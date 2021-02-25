@@ -1,6 +1,6 @@
 import * as Types from "../types/Types";
 import Axios from "axios";
-
+import store from '../../../../../redux/store';
 
 
 
@@ -9,6 +9,7 @@ export const handleChangePartnerOtherInfoInput = (name, value) => (dispatch) => 
         name: name,
         value: value,
     };
+    console.log('formData', formData)
 
 
     let updatedArray = [];
@@ -23,16 +24,14 @@ export const handleChangePartnerOtherInfoInput = (name, value) => (dispatch) => 
         });
     }
 
-    // if (name === "deleted_item") {
 
-    //     const itemNew = {
-    //         "intPortID": value.intPortID,
-    //         "strPortName": value.strPortName,
-    //         "intActionBy": value.intActionBy,
-    //     }
-    //     updatedArray.push(itemNew);
-
-    // }
+    if (name === "deleted_item") {
+        const itemNew = {
+            "id": value.intPortID,
+            "strPortName": value.strPortName,
+        }
+        dispatch({ type: Types.DELETED_PORTS, payload: itemNew })
+    }
 
     if (name === "multipleProduct") {
         value.forEach(item => {

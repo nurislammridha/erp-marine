@@ -76,10 +76,7 @@ export const bankInfoSubmitMultiple = (bankInfoInput) => (dispatch) => {
 }
 
 export const deleteBankMultiple = (index, item) => (dispatch) => {
-    // if (item !== null) {
-    //     const deleted_bank_info = [...deleted_bank_info, item];
-    //     dispatch(handleChangeBankInfoInput("deleted_bank_info", deleted_bank_info));
-    // }
+
     dispatch({ type: Types.DELETE_PARTNER_BANK_MULTIPLE, payload: index });
     dispatch({ type: Types.DELETE_BANK_MULTIPLE_IN_EDIT, payload: item })
 }
