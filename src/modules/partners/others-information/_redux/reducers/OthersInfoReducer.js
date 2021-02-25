@@ -7,12 +7,12 @@ const initialState = {
         multiplePort: [],
         multipleProduct: [],
         deleted_item: {},
+        deleted_item_pro: {}
 
-        deleted_provider: []
+
     },
     deleted_ports: [],
-
-
+    deleted_provider: [],
     status: false,
 };
 
@@ -30,10 +30,16 @@ const OthersInfoReducer = (state = initialState, action) => {
             };
 
         case Types.DELETED_PORTS:
-            console.log('deltport', action.payload)
+            console.log('DELETED_PORTS', action.payload)
             return {
                 ...state,
                 deleted_ports: [...state.deleted_ports, action.payload],
+            }
+
+        case Types.DELETED_PROVIDER:
+            return {
+                ...state,
+                deleted_provider: [...state.deleted_provider, action.payload],
             }
 
 

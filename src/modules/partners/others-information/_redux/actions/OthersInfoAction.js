@@ -28,7 +28,6 @@ export const handleChangePartnerOtherInfoInput = (name, value) => (dispatch) => 
     if (name === "deleted_item") {
         const itemNew = {
             "id": value.intPortID,
-            "strPortName": value.strPortName,
         }
         dispatch({ type: Types.DELETED_PORTS, payload: itemNew })
     }
@@ -43,6 +42,13 @@ export const handleChangePartnerOtherInfoInput = (name, value) => (dispatch) => 
             }
             updatedArray.push(itemNew);
         });
+    }
+
+    if (name === "deleted_item_pro") {
+        const itemNew = {
+            "id": value.intProductAndServiceTypeID,
+        }
+        dispatch({ type: Types.DELETED_PROVIDER, payload: itemNew })
     }
 
     formData.value = updatedArray;

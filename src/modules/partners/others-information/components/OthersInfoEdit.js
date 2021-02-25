@@ -11,8 +11,6 @@ const OthersInfoEdit = withRouter(({ history }) => {
 
     const dispatch = useDispatch();
     const partnerOtherInfoInput = useSelector((state) => state.partnerOthersInfo.partnerOtherInfoInput);
-    const deleted_ports = useSelector((state) => state.partnerOthersInfo.deleted_ports);
-    console.log('deleted_ports', deleted_ports)
     const PortOptionData = useSelector(
         (state) => state.partnerOthersInfo.portOptionData
     );
@@ -24,12 +22,6 @@ const OthersInfoEdit = withRouter(({ history }) => {
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangePartnerOtherInfoInput(name, value));
     };
-
-    // const handleDelete = (removedItem) => {
-    //     const deleted_ports = [...partnerOtherInfoInput.deleted_ports, removedItem];
-    //     dispatch(handleChangePartnerOtherInfoInput("deleted_ports", deleted_ports));
-    //     console.log('deleted_ports', deleted_ports)
-    // }
 
     useEffect(() => {
         dispatch(getPortName());
@@ -72,8 +64,6 @@ const OthersInfoEdit = withRouter(({ history }) => {
                                             "deleted_item",
                                             removedItem
                                         );
-                                        // handleDelete(removedItem);
-                                        // console.log('removedItem', removedItem)
                                     }}
 
                                 />
@@ -93,10 +83,15 @@ const OthersInfoEdit = withRouter(({ history }) => {
                                             selectedList
                                         );
                                     }}
-                                    onRemove={(selectedList, selectedItem) => {
+                                    onRemove={(selectedList, removedItem) => {
                                         handleChangeTextInput(
                                             "multipleProduct",
                                             selectedList
+                                        );
+
+                                        handleChangeTextInput(
+                                            "deleted_item_pro",
+                                            removedItem
                                         );
                                     }}
                                 />

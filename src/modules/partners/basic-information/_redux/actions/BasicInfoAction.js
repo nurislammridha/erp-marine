@@ -277,14 +277,30 @@ export const UpdatePartnerInfo = (id) => async (dispatch) => {
     const deleted_bank_info = store.getState().bankInfo.deleted_bank_info;
     const otherInfo = store.getState().partnerOthersInfo.partnerOtherInfoInput;
     const multiPort = store.getState().partnerOthersInfo.partnerOtherInfoInput.multiplePort;
+    const multiProvider = store.getState().partnerOthersInfo.partnerOtherInfoInput.multipleProduct;
     const deleted_ports = store.getState().partnerOthersInfo.deleted_ports;
+    const deleted_provider = store.getState().partnerOthersInfo.deleted_provider;
+
+    console.log('deleted_ports', deleted_ports)
+    console.log('deleted_provider', deleted_provider)
 
     let newArray = [];
     if (deleted_ports) {
         deleted_ports.forEach(id => {
             multiPort.forEach(item => {
-                if (id.strPortName !== item.strPortName) {
+                if (id.id !== item.intPortID) {
                     newArray.push(id);
+                }
+            })
+        })
+    }
+
+    let newArray2 = [];
+    if (deleted_provider) {
+        deleted_provider.forEach(id => {
+            multiProvider.forEach(item => {
+                if (id.id !== item.intProductAndServiceTypeID) {
+                    newArray2.push(id);
                 }
             })
         })
@@ -322,8 +338,9 @@ export const UpdatePartnerInfo = (id) => async (dispatch) => {
             option2.push(itemData);
         });
     }
+    console.log('newArray', newArray);
+    console.log('newArray2', newArray2);
 
-    console.log('newArray', newArray)
     const finalSubmitInputData = {
 
         basicInfo: basicInfo,
@@ -334,6 +351,7 @@ export const UpdatePartnerInfo = (id) => async (dispatch) => {
         ports: otherInfo.multiplePort,
         deleted_ports: newArray,
         psProvider: otherInfo.multipleProduct,
+        deleted_provider: newArray2
 
         // psType: otherInfo.multipleServiceList,
     }
