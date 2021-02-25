@@ -101,9 +101,9 @@ const CertificateMainList = () => {
           <div className="row mb-5">
             <div className="col-lg-4 col-md-6 ">
               <div className="row">
-                <div className="col-lg-4 col-md-4">
+                {/* <div className="col-lg-4 col-md-4">
                   <h1 className="headerText pt-2">Certificates</h1>
-                </div>
+                </div> */}
                 <div className="col-lg-8 col-md-8">
                   <Form.Group as={Col} controlId="formGridState">
                     <input

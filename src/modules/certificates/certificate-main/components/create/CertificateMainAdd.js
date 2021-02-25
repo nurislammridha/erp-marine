@@ -104,12 +104,12 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
   const getFiles = (files) => {
     console.log("files", files[0]);
-   
+
 
     if (files.length > 0) {
       // setValue("multipleAttachments", "")
       files.forEach((file) => {
-        
+
         const filesUpdated = [
           file,
           ...certificateInfoInput.multipleAttachments,
@@ -117,10 +117,10 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
         dispatch(
           handleChangeProductInputAction("multipleAttachments", filesUpdated)
         );
-       
+
       });
     }
-    
+
   };
 
   const deleteMultipleAttachmentData = (index) => {
@@ -819,34 +819,37 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               )}
 
               <div className="form-group row mt-1 border mt-2 pb-3 bg-light">
-                <div className="col-lg-3  col-md-4">
-                  <label className="form-label formFont mt-2">
-                    Office Remarks
+                <PermissionWiseDisplay permission_name={"Certificate_office.Remarks"} display={false}>
+                  <div className="col-lg-3  col-md-4">
+                    <label className="form-label formFont mt-2">
+                      Office Remarks
                   </label>
-                  <Form.Control
-                    as="textarea"
-                    type="text"
-                    name="strOfficeRemarks"
-                    className="fromStyle formHeight"
-                    disabled={true}
-                    value={certificateInfoInput.strOfficeRemarks}
-                    onChange={(e) =>
-                      certificateMainInfoChange(
-                        "strOfficeRemarks",
-                        e.target.value
-                      )
-                    }
-                    ref={register({
-                      required: false,
-                      maxLength: 100,
-                    })}
-                  />
-                  {/* <div className="inputError margin-minus-8">
+                    <Form.Control
+                      as="textarea"
+                      type="text"
+                      name="strOfficeRemarks"
+                      className="fromStyle formHeight"
+                      // disabled={true}
+                      value={certificateInfoInput.strOfficeRemarks}
+                      onChange={(e) =>
+                        certificateMainInfoChange(
+                          "strOfficeRemarks",
+                          e.target.value
+                        )
+                      }
+                      ref={register({
+                        required: false,
+                        maxLength: 100,
+                      })}
+                    />
+                    {/* <div className="inputError margin-minus-8">
                     {errors.strOfficeRemarks &&
                       errors.strOfficeRemarks.type === "required" &&
                       "Expiry Date can't be blank"}
                   </div> */}
-                </div>
+                  </div>
+                </PermissionWiseDisplay>
+
                 <div className="col-lg-3  col-md-4">
                   <label className="form-label formFont mt-2">
                     Ship remarks
