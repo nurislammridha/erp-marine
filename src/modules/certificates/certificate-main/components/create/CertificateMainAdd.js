@@ -819,7 +819,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               )}
 
               <div className="form-group row mt-1 border mt-2 pb-3 bg-light">
-                <PermissionWiseDisplay permission_name={"Certificate_office.Remarks"} display={false}>
+                <PermissionWiseDisplay permission_name={"certificate_office.remarks"} display={false}>
                   <div className="col-lg-3  col-md-4">
                     <label className="form-label formFont mt-2">
                       Office Remarks
