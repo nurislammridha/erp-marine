@@ -30,6 +30,7 @@ function CertificateCategoryReducer(state = initiliazeState, action) {
         ...state,
         status: action.payload.status,
         isLoading: action.payload.isLoading,
+        certificateCategoryInput: initiliazeState.certificateCategoryInput
       };
 
     case Types.GET_CERTIFICATE_CATEGORY_LIST:

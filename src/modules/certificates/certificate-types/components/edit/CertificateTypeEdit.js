@@ -89,7 +89,7 @@ const CertificateTypeEdit = (props) => {
                 rules={{ required: false }}
                 name="isActive"
                 register={register}
-                value={statusOptions.value}
+                value={certificateTypeInput.status}
                 onChange={(e) => handleChangeTextInput("isActive", e.value)}
                 setValue={setValue}
               />

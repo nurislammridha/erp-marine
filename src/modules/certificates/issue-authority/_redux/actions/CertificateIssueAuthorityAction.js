@@ -82,9 +82,12 @@ export const issueAuthoritySubmitAction = (CertificateIssueAuthirityInput) => (
           type: Types.POST_ISSUING_AUTHORITY,
           payload: responseList,
         });
+        dispatch(getIssuingAuthorities())
         dispatch(getCertificateIssueBy());
       } else {
         showToast("error", response.data.message);
+        dispatch(getIssuingAuthorities())
+
       }
     })
     .catch(function (error) {
@@ -97,6 +100,7 @@ export const issueAuthoritySubmitAction = (CertificateIssueAuthirityInput) => (
         type: Types.POST_ISSUING_AUTHORITY,
         payload: responseList,
       });
+      dispatch(getIssuingAuthorities())
     });
 };
 

@@ -98,10 +98,22 @@ export const certificatetypeSubmitAction = (CertificateTypeInput) => (
 export const EditCertificateTypeList = (id) => (dispatch) => {
   Axios.get(`${process.env.REACT_APP_API_URL}certificate/types/${id}`)
     .then((res) => {
-      dispatch({
-        type: Types.EDIT_CERTIFICATE_TYPE_LIST,
-        payload: res.data,
-      });
+      if (res.data.status) {
+        if (res.data.data.isActive !== null && res.data.data.isActive !== '') {
+          if (res.data.data.isActive === "1") {
+            res.data.data.status = {
+              label: "Active",
+              value: "1"
+            }
+          } else {
+            res.data.data.status = {
+              label: "In Active",
+              value: "0"
+            }
+          }
+        }
+        dispatch({ type: Types.EDIT_CERTIFICATE_TYPE_LIST, payload: res.data });
+      }
     });
 };
 
@@ -141,8 +153,10 @@ export const UpdateCertificateTypeList = (certificateEditInfoData) => async (
           type: Types.UPDATE_CERTIFICATE_TYPE_LIST,
           payload: responseList,
         });
+
       } else {
         showToast("error", response.data.message);
+
       }
     })
 
@@ -157,4 +171,5 @@ export const UpdateCertificateTypeList = (certificateEditInfoData) => async (
         payload: responseList,
       });
     });
+    dispatch(getCertificateTypeList())
 };

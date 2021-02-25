@@ -36,7 +36,7 @@ const CertificateCategoryAdd = (props) => {
   const categoryInputChange = (name, value) => {
     dispatch(handleCertificateCategoryInput(name, value));
   };
-console.log('categoryInputChange :>> ', categoryInputChange);
+
   const submiteCategory = (data) => {
     dispatch(certificatecategorySubmitAction(getCategoryInpuData, isSubCategory));
   };

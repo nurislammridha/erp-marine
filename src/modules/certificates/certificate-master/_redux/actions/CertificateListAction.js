@@ -31,16 +31,17 @@ export const getCertificateMasterList = (searchValue = "", status = "", page) =>
 
   let isActive = status == "" ? 1 : parseInt(status);
 
-  let url = `${process.env.REACT_APP_API_URL}certificate/certificateList?isPaginated=1&paginateNo=10`;
+  let url = `${process.env.REACT_APP_API_URL}certificate/certificateList?search=${searchValue}&isActive=${isActive}&isPaginated=1&paginateNo=10`; 
+
   if (page !== null || page === "") {
     url += `&page=${page}`;
   }
-  if (searchValue !== "") {
-    url += `?search=${searchValue}`;
-  }
-  if (isActive !== "") {
-    url += `&isActive=${isActive}`
-  }
+  // if (searchValue !== "") {
+  //   url += `?search=${searchValue}`;
+  // }
+  // if (isActive !== "") {
+  //   url += `&isActive=${isActive}`
+  // }
   try {
     await Axios.get(url)
       .then((res) => {
@@ -85,6 +86,7 @@ export const certificateMasterSubmitAction = (CertificateMasterInput, isSubCateg
         payload: responseList,
       });
       dispatch(getCertificateName());
+      dispatch(getCertificateMasterList())
     })
     .catch(function (error) {
       responseList.isLoading = false;
@@ -96,7 +98,9 @@ export const certificateMasterSubmitAction = (CertificateMasterInput, isSubCateg
         type: Types.CERTIFICATE_MASTER_SUBMIT,
         payload: responseList,
       });
+      dispatch(getCertificateMasterList())
     });
+    dispatch(getCertificateMasterList())
 };
 
 export const setMasterCertificateEditValue = (certificateMasterInput) => (

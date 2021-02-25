@@ -51,7 +51,7 @@ const IssueAuthorityAdd = () => {
               className="formHeight"
               type="text"
               placeholder="Type Authority name"
-              value={CertificateIssueAuthirityInput.strIssuingAuthorityName}
+              // value={CertificateIssueAuthirityInput.strIssuingAuthorityName}
               name="strIssuingAuthorityName"
               ref={register({
                 required: false,
