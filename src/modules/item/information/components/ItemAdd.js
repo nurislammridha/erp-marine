@@ -40,6 +40,8 @@ const ItemAdd = () => {
       setValue("intUoMID", "");
       setValue("intItemTypeID", "");
       setValue("intItemCategoryID", "");
+      setValue("intCatalogueID", "");
+      setValue("intItemSubCategoryID", "");
     }
   }, [multipleItemList, setValue])
 
@@ -62,6 +64,7 @@ const ItemAdd = () => {
       label: "Engine",
     }
   ];
+  console.log('itemDataInput.strIMPACode :>> ', itemDataInput.strIMPACode);
   return (
     <>
       <div className="card card-custom gutter-b pl-5 pr-5 mb-5 card-top-border">
@@ -162,7 +165,7 @@ const ItemAdd = () => {
               setValue={setValue}
               onChange={(option) => {
                 changeText("intItemSubCategoryID", option.value);
-                changeText("strtemSubCategoryName", option.label);
+                changeText("strSubCategoryName", option.label);
               }}
               setValue={setValue}
             />

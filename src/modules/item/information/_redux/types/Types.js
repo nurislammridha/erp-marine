@@ -17,4 +17,5 @@ export const GET_ITEMS_DETAILS = "GET_ITEMS_DETAILS";
 //edit items 
 export const ITEM_EDIT = "ITEM_EDIT";
 export const ITEM_EDITTING = "ITEM_EDITTING";
+export const EMPTY_ITEM_DATA_INPUT = "EMPTY_ITEM_DATA_INPUT";
 
