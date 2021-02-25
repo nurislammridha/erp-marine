@@ -190,18 +190,18 @@ const CertificateMainList = () => {
                   </tr>
                 </thead>
               </table>
-              <table className="table table table-head-custom table-vertical-center user-list-table certificate-list-table">
-
+              <table className="table table table-head-custom table-vertical-center user-list-table certificate-list-table certificate-table">
                 {certificates.map((certificate, index) => (
                   <Accordion defaultActiveKey="0">
                     <Card className="Custome-collapse">
                       <thead>
                         <tr>
-                          <th rowspan="12">
-                            <Card.Header>
+                          <th rowspan="12" className="certificate-collapse">
+                            <Card.Header className="bg-white certificate-card-header">
                               <Accordion.Toggle className="collapse-btn" eventKey={index.toString()}>
-                                <i className="fas fa-sort mr-2"></i>
+                                <i className="fas fa-angle-down mr-2"></i>
                                 {certificate.strCertificateCategoryName !== null && certificate.strCertificateCategoryName !== "" && certificate.strCertificateCategoryName}
+                                {' '} ({certificate.certificates.data.length})
                               </Accordion.Toggle>
                             </Card.Header>
                           </th>

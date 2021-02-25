@@ -1425,28 +1425,28 @@ label.form-control.criteriaOptionsInput {
 .certificate-list-table td {
   /* width: 6%!important; */
 }
-td.type {
+.certificate-list-table td.type, .certificate-list-table th.type {
   width: 2%;
 }
-td.issuePlace {
+.certificate-list-table td.issuePlace, .certificate-list-table th.issuePlace {
   width: 10%;
 }
-td.location {
+.certificate-list-table td.location {
   width: 8%;
 }
-td.validUntil {
-  width: 10%;
+.certificate-list-table td.validUntil {
+  width: 11%;
 }
-td.extendUntil {
+.certificate-list-table td.extendUntil {
   width: 13%!important;
 }
-td.LastEndorsementDate {
-  width: 15%;
+.certificate-list-table td.LastEndorsementDate {
+  width: 19%;
 }
-td.NotOnBoard {
+.certificate-list-table td.NotOnBoard {
   width: 13%;
 }
-td.dueDate {
+.certificate-list-table td.dueDate {
   width: 5%;
 }
 .Custome-collapse{
@@ -1461,4 +1461,16 @@ td.dueDate {
   padding: 8px 0px !important;
   font-size: 15px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 500;
+  color: #51515c;
+}
+.certificate-collapse{
+  border-bottom: 2px solid rgba(0,0,0,.125)!important;
+}
+
+.certificate-table tr, td {
+  line-height: 1px!important;
+}
+.table.table-head-custom thead th,.certificate-list-table.table.table-head-custom thead tr {
+  width: 1137px!important;
 }
