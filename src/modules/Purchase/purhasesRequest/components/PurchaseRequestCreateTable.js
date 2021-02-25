@@ -1,18 +1,26 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteMultiplePQRowData, handleSubmitPQ } from '../_redux/actions/PurhasesRequestAddAction';
+import { deleteMultiplePQRowData, emptyStatus, handleSubmitPQ } from '../_redux/actions/PurhasesRequestAddAction';
 
 const PurchaseRequestCreateTable = () => {
+    const history = useHistory();
     const dispatch = useDispatch()
     const purchaseRequestData = useSelector((state) => state.purchaseRequest.purchaseRequestData);
     const multiplePQData = useSelector((state) => state.purchaseRequest.multiplePQData);
     const isLoading = useSelector((state) => state.purchaseRequest.isLoading);
+    const addStatus = useSelector((state) => state.purchaseRequest.addStatus);
 
     const handlePQSubmit = (e) => {
         dispatch(handleSubmitPQ(purchaseRequestData));
         e.preventDefault();
+    }
+
+    if (addStatus) {
+        history.push('/purchase/request/list')
+        dispatch(emptyStatus());
     }
     return (
         <div className="container table-form">
@@ -75,6 +83,12 @@ const PurchaseRequestCreateTable = () => {
 
                     // </Button>
                 )}
+                <Link to="/purchase/request/list">
+                    <Button className="booking-btn float-right mr-3" type="button" variant="primary">
+                        Back
+                    </Button>
+                </Link>
+
             </div>
         </div>
 

@@ -23,6 +23,17 @@ export const handleChangePartnerOtherInfoInput = (name, value) => (dispatch) => 
         });
     }
 
+    // if (name === "deleted_item") {
+
+    //     const itemNew = {
+    //         "intPortID": value.intPortID,
+    //         "strPortName": value.strPortName,
+    //         "intActionBy": value.intActionBy,
+    //     }
+    //     updatedArray.push(itemNew);
+
+    // }
+
     if (name === "multipleProduct") {
         value.forEach(item => {
             const itemNew = {

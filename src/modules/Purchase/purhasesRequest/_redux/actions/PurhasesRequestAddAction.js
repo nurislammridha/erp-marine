@@ -105,3 +105,11 @@ export const handleSubmitPQ = (purchaseRequestData) => (dispatch) => {
             dispatch({ type: Types.PQ_DATA_SUBMIT, payload: response });
         })
 }
+
+export const emptyStatus = () => (dispatch) => {
+    let response = {
+        status: false
+    };
+    dispatch({ type: Types.PQ_DATA_SUBMIT, payload: response });
+    dispatch({ type: Types.EMPTY_STATUS });
+}

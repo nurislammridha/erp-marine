@@ -75,8 +75,13 @@ export const bankInfoSubmitMultiple = (bankInfoInput) => (dispatch) => {
 
 }
 
-export const deleteBankMultiple = (index) => (dispatch) => {
-    dispatch({ type: Types.DELETE_PARTNER_BANK_MULTIPLE, payload: index })
+export const deleteBankMultiple = (index, item) => (dispatch) => {
+    // if (item !== null) {
+    //     const deleted_bank_info = [...deleted_bank_info, item];
+    //     dispatch(handleChangeBankInfoInput("deleted_bank_info", deleted_bank_info));
+    // }
+    dispatch({ type: Types.DELETE_PARTNER_BANK_MULTIPLE, payload: index });
+    dispatch({ type: Types.DELETE_BANK_MULTIPLE_IN_EDIT, payload: item })
 }
 
 export const getBankName = () => (dispatch) => {
@@ -84,7 +89,6 @@ export const getBankName = () => (dispatch) => {
     Axios.get(`${process.env.REACT_APP_API_URL}master/bank`).then(
 
         (res) => {
-            console.log('res bank check', res)
             let data = res.data.data;
             dispatch({ type: Types.GET_BANK_NAME, payload: data });
         }

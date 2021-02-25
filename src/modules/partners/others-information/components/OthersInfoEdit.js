@@ -17,7 +17,7 @@ const OthersInfoEdit = withRouter(({ history }) => {
     const providerOptionData = useSelector(
         (state) => state.partnerOthersInfo.providerOptionData
     );
-    console.log('partnerOtherInfoInput', partnerOtherInfoInput);
+    console.log('deleted_ports', partnerOtherInfoInput.deleted_ports);
 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangePartnerOtherInfoInput(name, value));
@@ -55,14 +55,22 @@ const OthersInfoEdit = withRouter(({ history }) => {
                                             selectedList
                                         );
                                     }}
-                                    onRemove={(selectedList, selectedItem) => {
+                                    onRemove={(selectedList, removedItem) => {
                                         handleChangeTextInput(
                                             "multiplePort",
                                             selectedList
                                         );
+                                        handleChangeTextInput(
+                                            "deleted_item",
+                                            removedItem
+                                        );
+                                        console.log('removedItem', removedItem)
                                     }}
+
                                 />
+
                             </div>
+
                             <div className="col-md-4">
                                 <label className="form-label mt-2 formFont">Product or Service Supplied</label>
                                 <Multiselect

@@ -62,8 +62,9 @@ export const partnerAddressSubmitMultiple = (partnerAddress) => (dispatch) => {
     dispatch({ type: Types.SUBMIT_PARTNER_ADDRESS_MULTIPLE, payload: responseList })
 }
 
-export const deletePartnerAddressMultiple = (index) => (dispatch) => {
+export const deletePartnerAddressMultiple = (index, item) => (dispatch) => {
     dispatch({ type: Types.DELETE_PARTNER_ADDRESS_MULTIPLE, payload: index })
+    dispatch({ type: Types.DELETE_ADDRESS_MULTIPLE_IN_EDIT, payload: item })
 }
 
 export const getCountryName = (data) => (dispatch) => {
