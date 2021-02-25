@@ -17,7 +17,7 @@ const OthersInfoEdit = withRouter(({ history }) => {
     const providerOptionData = useSelector(
         (state) => state.partnerOthersInfo.providerOptionData
     );
-    console.log('deleted_ports', partnerOtherInfoInput.deleted_ports);
+
 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangePartnerOtherInfoInput(name, value));
