@@ -54,16 +54,19 @@ export async function login(email, password) {
     // Do More..
 
     if (loginResponse.status) {
-      const rolePermissionURL = `${process.env.REACT_APP_API_URL}roles/getUserPermissions`;
+      const rolePermissionURL = `${process.env.REACT_APP_API_URL}roles/getUserPermissions?is_all_data=1`;
       await axios.get(`${rolePermissionURL}`, loginResponse.access_token)
         .then((res) => {
           if (res.data.status) {
-            console.log('res of permission:>> ', res.data.data);
-            localStorage.setItem('rolePermissionData', res.data.data);
+            let data = [];
+            res.data.data.forEach(item => {
+              data.push(item.name);
+            });
+            localStorage.setItem('rolePermissionData', data);
           }
         })
         .catch((error) => {
-          console.log('error res token :>> ', error);
+          console.log('error res rolePermission :>> ', error);
         });
       // let loginUserData = localStorage.getItem('access_token');
       // console.log('loginUserData :>> ', loginUserData);

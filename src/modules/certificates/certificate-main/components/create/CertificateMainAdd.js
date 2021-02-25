@@ -104,9 +104,12 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
   const getFiles = (files) => {
     console.log("files", files[0]);
+   
 
     if (files.length > 0) {
+      // setValue("multipleAttachments", "")
       files.forEach((file) => {
+        
         const filesUpdated = [
           file,
           ...certificateInfoInput.multipleAttachments,
@@ -114,8 +117,10 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
         dispatch(
           handleChangeProductInputAction("multipleAttachments", filesUpdated)
         );
+       
       });
     }
+    
   };
 
   const deleteMultipleAttachmentData = (index) => {
@@ -169,6 +174,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                         option.value
                       );
                       setValue("intCategoryID", "");
+                      setValue("intCertificateID", "");
                       dispatch(getCertificateChildCategoryData(option.value));
                       dispatch(handleCertificateCategoryInput("certificateCategoryParent", { label: option.label, value: option.value }));
                       dispatch(handleCertificateCategoryInput("intParentsCategoryID", option.value));
@@ -331,7 +337,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   />
                 </div> */}
 
-                <div className="col-lg-3 col-md-4">
+                {/* <div className="col-lg-3 col-md-4">
                   <label className="form-label mt-2 formFont">Code</label>
                   <Form.Control
                     type="text"
@@ -349,12 +355,12 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       maxLength: 100,
                     })}
                   />
-                  {/* <div className="inputError margin-minus-8">
-                    {errors.strCustomeCode &&
-                      errors.strCustomeCode.type === "required" &&
-                      "Certificate Code can't be blank"}
-                  </div> */}
-                </div>
+                  //  <div className="inputError margin-minus-8">
+                  //   {errors.strCustomeCode &&
+                  //     errors.strCustomeCode.type === "required" &&
+                  //     "Certificate Code can't be blank"}
+                  // </div> 
+                </div> */}
 
                 <div className="col-lg-3 col-md-4">
                   <label className="form-label mt-2 formFont">
@@ -363,7 +369,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <Form.Control
                     type="text"
                     name="strShipFolderNo"
-                    className="fromStyle formHeight"
+                    className="fromStyle formHeight formWidth"
                     value={certificateInfoInput.strShipFolderNo}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -449,7 +455,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   <Form.Control
                     type="text"
                     name="strIssuedPlace"
-                    className="fromStyle formHeight"
+                    className="fromStyle formHeight formWidth"
                     value={certificateInfoInput.strIssuedPlace}
                     onChange={(e) =>
                       certificateMainInfoChange(
@@ -880,6 +886,9 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       name="multipleAttachments"
                       multiple={true}
                       onDone={getFiles.bind(this)}
+                    // ref={ref=> this.fileInput = ref} 
+                    // register={register}
+                    // setValue={setValue}
                     />
                   </div>
                 </div>
@@ -921,9 +930,14 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                                   {/* <i className="fa fa-edit text-success mr-2"></i> */}
                                   <i
                                     className="fa fa-trash text-danger pointer"
-                                    onClick={() =>
-                                      deleteMultipleAttachmentData(index)
-                                    }
+                                    onClick={() => {
+                                      if (
+                                        window.confirm(
+                                          "Are you sure you wish to delete this item?"
+                                        )
+                                      )
+                                        deleteMultipleAttachmentData(index)
+                                    }}
                                   ></i>
                                 </td>
                               </tr>
@@ -936,7 +950,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               </div>
               <div className="form-group row">
                 <div className="col-sm-10">
-                  <a onClick={() => { history.push("/certificates-main/list") }}>
+                  <a href onClick={() => { history.push("/certificates-main/list") }}>
                     <button type="button" className="cancelButton btn mr-3"> Back </button>
                   </a>
 

@@ -101,38 +101,38 @@ const initialState = {
   },
   bottomStatus: [
     {
-      minDate : '0',
-      maxDate : '0',
-      colorCode : '#ea673e',
+      minDate: '0',
+      maxDate: '0',
+      colorCode: '#ea673e',
       inputName: 'expired_code',
       bottomLabel: 'EXPIRED',
       statusLabel: 'EXPIRED',
     },
     {
-      minDate : '1',
-      maxDate : '30',
-      colorCode : '#8ec7ff',
+      minDate: '1',
+      maxDate: '30',
+      colorCode: '#8ec7ff',
       inputName: 'due_30_days_code',
       bottomLabel: 'DUE BETWEEN 30 DAYS',
       statusLabel: 'Due',
     },
     {
-      minDate : '31',
-      maxDate : '60',
-      colorCode : '#678db2',
+      minDate: '31',
+      maxDate: '60',
+      colorCode: '#678db2',
       inputName: 'due_60_days_code',
       bottomLabel: 'DUE BETWEEN 60 DAYS',
       statusLabel: 'Due',
     },
     {
-      minDate : '61',
-      maxDate : '200',
-      colorCode : '#8af2c0',
+      minDate: '61',
+      maxDate: '200',
+      colorCode: '#8af2c0',
       inputName: 'due_more_60_days_code',
       bottomLabel: 'DUE MORE THAN 60 DAYS',
       statusLabel: 'Due',
     },
-]
+  ]
 };
 
 const CertificateMainReducer = (state = initialState, action) => {
@@ -140,6 +140,7 @@ const CertificateMainReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case Types.CERTIFICATE_LIST_DASHBOARD:
+      console.log('action.payload :>> ', action.payload);
       return {
         ...state,
         certificates: action.payload.certificates,
@@ -148,6 +149,7 @@ const CertificateMainReducer = (state = initialState, action) => {
         certificateExpireDaysList: getCertificateExpireDaysList()
       };
     case Types.GET_CERTIFICATE_CATEGORY:
+      console.log('action.payload :>> ', action.payload);
       return {
         ...state,
         certificatesCategoryOptionData: getCertificateCategoryName(
@@ -280,7 +282,7 @@ const CertificateMainReducer = (state = initialState, action) => {
         ...state,
         certificateEditInfo: certificateEditInfoData,
       };
-      
+
     case Types.MAIN_CERTIFICATE_UPDATE:
       if (action.payload.status) {
         return {
@@ -381,9 +383,9 @@ const CertificateMainReducer = (state = initialState, action) => {
         },
       };
 
-      //get cirtificate background colorCode
-      case Types.CHANGE_STATUS_BACKGROUD: 
-      const certificateBackgroundColor = {...state.certificateBackgroundColor}
+    //get cirtificate background colorCode
+    case Types.CHANGE_STATUS_BACKGROUD:
+      const certificateBackgroundColor = { ...state.certificateBackgroundColor }
       certificateBackgroundColor[action.payload.name] = action.payload.value;
       let bottomLabel = state.bottomStatus.slice();
       for (let i = 0; i < bottomLabel.length; i++) {
@@ -396,8 +398,8 @@ const CertificateMainReducer = (state = initialState, action) => {
         certificateBackgroundColor,
         bottomStatus: bottomLabel,
       }
-      case Types.BOTTOM_STATUS_LIST: 
-      const bottomStatus = {...state.bottomStatus}
+    case Types.BOTTOM_STATUS_LIST:
+      const bottomStatus = { ...state.bottomStatus }
       return {
         ...state,
         bottomStatus: bottomStatus,
@@ -466,10 +468,10 @@ const getCertificateName = (data) => {
 };
 const getCertificateColorCode = () => {
   let bottomStatus = [
-    {bottomLevel: 'DUE BETWEEN 30 DAYS', colorCode: '#8ec7ff' },
-    {bottomLevel: 'DUE BETWEEN 60 DAYS', colorCode: '#678db2'},
-    {bottomLevel: 'DUE MORE THAN 60 DAYS',colorCode: '#8af2c0'},
-    {bottomLevel: 'EXPIRED', colorCode: '#ea673e'}
+    { bottomLevel: 'DUE BETWEEN 30 DAYS', colorCode: '#8ec7ff' },
+    { bottomLevel: 'DUE BETWEEN 60 DAYS', colorCode: '#678db2' },
+    { bottomLevel: 'DUE MORE THAN 60 DAYS', colorCode: '#8af2c0' },
+    { bottomLevel: 'EXPIRED', colorCode: '#ea673e' }
   ]
 
   // let options = [];

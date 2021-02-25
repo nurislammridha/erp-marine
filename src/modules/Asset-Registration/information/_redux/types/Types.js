@@ -1,0 +1,1 @@
+export const BASIC_INFO_INPUT = "BASIC_INFO_INPUT";

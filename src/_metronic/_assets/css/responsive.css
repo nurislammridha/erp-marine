@@ -512,6 +512,9 @@ margin-top: 5px;
 a.ml-2.user-list-icon {
   margin-left: 0px!important;
 }
+label.formFont.Asset-Qty {
+  margin-top: 16px!important;
+}
 
 }
 

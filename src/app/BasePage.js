@@ -26,6 +26,8 @@ import PurchaseApproval from "../modules/Purchase/PurchaseApproval/routes";
 import getSupplierRoutes from "../modules/Purchase/SupplierCS/routes";
 import getQuotationRoutes from "../modules/Purchase/Quotation/routes";
 import getComparativeStatementRoutes from "../modules/Purchase/comparativeStatement/routes";
+import getAssetRegistrationRoutes from "../modules/Asset-Registration/routes";
+import getAssetRegistrationParkingRoutes from "../modules/Asset-RegistrationParking/routes";
 
 const BasePage = () => {
   return (
@@ -93,6 +95,8 @@ const BasePage = () => {
         {getSupplierRoutes()}
         {getQuotationRoutes()}
         {getComparativeStatementRoutes()}
+        {getAssetRegistrationRoutes()}
+        {getAssetRegistrationParkingRoutes()}
        
 
         <Redirect to="error/error-v1" />

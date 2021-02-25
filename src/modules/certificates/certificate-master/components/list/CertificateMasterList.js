@@ -6,8 +6,10 @@ import CertificateMasterEdit from "../edit/CertificateMasterEdit";
 import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
 import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 
-const CertificateMasterList = () => {
+const CertificateMasterList = (props) => {
+  console.log('props checking', props);
   const [show, setShow] = useState(false);
+  const ref = React.createRef();
   const [editItem, setEditItem] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const modalEditStatus = useSelector(
@@ -40,7 +42,7 @@ const CertificateMasterList = () => {
     setCurrentPage(data.page);
     dispatch(getCertificateMasterList("", "", data.page));
   };
-
+  console.log('certificateMasterData :>> ', certificateMasterData);
   return (
     <>
       {isLoading && (
@@ -55,15 +57,15 @@ const CertificateMasterList = () => {
       )}
       {!isLoading && certificateMasterData.length > 0 && (
         <>
-          <div className="react-bootstrap-table table-responsive">
-            <table className="table mt-4 tbl-standard" id="table-to-xls">
+          <div className="react-bootstrap-table table-responsive" >
+            <table className="table mt-4 tbl-standard" id="table-to-xls" ref={props.printRef}>
               <thead>
                 <tr>
                   <th scope="col">SI</th>
                   <th scope="col">Certificate Name</th>
                   <th scope="col">Category Name</th>
                   <th scope="col">Status</th>
-                  <th scope="col">Action</th>
+                  <th scope="col " className="print-test">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -74,7 +76,7 @@ const CertificateMasterList = () => {
                       <td>{item.strCertificateName}</td>
                       <td>{item.strCertificateCategoryName}</td>
                       <td>{item.isActive ? "Active" : "Inactive"}</td>
-                      <td>
+                      <td className="print-test">
                         {" "}
                         <a>
                           <i

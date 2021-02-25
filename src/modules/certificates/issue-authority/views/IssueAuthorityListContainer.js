@@ -101,8 +101,8 @@ const IssueAutorityListContainer = (props) => {
                 <IssueAuthorityAdd />
               </SimpleModal>
             </div>
-            <div id="id" ref={ref}>
-              <IssueAuthorityList />
+            <div id="id">
+              <IssueAuthorityList printRef={ref} />
             </div>
           </div>
         </Card.Body>
