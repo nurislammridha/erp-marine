@@ -210,7 +210,7 @@ const CertificateMainList = () => {
                       <Accordion.Collapse eventKey={index.toString()}>
                         {/* <Card.Body> */}
                         <tbody>
-                          {certificate.certificates.data.map((certificate, index) => (
+                          {certificate.certificates.data.length > 0 && certificate.certificates.data.map((certificate, index) => (
                             <tr key={index + 1}>
                               <td>{index + 1}</td>
 
