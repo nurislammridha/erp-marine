@@ -36,9 +36,9 @@ const CertificateMainList = () => {
   const certificatesPaginatedData = useSelector((state) => state.certificateMainInfo.certificatesPaginatedData);
   const certificateParentCategoryList = useSelector((state) => state.CertificateCategoryReducer.certificateParentCategoryList);
   const certificateChildCategoryList = useSelector((state) => state.CertificateCategoryReducer.certificateChildCategoryList);
-
   const certificateBackgroundColor = useSelector((state) => state.certificateMainInfo.certificateBackgroundColor);
   const bottomStatus = useSelector((state) => state.certificateMainInfo.bottomStatus);
+
   useEffect(() => {
     dispatch(getCertificateMainListAction(currentPage));
     dispatch(getCertificateCategory());
@@ -255,7 +255,7 @@ const CertificateMainList = () => {
                               <td className="dueDate">{certificate.differenceDays}</td>
                               <td className="status">
                                 <button
-                                  className="btn btn-primary btn-sm text-white certificate-lis-btn" style={{ backgroundColor: `${getColorCode(certificate.differenceDays)}` }}>
+                                  className="btn btn-primary btn-sm text-white certificate-lis-btn" style={{ backgroundColor: `${getColorCode(certificate.differenceDays && certificate.differenceDays)}` }}>
                                   {certificate.differenceDays === 0 ? "Expired" : "Due"}
                                 </button>
 
