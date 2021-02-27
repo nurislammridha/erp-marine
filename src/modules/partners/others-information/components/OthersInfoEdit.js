@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
 import { withRouter } from "react-router-dom";
 import { Multiselect } from 'multiselect-react-dropdown';
 import { getPortName, handleChangePartnerOtherInfoInput, getProviderName } from '../_redux/actions/OthersInfoAction';
