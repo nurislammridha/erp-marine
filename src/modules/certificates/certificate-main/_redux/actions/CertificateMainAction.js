@@ -212,8 +212,10 @@ export const getCertificateMainListAction = (page, searchText = null, isPublic =
   dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
   let url = "";
   // url = `${process.env.REACT_APP_API_URL}certificate/categoryList?isPaginated=1`;
+
+  // url = `${process.env.REACT_APP_API_URL}certificate/categoryList?search=${searchText}&isPaginated=1&paginateNo=10`;
+
   url = `${process.env.REACT_APP_API_URL}certificate/categoryList?isPaginated=1&paginateNo=10`;
-  // url = `${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1`;
 
   if (page !== null || page === "") {
     url += `&page=${page}`;
