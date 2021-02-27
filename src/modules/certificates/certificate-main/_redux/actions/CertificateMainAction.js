@@ -209,16 +209,14 @@ export const getCertificateMainListAction = (page, searchText = null, isPublic =
     isLoading: true,
     errors: [],
   };
-  dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
+  // dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
   let url = "";
-  // url = `${process.env.REACT_APP_API_URL}certificate/categoryList?isPaginated=1`;
 
-  // url = `${process.env.REACT_APP_API_URL}certificate/categoryList?search=${searchText}&isPaginated=1&paginateNo=10`;
-
-  url = `${process.env.REACT_APP_API_URL}certificate/categoryList?isPaginated=1&paginateNo=10`;
+  url = `${process.env.REACT_APP_API_URL}certificate/categoryList?isPaginated=1&paginateNo=5`;
 
   if (page !== null || page === "") {
     url += `&page=${page}`;
+    
   }
 
   if (searchText !== null) {
@@ -238,11 +236,13 @@ export const getCertificateMainListAction = (page, searchText = null, isPublic =
   try {
     await Axios.get(url)
       .then((res) => {
+        console.log('res for certificated:>> ', res);
         const { data, message, status } = res.data;
+        console.log('data :>> ', data);
         response.status = status;
         response.certificates = data;
         response.message = message;
-        response.certificatesPaginatedData = data;
+        // response.certificatesPaginatedData = data.certificates;
         response.isLoading = false;
       })
       .catch((err) => {
