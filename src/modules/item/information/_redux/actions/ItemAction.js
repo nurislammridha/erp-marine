@@ -147,14 +147,7 @@ export const getItemSubCategory = (intItemCategoryID = null) => (dispatch) => {
 };
 
 
-// export const getItemSubCategory = (data) => (dispatch) => {
-//     Axios.get(`${process.env.REACT_APP_API_URL}inventory/itemSubCategory `)
-//         .then((res) => {
-//             let data = res.data.data;
-//             dispatch({ type: Types.GET_ITEM_SUB_CATEGORY, payload: data });
-//         }
-//         );
-// };
+
 
 export const getItemList = (page, searchText = null, itemCategory = null, itemSubCategory = null, department = null) => async (dispatch) => {
     let responseList = {
