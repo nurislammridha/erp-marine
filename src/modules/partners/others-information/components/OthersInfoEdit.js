@@ -17,7 +17,7 @@ const OthersInfoEdit = withRouter(({ history }) => {
     const providerOptionData = useSelector(
         (state) => state.partnerOthersInfo.providerOptionData
     );
-    console.log('deleted_ports', partnerOtherInfoInput.deleted_ports);
+
 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangePartnerOtherInfoInput(name, value));
@@ -64,7 +64,6 @@ const OthersInfoEdit = withRouter(({ history }) => {
                                             "deleted_item",
                                             removedItem
                                         );
-                                        console.log('removedItem', removedItem)
                                     }}
 
                                 />
@@ -84,10 +83,15 @@ const OthersInfoEdit = withRouter(({ history }) => {
                                             selectedList
                                         );
                                     }}
-                                    onRemove={(selectedList, selectedItem) => {
+                                    onRemove={(selectedList, removedItem) => {
                                         handleChangeTextInput(
                                             "multipleProduct",
                                             selectedList
+                                        );
+
+                                        handleChangeTextInput(
+                                            "deleted_item_pro",
+                                            removedItem
                                         );
                                     }}
                                 />
