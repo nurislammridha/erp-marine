@@ -209,10 +209,10 @@ export const getCertificateMainListAction = (page, searchText = null, isPublic =
     isLoading: true,
     errors: [],
   };
-  // dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
+  dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
   let url = "";
 
-  url = `${process.env.REACT_APP_API_URL}certificate/categoryList?isPaginated=1&paginateNo=5`;
+  url = `${process.env.REACT_APP_API_URL}certificate/categoryList?isPaginated=1&paginateNo=1000000`;
 
   if (page !== null || page === "") {
     url += `&page=${page}`;
@@ -347,7 +347,6 @@ export const getCertificateCategory = (data) => (dispatch) => {
   Axios.get(`${process.env.REACT_APP_API_URL}certificate/category`).then(
     (res) => {
       let data = res.data.data;
-      console.log('data certificate category :>> ', data);
       dispatch({ type: Types.GET_CERTIFICATE_CATEGORY, payload: data });
     }
   );

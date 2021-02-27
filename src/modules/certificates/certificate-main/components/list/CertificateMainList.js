@@ -176,16 +176,16 @@ const CertificateMainList = () => {
                 <thead>
                   <tr>
                     <th className="td-sl">#</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Issued Place</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Valid Until</th>
-                    <th scope="col">Entended Until</th>
-                    <th scope="col">Last Endorsement</th>
-                    <th scope="col">Not On Board</th>
-                    <th scope="col">Due Date</th>
-                    <th scope="col">Status</th>
-                    <th>Action</th>
+                    <th scope="col" className="type">Type</th>
+                    <th scope="col" className="issuePlace">Issued Place</th>
+                    <th scope="col" className="location">Location</th>
+                    <th scope="col" className="validUntil">Valid Until</th>
+                    <th scope="col" className="extendUntil">Entended Until</th>
+                    <th scope="col" className="LastEndorsementDate">Last Endorsement</th>
+                    <th scope="col" className="NotOnBoard">Not On Board</th>
+                    <th scope="col" className="dueDate">Due Date</th>
+                    <th scope="col" className="status">Status</th>
+                    <th className="action">Action</th>
                   </tr>
                 </thead>
               </table>
@@ -266,10 +266,10 @@ const CertificateMainList = () => {
 
                           </tbody>
                           {/* </Card.Body> */}
-                          <PaginationLaravel
+                          {/* <PaginationLaravel
                             changePage={changePage}
                             data={certificate.certificates}
-                          />
+                          /> */}
                           {!isLoading && certificate.certificates.data.length === 0 && (
                             <div className="alert alert-warning mt-5">
                               Sorry ! No certificates found in this category.

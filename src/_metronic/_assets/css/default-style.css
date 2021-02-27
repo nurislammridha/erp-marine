@@ -1426,7 +1426,7 @@ label.form-control.criteriaOptionsInput {
   /* width: 6%!important; */
 }
 .certificate-list-table td.type, .certificate-list-table th.type {
-  width: 2%;
+  width: 7%;
 }
 .certificate-list-table td.issuePlace, .certificate-list-table th.issuePlace {
   width: 10%;
