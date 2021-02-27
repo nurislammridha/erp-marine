@@ -46,7 +46,6 @@ const CertificateMasterAdd = (props) => {
   }, [status]);
 
   //=========
-console.log('CertificateMasterInput :>> ', CertificateMasterInput);
   const certificateMainInfoChange = (name, value) => {
     dispatch(handleChangeCertificateMasterInput(name, value));
   };

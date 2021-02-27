@@ -428,6 +428,7 @@ export const getCertificateIssueBy = (data) => (dispatch) => {
 export const getMainCertificateDeteailByID = (id) => (dispatch) => {
   Axios.get(`${process.env.REACT_APP_API_URL}certificate/details/${id}`).then(
     (res) => {
+      console.log('res :>> ', res);
       let data = res.data.data;
       if (data.multipleAttachments === null) {
         data.multipleAttachments = [];

@@ -1425,10 +1425,10 @@ label.form-control.criteriaOptionsInput {
 .certificate-list-table td {
   /* width: 6%!important; */
 }
-.certificate-list-table td.type, .certificate-list-table th.type {
+.certificate-list-table td.type {
   width: 7%;
 }
-.certificate-list-table td.issuePlace, .certificate-list-table th.issuePlace {
+.certificate-list-table td.issuePlace {
   width: 10%;
 }
 .certificate-list-table td.location {

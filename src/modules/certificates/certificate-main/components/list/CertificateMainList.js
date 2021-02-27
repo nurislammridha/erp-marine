@@ -39,7 +39,6 @@ const CertificateMainList = () => {
   const certificateBackgroundColor = useSelector((state) => state.certificateMainInfo.certificateBackgroundColor);
   const bottomStatus = useSelector((state) => state.certificateMainInfo.bottomStatus);
 
-  console.log('certificates :>> ', certificates);
   useEffect(() => {
     dispatch(getCertificateMainListAction(currentPage));
     dispatch(getCertificateCategory());

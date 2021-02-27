@@ -141,6 +141,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const onSubmit = async (e) => {
     dispatch(MainCertificateCreateAction(certificateInfoInput));
   };
+  console.log('certificatesNameOption :>> ', certificatesNameOption);
   return (
     <PermissionWiseDisplay permission_name={"certificate.create"}>
       <div className="container ">
@@ -209,7 +210,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                             "intCategoryID",
                             option.value
                           );
-                          dispatch(getCertificateName(option.value));
+                          // dispatch(getCertificateName(option.value));
                         }}
                         setValue={setValue}
 
