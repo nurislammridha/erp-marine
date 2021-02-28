@@ -50,11 +50,11 @@ const CertificateMasterAdd = (props) => {
     dispatch(handleChangeCertificateMasterInput(name, value));
   };
 
-  useEffect(() => {
-    if (addStatus) {
-      dispatch(getCertificateMasterList("", "", currentPage));
-    }
-  }, [addStatus]);
+  // useEffect(() => {
+  //   if (addStatus) {
+  //     dispatch(getCertificateMasterList("", "", currentPage));
+  //   }
+  // }, [addStatus]);
 
   useEffect(() => {
     dispatch(getCertificateCategory());

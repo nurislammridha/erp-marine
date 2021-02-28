@@ -42,3 +42,6 @@ export const MAIN_CERTIFICATE_STATUS = "MAIN_CERTIFICATE_STATUS";
 /*********Color code change************/
 export const CHANGE_STATUS_BACKGROUD = "CHANGE_STATUS_BACKGROUD";
 export const BOTTOM_STATUS_LIST = "BOTTOM_STATUS_LIST";
+
+/*******************Empty status********************** */
+export const EMPTY_STATUS = "EMPTY_STATUS";
