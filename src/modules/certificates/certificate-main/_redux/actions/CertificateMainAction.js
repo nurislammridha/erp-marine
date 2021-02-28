@@ -155,9 +155,9 @@ export const MainCertificateUpdateAction = (certificateInfoInput, id) => async (
     showToast("error", "Certificate category can't be blank!");
     return false;
   }
-  if (certificateInfoInput.strCustomeCode === null) {
-    showToast("error", "Certificate Code can't be blank!");
-  }
+  // if (certificateInfoInput.strCustomeCode === null) {
+  //   showToast("error", "Certificate Code can't be blank!");
+  // }
   if (certificateInfoInput.intIssuingAuthorityID === null) {
     showToast("error", "Issue Autherity can't be blank!");
     return false;
