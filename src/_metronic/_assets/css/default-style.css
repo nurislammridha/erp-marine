@@ -1486,7 +1486,7 @@ td.status {
 }
 
 .certificate-table tr, td {
-  line-height: 1px!important;
+  /* line-height: 1px!important; */
 }
 .table.table-head-custom thead th,.certificate-list-table.table.table-head-custom thead tr {
   width: 1137px!important;
