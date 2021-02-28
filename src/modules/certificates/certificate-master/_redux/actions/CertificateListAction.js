@@ -31,7 +31,7 @@ export const getCertificateMasterList = (searchValue = "", status = "", page) =>
 
   let isActive = status == "" ? 1 : parseInt(status);
 
-  let url = `${process.env.REACT_APP_API_URL}certificate/certificateList?search=${searchValue}&isActive=${isActive}&isPaginated=1&paginateNo=10`; 
+  let url = `${process.env.REACT_APP_API_URL}certificate/certificateList?search=${searchValue}&isActive=${isActive}&isPaginated=1&paginateNo=10`;
 
   if (page !== null || page === "") {
     url += `&page=${page}`;
@@ -63,7 +63,14 @@ export const getCertificateMasterList = (searchValue = "", status = "", page) =>
   dispatch({ type: Types.GET_CERTIFICATE_MASTER_LIST, payload: response });
 };
 
+//================================================================
 export const certificateMasterSubmitAction = (CertificateMasterInput, isSubCategory) => (dispatch) => {
+  if (typeof isSubCategory !== 'undefined' || isSubCategory === true) {
+    if (CertificateMasterInput.intCategoryID === null || CertificateMasterInput.intCategoryID === "") {
+      showToast("error", 'Please select parent category !');
+      return false;
+    }
+  }
   let responseList = {
     isLoading: true,
     data: {},
@@ -75,18 +82,30 @@ export const certificateMasterSubmitAction = (CertificateMasterInput, isSubCateg
   });
 
   let postUrl = `${process.env.REACT_APP_API_URL}certificate/certificateList`;
+  if (CertificateMasterInput.intCategoryID == null) {
+    CertificateMasterInput.intCategoryID = 0;
+  }
   Axios.post(postUrl, CertificateMasterInput)
     .then(function (response) {
       responseList.data = response.data;
       responseList.isLoading = false;
       responseList.status = response.data.status;
-      showToast("success", response.data.message);
-      dispatch({
-        type: Types.CERTIFICATE_MASTER_SUBMIT,
-        payload: responseList,
-      });
-      dispatch(getCertificateName());
-      dispatch(getCertificateMasterList())
+      if (response.data.status) {
+        showToast("success", response.data.message);
+        dispatch({
+          type: Types.CERTIFICATE_MASTER_SUBMIT,
+          payload: responseList,
+        });
+        if (CertificateMasterInput.intCategoryID !== null) {
+          dispatch(
+            getCertificateMasterList(
+              CertificateMasterInput.intCategoryID
+            )
+          );
+        }
+      } else {
+        showToast("error", response.data.message);
+      }
     })
     .catch(function (error) {
       responseList.isLoading = false;
@@ -98,11 +117,50 @@ export const certificateMasterSubmitAction = (CertificateMasterInput, isSubCateg
         type: Types.CERTIFICATE_MASTER_SUBMIT,
         payload: responseList,
       });
-      dispatch(getCertificateMasterList())
     });
-    dispatch(getCertificateMasterList())
-
 };
+//===============================
+
+// export const certificateMasterSubmitAction = (CertificateMasterInput, isSubCategory) => (dispatch) => {
+//   console.log('CertificateMasterInput :>> ', CertificateMasterInput);
+//   let responseList = {
+//     isLoading: true,
+//     data: {},
+//     status: false,
+//   };
+//   dispatch({
+//     type: Types.CERTIFICATE_MASTER_SUBMIT,
+//     payload: responseList,
+//   });
+
+//   let postUrl = `${process.env.REACT_APP_API_URL}certificate/certificateList`;
+//   Axios.post(postUrl, CertificateMasterInput)
+//     .then(function (response) {
+//       responseList.data = response.data;
+//       responseList.isLoading = false;
+//       responseList.status = response.data.status;
+//       showToast("success", response.data.message);
+//       dispatch({
+//         type: Types.CERTIFICATE_MASTER_SUBMIT,
+//         payload: responseList,
+//       });
+//       dispatch(getCertificateName());
+//       dispatch(getCertificateMasterList())
+//     })
+//     .catch(function (error) {
+//       responseList.isLoading = false;
+//       const message =
+//         "Something went wrong ! Please fill all inputs and try again !";
+//       showToast("error", message);
+
+//       dispatch({
+//         type: Types.CERTIFICATE_MASTER_SUBMIT,
+//         payload: responseList,
+//       });
+//       // dispatch(getCertificateMasterList())
+//     });
+
+// };
 
 export const setMasterCertificateEditValue = (certificateMasterInput) => (
   dispatch

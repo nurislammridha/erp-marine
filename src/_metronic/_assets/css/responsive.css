@@ -535,6 +535,60 @@ label.formFont.Asset-Qty {
   .empty-space {
     width: 48% !important;
   }
+  .collapse.show.certificate-list-collapse {
+    width: 350%!important;
+}
+.collapse.show {
+  width:149%;
+}
+td.Slno {
+  width: 4%!important;
+  line-height: 13px!important;
+}
+ td.type {
+  width: 8%!important;
+  line-height: 13px!important;
+}
+td.issuePlace {
+  width: 11%!important;
+    
+  line-height: 13px!important;
+}
+td.location {
+  width: 16%!important;
+  line-height: 13px!important;
+}
+td.validUntil {
+  width: 16%!important;
+  line-height: 13px!important;
+}
+td.extendUntil {
+  
+  width: 10%!important;
+  line-height: 13px!important;
+}
+td.LastEndorsementDate {
+  width: 17%!important;
+  line-height: 20px!important;
+}
+td.NotOnBoard {
+  width: 12%!important;
+  line-height: 20px!important;
+}
+td.dueDate {
+  width: 6%!important;
+  line-height: 20px!important;
+}
+td.status {
+  width: 4%!important;
+  line-height: 20px!important;
+}
+.Custome-collapse {
+  border-bottom: none!important;
+}
+.accordion {
+  border-bottom: none!important;
+}
 }
 
 @media (max-width: 375px) {

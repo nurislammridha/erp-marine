@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { Form } from "react-bootstrap";
@@ -21,6 +21,7 @@ import {
   certificateMultipleDataAdd,
   certificateMultipleDataDelete,
   certificateMultipleAttachmentDelete,
+  emptyStatus,
 } from "../../_redux/actions/CertificateMainAction";
 import CertificateMasterAdd from "../../../certificate-master/components/create/CertificateMasterAdd";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
@@ -39,6 +40,7 @@ import AttachmentPreviewModel from "../../../../master/components/previews/Attac
 import PermissionWiseDisplay from "../../../../master/components/permissions/PermissionWiseDisplay";
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
+  // const history = useHistory()
   const { register, handleSubmit, errors, setValue } = useForm();
   const dispatch = useDispatch();
 
@@ -50,41 +52,18 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const addMessage = useSelector((state) => state.vesselInfo.addMessage);
   const serverErrors = useSelector((state) => state.certificateMainInfo.errors);
   const isLoading = useSelector((state) => state.certificateMainInfo.isLoading);
-  const certificateInfoInput = useSelector(
-    (state) => state.certificateMainInfo.certificateMainInfo
-  );
-  const certificatesCategoryOption = useSelector(
-    (state) => state.certificateMainInfo.certificatesCategoryOptionData
-  );
-  const certificatesNameOption = useSelector(
-    (state) => state.certificateMainInfo.certificatesNameOptionData
-  );
+  const certificateInfoInput = useSelector((state) => state.certificateMainInfo.certificateMainInfo);
+  const certificatesCategoryOption = useSelector((state) => state.certificateMainInfo.certificatesCategoryOptionData);
+  const certificatesNameOption = useSelector((state) => state.certificateMainInfo.certificatesNameOptionData);
+  const certificateParentCategoryList = useSelector((state) => state.CertificateCategoryReducer.certificateParentCategoryList);
+  const submitStatus = useSelector((state) => state.certificateMainInfo.submitStatus);
+  const certificateChildCategoryList = useSelector((state) => state.CertificateCategoryReducer.certificateChildCategoryList);
+  const certificatesTypeOption = useSelector((state) => state.certificateMainInfo.certificatesTypeOptionData);
+  const certificatesIssueByOption = useSelector((state) => state.certificateMainInfo.certificatesIssueByOptionData);
+  const certificateStatus = useSelector((state) => state.certificateMainInfo.certificateStatus);
+  const vesselTypeOption = useSelector((state) => state.certificateMainInfo.vesselTypeOptionData);
 
-
-  const certificateParentCategoryList = useSelector(
-    (state) => state.CertificateCategoryReducer.certificateParentCategoryList
-  );
-
-  const certificateChildCategoryList = useSelector(
-    (state) => state.CertificateCategoryReducer.certificateChildCategoryList
-  );
-
-  const certificatesTypeOption = useSelector(
-    (state) => state.certificateMainInfo.certificatesTypeOptionData
-  );
-
-  const certificatesIssueByOption = useSelector(
-    (state) => state.certificateMainInfo.certificatesIssueByOptionData
-  );
-
-  const certificateStatus = useSelector(
-    (state) => state.certificateMainInfo.certificateStatus
-  );
-
-  const vesselTypeOption = useSelector(
-    (state) => state.certificateMainInfo.vesselTypeOptionData
-  );
-
+  console.log('submitStatus :>> ', submitStatus);
   useEffect(() => {
     dispatch(GetVesselTypeAction());
     dispatch(getCertificateCategory());
@@ -141,7 +120,12 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const onSubmit = async (e) => {
     dispatch(MainCertificateCreateAction(certificateInfoInput));
   };
-  console.log('certificatesNameOption :>> ', certificatesNameOption);
+ 
+  if (submitStatus === true) {
+    history.push("/certificates-main/list");
+    dispatch(emptyStatus())
+  }
+
   return (
     <PermissionWiseDisplay permission_name={"certificate.create"}>
       <div className="container ">

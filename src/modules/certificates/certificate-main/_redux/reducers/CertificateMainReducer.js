@@ -71,6 +71,7 @@ const initialState = {
     ],
 
   },
+  submitStatus: false,
 
   // update edit
   isEditLoaded: false,
@@ -252,13 +253,20 @@ const CertificateMainReducer = (state = initialState, action) => {
           ...state,
           certificateMainInfo: initialState.certificateMainInfo,
           isLoading: false,
+          submitStatus: action.payload.status
         };
       } else {
         return {
           ...state,
           isLoading: false,
+          submitStatus: false,
         };
       }
+    case Types.EMPTY_STATUS:
+      return {
+        ...state,
+        submitStatus: action.payload,
+      };
     case Types.CERTIFICATE_MAIN_SUBMITTING:
       return {
         ...state,
@@ -456,7 +464,7 @@ const getCertificateName = (data) => {
   if (data) {
     data.forEach((item) => {
       let itemData = {
-        value: item.intCategoryID,
+        value: item.intCertificateID,
         label: item.strCertificateName,
       };
       options.push(itemData);

@@ -13,15 +13,13 @@ export const handleCertificateCategoryInput = (name, value) => (dispatch) => {
 export const certificatecategorySubmitAction = (getCategoryInpuData, isSubCategory) => (
   dispatch
 ) => {
-
+console.log('getCategoryInpuData :>> ', getCategoryInpuData);
   if (typeof isSubCategory !== 'undefined' || isSubCategory === true) {
     if (getCategoryInpuData.intParentsCategoryID === null || getCategoryInpuData.intParentsCategoryID === "") {
       showToast("error", 'Please select parent category !');
       return false;
     }
   }
-
-
   let responseList = {
     isLoading: true,
     data: {},

@@ -10,6 +10,7 @@ import { generateFormDataFromObject } from "../../../../master/utils/FileHelper"
 import { showToast } from "../../../../master/utils/ToastHelper";
 import * as Types from "../types/Types";
 import { getCertificateChildCategoryData } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
+import { useHistory } from "react-router-dom";
 //input handle
 export const handleChangeProductInputAction = (
   name,
@@ -40,7 +41,6 @@ export const handleChangeProductInputAction = (
 
 // submit main certificate info
 export const MainCertificateCreateAction = (certificateInfoInput) => async (dispatch) => {
-  console.log('certificateInfoInput :>> ', certificateInfoInput);
   const shipID = getVesselId();
   if (shipID === null) {
     certificateInfoInput.intShipID = 1;
@@ -123,6 +123,12 @@ export const MainCertificateCreateAction = (certificateInfoInput) => async (disp
   });
 };
 
+export const emptyStatus = ()=> (dispatch)=>{
+  const responsList = {
+    submitStatus: false
+  }
+  dispatch({type: Types.EMPTY_STATUS, payload: responsList})
+}
 export const MainCertificateUpdateAction = (certificateInfoInput, id) => async (
   dispatch
 ) => {
@@ -149,9 +155,9 @@ export const MainCertificateUpdateAction = (certificateInfoInput, id) => async (
     showToast("error", "Certificate category can't be blank!");
     return false;
   }
-  if (certificateInfoInput.strCustomeCode === null) {
-    showToast("error", "Certificate Code can't be blank!");
-  }
+  // if (certificateInfoInput.strCustomeCode === null) {
+  //   showToast("error", "Certificate Code can't be blank!");
+  // }
   if (certificateInfoInput.intIssuingAuthorityID === null) {
     showToast("error", "Issue Autherity can't be blank!");
     return false;
