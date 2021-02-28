@@ -17,7 +17,6 @@ const OthersInfoAdd = withRouter(({ history }) => {
     const providerOptionData = useSelector(
         (state) => state.partnerOthersInfo.providerOptionData
     );
-    console.log('partnerOtherInfoInput', partnerOtherInfoInput);
 
     const handleChangeTextInput = (name, value) => {
         dispatch(handleChangePartnerOtherInfoInput(name, value));
