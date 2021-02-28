@@ -248,7 +248,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                             // rules={{ required: true }}
                             name="intCertificateID"
                             register={register}
-                            value={certificateEditInfo.intCertificateID}
+                            value={certificateEditInfo.certificate}
                             onChange={(option) => {
                               certificateMainInfoChange(
                                 "intCertificateName",

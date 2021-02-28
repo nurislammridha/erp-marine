@@ -101,6 +101,7 @@ export const certificateMasterSubmitAction = (CertificateMasterInput, isSubCateg
       dispatch(getCertificateMasterList())
     });
     dispatch(getCertificateMasterList())
+
 };
 
 export const setMasterCertificateEditValue = (certificateMasterInput) => (

@@ -456,7 +456,7 @@ const getCertificateName = (data) => {
   if (data) {
     data.forEach((item) => {
       let itemData = {
-        value: item.intCertificateID,
+        value: item.intCategoryID,
         label: item.strCertificateName,
       };
       options.push(itemData);
