@@ -212,7 +212,7 @@ const CertificateMainList = () => {
                         <tbody>
                           {certificate.certificates.data.length > 0 && certificate.certificates.data.map((certificate, index) => (
                             <tr key={index + 1}>
-                              <td>{index + 1}</td>
+                              <td className="Slno">{index + 1}</td>
 
                               {/* <td className="description">{certificate.strShipFolderNo}</td> */}
                               {/* <td>{certificate.strCustomeCode}</td>

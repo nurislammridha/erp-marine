@@ -1422,32 +1422,49 @@ label.form-control.criteriaOptionsInput {
     display: none !important;
   }
 }
-.certificate-list-table td {
-  /* width: 6%!important; */
+
+
+td.Slno {
+  width: 52px;
+  line-height: 20px!important;
+  
 }
 .certificate-list-table td.type, .certificate-list-table th.type {
-  width: 2%;
+  width: 82px;
+  line-height: 20px!important;
 }
 .certificate-list-table td.issuePlace, .certificate-list-table th.issuePlace {
-  width: 10%;
+  width: 76px;
+  line-height: 20px!important;
 }
 .certificate-list-table td.location {
-  width: 8%;
+  width: 104px;
+  line-height: 20px!important;
 }
 .certificate-list-table td.validUntil {
-  width: 11%;
+  width: 93px;
+  line-height: 20px!important;
 }
 .certificate-list-table td.extendUntil {
-  width: 13%!important;
+  width: 106px!important;
+  line-height: 20px!important;
 }
 .certificate-list-table td.LastEndorsementDate {
-  width: 19%;
+  width: 138px;
+  line-height: 20px!important;
 }
 .certificate-list-table td.NotOnBoard {
-  width: 13%;
+  width: 89px;
+  line-height: 20px!important;
 }
 .certificate-list-table td.dueDate {
-  width: 5%;
+  width: 60px;
+  line-height: 20px!important;
+}
+td.status {
+  width: 92px;
+  line-height: 20px!important;
+  
 }
 .Custome-collapse{
   border: none!important;
@@ -1474,3 +1491,4 @@ label.form-control.criteriaOptionsInput {
 .table.table-head-custom thead th,.certificate-list-table.table.table-head-custom thead tr {
   width: 1137px!important;
 }
+
