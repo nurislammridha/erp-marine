@@ -287,67 +287,7 @@ const ItemEdit = () => {
                     <div className="clear-fix"></div>
                 </div>
             </div>
-            {/* {multipleItemList.length > 0 && (
-                <div className="card card-custom gutter-b pl-5 pr-5">
-                    <div className="row mt-5 pb-1">
-                        <div className="react-bootstrap-table table-responsive border-0 pl-5">
-                            <table className="table table table-head-custom table-vertical-center  item-add-table  ">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">SL</th>
-                                        <th scope="col">Department</th>
-                                        <th scope="col">ITEM NAME</th>
-                                        <th scope="col">UOM</th>
-                                        <th scope="col">ITEM TYPE</th>
-                                        <th scope="col">ITEM CATEGORY</th>
-                                        <th scope="col">PART NO</th>
-                                        <th scope="col">MODEL</th>
-                                        <th scope="col">ACTION</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {multipleItemList.map((item, index) => (
-                                        <tr>
-                                            <td>{index + 1}</td>
-                                            <td>{item.strDepartmentName}</td>
-                                            <td>{item.strItemName}</td>
-                                            <td>{item.strUoM}</td>
-                                            <td>{item.StrItemTypeName}</td>
-                                            <td>{item.strItemCategoryName}</td>
-                                            <td>{item.strPartNo}</td>
-                                            <td>{item.strModelNo}</td>
 
-                                            <td>
-                                                {" "}
-                                                <i className="far fa-edit editIcon item-list-icon"></i>
-                                                <a
-
-                                                    onClick={(index) => {
-                                                        alert("Are sure, you want to delete?")
-                                                        dispatch(deleteMultipleItemInput(index))
-                                                    }}
-                                                >
-                                                    <i className="fas fa-trash-alt editIcon item-list-icon ml-4"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                        <div className="col-lg-10"></div>
-                        <div className="col-lg-2 mt-3">
-                            <button
-                                className="btn btn-primary btn-sm float-right text-center custome-addnew-btn item-add-save mb-5"
-                                onClick={() => dispatch(editMultipleItemData(multipleItemList, id))}
-                            >
-                                save
-             </button>
-                        </div>
-                        <div className="clear-fix"></div>
-                    </div>
-                </div>
-            )} */}
 
         </>
     );
