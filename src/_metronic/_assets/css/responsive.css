@@ -1,6 +1,50 @@
 /* Extra large devices (large desktops, 1200px and up) */
 
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
+  td.Slno {
+    width: 50px!important;
+    line-height: 20px!important;
+  }
+  td.type, .certificate-list-table th.type {
+    width: 153px!important;
+    line-height: 20px!important;
+  }
+  td.issuePlace, .certificate-list-table th.issuePlace {
+    width: 76px!important;
+    line-height: 20px!important;
+  }
+  td.location {
+    width: 101px!important;
+    line-height: 20px!important;
+  }
+  td.validUntil {
+    width: 143px!important;
+    line-height: 20px!important;
+  }
+  
+  .certificate-list-table td.extendUntil {
+    width: 130px!important;
+    line-height: 20px!important;
+}
+  td.LastEndorsementDate {
+    width: 160px!important;
+    line-height: 20px!important;
+  }
+  td.NotOnBoard {
+    width: 108px!important;
+    line-height: 20px!important;
+  }
+  td.dueDate {
+    width: 84px!important;
+    line-height: 20px!important;
+  }
+  td.status {
+    width: 115px!important;
+    line-height: 20px!important;
+  }
+  .table.table-head-custom thead th, .certificate-list-table.table.table-head-custom thead tr {
+    width: 1219px!important;
+  }
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -586,7 +630,8 @@ td.status {
 .Custome-collapse {
   border-bottom: none!important;
 }
-.accordion {
+.certificate-list-table.table.table-head-custom thead tr {
+
   border-bottom: none!important;
 }
 }
@@ -601,3 +646,5 @@ td.status {
     margin-top: 6px;
 }
 }
+
+
