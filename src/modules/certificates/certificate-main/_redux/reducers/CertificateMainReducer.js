@@ -140,7 +140,6 @@ const CertificateMainReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case Types.CERTIFICATE_LIST_DASHBOARD:
-      console.log('action.payload :>> ', action.payload);
       return {
         ...state,
         certificates: action.payload.certificates,
@@ -149,7 +148,6 @@ const CertificateMainReducer = (state = initialState, action) => {
         certificateExpireDaysList: getCertificateExpireDaysList()
       };
     case Types.GET_CERTIFICATE_CATEGORY:
-      console.log('action.payload :>> ', action.payload);
       return {
         ...state,
         certificatesCategoryOptionData: getCertificateCategoryName(
@@ -458,7 +456,7 @@ const getCertificateName = (data) => {
   if (data) {
     data.forEach((item) => {
       let itemData = {
-        value: item.intCertificateID,
+        value: item.intCategoryID,
         label: item.strCertificateName,
       };
       options.push(itemData);

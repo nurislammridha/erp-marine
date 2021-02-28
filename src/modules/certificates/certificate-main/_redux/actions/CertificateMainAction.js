@@ -211,12 +211,12 @@ export const getCertificateMainListAction = (page, searchText = null, isPublic =
   };
   dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
   let url = "";
-  // url = `${process.env.REACT_APP_API_URL}certificate/categoryList?isPaginated=1`;
-  url = `${process.env.REACT_APP_API_URL}certificate/categoryList?isPaginated=1&paginateNo=10`;
-  // url = `${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1`;
+
+  url = `${process.env.REACT_APP_API_URL}certificate/categoryList?isPaginated=1&paginateNo=1000000`;
 
   if (page !== null || page === "") {
     url += `&page=${page}`;
+    
   }
 
   if (searchText !== null) {
@@ -236,11 +236,13 @@ export const getCertificateMainListAction = (page, searchText = null, isPublic =
   try {
     await Axios.get(url)
       .then((res) => {
+        console.log('res for certificated:>> ', res);
         const { data, message, status } = res.data;
+        console.log('data :>> ', data);
         response.status = status;
         response.certificates = data;
         response.message = message;
-        response.certificatesPaginatedData = data;
+        // response.certificatesPaginatedData = data.certificates;
         response.isLoading = false;
       })
       .catch((err) => {
@@ -345,7 +347,6 @@ export const getCertificateCategory = (data) => (dispatch) => {
   Axios.get(`${process.env.REACT_APP_API_URL}certificate/category`).then(
     (res) => {
       let data = res.data.data;
-      console.log('data certificate category :>> ', data);
       dispatch({ type: Types.GET_CERTIFICATE_CATEGORY, payload: data });
     }
   );
@@ -427,6 +428,7 @@ export const getCertificateIssueBy = (data) => (dispatch) => {
 export const getMainCertificateDeteailByID = (id) => (dispatch) => {
   Axios.get(`${process.env.REACT_APP_API_URL}certificate/details/${id}`).then(
     (res) => {
+      console.log('res :>> ', res);
       let data = res.data.data;
       if (data.multipleAttachments === null) {
         data.multipleAttachments = [];
