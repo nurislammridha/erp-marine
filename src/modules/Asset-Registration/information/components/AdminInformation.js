@@ -6,12 +6,24 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import moment from "moment"
 import DatePicker from "react-datepicker";
-import { handleChangeAdminInfoInput } from "../_redux/actions/AdminInformationAction";
+import { handleChangeAdminInfoInput, submitAdminInformation } from "../_redux/actions/AdminInformationAction";
+import { getSupplierName } from "../../../Purchase/Quotation/_redux/actions/QuotationFilterAction";
+import { getCountryName } from "../../../partners/address/_redux/actions/AddressAction";
 
 const AdminInformation = () => {
   const dispatch = useDispatch();
   const { register, setValue } = useForm();
-  const adminInfoInput = useSelector((state) => state.adminInfo.adminInfoInput)
+  const adminInfoInput = useSelector((state) => state.adminInfo.adminInfoInput);
+  console.log('adminInfoInput', adminInfoInput);
+  const supplierOptionData = useSelector((state) => state.QuotationFilterinfo.supplierNameData);
+  const countryOptionData = useSelector((state) => state.partnerAddress.countryOptionData);
+  const isLoading = useSelector((state) => state.adminInfo.isLoading);
+
+  useEffect(() => {
+    dispatch(getSupplierName());
+    dispatch(getCountryName());
+  }, [])
+
   const courseData = [
     {
       id: 1,
@@ -37,11 +49,15 @@ const AdminInformation = () => {
       CourseName.push(items);
     });
   }
-  const [startDate, setStartDate] = useState(new Date());
+
 
   const handleChangeTextInput = (name, value) => {
     dispatch(handleChangeAdminInfoInput(name, value));
   };
+
+  const handleSubmit = (e) => {
+    dispatch(submitAdminInformation(adminInfoInput));
+  }
 
   return (
     <>
@@ -61,11 +77,10 @@ const AdminInformation = () => {
                   <div className="col-xl-3 col-lg-3 col-6">
                     <label className="formFont">Supplier Name</label>
                     <RHFInput
-                      as={<Select options={CourseName} />}
+                      as={<Select options={supplierOptionData} />}
                       rules={{ required: false }}
                       name="intSupplierId"
                       register={register}
-                      value={adminInfoInput.intSupplierId}
                       setValue={setValue}
                       onChange={(option) => {
                         handleChangeTextInput("intSupplierId", option.value);
@@ -90,10 +105,9 @@ const AdminInformation = () => {
                   <div className="col-xl-3 col-lg-3 col-6">
                     <label className="formFont">PO Date</label>
                     <DatePicker
+                      selected={adminInfoInput.dtePODate}
                       className="date-picker"
                       name="dtePODate"
-                      dateFormat="MM-dd-yyyy"
-                      selected={adminInfoInput.dtePODate}
                       onChange={(date) => handleChangeTextInput("dtePODate", date)}
                       ref={register({
                         required: true,
@@ -105,12 +119,13 @@ const AdminInformation = () => {
                   <div className="col-xl-3 col-lg-3 col-6">
                     <label className="formFont">Waranty Expiry Date</label>
                     <DatePicker
-                      className="date-picker"
-                      name="dteWarantyExpiryDate"
-                      dateFormat="MM-dd-yyyy"
-                      minDate={adminInfoInput.dtePODate}
                       selected={adminInfoInput.dteWarantyExpiryDate}
+                      className="date-picker"
+                      disableClock={true}
+                      name="dteWarantyExpiryDate"
+                      minDate={adminInfoInput.dtePODate}
                       onChange={(date) => handleChangeTextInput("dteWarantyExpiryDate", date)}
+                      dateFormat="MM-dd-yyyy"
                       ref={register({
                         required: true,
                         maxLength: 100,
@@ -170,7 +185,7 @@ const AdminInformation = () => {
                       <Form.Label className="formFont">Rate of Depriciation</Form.Label>
                       <Form.Control
                         className="formHeight"
-                        type="text"
+                        type="number"
                         name="numRateofDepreciation"
                         placeholder="Type"
                         onChange={(e) => {
@@ -184,7 +199,7 @@ const AdminInformation = () => {
                   <div className="col-xl-3 col-lg-3 col-6">
                     <label className="formFont">Country</label>
                     <RHFInput
-                      as={<Select options={CourseName} />}
+                      as={<Select options={countryOptionData} />}
                       rules={{ required: false }}
                       name="intCountryId"
                       register={register}
@@ -273,7 +288,7 @@ const AdminInformation = () => {
                       <Form.Label className="formFont">Rated Capacity</Form.Label>
                       <Form.Control
                         className="formHeight"
-                        type="text"
+                        type="number"
                         name="numRatedCapacity"
                         placeholder="Type"
                         onChange={(e) => {
@@ -314,9 +329,25 @@ const AdminInformation = () => {
                   </div>
                 </div>
                 <div className="mt-5 float-right pb-5">
-                  <Button className="saveButton text-white" variant="">
-                    Submit
-                  </Button>
+                  {!isLoading && (
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={(e) => handleSubmit(e)}
+                    >
+                      Submit
+                    </button>
+                  )}
+
+                  {isLoading && (
+                    <button
+                      className="btn btn-primary"
+                      type="button"
+                    >
+                      <span>Submitting</span>
+                      <span className="ml-3 spinner spinner-white"></span>
+                    </button>
+                  )}
                 </div>
                 <div className="clear-fix" />
               </form>

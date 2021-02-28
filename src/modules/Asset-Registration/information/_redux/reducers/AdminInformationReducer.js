@@ -5,7 +5,7 @@ const initialState = {
     adminInfoInput: {
         intSupplierId: "",
         strSupplierName: "",
-        IntPOId: "",
+        IntPOId: "3",
         strPONumber: "",
         dtePODate: "",
         dteWarantyExpiryDate: "",
@@ -66,6 +66,7 @@ const AdminInformationReducer = (state = initialState, action) => {
 
         case Types.SUBMIT_ADMIN_INFO:
             return {
+                ...state,
                 status: action.payload.status,
                 isLoading: action.payload.isLoading,
             }
