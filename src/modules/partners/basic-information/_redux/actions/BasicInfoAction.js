@@ -281,19 +281,23 @@ export const UpdatePartnerInfo = (id) => async (dispatch) => {
     const deleted_ports = store.getState().partnerOthersInfo.deleted_ports;
     const deleted_provider = store.getState().partnerOthersInfo.deleted_provider;
 
-    console.log('deleted_ports', deleted_ports)
-    console.log('deleted_provider', deleted_provider)
-
     let newArray = [];
     if (deleted_ports) {
-        deleted_ports.forEach(id => {
-            multiPort.forEach(item => {
-                if (id.id !== item.intPortID) {
-                    newArray.push(id);
-                }
+        if (multiPort.length == 0) {
+            newArray = deleted_ports
+        } else {
+            deleted_ports.forEach(id => {
+                multiPort.forEach(item => {
+                    if (id.id !== item.intPortID) {
+                        newArray.push(id);
+                    }
+                })
             })
-        })
+        }
+
     }
+
+
 
     let newArray2 = [];
     if (deleted_provider) {
