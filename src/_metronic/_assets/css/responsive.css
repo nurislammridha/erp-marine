@@ -259,6 +259,71 @@ label.voyage-vessel.form-label {
   margin-top: 5px;
   }
 }
+@media  (min-width: 500px) and (max-width: 767.98px) {
+  .collapse.show {
+    width:119%;
+  }
+  .certificate-list-table td{
+    font-size: 9px!important;
+  }
+  td.Slno {
+    width: 3%!important;
+    line-height: 13px!important;
+  }
+   td.type {
+    width: 8%!important;
+    line-height: 13px!important;
+  }
+  td.issuePlace {
+    width: 7%!important;
+      
+    line-height: 13px!important;
+  }
+  td.location {
+    width: 12%!important;
+    line-height: 13px!important;
+  }
+  td.validUntil {
+    width:7%!important;
+    line-height: 13px!important;
+  }
+  td.extendUntil {
+    
+    width: 11%!important;
+    line-height: 13px!important;
+  }
+  td.LastEndorsementDate {
+    width: 17%!important;
+    line-height: 20px!important;
+  }
+  td.NotOnBoard {
+    width: 12%!important;
+    line-height: 20px!important;
+  }
+  td.dueDate {
+    width: 6%!important;
+    line-height: 20px!important;
+  }
+  td.status {
+    width: 4%!important;
+    line-height: 20px!important;
+  }
+  .Custome-collapse {
+    border-bottom: none!important;
+  }
+  .certificate-list-table.table.table-head-custom thead tr {
+  
+    border-bottom: none!important;
+  }
+  .table:not(.table-bordered) thead th, .table:not(.table-bordered) thead td.certificate-list-table{
+   
+    border-bottom: 0px!important;
+    
+  }
+  .certificate-lis-btn {
+    width: 52px !important;
+  }
+}
 
 /* Extra small devices (portrait phones, less than 576px) */
 
@@ -633,6 +698,11 @@ td.status {
 .certificate-list-table.table.table-head-custom thead tr {
 
   border-bottom: none!important;
+}
+.table:not(.table-bordered) thead th, .table:not(.table-bordered) thead td.certificate-list-table{
+ 
+  border-bottom: 0px!important;
+  
 }
 }
 
