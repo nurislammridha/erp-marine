@@ -1,1 +1,2 @@
 export const BASIC_INFO_INPUT = "BASIC_INFO_INPUT";
+export const SUBMITTING = "SUBMITTING";
