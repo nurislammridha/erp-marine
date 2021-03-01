@@ -7,3 +7,4 @@ export const SUBMIT_ADMIN_INFO = "SUBMIT_ADMIN_INFO";
 export const SUBMITTING = "SUBMITTING";
 /**********************Account Information********************* */
 export const CHANGE_ACCOUNT_INFO_INPUT = "CHANGE_ACCOUNT_INFO_INPUT";
+export const SUBMIT_ACCOUNT_INFO = "SUBMIT_ACCOUNT_INFO";

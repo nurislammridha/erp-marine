@@ -16,7 +16,7 @@ const initialState = {
         numLandedCost: "",
         numErectionAndOtherCost: "",
         strTotalAccumulatedDep: "",
-        isTaxAccount: "",
+        isTaxAccount: "0",
         // isActive: "",
         // dteSarverEntryDate: "",
         // dteLastEntryDate: "",
@@ -37,7 +37,19 @@ const AccountsInformationReducer = (state = initialState, action) => {
                 ...state,
                 accountsInfoInput
             }
-      
+        case Types.SUBMIT_ACCOUNT_INFO:
+            if (action.payload.status) {
+                return {
+                    ...state,
+                    isLoading: action.payload.isLoading,
+                    accountsInfoInput: initialState.accountsInfoInput
+                }
+            } else {
+                return {
+                    ...state,
+                    isLoading: action.payload.isLoading
+                }
+            }
         default:
             break;
     }

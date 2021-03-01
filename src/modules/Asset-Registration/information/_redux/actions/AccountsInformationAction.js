@@ -11,36 +11,27 @@ export const changeAccountsInformation = (name, value) => (dispatch) => {
     dispatch({ type: Types.CHANGE_ACCOUNT_INFO_INPUT, payload: formData })
 }
 
-// // export const postBasicInformation = (data) => async (dispatch) => {
-// //     let responseList = {
-// //         isLoading: true,
-// //         data: {},
-// //         status: false,
-// //     };
-// //     // dispatch({ type: Types.SUBMITTING, payload: responseList })
-
-// //     data.dteDatePlaceInServiceDate = moment().format("YYYY-MM-DD");
-// //     data.dteGRNDate = moment().format("YYYY-MM-DD");
-// //     data.dteStoreIssueDate = moment().format("YYYY-MM-DD");
-
-
-// //     const url = `${process.env.REACT_APP_API_URL}asset/assetBasicInfoRegistration`;
-// //     await Axios.post(url, data)
-// //         .then((res) => {
-// //             if (res.data.status) {
-// //                 responseList.isLoading = false;
-// //                 responseList.data = res.data
-// //                 responseList.status = res.status
-
-
-// //                 showToast('success', res.data.message)
-// //                 dispatch({ type: Types.SUBMITTING, payload: responseList })
-// //             } else {
-// //                 showToast('success', res.data.message)
-// //             }
-// //         }).catch(function (error) {
-// //             const message = "Sorry, something went wrong!"
-// //             showToast('error', message);
-// //             dispatch({ type: Types.SUBMITTING, payload: responseList })
-// //         })
-// }
+export const SubmitAccountsInformation = (accountsInfoInput) => async (dispatch) => {
+    let responseList = {
+        isLoading: true,
+        data: {},
+        status: false,
+    };
+    dispatch({ type: Types.SUBMIT_ACCOUNT_INFO, payload: responseList })
+    const url = `${process.env.REACT_APP_API_URL}asset/assetAccountInfoRegistration`;
+    await Axios.post(url, accountsInfoInput)
+        .then((res) => {
+            if (res.data.status) {
+                responseList.isLoading = false;
+                responseList.data = res.data
+                responseList.status = res.status
+                showToast('success', res.data.message)
+                dispatch({ type: Types.SUBMIT_ACCOUNT_INFO, payload: responseList })
+            } 
+        }).catch(function (error) {
+            const message = "Sorry, something went wrong!"
+            responseList.isLoading = false;
+            showToast('error', message);
+            dispatch({ type: Types.SUBMIT_ACCOUNT_INFO, payload: responseList })
+        })
+}
