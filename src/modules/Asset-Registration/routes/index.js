@@ -1,5 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import AdminEditContainer from "../information/views/AdminEditContainer";
 import AdminInformationContainer from "../information/views/AdminInformationContainer";
 import AdminListContainer from "../information/views/AdminListContainer";
 import BasicInformationContainer from "../information/views/BasicInformationContainer";
@@ -16,8 +17,14 @@ const routeAssetRegistration = [
   },
   {
     path: "/admin-information/create",
-    name: "admininformation",
+    name: "admininformationadd",
     component: AdminInformationContainer,
+    exact: true,
+  },
+  {
+    path: "/admin-information/edit/:id",
+    name: "admininformationedit",
+    component: AdminEditContainer,
     exact: true,
   },
   {

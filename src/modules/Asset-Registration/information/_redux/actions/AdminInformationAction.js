@@ -83,3 +83,17 @@ export const emptyStatus = () => (dispatch) => {
     });
 
 }
+
+export const editAdminInformation = (id) => (dispatch) => {
+
+    Axios.get(`${process.env.REACT_APP_API_URL}asset/assetAdminInfoRegistration/${id}`)
+        .then((res) => {
+            let data = res.data.data
+
+
+            dispatch({
+                type: Types.EDIT_ADMIN_INFO,
+                payload: data,
+            });
+        });
+}

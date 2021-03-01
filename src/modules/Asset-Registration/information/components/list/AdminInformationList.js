@@ -80,7 +80,7 @@ const AdminInformationList = () => {
                                             <Link >
                                                 <i className="far fa-eye editIcon item-list-icon"></i>
                                             </Link> &nbsp;&nbsp;
-                                            <Link>
+                                            <Link to={`/admin-information/edit/${item.intAdminInfoId}`}>
                                                 <i className="far fa-edit editIcon item-list-icon"></i>
                                             </Link>
 
