@@ -84,6 +84,7 @@ import ComparativeStatementReducer from "../modules/Purchase/comparativeStatemen
 import QuotationFilterReducer from "../modules/Purchase/Quotation/_redux/reducers/QuotationFilterReducer";
 import BasicInformationReducer from "../modules/Asset-Registration/information/_redux/reducers/BasicInformationReducer";
 import AdminInformationReducer from "../modules/Asset-Registration/information/_redux/reducers/AdminInformationReducer";
+import AdminInfoListReducer from "../modules/Asset-Registration/information/_redux/reducers/AdminInfoListReducer";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -197,6 +198,7 @@ export const rootReducer = combineReducers({
   //Asset Registration
   basicInformation: BasicInformationReducer,
   adminInfo: AdminInformationReducer,
+  adminInfoList: AdminInfoListReducer,
 });
 
 export function* rootSaga() {
