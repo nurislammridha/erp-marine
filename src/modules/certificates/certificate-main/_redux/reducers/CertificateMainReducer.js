@@ -133,7 +133,9 @@ const initialState = {
       bottomLabel: 'DUE MORE THAN 60 DAYS',
       statusLabel: 'Due',
     },
-  ]
+  ],
+  reportList: [],
+  reportPaginationList: [],
 };
 
 const CertificateMainReducer = (state = initialState, action) => {
@@ -145,6 +147,14 @@ const CertificateMainReducer = (state = initialState, action) => {
         ...state,
         certificates: action.payload.certificates,
         certificatesPaginatedData: action.payload.certificatesPaginatedData,
+        isLoading: action.payload.isLoading,
+        certificateExpireDaysList: getCertificateExpireDaysList()
+      };
+    case Types.GET_CERTIFICATE_REPORT_LIST:
+      return {
+        ...state,
+        reportList: action.payload.reportList,
+        reportPaginationList: action.payload.reportPaginationList,
         isLoading: action.payload.isLoading,
         certificateExpireDaysList: getCertificateExpireDaysList()
       };

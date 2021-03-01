@@ -3,12 +3,19 @@ import { Route } from "react-router-dom";
 import CertificateMainAddContainer from "../views/CertificateMainAddContainer";
 import CertificateMainContainer from "../views/CertificateMainContainer";
 import CertificateMainEditContainer from "../views/CertificateMainEditContainer";
+import CertificateMainReportContainer from "../views/CertificateMainReportContainer";
 
 const certificateMainRoutes = [
   {
     path: "/certificates-main/list",
     name: "Certificate Main List",
     component: CertificateMainContainer,
+    exact: true,
+  },
+  {
+    path: "/certificate_report/list",
+    name: "Certificate Main Report List",
+    component: CertificateMainReportContainer,
     exact: true,
   },
 

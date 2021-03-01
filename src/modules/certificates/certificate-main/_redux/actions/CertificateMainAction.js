@@ -123,11 +123,11 @@ export const MainCertificateCreateAction = (certificateInfoInput) => async (disp
   });
 };
 
-export const emptyStatus = ()=> (dispatch)=>{
+export const emptyStatus = () => (dispatch) => {
   const responsList = {
     submitStatus: false
   }
-  dispatch({type: Types.EMPTY_STATUS, payload: responsList})
+  dispatch({ type: Types.EMPTY_STATUS, payload: responsList })
 }
 export const MainCertificateUpdateAction = (certificateInfoInput, id) => async (
   dispatch
@@ -222,7 +222,7 @@ export const getCertificateMainListAction = (page, searchText = null, isPublic =
 
   if (page !== null || page === "") {
     url += `&page=${page}`;
-    
+
   }
 
   if (searchText !== null) {
@@ -550,3 +550,68 @@ export const handleColorCode = (status, colorCode, index) => (dispatch) => {
   }
   dispatch({ type: Types.CHANGE_STATUS_BACKGROUD, payload: Data });
 }
+
+//get certificate reports 
+export const getCertificateReportList = (page, searchText = null, isPublic = false, category = null, fromDate = null, toDate = null, diffDays = null) => async (dispatch) => {
+  let response = {
+    reportList: [],
+    status: false,
+    message: "",
+    isLoading: true,
+    errors: [],
+    reportPaginationList: []
+  };
+  dispatch({ type: Types.GET_CERTIFICATE_REPORT_LIST, payload: response });
+  let url = "";
+  // url = `${process.env.REACT_APP_API_URL}certificate/details?search=${searchText}&isPaginated=1&paginateNo=5&category=${category}&fromDate=${fromDate}&toDate=${toDate}&diffDay=${diffDays}`;
+  url = `${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1&paginateNo=5`;
+
+  if (page !== null || page === "") {
+    url += `&page=${page}`;
+
+  }
+
+  // if (searchText !== null) {
+  //   url += `&search=${searchText}`;
+  // } else {
+  //   // url += `&certificate/details?search=${searchText}`
+  // }
+
+  if (category !== null) {
+    url += `&category=${category}`;
+  }
+
+  if (fromDate !== null) {
+    url += `&fromDate=${fromDate}`;
+  }
+  if (toDate !== null) {
+    url += `&toDate=${toDate}`;
+  }
+  if (diffDays !== null) {
+    url += `&diffDays=${diffDays}`;
+  }
+
+  try {
+    await Axios.get(url)
+      .then((res) => {
+        const { data, message, status } = res.data;
+        console.log('data :>> ', data);
+        response.status = status;
+        response.reportList = data.data;
+        response.message = message;
+        response.reportPaginationList = data;
+        response.isLoading = false;
+      })
+      .catch((err) => {
+        console.log("ErrorCertificate1");
+        toast.error(err);
+      });
+  } catch (error) {
+    console.log("ErrorCertificate2");
+    response.message = "Something Went Wrong !";
+    toast.error(error);
+  }
+
+  response.isLoading = false;
+  dispatch({ type: Types.GET_CERTIFICATE_REPORT_LIST, payload: response });
+};

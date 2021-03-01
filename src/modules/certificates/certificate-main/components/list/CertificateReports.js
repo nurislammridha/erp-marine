@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import PaginationLaravel from "../../../../master/pagination/PaginationLaravel";
 import LoadingSpinner from "../../../../master/spinner/LoadingSpinner";
-import { Form, Card, Button, Row, Col, Accordion, Table } from "react-bootstrap";
+import { Form, Card, Button, Row, Col, Accordion, Table, Dropdown } from "react-bootstrap";
 import "./style.css";
 import { generateStringDateFromDate } from "../../../../../domains/CCO/utils/DateHelper";
 import {
   changeColorCode,
   getCertificateCategory,
-  getCertificateMainListAction,
+  getCertificateReportList,
   handleColorCode,
 } from "../../_redux/actions/CertificateMainAction";
 import "./style.css";
@@ -22,8 +22,9 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 import CertificateDetails from "../create/details/CertificateDetails";
-
-const CertificateMainList = () => {
+import DatePicker from "react-datepicker";
+import moment from "moment";
+const CertificateReports = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit, errors, setValue } = useForm();
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,6 +33,7 @@ const CertificateMainList = () => {
 
   const isLoading = useSelector((state) => state.certificateMainInfo.isLoading);
   const certificates = useSelector((state) => state.certificateMainInfo.certificates);
+  const reportList = useSelector((state) => state.certificateMainInfo.reportList);
   const certificateExpireDaysList = useSelector((state) => state.certificateMainInfo.certificateExpireDaysList);
   const certificatesPaginatedData = useSelector((state) => state.certificateMainInfo.certificatesPaginatedData);
   const certificateParentCategoryList = useSelector((state) => state.CertificateCategoryReducer.certificateParentCategoryList);
@@ -39,20 +41,36 @@ const CertificateMainList = () => {
   const certificateBackgroundColor = useSelector((state) => state.certificateMainInfo.certificateBackgroundColor);
   const bottomStatus = useSelector((state) => state.certificateMainInfo.bottomStatus);
 
+  console.log('reportList :>> ', reportList);
   useEffect(() => {
-    dispatch(getCertificateMainListAction(currentPage));
+    dispatch(getCertificateReportList(currentPage));
     dispatch(getCertificateCategory());
     dispatch(getCertificateParentCategoryData());
   }, [dispatch, currentPage]);
 
   const changePage = (data) => {
     setCurrentPage(data.page);
-    dispatch(getCertificateMainListAction(data.page));
+    dispatch(getCertificateReportList(data.page));
   };
 
   const certificateSelect = (category) => {
     dispatch(
-      getCertificateMainListAction(currentPage, searchText, 1, category)
+      getCertificateReportList(currentPage, searchText, 1, category, null, null, null)
+    );
+  };
+  const fromDateSelect = (fromDate) => {
+    dispatch(
+      getCertificateReportList(currentPage, searchText, 1, null, fromDate, null, null)
+    );
+  };
+  const ToDateSelect = (toDate) => {
+    dispatch(
+      getCertificateReportList(currentPage, searchText, 1, null, null, toDate, null)
+    );
+  };
+  const differenceDay = (diffDay) => {
+    dispatch(
+      getCertificateReportList(currentPage, searchText, 1, null, null, null, diffDay)
     );
   };
 
@@ -60,9 +78,9 @@ const CertificateMainList = () => {
     const searchText = e.target.value;
     setSearchText(searchText);
     if (searchText.length === 0) {
-      dispatch(getCertificateMainListAction(currentPage));
+      dispatch(getCertificateReportList(currentPage));
     } else {
-      dispatch(getCertificateMainListAction(currentPage, searchText));
+      dispatch(getCertificateReportList(currentPage, searchText));
     }
   };
 
@@ -93,35 +111,38 @@ const CertificateMainList = () => {
     setCertificateID(certificate.intCertificateDetailsID);
     setCertificateDetailShow(true);
   };
-  
+  const filterWithDifferenceDay = [
+    { label: "Day-0", value: 0 },
+    { label: "Day-(1-30)", value: 30 },
+    { label: "Day-(31-60)", value: 60 },
+    { label: "Day-more than 60", value: 100000000 },
+  ]
+  const [fromDate, setfromDate] = useState(null);
+  const [toDate, setToDate] = useState(null);
+
   return (
     <>
       <Card>
         <Card.Body className="certificate-card">
-          <h1 className="headerText pt-2">Certificates</h1> <hr />
-          <div className="row mb-5">
-            <div className="col-lg-4 col-md-6 ">
-              <div className="row">
-                {/* <div className="col-lg-4 col-md-4">
-                  <h1 className="headerText pt-2">Certificates</h1>
-                </div> */}
-                <div className="col-lg-8 col-md-8">
-                  <Form.Group as={Col} controlId="formGridState">
-                    <input
-                      type="search"
-                      value={searchText}
-                      className="form-control product-search-input formHeight"
-                      placeholder="Search"
-                      onChange={searchProduct}
-                    />
-                  </Form.Group>
-                </div>
-              </div>
-            </div>
+          <div className="row justify-content-between">
+            <h1 className="headerText pt-2">Certificate Reports</h1>
 
-            <div className="col-lg-3 col-md-6 "></div>
-            <div className="col-lg-3 col-md-6 "></div>
-            {/* <div className="col-lg-3 col-md-6">
+            <div className="col-md-7 d-flex">
+              <Form.Group as={Col} controlId="formGridState">
+                <input
+                  type="search"
+                  value={searchText}
+                  className="form-control product-search-input formHeight search-box"
+                  placeholder="Search"
+                  onChange={searchProduct}
+                />
+              </Form.Group>
+              <i className="fas fa-search custome-certificate-search"></i>
+            </div>
+          </div>
+          <hr />
+          <div className="row mb-5">
+            <div className="col-lg-3 col-md-6">
               <Form.Group as={Col} controlId="formGridState">
                 <RHFInput
                   as={<Select options={certificateParentCategoryList} />}
@@ -149,22 +170,58 @@ const CertificateMainList = () => {
                   register={register}
                   value={certificateChildCategoryList.intCategoryID}
                   onChange={(option) => {
+                    differenceDay(option.value);
+                  }}
+                  setValue={setValue}
+                />
+              </Form.Group>
+            </div>
+
+            <div className="col-lg-2 col-md-6 ">
+              <Form.Group as={Col} controlId="formGridState">
+                <RHFInput
+                  as={<Select options={filterWithDifferenceDay} />}
+                  rules={{ required: true }}
+                  placeholder="Filter with days"
+                  name="days"
+                  register={register}
+                  value={certificateChildCategoryList.days}
+                  onChange={(option) => {
                     certificateSelect(option.value);
                   }}
                   setValue={setValue}
                 />
               </Form.Group>
-            </div> */}
-
-            <div className="col-lg-2 col-md-6 certificate-filter">
-              <i className="fas fa-filter tableFilter mt-1 mr-2"></i>
-              <i className="far fa-filter"></i>
-              <Link
-                to="/certificates-main/create"
-                className="btn btn-primary text-center text-white btn-sm custome-addnew-btn certificate-add-btn"
-              >
-                Add New
-              </Link>
+            </div>
+            <div className="col-lg-2 col-md-6 ">
+              <Form.Group as={Col} controlId="formGridState">
+                <DatePicker
+                  autoComplete="off"
+                  name="dteExtendedUntil"
+                  className="form-control fromStyle formHeight custome-date"
+                  placeholderText="From Date"
+                  selected={fromDate}
+                  onChange={(date) => (
+                    fromDateSelect(moment(date).format("YYYY-MM-DD")),
+                    setfromDate(date)
+                  )}
+                />
+              </Form.Group>
+            </div>
+            <div className="col-lg-2 col-md-6 ">
+              <Form.Group as={Col} controlId="formGridState">
+                <DatePicker
+                  autoComplete="off"
+                  name="dteExtendedUntil"
+                  className="form-control fromStyle formHeight custome-date"
+                  placeholderText="To Date"
+                  selected={toDate}
+                  onChange={(date) => (
+                    ToDateSelect(moment(date).format("YYYY-MM-DD")),
+                    setToDate(date)
+                  )}
+                />
+              </Form.Group>
             </div>
           </div>
           {isLoading && <LoadingSpinner text="Loading Certificates..." />}
@@ -178,7 +235,6 @@ const CertificateMainList = () => {
                     <th className="td-sl">#</th>
                     <th scope="col" className="type">Type</th>
                     <th scope="col" className="issuePlace">Issued Place</th>
-                    <th scope="col" className="location">Location</th>
                     <th scope="col" className="validUntil">Valid Until</th>
                     <th scope="col" className="extendUntil">Entended Until</th>
                     <th scope="col" className="LastEndorsementDate">Last Endorsement</th>
@@ -188,99 +244,71 @@ const CertificateMainList = () => {
                     <th className="action">Action</th>
                   </tr>
                 </thead>
-              </table>
-              <table className="table table table-head-custom table-vertical-center user-list-table certificate-list-table certificate-table">
-                {certificates.map((certificate, index) => (
-                  <Accordion defaultActiveKey="0">
-                    <Card className="Custome-collapse">
-                      <thead>
-                        <tr>
-                          <th rowspan="12" className="certificate-collapse">
-                            <Card.Header className="bg-white certificate-card-header">
-                              <Accordion.Toggle className="collapse-btn" eventKey={index.toString()}>
-                                <i className="fas fa-angle-down mr-2"></i>
-                                {certificate.strCertificateCategoryName !== null && certificate.strCertificateCategoryName !== "" && certificate.strCertificateCategoryName}
-                                {' '} ({certificate.certificates.data.length})
-                              </Accordion.Toggle>
-                            </Card.Header>
-                          </th>
-                        </tr>
-                      </thead>
-                      <Accordion.Collapse eventKey={index.toString()}>
-                        {/* <Card.Body> */}
-                        <>
-                          <tbody>
-                            {certificate.certificates.data.length > 0 && certificate.certificates.data.map((certificate, index) => (
-                              <tr key={index + 1}>
-                                <td>{index + 1}</td>
-                                <td className="type">{certificate.strCertificateTypeName}</td>
-                                <td className="issuePlace">{certificate.strIssuedPlace}</td>
-                                <td className="location">{certificate.strLocation}</td>
-                                <td className="validUntil">
-                                  {certificate.dteCertificateValidUntil !== null
-                                    ? generateStringDateFromDate(
-                                      certificate.dteCertificateValidUntil
-                                    )
-                                    : ""}
-                                </td>
-                                <td className="extendUntil">
-                                  {certificate.dteExtendedUntil !== null
-                                    ? generateStringDateFromDate(
-                                      certificate.dteExtendedUntil
-                                    )
-                                    : ""}
-                                </td>
+                <tbody>
+                  <th className="td-sl">#</th>
+                  <td scope="col" className="type">Type</td>
+                  <td scope="col" className="issuePlace">Issued Place</td>
+                  <td scope="col" className="validUntil">Valid Until</td>
+                  <td scope="col" className="extendUntil">Entended Until</td>
+                  <td scope="col" className="LastEndorsementDate">Last Endorsement</td>
+                  <td scope="col" className="NotOnBoard">Not On Board</td>
+                  <td scope="col" className="dueDate">Due Date</td>
+                  <td scope="col" className="status">Status</td>
+                  <td className="action">Action</td>
+                  {/* {certificates.certificates.data.length > 0 && certificates.certificates.data.map((certificate, index) => (
+                    <tr key={index + 1}>
+                      <td>{index + 1}</td>
+                      <td className="type">{certificate.strCertificateTypeName}</td>
+                      <td className="issuePlace">{certificate.strIssuedPlace}</td>
+                      <td className="validUntil">
+                        {certificate.dteCertificateValidUntil !== null
+                          ? generateStringDateFromDate(
+                            certificate.dteCertificateValidUntil
+                          )
+                          : ""}
+                      </td>
+                      <td className="extendUntil">
+                        {certificate.dteExtendedUntil !== null
+                          ? generateStringDateFromDate(
+                            certificate.dteExtendedUntil
+                          )
+                          : ""}
+                      </td>
 
-                                <td className="LastEndorsementDate">
-                                  {certificate.dteLastEndorsementDate !== null
-                                    ? generateStringDateFromDate(
-                                      certificate.dteLastEndorsementDate
-                                    )
-                                    : ""}
-                                </td>
-                                <td className="NotOnBoard">{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
-                                <td className="dueDate">{certificate.differenceDays}</td>
-                                <td className="status">
-                                  <button
-                                    className="btn btn-primary btn-sm text-white certificate-lis-btn" style={{ backgroundColor: `${getColorCode(certificate.differenceDays && certificate.differenceDays)}` }}>
-                                    {certificate.differenceDays === 0 ? "Expired" : "Due"}
-                                  </button>
+                      <td className="LastEndorsementDate">
+                        {certificate.dteLastEndorsementDate !== null
+                          ? generateStringDateFromDate(
+                            certificate.dteLastEndorsementDate
+                          )
+                          : ""}
+                      </td>
+                      <td className="NotOnBoard">{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
+                      <td className="dueDate">{certificate.differenceDays}</td>
+                      <td className="status">
+                        <button
+                          className="btn btn-primary btn-sm text-white certificate-lis-btn" style={{ backgroundColor: `${getColorCode(certificate.differenceDays && certificate.differenceDays)}` }}>
+                          {certificate.differenceDays === 0 ? "Expired" : "Due"}
+                        </button>
 
-                                </td>
-                                <td className="action">
-                                  <div className="mt-5">
-                                    <Link onClick={() => certificateDetails(certificate)}>
-                                      <i className="far fa-eye text-success editIcon item-list-icon"></i>
-                                    </Link>
-                                    <Link
-                                      className="ml-2 certificate-icon"
-                                      to={`/certificates-main/edit/${certificate.intCertificateDetailsID}`}
-                                    >
-                                      <i className="fa fa-edit text-success editIcon item-list-icon"></i>
-                                    </Link>
-                                  </div>
+                      </td>
+                      <td className="action">
+                        <div className="mt-5">
+                          <Link onClick={() => certificateDetails(certificate)}>
+                            <i className="far fa-eye text-success editIcon item-list-icon"></i>
+                          </Link>
+                          <Link
+                            className="ml-2 certificate-icon"
+                            to={`/certificates-main/edit/${certificate.intCertificateDetailsID}`}
+                          >
+                            <i className="fa fa-edit text-success editIcon item-list-icon"></i>
+                          </Link>
+                        </div>
                                  &nbsp;&nbsp;&nbsp;
                               </td>
-                              </tr>
-                            ))}
+                    </tr>
+                  ))} */}
 
-                          </tbody>
-                          {/* </Card.Body> */}
-                          {/* <PaginationLaravel
-                            changePage={changePage}
-                            data={certificate.certificates}
-                          /> */}
-                          {!isLoading && certificate.certificates.data.length === 0 && (
-                            <div className="alert alert-warning mt-5">
-                              Sorry ! No certificates found in this category.
-                            </div>
-                          )}
-                        </>
-                      </Accordion.Collapse>
-                    </Card>
-                  </Accordion>
-                ))}
-
+                </tbody>
               </table>
             </div>
           )}
@@ -338,4 +366,4 @@ const CertificateMainList = () => {
   );
 };
 
-export default CertificateMainList;
+export default CertificateReports;
