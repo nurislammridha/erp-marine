@@ -4,20 +4,27 @@ import { Form, Button } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
+import { useHistory } from 'react-router-dom';
 import moment from "moment"
 import DatePicker from "react-datepicker";
-import { handleChangeAdminInfoInput, submitAdminInformation } from "../_redux/actions/AdminInformationAction";
+import { emptyStatus, handleChangeAdminInfoInput, submitAdminInformation } from "../_redux/actions/AdminInformationAction";
 import { getSupplierName } from "../../../Purchase/Quotation/_redux/actions/QuotationFilterAction";
 import { getCountryName } from "../../../partners/address/_redux/actions/AddressAction";
 
 const AdminInformation = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { register, setValue } = useForm();
   const adminInfoInput = useSelector((state) => state.adminInfo.adminInfoInput);
-  console.log('adminInfoInput', adminInfoInput);
   const supplierOptionData = useSelector((state) => state.QuotationFilterinfo.supplierNameData);
   const countryOptionData = useSelector((state) => state.partnerAddress.countryOptionData);
   const isLoading = useSelector((state) => state.adminInfo.isLoading);
+  const status = useSelector((state) => state.adminInfo.status);
+
+  if (status) {
+    history.push('/admin-information/list');
+    dispatch(emptyStatus());
+  }
 
   useEffect(() => {
     dispatch(getSupplierName());
@@ -74,7 +81,7 @@ const AdminInformation = () => {
                 method="post"
               >
                 <div className="form-group row">
-                  <div className="col-xl-3 col-lg-3 col-6">
+                  <div className="col-md-3 col-6">
                     <label className="formFont">Supplier Name</label>
                     <RHFInput
                       as={<Select options={supplierOptionData} />}
@@ -88,7 +95,7 @@ const AdminInformation = () => {
                       }}
                     />
                   </div>
-                  <div className="col-xl-3 col-lg-3 col-6">
+                  <div className="col-md-3 col-6">
                     <Form.Group>
                       <Form.Label className="formFont">PO Number</Form.Label>
                       <Form.Control
@@ -102,7 +109,7 @@ const AdminInformation = () => {
                       />
                     </Form.Group>
                   </div>
-                  <div className="col-xl-3 col-lg-3 col-6">
+                  <div className="col-md-3 col-6">
                     <label className="formFont">PO Date</label>
                     <DatePicker
                       selected={adminInfoInput.dtePODate}
@@ -116,7 +123,7 @@ const AdminInformation = () => {
                     />
                     <i className="fas fa-calendar-alt"></i>
                   </div>
-                  <div className="col-xl-3 col-lg-3 col-6">
+                  <div className="col-md-3 col-6">
                     <label className="formFont">Waranty Expiry Date</label>
                     <DatePicker
                       selected={adminInfoInput.dteWarantyExpiryDate}
@@ -135,7 +142,7 @@ const AdminInformation = () => {
                   </div>
                 </div>
                 <div className="form-group row">
-                  <div className="col-xl-3 col-lg-3 col-6">
+                  <div className="col-md-3 col-6">
                     <label className="formFont">Date Of Installation</label>
                     <DatePicker
                       className="date-picker"
@@ -150,7 +157,7 @@ const AdminInformation = () => {
                     />
                     <i className="fas fa-calendar-alt"></i>
                   </div>
-                  <div className="col-xl-3 col-lg-3 col-6">
+                  <div className="col-md-3 col-6">
                     <label className="formFont">Asset Location</label>
                     <RHFInput
                       as={<Select options={CourseName} />}
@@ -165,7 +172,7 @@ const AdminInformation = () => {
                       setValue={setValue}
                     />
                   </div>
-                  <div className="col-xl-3 col-lg-3 col-6">
+                  <div className="col-md-3 col-6">
                     <label className="formFont">Depriciation Run Date</label>
                     <DatePicker
                       className="date-picker"
@@ -180,7 +187,7 @@ const AdminInformation = () => {
                     />
                     <i className="fas fa-calendar-alt"></i>
                   </div>
-                  <div className="col-xl-3 col-lg-3 col-6">
+                  <div className="col-md-3 col-6">
                     <Form.Group>
                       <Form.Label className="formFont">Rate of Depriciation</Form.Label>
                       <Form.Control
@@ -196,7 +203,7 @@ const AdminInformation = () => {
                   </div>
                 </div>
                 <div className="form-group row">
-                  <div className="col-xl-3 col-lg-3 col-6">
+                  <div className="col-md-3 col-6">
                     <label className="formFont">Country</label>
                     <RHFInput
                       as={<Select options={countryOptionData} />}
@@ -211,7 +218,7 @@ const AdminInformation = () => {
                       setValue={setValue}
                     />
                   </div>
-                  <div className="col-xl-3 col-lg-3 col-6">
+                  <div className="col-md-3 col-6">
                     <Form.Group>
                       <Form.Label className="formFont">Name Of Manufacture</Form.Label>
                       <Form.Control
@@ -225,7 +232,7 @@ const AdminInformation = () => {
                       />
                     </Form.Group>
                   </div>
-                  <div className="col-xl-3 col-lg-3 col-6">
+                  <div className="col-md-3 col-6">
                     <Form.Group>
                       <Form.Label className="formFont">Manufacture Provice SL NO</Form.Label>
                       <Form.Control
@@ -239,7 +246,7 @@ const AdminInformation = () => {
                       />
                     </Form.Group>
                   </div>
-                  <div className="col-xl-3 col-lg-3 col-6">
+                  <div className="col-md-3 col-6">
                     <Form.Group>
                       <Form.Label className="formFont">Model No</Form.Label>
                       <Form.Control
@@ -255,7 +262,7 @@ const AdminInformation = () => {
                   </div>
                 </div>
                 <div className="form-group row">
-                  <div className="col-xl-3 col-lg-3 col-6">
+                  <div className="col-md-3 col-6">
                     <Form.Group>
                       <Form.Label className="formFont">LC Number</Form.Label>
                       <Form.Control
@@ -269,7 +276,7 @@ const AdminInformation = () => {
                       />
                     </Form.Group>
                   </div>
-                  <div className="col-xl-3 col-lg-3 col-6">
+                  <div className="col-md-3 col-6">
                     <Form.Group>
                       <Form.Label className="formFont">Others</Form.Label>
                       <Form.Control
@@ -283,7 +290,7 @@ const AdminInformation = () => {
                       />
                     </Form.Group>
                   </div>
-                  <div className="col-xl-3 col-lg-3 col-6">
+                  <div className="col-md-3 col-6">
                     <Form.Group>
                       <Form.Label className="formFont">Rated Capacity</Form.Label>
                       <Form.Control
@@ -297,7 +304,7 @@ const AdminInformation = () => {
                       />
                     </Form.Group>
                   </div>
-                  <div className="col-xl-3 col-lg-3 col-6">
+                  <div className="col-md-3 col-6">
                     <Form.Group>
                       <Form.Label className="formFont">Recommand Life</Form.Label>
                       <Form.Control
@@ -313,7 +320,7 @@ const AdminInformation = () => {
                   </div>
                 </div>
                 <div className="form-group row">
-                  <div className="col-xl-3 col-lg-3 col-6">
+                  <div className="col-md-3 col-6">
                     <Form.Group>
                       <Form.Label className="formFont">Remarks</Form.Label>
                       <Form.Control

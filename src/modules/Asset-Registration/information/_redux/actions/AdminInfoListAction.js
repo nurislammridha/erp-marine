@@ -16,10 +16,19 @@ export const handleChangeAdminListFilterInput = (name, value) => (dispatch) => {
 
 export const getAdminInfoList = () => (dispatch) => {
 
+    let response = {
+        status: false,
+        isLoading: true,
+        data: [],
+    };
+
+    dispatch({ type: Types.GET_ADMIN_INFO_LIST, payload: response });
+
     Axios.get(`${process.env.REACT_APP_API_URL}asset/assetAdminInfoRegistration`).then(
         (res) => {
-            let data = res.data.data;
-            dispatch({ type: Types.GET_ADMIN_INFO_LIST, payload: data })
+            response.data = res.data.data;
+            response.isLoading = false
+            dispatch({ type: Types.GET_ADMIN_INFO_LIST, payload: response })
         }
     )
 }

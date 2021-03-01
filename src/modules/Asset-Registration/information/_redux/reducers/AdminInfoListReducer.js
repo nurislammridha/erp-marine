@@ -7,6 +7,7 @@ const initialState = {
     },
 
     adminListData: [],
+    isLoading: false
 }
 
 const AdminInfoListReducer = (state = initialState, action) => {
@@ -24,7 +25,9 @@ const AdminInfoListReducer = (state = initialState, action) => {
         case Types.GET_ADMIN_INFO_LIST:
             return {
                 ...state,
-                adminListData: action.payload
+                adminListData: action.payload.data,
+                isLoading: action.payload.isLoading
+
             }
     }
     return newState;
