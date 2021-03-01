@@ -5,3 +5,5 @@ export const GET_COUNTRY_NAME = "GET_COUNTRY_NAME";
 export const GET_ASSET_LOCATION = "GET_ASSET_LOCATION";
 export const SUBMIT_ADMIN_INFO = "SUBMIT_ADMIN_INFO";
 export const SUBMITTING = "SUBMITTING";
+/**********************Account Information********************* */
+export const CHANGE_ACCOUNT_INFO_INPUT = "CHANGE_ACCOUNT_INFO_INPUT";
