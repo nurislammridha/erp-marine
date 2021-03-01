@@ -24,7 +24,8 @@ const initialState = {
         numAssetQty: "",
         strProjectName: "",
         strRemarks: ""
-    }
+    },
+    isLoading: false
 }
 
 const BasicInformationReducer = (state = initialState, action) => {
@@ -37,6 +38,11 @@ const BasicInformationReducer = (state = initialState, action) => {
             return {
                 ...state,
                 basicInfoInput
+            }
+        case Types.SUBMITTING:
+            return {
+                ...state,
+                isLoading: action.payload.isLoading
             }
         default:
             break;
