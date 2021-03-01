@@ -17,9 +17,6 @@ const AccountsInformation = () => {
   const accountsInfoInput = useSelector((state) => state.accountInfo.accountsInfoInput);
   const isLoading = useSelector((state) => state.accountInfo.isLoading);
 
-  console.log('accountsInfoInput :>> ', accountsInfoInput);
-  const [startDate, setStartDate] = useState(new Date());
-
   useEffect(() => {
     dispatch(getCurrencyList())
     dispatch(getPaymentTerms())
@@ -31,7 +28,6 @@ const AccountsInformation = () => {
 
   const handleSubmitAccountsInfo = (e) => {
     dispatch(SubmitAccountsInformation(accountsInfoInput));
-    // e.preventDefault();
   }
   return (
     <>
