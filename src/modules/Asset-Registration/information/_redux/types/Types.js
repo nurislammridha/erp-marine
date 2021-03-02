@@ -8,3 +8,7 @@ export const SUBMITTING = "SUBMITTING";
 /**********************Account Information********************* */
 export const CHANGE_ACCOUNT_INFO_INPUT = "CHANGE_ACCOUNT_INFO_INPUT";
 export const SUBMIT_ACCOUNT_INFO = "SUBMIT_ACCOUNT_INFO";
+export const CHANGE_ADMIN_LIST_FILTER_INPUT = "CHANGE_ADMIN_LIST_FILTER_INPUT";
+export const GET_ADMIN_INFO_LIST = "GET_ADMIN_INFO_LIST";
+export const EMPTY_ADMIN = "EMPTY_ADMIN";
+export const EDIT_ADMIN_INFO = "EDIT_ADMIN_INFO";

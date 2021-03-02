@@ -70,6 +70,19 @@ const AdminInformationReducer = (state = initialState, action) => {
                 status: action.payload.status,
                 isLoading: action.payload.isLoading,
             }
+        case Types.EMPTY_ADMIN:
+            return {
+                ...state,
+                status: action.payload.status,
+                adminInfoInput: initialState.adminInfoInput
+            }
+        case Types.EDIT_ADMIN_INFO:
+            console.log('editadmin', action.payload)
+            return {
+                ...state,
+                adminInfoInput: action.payload
+            }
+
     }
     return newState;
 }
