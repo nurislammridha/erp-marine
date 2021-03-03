@@ -17,11 +17,10 @@ export const postBasicInformation = (data) => async (dispatch) => {
     };
     // dispatch({ type: Types.SUBMITTING, payload: responseList })
 
-    data.dteDatePlaceInServiceDate = moment().format("YYYY-MM-DD");
-    data.dteGRNDate = moment().format("YYYY-MM-DD");
-    data.dteStoreIssueDate = moment().format("YYYY-MM-DD");
-
-
+    data.dteDatePlaceInServiceDate = moment(data.dteDatePlaceInServiceDate).format("YYYY-MM-DD");
+    data.dteGRNDate = moment(data.dteGRNDate).format("YYYY-MM-DD");
+    data.dteStoreIssueDate = moment(data.dteStoreIssueDate).format("YYYY-MM-DD");
+    console.log('data', data)
     const url = `${process.env.REACT_APP_API_URL}asset/assetBasicInfoRegistration`;
     await Axios.post(url, data)
         .then((res) => {
