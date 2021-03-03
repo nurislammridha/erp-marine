@@ -593,32 +593,12 @@ console.log('page :>> ', page);
 
   }
   // url += currentPage !== "" ? `currentPage=${currentPage}&` : '';
-  url += searchText !== "" ? `searchText=${searchText}&` : '';
-  url += isPublic !== null ? `isPublic=${isPublic}&` : '';
-  url += category !== null ? `category=${category}&` : '';
-  url += fromDate !== null ? `fromDate=${fromDate}&` : '';
-  url += toDate !== null ? `toDate=${toDate}&` : '';
-  url += diffDays !== null ? `diffDays=${diffDays}` : '';
-
-  // if (searchText !== null) {
-  //   url += `&search=${searchText}`;
-  // } else {
-  //   // url += `&certificate/details?search=${searchText}`
-  // }
-
-  // if (category !== null) {
-  //   url += `&category=${category}`;
-  // }
-
-  // if (fromDate !== null) {
-  //   url += `&fromDate=${fromDate}`;
-  // }
-  // if (toDate !== null) {
-  //   url += `&toDate=${toDate}`;
-  // }
-  // if (diffDays !== null) {
-  //   url += `&diffDays=${diffDays}`;
-  // }
+  url += searchText !== "" ? `searchText=${searchText}` : '';
+  url += isPublic !== null ? `&isPublic=${isPublic}` : '';
+  url += category !== null ? `&category=${category}` : '';
+  url += fromDate !== null ? `&fromDate=${moment(fromDate).format("YYYY-MM-DD")}` : '';
+  url += toDate !== null ? `&toDate=${moment(toDate).format("YYYY-MM-DD")}` : '';
+  url += diffDays !== null ? `&diffDays=${diffDays}` : '';
 
   try {
     await Axios.get(url)

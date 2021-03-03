@@ -58,44 +58,6 @@ const CertificateReports = () => {
     dispatch(getCertificateReportList(data.page));
   };
 
-  // const certificateSelect = (category) => {
-  //   if (category.length === 0) {
-  //     dispatch(getCertificateReportList(currentPage));
-  //   } else {
-  //     dispatch(getCertificateReportList(currentPage, "", 1, category, "", "", ""));
-  //   }
-  // };
-  // const fromDateSelect = (fromDate) => {
-  //   if (fromDate === null) {
-  //     dispatch(getCertificateReportList(currentPage));
-  //   } else {
-  //     dispatch(getCertificateReportList(currentPage, "", 1, "", fromDate, "", ""));
-  //   }
-  // };
-  // const ToDateSelect = (toDate) => {
-  //   if (toDate === null) {
-  //     dispatch(getCertificateReportList(currentPage));
-  //   } else {
-  //     dispatch(getCertificateReportList(currentPage, "", 1, "", "", toDate, ""));
-  //   }
-  // };
-  // const differenceDay = (diffDay) => {
-  //   if (diffDay.length === 0) {
-  //     dispatch(getCertificateReportList(currentPage));
-  //   } else {
-  //     dispatch(getCertificateReportList(currentPage, "", 1, "", "", "", diffDay));
-  //   }
-  // };
-
-  // const searchProduct = (e) => {
-  //   const searchText = e.target.value;
-  //   setSearchText(searchText);
-  //   if (searchText.length === 0) {
-  //     dispatch(getCertificateReportList(currentPage));
-  //   } else {
-  //     dispatch(getCertificateReportList(currentPage, searchText));
-  //   }
-  // };
   const { searchText, isPublic, category, fromDate, toDate, diffDays } = CertificateFilterInputChange;
   useEffect(() => {
     dispatch(getCertificateReportList(currentPage, searchText, isPublic, category, fromDate, toDate, diffDays));
@@ -183,12 +145,6 @@ const CertificateReports = () => {
                   name="category"
                   placeholder="Category"
                   register={register}
-                  // value={certificateParentCategoryList.intParentCategoryID}
-                  // onChange={(option) => {
-                  //   certificateSelect(option.value);
-                  //   setValue("intCategoryID", "");
-                  //   dispatch(getCertificateChildCategoryData(option.value));
-                  // }}
                   value={CertificateFilterInputChange.category}
                   onChange={(option) => (
                     handleChangeTextInput("category", option.value)
@@ -206,14 +162,10 @@ const CertificateReports = () => {
                   className="form-control fromStyle formHeight custome-date"
                   placeholderText="From Date"
                   name="fromDate"
-                  // selected={fromDate}
-                  // onChange={(date) => (
-                  //   fromDateSelect(moment(date).format("YYYY-MM-DD")),
-                  //   setFromDate(date)
-                  // )}
+                  selected={CertificateFilterInputChange.fromDate}
                   value={CertificateFilterInputChange.fromDate}
                   onChange={(date) => (
-                    handleChangeTextInput("fromDate", moment(date).format("YYYY-MM-DD"))
+                    handleChangeTextInput("fromDate", date)
                   )}
                 />
               </Form.Group>
@@ -226,15 +178,13 @@ const CertificateReports = () => {
                   name="dteExtendedUntil"
                   className="form-control fromStyle formHeight custome-date"
                   placeholderText="To Date"
-                  // selected={toDate}
-                  // onChange={(date) => (
-                  //   ToDateSelect(moment(date).format("YYYY-MM-DD")),
-                  //   setToDate(date)
-                  // )}
+                  minDate={CertificateFilterInputChange.fromDate}
+                  disabled={CertificateFilterInputChange.fromDate === null ? true : false}
                   name="toDate"
+                  selected={CertificateFilterInputChange.toDate}
                   value={CertificateFilterInputChange.toDate}
                   onChange={(date) => (
-                    handleChangeTextInput("toDate", moment(date).format("YYYY-MM-DD"))
+                    handleChangeTextInput("toDate", date)
                   )}
                 />
               </Form.Group>
@@ -248,10 +198,6 @@ const CertificateReports = () => {
                   placeholder="Filter with days"
                   name="diffDays"
                   register={register}
-                  // value={certificateChildCategoryList.days}
-                  // onChange={(option) => {
-                  //   differenceDay(option.value);
-                  // }}
                   value={CertificateFilterInputChange.diffDays}
                   onChange={(option) => (
                     handleChangeTextInput("diffDays", option.value)

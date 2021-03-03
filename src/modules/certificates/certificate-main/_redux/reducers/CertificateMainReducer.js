@@ -139,11 +139,10 @@ const initialState = {
   CertificateFilterInputChange: {
     searchText: '',
     isPublic: 1,
-    category: '',
-    fromDate: '',
-    toDate: '',
-    diffDays: '',
-    currentPage: ''
+    category: null,
+    fromDate: null,
+    toDate: null,
+    diffDays: null,
   }
 };
 
