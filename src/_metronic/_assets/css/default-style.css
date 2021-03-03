@@ -1492,17 +1492,51 @@ td.status {
   width: 1137px!important;
 }
 
-.custome-certificate-search{
+/**********For Certificate Search box**********/
+.search-box{
+  position: absolute;
+  right: 4%;
+  display: flex;
+  bottom: -2%;
+}
+.search-box .custome-certificate-search{
   font-size: 24px;
   background-color: #f3f6f9;
-  padding: 5px;
+  padding: 8px;
   border-radius: 5px;
 }
-.search-box {
-  /* display: none!important; */
+.search{
+  background-color: #fff!important;
+  width: 100%;
+  margin-right: 10px;
 }
-.custome-certificate-search:hover {
+.search-btn{
+  float: left;
+  background: transparent;
+}
+.search input{
+  margin-left: 20px;
+  border: none;
+  outline: none;
+  border-radius: 15px;
+  line-height: 35px;
+  width: 0;
+  color: #919191;
+  letter-spacing: 1px;
+  box-shadow: 2px 0px 6px;
+  transition: width 800ms;
+  padding: 0;
+}
+.search-box .custome-certificate-search{
+  transition: 0.8s;
+}
+.search-box:hover .custome-certificate-search{
   cursor: pointer;
+  background-color: rgb(44, 149, 197);
+  color: white;
 }
-
-
+.search-box:hover .search input{
+  padding: 0 10px;
+  width: 500px;
+  margin-top:2px;
+}

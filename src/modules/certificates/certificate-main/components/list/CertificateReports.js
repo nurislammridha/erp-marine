@@ -29,13 +29,16 @@ const CertificateReports = () => {
   const { register, handleSubmit, errors, setValue } = useForm();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
+  const [category, setCategory] = useState("")
+  const [fromDate, setFromDate] = useState(null)
+  const [toDate, setToDate] = useState(null)
+  const [diffDay, setDiffDay] = useState("")
   const [expireInDays, setExpireInDays] = useState(30);
 
   const isLoading = useSelector((state) => state.certificateMainInfo.isLoading);
-  const certificates = useSelector((state) => state.certificateMainInfo.certificates);
   const reportList = useSelector((state) => state.certificateMainInfo.reportList);
   const certificateExpireDaysList = useSelector((state) => state.certificateMainInfo.certificateExpireDaysList);
-  const certificatesPaginatedData = useSelector((state) => state.certificateMainInfo.certificatesPaginatedData);
+  const reportPaginationList = useSelector((state) => state.certificateMainInfo.reportPaginationList);
   const certificateParentCategoryList = useSelector((state) => state.CertificateCategoryReducer.certificateParentCategoryList);
   const certificateChildCategoryList = useSelector((state) => state.CertificateCategoryReducer.certificateChildCategoryList);
   const certificateBackgroundColor = useSelector((state) => state.certificateMainInfo.certificateBackgroundColor);
@@ -54,24 +57,32 @@ const CertificateReports = () => {
   };
 
   const certificateSelect = (category) => {
-    dispatch(
-      getCertificateReportList(currentPage, searchText, 1, category, null, null, null)
-    );
+    if (category.length === 0) {
+      dispatch(getCertificateReportList(currentPage));
+    } else {
+      dispatch(getCertificateReportList(currentPage, "", 1, category, "", "", ""));
+    }
   };
   const fromDateSelect = (fromDate) => {
-    dispatch(
-      getCertificateReportList(currentPage, searchText, 1, null, fromDate, null, null)
-    );
+    if (fromDate === null) {
+      dispatch(getCertificateReportList(currentPage));
+    } else {
+      dispatch(getCertificateReportList(currentPage, "", 1, "", fromDate, "", ""));
+    }
   };
   const ToDateSelect = (toDate) => {
-    dispatch(
-      getCertificateReportList(currentPage, searchText, 1, null, null, toDate, null)
-    );
+    if (toDate === null) {
+      dispatch(getCertificateReportList(currentPage));
+    } else {
+      dispatch(getCertificateReportList(currentPage, "", 1, "", "", toDate, ""));
+    }
   };
   const differenceDay = (diffDay) => {
-    dispatch(
-      getCertificateReportList(currentPage, searchText, 1, null, null, null, diffDay)
-    );
+    if (diffDay.length === 0) {
+      dispatch(getCertificateReportList(currentPage));
+    } else {
+      dispatch(getCertificateReportList(currentPage, "", 1, "", "", "", diffDay));
+    }
   };
 
   const searchProduct = (e) => {
@@ -83,6 +94,10 @@ const CertificateReports = () => {
       dispatch(getCertificateReportList(currentPage, searchText));
     }
   };
+
+  useEffect(() => {
+    dispatch(getCertificateReportList(currentPage, "", 1, "", "", "", ""));
+  }, [dispatch, currentPage]);
 
   //filter sttus color code 
   const getColorCode = (difference) => {
@@ -112,13 +127,11 @@ const CertificateReports = () => {
     setCertificateDetailShow(true);
   };
   const filterWithDifferenceDay = [
-    { label: "Day-0", value: 0 },
+    { label: "Day-0", value: '0' },
     { label: "Day-(1-30)", value: 30 },
     { label: "Day-(31-60)", value: 60 },
     { label: "Day-more than 60", value: 100000000 },
   ]
-  const [fromDate, setfromDate] = useState(null);
-  const [toDate, setToDate] = useState(null);
 
   return (
     <>
@@ -126,8 +139,21 @@ const CertificateReports = () => {
         <Card.Body className="certificate-card">
           <div className="row justify-content-between">
             <h1 className="headerText pt-2">Certificate Reports</h1>
+            <div className="col-md-7">
+              <div class="search-box">
+                <div class="search">
+                  <input
+                    type="text"
+                    placeholder="Search by certificate"
+                    value={searchText}
+                    onChange={searchProduct}
+                  />
+                </div>
+                <i className="fas fa-search custome-certificate-search"></i>
+              </div>
+            </div>
 
-            <div className="col-md-7 d-flex">
+            {/* <div className="col-md-7 d-flex">
               <Form.Group as={Col} controlId="formGridState">
                 <input
                   type="search"
@@ -138,7 +164,8 @@ const CertificateReports = () => {
                 />
               </Form.Group>
               <i className="fas fa-search custome-certificate-search"></i>
-            </div>
+            </div> */}
+
           </div>
           <hr />
           <div className="row mb-5">
@@ -160,40 +187,8 @@ const CertificateReports = () => {
                 />
               </Form.Group>
             </div>
-            <div className="col-lg-3 col-md-6 ">
-              <Form.Group as={Col} controlId="formGridState">
-                <RHFInput
-                  as={<Select options={certificateChildCategoryList} />}
-                  rules={{ required: true }}
-                  placeholder="Sub Category"
-                  name="intCategoryID"
-                  register={register}
-                  value={certificateChildCategoryList.intCategoryID}
-                  onChange={(option) => {
-                    differenceDay(option.value);
-                  }}
-                  setValue={setValue}
-                />
-              </Form.Group>
-            </div>
 
-            <div className="col-lg-2 col-md-6 ">
-              <Form.Group as={Col} controlId="formGridState">
-                <RHFInput
-                  as={<Select options={filterWithDifferenceDay} />}
-                  rules={{ required: true }}
-                  placeholder="Filter with days"
-                  name="days"
-                  register={register}
-                  value={certificateChildCategoryList.days}
-                  onChange={(option) => {
-                    certificateSelect(option.value);
-                  }}
-                  setValue={setValue}
-                />
-              </Form.Group>
-            </div>
-            <div className="col-lg-2 col-md-6 ">
+            <div className="col-lg-3 col-md-6 ">
               <Form.Group as={Col} controlId="formGridState">
                 <DatePicker
                   autoComplete="off"
@@ -203,12 +198,13 @@ const CertificateReports = () => {
                   selected={fromDate}
                   onChange={(date) => (
                     fromDateSelect(moment(date).format("YYYY-MM-DD")),
-                    setfromDate(date)
+                    setFromDate(date)
                   )}
                 />
               </Form.Group>
             </div>
-            <div className="col-lg-2 col-md-6 ">
+
+            <div className="col-lg-3 col-md-6 ">
               <Form.Group as={Col} controlId="formGridState">
                 <DatePicker
                   autoComplete="off"
@@ -223,11 +219,28 @@ const CertificateReports = () => {
                 />
               </Form.Group>
             </div>
+
+            <div className="col-lg-3 col-md-6 ">
+              <Form.Group as={Col} controlId="formGridState">
+                <RHFInput
+                  as={<Select options={filterWithDifferenceDay} />}
+                  rules={{ required: true }}
+                  placeholder="Filter with days"
+                  name="days"
+                  register={register}
+                  value={certificateChildCategoryList.days}
+                  onChange={(option) => {
+                    differenceDay(option.value);
+                  }}
+                  setValue={setValue}
+                />
+              </Form.Group>
+            </div>
           </div>
           {isLoading && <LoadingSpinner text="Loading Certificates..." />}
 
           {/**=================Certficate list body start====================== */}
-          {!isLoading && certificates.length > 0 && (
+          {!isLoading && reportList.length > 0 && (
             <div className="react-bootstrap-table table-responsive">
               <table className="table table table-head-custom table-vertical-center user-list-table certificate-list-table">
                 <thead>
@@ -245,42 +258,19 @@ const CertificateReports = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <th className="td-sl">#</th>
-                  <td scope="col" className="type">Type</td>
-                  <td scope="col" className="issuePlace">Issued Place</td>
-                  <td scope="col" className="validUntil">Valid Until</td>
-                  <td scope="col" className="extendUntil">Entended Until</td>
-                  <td scope="col" className="LastEndorsementDate">Last Endorsement</td>
-                  <td scope="col" className="NotOnBoard">Not On Board</td>
-                  <td scope="col" className="dueDate">Due Date</td>
-                  <td scope="col" className="status">Status</td>
-                  <td className="action">Action</td>
-                  {/* {certificates.certificates.data.length > 0 && certificates.certificates.data.map((certificate, index) => (
+                  {reportList.length > 0 && reportList.map((certificate, index) => (
                     <tr key={index + 1}>
-                      <td>{index + 1}</td>
+                      <td>{reportPaginationList.from + 1}</td>
                       <td className="type">{certificate.strCertificateTypeName}</td>
                       <td className="issuePlace">{certificate.strIssuedPlace}</td>
                       <td className="validUntil">
-                        {certificate.dteCertificateValidUntil !== null
-                          ? generateStringDateFromDate(
-                            certificate.dteCertificateValidUntil
-                          )
-                          : ""}
+                        {certificate.dteCertificateValidUntil !== null ? generateStringDateFromDate(certificate.dteCertificateValidUntil) : ""}
                       </td>
                       <td className="extendUntil">
-                        {certificate.dteExtendedUntil !== null
-                          ? generateStringDateFromDate(
-                            certificate.dteExtendedUntil
-                          )
-                          : ""}
+                        {certificate.dteExtendedUntil !== null ? generateStringDateFromDate(certificate.dteExtendedUntil) : ""}
                       </td>
-
                       <td className="LastEndorsementDate">
-                        {certificate.dteLastEndorsementDate !== null
-                          ? generateStringDateFromDate(
-                            certificate.dteLastEndorsementDate
-                          )
-                          : ""}
+                        {certificate.dteLastEndorsementDate !== null ? generateStringDateFromDate(certificate.dteLastEndorsementDate) : ""}
                       </td>
                       <td className="NotOnBoard">{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
                       <td className="dueDate">{certificate.differenceDays}</td>
@@ -289,32 +279,31 @@ const CertificateReports = () => {
                           className="btn btn-primary btn-sm text-white certificate-lis-btn" style={{ backgroundColor: `${getColorCode(certificate.differenceDays && certificate.differenceDays)}` }}>
                           {certificate.differenceDays === 0 ? "Expired" : "Due"}
                         </button>
-
                       </td>
                       <td className="action">
                         <div className="mt-5">
                           <Link onClick={() => certificateDetails(certificate)}>
                             <i className="far fa-eye text-success editIcon item-list-icon"></i>
                           </Link>
-                          <Link
-                            className="ml-2 certificate-icon"
-                            to={`/certificates-main/edit/${certificate.intCertificateDetailsID}`}
-                          >
+                          <Link className="ml-2 certificate-icon" to={`/certificates-main/edit/${certificate.intCertificateDetailsID}`}>
                             <i className="fa fa-edit text-success editIcon item-list-icon"></i>
                           </Link>
                         </div>
-                                 &nbsp;&nbsp;&nbsp;
-                              </td>
+                            &nbsp;&nbsp;&nbsp;
+                         </td>
                     </tr>
-                  ))} */}
+                  ))}
 
                 </tbody>
               </table>
             </div>
           )}
+          <PaginationLaravel
+            changePage={changePage}
+            data={reportPaginationList}
+          />
 
-
-          {!isLoading && certificates.length === 0 && (
+          {!isLoading && reportList.length === 0 && (
             <div className="alert alert-warning mt-5">
               Sorry ! No Certificates Found.
             </div>
@@ -324,7 +313,7 @@ const CertificateReports = () => {
         </Card.Body>
       </Card>
 
-      {!isLoading && certificates.length > 0 && (
+      {!isLoading && reportList.length > 0 && (
         <Card className="p-5 stickeyCard" sticky="bottom" style={stickyFooter}>
           <div className="row justify-content-center">
             {

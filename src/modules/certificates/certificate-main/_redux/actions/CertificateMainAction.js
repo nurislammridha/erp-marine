@@ -571,11 +571,11 @@ export const getCertificateReportList = (page, searchText = null, isPublic = fal
 
   }
 
-  // if (searchText !== null) {
-  //   url += `&search=${searchText}`;
-  // } else {
-  //   // url += `&certificate/details?search=${searchText}`
-  // }
+  if (searchText !== null) {
+    url += `&search=${searchText}`;
+  } else {
+    // url += `&certificate/details?search=${searchText}`
+  }
 
   if (category !== null) {
     url += `&category=${category}`;
