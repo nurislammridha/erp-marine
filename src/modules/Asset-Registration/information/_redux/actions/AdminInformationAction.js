@@ -41,6 +41,10 @@ export const submitAdminInformation = (adminInfoInput) => async (dispatch) => {
         showToast("error", "Please give asset location");
         return false;
     }
+    if (adminInfoInput.dteDepreciationRunDate === undefined || adminInfoInput.dteDepreciationRunDate === null || adminInfoInput.dteDepreciationRunDate.length < 1) {
+        showToast("error", "Please give Depreciation Run Date");
+        return false;
+    }
     if (adminInfoInput.numRateofDepreciation === undefined || adminInfoInput.numRateofDepreciation === null || adminInfoInput.numRateofDepreciation.length < 1) {
         showToast("error", "Please give depreciation rate");
         return false;
@@ -96,4 +100,67 @@ export const editAdminInformation = (id) => (dispatch) => {
                 payload: data,
             });
         });
+}
+
+export const updateAdminInformation = (adminInfoInput, id) => async (dispatch) => {
+
+
+    if (adminInfoInput.strSupplierName === undefined || adminInfoInput.strSupplierName === null || adminInfoInput.strSupplierName.length < 1) {
+        showToast("error", "Please give supplier name");
+        return false;
+    }
+    if (adminInfoInput.strPONumber === undefined || adminInfoInput.strPONumber === null || adminInfoInput.strPONumber.length < 1) {
+        showToast("error", "Please give PO number");
+        return false;
+    }
+    if (adminInfoInput.dtePODate === undefined || adminInfoInput.dtePODate === null || adminInfoInput.dtePODate.length < 1) {
+        showToast("error", "Please give PO date");
+        return false;
+    }
+    if (adminInfoInput.dteWarantyExpiryDate === undefined || adminInfoInput.dteWarantyExpiryDate === null || adminInfoInput.dteWarantyExpiryDate.length < 1) {
+        showToast("error", "Please give warranty expiry date");
+        return false;
+    }
+    if (adminInfoInput.dteDateOfInstallation === undefined || adminInfoInput.dteDateOfInstallation === null || adminInfoInput.dteDateOfInstallation.length < 1) {
+        showToast("error", "Please give Installation date");
+        return false;
+    }
+    if (adminInfoInput.strAssetLocation === undefined || adminInfoInput.strAssetLocation === null || adminInfoInput.strAssetLocation.length < 1) {
+        showToast("error", "Please give asset location");
+        return false;
+    }
+    if (adminInfoInput.dteDepreciationRunDate === undefined || adminInfoInput.dteDepreciationRunDate === null || adminInfoInput.dteDepreciationRunDate.length < 1) {
+        showToast("error", "Please give Depreciation Run Date");
+        return false;
+    }
+    if (adminInfoInput.numRateofDepreciation === undefined || adminInfoInput.numRateofDepreciation === null || adminInfoInput.numRateofDepreciation.length < 1) {
+        showToast("error", "Please give depreciation rate");
+        return false;
+    }
+
+    let responseList = {
+        status: false,
+        isLoading: true,
+        data: {},
+    }
+
+    dispatch({ type: Types.UPDATE_ADMIN_INFO, payload: responseList });
+
+    await Axios.put(`${process.env.REACT_APP_API_URL}asset/assetAdminInfoRegistration/${id}`, adminInfoInput).then(
+        (res) => {
+            if (res.data.status) {
+                responseList.data = res.data;
+                responseList.isLoading = false;
+                responseList.status = res.data.status;
+                showToast("success", res.data.message);
+                dispatch({ type: Types.UPDATE_ADMIN_INFO, payload: responseList });
+            } else { showToast("error", res.data.message) }
+        }
+    ).catch(function (error) {
+        responseList.isLoading = false;
+        const message = "Something went wrong ! Please fill all inputs and try again !";
+        showToast("error", message);
+        dispatch({ type: Types.UPDATE_ADMIN_INFO, payload: responseList });
+    });
+
 }
