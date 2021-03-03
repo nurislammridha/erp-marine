@@ -10,6 +10,7 @@ import {
   changeColorCode,
   getCertificateCategory,
   getCertificateReportList,
+  handleChangeCertificateFilterInput,
   handleColorCode,
 } from "../../_redux/actions/CertificateMainAction";
 import "./style.css";
@@ -28,12 +29,12 @@ const CertificateReports = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit, errors, setValue } = useForm();
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchText, setSearchText] = useState("");
-  const [category, setCategory] = useState("")
-  const [fromDate, setFromDate] = useState(null)
-  const [toDate, setToDate] = useState(null)
-  const [diffDay, setDiffDay] = useState("")
-  const [expireInDays, setExpireInDays] = useState(30);
+  // const [searchText, setSearchText] = useState("");
+  // const [category, setCategory] = useState("")
+  // const [fromDate, setFromDate] = useState(null)
+  // const [toDate, setToDate] = useState(null)
+  // const [diffDay, setDiffDay] = useState("")
+  // const [expireInDays, setExpireInDays] = useState(30);
 
   const isLoading = useSelector((state) => state.certificateMainInfo.isLoading);
   const reportList = useSelector((state) => state.certificateMainInfo.reportList);
@@ -42,9 +43,10 @@ const CertificateReports = () => {
   const certificateParentCategoryList = useSelector((state) => state.CertificateCategoryReducer.certificateParentCategoryList);
   const certificateChildCategoryList = useSelector((state) => state.CertificateCategoryReducer.certificateChildCategoryList);
   const certificateBackgroundColor = useSelector((state) => state.certificateMainInfo.certificateBackgroundColor);
+  const CertificateFilterInputChange = useSelector((state) => state.certificateMainInfo.CertificateFilterInputChange);
   const bottomStatus = useSelector((state) => state.certificateMainInfo.bottomStatus);
 
-  console.log('reportList :>> ', reportList);
+  console.log('CertificateFilterInputChange :>> ', CertificateFilterInputChange);
   useEffect(() => {
     dispatch(getCertificateReportList(currentPage));
     dispatch(getCertificateCategory());
@@ -56,48 +58,49 @@ const CertificateReports = () => {
     dispatch(getCertificateReportList(data.page));
   };
 
-  const certificateSelect = (category) => {
-    if (category.length === 0) {
-      dispatch(getCertificateReportList(currentPage));
-    } else {
-      dispatch(getCertificateReportList(currentPage, "", 1, category, "", "", ""));
-    }
-  };
-  const fromDateSelect = (fromDate) => {
-    if (fromDate === null) {
-      dispatch(getCertificateReportList(currentPage));
-    } else {
-      dispatch(getCertificateReportList(currentPage, "", 1, "", fromDate, "", ""));
-    }
-  };
-  const ToDateSelect = (toDate) => {
-    if (toDate === null) {
-      dispatch(getCertificateReportList(currentPage));
-    } else {
-      dispatch(getCertificateReportList(currentPage, "", 1, "", "", toDate, ""));
-    }
-  };
-  const differenceDay = (diffDay) => {
-    if (diffDay.length === 0) {
-      dispatch(getCertificateReportList(currentPage));
-    } else {
-      dispatch(getCertificateReportList(currentPage, "", 1, "", "", "", diffDay));
-    }
-  };
+  // const certificateSelect = (category) => {
+  //   if (category.length === 0) {
+  //     dispatch(getCertificateReportList(currentPage));
+  //   } else {
+  //     dispatch(getCertificateReportList(currentPage, "", 1, category, "", "", ""));
+  //   }
+  // };
+  // const fromDateSelect = (fromDate) => {
+  //   if (fromDate === null) {
+  //     dispatch(getCertificateReportList(currentPage));
+  //   } else {
+  //     dispatch(getCertificateReportList(currentPage, "", 1, "", fromDate, "", ""));
+  //   }
+  // };
+  // const ToDateSelect = (toDate) => {
+  //   if (toDate === null) {
+  //     dispatch(getCertificateReportList(currentPage));
+  //   } else {
+  //     dispatch(getCertificateReportList(currentPage, "", 1, "", "", toDate, ""));
+  //   }
+  // };
+  // const differenceDay = (diffDay) => {
+  //   if (diffDay.length === 0) {
+  //     dispatch(getCertificateReportList(currentPage));
+  //   } else {
+  //     dispatch(getCertificateReportList(currentPage, "", 1, "", "", "", diffDay));
+  //   }
+  // };
 
-  const searchProduct = (e) => {
-    const searchText = e.target.value;
-    setSearchText(searchText);
-    if (searchText.length === 0) {
-      dispatch(getCertificateReportList(currentPage));
-    } else {
-      dispatch(getCertificateReportList(currentPage, searchText));
-    }
-  };
-
+  // const searchProduct = (e) => {
+  //   const searchText = e.target.value;
+  //   setSearchText(searchText);
+  //   if (searchText.length === 0) {
+  //     dispatch(getCertificateReportList(currentPage));
+  //   } else {
+  //     dispatch(getCertificateReportList(currentPage, searchText));
+  //   }
+  // };
+  const { searchText, isPublic, category, fromDate, toDate, diffDays } = CertificateFilterInputChange;
   useEffect(() => {
-    dispatch(getCertificateReportList(currentPage, "", 1, "", "", "", ""));
-  }, [dispatch, currentPage]);
+    dispatch(getCertificateReportList(currentPage, searchText, isPublic, category, fromDate, toDate, diffDays));
+  }, [dispatch, currentPage, searchText, isPublic, category, fromDate, toDate, diffDays]);
+
 
   //filter sttus color code 
   const getColorCode = (difference) => {
@@ -132,7 +135,9 @@ const CertificateReports = () => {
     { label: "Day-(31-60)", value: 60 },
     { label: "Day-more than 60", value: 100000000 },
   ]
-
+  const handleChangeTextInput = (name, value) => {
+    dispatch(handleChangeCertificateFilterInput(name, value));
+  };
   return (
     <>
       <Card>
@@ -145,8 +150,9 @@ const CertificateReports = () => {
                   <input
                     type="text"
                     placeholder="Search by certificate"
-                    value={searchText}
-                    onChange={searchProduct}
+                    name="searchText"
+                    value={CertificateFilterInputChange.searchText}
+                    onChange={(e) => handleChangeTextInput("searchText", e.target.value)}
                   />
                 </div>
                 <i className="fas fa-search custome-certificate-search"></i>
@@ -174,15 +180,19 @@ const CertificateReports = () => {
                 <RHFInput
                   as={<Select options={certificateParentCategoryList} />}
                   rules={{ required: true }}
-                  name="intCategoryID"
+                  name="category"
                   placeholder="Category"
                   register={register}
-                  value={certificateParentCategoryList.intParentCategoryID}
-                  onChange={(option) => {
-                    certificateSelect(option.value);
-                    setValue("intCategoryID", "");
-                    dispatch(getCertificateChildCategoryData(option.value));
-                  }}
+                  // value={certificateParentCategoryList.intParentCategoryID}
+                  // onChange={(option) => {
+                  //   certificateSelect(option.value);
+                  //   setValue("intCategoryID", "");
+                  //   dispatch(getCertificateChildCategoryData(option.value));
+                  // }}
+                  value={CertificateFilterInputChange.category}
+                  onChange={(option) => (
+                    handleChangeTextInput("category", option.value)
+                  )}
                   setValue={setValue}
                 />
               </Form.Group>
@@ -195,10 +205,15 @@ const CertificateReports = () => {
                   name="dteExtendedUntil"
                   className="form-control fromStyle formHeight custome-date"
                   placeholderText="From Date"
-                  selected={fromDate}
+                  name="fromDate"
+                  // selected={fromDate}
+                  // onChange={(date) => (
+                  //   fromDateSelect(moment(date).format("YYYY-MM-DD")),
+                  //   setFromDate(date)
+                  // )}
+                  value={CertificateFilterInputChange.fromDate}
                   onChange={(date) => (
-                    fromDateSelect(moment(date).format("YYYY-MM-DD")),
-                    setFromDate(date)
+                    handleChangeTextInput("fromDate", moment(date).format("YYYY-MM-DD"))
                   )}
                 />
               </Form.Group>
@@ -211,10 +226,15 @@ const CertificateReports = () => {
                   name="dteExtendedUntil"
                   className="form-control fromStyle formHeight custome-date"
                   placeholderText="To Date"
-                  selected={toDate}
+                  // selected={toDate}
+                  // onChange={(date) => (
+                  //   ToDateSelect(moment(date).format("YYYY-MM-DD")),
+                  //   setToDate(date)
+                  // )}
+                  name="toDate"
+                  value={CertificateFilterInputChange.toDate}
                   onChange={(date) => (
-                    ToDateSelect(moment(date).format("YYYY-MM-DD")),
-                    setToDate(date)
+                    handleChangeTextInput("toDate", moment(date).format("YYYY-MM-DD"))
                   )}
                 />
               </Form.Group>
@@ -226,12 +246,16 @@ const CertificateReports = () => {
                   as={<Select options={filterWithDifferenceDay} />}
                   rules={{ required: true }}
                   placeholder="Filter with days"
-                  name="days"
+                  name="diffDays"
                   register={register}
-                  value={certificateChildCategoryList.days}
-                  onChange={(option) => {
-                    differenceDay(option.value);
-                  }}
+                  // value={certificateChildCategoryList.days}
+                  // onChange={(option) => {
+                  //   differenceDay(option.value);
+                  // }}
+                  value={CertificateFilterInputChange.diffDays}
+                  onChange={(option) => (
+                    handleChangeTextInput("diffDays", option.value)
+                  )}
                   setValue={setValue}
                 />
               </Form.Group>

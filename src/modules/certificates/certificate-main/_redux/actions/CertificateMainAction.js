@@ -11,6 +11,7 @@ import { showToast } from "../../../../master/utils/ToastHelper";
 import * as Types from "../types/Types";
 import { getCertificateChildCategoryData } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
 import { useHistory } from "react-router-dom";
+import store from "../../../../../redux/store";
 //input handle
 export const handleChangeProductInputAction = (
   name,
@@ -550,6 +551,25 @@ export const handleColorCode = (status, colorCode, index) => (dispatch) => {
   }
   dispatch({ type: Types.CHANGE_STATUS_BACKGROUD, payload: Data });
 }
+// certificate reports fiter input change
+export const handleChangeCertificateFilterInput = ( name, value) => (dispatch) => {
+  const formData = {
+    name: name,
+    value: value,
+  };
+  dispatch({ type: Types.CHANGE_CERTIFICATE_FILTER_INPUT, payload: formData });
+
+
+  const currentPage = store.getState().certificateMainInfo.CertificateFilterInputChange.currentPage;
+  const searchText = store.getState().certificateMainInfo.CertificateFilterInputChange.searchText;
+  const isPublic = store.getState().certificateMainInfo.CertificateFilterInputChange.isPublic;
+  const category = store.getState().certificateMainInfo.CertificateFilterInputChange.category;
+  const fromDate = store.getState().certificateMainInfo.CertificateFilterInputChange.fromDate;
+  const toDate = store.getState().certificateMainInfo.CertificateFilterInputChange.toDate;
+  const diffDays = store.getState().certificateMainInfo.CertificateFilterInputChange.diffDays;
+  // dispatch(getPurchaseApprovalList(search, intSBUId, intBusinessUnitId, intShipID, dteFromDate, dteToDate));
+  dispatch(getCertificateReportList(currentPage, searchText, isPublic, category, fromDate, toDate, diffDays));
+};
 
 //get certificate reports 
 export const getCertificateReportList = (page, searchText = null, isPublic = false, category = null, fromDate = null, toDate = null, diffDays = null) => async (dispatch) => {
@@ -566,30 +586,39 @@ export const getCertificateReportList = (page, searchText = null, isPublic = fal
   // url = `${process.env.REACT_APP_API_URL}certificate/details?search=${searchText}&isPaginated=1&paginateNo=5&category=${category}&fromDate=${fromDate}&toDate=${toDate}&diffDay=${diffDays}`;
   url = `${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1&paginateNo=5`;
 
+console.log('page :>> ', page);
+
   if (page !== null || page === "") {
-    url += `&page=${page}`;
+    url += `&page=${page}&`;
 
   }
+  // url += currentPage !== "" ? `currentPage=${currentPage}&` : '';
+  url += searchText !== "" ? `searchText=${searchText}&` : '';
+  url += isPublic !== null ? `isPublic=${isPublic}&` : '';
+  url += category !== null ? `category=${category}&` : '';
+  url += fromDate !== null ? `fromDate=${fromDate}&` : '';
+  url += toDate !== null ? `toDate=${toDate}&` : '';
+  url += diffDays !== null ? `diffDays=${diffDays}` : '';
 
-  if (searchText !== null) {
-    url += `&search=${searchText}`;
-  } else {
-    // url += `&certificate/details?search=${searchText}`
-  }
+  // if (searchText !== null) {
+  //   url += `&search=${searchText}`;
+  // } else {
+  //   // url += `&certificate/details?search=${searchText}`
+  // }
 
-  if (category !== null) {
-    url += `&category=${category}`;
-  }
+  // if (category !== null) {
+  //   url += `&category=${category}`;
+  // }
 
-  if (fromDate !== null) {
-    url += `&fromDate=${fromDate}`;
-  }
-  if (toDate !== null) {
-    url += `&toDate=${toDate}`;
-  }
-  if (diffDays !== null) {
-    url += `&diffDays=${diffDays}`;
-  }
+  // if (fromDate !== null) {
+  //   url += `&fromDate=${fromDate}`;
+  // }
+  // if (toDate !== null) {
+  //   url += `&toDate=${toDate}`;
+  // }
+  // if (diffDays !== null) {
+  //   url += `&diffDays=${diffDays}`;
+  // }
 
   try {
     await Axios.get(url)

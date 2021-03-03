@@ -136,6 +136,15 @@ const initialState = {
   ],
   reportList: [],
   reportPaginationList: [],
+  CertificateFilterInputChange: {
+    searchText: '',
+    isPublic: 1,
+    category: '',
+    fromDate: '',
+    toDate: '',
+    diffDays: '',
+    currentPage: ''
+  }
 };
 
 const CertificateMainReducer = (state = initialState, action) => {
@@ -420,6 +429,14 @@ const CertificateMainReducer = (state = initialState, action) => {
         ...state,
         bottomStatus: bottomStatus,
       }
+    //CERTIFICATE FILTER INPUT HANDLE  INPUT
+    case Types.CHANGE_CERTIFICATE_FILTER_INPUT:
+      const CertificateFilterInputChange = { ...state.CertificateFilterInputChange };
+      CertificateFilterInputChange[action.payload.name] = action.payload.value;
+      return {
+        ...state,
+        CertificateFilterInputChange,
+      };
 
     default:
       break;
