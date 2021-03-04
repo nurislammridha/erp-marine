@@ -46,7 +46,7 @@ const CertificateReports = () => {
   const CertificateFilterInputChange = useSelector((state) => state.certificateMainInfo.CertificateFilterInputChange);
   const bottomStatus = useSelector((state) => state.certificateMainInfo.bottomStatus);
 
-  console.log('CertificateFilterInputChange :>> ', CertificateFilterInputChange);
+  console.log('reportList :>> ', reportList);
   useEffect(() => {
     dispatch(getCertificateReportList(currentPage));
     dispatch(getCertificateCategory());
@@ -66,10 +66,10 @@ const CertificateReports = () => {
 
   //filter sttus color code 
   const getColorCode = (difference) => {
-    const singleItem = bottomStatus.filter((item, index) => (
-      difference >= item.minDate && difference <= item.maxDate
-    ))
-    return singleItem[0].colorCode;
+    // const singleItem = bottomStatus.filter((item, index) => (
+    //   difference >= item.minDate && difference <= item.maxDate
+    // ))
+    // return singleItem[0].colorCode;
   }
 
   const dataWithColorCodeFilter = (name, value, index) => {
@@ -111,7 +111,7 @@ const CertificateReports = () => {
                 <div class="search">
                   <input
                     type="text"
-                    placeholder="Search by certificate"
+                    placeholder="Search certificate"
                     name="searchText"
                     value={CertificateFilterInputChange.searchText}
                     onChange={(e) => handleChangeTextInput("searchText", e.target.value)}
@@ -196,11 +196,11 @@ const CertificateReports = () => {
                   as={<Select options={filterWithDifferenceDay} />}
                   rules={{ required: true }}
                   placeholder="Filter with days"
-                  name="diffDays"
+                  name="diffDay"
                   register={register}
-                  value={CertificateFilterInputChange.diffDays}
+                  value={CertificateFilterInputChange.diffDay}
                   onChange={(option) => (
-                    handleChangeTextInput("diffDays", option.value)
+                    handleChangeTextInput("diffDay", option.value)
                   )}
                   setValue={setValue}
                 />
@@ -218,8 +218,8 @@ const CertificateReports = () => {
                     <th className="td-sl">#</th>
                     <th scope="col" className="type">Type</th>
                     <th scope="col" className="issuePlace">Issued Place</th>
-                    <th scope="col" className="validUntil">Valid Until</th>
-                    <th scope="col" className="extendUntil">Entended Until</th>
+                    <th scope="col" className="validUntil">Issue Date</th>
+                    <th scope="col" className="extendUntil">Expiry Date</th>
                     <th scope="col" className="LastEndorsementDate">Last Endorsement</th>
                     <th scope="col" className="NotOnBoard">Not On Board</th>
                     <th scope="col" className="dueDate">Due Date</th>
@@ -233,11 +233,11 @@ const CertificateReports = () => {
                       <td>{reportPaginationList.from + 1}</td>
                       <td className="type">{certificate.strCertificateTypeName}</td>
                       <td className="issuePlace">{certificate.strIssuedPlace}</td>
-                      <td className="validUntil">
-                        {certificate.dteCertificateValidUntil !== null ? generateStringDateFromDate(certificate.dteCertificateValidUntil) : ""}
+                      <td className="">
+                        {certificate.dteCertificateIssueDate !== null ? moment(certificate.dteCertificateIssueDate).format("YYYY-MM-DD") : ""}
                       </td>
-                      <td className="extendUntil">
-                        {certificate.dteExtendedUntil !== null ? generateStringDateFromDate(certificate.dteExtendedUntil) : ""}
+                      <td className="">
+                        {certificate.dteCertificateExpiryDate !== null ? moment(certificate.dteCertificateExpiryDate).format("YYYY-MM-DD") : ""}
                       </td>
                       <td className="LastEndorsementDate">
                         {certificate.dteLastEndorsementDate !== null ? generateStringDateFromDate(certificate.dteLastEndorsementDate) : ""}

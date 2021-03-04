@@ -38,6 +38,7 @@ import { showToast } from "../../../../master/utils/ToastHelper";
 import { handleChangeCertificateMasterInput } from "../../../certificate-master/_redux/actions/CertificateListAction";
 import AttachmentPreviewModel from "../../../../master/components/previews/AttachmentPreviewModel";
 import PermissionWiseDisplay from "../../../../master/components/permissions/PermissionWiseDisplay";
+import LabelRequired from "../../../../master/components/LabelRequired/LabelRequired";
 
 const CertificateMainAdd = withRouter(({ history, props }) => {
   // const history = useHistory()
@@ -120,7 +121,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
   const onSubmit = async (e) => {
     dispatch(MainCertificateCreateAction(certificateInfoInput));
   };
- 
+
   if (submitStatus === true) {
     history.push("/certificates-main/list");
     dispatch(emptyStatus())
@@ -145,7 +146,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
             >
               <div className="form-group row mt-0 border pb-3 bg-light pt-3 ">
                 <div className="col-lg-3 col-md-4 ">
-                  <label className="form-label formFont">Category</label>
+                  <label className="form-label formFont">Category <LabelRequired /></label>
                   <RHFInput
                     as={<Select options={certificateParentCategoryList} />}
                     name="intCategoryID"
@@ -177,7 +178,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
                 {/*====Sub Category=====*/}
                 <div className="col-lg-3 col-md-4">
-                  <label className="form-label formFont">Sub Category</label>
+                  <label className="form-label formFont">Sub Category <LabelRequired /></label>
                   <div className="input-area-add">
                     <div className="float-left">
                       <RHFInput
@@ -228,7 +229,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
                 <div className="col-lg-3 col-md-4">
                   <label className="form-label formFont">
-                    Certificate Name
+                    Certificate Name <LabelRequired />
                   </label>
                   <div className="input-area-add">
                     <div className="float-left">
@@ -271,7 +272,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
                 <div className="col-lg-3 col-md-4">
                   <label className="form-label formFont">
-                    Certificate Type
+                    Certificate Type <LabelRequired />
                   </label>
                   <div className="input-area-add">
                     <div className="float-left">
@@ -392,7 +393,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
 
                 <div className="col-lg-3 col-md-4 mt-2">
                   <label className="form-label formFont">
-                    Issuing Authority
+                    Issuing Authority <LabelRequired />
                   </label>
                   <div className="input-area-add">
                     <div className="float-left">
@@ -435,7 +436,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 </div>
                 <div className="col-lg-3 col-md-4">
                   <label className="form-label mt-2 formFont ">
-                    Issue Place
+                    Issue Place <LabelRequired />
                   </label>
                   <Form.Control
                     type="text"
@@ -504,11 +505,12 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
               <div className="form-group row mt-2 border mb-2 pb-3 bg-light">
                 <div className="col-lg-3  col-md-4">
                   <label className="form-label mt-2 formFont">
-                    Certificate Issue date
+                    Certificate Issue date <LabelRequired />
                   </label>
                   <DatePicker
                     name="dteCertificateIssueDate"
                     className="form-control fromStyle formHeight"
+                    name="dteCertificateIssueDate"
                     placeholderText="select issue date"
                     selected={certificateInfoInput.dteCertificateIssueDate}
                     onChange={(e) =>
@@ -530,7 +532,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                   certificateInfoInput.intCertificateTypeID !== null && (
                     <>
                       <div className="col-lg-3  col-md-4">
-                        <label className="form-label mt-2">Expiry Date</label>{" "}
+                        <label className="form-label mt-2">Expiry Date <LabelRequired /></label>{" "}
                         <div>
                           <DatePicker
                             name="dteCertificateExpiryDate"
@@ -807,7 +809,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 <PermissionWiseDisplay permission_name={"certificate_office.remarks"} display={false}>
                   <div className="col-lg-3  col-md-4">
                     <label className="form-label formFont mt-2">
-                      Office Remarks
+                      Office Remarks 
                   </label>
                     <Form.Control
                       as="textarea"

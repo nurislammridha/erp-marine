@@ -137,12 +137,12 @@ const initialState = {
   reportList: [],
   reportPaginationList: [],
   CertificateFilterInputChange: {
-    searchText: '',
+    searchText: null,
     isPublic: 1,
     category: null,
     fromDate: null,
     toDate: null,
-    diffDays: null,
+    diffDay: null,
   }
 };
 

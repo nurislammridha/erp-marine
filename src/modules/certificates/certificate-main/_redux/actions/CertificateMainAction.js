@@ -49,34 +49,50 @@ export const MainCertificateCreateAction = (certificateInfoInput) => async (disp
     certificateInfoInput.intShipID = shipID;
   }
   certificateInfoInput.intActionBy = getEmployeeId();
+  if (certificateInfoInput.intCategoryID === null) {
+    showToast("error", "Category can't be blank!");
+    return false;
+  }
   if (certificateInfoInput.intCertificateID === null) {
     showToast("error", "Certificate can't be blank!");
     return false;
   }
-  if (certificateInfoInput.intParentCategoryID === null) {
-    showToast("error", "Certificate parent category can't be blank!");
+  if (certificateInfoInput.intCertificateTypeID === null) {
+    showToast("error", "Certificate type can't be blank!");
     return false;
   }
-  if (certificateInfoInput.intCategoryID === null) {
-    showToast("error", "Certificate category can't be blank!");
-    return false;
-  }
-  if (certificateInfoInput.strCustomeCode === null) {
-    showToast("error", "Certificate Code can't be blank!");
-    return false;
-  }
+  // if (certificateInfoInput.intParentCategoryID === null) {
+  //   showToast("error", "Certificate parent category can't be blank!");
+  //   return false;
+  // }
+  // if (certificateInfoInput.intCategoryID === null) {
+  //   showToast("error", "Certificate category can't be blank!");
+  //   return false;
+  // }
+
   if (certificateInfoInput.intIssuingAuthorityID === null) {
     showToast("error", "Issue Autherity can't be blank!");
     return false;
   }
-
+  if (certificateInfoInput.strIssuedPlace === null) {
+    showToast("error", "Issue place can't be blank!");
+    return false;
+  }
   if (certificateInfoInput.dteCertificateIssueDate === null || certificateInfoInput.dteCertificateIssueDate === "") {
     showToast("error", "Issue date can't be blank!");
     return false;
   }
+  if (certificateInfoInput.dteCertificateIssueDate === null || certificateInfoInput.dteCertificateIssueDate === "") {
+    showToast("error", "Issue date can't be blank!");
+    return false;
+  }
+  if (certificateInfoInput.dteCertificateExpiryDate === null || certificateInfoInput.dteCertificateExpiryDate === "") {
+    showToast("error", "Expiry date can't be blank!");
+    return false;
+  }
 
-  // if (certificateInfoInput.dteCertificateIssueDate < certificateInfoInput.dteExtendedUntil) {
-  //   showToast('error', "Certificate extended date can't be smaller than certificate issued date");
+  // if (certificateInfoInput.dteCertificateIssueDate.getTime() <= certificateInfoInput.dteCertificateExpiryDate.getTime()) {
+  //   showToast('error', "Certificate expiry date can't be smaller than certificate issued date");
   //   return false;
   // }
 
@@ -552,7 +568,7 @@ export const handleColorCode = (status, colorCode, index) => (dispatch) => {
   dispatch({ type: Types.CHANGE_STATUS_BACKGROUD, payload: Data });
 }
 // certificate reports fiter input change
-export const handleChangeCertificateFilterInput = ( name, value) => (dispatch) => {
+export const handleChangeCertificateFilterInput = (name, value) => (dispatch) => {
   const formData = {
     name: name,
     value: value,
@@ -566,13 +582,13 @@ export const handleChangeCertificateFilterInput = ( name, value) => (dispatch) =
   const category = store.getState().certificateMainInfo.CertificateFilterInputChange.category;
   const fromDate = store.getState().certificateMainInfo.CertificateFilterInputChange.fromDate;
   const toDate = store.getState().certificateMainInfo.CertificateFilterInputChange.toDate;
-  const diffDays = store.getState().certificateMainInfo.CertificateFilterInputChange.diffDays;
+  const diffDay = store.getState().certificateMainInfo.CertificateFilterInputChange.diffDay;
   // dispatch(getPurchaseApprovalList(search, intSBUId, intBusinessUnitId, intShipID, dteFromDate, dteToDate));
-  dispatch(getCertificateReportList(currentPage, searchText, isPublic, category, fromDate, toDate, diffDays));
+  dispatch(getCertificateReportList(currentPage, searchText, isPublic, category, fromDate, toDate, diffDay));
 };
 
 //get certificate reports 
-export const getCertificateReportList = (page, searchText = null, isPublic = false, category = null, fromDate = null, toDate = null, diffDays = null) => async (dispatch) => {
+export const getCertificateReportList = (page, searchText = null, isPublic = false, category = null, fromDate = null, toDate = null, diffDay = null) => async (dispatch) => {
   let response = {
     reportList: [],
     status: false,
@@ -586,25 +602,25 @@ export const getCertificateReportList = (page, searchText = null, isPublic = fal
   // url = `${process.env.REACT_APP_API_URL}certificate/details?search=${searchText}&isPaginated=1&paginateNo=5&category=${category}&fromDate=${fromDate}&toDate=${toDate}&diffDay=${diffDays}`;
   url = `${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1&paginateNo=5`;
 
-console.log('page :>> ', page);
-
-  if (page !== null || page === "") {
-    url += `&page=${page}&`;
-
+  let currentPage = page === undefined ? 1 : page;
+  if (currentPage !== null || currentPage === "") {
+    url += `&page=${currentPage}`;
   }
+  console.log('page :>> ', currentPage);
+
   // url += currentPage !== "" ? `currentPage=${currentPage}&` : '';
-  url += searchText !== "" ? `searchText=${searchText}` : '';
-  url += isPublic !== null ? `&isPublic=${isPublic}` : '';
+  url += searchText !== null ? `&searchText=${searchText}` : '';
+  url += isPublic !== null ? `&isPublic=1` : '';
   url += category !== null ? `&category=${category}` : '';
   url += fromDate !== null ? `&fromDate=${moment(fromDate).format("YYYY-MM-DD")}` : '';
   url += toDate !== null ? `&toDate=${moment(toDate).format("YYYY-MM-DD")}` : '';
-  url += diffDays !== null ? `&diffDays=${diffDays}` : '';
+  url += diffDay !== null ? `&diffDay=${diffDay}` : '';
 
   try {
     await Axios.get(url)
       .then((res) => {
+        console.log('res :>> ', res);
         const { data, message, status } = res.data;
-        console.log('data :>> ', data);
         response.status = status;
         response.reportList = data.data;
         response.message = message;
