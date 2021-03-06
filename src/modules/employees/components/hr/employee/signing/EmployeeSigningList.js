@@ -1,0 +1,275 @@
+import React, { useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { Form } from "react-bootstrap";
+import {
+  GetEmployeeSigningList,
+  GetEmployeeInfoBySearchAction,
+  DeleteEmployeeSigning,
+  EmptyEmployeeSigningDeleteMessage,
+  getemployeeSigingSearch,
+} from "../../../../_redux/actions/EmployeeSigningAction";
+import { generateStringDateFromDate } from "../../../../utils/DateHelper";
+import PaginationLaravel from "../../../../../master/pagination/PaginationLaravel";
+import { GetVesselList } from "../../../../_redux/actions/EmployeeApplicationAction";
+
+const EmployeeSigningList = withRouter(({ history, props }) => {
+  const dispatch = useDispatch();
+  const [employeeInfo, setEmployeeInfo] = React.useState({
+    employeeSigningInfoList: [],
+    vesselId: "",
+    employee: "",
+  });
+  const [currentPage, setCurrentPage] = useState(1);
+  const employeeSigningInfoList = useSelector(
+    (state) => state.employeeSigningInfo.employeeSigningInfoList
+  );
+
+  const signingPaginatedData = useSelector(
+    (state) => state.employeeSigningInfo.signingPaginatedData
+  );
+  const deleteMessage = useSelector(
+    (state) => state.employeeSigningInfo.deleteMessage
+  );
+  const deleteStatus = useSelector(
+    (state) => state.employeeSigningInfo.deleteStatus
+  );
+
+  const isLoading = useSelector((state) => state.employeeSigningInfo.isLoading);
+  const vesselList = useSelector((state) => state.vesselInfo.vesselList);
+
+  const selectHandle = (event) => {
+    const employeeInfoData = { ...employeeInfo };
+    employeeInfoData.vesselId = event.target.value;
+    setEmployeeInfo(employeeInfoData);
+    // serchEmployee();
+  };
+  console.log("signingPaginatedData", signingPaginatedData);
+  const changePage = (data) => {
+    setCurrentPage(data.page);
+    dispatch(GetEmployeeSigningList(data.page));
+  };
+  useEffect(() => {
+    dispatch(GetEmployeeSigningList(currentPage));
+    dispatch(GetVesselList());
+
+    if (typeof deleteMessage === null || typeof deleteMessage === "undefined") {
+      toast.error("Something Went Wrong", {
+        autoClose: 2000,
+        className: "dangerColor",
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else {
+      if (deleteStatus && deleteMessage.length > 0) {
+        toast.success(deleteMessage, {
+          autoClose: 2000,
+          className: "primaryColor",
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+        dispatch(EmptyEmployeeSigningDeleteMessage());
+      }
+
+      if (!deleteStatus && deleteMessage.length > 0) {
+        toast.error(deleteMessage, {
+          autoClose: 2000,
+          className: "dangerColor",
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        dispatch(EmptyEmployeeSigningDeleteMessage());
+      }
+    }
+  }, [deleteMessage, deleteStatus, dispatch, props, currentPage]);
+
+  const deleteData = (intID) => {
+    dispatch(DeleteEmployeeSigning(intID));
+    dispatch(GetEmployeeSigningList());
+  };
+
+  // const serchEmployee = () => {
+  //   dispatch(getemployeeSigingSearch(employeeInfo.vesselId));
+  // };
+
+  const handleChange = ({ currentTarget: input }) => {
+    console.log('input',input.value);
+    const employeeInfoData = { ...employeeInfo };
+    employeeInfoData[input.name] = input.value;
+    if (input.value.length == 0) {
+      dispatch(GetEmployeeSigningList());
+    }
+    setEmployeeInfo(employeeInfoData);
+  };
+
+  const serchEmployee = () => {
+    console.log('employeeInfo.employee',employeeInfo.employee,'employeeInfo.vesselId',employeeInfo.vesselId);
+    dispatch(getemployeeSigingSearch(employeeInfo.employee, employeeInfo.vesselId));
+  };
+
+  return (
+    <>
+      <div className="container">
+        <div className="card card-custom gutter-b">
+          <div className="card-header">
+            <div className="card-title">
+              <h3 class="card-label">Employee Signing List</h3>
+            </div>
+            <div className="card-toolbar">
+              <a
+                onClick={() => {
+                  history.push("/employee/employee-signing-add");
+                }}
+              >
+                <button type="button" class="btn btn-primary">
+                  Sign Employee{" "}
+                </button>
+              </a>
+            </div>
+          </div>
+          <div className="card-body">
+            <div className="row mb-2">
+              <div className="col-lg-3">
+                <div>
+                  <label className="form-label">Vessel</label>
+                </div>
+                <select
+                  className="form-control"
+                  name="vesselId"
+                  placeholder="Search Any Information"
+                  onChange={selectHandle}
+                  value={employeeInfo.vesselId}
+                >
+                  <option value={0}>All</option>
+                  {vesselList &&
+                    vesselList.map((item) => (
+                      <option value={item.intID} key={item.intID}>
+                        {item.strVesselName}
+                      </option>
+                    ))}
+                </select>
+              </div>
+
+              <div className="col-lg-3">
+              <div>
+                <label className="form-label">Search Any Information</label>
+              </div>
+              <Form.Control
+                type="text"
+                placeholder="Search "
+                name="employee"
+                id="ysnSignIn"
+                onChange={handleChange}
+              />
+            </div>
+              <div className="col-lg-3 mt-2">
+                <div>
+                  <label className="form-label"></label>
+                </div>
+                <button
+                  className="btn"
+                  onClick={serchEmployee}
+                  style={{ backgroundColor: "#E1F0FF", color: "#3699FF" }}
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+            {!isLoading && (
+              <div className="react-bootstrap-table table-responsive">
+                <table className="table table table-head-custom table-vertical-center">
+                  <thead>
+                    <tr>
+                      <td>SL</td>
+                      <td>Name</td>
+                      <td>Rank</td>
+                      <td>Vessel Name</td>
+                      <td>Action Date</td>
+                      <td>Status</td>
+                      {/* <td>Action</td> */}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {employeeSigningInfoList &&
+                      employeeSigningInfoList.map((item, index) => (
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>{item.strName}</td>
+                          <td>{item.strRank}</td>
+                          <td>{item.strVesselName}</td>
+                          <td>
+                            {generateStringDateFromDate(item.dteActionDate)}
+                          </td>
+                          <td>
+                            {item.ysnSignIn == "0" ? (
+                              <button
+                                type="button"
+                                className="badge badge-danger border-0"
+                              >
+                                Signed Out
+                              </button>
+                            ) : (
+                              <button
+                                type="button"
+                                className="badge badge-primary border-0"
+                              >
+                                Signed In
+                              </button>
+                            )}
+                          </td>
+                          <td>
+                            <a
+                              className="btn btn-icon btn-light btn-hover-info btn-sm"
+                              onClick={() => {
+                                history.push(
+                                  "/employee/employee-signing-edit/" +
+                                    item.intID,
+                                  { item }
+                                );
+                              }}
+                            >
+                              <i className="fa fa-edit"></i>
+                            </a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a
+                              className="btn btn-icon btn-light btn-hover-danger btn-sm"
+                              onClick={() => {
+                                if (
+                                  window.confirm(
+                                    "Are you sure you wish to delete sign in/out data"
+                                  )
+                                )
+                                  deleteData(item.intID);
+                              }}
+                            >
+                              <i className="fa fa-trash"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                  <tfoot>
+                    {" "}
+                    {employeeSigningInfoList == null && (
+                      <p className="text-danger text-center">No Data Found</p>
+                    )}
+                  </tfoot>
+                </table>
+              </div>
+            )}
+           
+          </div>
+          {isLoading && (
+            <div className="text-center">
+              <span className="spinner spinner-primary"></span>
+            </div>
+          )}
+          <PaginationLaravel
+              changePage={changePage}
+              data={signingPaginatedData}
+            />
+        </div>
+      </div>
+    </>
+  );
+});
+
+export default EmployeeSigningList;

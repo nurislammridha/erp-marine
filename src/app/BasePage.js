@@ -7,7 +7,7 @@ import { DashboardPage } from "./pages/DashboardPage";
 // Domain Wise Routers
 import getItemRoutes from "../domains/Item/routes/index";
 import getPartnerRoutes from "../domains/Partner/routes/index";
-import getCCORoutes from "../domains/CCO/routes/index";
+// import getCCORoutes from "../domains/CCO/routes/index";
 import getVesselRoutes from "../domains/Vessel/routes";
 import getProcurementRoutes from "./modules/SupplyChain/Procurement/routes";
 import getVoyageRoutes from "../modules/voyage/routes/";
@@ -28,6 +28,7 @@ import getQuotationRoutes from "../modules/Purchase/Quotation/routes";
 import getComparativeStatementRoutes from "../modules/Purchase/comparativeStatement/routes";
 import getAssetRegistrationRoutes from "../modules/Asset-Registration/routes";
 import getAssetRegistrationParkingRoutes from "../modules/Asset-RegistrationParking/routes";
+import getEmployeeRoutes from "../modules/employees/routes";
 
 const BasePage = () => {
   return (
@@ -47,8 +48,11 @@ const BasePage = () => {
         {/* DCO End */}
 
         {/* CCO Start */}
-        {getCCORoutes()}
+        {/* {getCCORoutes()} */}
         {/* CCO End */}
+        {/**HR Start */}
+        {getEmployeeRoutes()}
+        {/**HR End */}
 
         {/* Item Start */}
         {getItemRoutes()}
