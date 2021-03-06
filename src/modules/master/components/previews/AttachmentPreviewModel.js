@@ -10,6 +10,9 @@ const AttachmentPreviewModel = ({ previewAttachment, handleClose }) => {
     // const extension = GetExtensionFromUrl(previewAttachment.filePreviewUrl ? previewAttachment.filePreviewUrl : previewAttachment.name);
     const fileName = GetExtensionFromUrl(previewAttachment.filePreviewUrl ? previewAttachment.filePreviewUrl : previewAttachment.name, '/');
     const extension = newExtension.toLowerCase()
+
+    console.log('newExtension :>> ', newExtension);
+    console.log('extension :>> ', extension);
     return (
         <div className="custome-preview">
             {

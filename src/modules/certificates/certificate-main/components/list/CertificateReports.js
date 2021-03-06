@@ -92,10 +92,10 @@ const CertificateReports = () => {
     setCertificateDetailShow(true);
   };
   const filterWithDifferenceDay = [
-    { label: "Day-0", value: '0' },
-    { label: "Day-(1-30)", value: 30 },
-    { label: "Day-(31-60)", value: 60 },
-    { label: "Day-more than 60", value: 100000000 },
+    { label: "Day-0", value: '1' },
+    { label: "DUE BETWEEN 30 DAYS", value: "2" },
+    { label: "DUE BETWEEN 60 DAYS", value: "3" },
+    { label: "DUE MORE THAN 60 DAYS", value: "4" },
   ]
   const handleChangeTextInput = (name, value) => {
     dispatch(handleChangeCertificateFilterInput(name, value));
@@ -190,7 +190,7 @@ const CertificateReports = () => {
               </Form.Group>
             </div>
 
-            {/* <div className="col-lg-3 col-md-6 ">
+            <div className="col-lg-3 col-md-6 ">
               <Form.Group as={Col} controlId="formGridState">
                 <RHFInput
                   as={<Select options={filterWithDifferenceDay} />}
@@ -205,7 +205,7 @@ const CertificateReports = () => {
                   setValue={setValue}
                 />
               </Form.Group>
-            </div> */}
+            </div>
 
           </div>
           {isLoading && <LoadingSpinner text="Loading Certificates..." />}
