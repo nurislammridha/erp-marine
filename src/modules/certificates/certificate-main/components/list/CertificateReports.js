@@ -66,10 +66,10 @@ const CertificateReports = () => {
 
   //filter sttus color code 
   const getColorCode = (difference) => {
-    // const singleItem = bottomStatus.filter((item, index) => (
-    //   difference >= item.minDate && difference <= item.maxDate
-    // ))
-    // return singleItem[0].colorCode;
+    const singleItem = bottomStatus.filter((item, index) => (
+      difference >= item.minDate && difference <= item.maxDate
+    ))
+    return singleItem[0].colorCode;
   }
 
   const dataWithColorCodeFilter = (name, value, index) => {
@@ -190,7 +190,7 @@ const CertificateReports = () => {
               </Form.Group>
             </div>
 
-            <div className="col-lg-3 col-md-6 ">
+            {/* <div className="col-lg-3 col-md-6 ">
               <Form.Group as={Col} controlId="formGridState">
                 <RHFInput
                   as={<Select options={filterWithDifferenceDay} />}
@@ -205,7 +205,8 @@ const CertificateReports = () => {
                   setValue={setValue}
                 />
               </Form.Group>
-            </div>
+            </div> */}
+
           </div>
           {isLoading && <LoadingSpinner text="Loading Certificates..." />}
 
@@ -230,7 +231,7 @@ const CertificateReports = () => {
                 <tbody>
                   {reportList.length > 0 && reportList.map((certificate, index) => (
                     <tr key={index + 1}>
-                      <td>{reportPaginationList.from + 1}</td>
+                      <td>{reportPaginationList.from + index}</td>
                       <td className="type">{certificate.strCertificateTypeName}</td>
                       <td className="issuePlace">{certificate.strIssuedPlace}</td>
                       <td className="">

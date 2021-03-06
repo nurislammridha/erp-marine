@@ -39,7 +39,7 @@ const CertificateMasterFilter = () => {
         <Form.Control
           className="formHeight"
           type="text"
-          placeholder="Search"
+          placeholder="Search by certificate name"
           value={search}
           onChange={(e) => changeSearch(e.target.value)}
         />
@@ -50,6 +50,7 @@ const CertificateMasterFilter = () => {
         <RHFInput
           className="formSelect pt-0"
           as={<Select options={statusOptions} />}
+          placeholder="Filter by status"
           rules={{ required: false }}
           name="isActive"
           register={register}
