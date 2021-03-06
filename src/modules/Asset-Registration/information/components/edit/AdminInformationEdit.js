@@ -7,7 +7,7 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { useHistory, useParams } from 'react-router-dom';
 import DatePicker from "react-datepicker";
-import { editAdminInformation, handleChangeAdminInfoInput } from "../../_redux/actions/AdminInformationAction";
+import { editAdminInformation, emptyStatus, handleChangeAdminInfoInput, updateAdminInformation } from "../../_redux/actions/AdminInformationAction";
 import { getSupplierName } from "../../../../Purchase/Quotation/_redux/actions/QuotationFilterAction";
 import { getCountryName } from "../../../../partners/address/_redux/actions/AddressAction";
 
@@ -39,7 +39,11 @@ const AdminInformationEdit = () => {
     };
 
     const handleSubmit = (e) => {
-
+        dispatch(updateAdminInformation(adminInfoInput, id))
+    }
+    if (status) {
+        history.push('/admin-information/list');
+        dispatch(emptyStatus());
     }
 
     return (

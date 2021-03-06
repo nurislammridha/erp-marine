@@ -83,6 +83,13 @@ const AdminInformationReducer = (state = initialState, action) => {
                 adminInfoInput: action.payload
             }
 
+        case Types.UPDATE_ADMIN_INFO:
+            return {
+                ...state,
+                status: action.payload.status,
+                isLoading: action.payload.isLoading,
+            }
+
     }
     return newState;
 }
