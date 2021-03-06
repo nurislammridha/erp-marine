@@ -3,12 +3,13 @@ import ReactPDF from '@intelllex/react-pdf';
 import './css/PreviewURL.css'
 import { Button } from 'react-bootstrap';
 import { GetExtensionFromUrl } from '../../utils/StringHelper';
+import { toLower } from 'lodash';
 const AttachmentPreviewModel = ({ previewAttachment, handleClose }) => {
-    
-    const extension = GetExtensionFromUrl(previewAttachment.filePreviewUrl ? previewAttachment.filePreviewUrl : previewAttachment.name);
-    const fileName = GetExtensionFromUrl(previewAttachment.filePreviewUrl ? previewAttachment.filePreviewUrl : previewAttachment.name, '/');
 
-    console.log('previewAttachment :>> ', previewAttachment);
+    const newExtension = GetExtensionFromUrl(previewAttachment.filePreviewUrl ? previewAttachment.filePreviewUrl : previewAttachment.name);
+    // const extension = GetExtensionFromUrl(previewAttachment.filePreviewUrl ? previewAttachment.filePreviewUrl : previewAttachment.name);
+    const fileName = GetExtensionFromUrl(previewAttachment.filePreviewUrl ? previewAttachment.filePreviewUrl : previewAttachment.name, '/');
+    const extension = newExtension.toLowerCase()
     return (
         <div className="custome-preview">
             {
