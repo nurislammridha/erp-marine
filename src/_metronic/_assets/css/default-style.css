@@ -1540,3 +1540,31 @@ td.status {
   width: 500px;
   margin-top:2px;
 }
+
+.pdf-thumbnail-bar {
+  position: fixed;
+  top: 88px;
+  height: 77vh!important;
+  overflow: hidden;
+  width: 100px;
+  overflow: auto;
+  background-color: #F1F3F7;
+  border-right: #DCE0E3 1px solid;
+  padding: 22px 24px;
+  transition: all 0.5s;
+}
+.toolbox-container .toolbox-wrapper .toolbox {
+  position: fixed;
+  background-color: #39aba0;
+  z-index: 9999;
+  bottom: 50px;
+  left: 273px!important;
+  max-height: 48px;
+  width: 59.5%!important;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  border-radius: 3px;
+}

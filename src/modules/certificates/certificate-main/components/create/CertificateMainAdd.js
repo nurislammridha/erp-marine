@@ -527,11 +527,42 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       "Issue Date can't be blank"}
                   </div>
                 </div>
+                <div className="col-lg-3  col-md-4">
+                  <label className="form-label mt-2">Expiry Date <LabelRequired /></label>{" "}
+                  <div>
+                    <DatePicker
+                      name="dteCertificateExpiryDate"
+                      className="form-control fromStyle formHeight custome-date"
+                      placeholderText="select expiry date"
+                      disabled={
+                        certificateInfoInput.dteCertificateIssueDate
+                          ? false
+                          : true
+                      }
+                      minDate={
+                        certificateInfoInput.dteCertificateIssueDate
+                      }
+                      selected={
+                        certificateInfoInput.dteCertificateExpiryDate
+                      }
+                      onChange={(e) =>
+                        certificateMainInfoChange(
+                          "dteCertificateExpiryDate",
+                          e
+                        )
+                      }
+                      ref={register({
+                        required: false,
+                        maxLength: 100,
+                      })}
+                    />
+                  </div>
+                </div>
 
                 {certificateInfoInput.intCertificateTypeID !== 4 &&
                   certificateInfoInput.intCertificateTypeID !== null && (
                     <>
-                      <div className="col-lg-3  col-md-4">
+                      {/* <div className="col-lg-3  col-md-4">
                         <label className="form-label mt-2">Expiry Date <LabelRequired /></label>{" "}
                         <div>
                           <DatePicker
@@ -560,13 +591,13 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                               maxLength: 100,
                             })}
                           />
-                        </div>
+                        </div> */}
                         {/* <div className="inputError margin-minus-8">
                         {errors.dteCertificateExpiryDate &&
                           errors.dteCertificateExpiryDate.type === "required" &&
                           "Expiry Date can't be blank"}
                       </div> */}
-                      </div>
+                      {/* </div> */}
                       {/* <div className="col-lg-3">
                         <label className="form-label formFont mt-2">
                           Certificate Valid date
@@ -809,7 +840,7 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                 <PermissionWiseDisplay permission_name={"certificate_office.remarks"} display={false}>
                   <div className="col-lg-3  col-md-4">
                     <label className="form-label formFont mt-2">
-                      Office Remarks 
+                      Office Remarks
                   </label>
                     <Form.Control
                       as="textarea"
