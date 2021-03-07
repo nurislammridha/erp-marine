@@ -22,6 +22,7 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import SimpleModal from "../../../../master/components/Modal/SimpleModal";
 import CertificateDetails from "../create/details/CertificateDetails";
+import { getCargoId, getEmployeeId } from "../../../../../app/modules/Auth/_redux/authCrud";
 
 const CertificateMainList = () => {
   const dispatch = useDispatch();
@@ -43,6 +44,9 @@ const CertificateMainList = () => {
     dispatch(getCertificateMainListAction(currentPage));
     dispatch(getCertificateCategory());
     dispatch(getCertificateParentCategoryData());
+
+
+  
   }, [dispatch, currentPage]);
 
   const changePage = (data) => {
@@ -51,6 +55,7 @@ const CertificateMainList = () => {
   };
 
   const certificateSelect = (category) => {
+
     dispatch(
       getCertificateMainListAction(currentPage, searchText, 1, category)
     );

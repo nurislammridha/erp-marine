@@ -137,6 +137,7 @@ export function getVesselId() {
 
 export function getCargoId() {
   let data = getEmployeData();
+  console.log('data employeeId :>> ', data);
   let intCargoId = null;
   if (typeof data !== "undefined" && data != null) {
     intCargoId = data.intCargoId;
@@ -148,5 +149,6 @@ export function getCargoId() {
 
 export function getEmployeeId() {
   let data = getEmployeData();
-  if (typeof data !== "undefined" && data != null) return data.intEmployeeId;
+  console.log('data getEmployeData :>> ', data);
+  if (typeof data !== "undefined" && data != null) return data.id;
 }
