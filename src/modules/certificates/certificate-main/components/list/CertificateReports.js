@@ -107,10 +107,10 @@ const CertificateReports = () => {
             <h1 className="headerText pt-2">Certificate Reports</h1>
             <div className="col-md-7">
               <div class="search-box">
-                <div class="search">
+                <div class="search1">
                   <input
                     type="text"
-                    placeholder="Search certificate"
+                    placeholder="Search with certificate type"
                     name="searchText"
                     value={CertificateFilterInputChange.searchText}
                     onChange={(e) => handleChangeTextInput("searchText", e.target.value)}
