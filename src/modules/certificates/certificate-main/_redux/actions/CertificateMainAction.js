@@ -11,6 +11,7 @@ import { showToast } from "../../../../master/utils/ToastHelper";
 import * as Types from "../types/Types";
 import { getCertificateChildCategoryData } from "../../../certificate-category/_redux/actions/CertificateCategoryAction";
 import { useHistory } from "react-router-dom";
+import store from "../../../../../redux/store";
 //input handle
 export const handleChangeProductInputAction = (
   name,
@@ -48,34 +49,50 @@ export const MainCertificateCreateAction = (certificateInfoInput) => async (disp
     certificateInfoInput.intShipID = shipID;
   }
   certificateInfoInput.intActionBy = getEmployeeId();
+  if (certificateInfoInput.intCategoryID === null) {
+    showToast("error", "Category can't be blank!");
+    return false;
+  }
   if (certificateInfoInput.intCertificateID === null) {
     showToast("error", "Certificate can't be blank!");
     return false;
   }
-  if (certificateInfoInput.intParentCategoryID === null) {
-    showToast("error", "Certificate parent category can't be blank!");
+  if (certificateInfoInput.intCertificateTypeID === null) {
+    showToast("error", "Certificate type can't be blank!");
     return false;
   }
-  if (certificateInfoInput.intCategoryID === null) {
-    showToast("error", "Certificate category can't be blank!");
-    return false;
-  }
-  if (certificateInfoInput.strCustomeCode === null) {
-    showToast("error", "Certificate Code can't be blank!");
-    return false;
-  }
+  // if (certificateInfoInput.intParentCategoryID === null) {
+  //   showToast("error", "Certificate parent category can't be blank!");
+  //   return false;
+  // }
+  // if (certificateInfoInput.intCategoryID === null) {
+  //   showToast("error", "Certificate category can't be blank!");
+  //   return false;
+  // }
+
   if (certificateInfoInput.intIssuingAuthorityID === null) {
     showToast("error", "Issue Autherity can't be blank!");
     return false;
   }
-
+  if (certificateInfoInput.strIssuedPlace === null) {
+    showToast("error", "Issue place can't be blank!");
+    return false;
+  }
   if (certificateInfoInput.dteCertificateIssueDate === null || certificateInfoInput.dteCertificateIssueDate === "") {
     showToast("error", "Issue date can't be blank!");
     return false;
   }
+  if (certificateInfoInput.dteCertificateIssueDate === null || certificateInfoInput.dteCertificateIssueDate === "") {
+    showToast("error", "Issue date can't be blank!");
+    return false;
+  }
+  if (certificateInfoInput.dteCertificateExpiryDate === null || certificateInfoInput.dteCertificateExpiryDate === "") {
+    showToast("error", "Expiry date can't be blank!");
+    return false;
+  }
 
-  // if (certificateInfoInput.dteCertificateIssueDate < certificateInfoInput.dteExtendedUntil) {
-  //   showToast('error', "Certificate extended date can't be smaller than certificate issued date");
+  // if (certificateInfoInput.dteCertificateIssueDate.getTime() <= certificateInfoInput.dteCertificateExpiryDate.getTime()) {
+  //   showToast('error', "Certificate expiry date can't be smaller than certificate issued date");
   //   return false;
   // }
 
@@ -123,11 +140,11 @@ export const MainCertificateCreateAction = (certificateInfoInput) => async (disp
   });
 };
 
-export const emptyStatus = ()=> (dispatch)=>{
+export const emptyStatus = () => (dispatch) => {
   const responsList = {
     submitStatus: false
   }
-  dispatch({type: Types.EMPTY_STATUS, payload: responsList})
+  dispatch({ type: Types.EMPTY_STATUS, payload: responsList })
 }
 export const MainCertificateUpdateAction = (certificateInfoInput, id) => async (
   dispatch
@@ -222,7 +239,7 @@ export const getCertificateMainListAction = (page, searchText = null, isPublic =
 
   if (page !== null || page === "") {
     url += `&page=${page}`;
-    
+
   }
 
   if (searchText !== null) {
@@ -550,3 +567,76 @@ export const handleColorCode = (status, colorCode, index) => (dispatch) => {
   }
   dispatch({ type: Types.CHANGE_STATUS_BACKGROUD, payload: Data });
 }
+// certificate reports fiter input change
+export const handleChangeCertificateFilterInput = (name, value) => (dispatch) => {
+  const formData = {
+    name: name,
+    value: value,
+  };
+  dispatch({ type: Types.CHANGE_CERTIFICATE_FILTER_INPUT, payload: formData });
+
+
+  const currentPage = store.getState().certificateMainInfo.CertificateFilterInputChange.currentPage;
+  const searchText = store.getState().certificateMainInfo.CertificateFilterInputChange.searchText;
+  const isPublic = store.getState().certificateMainInfo.CertificateFilterInputChange.isPublic;
+  const category = store.getState().certificateMainInfo.CertificateFilterInputChange.category;
+  const fromDate = store.getState().certificateMainInfo.CertificateFilterInputChange.fromDate;
+  const toDate = store.getState().certificateMainInfo.CertificateFilterInputChange.toDate;
+  const diffDay = store.getState().certificateMainInfo.CertificateFilterInputChange.diffDay;
+  // dispatch(getPurchaseApprovalList(search, intSBUId, intBusinessUnitId, intShipID, dteFromDate, dteToDate));
+  dispatch(getCertificateReportList(currentPage, searchText, isPublic, category, fromDate, toDate, diffDay));
+};
+
+//get certificate reports 
+export const getCertificateReportList = (page, searchText = null, isPublic = false, category = null, fromDate = null, toDate = null, diffDay = null) => async (dispatch) => {
+  let response = {
+    reportList: [],
+    status: false,
+    message: "",
+    isLoading: true,
+    errors: [],
+    reportPaginationList: []
+  };
+  dispatch({ type: Types.GET_CERTIFICATE_REPORT_LIST, payload: response });
+  let url = "";
+  // url = `${process.env.REACT_APP_API_URL}certificate/details?search=${searchText}&isPaginated=1&paginateNo=5&category=${category}&fromDate=${fromDate}&toDate=${toDate}&diffDay=${diffDays}`;
+  url = `${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1&paginateNo=5`;
+
+  let currentPage = page === undefined ? 1 : page;
+  if (currentPage !== null || currentPage === "") {
+    url += `&page=${currentPage}`;
+  }
+  console.log('page :>> ', currentPage);
+
+  // url += currentPage !== "" ? `currentPage=${currentPage}&` : '';
+  url += searchText !== null ? `&searchText=${searchText}` : '';
+  url += isPublic !== null ? `&isPublic=1` : '';
+  url += category !== null ? `&category=${category}` : '';
+  url += fromDate !== null ? `&fromDate=${moment(fromDate).format("YYYY-MM-DD")}` : '';
+  url += toDate !== null ? `&toDate=${moment(toDate).format("YYYY-MM-DD")}` : '';
+  url += diffDay !== null ? `&diffDay=${diffDay}` : '';
+
+  try {
+    await Axios.get(url)
+      .then((res) => {
+        console.log('res :>> ', res);
+        const { data, message, status } = res.data;
+        response.status = status;
+        response.reportList = data.data;
+        response.message = message;
+        response.reportPaginationList = data;
+        response.isLoading = false;
+      })
+      .catch((err) => {
+        console.log("ErrorCertificate1");
+        toast.error(err);
+      });
+  } catch (error) {
+    console.log("ErrorCertificate2");
+    response.message = "Something Went Wrong !";
+    toast.error(error);
+  }
+
+  response.isLoading = false;
+  dispatch({ type: Types.GET_CERTIFICATE_REPORT_LIST, payload: response });
+};

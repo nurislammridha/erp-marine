@@ -45,3 +45,6 @@ export const BOTTOM_STATUS_LIST = "BOTTOM_STATUS_LIST";
 
 /*******************Empty status********************** */
 export const EMPTY_STATUS = "EMPTY_STATUS";
+/*******************Certificate Reports List********************** */
+export const GET_CERTIFICATE_REPORT_LIST = "GET_CERTIFICATE_REPORT_LIST";
+export const CHANGE_CERTIFICATE_FILTER_INPUT = "CHANGE_CERTIFICATE_FILTER_INPUT";

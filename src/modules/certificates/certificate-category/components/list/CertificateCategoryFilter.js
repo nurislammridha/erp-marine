@@ -50,7 +50,7 @@ const CertificateCategoryFilter = () => {
           <Form.Control
             type="text"
             className="formHeight"
-            placeholder="Search"
+            placeholder="Search by category"
             value={search}
             onChange={(e) => changeSearch(e.target.value)}
           />
@@ -63,6 +63,7 @@ const CertificateCategoryFilter = () => {
               as={<Select options={statusOptions} />}
               rules={{ required: false }}
               name="isActive"
+              placeholder="Filter by status"
               className="formSelect pt-0"
               register={register}
               value={certificateCategoryInput.isActive}

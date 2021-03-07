@@ -21,11 +21,10 @@
     width: 143px!important;
     line-height: 20px!important;
   }
-  
   .certificate-list-table td.extendUntil {
     width: 130px!important;
     line-height: 20px!important;
-}
+  }
   td.LastEndorsementDate {
     width: 160px!important;
     line-height: 20px!important;
@@ -51,16 +50,14 @@
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .widget__right h4 {
-    
     font-size: 17px;
-}
-.voyage-activity-vessel {
-  margin-top: 0px!important;
-}
-a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
-  margin-top: 5px;
-}
-
+  }
+  .voyage-activity-vessel {
+    margin-top: 0px!important;
+  }
+  a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
+    margin-top: 5px;
+  }
 }
 
 /* All Mobile Devices */
@@ -92,7 +89,6 @@ a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
   .doug__left {
     padding-top: 0px;
   }
-
   .chart__box {
     height: 407px !important;
   }
@@ -115,41 +111,37 @@ a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
   .dashboard-cardsection {
     padding-top: 45px !important;
   }
-  .purchase-table{
+  .purchase-table {
     margin-top: 10px;
   }
   .dashboard-cardsection {
     padding-top: 3px !important;
-}
-.header-fixed.subheader-fixed .header {
-  background: transparent;
-   
- }
- .header.header-fixed {
-  height: 16px !important;
- }
- .MuiTab-root {
-  min-width: 108px !important;
-  
-}
-label.form-control.criteriaOptionsInput {
-  padding-bottom: 42px;
-  
-}
-.stickeyCard.card {
-  margin-left: -40px;
-}
-.css-yk16xz-control {
-  width: 100%!important;
-}
-a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
-  margin-top: 5px;
-}
-.user-list-addbutton{
-  margin-top: 5px;
-  margin-left: 10px;
-}
-
+  }
+  .header-fixed.subheader-fixed .header {
+    background: transparent;
+  }
+  .header.header-fixed {
+    height: 16px !important;
+  }
+  .MuiTab-root {
+    min-width: 108px !important;
+  }
+  label.form-control.criteriaOptionsInput {
+    padding-bottom: 42px;
+  }
+  .stickeyCard.card {
+    margin-left: -40px;
+  }
+  .css-yk16xz-control {
+    width: 100%!important;
+  }
+  a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
+    margin-top: 5px;
+  }
+  .user-list-addbutton {
+    margin-top: 5px;
+    margin-left: 10px;
+  }
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -176,87 +168,141 @@ a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
   }
   .container.dashboard__pb {
     margin-top: 23px;
+  }
+  .purchase-table {
+    margin-top: 10px;
+  }
+  label.voyagelist-type.form-label {
+    margin-left: 10px;
+  }
+  label.mt-2.voyagelist-formlabel.form-label {
+    margin-left: 10px;
+  }
+  button.MuiButtonBase-root.MuiTab-root {
+    width: 73px!important;
+    min-width: 2px!important;
+    font-size: 9px!important;
+    text-transform: capitalize!important;
+    padding: 6px 8px!important;
+  }
+  .header-fixed.subheader-fixed .header {
+    background: transparent;
+  }
+  .header.header-fixed {
+    height: 16px !important;
+  }
+  label.form-control.criteriaOptionsInput {
+    padding-bottom: 78px;
+  }
+  .form-check.radio__button.Promotion-radio-button {
+    margin-left: 15px;
+  }
+  .form-check.radio__button.Promotion-radio-button {
+    margin-left: 15px;
+  }
+  .Promotion-radio-no-button {
+    margin-left: 15px;
+  }
+  .laytimecCommenced {
+    margin-left: 24px;
+  }
+  .laytimecCompleted {
+    margin-left: 24px!important;
+  }
+  .float-left.Rate-commision.one {
+    width: 16%;
+  }
+  .float-right.Rate-commision.one {
+    display: none;
+  }
+  .float-left.Rate-commision {
+    width: 32%;
+  }
+  .float-right.Rate-commision {
+    display: none;
+  }
+  .form-group label {
+    font-size: 10px !important;
+  }
+  .float-left.Rate-commision.two {
+    width: 20%;
+  }
+  .float-right.Rate-commision.two {
+    display: none;
+  }
+  i.fas.fa-trash-alt.editIcon.item-list-icon {
+    margin-left: 0px!important;
+  }
+  label.voyage-vessel.form-label {
+    margin-left: 12px;
+  }
+  .user-list-addbutton {
+    margin-top: 5px;
+    margin-left: 12px;
+  }
+  .user-list-dropdown {
+    margin-top: 5px;
+  }
 }
-.purchase-table{
-  margin-top: 10px;
-}
-label.voyagelist-type.form-label {
-  margin-left: 10px;
-}
-label.mt-2.voyagelist-formlabel.form-label {
-  margin-left: 10px;
-}
-button.MuiButtonBase-root.MuiTab-root {
-  width: 73px!important;
-  min-width: 2px!important;
- 
-  font-size: 9px!important;
-  text-transform: capitalize!important;
-  padding: 6px 8px!important;
-}
-.header-fixed.subheader-fixed .header {
-  background: transparent;
-   
- }
- .header.header-fixed {
-  height: 16px !important;
- }
- label.form-control.criteriaOptionsInput {
-  padding-bottom: 78px;
-  
-}
-.form-check.radio__button.Promotion-radio-button {
-  margin-left: 15px;
-}
-.form-check.radio__button.Promotion-radio-button {
-  margin-left: 15px;
-}
-.Promotion-radio-no-button {
-  margin-left: 15px;
-}
-.laytimecCommenced {
-  margin-left: 24px;
-}
-.laytimecCompleted{
-  margin-left: 24px!important;
-}
-.float-left.Rate-commision.one {
-  width: 16%;
-}
-.float-right.Rate-commision.one {
- 
-  display: none;
-}
-.float-left.Rate-commision {
-  width: 32%;
-  
-}
-.float-right.Rate-commision {
- 
-  display: none;
-}
-.form-group label {
-  font-size: 10px !important;
-}
-.float-left.Rate-commision.two {
-  width: 20%;
-}
-.float-right.Rate-commision.two {
-  
-  display: none;
-}
-i.fas.fa-trash-alt.editIcon.item-list-icon {
-  margin-left: 0px!important;
-}
-label.voyage-vessel.form-label {
-  margin-left: 12px;
-}
-.user-list-addbutton{
-  margin-top: 5px;
-  margin-left: 12px;
-}
-.user-list-dropdown{
-  margin-top: 5px;
+
+@media (min-width: 500px) and (max-width: 767.98px) {
+  .collapse.show {
+    width: 119%;
+  }
+  .certificate-list-table td {
+    font-size: 9px!important;
+  }
+  td.Slno {
+    width: 3%!important;
+    line-height: 13px!important;
+  }
+  td.type {
+    width: 8%!important;
+    line-height: 13px!important;
+  }
+  td.issuePlace {
+    width: 7%!important;
+    line-height: 13px!important;
+  }
+  td.location {
+    width: 12%!important;
+    line-height: 13px!important;
+  }
+  td.validUntil {
+    width: 7%!important;
+    line-height: 13px!important;
+  }
+  td.extendUntil {
+    width: 11%!important;
+    line-height: 13px!important;
+  }
+  td.LastEndorsementDate {
+    width: 17%!important;
+    line-height: 20px!important;
+  }
+  td.NotOnBoard {
+    width: 12%!important;
+    line-height: 20px!important;
+  }
+  td.dueDate {
+    width: 6%!important;
+    line-height: 20px!important;
+  }
+  td.status {
+    width: 4%!important;
+    line-height: 20px!important;
+  }
+  .Custome-collapse {
+    border-bottom: none!important;
+  }
+  .certificate-list-table.table.table-head-custom thead tr {
+    border-bottom: none!important;
+  }
+  .table:not(.table-bordered) thead th, .table:not(.table-bordered) thead td.certificate-list-table {
+    border-bottom: 0px!important;
+  }
+  .certificate-lis-btn {
+    width: 52px !important;
   }
 }
 
@@ -266,8 +312,7 @@ label.voyage-vessel.form-label {
   .dashboard__pb {
     padding: 10px;
   }
-  .dough__main,
-  .doug__left {
+  .dough__main, .doug__left {
     padding-top: 0px !important;
   }
   .chart__box {
@@ -296,9 +341,7 @@ label.voyage-vessel.form-label {
   .voyageTable i.fas.fa-trash-alt.editIcon.ml-4 {
     margin-left: 0px !important;
   }
-  .voyageTable td,
-  th,
-  ._1hzhf {
+  .voyageTable td, th, ._1hzhf {
     font-size: 10px !important;
   }
   button.btn.approve {
@@ -344,9 +387,7 @@ label.voyage-vessel.form-label {
   .header-fixed.subheader-fixed.subheader-enabled .wrapper {
     padding-top: 6px !important;
   }
-  table.table.table.item-add-table th,
-  tr,
-  td {
+  table.table.table.item-add-table th, tr, td {
     font-size: 10px !important;
   }
   .item-list-icon.ml-4 {
@@ -376,7 +417,6 @@ label.voyage-vessel.form-label {
   .aside {
     width: 184px;
   }
-
   h5.text-muted.font-weight-bold.my-2.mr-5.ml-5 {
     font-size: 13px !important;
     width: 55% !important;
@@ -403,21 +443,18 @@ label.voyage-vessel.form-label {
   .float-left.booking-text {
     width: 23%;
   }
-
   .booking-text.float-right {
     width: 74%;
   }
   .float-left.booking-text.one {
     width: 25%;
   }
-
   .booking-text.float-right.one {
     width: 70%;
   }
   .float-left.booking-text.two {
     width: 23%;
   }
-
   .booking-text.float-right.two {
     width: 67%;
   }
@@ -474,7 +511,6 @@ label.voyage-vessel.form-label {
   i.fas.fa-calendar-alt {
     display: none;
   }
-
   .commence-date {
     margin-top: 15px;
   }
@@ -522,44 +558,42 @@ label.voyage-vessel.form-label {
     margin-left: 29px;
   }
   .col-form-label {
-      padding-top: 0px!important;
-      padding-bottom: 0px!important;
-}
-.employee-cr-report-date{
+    padding-top: 0px!important;
+    padding-bottom: 0px!important;
+  }
+  .employee-cr-report-date {
     margin-top: 0px!important;
     margin-bottom: 0px!important;
-}
-.employee-cr-report-input{
+  }
+  .employee-cr-report-input {
     margin-top: -19px;
-}
-.paid__widget {
-  margin-bottom: 10px;
-}
-button.MuiButtonBase-root.MuiTab-root {
-  width: 56px!important;
-  min-width: 2px!important;
- 
-  font-size: 9px!important;
-  text-transform: capitalize!important;
-  padding: 6px 3px!important;
-}
-.Promotion-radio-button{
-  margin-left: 13px;
-}
-.user-list-addbutton{
-  margin-top: 5px;
-  margin-left: 11px;
-}
-.user-list-dropdown{
-margin-top: 5px;
-}
-a.ml-2.user-list-icon {
-  margin-left: 0px!important;
-}
-label.formFont.Asset-Qty {
-  margin-top: 16px!important;
-}
-
+  }
+  .paid__widget {
+    margin-bottom: 10px;
+  }
+  button.MuiButtonBase-root.MuiTab-root {
+    width: 56px!important;
+    min-width: 2px!important;
+    font-size: 9px!important;
+    text-transform: capitalize!important;
+    padding: 6px 3px!important;
+  }
+  .Promotion-radio-button {
+    margin-left: 13px;
+  }
+  .user-list-addbutton {
+    margin-top: 5px;
+    margin-left: 11px;
+  }
+  .user-list-dropdown {
+    margin-top: 5px;
+  }
+  a.ml-2.user-list-icon {
+    margin-left: 0px!important;
+  }
+  label.formFont.Asset-Qty {
+    margin-top: 16px!important;
+  }
 }
 
 @media (max-width: 426px) {
@@ -569,8 +603,7 @@ label.formFont.Asset-Qty {
   .dashboard__pb {
     padding: 10px;
   }
-  .dough__main,
-  .doug__left {
+  .dough__main, .doug__left {
     padding-top: 0px !important;
   }
   .chart__box {
@@ -581,59 +614,59 @@ label.formFont.Asset-Qty {
   }
   .collapse.show.certificate-list-collapse {
     width: 350%!important;
-}
-.collapse.show {
-  width:149%;
-}
-td.Slno {
-  width: 4%!important;
-  line-height: 13px!important;
-}
- td.type {
-  width: 8%!important;
-  line-height: 13px!important;
-}
-td.issuePlace {
-  width: 11%!important;
-    
-  line-height: 13px!important;
-}
-td.location {
-  width: 16%!important;
-  line-height: 13px!important;
-}
-td.validUntil {
-  width: 16%!important;
-  line-height: 13px!important;
-}
-td.extendUntil {
-  
-  width: 10%!important;
-  line-height: 13px!important;
-}
-td.LastEndorsementDate {
-  width: 17%!important;
-  line-height: 20px!important;
-}
-td.NotOnBoard {
-  width: 12%!important;
-  line-height: 20px!important;
-}
-td.dueDate {
-  width: 6%!important;
-  line-height: 20px!important;
-}
-td.status {
-  width: 4%!important;
-  line-height: 20px!important;
-}
-.Custome-collapse {
-  border-bottom: none!important;
-}
-.certificate-list-table.table.table-head-custom thead tr {
-
-  border-bottom: none!important;
-}
+  }
+  .collapse.show {
+    width: 149%;
+  }
+  td.Slno {
+    width: 4%!important;
+    line-height: 13px!important;
+  }
+  td.type {
+    width: 8%!important;
+    line-height: 13px!important;
+  }
+  td.issuePlace {
+    width: 11%!important;
+    line-height: 13px!important;
+  }
+  td.location {
+    width: 16%!important;
+    line-height: 13px!important;
+  }
+  td.validUntil {
+    width: 16%!important;
+    line-height: 13px!important;
+  }
+  td.extendUntil {
+    width: 10%!important;
+    line-height: 13px!important;
+  }
+  td.LastEndorsementDate {
+    width: 17%!important;
+    line-height: 20px!important;
+  }
+  td.NotOnBoard {
+    width: 12%!important;
+    line-height: 20px!important;
+  }
+  td.dueDate {
+    width: 6%!important;
+    line-height: 20px!important;
+  }
+  td.status {
+    width: 4%!important;
+    line-height: 20px!important;
+  }
+  .Custome-collapse {
+    border-bottom: none!important;
+  }
+  .certificate-list-table.table.table-head-custom thead tr {
+    border-bottom: none!important;
+  }
+  .table:not(.table-bordered) thead th, .table:not(.table-bordered) thead td.certificate-list-table {
+    border-bottom: 0px!important;
+  }
 }
 
 @media (max-width: 375px) {
@@ -644,7 +677,42 @@ td.status {
   }
   a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
     margin-top: 6px;
-}
+  }
 }
 
-
+@media (min-width: 1400px) {
+  .pdfViewer {
+    height: 560px!important;
+    padding-top: 0;
+    margin-left: 190px;
+    transition: all 0.5s;
+    background-color: #F1F3F7;
+  }
+  .pdf-thumbnail-bar {
+    position: fixed;
+    top: 87px;
+    height: 69vh!important;
+    overflow: hidden;
+    width: 100px;
+    overflow: auto;
+    background-color: #F1F3F7;
+    border-right: #DCE0E3 1px solid;
+    padding: 22px 24px;
+    transition: all 0.5s;
+  }
+  .toolbox-container .toolbox-wrapper .toolbox {
+    position: fixed;
+    background-color: #39aba0;
+    z-index: 9999;
+    bottom: 202px!important;
+    left: 560px!important;
+    max-height: 48px;
+    width: 41.8%!important;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    border-radius: 3px;
+}
+}

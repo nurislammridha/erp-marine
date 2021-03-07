@@ -85,7 +85,7 @@ const SuppliersListContainer = () => {
               </div>
             </div>
           </div>
-          <div id="id" ref={ref} className="mt-5">
+          <div ref={ref} className="mt-5">
             <SuppliersList />
           </div>
         </div>

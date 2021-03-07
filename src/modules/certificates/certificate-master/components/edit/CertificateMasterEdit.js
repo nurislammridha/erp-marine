@@ -22,25 +22,18 @@ const CertificateMasterEdit = (props) => {
   const [currentPage, setCurrentPage] = useState(15);
   const dispatch = useDispatch();
 
-  const editStatus = useSelector(
-    (state) => state.CertificateListReducer.editStatus
-  );
+  const editStatus = useSelector((state) => state.CertificateListReducer.editStatus);
 
-  const CertificatesCategoryOptionData = useSelector(
-    (state) => state.certificateMainInfo.certificatesCategoryOptionData
-  );
+  const CertificatesCategoryOptionData = useSelector((state) => state.certificateMainInfo.certificatesCategoryOptionData);
   const certificateMainInfoChange = (name, value, e = null) => {
     dispatch(handleChangeCertificateMasterInput(name, value));
   };
 
-  const CertificateMasterInput = useSelector(
-    (state) => state.CertificateListReducer.certificateMasterInput
-  );
+  const CertificateMasterInput = useSelector((state) => state.CertificateListReducer.certificateMasterInput);
   useEffect(() => {
     dispatch(getCertificateCategory())
   }, [])
   useEffect(() => {
-    console.log('Hi :>> ');
     dispatch(setMasterCertificateEditValue(props.editData));
     // if (editStatus) {
     //   dispatch(getCertificateMasterList("", "", currentPage));

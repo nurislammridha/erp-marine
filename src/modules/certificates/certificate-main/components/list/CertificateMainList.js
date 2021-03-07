@@ -93,6 +93,7 @@ const CertificateMainList = () => {
     setCertificateID(certificate.intCertificateDetailsID);
     setCertificateDetailShow(true);
   };
+  
   return (
     <>
       <Card>

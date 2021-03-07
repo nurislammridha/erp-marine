@@ -4,14 +4,16 @@ import { Form, Button } from "react-bootstrap";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
-import { ChangeBasicInfoInput } from "../_redux/actions/BasicInformationAction"
+import { ChangeBasicInfoInput, postBasicInformation } from "../_redux/actions/BasicInformationAction"
 import DatePicker from "react-datepicker";
 
 const BasicInformation = () => {
   const dispatch = useDispatch()
   const { register, setValue } = useForm();
   const basicInfoInput = useSelector(state => state.basicInformation.basicInfoInput)
+  const isLoading = useSelector(state => state.basicInformation.isLoading)
   console.log('basicInfoInput :>> ', basicInfoInput);
+  console.log('isLoading :>> ', isLoading);
   const handleChangeText = (name, value) => {
     dispatch(ChangeBasicInfoInput(name, value))
   }
@@ -294,9 +296,32 @@ const BasicInformation = () => {
                   </div>
                 </div>
                 <div className="mt-5 float-right pb-5">
-                  <Button className="saveButton text-white" variant="">
+                  {!isLoading && (
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={() => dispatch(postBasicInformation(basicInfoInput))}
+                    >
+                      Submit
+                    </button>
+                  )}
+
+                  {isLoading && (
+                    <button
+                      className="btn btn-primary"
+                      type="button"
+                    >
+                      <span>Submitting</span>
+                      <span className="ml-3 spinner spinner-white"></span>
+                    </button>
+                  )}
+                  {/* <Button
+                    className="saveButton text-white"
+                    variant=""
+                    onClick={() => dispatch(postBasicInformation(basicInfoInput))}
+                  >
                     Submit
-                  </Button>
+                  </Button> */}
                 </div>
                 <div className="clear-fix" />
               </form>

@@ -1486,9 +1486,85 @@ td.status {
 }
 
 .certificate-table tr, td {
-  line-height: 1px!important;
+  /* line-height: 1px!important; */
 }
 .table.table-head-custom thead th,.certificate-list-table.table.table-head-custom thead tr {
   width: 1137px!important;
 }
 
+/**********For Certificate Search box**********/
+.search-box{
+  position: absolute;
+  right: 4%;
+  display: flex;
+  bottom: -2%;
+}
+.search-box .custome-certificate-search{
+  font-size: 24px;
+  background-color: #f3f6f9;
+  padding: 8px;
+  border-radius: 5px;
+}
+.search{
+  background-color: #fff!important;
+  width: 100%;
+  margin-right: 10px;
+}
+.search-btn{
+  float: left;
+  background: transparent;
+}
+.search input{
+  margin-left: 20px;
+  border: none;
+  outline: none;
+  border-radius: 15px;
+  line-height: 35px;
+  width: 0;
+  color: #919191;
+  letter-spacing: 1px;
+  box-shadow: 2px 0px 6px;
+  transition: width 800ms;
+  padding: 0;
+}
+.search-box .custome-certificate-search{
+  transition: 0.8s;
+}
+.search-box:hover .custome-certificate-search{
+  cursor: pointer;
+  background-color: rgb(44, 149, 197);
+  color: white;
+}
+.search-box:hover .search input{
+  padding: 0 10px;
+  width: 500px;
+  margin-top:2px;
+}
+
+.pdf-thumbnail-bar {
+  position: fixed;
+  top: 88px;
+  height: 77vh!important;
+  overflow: hidden;
+  width: 100px;
+  overflow: auto;
+  background-color: #F1F3F7;
+  border-right: #DCE0E3 1px solid;
+  padding: 22px 24px;
+  transition: all 0.5s;
+}
+.toolbox-container .toolbox-wrapper .toolbox {
+  position: fixed;
+  background-color: #39aba0;
+  z-index: 9999;
+  bottom: 50px;
+  left: 273px!important;
+  max-height: 48px;
+  width: 59.5%!important;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  border-radius: 3px;
+}

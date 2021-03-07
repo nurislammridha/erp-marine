@@ -133,7 +133,17 @@ const initialState = {
       bottomLabel: 'DUE MORE THAN 60 DAYS',
       statusLabel: 'Due',
     },
-  ]
+  ],
+  reportList: [],
+  reportPaginationList: [],
+  CertificateFilterInputChange: {
+    searchText: null,
+    isPublic: 1,
+    category: null,
+    fromDate: null,
+    toDate: null,
+    diffDay: null,
+  }
 };
 
 const CertificateMainReducer = (state = initialState, action) => {
@@ -145,6 +155,14 @@ const CertificateMainReducer = (state = initialState, action) => {
         ...state,
         certificates: action.payload.certificates,
         certificatesPaginatedData: action.payload.certificatesPaginatedData,
+        isLoading: action.payload.isLoading,
+        certificateExpireDaysList: getCertificateExpireDaysList()
+      };
+    case Types.GET_CERTIFICATE_REPORT_LIST:
+      return {
+        ...state,
+        reportList: action.payload.reportList,
+        reportPaginationList: action.payload.reportPaginationList,
         isLoading: action.payload.isLoading,
         certificateExpireDaysList: getCertificateExpireDaysList()
       };
@@ -410,6 +428,14 @@ const CertificateMainReducer = (state = initialState, action) => {
         ...state,
         bottomStatus: bottomStatus,
       }
+    //CERTIFICATE FILTER INPUT HANDLE  INPUT
+    case Types.CHANGE_CERTIFICATE_FILTER_INPUT:
+      const CertificateFilterInputChange = { ...state.CertificateFilterInputChange };
+      CertificateFilterInputChange[action.payload.name] = action.payload.value;
+      return {
+        ...state,
+        CertificateFilterInputChange,
+      };
 
     default:
       break;
