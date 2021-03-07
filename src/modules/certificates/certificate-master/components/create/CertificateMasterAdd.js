@@ -40,21 +40,16 @@ const CertificateMasterAdd = (props) => {
   );
   useEffect(() => {
     dispatch(getCertificateParentCategoryData());
-    if (status) {
-      dispatch(getCertificateCategoryListData());
-    }
+    // if (status) {
+    //   dispatch(getCertificateCategoryListData());
+    // }
   }, [status]);
 
   //=========
   const certificateMainInfoChange = (name, value) => {
     dispatch(handleChangeCertificateMasterInput(name, value));
   };
-
-  // useEffect(() => {
-  //   if (addStatus) {
-  //     dispatch(getCertificateMasterList("", "", currentPage));
-  //   }
-  // }, [addStatus]);
+  const modelAddStatus = useSelector((state) => state.CertificateListReducer.addStatus);
 
   useEffect(() => {
     dispatch(getCertificateCategory());
@@ -63,6 +58,7 @@ const CertificateMasterAdd = (props) => {
   const onSubmit = (data) => {
     dispatch(certificateMasterSubmitAction(CertificateMasterInput));
     dispatch(getCertificateMasterList("", "", currentPage));
+   
   };
 
   return (
