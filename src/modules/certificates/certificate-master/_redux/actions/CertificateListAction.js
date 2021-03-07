@@ -96,6 +96,8 @@ export const certificateMasterSubmitAction = (CertificateMasterInput, isSubCateg
           type: Types.CERTIFICATE_MASTER_SUBMIT,
           payload: responseList,
         });
+        // dispatch(getCertificateMasterList())
+
         if (CertificateMasterInput.intCategoryID !== null) {
           dispatch(
             getCertificateMasterList(
@@ -117,6 +119,8 @@ export const certificateMasterSubmitAction = (CertificateMasterInput, isSubCateg
         type: Types.CERTIFICATE_MASTER_SUBMIT,
         payload: responseList,
       });
+      // dispatch(getCertificateMasterList())
+
     });
 };
 //===============================

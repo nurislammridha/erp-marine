@@ -46,7 +46,6 @@ const CertificateReports = () => {
   const CertificateFilterInputChange = useSelector((state) => state.certificateMainInfo.CertificateFilterInputChange);
   const bottomStatus = useSelector((state) => state.certificateMainInfo.bottomStatus);
 
-  console.log('reportList :>> ', reportList);
   useEffect(() => {
     dispatch(getCertificateReportList(currentPage));
     dispatch(getCertificateCategory());
@@ -218,10 +217,10 @@ const CertificateReports = () => {
                   <tr>
                     <th className="td-sl">#</th>
                     <th scope="col" className="type">Type</th>
-                    <th scope="col" className="issuePlace">Issued Place</th>
+                    {/* <th scope="col" className="issuePlace">Issued Place</th>
                     <th scope="col" className="validUntil">Issue Date</th>
                     <th scope="col" className="extendUntil">Expiry Date</th>
-                    <th scope="col" className="LastEndorsementDate">Last Endorsement</th>
+                    <th scope="col" className="LastEndorsementDate">Last Endorsement</th> */}
                     <th scope="col" className="NotOnBoard">Not On Board</th>
                     <th scope="col" className="dueDate">Due Date</th>
                     <th scope="col" className="status">Status</th>
@@ -233,7 +232,7 @@ const CertificateReports = () => {
                     <tr key={index + 1}>
                       <td>{reportPaginationList.from + index}</td>
                       <td className="type">{certificate.strCertificateTypeName}</td>
-                      <td className="issuePlace">{certificate.strIssuedPlace}</td>
+                      {/* <td className="issuePlace">{certificate.strIssuedPlace}</td>
                       <td className="">
                         {certificate.dteCertificateIssueDate !== null ? moment(certificate.dteCertificateIssueDate).format("YYYY-MM-DD") : ""}
                       </td>
@@ -242,7 +241,7 @@ const CertificateReports = () => {
                       </td>
                       <td className="LastEndorsementDate">
                         {certificate.dteLastEndorsementDate !== null ? generateStringDateFromDate(certificate.dteLastEndorsementDate) : ""}
-                      </td>
+                      </td> */}
                       <td className="NotOnBoard">{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
                       <td className="dueDate">{certificate.differenceDays}</td>
                       <td className="status">
