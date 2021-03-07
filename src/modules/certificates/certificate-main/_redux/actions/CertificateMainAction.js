@@ -316,8 +316,13 @@ export const certificateMultipleDataAdd = (data, isEdit = false) => (dispatch) =
     dteToSurvey: data.dteToSurvey,
     intCertificateStatusID: data.intCertificateStatusID,
     strCertificateStatusName: data.strCertificateStatusName,
+    status: {
+      strStatus: data.strCertificateStatusName
+    },
     isActive: true,
   };
+
+  console.log('singleDetail :>> ', singleDetail);
   if (!isEdit) {
     dispatch({ type: Types.ADD_MULTIPLE_DATA, payload: singleDetail });
   } else {
