@@ -71,7 +71,7 @@ const CertificateMainList = () => {
     const singleItem = bottomStatus.filter((item, index) => (
       difference >= item.minDate && difference <= item.maxDate
     ))
-    return singleItem[0].colorCode;
+    // return singleItem[0].colorCode;
   }
 
   const dataWithColorCodeFilter = (name, value, index) => {

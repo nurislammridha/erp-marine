@@ -54,6 +54,8 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
     (state) => state.certificateMainInfo.certificateEditInfo
   );
 
+  console.log('certificateEditInfo :>> ', certificateEditInfo);
+
   const certificatesCategoryOption = useSelector(
     (state) => state.certificateMainInfo.certificatesCategoryOptionData
   );
