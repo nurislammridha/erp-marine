@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import moment from 'moment';
 
 import {
+  getCargoId,
   getEmployeeId,
   getVesselId,
 } from "../../../../../app/modules/Auth/_redux/authCrud";
@@ -43,12 +44,16 @@ export const handleChangeProductInputAction = (
 // submit main certificate info
 export const MainCertificateCreateAction = (certificateInfoInput) => async (dispatch) => {
   const shipID = getVesselId();
+
+  let userId = await getEmployeeId();
+   console.log('user id create :>> ', userId);
   if (shipID === null) {
     certificateInfoInput.intShipID = 1;
   } else {
     certificateInfoInput.intShipID = shipID;
   }
   certificateInfoInput.intActionBy = getEmployeeId();
+
   if (certificateInfoInput.intCategoryID === null) {
     showToast("error", "Category can't be blank!");
     return false;
@@ -232,6 +237,10 @@ export const getCertificateMainListAction = (page, searchText = null, isPublic =
     isLoading: true,
     errors: [],
   };
+
+
+  
+
   dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
   let url = "";
 
