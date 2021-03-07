@@ -27,9 +27,9 @@ const IssueAuthorityAdd = () => {
       state.certificateIssueAuthorityInfo.CertificateIssueAuthirityInput
   );
   useEffect(() => {
-    if (addStatus) {
-      dispatch(getIssuingAuthorities("", "", currentPage));
-    }
+    // if (addStatus) {
+    //   dispatch(getIssuingAuthorities("", "", currentPage));
+    // }
   }, [addStatus]);
   const handleChangeTextInput = (name, value) => {
     dispatch(handleChangeCertificateIssueAuthorityInput(name, value));
@@ -37,6 +37,8 @@ const IssueAuthorityAdd = () => {
 
   const submiteIssuingAuthority = (data) => {
     dispatch(issueAuthoritySubmitAction(CertificateIssueAuthirityInput));
+    dispatch(getIssuingAuthorities("", "", currentPage));
+
   };
 
   return (

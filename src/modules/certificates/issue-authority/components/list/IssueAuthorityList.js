@@ -71,11 +71,7 @@ const IssueAuthorityList = (props) => {
           <LoadingSpinner text="Loading Issuing Authority..." />
         </div>
       )}
-      {!isLoading && issuingAuthorities.length === 0 && (
-        <div className="alert alert-warning mt-5">
-          Sorry ! No Issuing Authority Found.
-        </div>
-      )}
+
       {!isLoading && issuingAuthorities.length > 0 && (
         <>
           <div className="react-bootstrap-table table-responsive">
@@ -106,6 +102,11 @@ const IssueAuthorityList = (props) => {
                   ))}
               </tbody>
             </table>
+            {!isLoading && issuingAuthorities.length === 0 && (
+              <div className="alert alert-warning mt-5">
+                Sorry ! No Issuing Authority Found.
+              </div>
+            )}
             <PaginationLaravel
               isDescription={true}
               changePage={changePage}
