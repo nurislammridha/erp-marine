@@ -197,7 +197,7 @@ const NewUser = ({ handleClose }) => {
                       name="business_id"
                       register={register}
                       onChange={(option) => {
-                        handleChange('name', option.label);
+                        handleChange('business_name', option.label);
                         handleChange('business_id', option.value)
                       }}
                       setValue={setValue}
@@ -213,7 +213,7 @@ const NewUser = ({ handleClose }) => {
                       name="shipId"
                       register={register}
                       onChange={(option) => {
-                        handleChange('name', option.label);
+                        handleChange('strShipName', option.label);
                         handleChange('shipId', option.value)
                       }}
                       setValue={setValue}
