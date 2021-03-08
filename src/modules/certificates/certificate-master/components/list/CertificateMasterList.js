@@ -12,9 +12,8 @@ const CertificateMasterList = (props) => {
   const ref = React.createRef();
   const [editItem, setEditItem] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
-  const modalEditStatus = useSelector(
-    (state) => state.CertificateListReducer.editStatus
-  );
+  const modalEditStatus = useSelector((state) => state.CertificateListReducer.editStatus);
+  const modelAddStatus = useSelector((state) => state.CertificateListReducer.addStatus);
   const isLoading = useSelector(
     (state) => state.CertificateListReducer.isLoading
   );
@@ -36,7 +35,10 @@ const CertificateMasterList = (props) => {
     if (modalEditStatus) {
       setShow(false);
     }
-  }, [dispatch, currentPage, modalEditStatus]);
+    if (modelAddStatus) {
+      setShow(false);
+    }
+  }, [dispatch, currentPage, modalEditStatus, modelAddStatus]);
 
   const changePage = (data) => {
     setCurrentPage(data.page);
@@ -50,11 +52,7 @@ const CertificateMasterList = (props) => {
           <LoadingSpinner text="Loading Master Certificate..." />
         </div>
       )}
-      {!isLoading && certificateMasterData.length === 0 && (
-        <div className="alert alert-warning mt-5">
-          Sorry ! No Master Certificate Found.
-        </div>
-      )}
+
       {!isLoading && certificateMasterData.length > 0 && (
         <>
           <div className="react-bootstrap-table table-responsive" >
@@ -89,12 +87,17 @@ const CertificateMasterList = (props) => {
                   ))}
               </tbody>
             </table>
+            {!isLoading && certificateMasterData.length === 0 && (
+              <div className="alert alert-warning mt-5">
+                Sorry ! No Master Certificate Found.
+              </div>
+            )}
             <PaginationLaravel
               isDescription={true}
               changePage={changePage}
               data={certificateMasterPaginatedData}
             />
-
+           
             <SimpleModal
               show={show}
               size="lg"

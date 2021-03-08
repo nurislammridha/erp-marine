@@ -27,7 +27,7 @@ export const getCertificateMasterList = (searchValue = "", status = "", page) =>
     isLoading: true,
     errors: [],
   };
-  dispatch({ type: Types.GET_CERTIFICATE_MASTER_LIST, payload: response });
+  // dispatch({ type: Types.GET_CERTIFICATE_MASTER_LIST, payload: response });
 
   let isActive = status == "" ? 1 : parseInt(status);
 
