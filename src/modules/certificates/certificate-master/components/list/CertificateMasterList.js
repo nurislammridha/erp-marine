@@ -52,8 +52,14 @@ const CertificateMasterList = (props) => {
           <LoadingSpinner text="Loading Master Certificate..." />
         </div>
       )}
+      {!isLoading && certificateMasterData.length == 0 && (
+        <div className="alert alert-warning mt-5">
+          Sorry ! No Master Certificate Found.
+        </div>
+      )}
 
       {!isLoading && certificateMasterData.length > 0 && (
+
         <>
           <div className="react-bootstrap-table table-responsive" >
             <table className="table mt-4 tbl-standard" id="table-to-xls" ref={props.printRef}>
@@ -87,17 +93,13 @@ const CertificateMasterList = (props) => {
                   ))}
               </tbody>
             </table>
-            {!isLoading && certificateMasterData.length === 0 && (
-              <div className="alert alert-warning mt-5">
-                Sorry ! No Master Certificate Found.
-              </div>
-            )}
+
             <PaginationLaravel
               isDescription={true}
               changePage={changePage}
               data={certificateMasterPaginatedData}
             />
-           
+
             <SimpleModal
               show={show}
               size="lg"
@@ -106,7 +108,9 @@ const CertificateMasterList = (props) => {
             >
               <CertificateMasterEdit editData={editItem} />
             </SimpleModal>
+
           </div>
+
         </>
       )}
     </>
