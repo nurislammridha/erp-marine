@@ -44,7 +44,7 @@ const CertificateMasterContainer = () => {
             <h1 className="tableheading">Certificate Master List </h1> <hr />
             <div className="row">
               <CertificateMasterFilter />
-              <div className="col-lg-3 export text-right">
+              <div className="col-lg-4 col-md-4 export text-right">
                 <Dropdown className="d-inline mr-2">
                   <Dropdown.Toggle
                     className="btn btn-sm"

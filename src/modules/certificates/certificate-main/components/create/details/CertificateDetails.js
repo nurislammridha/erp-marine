@@ -130,10 +130,13 @@ const CertificateDetails = ({ handleClose, CertificateID }) => {
                             <div className="custome-border-design">
                             </div>
                         </div>
-                        <Button variant="success" className="float-right m-2 cursor-pointer" onClick={() => handleDownloadAttachment()} download={true}>Download All Documents</Button>
+                        <div className="float-right">
+                        <Button variant="success" className="m-2 cursor-pointer" onClick={() => handleDownloadAttachment()} download={true}>Download All Documents</Button>
+                        </div>
+                        <div className="clearfix"></div>
                         <Row>
-                            <Col md={8} className="p-3 mt-1">
-                                <div className="react-bootstrap-table table-responsive">
+                            <Col lg={12} md={12} sm={12} xs={12} className="p-3 mt-1">
+                                <div className="react-bootstrap-table table-responsive modal-table">
                                     <table className="table table table-head-custom table-vertical-center user-list-table">
                                         <thead>
                                             <tr>

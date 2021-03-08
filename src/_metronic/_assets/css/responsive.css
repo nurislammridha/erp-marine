@@ -2,47 +2,50 @@
 
 @media (min-width: 1400px) {
   td.Slno {
-    width: 50px!important;
-    line-height: 20px!important;
+    width: 50px !important;
+    line-height: 20px !important;
   }
-  td.type, .certificate-list-table th.type {
-    width: 153px!important;
-    line-height: 20px!important;
+  td.type,
+  .certificate-list-table th.type {
+    width: 153px !important;
+    line-height: 20px !important;
   }
-  td.issuePlace, .certificate-list-table th.issuePlace {
-    width: 76px!important;
-    line-height: 20px!important;
+  td.issuePlace,
+  .certificate-list-table th.issuePlace {
+    width: 76px !important;
+    line-height: 20px !important;
   }
   td.location {
-    width: 101px!important;
-    line-height: 20px!important;
+    width: 101px !important;
+    line-height: 20px !important;
   }
   td.validUntil {
-    width: 143px!important;
-    line-height: 20px!important;
+    width: 143px !important;
+    line-height: 20px !important;
   }
   .certificate-list-table td.extendUntil {
-    width: 130px!important;
-    line-height: 20px!important;
+    width: 130px !important;
+    line-height: 20px !important;
   }
   td.LastEndorsementDate {
-    width: 160px!important;
-    line-height: 20px!important;
+    width: 160px !important;
+    line-height: 20px !important;
   }
   td.NotOnBoard {
-    width: 108px!important;
-    line-height: 20px!important;
+    width: 108px !important;
+    line-height: 20px !important;
   }
   td.dueDate {
-    width: 84px!important;
-    line-height: 20px!important;
+    width: 84px !important;
+    line-height: 20px !important;
   }
   td.status {
-    width: 115px!important;
-    line-height: 20px!important;
+    width: 115px !important;
+    line-height: 20px !important;
   }
-  .table.table-head-custom thead th, .certificate-list-table.table.table-head-custom thead tr {
-    width: 1219px!important;
+  .table.table-head-custom thead th,
+  .certificate-list-table.table.table-head-custom thead tr {
+    width: 1219px !important;
   }
 }
 
@@ -53,10 +56,19 @@
     font-size: 17px;
   }
   .voyage-activity-vessel {
-    margin-top: 0px!important;
+    margin-top: 0px !important;
   }
   a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
     margin-top: 5px;
+  }
+  .due-days h6 {
+    left: 83px;
+  }
+  input.color-picker.float-left.mr-2 {
+    margin-left: 52px;
+  }
+  .partner-progessbar{
+    margin-top: 10px;
   }
 }
 
@@ -133,7 +145,7 @@
     margin-left: -40px;
   }
   .css-yk16xz-control {
-    width: 100%!important;
+    width: 100% !important;
   }
   a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
     margin-top: 5px;
@@ -142,6 +154,17 @@
     margin-top: 5px;
     margin-left: 10px;
   }
+  ._2Jtxm._35Ago ._2kL0S {
+    margin-left: -28px;
+}
+._2Jtxm {
+  margin-left:0px;
+}
+._2Jtxm ._1hzhf {
+  line-height: 1;
+  font-size: 12px;
+ 
+}
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -179,11 +202,11 @@
     margin-left: 10px;
   }
   button.MuiButtonBase-root.MuiTab-root {
-    width: 73px!important;
-    min-width: 2px!important;
-    font-size: 9px!important;
-    text-transform: capitalize!important;
-    padding: 6px 8px!important;
+    width: 73px !important;
+    min-width: 2px !important;
+    font-size: 9px !important;
+    text-transform: capitalize !important;
+    padding: 6px 8px !important;
   }
   .header-fixed.subheader-fixed .header {
     background: transparent;
@@ -207,7 +230,7 @@
     margin-left: 24px;
   }
   .laytimecCompleted {
-    margin-left: 24px!important;
+    margin-left: 24px !important;
   }
   .float-left.Rate-commision.one {
     width: 16%;
@@ -231,7 +254,7 @@
     display: none;
   }
   i.fas.fa-trash-alt.editIcon.item-list-icon {
-    margin-left: 0px!important;
+    margin-left: 0px !important;
   }
   label.voyage-vessel.form-label {
     margin-left: 12px;
@@ -250,59 +273,63 @@
     width: 119%;
   }
   .certificate-list-table td {
-    font-size: 9px!important;
+    font-size: 9px !important;
   }
   td.Slno {
-    width: 3%!important;
-    line-height: 13px!important;
+    width: 3% !important;
+    line-height: 13px !important;
   }
   td.type {
-    width: 8%!important;
-    line-height: 13px!important;
+    width: 8% !important;
+    line-height: 13px !important;
   }
   td.issuePlace {
-    width: 7%!important;
-    line-height: 13px!important;
+    width: 7% !important;
+    line-height: 13px !important;
   }
   td.location {
-    width: 12%!important;
-    line-height: 13px!important;
+    width: 12% !important;
+    line-height: 13px !important;
   }
   td.validUntil {
-    width: 7%!important;
-    line-height: 13px!important;
+    width: 7% !important;
+    line-height: 13px !important;
   }
   td.extendUntil {
-    width: 11%!important;
-    line-height: 13px!important;
+    width: 11% !important;
+    line-height: 13px !important;
   }
   td.LastEndorsementDate {
-    width: 17%!important;
-    line-height: 20px!important;
+    width: 17% !important;
+    line-height: 20px !important;
   }
   td.NotOnBoard {
-    width: 12%!important;
-    line-height: 20px!important;
+    width: 12% !important;
+    line-height: 20px !important;
   }
   td.dueDate {
-    width: 6%!important;
-    line-height: 20px!important;
+    width: 6% !important;
+    line-height: 20px !important;
   }
   td.status {
-    width: 4%!important;
-    line-height: 20px!important;
+    width: 4% !important;
+    line-height: 20px !important;
   }
   .Custome-collapse {
-    border-bottom: none!important;
+    border-bottom: none !important;
   }
   .certificate-list-table.table.table-head-custom thead tr {
-    border-bottom: none!important;
+    border-bottom: none !important;
   }
-  .table:not(.table-bordered) thead th, .table:not(.table-bordered) thead td.certificate-list-table {
-    border-bottom: 0px!important;
+  .table:not(.table-bordered) thead th,
+  .table:not(.table-bordered) thead td.certificate-list-table {
+    border-bottom: 0px !important;
   }
   .certificate-lis-btn {
     width: 52px !important;
+  }
+  .stickeyCard.card {
+    left: 0px !important;
   }
 }
 
@@ -312,7 +339,8 @@
   .dashboard__pb {
     padding: 10px;
   }
-  .dough__main, .doug__left {
+  .dough__main,
+  .doug__left {
     padding-top: 0px !important;
   }
   .chart__box {
@@ -341,7 +369,9 @@
   .voyageTable i.fas.fa-trash-alt.editIcon.ml-4 {
     margin-left: 0px !important;
   }
-  .voyageTable td, th, ._1hzhf {
+  .voyageTable td,
+  th,
+  ._1hzhf {
     font-size: 10px !important;
   }
   button.btn.approve {
@@ -387,7 +417,9 @@
   .header-fixed.subheader-fixed.subheader-enabled .wrapper {
     padding-top: 6px !important;
   }
-  table.table.table.item-add-table th, tr, td {
+  table.table.table.item-add-table th,
+  tr,
+  td {
     font-size: 10px !important;
   }
   .item-list-icon.ml-4 {
@@ -558,12 +590,12 @@
     margin-left: 29px;
   }
   .col-form-label {
-    padding-top: 0px!important;
-    padding-bottom: 0px!important;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
   }
   .employee-cr-report-date {
-    margin-top: 0px!important;
-    margin-bottom: 0px!important;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
   }
   .employee-cr-report-input {
     margin-top: -19px;
@@ -572,11 +604,11 @@
     margin-bottom: 10px;
   }
   button.MuiButtonBase-root.MuiTab-root {
-    width: 56px!important;
-    min-width: 2px!important;
-    font-size: 9px!important;
-    text-transform: capitalize!important;
-    padding: 6px 3px!important;
+    width: 56px !important;
+    min-width: 2px !important;
+    font-size: 9px !important;
+    text-transform: capitalize !important;
+    padding: 6px 3px !important;
   }
   .Promotion-radio-button {
     margin-left: 13px;
@@ -589,11 +621,38 @@
     margin-top: 5px;
   }
   a.ml-2.user-list-icon {
-    margin-left: 0px!important;
+    margin-left: 0px !important;
   }
   label.formFont.Asset-Qty {
-    margin-top: 16px!important;
+    margin-top: 16px !important;
   }
+  ._2Jtxm ._1hzhf {
+    line-height: 1;
+  }
+  .btn-modal-close {
+    
+    right: -4px;
+    
+    top: -4px;
+  }
+  h1.certificate-report-heading {
+  
+    padding-left: 11px;
+}
+.search-box:hover .search1 input {
+  padding: 0 10px;
+  width: 318px;
+  margin-top: 2px;
+}
+.search1 input {
+
+  line-height: 26px;
+}
+.search-box .custome-certificate-search {
+  font-size: 16px;
+  
+  padding: 5px;
+}
 }
 
 @media (max-width: 426px) {
@@ -603,7 +662,8 @@
   .dashboard__pb {
     padding: 10px;
   }
-  .dough__main, .doug__left {
+  .dough__main,
+  .doug__left {
     padding-top: 0px !important;
   }
   .chart__box {
@@ -613,59 +673,60 @@
     width: 48% !important;
   }
   .collapse.show.certificate-list-collapse {
-    width: 350%!important;
+    width: 350% !important;
   }
   .collapse.show {
     width: 149%;
   }
   td.Slno {
-    width: 4%!important;
-    line-height: 13px!important;
+    width: 4% !important;
+    line-height: 13px !important;
   }
   td.type {
-    width: 8%!important;
-    line-height: 13px!important;
+    width: 8% !important;
+    line-height: 13px !important;
   }
   td.issuePlace {
-    width: 11%!important;
-    line-height: 13px!important;
+    width: 11% !important;
+    line-height: 13px !important;
   }
   td.location {
-    width: 16%!important;
-    line-height: 13px!important;
+    width: 16% !important;
+    line-height: 13px !important;
   }
   td.validUntil {
-    width: 16%!important;
-    line-height: 13px!important;
+    width: 16% !important;
+    line-height: 13px !important;
   }
   td.extendUntil {
-    width: 10%!important;
-    line-height: 13px!important;
+    width: 10% !important;
+    line-height: 13px !important;
   }
   td.LastEndorsementDate {
-    width: 17%!important;
-    line-height: 20px!important;
+    width: 17% !important;
+    line-height: 20px !important;
   }
   td.NotOnBoard {
-    width: 12%!important;
-    line-height: 20px!important;
+    width: 12% !important;
+    line-height: 20px !important;
   }
   td.dueDate {
-    width: 6%!important;
-    line-height: 20px!important;
+    width: 6% !important;
+    line-height: 20px !important;
   }
   td.status {
-    width: 4%!important;
-    line-height: 20px!important;
+    width: 4% !important;
+    line-height: 20px !important;
   }
   .Custome-collapse {
-    border-bottom: none!important;
+    border-bottom: none !important;
   }
   .certificate-list-table.table.table-head-custom thead tr {
-    border-bottom: none!important;
+    border-bottom: none !important;
   }
-  .table:not(.table-bordered) thead th, .table:not(.table-bordered) thead td.certificate-list-table {
-    border-bottom: 0px!important;
+  .table:not(.table-bordered) thead th,
+  .table:not(.table-bordered) thead td.certificate-list-table {
+    border-bottom: 0px !important;
   }
 }
 
@@ -678,25 +739,32 @@
   a.pl-3.pr-3.text-bold.btn.btn-primary.text-white.btn-sm {
     margin-top: 6px;
   }
+  
 }
-
+@media (max-width: 335px) {
+  .due-days h6 {
+    top: 5px;
+  
+    font-size: 7px !important;
+}
+}
 @media (min-width: 1400px) {
   .pdfViewer {
-    height: 560px!important;
+    height: 560px !important;
     padding-top: 0;
     margin-left: 190px;
     transition: all 0.5s;
-    background-color: #F1F3F7;
+    background-color: #f1f3f7;
   }
   .pdf-thumbnail-bar {
     position: fixed;
     top: 87px;
-    height: 69vh!important;
+    height: 69vh !important;
     overflow: hidden;
     width: 100px;
     overflow: auto;
-    background-color: #F1F3F7;
-    border-right: #DCE0E3 1px solid;
+    background-color: #f1f3f7;
+    border-right: #dce0e3 1px solid;
     padding: 22px 24px;
     transition: all 0.5s;
   }
@@ -704,15 +772,21 @@
     position: fixed;
     background-color: #39aba0;
     z-index: 9999;
-    bottom: 202px!important;
-    left: 560px!important;
+    bottom: 202px !important;
+    left: 560px !important;
     max-height: 48px;
-    width: 41.8%!important;
+    width: 41.8% !important;
     padding: 12px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     color: white;
     border-radius: 3px;
-}
+  }
+  input.color-picker.float-left.mr-2 {
+    /* margin-left: 44px!important; */
+  }
+  .due-days h6 {
+    /* left: 72px!important; */
+  }
 }

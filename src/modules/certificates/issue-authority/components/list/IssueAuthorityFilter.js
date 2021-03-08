@@ -37,8 +37,8 @@ const IssueAuthorityFilter = () => {
 
   return (
     <>
-      <div className="row">
-        <div className="col-lg-6">
+     
+        <div className="col-lg-4 col-md-4">
           <Form.Group as={Col} controlId="formGridState">
             <Form.Control
               className="formHeight"
@@ -49,7 +49,7 @@ const IssueAuthorityFilter = () => {
             />
           </Form.Group>
         </div>
-        <div className="col-lg-6">
+        <div className="col-lg-4 col-md-4">
           <Form.Group as={Col} controlId="formGridState">
             <RHFInput
               as={
@@ -71,7 +71,7 @@ const IssueAuthorityFilter = () => {
             />
           </Form.Group>
         </div>
-      </div>
+      
     </>
   );
 };
