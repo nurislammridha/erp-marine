@@ -1,0 +1,1 @@
+export const GET_BUSINESS_LIST = "GET_BUSINESS_LIST";

@@ -9,15 +9,17 @@ import {
 } from "../_redux/actions/UserAction";
 import { RHFInput } from "react-hook-form-input";
 import Select from "react-select";
+import { getShipList } from "../../../master/DropDownData/Ship/_redux/ShipAction/ShipAction";
+import { getBusinessData } from "../../../master/DropDownData/Business/_redux/BusinessAction/BusinessAction";
 
 const NewUser = ({ handleClose }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
   const userInput = useSelector((state) => state.userRole.inputData);
   const isLoading = useSelector((state) => state.userRole.isLoading);
   const roleListOption = useSelector((state) => state.roleReducer.roleListOption);
+  const shipList = useSelector((state) => state.ShipReducer.shipList);
+  const BusinessList = useSelector((state) => state.BusinessTypeReducer.BusinessList);
   const dispatch = useDispatch();
-
-  console.log('isLoading :>> ', isLoading);
 
   const onSubmit = () => {
     dispatch(createNewUser(userInput, handleClose));
@@ -29,6 +31,8 @@ const NewUser = ({ handleClose }) => {
 
   useEffect(() => {
     dispatch(getRoleListByPagination());
+    dispatch(getShipList());
+    dispatch(getBusinessData());
   }, []);
   return (
     <>
@@ -40,6 +44,7 @@ const NewUser = ({ handleClose }) => {
                 className="form form-label-right voyageEngineerForm"
                 method="post"
                 onSubmit={handleSubmit(onSubmit)}
+                autoComplete="off"
               >
                 <div className="form-group row">
                   <div className="col-xl-3 col-lg-3 col-md-6 ">
@@ -178,6 +183,38 @@ const NewUser = ({ handleClose }) => {
                       onChange={(option) => {
                         handleChange('name', option.label);
                         handleChange('role_id', option.value)
+                      }}
+                      setValue={setValue}
+                    />
+                  </div>
+                  <div className="col-xl-3 col-lg-3 col-md-6">
+                    <Form.Label className="formFont pl-1">
+                      Ship
+                      </Form.Label>
+                    <RHFInput
+                      as={<Select options={shipList} />}
+                      rules={{ required: false }}
+                      name="business_id"
+                      register={register}
+                      onChange={(option) => {
+                        handleChange('name', option.label);
+                        handleChange('business_id', option.value)
+                      }}
+                      setValue={setValue}
+                    />
+                  </div>
+                  <div className="col-xl-3 col-lg-3 col-md-6">
+                    <Form.Label className="formFont pl-1">
+                      Business
+                      </Form.Label>
+                    <RHFInput
+                      as={<Select options={BusinessList} />}
+                      rules={{ required: false }}
+                      name="shipId"
+                      register={register}
+                      onChange={(option) => {
+                        handleChange('name', option.label);
+                        handleChange('shipId', option.value)
                       }}
                       setValue={setValue}
                     />
