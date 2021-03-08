@@ -90,6 +90,14 @@ export const updatedUserPermission = (inputData, handleClose, id) => (dispatch) 
   //   showToast('error', "Role can't blank!");
   //   return false;
   // }
+  if (inputData.username.length === 0) {
+    showToast('error', "username can't blank!");
+    return false;
+  }
+  if (inputData.email.length === 0) {
+    showToast('error', "Email can't blank!");
+    return false;
+  }
   const responseList = {
     isLoading: true,
     rolesList: [],
@@ -101,6 +109,7 @@ export const updatedUserPermission = (inputData, handleClose, id) => (dispatch) 
   Axios.put(`${process.env.REACT_APP_API_URL}roles/multipleUserRoleUpdate/${id}`, inputData)
     .then((res) => {
       if (res.data.status) {
+        console.log('res for user updated :>> ', res);
         const { data, message } = res.data;
         responseList.rolesList = data.data;
         responseList.message = message;

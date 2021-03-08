@@ -149,7 +149,7 @@ const UserEdit = ({ handleClose, id }) => {
                       register={register}
                       value={userInput !== null && userInput.role ? userInput.role : ''}
                       onChange={(option) => {
-                        handleChange('role_name', option.label);
+                        handleChange('name', option.label);
                         handleChange('role_id', option.value)
                       }}
                       // value={CourseName.label}
