@@ -54,7 +54,7 @@ const UserEdit = ({ handleClose, id }) => {
                         type="text"
                         name="first_name"
                         placeholder="Enter Name"
-                        value={userInput !== null && userInput.first_name}
+                        value={userInput !== null && userInput.first_name ? userInput.first_name : ''}
                         onChange={(e) => handleChange("first_name", e.target.value)}
                       />
                     </Form.Group>
@@ -69,7 +69,7 @@ const UserEdit = ({ handleClose, id }) => {
                         type="text"
                         name="surname"
                         placeholder="Enter Name"
-                        value={userInput !== null && userInput.surname}
+                        value={userInput !== null && userInput.surname ? userInput.surname : ''}
                         onChange={(e) => handleChange("surname", e.target.value)}
                       />
                     </Form.Group>
@@ -83,7 +83,7 @@ const UserEdit = ({ handleClose, id }) => {
                         className="formHeight"
                         type="text"
                         name="last_name"
-                        value={userInput !== null && userInput.last_name}
+                        value={userInput !== null && userInput.last_name ? userInput.last_name : ''}
                         placeholder="Enter Name"
                         onChange={(e) =>
                           handleChange("last_name", e.target.value)
@@ -100,7 +100,7 @@ const UserEdit = ({ handleClose, id }) => {
                         className="formHeight"
                         type="text"
                         name="username"
-                        value={userInput !== null && userInput.username}
+                        value={userInput !== null && userInput.username ? userInput.username : ''}
                         placeholder="Enter Name"
                         onChange={(e) =>
                           handleChange("username", e.target.value)
@@ -115,7 +115,7 @@ const UserEdit = ({ handleClose, id }) => {
                         className="formHeight"
                         type="text"
                         name="email"
-                        value={userInput !== null && userInput.email}
+                        value={userInput !== null && userInput.email ? userInput.email : ''}
                         placeholder="Enter Name"
                         onChange={(e) => handleChange("email", e.target.value)}
                       />
@@ -131,7 +131,7 @@ const UserEdit = ({ handleClose, id }) => {
                         type="text"
                         name="phone_no"
                         placeholder="Enter Name"
-                        value={userInput !== null && userInput.phone_no}
+                        value={userInput !== null && userInput.phone_no ? userInput.phone_no : ''}
                         onChange={(e) =>
                           handleChange("phone_no", e.target.value)
                         }
@@ -147,9 +147,9 @@ const UserEdit = ({ handleClose, id }) => {
                       rules={{ required: false }}
                       name="role_id"
                       register={register}
-                      value={userInput !== null && userInput.role}
+                      value={userInput !== null && userInput.role ? userInput.role : ''}
                       onChange={(option) => {
-                        handleChange('name', option.label);
+                        handleChange('role_name', option.label);
                         handleChange('role_id', option.value)
                       }}
                       // value={CourseName.label}
@@ -165,9 +165,9 @@ const UserEdit = ({ handleClose, id }) => {
                       rules={{ required: false }}
                       name="business_id"
                       register={register}
-                      value={userInput !== null && userInput.ship}
+                      value={userInput !== null && userInput.ship ? userInput.ship : ''}
                       onChange={(option) => {
-                        handleChange('name', option.label);
+                        handleChange('business_name', option.label);
                         handleChange('business_id', option.value)
                       }}
                       setValue={setValue}
@@ -182,9 +182,9 @@ const UserEdit = ({ handleClose, id }) => {
                       rules={{ required: false }}
                       name="shipId"
                       register={register}
-                      value={userInput !== null && userInput.business}
+                      value={userInput !== null && userInput.business ? userInput.business : ''}
                       onChange={(option) => {
-                        handleChange('name', option.label);
+                        handleChange('strShipName', option.label);
                         handleChange('shipId', option.value)
                       }}
                       setValue={setValue}

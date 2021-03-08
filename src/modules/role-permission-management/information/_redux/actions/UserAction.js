@@ -19,14 +19,14 @@ export const createNewUser = (inputData, handleClose) => (dispatch) => {
   //   showToast('error', "First name can't blank!");
   //   return false;
   // }
-  // if (inputData.last_name.length === 0) {
-  //   showToast('error', "Last name can't blank!");
-  //   return false;
-  // }
-  // if (inputData.email.length === 0) {
-  //   showToast('error', "Email can't blank!");
-  //   return false;
-  // }
+  if (inputData.username.length === 0) {
+    showToast('error', "username can't blank!");
+    return false;
+  }
+  if (inputData.email.length === 0) {
+    showToast('error', "Email can't blank!");
+    return false;
+  }
   // if (inputData.phone_no.length === 0) {
   //   showToast('error', "Phone number can't blank!");
   //   return false;
@@ -70,27 +70,26 @@ export const createNewUser = (inputData, handleClose) => (dispatch) => {
 
 //updaetd user roles permission 
 export const updatedUserPermission = (inputData, handleClose, id) => (dispatch) => {
-  console.log('inputData :>> ', inputData);
-  if (inputData.first_name.length === 0) {
-    showToast('error', "First name can't blank!");
-    return false;
-  }
-  if (inputData.last_name.length === 0) {
-    showToast('error', "Last name can't blank!");
-    return false;
-  }
-  if (inputData.email.length === 0) {
-    showToast('error', "Email can't blank!");
-    return false;
-  }
-  if (inputData.phone_no.length === 0) {
-    showToast('error', "Phone number can't blank!");
-    return false;
-  }
-  if (inputData.role_id === '' || inputData.role_id === null ) {
-    showToast('error', "Role can't blank!");
-    return false;
-  }
+  // if (inputData.first_name.length === 0) {
+  //   showToast('error', "First name can't blank!");
+  //   return false;
+  // }
+  // if (inputData.last_name.length === 0) {
+  //   showToast('error', "Last name can't blank!");
+  //   return false;
+  // }
+  // if (inputData.email.length === 0) {
+  //   showToast('error', "Email can't blank!");
+  //   return false;
+  // }
+  // if (inputData.phone_no.length === 0) {
+  //   showToast('error', "Phone number can't blank!");
+  //   return false;
+  // }
+  // if (inputData.role_id === '' || inputData.role_id === null ) {
+  //   showToast('error', "Role can't blank!");
+  //   return false;
+  // }
   const responseList = {
     isLoading: true,
     rolesList: [],
