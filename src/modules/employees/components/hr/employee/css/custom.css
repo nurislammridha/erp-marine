@@ -1,0 +1,307 @@
+.icon {
+  font-size: 69px;
+  margin-right: 10px;
+}
+
+h3.username {
+  font-size: 30px !important;
+  font-weight: bold;
+}
+
+p.info-details {
+  font-weight: 600;
+  color: #84909b;
+  font-size: 12px;
+}
+
+p.experience {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+p.experience-details {
+  font-weight: 500;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  line-height: 11px;
+  font-size: 11px;
+}
+
+.title {
+  float: left;
+  width: 45%;
+}
+
+.title-img {
+  float: left;
+  width: 20%;
+  padding-left: 20px;
+}
+
+.cv-img-div {
+  float: right;
+  width: 25%;
+  height: 150px;
+  padding-left: 50px;
+}
+
+.cv-img {
+  width: 150px;
+  height: 150px;
+}
+
+.card-label {
+  text-align: center;
+}
+
+h3 {
+  font-size: 30px;
+  font-weight: 900;
+  padding-left: 5px;
+}
+
+h3.card-label.mt-3 {
+  vertical-align: middle;
+  height: 70px !important;
+}
+
+.light-grey {
+  background-color: #e7e6e6;
+}
+
+.light-yellow {
+  background-color: #ffffcc !important;
+}
+
+.table-bordered thead th,
+.table-bordered thead td {
+  border-bottom-width: 2px;
+  text-align: left !important;
+  padding: 8px !important;
+  padding-left: 8px !important;
+}
+
+.tr .th:first-child {
+  font-weight: bold;
+}
+
+.available {
+  background-color: yellow;
+}
+
+.myLogo {
+  height: 56px;
+  width: 56px;
+}
+
+.akij-logo {
+  width: 100%;
+}
+
+.a-lebel {
+  font-size: 37px;
+}
+
+.border-around {
+  width: 100%;
+  border: 2px solid grey;
+  padding: 20px 10px;
+}
+
+/* Employee Cr report */
+
+.form-group label {
+  font-size: 12px !important;
+  font-weight: 400;
+  color: #464e5f;
+}
+
+.form-check.appraisal {
+  position: relative;
+  display: block;
+  padding-left: 4.25rem;
+  padding-top: 9px;
+}
+
+.form-check.appraisal label.form-check-label {
+  margin-right: 45px;
+}
+
+input#defaultCheck1 {
+  margin-left: 7px;
+}
+
+th {
+  font-size: 14px !important;
+  /* text-align: center !important; */
+}
+
+td {
+  font-size: 12px;
+}
+
+.result p {
+  font-size: 17px;
+  padding-top: 30px;
+  font-weight: 600;
+}
+
+.additional__comments p {
+  font-size: 17px;
+  padding-top: 30px;
+  font-weight: 600;
+}
+
+.radio__button {
+  display: inline !important;
+  font-size: 13px !important;
+}
+
+.nb p {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.rivision p {
+  font-size: 14px;
+  padding-bottom: 7px;
+  font-weight: 600;
+}
+
+.title__ship {
+  text-align: center;
+  font-weight: 700;
+}
+
+.akij-logo-ship {
+  height: 70px;
+  width: 70px;
+  border-radius: 0% !important;
+}
+
+.checked {
+  background-color: #e41313;
+  color: #fff;
+}
+
+i {
+  margin-bottom: 5px;
+}
+
+.validation-symbol {
+  color: red !important;
+  font-size: 4s3px !important;
+}
+
+/* Employee Cr report Ends */
+
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+
+.table-list {
+  padding: 15px 30px 50px 30px;
+}
+
+.table-list tr td {
+  padding-left: 8px !important;
+  padding: 20px;
+}
+
+@media (min-width: 600px) {
+  .MuiTab-root {
+    min-width: 140px !important;
+  }
+}
+
+@media (max-width: 425px) {
+  img.akij-logo-ship.rounded-circle {
+    margin: 0px auto;
+    display: block;
+  }
+  label.form-control.criteriaOptionsInput {
+    padding-bottom: 66px;
+    font-size: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+.tbl-standard thead tr {
+  background: #ebedf6;
+}
+
+.tbl-standard thead tr th {
+  padding: 5px !important;
+  font-size: 13px !important;
+  border-bottom: 1px solid #1e1e2d40;
+}
+
+.excelBtn {
+  border: none;
+  background: none;
+  padding-top: -5px;
+}
+td.criteriaTd {
+  background: #fff;
+  cursor: pointer;
+  z-index: 100;
+  vertical-align: baseline !important;
+}
+.visually-hidden {
+  z-index: -100;
+  opacity: 0;
+  /* Note, you may want to position the checkbox over top the label and set the opacity to zero instead. It can be better for accessibilty on some touch devices for discoverability. */
+}
+.criteriaBackground::before {
+  content: "\2713";
+  color: rgb(70, 7, 243);
+  position: absolute;
+  margin-right: 10px;
+}
+.criteriaOptionsInput {
+  position: relative;
+}
+.criteriaBackground {
+  background: #b3e9b329;
+  vertical-align: baseline !important;
+}
+
+/* input[type=checkbox] {
+ width:100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  height: 14mm;
+  border: 0.1mm solid black;
+}
+
+input[type=checkbox]:checked {
+  background-color: lightblue;
+}
+
+input[type=checkbox]:checked:after {
+  margin-left: 4.3mm;
+  margin-top: -0.4mm;
+  width: 3mm;
+  height: 10mm;
+  border: solid white;
+  border-width: 0 2mm 2mm 0;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  content: "";
+  display: inline-block;
+} */
+.form-control.criteriaOptionsInput {
+  width: 95%;
+  margin-left: 5px;
+}

@@ -9,5 +9,4 @@ const SalaryGenerateContainer = () => {
         </>
     );
 };
-
 export default SalaryGenerateContainer;

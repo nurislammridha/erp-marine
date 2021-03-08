@@ -46,7 +46,6 @@ const CertificateReports = () => {
   const CertificateFilterInputChange = useSelector((state) => state.certificateMainInfo.CertificateFilterInputChange);
   const bottomStatus = useSelector((state) => state.certificateMainInfo.bottomStatus);
 
-  console.log('reportList :>> ', reportList);
   useEffect(() => {
     dispatch(getCertificateReportList(currentPage));
     dispatch(getCertificateCategory());
@@ -92,10 +91,10 @@ const CertificateReports = () => {
     setCertificateDetailShow(true);
   };
   const filterWithDifferenceDay = [
-    { label: "Day-0", value: '0' },
-    { label: "Day-(1-30)", value: 30 },
-    { label: "Day-(31-60)", value: 60 },
-    { label: "Day-more than 60", value: 100000000 },
+    { label: "Day-0", value: '1' },
+    { label: "DUE BETWEEN 30 DAYS", value: "2" },
+    { label: "DUE BETWEEN 60 DAYS", value: "3" },
+    { label: "DUE MORE THAN 60 DAYS", value: "4" },
   ]
   const handleChangeTextInput = (name, value) => {
     dispatch(handleChangeCertificateFilterInput(name, value));
@@ -108,10 +107,10 @@ const CertificateReports = () => {
             <h1 className="headerText pt-2">Certificate Reports</h1>
             <div className="col-md-7">
               <div class="search-box">
-                <div class="search">
+                <div class="search1">
                   <input
                     type="text"
-                    placeholder="Search certificate"
+                    placeholder="Search with certificate type"
                     name="searchText"
                     value={CertificateFilterInputChange.searchText}
                     onChange={(e) => handleChangeTextInput("searchText", e.target.value)}
@@ -218,10 +217,10 @@ const CertificateReports = () => {
                   <tr>
                     <th className="td-sl">#</th>
                     <th scope="col" className="type">Type</th>
-                    <th scope="col" className="issuePlace">Issued Place</th>
+                    {/* <th scope="col" className="issuePlace">Issued Place</th>
                     <th scope="col" className="validUntil">Issue Date</th>
                     <th scope="col" className="extendUntil">Expiry Date</th>
-                    <th scope="col" className="LastEndorsementDate">Last Endorsement</th>
+                    <th scope="col" className="LastEndorsementDate">Last Endorsement</th> */}
                     <th scope="col" className="NotOnBoard">Not On Board</th>
                     <th scope="col" className="dueDate">Due Date</th>
                     <th scope="col" className="status">Status</th>
@@ -233,7 +232,7 @@ const CertificateReports = () => {
                     <tr key={index + 1}>
                       <td>{reportPaginationList.from + index}</td>
                       <td className="type">{certificate.strCertificateTypeName}</td>
-                      <td className="issuePlace">{certificate.strIssuedPlace}</td>
+                      {/* <td className="issuePlace">{certificate.strIssuedPlace}</td>
                       <td className="">
                         {certificate.dteCertificateIssueDate !== null ? moment(certificate.dteCertificateIssueDate).format("YYYY-MM-DD") : ""}
                       </td>
@@ -242,7 +241,7 @@ const CertificateReports = () => {
                       </td>
                       <td className="LastEndorsementDate">
                         {certificate.dteLastEndorsementDate !== null ? generateStringDateFromDate(certificate.dteLastEndorsementDate) : ""}
-                      </td>
+                      </td> */}
                       <td className="NotOnBoard">{certificate.intNotOnBoard === "1" ? "Yes" : "No"}</td>
                       <td className="dueDate">{certificate.differenceDays}</td>
                       <td className="status">

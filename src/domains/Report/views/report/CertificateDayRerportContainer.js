@@ -9,5 +9,4 @@ const CertificateDayRerportContainer = () => {
         </>
     );
 };
-
 export default CertificateDayRerportContainer;

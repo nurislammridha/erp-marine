@@ -253,7 +253,7 @@ const CertificateMainList = () => {
 
                                 </td>
                                 <td className="action">
-                                  <div className="mt-5">
+                                  <div className="mt-5 d-flex">
                                     <Link onClick={() => certificateDetails(certificate)}>
                                       <i className="far fa-eye text-success editIcon item-list-icon"></i>
                                     </Link>

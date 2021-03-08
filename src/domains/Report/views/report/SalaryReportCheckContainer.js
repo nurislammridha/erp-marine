@@ -9,5 +9,4 @@ const SalaryReportCheckContainer = () => {
         </>
     );
 };
-
 export default SalaryReportCheckContainer;

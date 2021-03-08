@@ -1,0 +1,40 @@
+.search {
+  background-color: #e1f0ff !important;
+  color: #3699ff !important;
+  border-color: #e1f0ff !important;
+}
+
+.table td.line {
+  border-top: none !important;
+  font-weight: bold;
+}
+
+.searchlist {
+  margin-top: 0px !important;
+  margin-left: 0px !important;
+  padding-left: 0px !important;
+  padding-top: 0px !important;
+}
+.table th,
+.table td {
+  padding: 0.2rem !important;
+  padding-right: 0.4rem !important;
+  /* vertical-align: top;
+    border-top: 1px solid #ECF0F3; */
+}
+@media (max-width: 425px) {
+  .makeStyles-root-75 {
+    margin-top: 10px;
+  }
+  .form-control.criteriaOptionsInput {
+    width: 92%;
+    margin-left: 3px;
+  }
+  tr.border-left.cr-report th {
+    vertical-align: middle !important;
+  }
+  label.criteriaOptionsInput {
+    line-height: 16px;
+    padding: 0px !important;
+  }
+}

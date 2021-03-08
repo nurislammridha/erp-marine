@@ -687,10 +687,15 @@ i.fa.fa-plus-circle {
 }
 
 .searchInput {
-  background: #fff !important;
+  background-color: #fff !important;
   height: 30px !important;
   border: 1px solid #e5eaee !important;
   box-shadow: none !important;
+}
+.search {
+  background-color: #ffffff !important;
+  color: #3699ff !important;
+  border-color: #e1f0ff !important;
 }
 
 .searchInput i.flaticon-search {
@@ -1505,7 +1510,7 @@ td.status {
   padding: 8px;
   border-radius: 5px;
 }
-.search{
+.search1{
   background-color: #fff!important;
   width: 100%;
   margin-right: 10px;
@@ -1514,7 +1519,7 @@ td.status {
   float: left;
   background: transparent;
 }
-.search input{
+.search1 input{
   margin-left: 20px;
   border: none;
   outline: none;
@@ -1535,7 +1540,7 @@ td.status {
   background-color: rgb(44, 149, 197);
   color: white;
 }
-.search-box:hover .search input{
+.search-box:hover .search1 input{
   padding: 0 10px;
   width: 500px;
   margin-top:2px;

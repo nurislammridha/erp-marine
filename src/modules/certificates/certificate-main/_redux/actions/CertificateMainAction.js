@@ -316,8 +316,13 @@ export const certificateMultipleDataAdd = (data, isEdit = false) => (dispatch) =
     dteToSurvey: data.dteToSurvey,
     intCertificateStatusID: data.intCertificateStatusID,
     strCertificateStatusName: data.strCertificateStatusName,
+    status: {
+      strStatus: data.strCertificateStatusName
+    },
     isActive: true,
   };
+
+  console.log('singleDetail :>> ', singleDetail);
   if (!isEdit) {
     dispatch({ type: Types.ADD_MULTIPLE_DATA, payload: singleDetail });
   } else {
@@ -609,7 +614,7 @@ export const getCertificateReportList = (page, searchText = null, isPublic = fal
   dispatch({ type: Types.GET_CERTIFICATE_REPORT_LIST, payload: response });
   let url = "";
   // url = `${process.env.REACT_APP_API_URL}certificate/details?search=${searchText}&isPaginated=1&paginateNo=5&category=${category}&fromDate=${fromDate}&toDate=${toDate}&diffDay=${diffDays}`;
-  url = `${process.env.REACT_APP_API_URL}certificate/details?isPaginated=1&paginateNo=5`;
+  url = `${process.env.REACT_APP_API_URL}certificate/details?&isPaginated=1&paginateNo=5`;
 
   let currentPage = page === undefined ? 1 : page;
   if (currentPage !== null || currentPage === "") {
@@ -618,7 +623,7 @@ export const getCertificateReportList = (page, searchText = null, isPublic = fal
   console.log('page :>> ', currentPage);
 
   // url += currentPage !== "" ? `currentPage=${currentPage}&` : '';
-  url += searchText !== null ? `&searchText=${searchText}` : '';
+  url += searchText !== null ? `&search=${searchText}` : '';
   url += isPublic !== null ? `&isPublic=1` : '';
   url += category !== null ? `&category=${category}` : '';
   url += fromDate !== null ? `&fromDate=${moment(fromDate).format("YYYY-MM-DD")}` : '';

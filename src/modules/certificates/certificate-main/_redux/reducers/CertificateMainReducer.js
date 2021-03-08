@@ -184,6 +184,7 @@ const CertificateMainReducer = (state = initialState, action) => {
       break;
 
     case Types.ADD_MULTIPLE_DATA_EDIT:
+    
       const multipleDatasetEdit = { ...state.certificateEditInfo };
       multipleDatasetEdit.certificateDates = [action.payload, ...multipleDatasetEdit.certificateDates];
       return {

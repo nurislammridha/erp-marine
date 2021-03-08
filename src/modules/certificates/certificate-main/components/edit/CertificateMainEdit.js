@@ -54,6 +54,8 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
     (state) => state.certificateMainInfo.certificateEditInfo
   );
 
+  console.log('certificateEditInfo :>> ', certificateEditInfo);
+
   const certificatesCategoryOption = useSelector(
     (state) => state.certificateMainInfo.certificatesCategoryOptionData
   );
@@ -751,10 +753,10 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                               "strCertificateStatusName",
                               option.label
                             );
-                            certificateMainInfoChange("status", {
-                              label: option.label,
-                              value: option.value,
-                            });
+                            // certificateMainInfoChange("status", {
+                            //   label: option.label,
+                            //   value: option.value,
+                            // });
                             certificateMainInfoChange(
                               "intCertificateStatusID",
                               option.value
@@ -790,9 +792,9 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                                   <td>{index + 1}</td>
                                   <td>{date.dteFromSurvey}</td>
                                   <td>{date.dteToSurvey}</td>
-                                  <td>{date.status !== null ? date.status.strStatus : ''}</td>
+                                  <td>{date.status.strStatus && date.status.strStatus}</td>
                                   <td
-                                    style={{ width: 70, textAlign: "center" }}
+                                    // style={{ width: 70, textAlign: "center" }}
                                   >
                                     {/* <i className="fa fa-edit text-success mr-2"></i> */}
                                     <i

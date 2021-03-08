@@ -14,7 +14,6 @@ import {
 import { getCertificateCategory } from "../../../certificate-main/_redux/actions/CertificateMainAction";
 
 const CertificateMasterEdit = (props) => {
-  console.log('props.editData :>> ', props.editData);
   const isLoading = useSelector(
     (state) => state.CertificateListReducer.isLoading
   );
