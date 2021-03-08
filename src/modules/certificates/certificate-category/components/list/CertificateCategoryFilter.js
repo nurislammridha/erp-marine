@@ -45,7 +45,7 @@ const CertificateCategoryFilter = () => {
   }, []);
   return (
     <>
-      <div className="col-lg-4">
+      <div className="col-lg-4 col-md-4">
         <Form.Group as={Col} controlId="formGridState">
           <Form.Control
             type="text"
@@ -56,7 +56,7 @@ const CertificateCategoryFilter = () => {
           />
         </Form.Group>
       </div>
-      <div className="col-lg-4">
+      <div className="col-lg-4 col-md-4">
         <div className="row">
           <Form.Group as={Col} controlId="formGridState">
             <RHFInput

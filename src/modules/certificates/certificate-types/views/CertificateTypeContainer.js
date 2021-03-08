@@ -32,7 +32,7 @@ const CertificateTypeContainer = () => {
           <h1 className="tableheading">Certificate Type List</h1> <hr />
           <div className="row">
             <CertificateTypeFilter />
-            <div className="col-lg-3 export text-right">
+            <div className="col-lg-4 col-md-4 export text-right">
               <Dropdown className="d-inline">
                 <Dropdown.Toggle
                   className="btn btn-sm"
