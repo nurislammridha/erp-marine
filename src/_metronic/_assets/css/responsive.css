@@ -629,6 +629,30 @@
   ._2Jtxm ._1hzhf {
     line-height: 1;
   }
+  .btn-modal-close {
+    
+    right: -4px;
+    
+    top: -4px;
+  }
+  h1.certificate-report-heading {
+  
+    padding-left: 11px;
+}
+.search-box:hover .search1 input {
+  padding: 0 10px;
+  width: 318px;
+  margin-top: 2px;
+}
+.search1 input {
+
+  line-height: 26px;
+}
+.search-box .custome-certificate-search {
+  font-size: 16px;
+  
+  padding: 5px;
+}
 }
 
 @media (max-width: 426px) {
