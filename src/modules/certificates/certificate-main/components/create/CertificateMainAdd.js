@@ -919,11 +919,11 @@ const CertificateMainAdd = withRouter(({ history, props }) => {
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>#</th>
+                         
                           <th>Image Name</th>
                           <th>Image Size</th>
                           <th>Image View</th>
-                          <th></th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>

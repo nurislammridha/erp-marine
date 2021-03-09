@@ -32,10 +32,10 @@ const IssueAutorityListContainer = (props) => {
             <h1 className="tableheading">Issuing Authority List</h1>
             <hr />
             <div className="row justify-content-between">
-              <div className="col-lg-8">
+             
                 <IssueAuthorityFilter />
-              </div>
-              <div className="col-lg-3">
+              
+              <div className="col-lg-4 col-md-4">
                 <Dropdown className="d-inline mr-2">
                   <Dropdown.Toggle
                     className="btn btn-sm"

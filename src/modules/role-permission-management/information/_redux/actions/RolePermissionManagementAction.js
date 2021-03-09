@@ -61,6 +61,7 @@ export const getPermissionUserList = (searchValue = "", page) => async (dispatch
   try {
     await Axios.get(url)
       .then((res) => {
+        console.log('res :>> ', res);
         const { data, message, status } = res.data;
         response.status = status;
         response.userList = data.data;
@@ -175,10 +176,23 @@ export const getUserDetails = (id) => async (dispatch) => {
   await Axios.get(`${process.env.REACT_APP_API_URL}roles/userDetails/${id}`)
     .then((res) => {
       if (res.data.status) {
+        console.log('user details data :>> ', res);
         if (res.data.data.role_id !== null && res.data.data.role_name) {
           res.data.data.role = {
             label: res.data.data.role_name,
             value: res.data.data.role_id
+          }
+        }
+        if (res.data.data.business_id !== null && res.data.data.business_name) {
+          res.data.data.business = {
+            label: res.data.data.business_name,
+            value: res.data.data.business_id
+          }
+        }
+        if (res.data.data.shipId !== null && res.data.data.strShipName) {
+          res.data.data.ship = {
+            label: res.data.data.strShipName,
+            value: res.data.data.shipId
           }
         }
         res.data.data.password = '';

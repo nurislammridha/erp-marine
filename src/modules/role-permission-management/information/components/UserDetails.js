@@ -39,6 +39,14 @@ const UserDetails = ({ id, handleClose }) => {
                                 <h6>{userDetails.phone_no !== null && userDetails.phone_no !== "" ? userDetails.phone_no : "---"}</h6>
                             </Col>
                             <Col lg={3} md={4} sm={4} xs={6} className="mb-5">
+                                <p>Business</p>
+                                <h6>{userDetails.business_name !== null && userDetails.business_name !== "" ? userDetails.business_name : "---"}</h6>
+                            </Col>
+                            <Col lg={3} md={4} sm={4} xs={6} className="mb-5">
+                                <p>Ship</p>
+                                <h6>{userDetails.strShipName !== null && userDetails.strShipName !== "" ? userDetails.strShipName : "---"}</h6>
+                            </Col>
+                            <Col lg={3} md={4} sm={4} xs={6} className="mb-5">
                                 <p>Role</p>
                                 <Badge className="mt-2" variant="primary"> {userDetails.role_name !== null && userDetails.role_name !== "" ? userDetails.role_name : "not set yet"} </Badge>
                             </Col>

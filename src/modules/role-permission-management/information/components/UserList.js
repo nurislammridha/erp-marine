@@ -22,6 +22,8 @@ const UserList = () => {
   const isLoading = useSelector(state => state.roleReducer.isLoading);
   const userPaginationList = useSelector(state => state.roleReducer.userPaginationList);
 
+  console.log('userList :>> ', userList);
+  
   useEffect(() => {
     dispatch(getPermissionUserList("", currentPage));
   }, [dispatch, currentPage]);

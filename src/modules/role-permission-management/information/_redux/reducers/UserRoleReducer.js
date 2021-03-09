@@ -10,7 +10,8 @@ const initialState = {
     userList: [],
     submitStatus: false,
     inputData: {
-        business_id: 1,
+        business_id: "",
+        shipId: "",
         first_name: "",
         surname: "",
         last_name: "",
@@ -20,8 +21,7 @@ const initialState = {
         password: "",
         language: "",
         name: '',
-        role_id: ""
-
+        role_id: "",
     },
     isRoleCreated: false,
     roleCreateMessage: '',

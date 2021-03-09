@@ -926,18 +926,19 @@ h3 {
 
 ._1hzhf {
   font-size: 14px;
+  line-height: 1;
 }
 
 ._2Jtxm._35Ago ._2kL0S {
-  margin-left: -140px;
+  margin-left: -26px;
 }
 
 ._2Jtxm {
-  margin-left: -66px;
+  /* margin-left: -66px; */
 }
 
 ._1Lo2h {
-  width: 109%;
+  /* width: 109%; */
 }
 
 /* Certificate create */
@@ -1572,4 +1573,7 @@ td.status {
   justify-content: space-between;
   color: white;
   border-radius: 3px;
+}
+.modal-content{
+  /* margin-left: 115px; */
 }

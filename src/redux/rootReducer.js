@@ -86,6 +86,7 @@ import BasicInformationReducer from "../modules/Asset-Registration/information/_
 import AdminInformationReducer from "../modules/Asset-Registration/information/_redux/reducers/AdminInformationReducer";
 import AccountsInformationReducer from "../modules/Asset-Registration/information/_redux/reducers/AccountsInformationReducer";
 import AdminInfoListReducer from "../modules/Asset-Registration/information/_redux/reducers/AdminInfoListReducer";
+import BusinessTypeReducer from "../modules/master/DropDownData/Business/_redux/BusinessReducer/BusinessReducer";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -173,6 +174,7 @@ export const rootReducer = combineReducers({
   SupplierNameReducer: SupplierNameReducer,
   ItemListReducer: ItemListReducer,
   CatalogueListReducer: CatalogueListReducer,
+  BusinessTypeReducer: BusinessTypeReducer,
 
   /**Certificates */
   certificateMainInfo: CertificateMainReducer,
