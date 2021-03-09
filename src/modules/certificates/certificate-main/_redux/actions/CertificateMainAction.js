@@ -296,7 +296,7 @@ export const certificateMultipleDataAdd = (data, isEdit = false) => (dispatch) =
   //   showToast("error", "Please select a certificate first !");
   //   return false;
   // }
-  console.log('data.intCertificateStatusID :>> ', data.intCertificateStatusID);
+  console.log('data.strCertificateStatusName :>> ', data.strCertificateStatusName);
   if (data.dteFromSurvey === undefined) {
     showToast("error", "Please give survey from date !");
     return false;
@@ -305,7 +305,7 @@ export const certificateMultipleDataAdd = (data, isEdit = false) => (dispatch) =
     showToast("error", "Please give survey to date !");
     return false;
   }
-  else if (data.intCertificateStatusID && data.intCertificateStatusID.length === 0) {
+  else if (data.strCertificateStatusName === undefined) {
     showToast("error", "Please select a survey status !");
     return false;
   }
