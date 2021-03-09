@@ -16,6 +16,7 @@ const CertificateDetails = ({ handleClose, CertificateID }) => {
     const [previewAttachment, setPreviewAttachment] = useState(null);
 
     console.log('CRDetails :>> ', CRDetails);
+    console.log('CRDetails :>> ', CRDetails);
     const PreviewAttachment = (item) => {
         setAttachmentPreviewModel(true);
         setPreviewAttachment(item)
