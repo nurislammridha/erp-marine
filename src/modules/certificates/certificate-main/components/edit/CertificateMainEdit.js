@@ -836,6 +836,8 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                       required: true,
                       maxLength: 100,
                     })}
+
+                    closdkfjhdskjhfbsdjf
                   />
                 </div> */}
                     <div className="col-lg-3">
