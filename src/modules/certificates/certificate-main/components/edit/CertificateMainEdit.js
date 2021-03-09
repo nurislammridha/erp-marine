@@ -768,7 +768,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                       <div className="col-lg-3">
                         <button
                           type="button"
-                          className="btn saveButton text-white mt-11"
+                          className="btn saveButton text-white mt-8"
                           onClick={() => addMultipleData()}
                         >
                           <span> Add </span>
@@ -794,7 +794,7 @@ const CertificateMainEdit = withRouter(({ history, props }) => {
                                   <td>{date.dteToSurvey}</td>
                                   <td>{date.status.strStatus && date.status.strStatus}</td>
                                   <td
-                                    // style={{ width: 70, textAlign: "center" }}
+                                  // style={{ width: 70, textAlign: "center" }}
                                   >
                                     {/* <i className="fa fa-edit text-success mr-2"></i> */}
                                     <i

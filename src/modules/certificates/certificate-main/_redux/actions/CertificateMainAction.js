@@ -46,7 +46,7 @@ export const MainCertificateCreateAction = (certificateInfoInput) => async (disp
   const shipID = getVesselId();
 
   let userId = await getEmployeeId();
-   console.log('user id create :>> ', userId);
+  console.log('user id create :>> ', userId);
   if (shipID === null) {
     certificateInfoInput.intShipID = 1;
   } else {
@@ -239,7 +239,7 @@ export const getCertificateMainListAction = (page, searchText = null, isPublic =
   };
 
 
-  
+
 
   dispatch({ type: Types.CERTIFICATE_LIST_DASHBOARD, payload: response });
   let url = "";
@@ -292,19 +292,20 @@ export const getCertificateMainListAction = (page, searchText = null, isPublic =
 };
 
 export const certificateMultipleDataAdd = (data, isEdit = false) => (dispatch) => {
-  if (data.intCertificateID === null) {
-    showToast("error", "Please select a certificate first !");
-    return false;
-  }
-  if (data.dteFromSurvey === null) {
+  // if (data.intCertificateID === null) {
+  //   showToast("error", "Please select a certificate first !");
+  //   return false;
+  // }
+  console.log('data.intCertificateStatusID :>> ', data.intCertificateStatusID);
+  if (data.dteFromSurvey === undefined) {
     showToast("error", "Please give survey from date !");
     return false;
   }
-  if (data.dteToSurvey === null) {
+  else if (data.dteToSurvey === undefined) {
     showToast("error", "Please give survey to date !");
     return false;
   }
-  if (data.intCertificateStatusID === null) {
+  else if (data.intCertificateStatusID && data.intCertificateStatusID.length === 0) {
     showToast("error", "Please select a survey status !");
     return false;
   }
