@@ -18,6 +18,7 @@ const ItemList = () => {
   const isLoading = useSelector(state => state.itemList.isLoading)
   const [currentPage, setCurrentPage] = useState(1);
   console.log('itemList :>> ', itemList);
+  console.log('process.env', process.env)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(emptyItemSubmit());
@@ -27,7 +28,7 @@ const ItemList = () => {
   useEffect(() => {
     dispatch(getItemList(currentPage));
   }, [dispatch, currentPage]);
-
+  console.log('object :>> ');
   const changePage = (data) => {
     setCurrentPage(data.page);
     dispatch(getItemList(data.page));
